@@ -15,27 +15,32 @@
   * [Livestream_service.create_asset](#livestream_service.create_asset)
   * [Livestream_service.create_channel](#livestream_service.create_channel)
   * [Livestream_service.create_clip](#livestream_service.create_clip)
+  * [Livestream_service.create_dvr_session](#livestream_service.create_dvr_session)
   * [Livestream_service.create_event](#livestream_service.create_event)
   * [Livestream_service.create_input](#livestream_service.create_input)
   * [Livestream_service.delete_asset](#livestream_service.delete_asset)
   * [Livestream_service.delete_channel](#livestream_service.delete_channel)
   * [Livestream_service.delete_clip](#livestream_service.delete_clip)
+  * [Livestream_service.delete_dvr_session](#livestream_service.delete_dvr_session)
   * [Livestream_service.delete_event](#livestream_service.delete_event)
   * [Livestream_service.delete_input](#livestream_service.delete_input)
   * [Livestream_service.get_asset](#livestream_service.get_asset)
   * [Livestream_service.get_channel](#livestream_service.get_channel)
   * [Livestream_service.get_clip](#livestream_service.get_clip)
+  * [Livestream_service.get_dvr_session](#livestream_service.get_dvr_session)
   * [Livestream_service.get_event](#livestream_service.get_event)
   * [Livestream_service.get_input](#livestream_service.get_input)
   * [Livestream_service.get_pool](#livestream_service.get_pool)
   * [Livestream_service.list_assets](#livestream_service.list_assets)
   * [Livestream_service.list_channels](#livestream_service.list_channels)
   * [Livestream_service.list_clips](#livestream_service.list_clips)
+  * [Livestream_service.list_dvr_sessions](#livestream_service.list_dvr_sessions)
   * [Livestream_service.list_events](#livestream_service.list_events)
   * [Livestream_service.list_inputs](#livestream_service.list_inputs)
   * [Livestream_service.start_channel](#livestream_service.start_channel)
   * [Livestream_service.stop_channel](#livestream_service.stop_channel)
   * [Livestream_service.update_channel](#livestream_service.update_channel)
+  * [Livestream_service.update_dvr_session](#livestream_service.update_dvr_session)
   * [Livestream_service.update_input](#livestream_service.update_input)
   * [Livestream_service.update_pool](#livestream_service.update_pool)
   * [Quickstart](#quickstart)
@@ -99,6 +104,23 @@ __Usage:__
 
 
 `node packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_clip.js`
+
+
+-----
+
+
+
+
+### Livestream_service.create_dvr_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_dvr_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_dvr_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_dvr_session.js`
 
 
 -----
@@ -191,6 +213,23 @@ __Usage:__
 
 
 
+### Livestream_service.delete_dvr_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_dvr_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_dvr_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_dvr_session.js`
+
+
+-----
+
+
+
+
 ### Livestream_service.delete_event
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_event.js).
@@ -269,6 +308,23 @@ __Usage:__
 
 
 `node packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_clip.js`
+
+
+-----
+
+
+
+
+### Livestream_service.get_dvr_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_dvr_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_dvr_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_dvr_session.js`
 
 
 -----
@@ -378,6 +434,23 @@ __Usage:__
 
 
 
+### Livestream_service.list_dvr_sessions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_dvr_sessions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_dvr_sessions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_dvr_sessions.js`
+
+
+-----
+
+
+
+
 ### Livestream_service.list_events
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_events.js).
@@ -456,6 +529,23 @@ __Usage:__
 
 
 `node packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_channel.js`
+
+
+-----
+
+
+
+
+### Livestream_service.update_dvr_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_dvr_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_dvr_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_dvr_session.js`
 
 
 -----

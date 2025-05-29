@@ -259,9 +259,14 @@ describe('v2.CommentServiceClient', () => {
         throw err;
       });
       assert(client.commentServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -270,9 +275,14 @@ describe('v2.CommentServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.commentServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -435,7 +445,9 @@ describe('v2.CommentServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createComment(request), expectedError);
     });
   });

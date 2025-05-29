@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The parent resource path of the data exchanges.
-   *  e.g. `projects/myproject/locations/US`.
+   *  e.g. `projects/myproject/locations/us`.
    */
   // const parent = 'abc123'
   /**

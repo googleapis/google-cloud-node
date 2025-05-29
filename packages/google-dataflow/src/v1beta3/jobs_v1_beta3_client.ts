@@ -366,8 +366,6 @@ export class JobsV1Beta3Client {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/compute.readonly',
-      'https://www.googleapis.com/auth/userinfo.email',
     ];
   }
 
@@ -398,6 +396,9 @@ export class JobsV1Beta3Client {
    * (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
    * `projects.jobs.create` is not recommended, as your job will always start
    * in `us-central1`.
+   *
+   * Do not enter confidential information when you supply string values using
+   * the API.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -661,6 +662,13 @@ export class JobsV1Beta3Client {
    *   The [regional endpoint]
    *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
    *   contains this job.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to update relative to Job. If empty, only
+   *   RequestedJobState will be considered for update. If the FieldMask is not
+   *   empty and RequestedJobState is none/empty, The fields specified in the
+   *   update mask will be the only ones considered for update. If both
+   *   RequestedJobState and update_mask are specified, an error will be returned
+   *   as we cannot update both state and mask.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1000,8 +1008,12 @@ export class JobsV1Beta3Client {
    * `projects.locations.jobs.list` with a [regional endpoint]
    * (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). To
    * list the all jobs across all regions, use `projects.jobs.aggregated`. Using
-   * `projects.jobs.list` is not recommended, as you can only get the list of
-   * jobs that are running in `us-central1`.
+   * `projects.jobs.list` is not recommended, because you can only get the list
+   * of jobs that are running in `us-central1`.
+   *
+   * `projects.locations.jobs.list` and `projects.jobs.list` support filtering
+   * the list of jobs by name. Filtering by name isn't supported by
+   * `projects.jobs.aggregated`.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1023,6 +1035,8 @@ export class JobsV1Beta3Client {
    *   The [regional endpoint]
    *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
    *   contains this job.
+   * @param {string} [request.name]
+   *   Optional. The job name.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1151,6 +1165,8 @@ export class JobsV1Beta3Client {
    *   The [regional endpoint]
    *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
    *   contains this job.
+   * @param {string} [request.name]
+   *   Optional. The job name.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1212,6 +1228,8 @@ export class JobsV1Beta3Client {
    *   The [regional endpoint]
    *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
    *   contains this job.
+   * @param {string} [request.name]
+   *   Optional. The job name.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1252,6 +1270,9 @@ export class JobsV1Beta3Client {
   /**
    * List the jobs of a project across all regions.
    *
+   * **Note:** This method doesn't support filtering the list of
+   * jobs by name.
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.dataflow.v1beta3.ListJobsRequest.Filter} request.filter
@@ -1272,6 +1293,8 @@ export class JobsV1Beta3Client {
    *   The [regional endpoint]
    *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
    *   contains this job.
+   * @param {string} [request.name]
+   *   Optional. The job name.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1399,6 +1422,8 @@ export class JobsV1Beta3Client {
    *   The [regional endpoint]
    *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
    *   contains this job.
+   * @param {string} [request.name]
+   *   Optional. The job name.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1459,6 +1484,8 @@ export class JobsV1Beta3Client {
    *   The [regional endpoint]
    *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
    *   contains this job.
+   * @param {string} [request.name]
+   *   Optional. The job name.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

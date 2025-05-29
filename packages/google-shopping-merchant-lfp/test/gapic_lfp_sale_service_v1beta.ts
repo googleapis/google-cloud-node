@@ -193,9 +193,14 @@ describe('v1beta.LfpSaleServiceClient', () => {
         throw err;
       });
       assert(client.lfpSaleServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -204,9 +209,14 @@ describe('v1beta.LfpSaleServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.lfpSaleServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -369,7 +379,9 @@ describe('v1beta.LfpSaleServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insertLfpSale(request), expectedError);
     });
   });

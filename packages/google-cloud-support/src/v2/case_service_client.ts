@@ -420,12 +420,12 @@ export class CaseServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Retrieve the specified case.
+   * Retrieve a case.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The fully qualified name of a case to be retrieved.
+   *   Required. The full name of a case to be retrieved.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -528,15 +528,16 @@ export class CaseServiceClient {
       );
   }
   /**
-   * Create a new case and associate it with the given Google Cloud Resource.
-   * The case object must have the following fields set: `display_name`,
-   * `description`, `classification`, and `priority`.
+   * Create a new case and associate it with a parent.
+   *
+   * It must have the following fields set: `display_name`, `description`,
+   * `classification`, and `priority`. If you're just testing the API and don't
+   * want to route your case to an agent, set `testCase=true`.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the Google Cloud Resource under which the case should
-   *   be created.
+   *   Required. The name of the parent under which the case should be created.
    * @param {google.cloud.support.v2.Case} request.case
    *   Required. The case to be created.
    * @param {object} [options]
@@ -641,21 +642,20 @@ export class CaseServiceClient {
       );
   }
   /**
-   * Update the specified case. Only a subset of fields can be updated.
+   * Update a case. Only some fields can be updated.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.support.v2.Case} request.case
-   *   Required. The case object to update.
+   *   Required. The case to update.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   A list of attributes of the case object that should be updated
-   *   as part of this request. Supported values are `priority`, `display_name`,
-   *   and `subscriber_email_addresses`. If no fields are specified, all supported
-   *   fields are updated.
+   *   A list of attributes of the case that should be updated. Supported values
+   *   are `priority`, `display_name`, and `subscriber_email_addresses`. If no
+   *   fields are specified, all supported fields are updated.
    *
-   *   WARNING: If you do not provide a field mask, then you might accidentally
-   *   clear some fields. For example, if you leave the field mask empty and do
-   *   not provide a value for `subscriber_email_addresses`, then
+   *   Be careful - if you do not provide a field mask, then you might
+   *   accidentally clear some fields. For example, if you leave the field mask
+   *   empty and do not provide a value for `subscriber_email_addresses`, then
    *   `subscriber_email_addresses` is updated to empty.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -759,20 +759,20 @@ export class CaseServiceClient {
       );
   }
   /**
-   * Escalate a case. Escalating a case will initiate the Google Cloud Support
-   * escalation management process.
+   * Escalate a case, starting the Google Cloud Support escalation management
+   * process.
    *
-   * This operation is only available to certain Customer Care tiers. Go to
+   * This operation is only available for some support services. Go to
    * https://cloud.google.com/support and look for 'Technical support
-   * escalations' in the feature list to find out which tiers are able to
-   * perform escalations.
+   * escalations' in the feature list to find out which ones let you
+   * do that.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The fully qualified name of the Case resource to be escalated.
+   *   Required. The name of the case to be escalated.
    * @param {google.cloud.support.v2.Escalation} request.escalation
-   *   The escalation object to be sent with the escalation request.
+   *   The escalation information to be sent with the escalation request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -879,12 +879,12 @@ export class CaseServiceClient {
       );
   }
   /**
-   * Close the specified case.
+   * Close a case.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The fully qualified name of the case resource to be closed.
+   *   Required. The name of the case to close.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -988,31 +988,32 @@ export class CaseServiceClient {
   }
 
   /**
-   * Retrieve all cases under the specified parent.
+   * Retrieve all cases under a parent, but not its children.
    *
-   * Note: Listing cases under an Organization returns only the cases directly
-   * parented by that organization. To retrieve all cases under an organization,
-   * including cases parented by projects under that organization, use
-   * `cases.search`.
+   * For example, listing cases under an organization only returns the cases
+   * that are directly parented by that organization. To retrieve cases
+   * under an organization and its projects, use `cases.search`.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The fully qualified name of parent resource to list cases under.
+   *   Required. The name of a parent to list cases under.
    * @param {string} request.filter
-   *   An expression written in filter language. If non-empty, the query returns
-   *   the cases that match the filter. Else, the query doesn't filter the cases.
+   *   An expression used to filter cases.
    *
-   *   Filter expressions use the following fields with the operators equals (`=`)
-   *   and `AND`:
+   *   If it's an empty string, then no filtering happens. Otherwise, the endpoint
+   *   returns the cases that match the filter.
    *
-   *   - `state`: The accepted values are `OPEN` or `CLOSED`.
-   *   - `priority`: The accepted values are `P0`, `P1`, `P2`, `P3`, or `P4`. You
+   *   Expressions use the following fields separated by `AND` and specified with
+   *   `=`:
+   *
+   *   - `state`: Can be `OPEN` or `CLOSED`.
+   *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
    *   can specify multiple values for priority using the `OR` operator. For
    *   example, `priority=P1 OR priority=P2`.
    *   - `creator.email`: The email address of the case creator.
    *
-   *   Examples:
+   *   EXAMPLES:
    *
    *   - `state=CLOSED`
    *   - `state=OPEN AND creator.email="tester@example.com"`
@@ -1132,21 +1133,23 @@ export class CaseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The fully qualified name of parent resource to list cases under.
+   *   Required. The name of a parent to list cases under.
    * @param {string} request.filter
-   *   An expression written in filter language. If non-empty, the query returns
-   *   the cases that match the filter. Else, the query doesn't filter the cases.
+   *   An expression used to filter cases.
    *
-   *   Filter expressions use the following fields with the operators equals (`=`)
-   *   and `AND`:
+   *   If it's an empty string, then no filtering happens. Otherwise, the endpoint
+   *   returns the cases that match the filter.
    *
-   *   - `state`: The accepted values are `OPEN` or `CLOSED`.
-   *   - `priority`: The accepted values are `P0`, `P1`, `P2`, `P3`, or `P4`. You
+   *   Expressions use the following fields separated by `AND` and specified with
+   *   `=`:
+   *
+   *   - `state`: Can be `OPEN` or `CLOSED`.
+   *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
    *   can specify multiple values for priority using the `OR` operator. For
    *   example, `priority=P1 OR priority=P2`.
    *   - `creator.email`: The email address of the case creator.
    *
-   *   Examples:
+   *   EXAMPLES:
    *
    *   - `state=CLOSED`
    *   - `state=OPEN AND creator.email="tester@example.com"`
@@ -1199,21 +1202,23 @@ export class CaseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The fully qualified name of parent resource to list cases under.
+   *   Required. The name of a parent to list cases under.
    * @param {string} request.filter
-   *   An expression written in filter language. If non-empty, the query returns
-   *   the cases that match the filter. Else, the query doesn't filter the cases.
+   *   An expression used to filter cases.
    *
-   *   Filter expressions use the following fields with the operators equals (`=`)
-   *   and `AND`:
+   *   If it's an empty string, then no filtering happens. Otherwise, the endpoint
+   *   returns the cases that match the filter.
    *
-   *   - `state`: The accepted values are `OPEN` or `CLOSED`.
-   *   - `priority`: The accepted values are `P0`, `P1`, `P2`, `P3`, or `P4`. You
+   *   Expressions use the following fields separated by `AND` and specified with
+   *   `=`:
+   *
+   *   - `state`: Can be `OPEN` or `CLOSED`.
+   *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
    *   can specify multiple values for priority using the `OR` operator. For
    *   example, `priority=P1 OR priority=P2`.
    *   - `creator.email`: The email address of the case creator.
    *
-   *   Examples:
+   *   EXAMPLES:
    *
    *   - `state=CLOSED`
    *   - `state=OPEN AND creator.email="tester@example.com"`
@@ -1260,28 +1265,26 @@ export class CaseServiceClient {
     ) as AsyncIterable<protos.google.cloud.support.v2.ICase>;
   }
   /**
-   * Search cases using the specified query.
+   * Search for cases using a query.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The fully qualified name of parent resource to search cases under.
+   *   The name of the parent resource to search for cases under.
    * @param {string} request.query
-   *   An expression written in filter language.
+   *   An expression used to filter cases.
    *
-   *   A query uses the following fields with the operators equals (`=`) and
-   *   `AND`:
+   *   Expressions use the following fields separated by `AND` and specified with
+   *   `=`:
    *
    *   - `organization`: An organization name in the form
    *   `organizations/<organization_id>`.
    *   - `project`: A project name in the form `projects/<project_id>`.
-   *   - `state`: The accepted values are `OPEN` or `CLOSED`.
-   *   - `priority`: The accepted values are `P0`, `P1`, `P2`, `P3`, or `P4`. You
+   *   - `state`: Can be `OPEN` or `CLOSED`.
+   *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
    *   can specify multiple values for priority using the `OR` operator. For
    *   example, `priority=P1 OR priority=P2`.
    *   - `creator.email`: The email address of the case creator.
-   *   - `billingAccount`: A billing account in the form
-   *   `billingAccounts/<billing_account_id>`
    *
    *   You must specify either `organization` or `project`.
    *
@@ -1298,7 +1301,6 @@ export class CaseServiceClient {
    *   - `organization="organizations/123456789"`
    *   - `project="projects/my-project-id"`
    *   - `project="projects/123456789"`
-   *   - `billing_account="billingAccounts/123456-A0B0C0-CUZ789"`
    *   - `organization="organizations/123456789" AND state=CLOSED`
    *   - `project="projects/my-project-id" AND creator.email="tester@example.com"`
    *   - `project="projects/my-project-id" AND (priority=P0 OR priority=P1)`
@@ -1422,23 +1424,21 @@ export class CaseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The fully qualified name of parent resource to search cases under.
+   *   The name of the parent resource to search for cases under.
    * @param {string} request.query
-   *   An expression written in filter language.
+   *   An expression used to filter cases.
    *
-   *   A query uses the following fields with the operators equals (`=`) and
-   *   `AND`:
+   *   Expressions use the following fields separated by `AND` and specified with
+   *   `=`:
    *
    *   - `organization`: An organization name in the form
    *   `organizations/<organization_id>`.
    *   - `project`: A project name in the form `projects/<project_id>`.
-   *   - `state`: The accepted values are `OPEN` or `CLOSED`.
-   *   - `priority`: The accepted values are `P0`, `P1`, `P2`, `P3`, or `P4`. You
+   *   - `state`: Can be `OPEN` or `CLOSED`.
+   *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
    *   can specify multiple values for priority using the `OR` operator. For
    *   example, `priority=P1 OR priority=P2`.
    *   - `creator.email`: The email address of the case creator.
-   *   - `billingAccount`: A billing account in the form
-   *   `billingAccounts/<billing_account_id>`
    *
    *   You must specify either `organization` or `project`.
    *
@@ -1455,7 +1455,6 @@ export class CaseServiceClient {
    *   - `organization="organizations/123456789"`
    *   - `project="projects/my-project-id"`
    *   - `project="projects/123456789"`
-   *   - `billing_account="billingAccounts/123456-A0B0C0-CUZ789"`
    *   - `organization="organizations/123456789" AND state=CLOSED`
    *   - `project="projects/my-project-id" AND creator.email="tester@example.com"`
    *   - `project="projects/my-project-id" AND (priority=P0 OR priority=P1)`
@@ -1508,23 +1507,21 @@ export class CaseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The fully qualified name of parent resource to search cases under.
+   *   The name of the parent resource to search for cases under.
    * @param {string} request.query
-   *   An expression written in filter language.
+   *   An expression used to filter cases.
    *
-   *   A query uses the following fields with the operators equals (`=`) and
-   *   `AND`:
+   *   Expressions use the following fields separated by `AND` and specified with
+   *   `=`:
    *
    *   - `organization`: An organization name in the form
    *   `organizations/<organization_id>`.
    *   - `project`: A project name in the form `projects/<project_id>`.
-   *   - `state`: The accepted values are `OPEN` or `CLOSED`.
-   *   - `priority`: The accepted values are `P0`, `P1`, `P2`, `P3`, or `P4`. You
+   *   - `state`: Can be `OPEN` or `CLOSED`.
+   *   - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
    *   can specify multiple values for priority using the `OR` operator. For
    *   example, `priority=P1 OR priority=P2`.
    *   - `creator.email`: The email address of the case creator.
-   *   - `billingAccount`: A billing account in the form
-   *   `billingAccounts/<billing_account_id>`
    *
    *   You must specify either `organization` or `project`.
    *
@@ -1541,7 +1538,6 @@ export class CaseServiceClient {
    *   - `organization="organizations/123456789"`
    *   - `project="projects/my-project-id"`
    *   - `project="projects/123456789"`
-   *   - `billing_account="billingAccounts/123456-A0B0C0-CUZ789"`
    *   - `organization="organizations/123456789" AND state=CLOSED`
    *   - `project="projects/my-project-id" AND creator.email="tester@example.com"`
    *   - `project="projects/my-project-id" AND (priority=P0 OR priority=P1)`
@@ -1588,19 +1584,26 @@ export class CaseServiceClient {
     ) as AsyncIterable<protos.google.cloud.support.v2.ICase>;
   }
   /**
-   * Retrieve valid classifications to be used when creating a support case.
-   * The classications are hierarchical, with each classification containing
-   * all levels of the hierarchy, separated by " > ". For example "Technical
-   * Issue > Compute > Compute Engine".
+   * Retrieve valid classifications to use when creating a support case.
+   *
+   * Classifications are hierarchical. Each classification is a string
+   * containing all levels of the hierarchy separated by `" > "`. For example,
+   * `"Technical Issue > Compute > Compute Engine"`.
+   *
+   * Classification IDs returned by this endpoint are valid for at least six
+   * months. When a classification is deactivated, this endpoint immediately
+   * stops returning it. After six months, `case.create` requests using the
+   * classification will fail.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.query
-   *   An expression written in the Google Cloud filter language. If non-empty,
-   *   then only cases whose fields match the filter are returned. If empty, then
-   *   no messages are filtered out.
+   *   An expression used to filter case classifications.
+   *
+   *   If it's an empty string, then no filtering happens. Otherwise, case
+   *   classifications will be returned that match the filter.
    * @param {number} request.pageSize
-   *   The maximum number of cases fetched with each request.
+   *   The maximum number of classifications fetched with each request.
    * @param {string} request.pageToken
    *   A token identifying the page of results to return. If unspecified, the
    *   first page is retrieved.
@@ -1720,11 +1723,12 @@ export class CaseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.query
-   *   An expression written in the Google Cloud filter language. If non-empty,
-   *   then only cases whose fields match the filter are returned. If empty, then
-   *   no messages are filtered out.
+   *   An expression used to filter case classifications.
+   *
+   *   If it's an empty string, then no filtering happens. Otherwise, case
+   *   classifications will be returned that match the filter.
    * @param {number} request.pageSize
-   *   The maximum number of cases fetched with each request.
+   *   The maximum number of classifications fetched with each request.
    * @param {string} request.pageToken
    *   A token identifying the page of results to return. If unspecified, the
    *   first page is retrieved.
@@ -1767,11 +1771,12 @@ export class CaseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.query
-   *   An expression written in the Google Cloud filter language. If non-empty,
-   *   then only cases whose fields match the filter are returned. If empty, then
-   *   no messages are filtered out.
+   *   An expression used to filter case classifications.
+   *
+   *   If it's an empty string, then no filtering happens. Otherwise, case
+   *   classifications will be returned that match the filter.
    * @param {number} request.pageSize
-   *   The maximum number of cases fetched with each request.
+   *   The maximum number of classifications fetched with each request.
    * @param {string} request.pageToken
    *   A token identifying the page of results to return. If unspecified, the
    *   first page is retrieved.

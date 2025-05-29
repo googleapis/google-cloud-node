@@ -25,5889 +25,3538 @@ import * as datastoreserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.DataStoreServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          datastoreserviceModule.v1.DataStoreServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          datastoreserviceModule.v1.DataStoreServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'discoveryengine.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'discoveryengine.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new datastoreserviceModule.v1.DataStoreServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'discoveryengine.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'discoveryengine.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new datastoreserviceModule.v1.DataStoreServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = datastoreserviceModule.v1.DataStoreServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = datastoreserviceModule.v1.DataStoreServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.dataStoreServiceStub, undefined);
-      await client.initialize();
-      assert(client.dataStoreServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.dataStoreServiceStub);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.dataStoreServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getDataStore', () => {
-    it('invokes getDataStore without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.GetDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.GetDataStoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DataStore()
-      );
-      client.innerApiCalls.getDataStore = stubSimpleCall(expectedResponse);
-      const [response] = await client.getDataStore(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDataStore without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.GetDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.GetDataStoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DataStore()
-      );
-      client.innerApiCalls.getDataStore =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getDataStore(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1.IDataStore | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDataStore with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.GetDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.GetDataStoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getDataStore = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getDataStore(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDataStore with closed client', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.GetDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.GetDataStoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getDataStore(request), expectedError);
-    });
-  });
-
-  describe('updateDataStore', () => {
-    it('invokes updateDataStore without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.UpdateDataStoreRequest()
-      );
-      request.dataStore ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.UpdateDataStoreRequest',
-        ['dataStore', 'name']
-      );
-      request.dataStore.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_store.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DataStore()
-      );
-      client.innerApiCalls.updateDataStore = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateDataStore(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDataStore without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.UpdateDataStoreRequest()
-      );
-      request.dataStore ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.UpdateDataStoreRequest',
-        ['dataStore', 'name']
-      );
-      request.dataStore.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_store.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DataStore()
-      );
-      client.innerApiCalls.updateDataStore =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateDataStore(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1.IDataStore | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDataStore with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.UpdateDataStoreRequest()
-      );
-      request.dataStore ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.UpdateDataStoreRequest',
-        ['dataStore', 'name']
-      );
-      request.dataStore.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_store.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateDataStore = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateDataStore(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDataStore with closed client', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.UpdateDataStoreRequest()
-      );
-      request.dataStore ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.UpdateDataStoreRequest',
-        ['dataStore', 'name']
-      );
-      request.dataStore.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.updateDataStore(request), expectedError);
-    });
-  });
-
-  describe('createDataStore', () => {
-    it('invokes createDataStore without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.CreateDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.CreateDataStoreRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createDataStore =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createDataStore(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDataStore without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.CreateDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.CreateDataStoreRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createDataStore =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createDataStore(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.discoveryengine.v1.IDataStore,
-              protos.google.cloud.discoveryengine.v1.ICreateDataStoreMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1.IDataStore,
-        protos.google.cloud.discoveryengine.v1.ICreateDataStoreMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDataStore with call error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.CreateDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.CreateDataStoreRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createDataStore = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createDataStore(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDataStore with LRO error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.CreateDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.CreateDataStoreRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createDataStore = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createDataStore(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateDataStoreProgress without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateDataStoreProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateDataStoreProgress with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateDataStoreProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteDataStore', () => {
-    it('invokes deleteDataStore without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DeleteDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.DeleteDataStoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteDataStore =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteDataStore(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDataStore without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DeleteDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.DeleteDataStoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteDataStore =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteDataStore(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.discoveryengine.v1.IDeleteDataStoreMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteDataStoreMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDataStore with call error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DeleteDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.DeleteDataStoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteDataStore = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteDataStore(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDataStore with LRO error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DeleteDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.DeleteDataStoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteDataStore = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteDataStore(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteDataStoreProgress without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteDataStoreProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteDataStoreProgress with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteDataStoreProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listDataStores', () => {
-    it('invokes listDataStores without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDataStoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-      ];
-      client.innerApiCalls.listDataStores = stubSimpleCall(expectedResponse);
-      const [response] = await client.listDataStores(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDataStores as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDataStores as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDataStores without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDataStoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-      ];
-      client.innerApiCalls.listDataStores =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listDataStores(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1.IDataStore[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDataStores as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDataStores as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDataStores with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDataStoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listDataStores = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listDataStores(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listDataStores as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDataStores as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDataStoresStream without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDataStoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-      ];
-      client.descriptors.page.listDataStores.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listDataStoresStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1.DataStore[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.discoveryengine.v1.DataStore) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listDataStores.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDataStores, request)
-      );
-      assert(
-        (client.descriptors.page.listDataStores.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listDataStoresStream with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDataStoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDataStores.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listDataStoresStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1.DataStore[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.discoveryengine.v1.DataStore) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listDataStores.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDataStores, request)
-      );
-      assert(
-        (client.descriptors.page.listDataStores.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listDataStores without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDataStoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-      ];
-      client.descriptors.page.listDataStores.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.discoveryengine.v1.IDataStore[] = [];
-      const iterable = client.listDataStoresAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDataStores.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDataStores.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listDataStores with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDataStoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDataStores.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listDataStoresAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.discoveryengine.v1.IDataStore[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = datastoreserviceModule.v1.DataStoreServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDataStores.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDataStores.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
-    });
-    it('invokes getLocation with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'discoveryengine.example.com');
+        });
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'discoveryengine.example.com');
+        });
+
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new datastoreserviceModule.v1.DataStoreServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'discoveryengine.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new datastoreserviceModule.v1.DataStoreServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'discoveryengine.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new datastoreserviceModule.v1.DataStoreServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = datastoreserviceModule.v1.DataStoreServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.dataStoreServiceStub, undefined);
+            await client.initialize();
+            assert(client.dataStoreServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.dataStoreServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.dataStoreServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+
+    describe('getDataStore', () => {
+        it('invokes getDataStore without error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.GetDataStoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.GetDataStoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.DataStore()
+            );
+            client.innerApiCalls.getDataStore = stubSimpleCall(expectedResponse);
+            const [response] = await client.getDataStore(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDataStore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDataStore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDataStore without error using callback', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.GetDataStoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.GetDataStoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.DataStore()
+            );
+            client.innerApiCalls.getDataStore = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getDataStore(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.discoveryengine.v1.IDataStore|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDataStore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDataStore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDataStore with error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.GetDataStoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.GetDataStoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getDataStore = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getDataStore(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getDataStore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDataStore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDataStore with closed client', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.GetDataStoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.GetDataStoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getDataStore(request), expectedError);
+        });
     });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+    describe('updateDataStore', () => {
+        it('invokes updateDataStore without error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.UpdateDataStoreRequest()
+            );
+            request.dataStore ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.UpdateDataStoreRequest', ['dataStore', 'name']);
+            request.dataStore.name = defaultValue1;
+            const expectedHeaderRequestParams = `data_store.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.DataStore()
+            );
+            client.innerApiCalls.updateDataStore = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateDataStore(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateDataStore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDataStore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDataStore without error using callback', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.UpdateDataStoreRequest()
+            );
+            request.dataStore ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.UpdateDataStoreRequest', ['dataStore', 'name']);
+            request.dataStore.name = defaultValue1;
+            const expectedHeaderRequestParams = `data_store.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.DataStore()
+            );
+            client.innerApiCalls.updateDataStore = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateDataStore(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.discoveryengine.v1.IDataStore|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateDataStore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDataStore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDataStore with error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.UpdateDataStoreRequest()
+            );
+            request.dataStore ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.UpdateDataStoreRequest', ['dataStore', 'name']);
+            request.dataStore.name = defaultValue1;
+            const expectedHeaderRequestParams = `data_store.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateDataStore = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateDataStore(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateDataStore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDataStore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDataStore with closed client', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.UpdateDataStoreRequest()
+            );
+            request.dataStore ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.UpdateDataStoreRequest', ['dataStore', 'name']);
+            request.dataStore.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateDataStore(request), expectedError);
+        });
+    });
+
+    describe('createDataStore', () => {
+        it('invokes createDataStore without error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.CreateDataStoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.CreateDataStoreRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createDataStore = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createDataStore(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDataStore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataStore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDataStore without error using callback', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.CreateDataStoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.CreateDataStoreRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createDataStore = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createDataStore(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.discoveryengine.v1.IDataStore, protos.google.cloud.discoveryengine.v1.ICreateDataStoreMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.discoveryengine.v1.IDataStore, protos.google.cloud.discoveryengine.v1.ICreateDataStoreMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDataStore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataStore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDataStore with call error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.CreateDataStoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.CreateDataStoreRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createDataStore = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createDataStore(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createDataStore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataStore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDataStore with LRO error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.CreateDataStoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.CreateDataStoreRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createDataStore = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createDataStore(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createDataStore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataStore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateDataStoreProgress without error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateDataStoreProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateDataStoreProgress with error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateDataStoreProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteDataStore', () => {
+        it('invokes deleteDataStore without error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.DeleteDataStoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.DeleteDataStoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteDataStore = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteDataStore(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDataStore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataStore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDataStore without error using callback', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.DeleteDataStoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.DeleteDataStoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteDataStore = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteDataStore(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.discoveryengine.v1.IDeleteDataStoreMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.discoveryengine.v1.IDeleteDataStoreMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDataStore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataStore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDataStore with call error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.DeleteDataStoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.DeleteDataStoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteDataStore = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteDataStore(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteDataStore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataStore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDataStore with LRO error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.DeleteDataStoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.DeleteDataStoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteDataStore = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteDataStore(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteDataStore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataStore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteDataStoreProgress without error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteDataStoreProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteDataStoreProgress with error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteDataStoreProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listDataStores', () => {
+        it('invokes listDataStores without error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.ListDataStoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1.DataStore()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1.DataStore()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1.DataStore()),
+            ];
+            client.innerApiCalls.listDataStores = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDataStores(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDataStores as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDataStores as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDataStores without error using callback', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.ListDataStoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1.DataStore()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1.DataStore()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1.DataStore()),
+            ];
+            client.innerApiCalls.listDataStores = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDataStores(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.discoveryengine.v1.IDataStore[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDataStores as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDataStores as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDataStores with error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.ListDataStoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDataStores = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDataStores(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDataStores as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDataStores as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDataStoresStream without error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.ListDataStoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1.DataStore()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1.DataStore()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1.DataStore()),
+            ];
+            client.descriptors.page.listDataStores.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDataStoresStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.discoveryengine.v1.DataStore[] = [];
+                stream.on('data', (response: protos.google.cloud.discoveryengine.v1.DataStore) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDataStores.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDataStores, request));
+            assert(
+                (client.descriptors.page.listDataStores.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listDataStoresStream with error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.ListDataStoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDataStores.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDataStoresStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.discoveryengine.v1.DataStore[] = [];
+                stream.on('data', (response: protos.google.cloud.discoveryengine.v1.DataStore) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDataStores.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDataStores, request));
+            assert(
+                (client.descriptors.page.listDataStores.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listDataStores without error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.ListDataStoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1.DataStore()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1.DataStore()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1.DataStore()),
+            ];
+            client.descriptors.page.listDataStores.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.discoveryengine.v1.IDataStore[] = [];
+            const iterable = client.listDataStoresAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDataStores.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDataStores.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listDataStores with error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.ListDataStoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDataStores.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDataStoresAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.discoveryengine.v1.IDataStore[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDataStores.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDataStores.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getOperation with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes cancelOperation with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('collection', async () => {
-      const fakePath = '/rendered/path/collection';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.collectionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.collectionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('collectionPath', () => {
-        const result = client.collectionPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.collectionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromCollectionName', () => {
-        const result = client.matchProjectFromCollectionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.collectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromCollectionName', () => {
-        const result = client.matchLocationFromCollectionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.collectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromCollectionName', () => {
-        const result = client.matchCollectionFromCollectionName(fakePath);
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (client.pathTemplates.collectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('engine', async () => {
-      const fakePath = '/rendered/path/engine';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        engine: 'engineValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.enginePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.enginePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('enginePath', () => {
-        const result = client.enginePath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'engineValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.enginePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('collection', async () => {
+            const fakePath = "/rendered/path/collection";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.collectionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.collectionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromEngineName', () => {
-        const result = client.matchProjectFromEngineName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.enginePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('collectionPath', () => {
+                const result = client.collectionPath("projectValue", "locationValue", "collectionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.collectionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromEngineName', () => {
-        const result = client.matchLocationFromEngineName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.enginePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromCollectionName', () => {
+                const result = client.matchProjectFromCollectionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.collectionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchCollectionFromEngineName', () => {
-        const result = client.matchCollectionFromEngineName(fakePath);
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (client.pathTemplates.enginePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromCollectionName', () => {
+                const result = client.matchLocationFromCollectionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.collectionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchEngineFromEngineName', () => {
-        const result = client.matchEngineFromEngineName(fakePath);
-        assert.strictEqual(result, 'engineValue');
-        assert(
-          (client.pathTemplates.enginePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchCollectionFromCollectionName', () => {
+                const result = client.matchCollectionFromCollectionName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.collectionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('engine', async () => {
+            const fakePath = "/rendered/path/engine";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                engine: "engineValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.enginePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.enginePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('enginePath', () => {
+                const result = client.enginePath("projectValue", "locationValue", "collectionValue", "engineValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.enginePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEngineName', () => {
+                const result = client.matchProjectFromEngineName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.enginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEngineName', () => {
+                const result = client.matchLocationFromEngineName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.enginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromEngineName', () => {
+                const result = client.matchCollectionFromEngineName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.enginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEngineFromEngineName', () => {
+                const result = client.matchEngineFromEngineName(fakePath);
+                assert.strictEqual(result, "engineValue");
+                assert((client.pathTemplates.enginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStore', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStore";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStorePath', () => {
+                const result = client.projectLocationCollectionDataStorePath("projectValue", "locationValue", "collectionValue", "dataStoreValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStorePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreBranchDocument', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreBranchDocument";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                branch: "branchValue",
+                document: "documentValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreBranchDocumentPath', () => {
+                const result = client.projectLocationCollectionDataStoreBranchDocumentPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "branchValue", "documentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBranchFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
+                const result = client.matchBranchFromProjectLocationCollectionDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "branchValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
+                const result = client.matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "documentValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreBranchDocumentChunk', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreBranchDocumentChunk";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                branch: "branchValue",
+                document: "documentValue",
+                chunk: "chunkValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreBranchDocumentChunkPath', () => {
+                const result = client.projectLocationCollectionDataStoreBranchDocumentChunkPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "branchValue", "documentValue", "chunkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBranchFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchBranchFromProjectLocationCollectionDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "branchValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "documentValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchChunkFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchChunkFromProjectLocationCollectionDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "chunkValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreControl', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreControl";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                control: "controlValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreControlPath', () => {
+                const result = client.projectLocationCollectionDataStoreControlPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "controlValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreControlName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreControlName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreControlName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreControlName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreControlName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreControlName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreControlName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreControlName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchControlFromProjectLocationCollectionDataStoreControlName', () => {
+                const result = client.matchControlFromProjectLocationCollectionDataStoreControlName(fakePath);
+                assert.strictEqual(result, "controlValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreConversation', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreConversation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                conversation: "conversationValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreConversationPath', () => {
+                const result = client.projectLocationCollectionDataStoreConversationPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "conversationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreConversationName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreConversationName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreConversationName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreConversationName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConversationFromProjectLocationCollectionDataStoreConversationName', () => {
+                const result = client.matchConversationFromProjectLocationCollectionDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "conversationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreCustomTuningModel', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreCustomTuningModel";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                custom_tuning_model: "customTuningModelValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreCustomTuningModelPath', () => {
+                const result = client.projectLocationCollectionDataStoreCustomTuningModelPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "customTuningModelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
+                const result = client.matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "customTuningModelValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreDocumentProcessingConfig', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreDocumentProcessingConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreDocumentProcessingConfigPath', () => {
+                const result = client.projectLocationCollectionDataStoreDocumentProcessingConfigPath("projectValue", "locationValue", "collectionValue", "dataStoreValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreDocumentProcessingConfigName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreDocumentProcessingConfigName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreDocumentProcessingConfigName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreDocumentProcessingConfigName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreSchema', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreSchema";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                schema: "schemaValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreSchemaPath', () => {
+                const result = client.projectLocationCollectionDataStoreSchemaPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "schemaValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreSchemaName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreSchemaName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreSchemaName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreSchemaName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSchemaFromProjectLocationCollectionDataStoreSchemaName', () => {
+                const result = client.matchSchemaFromProjectLocationCollectionDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "schemaValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreServingConfig', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreServingConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                serving_config: "servingConfigValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreServingConfigPath', () => {
+                const result = client.projectLocationCollectionDataStoreServingConfigPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "servingConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreServingConfigName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreServingConfigName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreServingConfigName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName', () => {
+                const result = client.matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "servingConfigValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreSession', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreSession";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                session: "sessionValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreSessionPath', () => {
+                const result = client.projectLocationCollectionDataStoreSessionPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "sessionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreSessionName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreSessionName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreSessionName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreSessionName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectLocationCollectionDataStoreSessionName', () => {
+                const result = client.matchSessionFromProjectLocationCollectionDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreSessionAnswer', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreSessionAnswer";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                session: "sessionValue",
+                answer: "answerValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreSessionAnswerPath', () => {
+                const result = client.projectLocationCollectionDataStoreSessionAnswerPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "sessionValue", "answerValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+                const result = client.matchSessionFromProjectLocationCollectionDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAnswerFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+                const result = client.matchAnswerFromProjectLocationCollectionDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "answerValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreSiteSearchEngine', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreSiteSearchEngine";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreSiteSearchEnginePath', () => {
+                const result = client.projectLocationCollectionDataStoreSiteSearchEnginePath("projectValue", "locationValue", "collectionValue", "dataStoreValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreSiteSearchEngineSitemap', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreSiteSearchEngineSitemap";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                sitemap: "sitemapValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreSiteSearchEngineSitemapPath', () => {
+                const result = client.projectLocationCollectionDataStoreSiteSearchEngineSitemapPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "sitemapValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+                const result = client.matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(fakePath);
+                assert.strictEqual(result, "sitemapValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreSiteSearchEngineTargetSite', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreSiteSearchEngineTargetSite";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                target_site: "targetSiteValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreSiteSearchEngineTargetSitePath', () => {
+                const result = client.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "targetSiteValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTargetSiteFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchTargetSiteFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "targetSiteValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionEngineControl', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionEngineControl";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                engine: "engineValue",
+                control: "controlValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionEngineControlPath', () => {
+                const result = client.projectLocationCollectionEngineControlPath("projectValue", "locationValue", "collectionValue", "engineValue", "controlValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionEngineControlName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionEngineControlName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionEngineControlName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionEngineControlName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionEngineControlName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionEngineControlName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEngineFromProjectLocationCollectionEngineControlName', () => {
+                const result = client.matchEngineFromProjectLocationCollectionEngineControlName(fakePath);
+                assert.strictEqual(result, "engineValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchControlFromProjectLocationCollectionEngineControlName', () => {
+                const result = client.matchControlFromProjectLocationCollectionEngineControlName(fakePath);
+                assert.strictEqual(result, "controlValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionEngineConversation', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionEngineConversation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                engine: "engineValue",
+                conversation: "conversationValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionEngineConversationPath', () => {
+                const result = client.projectLocationCollectionEngineConversationPath("projectValue", "locationValue", "collectionValue", "engineValue", "conversationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionEngineConversationName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionEngineConversationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionEngineConversationName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionEngineConversationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionEngineConversationName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionEngineConversationName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEngineFromProjectLocationCollectionEngineConversationName', () => {
+                const result = client.matchEngineFromProjectLocationCollectionEngineConversationName(fakePath);
+                assert.strictEqual(result, "engineValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConversationFromProjectLocationCollectionEngineConversationName', () => {
+                const result = client.matchConversationFromProjectLocationCollectionEngineConversationName(fakePath);
+                assert.strictEqual(result, "conversationValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionEngineServingConfig', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionEngineServingConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                engine: "engineValue",
+                serving_config: "servingConfigValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionEngineServingConfigPath', () => {
+                const result = client.projectLocationCollectionEngineServingConfigPath("projectValue", "locationValue", "collectionValue", "engineValue", "servingConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionEngineServingConfigName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionEngineServingConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionEngineServingConfigName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionEngineServingConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionEngineServingConfigName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionEngineServingConfigName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEngineFromProjectLocationCollectionEngineServingConfigName', () => {
+                const result = client.matchEngineFromProjectLocationCollectionEngineServingConfigName(fakePath);
+                assert.strictEqual(result, "engineValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServingConfigFromProjectLocationCollectionEngineServingConfigName', () => {
+                const result = client.matchServingConfigFromProjectLocationCollectionEngineServingConfigName(fakePath);
+                assert.strictEqual(result, "servingConfigValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionEngineSession', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionEngineSession";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                engine: "engineValue",
+                session: "sessionValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionEngineSessionPath', () => {
+                const result = client.projectLocationCollectionEngineSessionPath("projectValue", "locationValue", "collectionValue", "engineValue", "sessionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionEngineSessionName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionEngineSessionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionEngineSessionName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionEngineSessionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionEngineSessionName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionEngineSessionName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEngineFromProjectLocationCollectionEngineSessionName', () => {
+                const result = client.matchEngineFromProjectLocationCollectionEngineSessionName(fakePath);
+                assert.strictEqual(result, "engineValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectLocationCollectionEngineSessionName', () => {
+                const result = client.matchSessionFromProjectLocationCollectionEngineSessionName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionEngineSessionAnswer', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionEngineSessionAnswer";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                engine: "engineValue",
+                session: "sessionValue",
+                answer: "answerValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionEngineSessionAnswerPath', () => {
+                const result = client.projectLocationCollectionEngineSessionAnswerPath("projectValue", "locationValue", "collectionValue", "engineValue", "sessionValue", "answerValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionEngineSessionAnswerName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionEngineSessionAnswerName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionEngineSessionAnswerName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionEngineSessionAnswerName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionEngineSessionAnswerName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionEngineSessionAnswerName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEngineFromProjectLocationCollectionEngineSessionAnswerName', () => {
+                const result = client.matchEngineFromProjectLocationCollectionEngineSessionAnswerName(fakePath);
+                assert.strictEqual(result, "engineValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectLocationCollectionEngineSessionAnswerName', () => {
+                const result = client.matchSessionFromProjectLocationCollectionEngineSessionAnswerName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAnswerFromProjectLocationCollectionEngineSessionAnswerName', () => {
+                const result = client.matchAnswerFromProjectLocationCollectionEngineSessionAnswerName(fakePath);
+                assert.strictEqual(result, "answerValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStore', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStore";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStorePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStorePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStorePath', () => {
+                const result = client.projectLocationDataStorePath("projectValue", "locationValue", "dataStoreValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStorePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreBranchDocument', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreBranchDocument";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                branch: "branchValue",
+                document: "documentValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreBranchDocumentPath', () => {
+                const result = client.projectLocationDataStoreBranchDocumentPath("projectValue", "locationValue", "dataStoreValue", "branchValue", "documentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreBranchDocumentName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreBranchDocumentName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreBranchDocumentName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBranchFromProjectLocationDataStoreBranchDocumentName', () => {
+                const result = client.matchBranchFromProjectLocationDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "branchValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentFromProjectLocationDataStoreBranchDocumentName', () => {
+                const result = client.matchDocumentFromProjectLocationDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "documentValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreBranchDocumentChunk', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreBranchDocumentChunk";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                branch: "branchValue",
+                document: "documentValue",
+                chunk: "chunkValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreBranchDocumentChunkPath', () => {
+                const result = client.projectLocationDataStoreBranchDocumentChunkPath("projectValue", "locationValue", "dataStoreValue", "branchValue", "documentValue", "chunkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBranchFromProjectLocationDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchBranchFromProjectLocationDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "branchValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentFromProjectLocationDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchDocumentFromProjectLocationDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "documentValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchChunkFromProjectLocationDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchChunkFromProjectLocationDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "chunkValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreControl', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreControl";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                control: "controlValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreControlPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreControlPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreControlPath', () => {
+                const result = client.projectLocationDataStoreControlPath("projectValue", "locationValue", "dataStoreValue", "controlValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreControlPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreControlName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreControlName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreControlName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreControlName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreControlName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreControlName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchControlFromProjectLocationDataStoreControlName', () => {
+                const result = client.matchControlFromProjectLocationDataStoreControlName(fakePath);
+                assert.strictEqual(result, "controlValue");
+                assert((client.pathTemplates.projectLocationDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreConversation', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreConversation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                conversation: "conversationValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreConversationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreConversationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreConversationPath', () => {
+                const result = client.projectLocationDataStoreConversationPath("projectValue", "locationValue", "dataStoreValue", "conversationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreConversationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreConversationName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreConversationName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreConversationName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConversationFromProjectLocationDataStoreConversationName', () => {
+                const result = client.matchConversationFromProjectLocationDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "conversationValue");
+                assert((client.pathTemplates.projectLocationDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreCustomTuningModel', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreCustomTuningModel";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                custom_tuning_model: "customTuningModelValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreCustomTuningModelPath', () => {
+                const result = client.projectLocationDataStoreCustomTuningModelPath("projectValue", "locationValue", "dataStoreValue", "customTuningModelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreCustomTuningModelName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreCustomTuningModelName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreCustomTuningModelName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName', () => {
+                const result = client.matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "customTuningModelValue");
+                assert((client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreDocumentProcessingConfig', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreDocumentProcessingConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreDocumentProcessingConfigPath', () => {
+                const result = client.projectLocationDataStoreDocumentProcessingConfigPath("projectValue", "locationValue", "dataStoreValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreDocumentProcessingConfigName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreDocumentProcessingConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreDocumentProcessingConfigName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreDocumentProcessingConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreDocumentProcessingConfigName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreDocumentProcessingConfigName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreSchema', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreSchema";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                schema: "schemaValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreSchemaPath', () => {
+                const result = client.projectLocationDataStoreSchemaPath("projectValue", "locationValue", "dataStoreValue", "schemaValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreSchemaName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreSchemaName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreSchemaName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSchemaFromProjectLocationDataStoreSchemaName', () => {
+                const result = client.matchSchemaFromProjectLocationDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "schemaValue");
+                assert((client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreServingConfig', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreServingConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                serving_config: "servingConfigValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreServingConfigPath', () => {
+                const result = client.projectLocationDataStoreServingConfigPath("projectValue", "locationValue", "dataStoreValue", "servingConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreServingConfigName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreServingConfigName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreServingConfigName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServingConfigFromProjectLocationDataStoreServingConfigName', () => {
+                const result = client.matchServingConfigFromProjectLocationDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "servingConfigValue");
+                assert((client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreSession', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreSession";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                session: "sessionValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreSessionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreSessionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreSessionPath', () => {
+                const result = client.projectLocationDataStoreSessionPath("projectValue", "locationValue", "dataStoreValue", "sessionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreSessionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreSessionName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreSessionName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreSessionName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectLocationDataStoreSessionName', () => {
+                const result = client.matchSessionFromProjectLocationDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreSessionAnswer', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreSessionAnswer";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                session: "sessionValue",
+                answer: "answerValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreSessionAnswerPath', () => {
+                const result = client.projectLocationDataStoreSessionAnswerPath("projectValue", "locationValue", "dataStoreValue", "sessionValue", "answerValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreSessionAnswerName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreSessionAnswerName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreSessionAnswerName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectLocationDataStoreSessionAnswerName', () => {
+                const result = client.matchSessionFromProjectLocationDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAnswerFromProjectLocationDataStoreSessionAnswerName', () => {
+                const result = client.matchAnswerFromProjectLocationDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "answerValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreSiteSearchEngine', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreSiteSearchEngine";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreSiteSearchEnginePath', () => {
+                const result = client.projectLocationDataStoreSiteSearchEnginePath("projectValue", "locationValue", "dataStoreValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreSiteSearchEngineName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreSiteSearchEngineName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreSiteSearchEngineName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreSiteSearchEngineName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreSiteSearchEngineName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreSiteSearchEngineName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreSiteSearchEngineSitemap', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreSiteSearchEngineSitemap";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                sitemap: "sitemapValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreSiteSearchEngineSitemapPath', () => {
+                const result = client.projectLocationDataStoreSiteSearchEngineSitemapPath("projectValue", "locationValue", "dataStoreValue", "sitemapValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+                const result = client.matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(fakePath);
+                assert.strictEqual(result, "sitemapValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreSiteSearchEngineTargetSite', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreSiteSearchEngineTargetSite";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                target_site: "targetSiteValue",
+            };
+            const client = new datastoreserviceModule.v1.DataStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreSiteSearchEngineTargetSitePath', () => {
+                const result = client.projectLocationDataStoreSiteSearchEngineTargetSitePath("projectValue", "locationValue", "dataStoreValue", "targetSiteValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTargetSiteFromProjectLocationDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchTargetSiteFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "targetSiteValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStore', async () => {
-      const fakePath = '/rendered/path/projectLocationCollectionDataStore';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStorePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStorePath', () => {
-        const result = client.projectLocationCollectionDataStorePath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'dataStoreValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreBranchDocument', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreBranchDocument';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        branch: 'branchValue',
-        document: 'documentValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreBranchDocumentPath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreBranchDocumentPath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue',
-            'branchValue',
-            'documentValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBranchFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchBranchFromProjectLocationCollectionDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'branchValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'documentValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreBranchDocumentChunk', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreBranchDocumentChunk';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        branch: 'branchValue',
-        document: 'documentValue',
-        chunk: 'chunkValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreBranchDocumentChunkPath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreBranchDocumentChunkPath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue',
-            'branchValue',
-            'documentValue',
-            'chunkValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBranchFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchBranchFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'branchValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'documentValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchChunkFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchChunkFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'chunkValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreControl', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreControl';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        control: 'controlValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreControlPath', () => {
-        const result = client.projectLocationCollectionDataStoreControlPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'dataStoreValue',
-          'controlValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreControlPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreControlName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreControlName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreControlName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreControlName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchControlFromProjectLocationCollectionDataStoreControlName', () => {
-        const result =
-          client.matchControlFromProjectLocationCollectionDataStoreControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'controlValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreConversation', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreConversation';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        conversation: 'conversationValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreConversationPath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreConversationPath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue',
-            'conversationValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreConversationPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreConversationName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreConversationName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreConversationName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreConversationName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConversationFromProjectLocationCollectionDataStoreConversationName', () => {
-        const result =
-          client.matchConversationFromProjectLocationCollectionDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'conversationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreCustomTuningModel', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreCustomTuningModel';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        custom_tuning_model: 'customTuningModelValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreCustomTuningModelPath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreCustomTuningModelPath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue',
-            'customTuningModelValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreCustomTuningModelPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'customTuningModelValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreDocumentProcessingConfig', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreDocumentProcessingConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreDocumentProcessingConfigPath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreDocumentProcessingConfigPath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreDocumentProcessingConfigName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreDocumentProcessingConfigName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreDocumentProcessingConfigName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreDocumentProcessingConfigName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreSchema', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreSchema';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        schema: 'schemaValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreSchemaPath', () => {
-        const result = client.projectLocationCollectionDataStoreSchemaPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'dataStoreValue',
-          'schemaValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSchemaPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreSchemaName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreSchemaName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreSchemaName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreSchemaName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreSchemaName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreSchemaName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreSchemaName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreSchemaName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSchemaFromProjectLocationCollectionDataStoreSchemaName', () => {
-        const result =
-          client.matchSchemaFromProjectLocationCollectionDataStoreSchemaName(
-            fakePath
-          );
-        assert.strictEqual(result, 'schemaValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreServingConfig', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreServingConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        serving_config: 'servingConfigValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreServingConfigPath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreServingConfigPath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue',
-            'servingConfigValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreServingConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreServingConfigName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreServingConfigName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreServingConfigName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName', () => {
-        const result =
-          client.matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'servingConfigValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreSession', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreSession';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        session: 'sessionValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreSessionPath', () => {
-        const result = client.projectLocationCollectionDataStoreSessionPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'dataStoreValue',
-          'sessionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreSessionName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreSessionName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreSessionName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreSessionName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectLocationCollectionDataStoreSessionName', () => {
-        const result =
-          client.matchSessionFromProjectLocationCollectionDataStoreSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreSessionAnswer', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreSessionAnswer';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        session: 'sessionValue',
-        answer: 'answerValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreSessionAnswerPath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreSessionAnswerPath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue',
-            'sessionValue',
-            'answerValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchSessionFromProjectLocationCollectionDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAnswerFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchAnswerFromProjectLocationCollectionDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'answerValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreSiteSearchEngine', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngine';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreSiteSearchEnginePath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreSiteSearchEnginePath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEnginePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEnginePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEnginePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEnginePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEnginePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreSiteSearchEngineSitemap', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngineSitemap';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        sitemap: 'sitemapValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreSiteSearchEngineSitemapPath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue',
-            'sitemapValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
-        const result =
-          client.matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sitemapValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreSiteSearchEngineTargetSite', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngineTargetSite';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        target_site: 'targetSiteValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreSiteSearchEngineTargetSitePath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue',
-            'targetSiteValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTargetSiteFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchTargetSiteFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'targetSiteValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionEngineControl', async () => {
-      const fakePath = '/rendered/path/projectLocationCollectionEngineControl';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        engine: 'engineValue',
-        control: 'controlValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionEngineControlPath', () => {
-        const result = client.projectLocationCollectionEngineControlPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'engineValue',
-          'controlValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineControlPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionEngineControlName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionEngineControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionEngineControlName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionEngineControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionEngineControlName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionEngineControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEngineFromProjectLocationCollectionEngineControlName', () => {
-        const result =
-          client.matchEngineFromProjectLocationCollectionEngineControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'engineValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchControlFromProjectLocationCollectionEngineControlName', () => {
-        const result =
-          client.matchControlFromProjectLocationCollectionEngineControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'controlValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionEngineConversation', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionEngineConversation';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        engine: 'engineValue',
-        conversation: 'conversationValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionEngineConversationPath', () => {
-        const result = client.projectLocationCollectionEngineConversationPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'engineValue',
-          'conversationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineConversationPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionEngineConversationName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionEngineConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionEngineConversationName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionEngineConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionEngineConversationName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionEngineConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEngineFromProjectLocationCollectionEngineConversationName', () => {
-        const result =
-          client.matchEngineFromProjectLocationCollectionEngineConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'engineValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConversationFromProjectLocationCollectionEngineConversationName', () => {
-        const result =
-          client.matchConversationFromProjectLocationCollectionEngineConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'conversationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionEngineServingConfig', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionEngineServingConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        engine: 'engineValue',
-        serving_config: 'servingConfigValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionEngineServingConfigPath', () => {
-        const result = client.projectLocationCollectionEngineServingConfigPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'engineValue',
-          'servingConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineServingConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionEngineServingConfigName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionEngineServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionEngineServingConfigName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionEngineServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionEngineServingConfigName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionEngineServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEngineFromProjectLocationCollectionEngineServingConfigName', () => {
-        const result =
-          client.matchEngineFromProjectLocationCollectionEngineServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'engineValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServingConfigFromProjectLocationCollectionEngineServingConfigName', () => {
-        const result =
-          client.matchServingConfigFromProjectLocationCollectionEngineServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'servingConfigValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionEngineSession', async () => {
-      const fakePath = '/rendered/path/projectLocationCollectionEngineSession';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        engine: 'engineValue',
-        session: 'sessionValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionEngineSessionPath', () => {
-        const result = client.projectLocationCollectionEngineSessionPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'engineValue',
-          'sessionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionEngineSessionName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionEngineSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionEngineSessionName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionEngineSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionEngineSessionName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionEngineSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEngineFromProjectLocationCollectionEngineSessionName', () => {
-        const result =
-          client.matchEngineFromProjectLocationCollectionEngineSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'engineValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectLocationCollectionEngineSessionName', () => {
-        const result =
-          client.matchSessionFromProjectLocationCollectionEngineSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionEngineSessionAnswer', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionEngineSessionAnswer';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        engine: 'engineValue',
-        session: 'sessionValue',
-        answer: 'answerValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionEngineSessionAnswerPath', () => {
-        const result = client.projectLocationCollectionEngineSessionAnswerPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'engineValue',
-          'sessionValue',
-          'answerValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionAnswerPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionEngineSessionAnswerName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionEngineSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionEngineSessionAnswerName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionEngineSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionEngineSessionAnswerName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionEngineSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEngineFromProjectLocationCollectionEngineSessionAnswerName', () => {
-        const result =
-          client.matchEngineFromProjectLocationCollectionEngineSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'engineValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectLocationCollectionEngineSessionAnswerName', () => {
-        const result =
-          client.matchSessionFromProjectLocationCollectionEngineSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAnswerFromProjectLocationCollectionEngineSessionAnswerName', () => {
-        const result =
-          client.matchAnswerFromProjectLocationCollectionEngineSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'answerValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStore', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStore';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStorePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationDataStorePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectLocationDataStorePath', () => {
-        const result = client.projectLocationDataStorePath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStorePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStorePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStorePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreName(fakePath);
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStorePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreBranchDocument', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreBranchDocument';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        branch: 'branchValue',
-        document: 'documentValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreBranchDocumentPath', () => {
-        const result = client.projectLocationDataStoreBranchDocumentPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'branchValue',
-          'documentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBranchFromProjectLocationDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchBranchFromProjectLocationDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'branchValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDocumentFromProjectLocationDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchDocumentFromProjectLocationDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'documentValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreBranchDocumentChunk', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationDataStoreBranchDocumentChunk';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        branch: 'branchValue',
-        document: 'documentValue',
-        chunk: 'chunkValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreBranchDocumentChunkPath', () => {
-        const result = client.projectLocationDataStoreBranchDocumentChunkPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'branchValue',
-          'documentValue',
-          'chunkValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentChunkPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBranchFromProjectLocationDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchBranchFromProjectLocationDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'branchValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDocumentFromProjectLocationDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchDocumentFromProjectLocationDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'documentValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchChunkFromProjectLocationDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchChunkFromProjectLocationDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'chunkValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreControl', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreControl';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        control: 'controlValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreControlPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreControlPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreControlPath', () => {
-        const result = client.projectLocationDataStoreControlPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'controlValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreControlPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreControlName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreControlName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreControlName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreControlName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreControlName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchControlFromProjectLocationDataStoreControlName', () => {
-        const result =
-          client.matchControlFromProjectLocationDataStoreControlName(fakePath);
-        assert.strictEqual(result, 'controlValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreConversation', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreConversation';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        conversation: 'conversationValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreConversationPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreConversationPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreConversationPath', () => {
-        const result = client.projectLocationDataStoreConversationPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'conversationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreConversationPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreConversationName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreConversationName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreConversationName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConversationFromProjectLocationDataStoreConversationName', () => {
-        const result =
-          client.matchConversationFromProjectLocationDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'conversationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreCustomTuningModel', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationDataStoreCustomTuningModel';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        custom_tuning_model: 'customTuningModelValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreCustomTuningModelPath', () => {
-        const result = client.projectLocationDataStoreCustomTuningModelPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'customTuningModelValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreCustomTuningModelPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'customTuningModelValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreDocumentProcessingConfig', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationDataStoreDocumentProcessingConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreDocumentProcessingConfigPath', () => {
-        const result =
-          client.projectLocationDataStoreDocumentProcessingConfigPath(
-            'projectValue',
-            'locationValue',
-            'dataStoreValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreDocumentProcessingConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreDocumentProcessingConfigName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreDocumentProcessingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreDocumentProcessingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreDocumentProcessingConfigName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreDocumentProcessingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreDocumentProcessingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreDocumentProcessingConfigName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreDocumentProcessingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreDocumentProcessingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreSchema', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreSchema';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        schema: 'schemaValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreSchemaPath', () => {
-        const result = client.projectLocationDataStoreSchemaPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'schemaValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreSchemaName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreSchemaName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreSchemaName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreSchemaName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreSchemaName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreSchemaName(fakePath);
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSchemaFromProjectLocationDataStoreSchemaName', () => {
-        const result =
-          client.matchSchemaFromProjectLocationDataStoreSchemaName(fakePath);
-        assert.strictEqual(result, 'schemaValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreServingConfig', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreServingConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        serving_config: 'servingConfigValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreServingConfigPath', () => {
-        const result = client.projectLocationDataStoreServingConfigPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'servingConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreServingConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreServingConfigName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreServingConfigName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreServingConfigName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServingConfigFromProjectLocationDataStoreServingConfigName', () => {
-        const result =
-          client.matchServingConfigFromProjectLocationDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'servingConfigValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreSession', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreSession';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        session: 'sessionValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreSessionPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreSessionPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreSessionPath', () => {
-        const result = client.projectLocationDataStoreSessionPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'sessionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSessionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreSessionName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreSessionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreSessionName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreSessionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreSessionName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectLocationDataStoreSessionName', () => {
-        const result =
-          client.matchSessionFromProjectLocationDataStoreSessionName(fakePath);
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreSessionAnswer', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreSessionAnswer';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        session: 'sessionValue',
-        answer: 'answerValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreSessionAnswerPath', () => {
-        const result = client.projectLocationDataStoreSessionAnswerPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'sessionValue',
-          'answerValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSessionAnswerPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectLocationDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchSessionFromProjectLocationDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAnswerFromProjectLocationDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchAnswerFromProjectLocationDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'answerValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreSiteSearchEngine', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationDataStoreSiteSearchEngine';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreSiteSearchEnginePath', () => {
-        const result = client.projectLocationDataStoreSiteSearchEnginePath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEnginePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreSiteSearchEngineName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreSiteSearchEngineName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEnginePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreSiteSearchEngineName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreSiteSearchEngineName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEnginePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreSiteSearchEngineName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreSiteSearchEngineName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEnginePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreSiteSearchEngineSitemap', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationDataStoreSiteSearchEngineSitemap';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        sitemap: 'sitemapValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreSiteSearchEngineSitemapPath', () => {
-        const result =
-          client.projectLocationDataStoreSiteSearchEngineSitemapPath(
-            'projectValue',
-            'locationValue',
-            'dataStoreValue',
-            'sitemapValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
-        const result =
-          client.matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sitemapValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreSiteSearchEngineTargetSite', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationDataStoreSiteSearchEngineTargetSite';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        target_site: 'targetSiteValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreSiteSearchEngineTargetSitePath', () => {
-        const result =
-          client.projectLocationDataStoreSiteSearchEngineTargetSitePath(
-            'projectValue',
-            'locationValue',
-            'dataStoreValue',
-            'targetSiteValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTargetSiteFromProjectLocationDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchTargetSiteFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'targetSiteValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

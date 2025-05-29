@@ -29,20 +29,21 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The fully qualified name of parent resource to list cases under.
+   *  Required. The name of a parent to list cases under.
    */
   // const parent = 'abc123'
   /**
-   *  An expression written in filter language. If non-empty, the query returns
-   *  the cases that match the filter. Else, the query doesn't filter the cases.
-   *  Filter expressions use the following fields with the operators equals (`=`)
-   *  and `AND`:
-   *  - `state`: The accepted values are `OPEN` or `CLOSED`.
-   *  - `priority`: The accepted values are `P0`, `P1`, `P2`, `P3`, or `P4`. You
+   *  An expression used to filter cases.
+   *  If it's an empty string, then no filtering happens. Otherwise, the endpoint
+   *  returns the cases that match the filter.
+   *  Expressions use the following fields separated by `AND` and specified with
+   *  `=`:
+   *  - `state`: Can be `OPEN` or `CLOSED`.
+   *  - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
    *  can specify multiple values for priority using the `OR` operator. For
    *  example, `priority=P1 OR priority=P2`.
    *  - `creator.email`: The email address of the case creator.
-   *  Examples:
+   *  EXAMPLES:
    *  - `state=CLOSED`
    *  - `state=OPEN AND creator.email="tester@example.com"`
    *  - `state=OPEN AND (priority=P0 OR priority=P1)`

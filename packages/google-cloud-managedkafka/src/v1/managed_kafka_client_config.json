@@ -101,6 +101,34 @@
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "ListAcls": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetAcl": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateAcl": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateAcl": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteAcl": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "AddAclEntry": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RemoveAclEntry": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

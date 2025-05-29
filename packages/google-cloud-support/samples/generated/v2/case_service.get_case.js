@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The fully qualified name of a case to be retrieved.
+   *  Required. The full name of a case to be retrieved.
    */
   // const name = 'abc123'
 
