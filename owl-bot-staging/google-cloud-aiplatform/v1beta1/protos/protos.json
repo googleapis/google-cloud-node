@@ -4759,6 +4759,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "urlContext": {
+                          "type": "UrlContext",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -4769,6 +4776,9 @@
                           "fields": {}
                         }
                       }
+                    },
+                    "UrlContext": {
+                      "fields": {}
                     },
                     "ToolUseExample": {
                       "oneofs": {
