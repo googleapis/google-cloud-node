@@ -256,9 +256,14 @@ describe('v1p1beta1.AssetServiceClient', () => {
         throw err;
       });
       assert(client.assetServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -267,9 +272,14 @@ describe('v1p1beta1.AssetServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.assetServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
