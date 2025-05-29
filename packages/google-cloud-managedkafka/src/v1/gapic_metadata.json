@@ -50,6 +50,36 @@
                 "deleteConsumerGroup"
               ]
             },
+            "GetAcl": {
+              "methods": [
+                "getAcl"
+              ]
+            },
+            "CreateAcl": {
+              "methods": [
+                "createAcl"
+              ]
+            },
+            "UpdateAcl": {
+              "methods": [
+                "updateAcl"
+              ]
+            },
+            "DeleteAcl": {
+              "methods": [
+                "deleteAcl"
+              ]
+            },
+            "AddAclEntry": {
+              "methods": [
+                "addAclEntry"
+              ]
+            },
+            "RemoveAclEntry": {
+              "methods": [
+                "removeAclEntry"
+              ]
+            },
             "CreateCluster": {
               "methods": [
                 "createCluster"
@@ -84,6 +114,13 @@
                 "listConsumerGroups",
                 "listConsumerGroupsStream",
                 "listConsumerGroupsAsync"
+              ]
+            },
+            "ListAcls": {
+              "methods": [
+                "listAcls",
+                "listAclsStream",
+                "listAclsAsync"
               ]
             }
           }
@@ -131,6 +168,36 @@
                 "deleteConsumerGroup"
               ]
             },
+            "GetAcl": {
+              "methods": [
+                "getAcl"
+              ]
+            },
+            "CreateAcl": {
+              "methods": [
+                "createAcl"
+              ]
+            },
+            "UpdateAcl": {
+              "methods": [
+                "updateAcl"
+              ]
+            },
+            "DeleteAcl": {
+              "methods": [
+                "deleteAcl"
+              ]
+            },
+            "AddAclEntry": {
+              "methods": [
+                "addAclEntry"
+              ]
+            },
+            "RemoveAclEntry": {
+              "methods": [
+                "removeAclEntry"
+              ]
+            },
             "CreateCluster": {
               "methods": [
                 "createCluster"
@@ -165,6 +232,13 @@
                 "listConsumerGroups",
                 "listConsumerGroupsStream",
                 "listConsumerGroupsAsync"
+              ]
+            },
+            "ListAcls": {
+              "methods": [
+                "listAcls",
+                "listAclsStream",
+                "listAclsAsync"
               ]
             }
           }

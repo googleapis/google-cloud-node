@@ -1,7 +1,7 @@
 {
   "name": "dataform",
   "name_pretty": "Dataform API",
-  "product_documentation": "https://dataform.co/",
+  "product_documentation": "https://cloud.google.com/dataform/docs/overview",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dataform/latest",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "release_level": "preview",
@@ -14,3 +14,4 @@
   "library_type": "GAPIC_AUTO",
   "api_shortname": "dataform"
 }
+

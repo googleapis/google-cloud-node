@@ -129,6 +129,118 @@ export namespace google {
                      * @returns Promise
                      */
                     public getCertificateAuthority(request: google.cloud.memorystore.v1.IGetCertificateAuthorityRequest): Promise<google.cloud.memorystore.v1.CertificateAuthority>;
+
+                    /**
+                     * Calls RescheduleMaintenance.
+                     * @param request RescheduleMaintenanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public rescheduleMaintenance(request: google.cloud.memorystore.v1.IRescheduleMaintenanceRequest, callback: google.cloud.memorystore.v1.Memorystore.RescheduleMaintenanceCallback): void;
+
+                    /**
+                     * Calls RescheduleMaintenance.
+                     * @param request RescheduleMaintenanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public rescheduleMaintenance(request: google.cloud.memorystore.v1.IRescheduleMaintenanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListBackupCollections.
+                     * @param request ListBackupCollectionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListBackupCollectionsResponse
+                     */
+                    public listBackupCollections(request: google.cloud.memorystore.v1.IListBackupCollectionsRequest, callback: google.cloud.memorystore.v1.Memorystore.ListBackupCollectionsCallback): void;
+
+                    /**
+                     * Calls ListBackupCollections.
+                     * @param request ListBackupCollectionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listBackupCollections(request: google.cloud.memorystore.v1.IListBackupCollectionsRequest): Promise<google.cloud.memorystore.v1.ListBackupCollectionsResponse>;
+
+                    /**
+                     * Calls GetBackupCollection.
+                     * @param request GetBackupCollectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BackupCollection
+                     */
+                    public getBackupCollection(request: google.cloud.memorystore.v1.IGetBackupCollectionRequest, callback: google.cloud.memorystore.v1.Memorystore.GetBackupCollectionCallback): void;
+
+                    /**
+                     * Calls GetBackupCollection.
+                     * @param request GetBackupCollectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getBackupCollection(request: google.cloud.memorystore.v1.IGetBackupCollectionRequest): Promise<google.cloud.memorystore.v1.BackupCollection>;
+
+                    /**
+                     * Calls ListBackups.
+                     * @param request ListBackupsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListBackupsResponse
+                     */
+                    public listBackups(request: google.cloud.memorystore.v1.IListBackupsRequest, callback: google.cloud.memorystore.v1.Memorystore.ListBackupsCallback): void;
+
+                    /**
+                     * Calls ListBackups.
+                     * @param request ListBackupsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listBackups(request: google.cloud.memorystore.v1.IListBackupsRequest): Promise<google.cloud.memorystore.v1.ListBackupsResponse>;
+
+                    /**
+                     * Calls GetBackup.
+                     * @param request GetBackupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Backup
+                     */
+                    public getBackup(request: google.cloud.memorystore.v1.IGetBackupRequest, callback: google.cloud.memorystore.v1.Memorystore.GetBackupCallback): void;
+
+                    /**
+                     * Calls GetBackup.
+                     * @param request GetBackupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getBackup(request: google.cloud.memorystore.v1.IGetBackupRequest): Promise<google.cloud.memorystore.v1.Backup>;
+
+                    /**
+                     * Calls DeleteBackup.
+                     * @param request DeleteBackupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteBackup(request: google.cloud.memorystore.v1.IDeleteBackupRequest, callback: google.cloud.memorystore.v1.Memorystore.DeleteBackupCallback): void;
+
+                    /**
+                     * Calls DeleteBackup.
+                     * @param request DeleteBackupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteBackup(request: google.cloud.memorystore.v1.IDeleteBackupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ExportBackup.
+                     * @param request ExportBackupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public exportBackup(request: google.cloud.memorystore.v1.IExportBackupRequest, callback: google.cloud.memorystore.v1.Memorystore.ExportBackupCallback): void;
+
+                    /**
+                     * Calls ExportBackup.
+                     * @param request ExportBackupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportBackup(request: google.cloud.memorystore.v1.IExportBackupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls BackupInstance.
+                     * @param request BackupInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public backupInstance(request: google.cloud.memorystore.v1.IBackupInstanceRequest, callback: google.cloud.memorystore.v1.Memorystore.BackupInstanceCallback): void;
+
+                    /**
+                     * Calls BackupInstance.
+                     * @param request BackupInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public backupInstance(request: google.cloud.memorystore.v1.IBackupInstanceRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace Memorystore {
@@ -174,6 +286,62 @@ export namespace google {
                      * @param [response] CertificateAuthority
                      */
                     type GetCertificateAuthorityCallback = (error: (Error|null), response?: google.cloud.memorystore.v1.CertificateAuthority) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|rescheduleMaintenance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RescheduleMaintenanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|listBackupCollections}.
+                     * @param error Error, if any
+                     * @param [response] ListBackupCollectionsResponse
+                     */
+                    type ListBackupCollectionsCallback = (error: (Error|null), response?: google.cloud.memorystore.v1.ListBackupCollectionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|getBackupCollection}.
+                     * @param error Error, if any
+                     * @param [response] BackupCollection
+                     */
+                    type GetBackupCollectionCallback = (error: (Error|null), response?: google.cloud.memorystore.v1.BackupCollection) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|listBackups}.
+                     * @param error Error, if any
+                     * @param [response] ListBackupsResponse
+                     */
+                    type ListBackupsCallback = (error: (Error|null), response?: google.cloud.memorystore.v1.ListBackupsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|getBackup}.
+                     * @param error Error, if any
+                     * @param [response] Backup
+                     */
+                    type GetBackupCallback = (error: (Error|null), response?: google.cloud.memorystore.v1.Backup) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|deleteBackup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteBackupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|exportBackup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExportBackupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|backupInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type BackupInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** PscConnectionStatus enum. */
@@ -193,6 +361,12 @@ export namespace google {
 
                 /** Properties of an Instance. */
                 interface IInstance {
+
+                    /** Instance gcsSource */
+                    gcsSource?: (google.cloud.memorystore.v1.Instance.IGcsBackupSource|null);
+
+                    /** Instance managedBackupSource */
+                    managedBackupSource?: (google.cloud.memorystore.v1.Instance.IManagedBackupSource|null);
 
                     /** Instance name */
                     name?: (string|null);
@@ -254,11 +428,35 @@ export namespace google {
                     /** Instance pscAutoConnections */
                     pscAutoConnections?: (google.cloud.memorystore.v1.IPscAutoConnection[]|null);
 
+                    /** Instance pscAttachmentDetails */
+                    pscAttachmentDetails?: (google.cloud.memorystore.v1.IPscAttachmentDetail[]|null);
+
                     /** Instance endpoints */
                     endpoints?: (google.cloud.memorystore.v1.Instance.IInstanceEndpoint[]|null);
 
                     /** Instance mode */
                     mode?: (google.cloud.memorystore.v1.Instance.Mode|keyof typeof google.cloud.memorystore.v1.Instance.Mode|null);
+
+                    /** Instance ondemandMaintenance */
+                    ondemandMaintenance?: (boolean|null);
+
+                    /** Instance maintenancePolicy */
+                    maintenancePolicy?: (google.cloud.memorystore.v1.IMaintenancePolicy|null);
+
+                    /** Instance maintenanceSchedule */
+                    maintenanceSchedule?: (google.cloud.memorystore.v1.IMaintenanceSchedule|null);
+
+                    /** Instance crossInstanceReplicationConfig */
+                    crossInstanceReplicationConfig?: (google.cloud.memorystore.v1.ICrossInstanceReplicationConfig|null);
+
+                    /** Instance asyncInstanceEndpointsDeletionEnabled */
+                    asyncInstanceEndpointsDeletionEnabled?: (boolean|null);
+
+                    /** Instance backupCollection */
+                    backupCollection?: (string|null);
+
+                    /** Instance automatedBackupConfig */
+                    automatedBackupConfig?: (google.cloud.memorystore.v1.IAutomatedBackupConfig|null);
                 }
 
                 /** Represents an Instance. */
@@ -269,6 +467,12 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.memorystore.v1.IInstance);
+
+                    /** Instance gcsSource. */
+                    public gcsSource?: (google.cloud.memorystore.v1.Instance.IGcsBackupSource|null);
+
+                    /** Instance managedBackupSource. */
+                    public managedBackupSource?: (google.cloud.memorystore.v1.Instance.IManagedBackupSource|null);
 
                     /** Instance name. */
                     public name: string;
@@ -330,17 +534,53 @@ export namespace google {
                     /** Instance pscAutoConnections. */
                     public pscAutoConnections: google.cloud.memorystore.v1.IPscAutoConnection[];
 
+                    /** Instance pscAttachmentDetails. */
+                    public pscAttachmentDetails: google.cloud.memorystore.v1.IPscAttachmentDetail[];
+
                     /** Instance endpoints. */
                     public endpoints: google.cloud.memorystore.v1.Instance.IInstanceEndpoint[];
 
                     /** Instance mode. */
                     public mode: (google.cloud.memorystore.v1.Instance.Mode|keyof typeof google.cloud.memorystore.v1.Instance.Mode);
 
+                    /** Instance ondemandMaintenance. */
+                    public ondemandMaintenance?: (boolean|null);
+
+                    /** Instance maintenancePolicy. */
+                    public maintenancePolicy?: (google.cloud.memorystore.v1.IMaintenancePolicy|null);
+
+                    /** Instance maintenanceSchedule. */
+                    public maintenanceSchedule?: (google.cloud.memorystore.v1.IMaintenanceSchedule|null);
+
+                    /** Instance crossInstanceReplicationConfig. */
+                    public crossInstanceReplicationConfig?: (google.cloud.memorystore.v1.ICrossInstanceReplicationConfig|null);
+
+                    /** Instance asyncInstanceEndpointsDeletionEnabled. */
+                    public asyncInstanceEndpointsDeletionEnabled?: (boolean|null);
+
+                    /** Instance backupCollection. */
+                    public backupCollection?: (string|null);
+
+                    /** Instance automatedBackupConfig. */
+                    public automatedBackupConfig?: (google.cloud.memorystore.v1.IAutomatedBackupConfig|null);
+
+                    /** Instance importSources. */
+                    public importSources?: ("gcsSource"|"managedBackupSource");
+
                     /** Instance _replicaCount. */
                     public _replicaCount?: "replicaCount";
 
                     /** Instance _deletionProtectionEnabled. */
                     public _deletionProtectionEnabled?: "deletionProtectionEnabled";
+
+                    /** Instance _ondemandMaintenance. */
+                    public _ondemandMaintenance?: "ondemandMaintenance";
+
+                    /** Instance _asyncInstanceEndpointsDeletionEnabled. */
+                    public _asyncInstanceEndpointsDeletionEnabled?: "asyncInstanceEndpointsDeletionEnabled";
+
+                    /** Instance _backupCollection. */
+                    public _backupCollection?: "backupCollection";
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -532,6 +772,12 @@ export namespace google {
 
                             /** UpdateInfo targetReplicaCount */
                             targetReplicaCount?: (number|null);
+
+                            /** UpdateInfo targetEngineVersion */
+                            targetEngineVersion?: (string|null);
+
+                            /** UpdateInfo targetNodeType */
+                            targetNodeType?: (google.cloud.memorystore.v1.Instance.NodeType|keyof typeof google.cloud.memorystore.v1.Instance.NodeType|null);
                         }
 
                         /** Represents an UpdateInfo. */
@@ -549,11 +795,23 @@ export namespace google {
                             /** UpdateInfo targetReplicaCount. */
                             public targetReplicaCount?: (number|null);
 
+                            /** UpdateInfo targetEngineVersion. */
+                            public targetEngineVersion?: (string|null);
+
+                            /** UpdateInfo targetNodeType. */
+                            public targetNodeType?: (google.cloud.memorystore.v1.Instance.NodeType|keyof typeof google.cloud.memorystore.v1.Instance.NodeType|null);
+
                             /** UpdateInfo _targetShardCount. */
                             public _targetShardCount?: "targetShardCount";
 
                             /** UpdateInfo _targetReplicaCount. */
                             public _targetReplicaCount?: "targetReplicaCount";
+
+                            /** UpdateInfo _targetEngineVersion. */
+                            public _targetEngineVersion?: "targetEngineVersion";
+
+                            /** UpdateInfo _targetNodeType. */
+                            public _targetNodeType?: "targetNodeType";
 
                             /**
                              * Creates a new UpdateInfo instance using the specified properties.
@@ -632,6 +890,200 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+                    }
+
+                    /** Properties of a GcsBackupSource. */
+                    interface IGcsBackupSource {
+
+                        /** GcsBackupSource uris */
+                        uris?: (string[]|null);
+                    }
+
+                    /** Represents a GcsBackupSource. */
+                    class GcsBackupSource implements IGcsBackupSource {
+
+                        /**
+                         * Constructs a new GcsBackupSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.memorystore.v1.Instance.IGcsBackupSource);
+
+                        /** GcsBackupSource uris. */
+                        public uris: string[];
+
+                        /**
+                         * Creates a new GcsBackupSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsBackupSource instance
+                         */
+                        public static create(properties?: google.cloud.memorystore.v1.Instance.IGcsBackupSource): google.cloud.memorystore.v1.Instance.GcsBackupSource;
+
+                        /**
+                         * Encodes the specified GcsBackupSource message. Does not implicitly {@link google.cloud.memorystore.v1.Instance.GcsBackupSource.verify|verify} messages.
+                         * @param message GcsBackupSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.memorystore.v1.Instance.IGcsBackupSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsBackupSource message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.Instance.GcsBackupSource.verify|verify} messages.
+                         * @param message GcsBackupSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.memorystore.v1.Instance.IGcsBackupSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsBackupSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsBackupSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.Instance.GcsBackupSource;
+
+                        /**
+                         * Decodes a GcsBackupSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsBackupSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.Instance.GcsBackupSource;
+
+                        /**
+                         * Verifies a GcsBackupSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsBackupSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsBackupSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.Instance.GcsBackupSource;
+
+                        /**
+                         * Creates a plain object from a GcsBackupSource message. Also converts values to other types if specified.
+                         * @param message GcsBackupSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.memorystore.v1.Instance.GcsBackupSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsBackupSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsBackupSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ManagedBackupSource. */
+                    interface IManagedBackupSource {
+
+                        /** ManagedBackupSource backup */
+                        backup?: (string|null);
+                    }
+
+                    /** Represents a ManagedBackupSource. */
+                    class ManagedBackupSource implements IManagedBackupSource {
+
+                        /**
+                         * Constructs a new ManagedBackupSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.memorystore.v1.Instance.IManagedBackupSource);
+
+                        /** ManagedBackupSource backup. */
+                        public backup: string;
+
+                        /**
+                         * Creates a new ManagedBackupSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ManagedBackupSource instance
+                         */
+                        public static create(properties?: google.cloud.memorystore.v1.Instance.IManagedBackupSource): google.cloud.memorystore.v1.Instance.ManagedBackupSource;
+
+                        /**
+                         * Encodes the specified ManagedBackupSource message. Does not implicitly {@link google.cloud.memorystore.v1.Instance.ManagedBackupSource.verify|verify} messages.
+                         * @param message ManagedBackupSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.memorystore.v1.Instance.IManagedBackupSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ManagedBackupSource message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.Instance.ManagedBackupSource.verify|verify} messages.
+                         * @param message ManagedBackupSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.memorystore.v1.Instance.IManagedBackupSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ManagedBackupSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ManagedBackupSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.Instance.ManagedBackupSource;
+
+                        /**
+                         * Decodes a ManagedBackupSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ManagedBackupSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.Instance.ManagedBackupSource;
+
+                        /**
+                         * Verifies a ManagedBackupSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ManagedBackupSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ManagedBackupSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.Instance.ManagedBackupSource;
+
+                        /**
+                         * Creates a plain object from a ManagedBackupSource message. Also converts values to other types if specified.
+                         * @param message ManagedBackupSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.memorystore.v1.Instance.ManagedBackupSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ManagedBackupSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ManagedBackupSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an InstanceEndpoint. */
@@ -878,6 +1330,1411 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an AutomatedBackupConfig. */
+                interface IAutomatedBackupConfig {
+
+                    /** AutomatedBackupConfig fixedFrequencySchedule */
+                    fixedFrequencySchedule?: (google.cloud.memorystore.v1.AutomatedBackupConfig.IFixedFrequencySchedule|null);
+
+                    /** AutomatedBackupConfig automatedBackupMode */
+                    automatedBackupMode?: (google.cloud.memorystore.v1.AutomatedBackupConfig.AutomatedBackupMode|keyof typeof google.cloud.memorystore.v1.AutomatedBackupConfig.AutomatedBackupMode|null);
+
+                    /** AutomatedBackupConfig retention */
+                    retention?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents an AutomatedBackupConfig. */
+                class AutomatedBackupConfig implements IAutomatedBackupConfig {
+
+                    /**
+                     * Constructs a new AutomatedBackupConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IAutomatedBackupConfig);
+
+                    /** AutomatedBackupConfig fixedFrequencySchedule. */
+                    public fixedFrequencySchedule?: (google.cloud.memorystore.v1.AutomatedBackupConfig.IFixedFrequencySchedule|null);
+
+                    /** AutomatedBackupConfig automatedBackupMode. */
+                    public automatedBackupMode: (google.cloud.memorystore.v1.AutomatedBackupConfig.AutomatedBackupMode|keyof typeof google.cloud.memorystore.v1.AutomatedBackupConfig.AutomatedBackupMode);
+
+                    /** AutomatedBackupConfig retention. */
+                    public retention?: (google.protobuf.IDuration|null);
+
+                    /** AutomatedBackupConfig schedule. */
+                    public schedule?: "fixedFrequencySchedule";
+
+                    /**
+                     * Creates a new AutomatedBackupConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutomatedBackupConfig instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IAutomatedBackupConfig): google.cloud.memorystore.v1.AutomatedBackupConfig;
+
+                    /**
+                     * Encodes the specified AutomatedBackupConfig message. Does not implicitly {@link google.cloud.memorystore.v1.AutomatedBackupConfig.verify|verify} messages.
+                     * @param message AutomatedBackupConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IAutomatedBackupConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutomatedBackupConfig message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.AutomatedBackupConfig.verify|verify} messages.
+                     * @param message AutomatedBackupConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IAutomatedBackupConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutomatedBackupConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutomatedBackupConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.AutomatedBackupConfig;
+
+                    /**
+                     * Decodes an AutomatedBackupConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutomatedBackupConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.AutomatedBackupConfig;
+
+                    /**
+                     * Verifies an AutomatedBackupConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutomatedBackupConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutomatedBackupConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.AutomatedBackupConfig;
+
+                    /**
+                     * Creates a plain object from an AutomatedBackupConfig message. Also converts values to other types if specified.
+                     * @param message AutomatedBackupConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.AutomatedBackupConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutomatedBackupConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AutomatedBackupConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AutomatedBackupConfig {
+
+                    /** Properties of a FixedFrequencySchedule. */
+                    interface IFixedFrequencySchedule {
+
+                        /** FixedFrequencySchedule startTime */
+                        startTime?: (google.type.ITimeOfDay|null);
+                    }
+
+                    /** Represents a FixedFrequencySchedule. */
+                    class FixedFrequencySchedule implements IFixedFrequencySchedule {
+
+                        /**
+                         * Constructs a new FixedFrequencySchedule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.memorystore.v1.AutomatedBackupConfig.IFixedFrequencySchedule);
+
+                        /** FixedFrequencySchedule startTime. */
+                        public startTime?: (google.type.ITimeOfDay|null);
+
+                        /**
+                         * Creates a new FixedFrequencySchedule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FixedFrequencySchedule instance
+                         */
+                        public static create(properties?: google.cloud.memorystore.v1.AutomatedBackupConfig.IFixedFrequencySchedule): google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule;
+
+                        /**
+                         * Encodes the specified FixedFrequencySchedule message. Does not implicitly {@link google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule.verify|verify} messages.
+                         * @param message FixedFrequencySchedule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.memorystore.v1.AutomatedBackupConfig.IFixedFrequencySchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FixedFrequencySchedule message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule.verify|verify} messages.
+                         * @param message FixedFrequencySchedule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.memorystore.v1.AutomatedBackupConfig.IFixedFrequencySchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FixedFrequencySchedule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FixedFrequencySchedule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule;
+
+                        /**
+                         * Decodes a FixedFrequencySchedule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FixedFrequencySchedule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule;
+
+                        /**
+                         * Verifies a FixedFrequencySchedule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FixedFrequencySchedule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FixedFrequencySchedule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule;
+
+                        /**
+                         * Creates a plain object from a FixedFrequencySchedule message. Also converts values to other types if specified.
+                         * @param message FixedFrequencySchedule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FixedFrequencySchedule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FixedFrequencySchedule
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** AutomatedBackupMode enum. */
+                    enum AutomatedBackupMode {
+                        AUTOMATED_BACKUP_MODE_UNSPECIFIED = 0,
+                        DISABLED = 1,
+                        ENABLED = 2
+                    }
+                }
+
+                /** Properties of a BackupCollection. */
+                interface IBackupCollection {
+
+                    /** BackupCollection name */
+                    name?: (string|null);
+
+                    /** BackupCollection instanceUid */
+                    instanceUid?: (string|null);
+
+                    /** BackupCollection instance */
+                    instance?: (string|null);
+
+                    /** BackupCollection kmsKey */
+                    kmsKey?: (string|null);
+
+                    /** BackupCollection uid */
+                    uid?: (string|null);
+
+                    /** BackupCollection createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a BackupCollection. */
+                class BackupCollection implements IBackupCollection {
+
+                    /**
+                     * Constructs a new BackupCollection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IBackupCollection);
+
+                    /** BackupCollection name. */
+                    public name: string;
+
+                    /** BackupCollection instanceUid. */
+                    public instanceUid: string;
+
+                    /** BackupCollection instance. */
+                    public instance: string;
+
+                    /** BackupCollection kmsKey. */
+                    public kmsKey: string;
+
+                    /** BackupCollection uid. */
+                    public uid: string;
+
+                    /** BackupCollection createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new BackupCollection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BackupCollection instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IBackupCollection): google.cloud.memorystore.v1.BackupCollection;
+
+                    /**
+                     * Encodes the specified BackupCollection message. Does not implicitly {@link google.cloud.memorystore.v1.BackupCollection.verify|verify} messages.
+                     * @param message BackupCollection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IBackupCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BackupCollection message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.BackupCollection.verify|verify} messages.
+                     * @param message BackupCollection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IBackupCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BackupCollection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BackupCollection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.BackupCollection;
+
+                    /**
+                     * Decodes a BackupCollection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BackupCollection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.BackupCollection;
+
+                    /**
+                     * Verifies a BackupCollection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BackupCollection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BackupCollection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.BackupCollection;
+
+                    /**
+                     * Creates a plain object from a BackupCollection message. Also converts values to other types if specified.
+                     * @param message BackupCollection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.BackupCollection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BackupCollection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BackupCollection
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Backup. */
+                interface IBackup {
+
+                    /** Backup name */
+                    name?: (string|null);
+
+                    /** Backup createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup instance */
+                    instance?: (string|null);
+
+                    /** Backup instanceUid */
+                    instanceUid?: (string|null);
+
+                    /** Backup totalSizeBytes */
+                    totalSizeBytes?: (number|Long|string|null);
+
+                    /** Backup expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup engineVersion */
+                    engineVersion?: (string|null);
+
+                    /** Backup backupFiles */
+                    backupFiles?: (google.cloud.memorystore.v1.IBackupFile[]|null);
+
+                    /** Backup nodeType */
+                    nodeType?: (google.cloud.memorystore.v1.Instance.NodeType|keyof typeof google.cloud.memorystore.v1.Instance.NodeType|null);
+
+                    /** Backup replicaCount */
+                    replicaCount?: (number|null);
+
+                    /** Backup shardCount */
+                    shardCount?: (number|null);
+
+                    /** Backup backupType */
+                    backupType?: (google.cloud.memorystore.v1.Backup.BackupType|keyof typeof google.cloud.memorystore.v1.Backup.BackupType|null);
+
+                    /** Backup state */
+                    state?: (google.cloud.memorystore.v1.Backup.State|keyof typeof google.cloud.memorystore.v1.Backup.State|null);
+
+                    /** Backup uid */
+                    uid?: (string|null);
+                }
+
+                /** Represents a Backup. */
+                class Backup implements IBackup {
+
+                    /**
+                     * Constructs a new Backup.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IBackup);
+
+                    /** Backup name. */
+                    public name: string;
+
+                    /** Backup createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup instance. */
+                    public instance: string;
+
+                    /** Backup instanceUid. */
+                    public instanceUid: string;
+
+                    /** Backup totalSizeBytes. */
+                    public totalSizeBytes: (number|Long|string);
+
+                    /** Backup expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup engineVersion. */
+                    public engineVersion: string;
+
+                    /** Backup backupFiles. */
+                    public backupFiles: google.cloud.memorystore.v1.IBackupFile[];
+
+                    /** Backup nodeType. */
+                    public nodeType: (google.cloud.memorystore.v1.Instance.NodeType|keyof typeof google.cloud.memorystore.v1.Instance.NodeType);
+
+                    /** Backup replicaCount. */
+                    public replicaCount: number;
+
+                    /** Backup shardCount. */
+                    public shardCount: number;
+
+                    /** Backup backupType. */
+                    public backupType: (google.cloud.memorystore.v1.Backup.BackupType|keyof typeof google.cloud.memorystore.v1.Backup.BackupType);
+
+                    /** Backup state. */
+                    public state: (google.cloud.memorystore.v1.Backup.State|keyof typeof google.cloud.memorystore.v1.Backup.State);
+
+                    /** Backup uid. */
+                    public uid: string;
+
+                    /**
+                     * Creates a new Backup instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Backup instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IBackup): google.cloud.memorystore.v1.Backup;
+
+                    /**
+                     * Encodes the specified Backup message. Does not implicitly {@link google.cloud.memorystore.v1.Backup.verify|verify} messages.
+                     * @param message Backup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IBackup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Backup message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.Backup.verify|verify} messages.
+                     * @param message Backup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IBackup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Backup message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Backup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.Backup;
+
+                    /**
+                     * Decodes a Backup message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Backup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.Backup;
+
+                    /**
+                     * Verifies a Backup message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Backup message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Backup
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.Backup;
+
+                    /**
+                     * Creates a plain object from a Backup message. Also converts values to other types if specified.
+                     * @param message Backup
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.Backup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Backup to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Backup
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Backup {
+
+                    /** BackupType enum. */
+                    enum BackupType {
+                        BACKUP_TYPE_UNSPECIFIED = 0,
+                        ON_DEMAND = 1,
+                        AUTOMATED = 2
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        DELETING = 3,
+                        SUSPENDED = 4
+                    }
+                }
+
+                /** Properties of a BackupFile. */
+                interface IBackupFile {
+
+                    /** BackupFile fileName */
+                    fileName?: (string|null);
+
+                    /** BackupFile sizeBytes */
+                    sizeBytes?: (number|Long|string|null);
+
+                    /** BackupFile createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a BackupFile. */
+                class BackupFile implements IBackupFile {
+
+                    /**
+                     * Constructs a new BackupFile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IBackupFile);
+
+                    /** BackupFile fileName. */
+                    public fileName: string;
+
+                    /** BackupFile sizeBytes. */
+                    public sizeBytes: (number|Long|string);
+
+                    /** BackupFile createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new BackupFile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BackupFile instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IBackupFile): google.cloud.memorystore.v1.BackupFile;
+
+                    /**
+                     * Encodes the specified BackupFile message. Does not implicitly {@link google.cloud.memorystore.v1.BackupFile.verify|verify} messages.
+                     * @param message BackupFile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IBackupFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BackupFile message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.BackupFile.verify|verify} messages.
+                     * @param message BackupFile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IBackupFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BackupFile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BackupFile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.BackupFile;
+
+                    /**
+                     * Decodes a BackupFile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BackupFile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.BackupFile;
+
+                    /**
+                     * Verifies a BackupFile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BackupFile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BackupFile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.BackupFile;
+
+                    /**
+                     * Creates a plain object from a BackupFile message. Also converts values to other types if specified.
+                     * @param message BackupFile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.BackupFile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BackupFile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BackupFile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CrossInstanceReplicationConfig. */
+                interface ICrossInstanceReplicationConfig {
+
+                    /** CrossInstanceReplicationConfig instanceRole */
+                    instanceRole?: (google.cloud.memorystore.v1.CrossInstanceReplicationConfig.InstanceRole|keyof typeof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.InstanceRole|null);
+
+                    /** CrossInstanceReplicationConfig primaryInstance */
+                    primaryInstance?: (google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance|null);
+
+                    /** CrossInstanceReplicationConfig secondaryInstances */
+                    secondaryInstances?: (google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance[]|null);
+
+                    /** CrossInstanceReplicationConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CrossInstanceReplicationConfig membership */
+                    membership?: (google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IMembership|null);
+                }
+
+                /** Represents a CrossInstanceReplicationConfig. */
+                class CrossInstanceReplicationConfig implements ICrossInstanceReplicationConfig {
+
+                    /**
+                     * Constructs a new CrossInstanceReplicationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.ICrossInstanceReplicationConfig);
+
+                    /** CrossInstanceReplicationConfig instanceRole. */
+                    public instanceRole: (google.cloud.memorystore.v1.CrossInstanceReplicationConfig.InstanceRole|keyof typeof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.InstanceRole);
+
+                    /** CrossInstanceReplicationConfig primaryInstance. */
+                    public primaryInstance?: (google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance|null);
+
+                    /** CrossInstanceReplicationConfig secondaryInstances. */
+                    public secondaryInstances: google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance[];
+
+                    /** CrossInstanceReplicationConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CrossInstanceReplicationConfig membership. */
+                    public membership?: (google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IMembership|null);
+
+                    /**
+                     * Creates a new CrossInstanceReplicationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CrossInstanceReplicationConfig instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.ICrossInstanceReplicationConfig): google.cloud.memorystore.v1.CrossInstanceReplicationConfig;
+
+                    /**
+                     * Encodes the specified CrossInstanceReplicationConfig message. Does not implicitly {@link google.cloud.memorystore.v1.CrossInstanceReplicationConfig.verify|verify} messages.
+                     * @param message CrossInstanceReplicationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.ICrossInstanceReplicationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CrossInstanceReplicationConfig message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.CrossInstanceReplicationConfig.verify|verify} messages.
+                     * @param message CrossInstanceReplicationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.ICrossInstanceReplicationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CrossInstanceReplicationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CrossInstanceReplicationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.CrossInstanceReplicationConfig;
+
+                    /**
+                     * Decodes a CrossInstanceReplicationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CrossInstanceReplicationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.CrossInstanceReplicationConfig;
+
+                    /**
+                     * Verifies a CrossInstanceReplicationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CrossInstanceReplicationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CrossInstanceReplicationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.CrossInstanceReplicationConfig;
+
+                    /**
+                     * Creates a plain object from a CrossInstanceReplicationConfig message. Also converts values to other types if specified.
+                     * @param message CrossInstanceReplicationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.CrossInstanceReplicationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CrossInstanceReplicationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CrossInstanceReplicationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CrossInstanceReplicationConfig {
+
+                    /** Properties of a RemoteInstance. */
+                    interface IRemoteInstance {
+
+                        /** RemoteInstance instance */
+                        instance?: (string|null);
+
+                        /** RemoteInstance uid */
+                        uid?: (string|null);
+                    }
+
+                    /** Represents a RemoteInstance. */
+                    class RemoteInstance implements IRemoteInstance {
+
+                        /**
+                         * Constructs a new RemoteInstance.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance);
+
+                        /** RemoteInstance instance. */
+                        public instance: string;
+
+                        /** RemoteInstance uid. */
+                        public uid: string;
+
+                        /**
+                         * Creates a new RemoteInstance instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RemoteInstance instance
+                         */
+                        public static create(properties?: google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance): google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance;
+
+                        /**
+                         * Encodes the specified RemoteInstance message. Does not implicitly {@link google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.verify|verify} messages.
+                         * @param message RemoteInstance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RemoteInstance message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.verify|verify} messages.
+                         * @param message RemoteInstance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RemoteInstance message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RemoteInstance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance;
+
+                        /**
+                         * Decodes a RemoteInstance message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RemoteInstance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance;
+
+                        /**
+                         * Verifies a RemoteInstance message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RemoteInstance message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RemoteInstance
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance;
+
+                        /**
+                         * Creates a plain object from a RemoteInstance message. Also converts values to other types if specified.
+                         * @param message RemoteInstance
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RemoteInstance to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RemoteInstance
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Membership. */
+                    interface IMembership {
+
+                        /** Membership primaryInstance */
+                        primaryInstance?: (google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance|null);
+
+                        /** Membership secondaryInstances */
+                        secondaryInstances?: (google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance[]|null);
+                    }
+
+                    /** Represents a Membership. */
+                    class Membership implements IMembership {
+
+                        /**
+                         * Constructs a new Membership.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IMembership);
+
+                        /** Membership primaryInstance. */
+                        public primaryInstance?: (google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance|null);
+
+                        /** Membership secondaryInstances. */
+                        public secondaryInstances: google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance[];
+
+                        /**
+                         * Creates a new Membership instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Membership instance
+                         */
+                        public static create(properties?: google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IMembership): google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership;
+
+                        /**
+                         * Encodes the specified Membership message. Does not implicitly {@link google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership.verify|verify} messages.
+                         * @param message Membership message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IMembership, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Membership message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership.verify|verify} messages.
+                         * @param message Membership message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IMembership, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Membership message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Membership
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership;
+
+                        /**
+                         * Decodes a Membership message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Membership
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership;
+
+                        /**
+                         * Verifies a Membership message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Membership message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Membership
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership;
+
+                        /**
+                         * Creates a plain object from a Membership message. Also converts values to other types if specified.
+                         * @param message Membership
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Membership to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Membership
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** InstanceRole enum. */
+                    enum InstanceRole {
+                        INSTANCE_ROLE_UNSPECIFIED = 0,
+                        NONE = 1,
+                        PRIMARY = 2,
+                        SECONDARY = 3
+                    }
+                }
+
+                /** Properties of a MaintenancePolicy. */
+                interface IMaintenancePolicy {
+
+                    /** MaintenancePolicy createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenancePolicy updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenancePolicy weeklyMaintenanceWindow */
+                    weeklyMaintenanceWindow?: (google.cloud.memorystore.v1.IWeeklyMaintenanceWindow[]|null);
+                }
+
+                /** Represents a MaintenancePolicy. */
+                class MaintenancePolicy implements IMaintenancePolicy {
+
+                    /**
+                     * Constructs a new MaintenancePolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IMaintenancePolicy);
+
+                    /** MaintenancePolicy createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenancePolicy updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenancePolicy weeklyMaintenanceWindow. */
+                    public weeklyMaintenanceWindow: google.cloud.memorystore.v1.IWeeklyMaintenanceWindow[];
+
+                    /**
+                     * Creates a new MaintenancePolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MaintenancePolicy instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IMaintenancePolicy): google.cloud.memorystore.v1.MaintenancePolicy;
+
+                    /**
+                     * Encodes the specified MaintenancePolicy message. Does not implicitly {@link google.cloud.memorystore.v1.MaintenancePolicy.verify|verify} messages.
+                     * @param message MaintenancePolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IMaintenancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MaintenancePolicy message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.MaintenancePolicy.verify|verify} messages.
+                     * @param message MaintenancePolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IMaintenancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MaintenancePolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MaintenancePolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.MaintenancePolicy;
+
+                    /**
+                     * Decodes a MaintenancePolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MaintenancePolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.MaintenancePolicy;
+
+                    /**
+                     * Verifies a MaintenancePolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MaintenancePolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MaintenancePolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.MaintenancePolicy;
+
+                    /**
+                     * Creates a plain object from a MaintenancePolicy message. Also converts values to other types if specified.
+                     * @param message MaintenancePolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.MaintenancePolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MaintenancePolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MaintenancePolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a WeeklyMaintenanceWindow. */
+                interface IWeeklyMaintenanceWindow {
+
+                    /** WeeklyMaintenanceWindow day */
+                    day?: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek|null);
+
+                    /** WeeklyMaintenanceWindow startTime */
+                    startTime?: (google.type.ITimeOfDay|null);
+                }
+
+                /** Represents a WeeklyMaintenanceWindow. */
+                class WeeklyMaintenanceWindow implements IWeeklyMaintenanceWindow {
+
+                    /**
+                     * Constructs a new WeeklyMaintenanceWindow.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IWeeklyMaintenanceWindow);
+
+                    /** WeeklyMaintenanceWindow day. */
+                    public day: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek);
+
+                    /** WeeklyMaintenanceWindow startTime. */
+                    public startTime?: (google.type.ITimeOfDay|null);
+
+                    /**
+                     * Creates a new WeeklyMaintenanceWindow instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WeeklyMaintenanceWindow instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IWeeklyMaintenanceWindow): google.cloud.memorystore.v1.WeeklyMaintenanceWindow;
+
+                    /**
+                     * Encodes the specified WeeklyMaintenanceWindow message. Does not implicitly {@link google.cloud.memorystore.v1.WeeklyMaintenanceWindow.verify|verify} messages.
+                     * @param message WeeklyMaintenanceWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IWeeklyMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WeeklyMaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.WeeklyMaintenanceWindow.verify|verify} messages.
+                     * @param message WeeklyMaintenanceWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IWeeklyMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WeeklyMaintenanceWindow message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WeeklyMaintenanceWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.WeeklyMaintenanceWindow;
+
+                    /**
+                     * Decodes a WeeklyMaintenanceWindow message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WeeklyMaintenanceWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.WeeklyMaintenanceWindow;
+
+                    /**
+                     * Verifies a WeeklyMaintenanceWindow message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WeeklyMaintenanceWindow message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WeeklyMaintenanceWindow
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.WeeklyMaintenanceWindow;
+
+                    /**
+                     * Creates a plain object from a WeeklyMaintenanceWindow message. Also converts values to other types if specified.
+                     * @param message WeeklyMaintenanceWindow
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.WeeklyMaintenanceWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WeeklyMaintenanceWindow to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WeeklyMaintenanceWindow
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MaintenanceSchedule. */
+                interface IMaintenanceSchedule {
+
+                    /** MaintenanceSchedule startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenanceSchedule endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a MaintenanceSchedule. */
+                class MaintenanceSchedule implements IMaintenanceSchedule {
+
+                    /**
+                     * Constructs a new MaintenanceSchedule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IMaintenanceSchedule);
+
+                    /** MaintenanceSchedule startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenanceSchedule endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new MaintenanceSchedule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MaintenanceSchedule instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IMaintenanceSchedule): google.cloud.memorystore.v1.MaintenanceSchedule;
+
+                    /**
+                     * Encodes the specified MaintenanceSchedule message. Does not implicitly {@link google.cloud.memorystore.v1.MaintenanceSchedule.verify|verify} messages.
+                     * @param message MaintenanceSchedule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IMaintenanceSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MaintenanceSchedule message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.MaintenanceSchedule.verify|verify} messages.
+                     * @param message MaintenanceSchedule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IMaintenanceSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MaintenanceSchedule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MaintenanceSchedule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.MaintenanceSchedule;
+
+                    /**
+                     * Decodes a MaintenanceSchedule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MaintenanceSchedule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.MaintenanceSchedule;
+
+                    /**
+                     * Verifies a MaintenanceSchedule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MaintenanceSchedule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MaintenanceSchedule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.MaintenanceSchedule;
+
+                    /**
+                     * Creates a plain object from a MaintenanceSchedule message. Also converts values to other types if specified.
+                     * @param message MaintenanceSchedule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.MaintenanceSchedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MaintenanceSchedule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MaintenanceSchedule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PscAttachmentDetail. */
+                interface IPscAttachmentDetail {
+
+                    /** PscAttachmentDetail serviceAttachment */
+                    serviceAttachment?: (string|null);
+
+                    /** PscAttachmentDetail connectionType */
+                    connectionType?: (google.cloud.memorystore.v1.ConnectionType|keyof typeof google.cloud.memorystore.v1.ConnectionType|null);
+                }
+
+                /** Represents a PscAttachmentDetail. */
+                class PscAttachmentDetail implements IPscAttachmentDetail {
+
+                    /**
+                     * Constructs a new PscAttachmentDetail.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IPscAttachmentDetail);
+
+                    /** PscAttachmentDetail serviceAttachment. */
+                    public serviceAttachment: string;
+
+                    /** PscAttachmentDetail connectionType. */
+                    public connectionType: (google.cloud.memorystore.v1.ConnectionType|keyof typeof google.cloud.memorystore.v1.ConnectionType);
+
+                    /**
+                     * Creates a new PscAttachmentDetail instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PscAttachmentDetail instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IPscAttachmentDetail): google.cloud.memorystore.v1.PscAttachmentDetail;
+
+                    /**
+                     * Encodes the specified PscAttachmentDetail message. Does not implicitly {@link google.cloud.memorystore.v1.PscAttachmentDetail.verify|verify} messages.
+                     * @param message PscAttachmentDetail message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IPscAttachmentDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PscAttachmentDetail message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.PscAttachmentDetail.verify|verify} messages.
+                     * @param message PscAttachmentDetail message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IPscAttachmentDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PscAttachmentDetail message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PscAttachmentDetail
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.PscAttachmentDetail;
+
+                    /**
+                     * Decodes a PscAttachmentDetail message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PscAttachmentDetail
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.PscAttachmentDetail;
+
+                    /**
+                     * Verifies a PscAttachmentDetail message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PscAttachmentDetail message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PscAttachmentDetail
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.PscAttachmentDetail;
+
+                    /**
+                     * Creates a plain object from a PscAttachmentDetail message. Also converts values to other types if specified.
+                     * @param message PscAttachmentDetail
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.PscAttachmentDetail, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PscAttachmentDetail to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PscAttachmentDetail
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a PscAutoConnection. */
                 interface IPscAutoConnection {
 
@@ -1029,6 +2886,9 @@ export namespace google {
                 /** Properties of a PscConnection. */
                 interface IPscConnection {
 
+                    /** PscConnection port */
+                    port?: (number|null);
+
                     /** PscConnection pscConnectionId */
                     pscConnectionId?: (string|null);
 
@@ -1063,6 +2923,9 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.memorystore.v1.IPscConnection);
 
+                    /** PscConnection port. */
+                    public port?: (number|null);
+
                     /** PscConnection pscConnectionId. */
                     public pscConnectionId: string;
 
@@ -1086,6 +2949,9 @@ export namespace google {
 
                     /** PscConnection connectionType. */
                     public connectionType: (google.cloud.memorystore.v1.ConnectionType|keyof typeof google.cloud.memorystore.v1.ConnectionType);
+
+                    /** PscConnection ports. */
+                    public ports?: "port";
 
                     /**
                      * Creates a new PscConnection instance using the specified properties.
@@ -1827,6 +3693,125 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a RescheduleMaintenanceRequest. */
+                interface IRescheduleMaintenanceRequest {
+
+                    /** RescheduleMaintenanceRequest name */
+                    name?: (string|null);
+
+                    /** RescheduleMaintenanceRequest rescheduleType */
+                    rescheduleType?: (google.cloud.memorystore.v1.RescheduleMaintenanceRequest.RescheduleType|keyof typeof google.cloud.memorystore.v1.RescheduleMaintenanceRequest.RescheduleType|null);
+
+                    /** RescheduleMaintenanceRequest scheduleTime */
+                    scheduleTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a RescheduleMaintenanceRequest. */
+                class RescheduleMaintenanceRequest implements IRescheduleMaintenanceRequest {
+
+                    /**
+                     * Constructs a new RescheduleMaintenanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IRescheduleMaintenanceRequest);
+
+                    /** RescheduleMaintenanceRequest name. */
+                    public name: string;
+
+                    /** RescheduleMaintenanceRequest rescheduleType. */
+                    public rescheduleType: (google.cloud.memorystore.v1.RescheduleMaintenanceRequest.RescheduleType|keyof typeof google.cloud.memorystore.v1.RescheduleMaintenanceRequest.RescheduleType);
+
+                    /** RescheduleMaintenanceRequest scheduleTime. */
+                    public scheduleTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new RescheduleMaintenanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RescheduleMaintenanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IRescheduleMaintenanceRequest): google.cloud.memorystore.v1.RescheduleMaintenanceRequest;
+
+                    /**
+                     * Encodes the specified RescheduleMaintenanceRequest message. Does not implicitly {@link google.cloud.memorystore.v1.RescheduleMaintenanceRequest.verify|verify} messages.
+                     * @param message RescheduleMaintenanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IRescheduleMaintenanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RescheduleMaintenanceRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.RescheduleMaintenanceRequest.verify|verify} messages.
+                     * @param message RescheduleMaintenanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IRescheduleMaintenanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RescheduleMaintenanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RescheduleMaintenanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.RescheduleMaintenanceRequest;
+
+                    /**
+                     * Decodes a RescheduleMaintenanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RescheduleMaintenanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.RescheduleMaintenanceRequest;
+
+                    /**
+                     * Verifies a RescheduleMaintenanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RescheduleMaintenanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RescheduleMaintenanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.RescheduleMaintenanceRequest;
+
+                    /**
+                     * Creates a plain object from a RescheduleMaintenanceRequest message. Also converts values to other types if specified.
+                     * @param message RescheduleMaintenanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.RescheduleMaintenanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RescheduleMaintenanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RescheduleMaintenanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RescheduleMaintenanceRequest {
+
+                    /** RescheduleType enum. */
+                    enum RescheduleType {
+                        RESCHEDULE_TYPE_UNSPECIFIED = 0,
+                        IMMEDIATE = 1,
+                        SPECIFIC_TIME = 3
+                    }
+                }
+
                 /** Properties of a ListInstancesRequest. */
                 interface IListInstancesRequest {
 
@@ -2475,6 +4460,957 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBackupCollectionsRequest. */
+                interface IListBackupCollectionsRequest {
+
+                    /** ListBackupCollectionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListBackupCollectionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListBackupCollectionsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListBackupCollectionsRequest. */
+                class ListBackupCollectionsRequest implements IListBackupCollectionsRequest {
+
+                    /**
+                     * Constructs a new ListBackupCollectionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IListBackupCollectionsRequest);
+
+                    /** ListBackupCollectionsRequest parent. */
+                    public parent: string;
+
+                    /** ListBackupCollectionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListBackupCollectionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListBackupCollectionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBackupCollectionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IListBackupCollectionsRequest): google.cloud.memorystore.v1.ListBackupCollectionsRequest;
+
+                    /**
+                     * Encodes the specified ListBackupCollectionsRequest message. Does not implicitly {@link google.cloud.memorystore.v1.ListBackupCollectionsRequest.verify|verify} messages.
+                     * @param message ListBackupCollectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IListBackupCollectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBackupCollectionsRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.ListBackupCollectionsRequest.verify|verify} messages.
+                     * @param message ListBackupCollectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IListBackupCollectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBackupCollectionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBackupCollectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.ListBackupCollectionsRequest;
+
+                    /**
+                     * Decodes a ListBackupCollectionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBackupCollectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.ListBackupCollectionsRequest;
+
+                    /**
+                     * Verifies a ListBackupCollectionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBackupCollectionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBackupCollectionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.ListBackupCollectionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListBackupCollectionsRequest message. Also converts values to other types if specified.
+                     * @param message ListBackupCollectionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.ListBackupCollectionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBackupCollectionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBackupCollectionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBackupCollectionsResponse. */
+                interface IListBackupCollectionsResponse {
+
+                    /** ListBackupCollectionsResponse backupCollections */
+                    backupCollections?: (google.cloud.memorystore.v1.IBackupCollection[]|null);
+
+                    /** ListBackupCollectionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListBackupCollectionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListBackupCollectionsResponse. */
+                class ListBackupCollectionsResponse implements IListBackupCollectionsResponse {
+
+                    /**
+                     * Constructs a new ListBackupCollectionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IListBackupCollectionsResponse);
+
+                    /** ListBackupCollectionsResponse backupCollections. */
+                    public backupCollections: google.cloud.memorystore.v1.IBackupCollection[];
+
+                    /** ListBackupCollectionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListBackupCollectionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListBackupCollectionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBackupCollectionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IListBackupCollectionsResponse): google.cloud.memorystore.v1.ListBackupCollectionsResponse;
+
+                    /**
+                     * Encodes the specified ListBackupCollectionsResponse message. Does not implicitly {@link google.cloud.memorystore.v1.ListBackupCollectionsResponse.verify|verify} messages.
+                     * @param message ListBackupCollectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IListBackupCollectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBackupCollectionsResponse message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.ListBackupCollectionsResponse.verify|verify} messages.
+                     * @param message ListBackupCollectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IListBackupCollectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBackupCollectionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBackupCollectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.ListBackupCollectionsResponse;
+
+                    /**
+                     * Decodes a ListBackupCollectionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBackupCollectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.ListBackupCollectionsResponse;
+
+                    /**
+                     * Verifies a ListBackupCollectionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBackupCollectionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBackupCollectionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.ListBackupCollectionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListBackupCollectionsResponse message. Also converts values to other types if specified.
+                     * @param message ListBackupCollectionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.ListBackupCollectionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBackupCollectionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBackupCollectionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetBackupCollectionRequest. */
+                interface IGetBackupCollectionRequest {
+
+                    /** GetBackupCollectionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetBackupCollectionRequest. */
+                class GetBackupCollectionRequest implements IGetBackupCollectionRequest {
+
+                    /**
+                     * Constructs a new GetBackupCollectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IGetBackupCollectionRequest);
+
+                    /** GetBackupCollectionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetBackupCollectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetBackupCollectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IGetBackupCollectionRequest): google.cloud.memorystore.v1.GetBackupCollectionRequest;
+
+                    /**
+                     * Encodes the specified GetBackupCollectionRequest message. Does not implicitly {@link google.cloud.memorystore.v1.GetBackupCollectionRequest.verify|verify} messages.
+                     * @param message GetBackupCollectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IGetBackupCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetBackupCollectionRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.GetBackupCollectionRequest.verify|verify} messages.
+                     * @param message GetBackupCollectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IGetBackupCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetBackupCollectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetBackupCollectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.GetBackupCollectionRequest;
+
+                    /**
+                     * Decodes a GetBackupCollectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetBackupCollectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.GetBackupCollectionRequest;
+
+                    /**
+                     * Verifies a GetBackupCollectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetBackupCollectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetBackupCollectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.GetBackupCollectionRequest;
+
+                    /**
+                     * Creates a plain object from a GetBackupCollectionRequest message. Also converts values to other types if specified.
+                     * @param message GetBackupCollectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.GetBackupCollectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetBackupCollectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetBackupCollectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBackupsRequest. */
+                interface IListBackupsRequest {
+
+                    /** ListBackupsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListBackupsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListBackupsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListBackupsRequest. */
+                class ListBackupsRequest implements IListBackupsRequest {
+
+                    /**
+                     * Constructs a new ListBackupsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IListBackupsRequest);
+
+                    /** ListBackupsRequest parent. */
+                    public parent: string;
+
+                    /** ListBackupsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListBackupsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListBackupsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBackupsRequest instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IListBackupsRequest): google.cloud.memorystore.v1.ListBackupsRequest;
+
+                    /**
+                     * Encodes the specified ListBackupsRequest message. Does not implicitly {@link google.cloud.memorystore.v1.ListBackupsRequest.verify|verify} messages.
+                     * @param message ListBackupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IListBackupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBackupsRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.ListBackupsRequest.verify|verify} messages.
+                     * @param message ListBackupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IListBackupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBackupsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBackupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.ListBackupsRequest;
+
+                    /**
+                     * Decodes a ListBackupsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBackupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.ListBackupsRequest;
+
+                    /**
+                     * Verifies a ListBackupsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBackupsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBackupsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.ListBackupsRequest;
+
+                    /**
+                     * Creates a plain object from a ListBackupsRequest message. Also converts values to other types if specified.
+                     * @param message ListBackupsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.ListBackupsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBackupsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBackupsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBackupsResponse. */
+                interface IListBackupsResponse {
+
+                    /** ListBackupsResponse backups */
+                    backups?: (google.cloud.memorystore.v1.IBackup[]|null);
+
+                    /** ListBackupsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListBackupsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListBackupsResponse. */
+                class ListBackupsResponse implements IListBackupsResponse {
+
+                    /**
+                     * Constructs a new ListBackupsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IListBackupsResponse);
+
+                    /** ListBackupsResponse backups. */
+                    public backups: google.cloud.memorystore.v1.IBackup[];
+
+                    /** ListBackupsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListBackupsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListBackupsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBackupsResponse instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IListBackupsResponse): google.cloud.memorystore.v1.ListBackupsResponse;
+
+                    /**
+                     * Encodes the specified ListBackupsResponse message. Does not implicitly {@link google.cloud.memorystore.v1.ListBackupsResponse.verify|verify} messages.
+                     * @param message ListBackupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IListBackupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBackupsResponse message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.ListBackupsResponse.verify|verify} messages.
+                     * @param message ListBackupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IListBackupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBackupsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBackupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.ListBackupsResponse;
+
+                    /**
+                     * Decodes a ListBackupsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBackupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.ListBackupsResponse;
+
+                    /**
+                     * Verifies a ListBackupsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBackupsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBackupsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.ListBackupsResponse;
+
+                    /**
+                     * Creates a plain object from a ListBackupsResponse message. Also converts values to other types if specified.
+                     * @param message ListBackupsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.ListBackupsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBackupsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBackupsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetBackupRequest. */
+                interface IGetBackupRequest {
+
+                    /** GetBackupRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetBackupRequest. */
+                class GetBackupRequest implements IGetBackupRequest {
+
+                    /**
+                     * Constructs a new GetBackupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IGetBackupRequest);
+
+                    /** GetBackupRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetBackupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetBackupRequest instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IGetBackupRequest): google.cloud.memorystore.v1.GetBackupRequest;
+
+                    /**
+                     * Encodes the specified GetBackupRequest message. Does not implicitly {@link google.cloud.memorystore.v1.GetBackupRequest.verify|verify} messages.
+                     * @param message GetBackupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IGetBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetBackupRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.GetBackupRequest.verify|verify} messages.
+                     * @param message GetBackupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IGetBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetBackupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetBackupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.GetBackupRequest;
+
+                    /**
+                     * Decodes a GetBackupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetBackupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.GetBackupRequest;
+
+                    /**
+                     * Verifies a GetBackupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetBackupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetBackupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.GetBackupRequest;
+
+                    /**
+                     * Creates a plain object from a GetBackupRequest message. Also converts values to other types if specified.
+                     * @param message GetBackupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.GetBackupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetBackupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetBackupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteBackupRequest. */
+                interface IDeleteBackupRequest {
+
+                    /** DeleteBackupRequest name */
+                    name?: (string|null);
+
+                    /** DeleteBackupRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteBackupRequest. */
+                class DeleteBackupRequest implements IDeleteBackupRequest {
+
+                    /**
+                     * Constructs a new DeleteBackupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IDeleteBackupRequest);
+
+                    /** DeleteBackupRequest name. */
+                    public name: string;
+
+                    /** DeleteBackupRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteBackupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteBackupRequest instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IDeleteBackupRequest): google.cloud.memorystore.v1.DeleteBackupRequest;
+
+                    /**
+                     * Encodes the specified DeleteBackupRequest message. Does not implicitly {@link google.cloud.memorystore.v1.DeleteBackupRequest.verify|verify} messages.
+                     * @param message DeleteBackupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IDeleteBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteBackupRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.DeleteBackupRequest.verify|verify} messages.
+                     * @param message DeleteBackupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IDeleteBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteBackupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteBackupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.DeleteBackupRequest;
+
+                    /**
+                     * Decodes a DeleteBackupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteBackupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.DeleteBackupRequest;
+
+                    /**
+                     * Verifies a DeleteBackupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteBackupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteBackupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.DeleteBackupRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteBackupRequest message. Also converts values to other types if specified.
+                     * @param message DeleteBackupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.DeleteBackupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteBackupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteBackupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportBackupRequest. */
+                interface IExportBackupRequest {
+
+                    /** ExportBackupRequest gcsBucket */
+                    gcsBucket?: (string|null);
+
+                    /** ExportBackupRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an ExportBackupRequest. */
+                class ExportBackupRequest implements IExportBackupRequest {
+
+                    /**
+                     * Constructs a new ExportBackupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IExportBackupRequest);
+
+                    /** ExportBackupRequest gcsBucket. */
+                    public gcsBucket?: (string|null);
+
+                    /** ExportBackupRequest name. */
+                    public name: string;
+
+                    /** ExportBackupRequest destination. */
+                    public destination?: "gcsBucket";
+
+                    /**
+                     * Creates a new ExportBackupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportBackupRequest instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IExportBackupRequest): google.cloud.memorystore.v1.ExportBackupRequest;
+
+                    /**
+                     * Encodes the specified ExportBackupRequest message. Does not implicitly {@link google.cloud.memorystore.v1.ExportBackupRequest.verify|verify} messages.
+                     * @param message ExportBackupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IExportBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportBackupRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.ExportBackupRequest.verify|verify} messages.
+                     * @param message ExportBackupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IExportBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportBackupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportBackupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.ExportBackupRequest;
+
+                    /**
+                     * Decodes an ExportBackupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportBackupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.ExportBackupRequest;
+
+                    /**
+                     * Verifies an ExportBackupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportBackupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportBackupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.ExportBackupRequest;
+
+                    /**
+                     * Creates a plain object from an ExportBackupRequest message. Also converts values to other types if specified.
+                     * @param message ExportBackupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.ExportBackupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportBackupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportBackupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BackupInstanceRequest. */
+                interface IBackupInstanceRequest {
+
+                    /** BackupInstanceRequest name */
+                    name?: (string|null);
+
+                    /** BackupInstanceRequest ttl */
+                    ttl?: (google.protobuf.IDuration|null);
+
+                    /** BackupInstanceRequest backupId */
+                    backupId?: (string|null);
+                }
+
+                /** Represents a BackupInstanceRequest. */
+                class BackupInstanceRequest implements IBackupInstanceRequest {
+
+                    /**
+                     * Constructs a new BackupInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IBackupInstanceRequest);
+
+                    /** BackupInstanceRequest name. */
+                    public name: string;
+
+                    /** BackupInstanceRequest ttl. */
+                    public ttl?: (google.protobuf.IDuration|null);
+
+                    /** BackupInstanceRequest backupId. */
+                    public backupId?: (string|null);
+
+                    /** BackupInstanceRequest _backupId. */
+                    public _backupId?: "backupId";
+
+                    /**
+                     * Creates a new BackupInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BackupInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IBackupInstanceRequest): google.cloud.memorystore.v1.BackupInstanceRequest;
+
+                    /**
+                     * Encodes the specified BackupInstanceRequest message. Does not implicitly {@link google.cloud.memorystore.v1.BackupInstanceRequest.verify|verify} messages.
+                     * @param message BackupInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IBackupInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BackupInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.BackupInstanceRequest.verify|verify} messages.
+                     * @param message BackupInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IBackupInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BackupInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BackupInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.BackupInstanceRequest;
+
+                    /**
+                     * Decodes a BackupInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BackupInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.BackupInstanceRequest;
+
+                    /**
+                     * Verifies a BackupInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BackupInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BackupInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.BackupInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a BackupInstanceRequest message. Also converts values to other types if specified.
+                     * @param message BackupInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.BackupInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BackupInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BackupInstanceRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -13927,6 +16863,137 @@ export namespace google {
 
             /**
              * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** DayOfWeek enum. */
+        enum DayOfWeek {
+            DAY_OF_WEEK_UNSPECIFIED = 0,
+            MONDAY = 1,
+            TUESDAY = 2,
+            WEDNESDAY = 3,
+            THURSDAY = 4,
+            FRIDAY = 5,
+            SATURDAY = 6,
+            SUNDAY = 7
+        }
+
+        /** Properties of a TimeOfDay. */
+        interface ITimeOfDay {
+
+            /** TimeOfDay hours */
+            hours?: (number|null);
+
+            /** TimeOfDay minutes */
+            minutes?: (number|null);
+
+            /** TimeOfDay seconds */
+            seconds?: (number|null);
+
+            /** TimeOfDay nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a TimeOfDay. */
+        class TimeOfDay implements ITimeOfDay {
+
+            /**
+             * Constructs a new TimeOfDay.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.ITimeOfDay);
+
+            /** TimeOfDay hours. */
+            public hours: number;
+
+            /** TimeOfDay minutes. */
+            public minutes: number;
+
+            /** TimeOfDay seconds. */
+            public seconds: number;
+
+            /** TimeOfDay nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new TimeOfDay instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TimeOfDay instance
+             */
+            public static create(properties?: google.type.ITimeOfDay): google.type.TimeOfDay;
+
+            /**
+             * Encodes the specified TimeOfDay message. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+             * @param message TimeOfDay message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TimeOfDay message, length delimited. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+             * @param message TimeOfDay message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TimeOfDay message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TimeOfDay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.TimeOfDay;
+
+            /**
+             * Decodes a TimeOfDay message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TimeOfDay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.TimeOfDay;
+
+            /**
+             * Verifies a TimeOfDay message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TimeOfDay message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TimeOfDay
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.TimeOfDay;
+
+            /**
+             * Creates a plain object from a TimeOfDay message. Also converts values to other types if specified.
+             * @param message TimeOfDay
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.TimeOfDay, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TimeOfDay to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TimeOfDay
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
