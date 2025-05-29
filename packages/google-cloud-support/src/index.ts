@@ -19,14 +19,12 @@
 import * as v2 from './v2';
 import * as v2beta from './v2beta';
 
-const CaseAttachmentServiceClient = v2beta.CaseAttachmentServiceClient;
-type CaseAttachmentServiceClient = v2beta.CaseAttachmentServiceClient;
-const CaseServiceClient = v2beta.CaseServiceClient;
-type CaseServiceClient = v2beta.CaseServiceClient;
-const CommentServiceClient = v2beta.CommentServiceClient;
-type CommentServiceClient = v2beta.CommentServiceClient;
-const FeedServiceClient = v2beta.FeedServiceClient;
-type FeedServiceClient = v2beta.FeedServiceClient;
+const CaseAttachmentServiceClient = v2.CaseAttachmentServiceClient;
+type CaseAttachmentServiceClient = v2.CaseAttachmentServiceClient;
+const CaseServiceClient = v2.CaseServiceClient;
+type CaseServiceClient = v2.CaseServiceClient;
+const CommentServiceClient = v2.CommentServiceClient;
+type CommentServiceClient = v2.CommentServiceClient;
 
 export {
   v2,
@@ -34,7 +32,6 @@ export {
   CaseAttachmentServiceClient,
   CaseServiceClient,
   CommentServiceClient,
-  FeedServiceClient,
 };
 export default {
   v2,
@@ -42,7 +39,6 @@ export default {
   CaseAttachmentServiceClient,
   CaseServiceClient,
   CommentServiceClient,
-  FeedServiceClient,
 };
 import * as protos from '../protos/protos';
 export {protos};
