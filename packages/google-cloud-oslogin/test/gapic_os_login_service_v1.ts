@@ -193,9 +193,14 @@ describe('v1.OsLoginServiceClient', () => {
         throw err;
       });
       assert(client.osLoginServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -204,9 +209,14 @@ describe('v1.OsLoginServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.osLoginServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -370,7 +380,9 @@ describe('v1.OsLoginServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createSshPublicKey(request), expectedError);
     });
   });
@@ -501,7 +513,9 @@ describe('v1.OsLoginServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deletePosixAccount(request), expectedError);
     });
   });
@@ -632,7 +646,9 @@ describe('v1.OsLoginServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteSshPublicKey(request), expectedError);
     });
   });
@@ -762,7 +778,9 @@ describe('v1.OsLoginServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getLoginProfile(request), expectedError);
     });
   });
@@ -892,7 +910,9 @@ describe('v1.OsLoginServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSshPublicKey(request), expectedError);
     });
   });
@@ -1023,7 +1043,9 @@ describe('v1.OsLoginServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.importSshPublicKey(request), expectedError);
     });
   });
@@ -1154,7 +1176,9 @@ describe('v1.OsLoginServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateSshPublicKey(request), expectedError);
     });
   });

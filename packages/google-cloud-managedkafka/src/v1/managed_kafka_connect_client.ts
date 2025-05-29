@@ -213,6 +213,9 @@ export class ManagedKafkaConnectClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      aclPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/clusters/{cluster}/acls/{acl}'
+      ),
       clusterPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clusters/{cluster}'
       ),
@@ -3002,6 +3005,68 @@ export class ManagedKafkaConnectClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified acl resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cluster
+   * @param {string} acl
+   * @returns {string} Resource name string.
+   */
+  aclPath(project: string, location: string, cluster: string, acl: string) {
+    return this.pathTemplates.aclPathTemplate.render({
+      project: project,
+      location: location,
+      cluster: cluster,
+      acl: acl,
+    });
+  }
+
+  /**
+   * Parse the project from Acl resource.
+   *
+   * @param {string} aclName
+   *   A fully-qualified path representing Acl resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAclName(aclName: string) {
+    return this.pathTemplates.aclPathTemplate.match(aclName).project;
+  }
+
+  /**
+   * Parse the location from Acl resource.
+   *
+   * @param {string} aclName
+   *   A fully-qualified path representing Acl resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAclName(aclName: string) {
+    return this.pathTemplates.aclPathTemplate.match(aclName).location;
+  }
+
+  /**
+   * Parse the cluster from Acl resource.
+   *
+   * @param {string} aclName
+   *   A fully-qualified path representing Acl resource.
+   * @returns {string} A string representing the cluster.
+   */
+  matchClusterFromAclName(aclName: string) {
+    return this.pathTemplates.aclPathTemplate.match(aclName).cluster;
+  }
+
+  /**
+   * Parse the acl from Acl resource.
+   *
+   * @param {string} aclName
+   *   A fully-qualified path representing Acl resource.
+   * @returns {string} A string representing the acl.
+   */
+  matchAclFromAclName(aclName: string) {
+    return this.pathTemplates.aclPathTemplate.match(aclName).acl;
+  }
 
   /**
    * Return a fully-qualified cluster resource name string.

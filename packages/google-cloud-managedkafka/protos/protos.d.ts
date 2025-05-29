@@ -241,6 +241,104 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteConsumerGroup(request: google.cloud.managedkafka.v1.IDeleteConsumerGroupRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls ListAcls.
+                     * @param request ListAclsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAclsResponse
+                     */
+                    public listAcls(request: google.cloud.managedkafka.v1.IListAclsRequest, callback: google.cloud.managedkafka.v1.ManagedKafka.ListAclsCallback): void;
+
+                    /**
+                     * Calls ListAcls.
+                     * @param request ListAclsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAcls(request: google.cloud.managedkafka.v1.IListAclsRequest): Promise<google.cloud.managedkafka.v1.ListAclsResponse>;
+
+                    /**
+                     * Calls GetAcl.
+                     * @param request GetAclRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Acl
+                     */
+                    public getAcl(request: google.cloud.managedkafka.v1.IGetAclRequest, callback: google.cloud.managedkafka.v1.ManagedKafka.GetAclCallback): void;
+
+                    /**
+                     * Calls GetAcl.
+                     * @param request GetAclRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAcl(request: google.cloud.managedkafka.v1.IGetAclRequest): Promise<google.cloud.managedkafka.v1.Acl>;
+
+                    /**
+                     * Calls CreateAcl.
+                     * @param request CreateAclRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Acl
+                     */
+                    public createAcl(request: google.cloud.managedkafka.v1.ICreateAclRequest, callback: google.cloud.managedkafka.v1.ManagedKafka.CreateAclCallback): void;
+
+                    /**
+                     * Calls CreateAcl.
+                     * @param request CreateAclRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAcl(request: google.cloud.managedkafka.v1.ICreateAclRequest): Promise<google.cloud.managedkafka.v1.Acl>;
+
+                    /**
+                     * Calls UpdateAcl.
+                     * @param request UpdateAclRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Acl
+                     */
+                    public updateAcl(request: google.cloud.managedkafka.v1.IUpdateAclRequest, callback: google.cloud.managedkafka.v1.ManagedKafka.UpdateAclCallback): void;
+
+                    /**
+                     * Calls UpdateAcl.
+                     * @param request UpdateAclRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAcl(request: google.cloud.managedkafka.v1.IUpdateAclRequest): Promise<google.cloud.managedkafka.v1.Acl>;
+
+                    /**
+                     * Calls DeleteAcl.
+                     * @param request DeleteAclRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteAcl(request: google.cloud.managedkafka.v1.IDeleteAclRequest, callback: google.cloud.managedkafka.v1.ManagedKafka.DeleteAclCallback): void;
+
+                    /**
+                     * Calls DeleteAcl.
+                     * @param request DeleteAclRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteAcl(request: google.cloud.managedkafka.v1.IDeleteAclRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls AddAclEntry.
+                     * @param request AddAclEntryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AddAclEntryResponse
+                     */
+                    public addAclEntry(request: google.cloud.managedkafka.v1.IAddAclEntryRequest, callback: google.cloud.managedkafka.v1.ManagedKafka.AddAclEntryCallback): void;
+
+                    /**
+                     * Calls AddAclEntry.
+                     * @param request AddAclEntryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public addAclEntry(request: google.cloud.managedkafka.v1.IAddAclEntryRequest): Promise<google.cloud.managedkafka.v1.AddAclEntryResponse>;
+
+                    /**
+                     * Calls RemoveAclEntry.
+                     * @param request RemoveAclEntryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RemoveAclEntryResponse
+                     */
+                    public removeAclEntry(request: google.cloud.managedkafka.v1.IRemoveAclEntryRequest, callback: google.cloud.managedkafka.v1.ManagedKafka.RemoveAclEntryCallback): void;
+
+                    /**
+                     * Calls RemoveAclEntry.
+                     * @param request RemoveAclEntryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public removeAclEntry(request: google.cloud.managedkafka.v1.IRemoveAclEntryRequest): Promise<google.cloud.managedkafka.v1.RemoveAclEntryResponse>;
                 }
 
                 namespace ManagedKafka {
@@ -342,6 +440,55 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteConsumerGroupCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafka|listAcls}.
+                     * @param error Error, if any
+                     * @param [response] ListAclsResponse
+                     */
+                    type ListAclsCallback = (error: (Error|null), response?: google.cloud.managedkafka.v1.ListAclsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafka|getAcl}.
+                     * @param error Error, if any
+                     * @param [response] Acl
+                     */
+                    type GetAclCallback = (error: (Error|null), response?: google.cloud.managedkafka.v1.Acl) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafka|createAcl}.
+                     * @param error Error, if any
+                     * @param [response] Acl
+                     */
+                    type CreateAclCallback = (error: (Error|null), response?: google.cloud.managedkafka.v1.Acl) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafka|updateAcl}.
+                     * @param error Error, if any
+                     * @param [response] Acl
+                     */
+                    type UpdateAclCallback = (error: (Error|null), response?: google.cloud.managedkafka.v1.Acl) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafka|deleteAcl}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteAclCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafka|addAclEntry}.
+                     * @param error Error, if any
+                     * @param [response] AddAclEntryResponse
+                     */
+                    type AddAclEntryCallback = (error: (Error|null), response?: google.cloud.managedkafka.v1.AddAclEntryResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafka|removeAclEntry}.
+                     * @param error Error, if any
+                     * @param [response] RemoveAclEntryResponse
+                     */
+                    type RemoveAclEntryCallback = (error: (Error|null), response?: google.cloud.managedkafka.v1.RemoveAclEntryResponse) => void;
                 }
 
                 /** Properties of a ListClustersRequest. */
@@ -2119,6 +2266,1039 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteConsumerGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAclsRequest. */
+                interface IListAclsRequest {
+
+                    /** ListAclsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAclsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAclsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAclsRequest. */
+                class ListAclsRequest implements IListAclsRequest {
+
+                    /**
+                     * Constructs a new ListAclsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IListAclsRequest);
+
+                    /** ListAclsRequest parent. */
+                    public parent: string;
+
+                    /** ListAclsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAclsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAclsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAclsRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IListAclsRequest): google.cloud.managedkafka.v1.ListAclsRequest;
+
+                    /**
+                     * Encodes the specified ListAclsRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.ListAclsRequest.verify|verify} messages.
+                     * @param message ListAclsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IListAclsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAclsRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.ListAclsRequest.verify|verify} messages.
+                     * @param message ListAclsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IListAclsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAclsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAclsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.ListAclsRequest;
+
+                    /**
+                     * Decodes a ListAclsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAclsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.ListAclsRequest;
+
+                    /**
+                     * Verifies a ListAclsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAclsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAclsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.ListAclsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAclsRequest message. Also converts values to other types if specified.
+                     * @param message ListAclsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.ListAclsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAclsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAclsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAclsResponse. */
+                interface IListAclsResponse {
+
+                    /** ListAclsResponse acls */
+                    acls?: (google.cloud.managedkafka.v1.IAcl[]|null);
+
+                    /** ListAclsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAclsResponse. */
+                class ListAclsResponse implements IListAclsResponse {
+
+                    /**
+                     * Constructs a new ListAclsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IListAclsResponse);
+
+                    /** ListAclsResponse acls. */
+                    public acls: google.cloud.managedkafka.v1.IAcl[];
+
+                    /** ListAclsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAclsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAclsResponse instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IListAclsResponse): google.cloud.managedkafka.v1.ListAclsResponse;
+
+                    /**
+                     * Encodes the specified ListAclsResponse message. Does not implicitly {@link google.cloud.managedkafka.v1.ListAclsResponse.verify|verify} messages.
+                     * @param message ListAclsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IListAclsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAclsResponse message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.ListAclsResponse.verify|verify} messages.
+                     * @param message ListAclsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IListAclsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAclsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAclsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.ListAclsResponse;
+
+                    /**
+                     * Decodes a ListAclsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAclsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.ListAclsResponse;
+
+                    /**
+                     * Verifies a ListAclsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAclsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAclsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.ListAclsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAclsResponse message. Also converts values to other types if specified.
+                     * @param message ListAclsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.ListAclsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAclsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAclsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAclRequest. */
+                interface IGetAclRequest {
+
+                    /** GetAclRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAclRequest. */
+                class GetAclRequest implements IGetAclRequest {
+
+                    /**
+                     * Constructs a new GetAclRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IGetAclRequest);
+
+                    /** GetAclRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAclRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAclRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IGetAclRequest): google.cloud.managedkafka.v1.GetAclRequest;
+
+                    /**
+                     * Encodes the specified GetAclRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.GetAclRequest.verify|verify} messages.
+                     * @param message GetAclRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IGetAclRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAclRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.GetAclRequest.verify|verify} messages.
+                     * @param message GetAclRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IGetAclRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAclRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAclRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.GetAclRequest;
+
+                    /**
+                     * Decodes a GetAclRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAclRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.GetAclRequest;
+
+                    /**
+                     * Verifies a GetAclRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAclRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAclRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.GetAclRequest;
+
+                    /**
+                     * Creates a plain object from a GetAclRequest message. Also converts values to other types if specified.
+                     * @param message GetAclRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.GetAclRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAclRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAclRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateAclRequest. */
+                interface ICreateAclRequest {
+
+                    /** CreateAclRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAclRequest aclId */
+                    aclId?: (string|null);
+
+                    /** CreateAclRequest acl */
+                    acl?: (google.cloud.managedkafka.v1.IAcl|null);
+                }
+
+                /** Represents a CreateAclRequest. */
+                class CreateAclRequest implements ICreateAclRequest {
+
+                    /**
+                     * Constructs a new CreateAclRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.ICreateAclRequest);
+
+                    /** CreateAclRequest parent. */
+                    public parent: string;
+
+                    /** CreateAclRequest aclId. */
+                    public aclId: string;
+
+                    /** CreateAclRequest acl. */
+                    public acl?: (google.cloud.managedkafka.v1.IAcl|null);
+
+                    /**
+                     * Creates a new CreateAclRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAclRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.ICreateAclRequest): google.cloud.managedkafka.v1.CreateAclRequest;
+
+                    /**
+                     * Encodes the specified CreateAclRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.CreateAclRequest.verify|verify} messages.
+                     * @param message CreateAclRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.ICreateAclRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAclRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.CreateAclRequest.verify|verify} messages.
+                     * @param message CreateAclRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.ICreateAclRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAclRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAclRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.CreateAclRequest;
+
+                    /**
+                     * Decodes a CreateAclRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAclRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.CreateAclRequest;
+
+                    /**
+                     * Verifies a CreateAclRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAclRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAclRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.CreateAclRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAclRequest message. Also converts values to other types if specified.
+                     * @param message CreateAclRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.CreateAclRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAclRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAclRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateAclRequest. */
+                interface IUpdateAclRequest {
+
+                    /** UpdateAclRequest acl */
+                    acl?: (google.cloud.managedkafka.v1.IAcl|null);
+
+                    /** UpdateAclRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateAclRequest. */
+                class UpdateAclRequest implements IUpdateAclRequest {
+
+                    /**
+                     * Constructs a new UpdateAclRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IUpdateAclRequest);
+
+                    /** UpdateAclRequest acl. */
+                    public acl?: (google.cloud.managedkafka.v1.IAcl|null);
+
+                    /** UpdateAclRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateAclRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAclRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IUpdateAclRequest): google.cloud.managedkafka.v1.UpdateAclRequest;
+
+                    /**
+                     * Encodes the specified UpdateAclRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.UpdateAclRequest.verify|verify} messages.
+                     * @param message UpdateAclRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IUpdateAclRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAclRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.UpdateAclRequest.verify|verify} messages.
+                     * @param message UpdateAclRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IUpdateAclRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAclRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAclRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.UpdateAclRequest;
+
+                    /**
+                     * Decodes an UpdateAclRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAclRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.UpdateAclRequest;
+
+                    /**
+                     * Verifies an UpdateAclRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAclRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAclRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.UpdateAclRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAclRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAclRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.UpdateAclRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAclRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAclRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteAclRequest. */
+                interface IDeleteAclRequest {
+
+                    /** DeleteAclRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteAclRequest. */
+                class DeleteAclRequest implements IDeleteAclRequest {
+
+                    /**
+                     * Constructs a new DeleteAclRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IDeleteAclRequest);
+
+                    /** DeleteAclRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteAclRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteAclRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IDeleteAclRequest): google.cloud.managedkafka.v1.DeleteAclRequest;
+
+                    /**
+                     * Encodes the specified DeleteAclRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.DeleteAclRequest.verify|verify} messages.
+                     * @param message DeleteAclRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IDeleteAclRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteAclRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.DeleteAclRequest.verify|verify} messages.
+                     * @param message DeleteAclRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IDeleteAclRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteAclRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteAclRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.DeleteAclRequest;
+
+                    /**
+                     * Decodes a DeleteAclRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteAclRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.DeleteAclRequest;
+
+                    /**
+                     * Verifies a DeleteAclRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteAclRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteAclRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.DeleteAclRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteAclRequest message. Also converts values to other types if specified.
+                     * @param message DeleteAclRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.DeleteAclRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteAclRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteAclRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AddAclEntryRequest. */
+                interface IAddAclEntryRequest {
+
+                    /** AddAclEntryRequest acl */
+                    acl?: (string|null);
+
+                    /** AddAclEntryRequest aclEntry */
+                    aclEntry?: (google.cloud.managedkafka.v1.IAclEntry|null);
+                }
+
+                /** Represents an AddAclEntryRequest. */
+                class AddAclEntryRequest implements IAddAclEntryRequest {
+
+                    /**
+                     * Constructs a new AddAclEntryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IAddAclEntryRequest);
+
+                    /** AddAclEntryRequest acl. */
+                    public acl: string;
+
+                    /** AddAclEntryRequest aclEntry. */
+                    public aclEntry?: (google.cloud.managedkafka.v1.IAclEntry|null);
+
+                    /**
+                     * Creates a new AddAclEntryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AddAclEntryRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IAddAclEntryRequest): google.cloud.managedkafka.v1.AddAclEntryRequest;
+
+                    /**
+                     * Encodes the specified AddAclEntryRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.AddAclEntryRequest.verify|verify} messages.
+                     * @param message AddAclEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IAddAclEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AddAclEntryRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.AddAclEntryRequest.verify|verify} messages.
+                     * @param message AddAclEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IAddAclEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AddAclEntryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AddAclEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.AddAclEntryRequest;
+
+                    /**
+                     * Decodes an AddAclEntryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AddAclEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.AddAclEntryRequest;
+
+                    /**
+                     * Verifies an AddAclEntryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AddAclEntryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AddAclEntryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.AddAclEntryRequest;
+
+                    /**
+                     * Creates a plain object from an AddAclEntryRequest message. Also converts values to other types if specified.
+                     * @param message AddAclEntryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.AddAclEntryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AddAclEntryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AddAclEntryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AddAclEntryResponse. */
+                interface IAddAclEntryResponse {
+
+                    /** AddAclEntryResponse acl */
+                    acl?: (google.cloud.managedkafka.v1.IAcl|null);
+
+                    /** AddAclEntryResponse aclCreated */
+                    aclCreated?: (boolean|null);
+                }
+
+                /** Represents an AddAclEntryResponse. */
+                class AddAclEntryResponse implements IAddAclEntryResponse {
+
+                    /**
+                     * Constructs a new AddAclEntryResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IAddAclEntryResponse);
+
+                    /** AddAclEntryResponse acl. */
+                    public acl?: (google.cloud.managedkafka.v1.IAcl|null);
+
+                    /** AddAclEntryResponse aclCreated. */
+                    public aclCreated: boolean;
+
+                    /**
+                     * Creates a new AddAclEntryResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AddAclEntryResponse instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IAddAclEntryResponse): google.cloud.managedkafka.v1.AddAclEntryResponse;
+
+                    /**
+                     * Encodes the specified AddAclEntryResponse message. Does not implicitly {@link google.cloud.managedkafka.v1.AddAclEntryResponse.verify|verify} messages.
+                     * @param message AddAclEntryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IAddAclEntryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AddAclEntryResponse message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.AddAclEntryResponse.verify|verify} messages.
+                     * @param message AddAclEntryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IAddAclEntryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AddAclEntryResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AddAclEntryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.AddAclEntryResponse;
+
+                    /**
+                     * Decodes an AddAclEntryResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AddAclEntryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.AddAclEntryResponse;
+
+                    /**
+                     * Verifies an AddAclEntryResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AddAclEntryResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AddAclEntryResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.AddAclEntryResponse;
+
+                    /**
+                     * Creates a plain object from an AddAclEntryResponse message. Also converts values to other types if specified.
+                     * @param message AddAclEntryResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.AddAclEntryResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AddAclEntryResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AddAclEntryResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RemoveAclEntryRequest. */
+                interface IRemoveAclEntryRequest {
+
+                    /** RemoveAclEntryRequest acl */
+                    acl?: (string|null);
+
+                    /** RemoveAclEntryRequest aclEntry */
+                    aclEntry?: (google.cloud.managedkafka.v1.IAclEntry|null);
+                }
+
+                /** Represents a RemoveAclEntryRequest. */
+                class RemoveAclEntryRequest implements IRemoveAclEntryRequest {
+
+                    /**
+                     * Constructs a new RemoveAclEntryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IRemoveAclEntryRequest);
+
+                    /** RemoveAclEntryRequest acl. */
+                    public acl: string;
+
+                    /** RemoveAclEntryRequest aclEntry. */
+                    public aclEntry?: (google.cloud.managedkafka.v1.IAclEntry|null);
+
+                    /**
+                     * Creates a new RemoveAclEntryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RemoveAclEntryRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IRemoveAclEntryRequest): google.cloud.managedkafka.v1.RemoveAclEntryRequest;
+
+                    /**
+                     * Encodes the specified RemoveAclEntryRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.RemoveAclEntryRequest.verify|verify} messages.
+                     * @param message RemoveAclEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IRemoveAclEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RemoveAclEntryRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.RemoveAclEntryRequest.verify|verify} messages.
+                     * @param message RemoveAclEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IRemoveAclEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RemoveAclEntryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RemoveAclEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.RemoveAclEntryRequest;
+
+                    /**
+                     * Decodes a RemoveAclEntryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RemoveAclEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.RemoveAclEntryRequest;
+
+                    /**
+                     * Verifies a RemoveAclEntryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RemoveAclEntryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RemoveAclEntryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.RemoveAclEntryRequest;
+
+                    /**
+                     * Creates a plain object from a RemoveAclEntryRequest message. Also converts values to other types if specified.
+                     * @param message RemoveAclEntryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.RemoveAclEntryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RemoveAclEntryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RemoveAclEntryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RemoveAclEntryResponse. */
+                interface IRemoveAclEntryResponse {
+
+                    /** RemoveAclEntryResponse acl */
+                    acl?: (google.cloud.managedkafka.v1.IAcl|null);
+
+                    /** RemoveAclEntryResponse aclDeleted */
+                    aclDeleted?: (boolean|null);
+                }
+
+                /** Represents a RemoveAclEntryResponse. */
+                class RemoveAclEntryResponse implements IRemoveAclEntryResponse {
+
+                    /**
+                     * Constructs a new RemoveAclEntryResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IRemoveAclEntryResponse);
+
+                    /** RemoveAclEntryResponse acl. */
+                    public acl?: (google.cloud.managedkafka.v1.IAcl|null);
+
+                    /** RemoveAclEntryResponse aclDeleted. */
+                    public aclDeleted?: (boolean|null);
+
+                    /** RemoveAclEntryResponse result. */
+                    public result?: ("acl"|"aclDeleted");
+
+                    /**
+                     * Creates a new RemoveAclEntryResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RemoveAclEntryResponse instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IRemoveAclEntryResponse): google.cloud.managedkafka.v1.RemoveAclEntryResponse;
+
+                    /**
+                     * Encodes the specified RemoveAclEntryResponse message. Does not implicitly {@link google.cloud.managedkafka.v1.RemoveAclEntryResponse.verify|verify} messages.
+                     * @param message RemoveAclEntryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IRemoveAclEntryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RemoveAclEntryResponse message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.RemoveAclEntryResponse.verify|verify} messages.
+                     * @param message RemoveAclEntryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IRemoveAclEntryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RemoveAclEntryResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RemoveAclEntryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.RemoveAclEntryResponse;
+
+                    /**
+                     * Decodes a RemoveAclEntryResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RemoveAclEntryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.RemoveAclEntryResponse;
+
+                    /**
+                     * Verifies a RemoveAclEntryResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RemoveAclEntryResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RemoveAclEntryResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.RemoveAclEntryResponse;
+
+                    /**
+                     * Creates a plain object from a RemoveAclEntryResponse message. Also converts values to other types if specified.
+                     * @param message RemoveAclEntryResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.RemoveAclEntryResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RemoveAclEntryResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RemoveAclEntryResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4051,6 +5231,248 @@ export namespace google {
 
                     /**
                      * Gets the default type url for TaskRetryPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Acl. */
+                interface IAcl {
+
+                    /** Acl name */
+                    name?: (string|null);
+
+                    /** Acl aclEntries */
+                    aclEntries?: (google.cloud.managedkafka.v1.IAclEntry[]|null);
+
+                    /** Acl etag */
+                    etag?: (string|null);
+
+                    /** Acl resourceType */
+                    resourceType?: (string|null);
+
+                    /** Acl resourceName */
+                    resourceName?: (string|null);
+
+                    /** Acl patternType */
+                    patternType?: (string|null);
+                }
+
+                /** Represents an Acl. */
+                class Acl implements IAcl {
+
+                    /**
+                     * Constructs a new Acl.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IAcl);
+
+                    /** Acl name. */
+                    public name: string;
+
+                    /** Acl aclEntries. */
+                    public aclEntries: google.cloud.managedkafka.v1.IAclEntry[];
+
+                    /** Acl etag. */
+                    public etag: string;
+
+                    /** Acl resourceType. */
+                    public resourceType: string;
+
+                    /** Acl resourceName. */
+                    public resourceName: string;
+
+                    /** Acl patternType. */
+                    public patternType: string;
+
+                    /**
+                     * Creates a new Acl instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Acl instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IAcl): google.cloud.managedkafka.v1.Acl;
+
+                    /**
+                     * Encodes the specified Acl message. Does not implicitly {@link google.cloud.managedkafka.v1.Acl.verify|verify} messages.
+                     * @param message Acl message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IAcl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Acl message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.Acl.verify|verify} messages.
+                     * @param message Acl message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IAcl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Acl message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Acl
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.Acl;
+
+                    /**
+                     * Decodes an Acl message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Acl
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.Acl;
+
+                    /**
+                     * Verifies an Acl message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Acl message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Acl
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.Acl;
+
+                    /**
+                     * Creates a plain object from an Acl message. Also converts values to other types if specified.
+                     * @param message Acl
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.Acl, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Acl to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Acl
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AclEntry. */
+                interface IAclEntry {
+
+                    /** AclEntry principal */
+                    principal?: (string|null);
+
+                    /** AclEntry permissionType */
+                    permissionType?: (string|null);
+
+                    /** AclEntry operation */
+                    operation?: (string|null);
+
+                    /** AclEntry host */
+                    host?: (string|null);
+                }
+
+                /** Represents an AclEntry. */
+                class AclEntry implements IAclEntry {
+
+                    /**
+                     * Constructs a new AclEntry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IAclEntry);
+
+                    /** AclEntry principal. */
+                    public principal: string;
+
+                    /** AclEntry permissionType. */
+                    public permissionType: string;
+
+                    /** AclEntry operation. */
+                    public operation: string;
+
+                    /** AclEntry host. */
+                    public host: string;
+
+                    /**
+                     * Creates a new AclEntry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AclEntry instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IAclEntry): google.cloud.managedkafka.v1.AclEntry;
+
+                    /**
+                     * Encodes the specified AclEntry message. Does not implicitly {@link google.cloud.managedkafka.v1.AclEntry.verify|verify} messages.
+                     * @param message AclEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IAclEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AclEntry message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.AclEntry.verify|verify} messages.
+                     * @param message AclEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IAclEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AclEntry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AclEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.AclEntry;
+
+                    /**
+                     * Decodes an AclEntry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AclEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.AclEntry;
+
+                    /**
+                     * Verifies an AclEntry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AclEntry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AclEntry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.AclEntry;
+
+                    /**
+                     * Creates a plain object from an AclEntry message. Also converts values to other types if specified.
+                     * @param message AclEntry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.AclEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AclEntry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AclEntry
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
