@@ -29,10 +29,24 @@ function main(onlineReturnPolicy) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The return policy to update.
+   *  Required. The online return policy to update.
+   *  The online return policy's `name` field is used to identify the
+   *  online return policy to be updated.
    */
   // const onlineReturnPolicy = {}
   /**
+   *  Optional. List of fields being updated.
+   *  The following fields are supported (in both `snake_case` and
+   *  `lowerCamelCase`):
+   *  - `accept_defective_only`
+   *  - `accept_exchange`
+   *  - `item_conditions`
+   *  - `policy`
+   *  - `process_refund_days`
+   *  - `restocking_fee`
+   *  - `return_methods`
+   *  - `return_policy_uri`
+   *  - `return_shipping_fee`
    */
   // const updateMask = {}
 

@@ -312,9 +312,14 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         throw err;
       });
       assert(client.documentProcessorServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -326,9 +331,14 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
           }
         );
       assert.strictEqual(client.documentProcessorServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -509,7 +519,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.processDocument(request), expectedError);
     });
   });
@@ -652,7 +664,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.fetchProcessorTypes(request), expectedError);
     });
   });
@@ -794,7 +808,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getProcessorType(request), expectedError);
     });
   });
@@ -936,7 +952,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getProcessor(request), expectedError);
     });
   });
@@ -1079,7 +1097,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getProcessorVersion(request), expectedError);
     });
   });
@@ -1221,7 +1241,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createProcessor(request), expectedError);
     });
   });
@@ -1363,7 +1385,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getEvaluation(request), expectedError);
     });
   });
@@ -5626,20 +5650,24 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .getOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: operationsProtos.google.longrunning.Operation | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -5715,20 +5743,24 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .cancelOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -5804,20 +5836,24 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .deleteOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
