@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v2.1.0...bigquery-analyticshub-v2.2.0) (2025-05-20)
+
+
+### Features
+
+* [bigquery-analyticshub] Add support for Analytics Hub & Marketplace Integration ([#6347](https://github.com/googleapis/google-cloud-node/issues/6347)) ([9e88f29](https://github.com/googleapis/google-cloud-node/commit/9e88f290fd76cdb8a721a0c4ed9592e6f020cadc))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v2.0.1...bigquery-analyticshub-v2.1.0) (2025-05-09)
 
 

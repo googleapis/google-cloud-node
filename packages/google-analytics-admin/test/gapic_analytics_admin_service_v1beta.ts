@@ -272,9 +272,14 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         throw err;
       });
       assert(client.analyticsAdminServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -284,9 +289,14 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.analyticsAdminServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -455,7 +465,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getAccount(request), expectedError);
     });
   });
@@ -589,7 +601,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteAccount(request), expectedError);
     });
   });
@@ -727,7 +741,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.account.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateAccount(request), expectedError);
     });
   });
@@ -818,7 +834,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.ProvisionAccountTicketRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.provisionAccountTicket(request),
         expectedError
@@ -955,7 +973,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getProperty(request), expectedError);
     });
   });
@@ -1042,7 +1062,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.CreatePropertyRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createProperty(request), expectedError);
     });
   });
@@ -1176,7 +1198,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteProperty(request), expectedError);
     });
   });
@@ -1314,7 +1338,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.property.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateProperty(request), expectedError);
     });
   });
@@ -1449,7 +1475,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createFirebaseLink(request), expectedError);
     });
   });
@@ -1584,7 +1612,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteFirebaseLink(request), expectedError);
     });
   });
@@ -1719,7 +1749,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createGoogleAdsLink(request), expectedError);
     });
   });
@@ -1858,7 +1890,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.googleAdsLink.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateGoogleAdsLink(request), expectedError);
     });
   });
@@ -1993,7 +2027,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteGoogleAdsLink(request), expectedError);
     });
   });
@@ -2131,7 +2167,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getDataSharingSettings(request),
         expectedError
@@ -2272,7 +2310,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getMeasurementProtocolSecret(request),
         expectedError
@@ -2413,7 +2453,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createMeasurementProtocolSecret(request),
         expectedError
@@ -2554,7 +2596,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteMeasurementProtocolSecret(request),
         expectedError
@@ -2699,7 +2743,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.measurementProtocolSecret.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateMeasurementProtocolSecret(request),
         expectedError
@@ -2840,7 +2886,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.acknowledgeUserDataCollection(request),
         expectedError
@@ -2988,7 +3036,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createConversionEvent(request),
         expectedError
@@ -3141,7 +3191,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.conversionEvent.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateConversionEvent(request),
         expectedError
@@ -3287,7 +3339,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getConversionEvent(request), expectedError);
       assert(stub.calledOnce);
     });
@@ -3433,7 +3487,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteConversionEvent(request),
         expectedError
@@ -3571,7 +3627,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createKeyEvent(request), expectedError);
     });
   });
@@ -3709,7 +3767,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.keyEvent.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateKeyEvent(request), expectedError);
     });
   });
@@ -3843,7 +3903,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getKeyEvent(request), expectedError);
     });
   });
@@ -3977,7 +4039,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteKeyEvent(request), expectedError);
     });
   });
@@ -4115,7 +4179,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createCustomDimension(request),
         expectedError
@@ -4260,7 +4326,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.customDimension.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateCustomDimension(request),
         expectedError
@@ -4401,7 +4469,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.archiveCustomDimension(request),
         expectedError
@@ -4539,7 +4609,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getCustomDimension(request), expectedError);
     });
   });
@@ -4674,7 +4746,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createCustomMetric(request), expectedError);
     });
   });
@@ -4813,7 +4887,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.customMetric.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateCustomMetric(request), expectedError);
     });
   });
@@ -4948,7 +5024,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.archiveCustomMetric(request), expectedError);
     });
   });
@@ -5082,7 +5160,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getCustomMetric(request), expectedError);
     });
   });
@@ -5220,7 +5300,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getDataRetentionSettings(request),
         expectedError
@@ -5365,7 +5447,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.dataRetentionSettings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateDataRetentionSettings(request),
         expectedError
@@ -5502,7 +5586,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createDataStream(request), expectedError);
     });
   });
@@ -5636,7 +5722,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteDataStream(request), expectedError);
     });
   });
@@ -5774,7 +5862,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.dataStream.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateDataStream(request), expectedError);
     });
   });
@@ -5908,7 +5998,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDataStream(request), expectedError);
     });
   });
@@ -6042,7 +6134,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.entity = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.runAccessReport(request), expectedError);
     });
   });

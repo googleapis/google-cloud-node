@@ -582,10 +582,10 @@ export class OnlineReturnPolicyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The merchant account for which to create a return policy.
+   *   Required. The merchant account for which the return policy will be created.
    *   Format: `accounts/{account}`
    * @param {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy} request.onlineReturnPolicy
-   *   Required. The return policy to create.
+   *   Required. The return policy object to create.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -712,8 +712,24 @@ export class OnlineReturnPolicyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy} request.onlineReturnPolicy
-   *   Required. The return policy to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The online return policy to update.
+   *   The online return policy's `name` field is used to identify the
+   *   online return policy to be updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. List of fields being updated.
+   *
+   *   The following fields are supported (in both `snake_case` and
+   *   `lowerCamelCase`):
+   *
+   *   - `accept_defective_only`
+   *   - `accept_exchange`
+   *   - `item_conditions`
+   *   - `policy`
+   *   - `process_refund_days`
+   *   - `restocking_fee`
+   *   - `return_methods`
+   *   - `return_policy_uri`
+   *   - `return_shipping_fee`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -835,7 +851,7 @@ export class OnlineReturnPolicyServiceClient {
       );
   }
   /**
-   * Deletes an existing return policy for a given merchant.
+   * Deletes an existing return policy.
    *
    * @param {Object} request
    *   The request object that will be sent.
