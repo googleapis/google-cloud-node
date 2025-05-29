@@ -2816,7 +2816,9 @@
                             "functionCall",
                             "functionResponse",
                             "executableCode",
-                            "codeExecutionResult"
+                            "codeExecutionResult",
+                            "thought",
+                            "thoughtSignature"
                           ]
                         },
                         "metadata": {
@@ -2871,6 +2873,20 @@
                         "codeExecutionResult": {
                           "type": "CodeExecutionResult",
                           "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "thought": {
+                          "type": "bool",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "thoughtSignature": {
+                          "type": "bytes",
+                          "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3192,6 +3208,11 @@
                         },
                         "ThinkingConfig": {
                           "oneofs": {
+                            "_includeThoughts": {
+                              "oneof": [
+                                "includeThoughts"
+                              ]
+                            },
                             "_thinkingBudget": {
                               "oneof": [
                                 "thinkingBudget"
@@ -3199,6 +3220,14 @@
                             }
                           },
                           "fields": {
+                            "includeThoughts": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
                             "thinkingBudget": {
                               "type": "int32",
                               "id": 3,

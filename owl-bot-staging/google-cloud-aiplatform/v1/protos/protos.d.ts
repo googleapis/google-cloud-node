@@ -11282,6 +11282,12 @@ export namespace google {
                     /** Part codeExecutionResult */
                     codeExecutionResult?: (google.cloud.aiplatform.v1.ICodeExecutionResult|null);
 
+                    /** Part thought */
+                    thought?: (boolean|null);
+
+                    /** Part thoughtSignature */
+                    thoughtSignature?: (Uint8Array|Buffer|string|null);
+
                     /** Part videoMetadata */
                     videoMetadata?: (google.cloud.aiplatform.v1.IVideoMetadata|null);
                 }
@@ -11316,11 +11322,17 @@ export namespace google {
                     /** Part codeExecutionResult. */
                     public codeExecutionResult?: (google.cloud.aiplatform.v1.ICodeExecutionResult|null);
 
+                    /** Part thought. */
+                    public thought?: (boolean|null);
+
+                    /** Part thoughtSignature. */
+                    public thoughtSignature?: (Uint8Array|Buffer|string|null);
+
                     /** Part videoMetadata. */
                     public videoMetadata?: (google.cloud.aiplatform.v1.IVideoMetadata|null);
 
                     /** Part data. */
-                    public data?: ("text"|"inlineData"|"fileData"|"functionCall"|"functionResponse"|"executableCode"|"codeExecutionResult");
+                    public data?: ("text"|"inlineData"|"fileData"|"functionCall"|"functionResponse"|"executableCode"|"codeExecutionResult"|"thought"|"thoughtSignature");
 
                     /** Part metadata. */
                     public metadata?: "videoMetadata";
@@ -12254,6 +12266,9 @@ export namespace google {
                     /** Properties of a ThinkingConfig. */
                     interface IThinkingConfig {
 
+                        /** ThinkingConfig includeThoughts */
+                        includeThoughts?: (boolean|null);
+
                         /** ThinkingConfig thinkingBudget */
                         thinkingBudget?: (number|null);
                     }
@@ -12267,8 +12282,14 @@ export namespace google {
                          */
                         constructor(properties?: google.cloud.aiplatform.v1.GenerationConfig.IThinkingConfig);
 
+                        /** ThinkingConfig includeThoughts. */
+                        public includeThoughts?: (boolean|null);
+
                         /** ThinkingConfig thinkingBudget. */
                         public thinkingBudget?: (number|null);
+
+                        /** ThinkingConfig _includeThoughts. */
+                        public _includeThoughts?: "includeThoughts";
 
                         /** ThinkingConfig _thinkingBudget. */
                         public _thinkingBudget?: "thinkingBudget";
