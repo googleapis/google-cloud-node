@@ -625,6 +625,28 @@
                         return CitationSource;
                     })();
     
+                    /**
+                     * Modality enum.
+                     * @name google.ai.generativelanguage.v1.Modality
+                     * @enum {number}
+                     * @property {number} MODALITY_UNSPECIFIED=0 MODALITY_UNSPECIFIED value
+                     * @property {number} TEXT=1 TEXT value
+                     * @property {number} IMAGE=2 IMAGE value
+                     * @property {number} VIDEO=3 VIDEO value
+                     * @property {number} AUDIO=4 AUDIO value
+                     * @property {number} DOCUMENT=5 DOCUMENT value
+                     */
+                    v1.Modality = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "MODALITY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "TEXT"] = 1;
+                        values[valuesById[2] = "IMAGE"] = 2;
+                        values[valuesById[3] = "VIDEO"] = 3;
+                        values[valuesById[4] = "AUDIO"] = 4;
+                        values[valuesById[5] = "DOCUMENT"] = 5;
+                        return values;
+                    })();
+    
                     v1.Content = (function() {
     
                         /**
@@ -1365,6 +1387,272 @@
                         return Blob;
                     })();
     
+                    v1.ModalityTokenCount = (function() {
+    
+                        /**
+                         * Properties of a ModalityTokenCount.
+                         * @memberof google.ai.generativelanguage.v1
+                         * @interface IModalityTokenCount
+                         * @property {google.ai.generativelanguage.v1.Modality|null} [modality] ModalityTokenCount modality
+                         * @property {number|null} [tokenCount] ModalityTokenCount tokenCount
+                         */
+    
+                        /**
+                         * Constructs a new ModalityTokenCount.
+                         * @memberof google.ai.generativelanguage.v1
+                         * @classdesc Represents a ModalityTokenCount.
+                         * @implements IModalityTokenCount
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1.IModalityTokenCount=} [properties] Properties to set
+                         */
+                        function ModalityTokenCount(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ModalityTokenCount modality.
+                         * @member {google.ai.generativelanguage.v1.Modality} modality
+                         * @memberof google.ai.generativelanguage.v1.ModalityTokenCount
+                         * @instance
+                         */
+                        ModalityTokenCount.prototype.modality = 0;
+    
+                        /**
+                         * ModalityTokenCount tokenCount.
+                         * @member {number} tokenCount
+                         * @memberof google.ai.generativelanguage.v1.ModalityTokenCount
+                         * @instance
+                         */
+                        ModalityTokenCount.prototype.tokenCount = 0;
+    
+                        /**
+                         * Creates a new ModalityTokenCount instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1.ModalityTokenCount
+                         * @static
+                         * @param {google.ai.generativelanguage.v1.IModalityTokenCount=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1.ModalityTokenCount} ModalityTokenCount instance
+                         */
+                        ModalityTokenCount.create = function create(properties) {
+                            return new ModalityTokenCount(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ModalityTokenCount message. Does not implicitly {@link google.ai.generativelanguage.v1.ModalityTokenCount.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1.ModalityTokenCount
+                         * @static
+                         * @param {google.ai.generativelanguage.v1.IModalityTokenCount} message ModalityTokenCount message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModalityTokenCount.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.modality != null && Object.hasOwnProperty.call(message, "modality"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.modality);
+                            if (message.tokenCount != null && Object.hasOwnProperty.call(message, "tokenCount"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.tokenCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ModalityTokenCount message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1.ModalityTokenCount.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1.ModalityTokenCount
+                         * @static
+                         * @param {google.ai.generativelanguage.v1.IModalityTokenCount} message ModalityTokenCount message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModalityTokenCount.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ModalityTokenCount message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1.ModalityTokenCount
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1.ModalityTokenCount} ModalityTokenCount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModalityTokenCount.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.ModalityTokenCount();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.modality = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.tokenCount = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ModalityTokenCount message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1.ModalityTokenCount
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1.ModalityTokenCount} ModalityTokenCount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModalityTokenCount.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ModalityTokenCount message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1.ModalityTokenCount
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ModalityTokenCount.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.modality != null && message.hasOwnProperty("modality"))
+                                switch (message.modality) {
+                                default:
+                                    return "modality: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.tokenCount != null && message.hasOwnProperty("tokenCount"))
+                                if (!$util.isInteger(message.tokenCount))
+                                    return "tokenCount: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ModalityTokenCount message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1.ModalityTokenCount
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1.ModalityTokenCount} ModalityTokenCount
+                         */
+                        ModalityTokenCount.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1.ModalityTokenCount)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1.ModalityTokenCount();
+                            switch (object.modality) {
+                            default:
+                                if (typeof object.modality === "number") {
+                                    message.modality = object.modality;
+                                    break;
+                                }
+                                break;
+                            case "MODALITY_UNSPECIFIED":
+                            case 0:
+                                message.modality = 0;
+                                break;
+                            case "TEXT":
+                            case 1:
+                                message.modality = 1;
+                                break;
+                            case "IMAGE":
+                            case 2:
+                                message.modality = 2;
+                                break;
+                            case "VIDEO":
+                            case 3:
+                                message.modality = 3;
+                                break;
+                            case "AUDIO":
+                            case 4:
+                                message.modality = 4;
+                                break;
+                            case "DOCUMENT":
+                            case 5:
+                                message.modality = 5;
+                                break;
+                            }
+                            if (object.tokenCount != null)
+                                message.tokenCount = object.tokenCount | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ModalityTokenCount message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1.ModalityTokenCount
+                         * @static
+                         * @param {google.ai.generativelanguage.v1.ModalityTokenCount} message ModalityTokenCount
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ModalityTokenCount.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.modality = options.enums === String ? "MODALITY_UNSPECIFIED" : 0;
+                                object.tokenCount = 0;
+                            }
+                            if (message.modality != null && message.hasOwnProperty("modality"))
+                                object.modality = options.enums === String ? $root.google.ai.generativelanguage.v1.Modality[message.modality] === undefined ? message.modality : $root.google.ai.generativelanguage.v1.Modality[message.modality] : message.modality;
+                            if (message.tokenCount != null && message.hasOwnProperty("tokenCount"))
+                                object.tokenCount = message.tokenCount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ModalityTokenCount to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1.ModalityTokenCount
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ModalityTokenCount.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ModalityTokenCount
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1.ModalityTokenCount
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ModalityTokenCount.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1.ModalityTokenCount";
+                        };
+    
+                        return ModalityTokenCount;
+                    })();
+    
                     v1.GenerativeService = (function() {
     
                         /**
@@ -1577,6 +1865,7 @@
                      * @property {number} CLUSTERING=5 CLUSTERING value
                      * @property {number} QUESTION_ANSWERING=6 QUESTION_ANSWERING value
                      * @property {number} FACT_VERIFICATION=7 FACT_VERIFICATION value
+                     * @property {number} CODE_RETRIEVAL_QUERY=8 CODE_RETRIEVAL_QUERY value
                      */
                     v1.TaskType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -1588,6 +1877,7 @@
                         values[valuesById[5] = "CLUSTERING"] = 5;
                         values[valuesById[6] = "QUESTION_ANSWERING"] = 6;
                         values[valuesById[7] = "FACT_VERIFICATION"] = 7;
+                        values[valuesById[8] = "CODE_RETRIEVAL_QUERY"] = 8;
                         return values;
                     })();
     
@@ -1944,6 +2234,7 @@
                          * @property {number|null} [temperature] GenerationConfig temperature
                          * @property {number|null} [topP] GenerationConfig topP
                          * @property {number|null} [topK] GenerationConfig topK
+                         * @property {number|null} [seed] GenerationConfig seed
                          * @property {number|null} [presencePenalty] GenerationConfig presencePenalty
                          * @property {number|null} [frequencyPenalty] GenerationConfig frequencyPenalty
                          * @property {boolean|null} [responseLogprobs] GenerationConfig responseLogprobs
@@ -2014,6 +2305,14 @@
                          * @instance
                          */
                         GenerationConfig.prototype.topK = null;
+    
+                        /**
+                         * GenerationConfig seed.
+                         * @member {number|null|undefined} seed
+                         * @memberof google.ai.generativelanguage.v1.GenerationConfig
+                         * @instance
+                         */
+                        GenerationConfig.prototype.seed = null;
     
                         /**
                          * GenerationConfig presencePenalty.
@@ -2114,6 +2413,17 @@
                         });
     
                         /**
+                         * GenerationConfig _seed.
+                         * @member {"seed"|undefined} _seed
+                         * @memberof google.ai.generativelanguage.v1.GenerationConfig
+                         * @instance
+                         */
+                        Object.defineProperty(GenerationConfig.prototype, "_seed", {
+                            get: $util.oneOfGetter($oneOfFields = ["seed"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * GenerationConfig _presencePenalty.
                          * @member {"presencePenalty"|undefined} _presencePenalty
                          * @memberof google.ai.generativelanguage.v1.GenerationConfig
@@ -2205,6 +2515,8 @@
                                 writer.uint32(/* id 6, wireType 5 =*/53).float(message.topP);
                             if (message.topK != null && Object.hasOwnProperty.call(message, "topK"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.topK);
+                            if (message.seed != null && Object.hasOwnProperty.call(message, "seed"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.seed);
                             if (message.presencePenalty != null && Object.hasOwnProperty.call(message, "presencePenalty"))
                                 writer.uint32(/* id 15, wireType 5 =*/125).float(message.presencePenalty);
                             if (message.frequencyPenalty != null && Object.hasOwnProperty.call(message, "frequencyPenalty"))
@@ -2273,6 +2585,10 @@
                                     }
                                 case 7: {
                                         message.topK = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.seed = reader.int32();
                                         break;
                                     }
                                 case 15: {
@@ -2363,6 +2679,11 @@
                                 if (!$util.isInteger(message.topK))
                                     return "topK: integer expected";
                             }
+                            if (message.seed != null && message.hasOwnProperty("seed")) {
+                                properties._seed = 1;
+                                if (!$util.isInteger(message.seed))
+                                    return "seed: integer expected";
+                            }
                             if (message.presencePenalty != null && message.hasOwnProperty("presencePenalty")) {
                                 properties._presencePenalty = 1;
                                 if (typeof message.presencePenalty !== "number")
@@ -2420,6 +2741,8 @@
                                 message.topP = Number(object.topP);
                             if (object.topK != null)
                                 message.topK = object.topK | 0;
+                            if (object.seed != null)
+                                message.seed = object.seed | 0;
                             if (object.presencePenalty != null)
                                 message.presencePenalty = Number(object.presencePenalty);
                             if (object.frequencyPenalty != null)
@@ -2477,6 +2800,11 @@
                                 object.topK = message.topK;
                                 if (options.oneofs)
                                     object._topK = "topK";
+                            }
+                            if (message.seed != null && message.hasOwnProperty("seed")) {
+                                object.seed = message.seed;
+                                if (options.oneofs)
+                                    object._seed = "seed";
                             }
                             if (message.presencePenalty != null && message.hasOwnProperty("presencePenalty")) {
                                 object.presencePenalty = options.json && !isFinite(message.presencePenalty) ? String(message.presencePenalty) : message.presencePenalty;
@@ -3154,7 +3482,13 @@
                              * @interface IUsageMetadata
                              * @property {number|null} [promptTokenCount] UsageMetadata promptTokenCount
                              * @property {number|null} [candidatesTokenCount] UsageMetadata candidatesTokenCount
+                             * @property {number|null} [toolUsePromptTokenCount] UsageMetadata toolUsePromptTokenCount
+                             * @property {number|null} [thoughtsTokenCount] UsageMetadata thoughtsTokenCount
                              * @property {number|null} [totalTokenCount] UsageMetadata totalTokenCount
+                             * @property {Array.<google.ai.generativelanguage.v1.IModalityTokenCount>|null} [promptTokensDetails] UsageMetadata promptTokensDetails
+                             * @property {Array.<google.ai.generativelanguage.v1.IModalityTokenCount>|null} [cacheTokensDetails] UsageMetadata cacheTokensDetails
+                             * @property {Array.<google.ai.generativelanguage.v1.IModalityTokenCount>|null} [candidatesTokensDetails] UsageMetadata candidatesTokensDetails
+                             * @property {Array.<google.ai.generativelanguage.v1.IModalityTokenCount>|null} [toolUsePromptTokensDetails] UsageMetadata toolUsePromptTokensDetails
                              */
     
                             /**
@@ -3166,6 +3500,10 @@
                              * @param {google.ai.generativelanguage.v1.GenerateContentResponse.IUsageMetadata=} [properties] Properties to set
                              */
                             function UsageMetadata(properties) {
+                                this.promptTokensDetails = [];
+                                this.cacheTokensDetails = [];
+                                this.candidatesTokensDetails = [];
+                                this.toolUsePromptTokensDetails = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -3189,12 +3527,60 @@
                             UsageMetadata.prototype.candidatesTokenCount = 0;
     
                             /**
+                             * UsageMetadata toolUsePromptTokenCount.
+                             * @member {number} toolUsePromptTokenCount
+                             * @memberof google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata
+                             * @instance
+                             */
+                            UsageMetadata.prototype.toolUsePromptTokenCount = 0;
+    
+                            /**
+                             * UsageMetadata thoughtsTokenCount.
+                             * @member {number} thoughtsTokenCount
+                             * @memberof google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata
+                             * @instance
+                             */
+                            UsageMetadata.prototype.thoughtsTokenCount = 0;
+    
+                            /**
                              * UsageMetadata totalTokenCount.
                              * @member {number} totalTokenCount
                              * @memberof google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata
                              * @instance
                              */
                             UsageMetadata.prototype.totalTokenCount = 0;
+    
+                            /**
+                             * UsageMetadata promptTokensDetails.
+                             * @member {Array.<google.ai.generativelanguage.v1.IModalityTokenCount>} promptTokensDetails
+                             * @memberof google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata
+                             * @instance
+                             */
+                            UsageMetadata.prototype.promptTokensDetails = $util.emptyArray;
+    
+                            /**
+                             * UsageMetadata cacheTokensDetails.
+                             * @member {Array.<google.ai.generativelanguage.v1.IModalityTokenCount>} cacheTokensDetails
+                             * @memberof google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata
+                             * @instance
+                             */
+                            UsageMetadata.prototype.cacheTokensDetails = $util.emptyArray;
+    
+                            /**
+                             * UsageMetadata candidatesTokensDetails.
+                             * @member {Array.<google.ai.generativelanguage.v1.IModalityTokenCount>} candidatesTokensDetails
+                             * @memberof google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata
+                             * @instance
+                             */
+                            UsageMetadata.prototype.candidatesTokensDetails = $util.emptyArray;
+    
+                            /**
+                             * UsageMetadata toolUsePromptTokensDetails.
+                             * @member {Array.<google.ai.generativelanguage.v1.IModalityTokenCount>} toolUsePromptTokensDetails
+                             * @memberof google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata
+                             * @instance
+                             */
+                            UsageMetadata.prototype.toolUsePromptTokensDetails = $util.emptyArray;
     
                             /**
                              * Creates a new UsageMetadata instance using the specified properties.
@@ -3226,6 +3612,22 @@
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.candidatesTokenCount);
                                 if (message.totalTokenCount != null && Object.hasOwnProperty.call(message, "totalTokenCount"))
                                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.totalTokenCount);
+                                if (message.promptTokensDetails != null && message.promptTokensDetails.length)
+                                    for (var i = 0; i < message.promptTokensDetails.length; ++i)
+                                        $root.google.ai.generativelanguage.v1.ModalityTokenCount.encode(message.promptTokensDetails[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.cacheTokensDetails != null && message.cacheTokensDetails.length)
+                                    for (var i = 0; i < message.cacheTokensDetails.length; ++i)
+                                        $root.google.ai.generativelanguage.v1.ModalityTokenCount.encode(message.cacheTokensDetails[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.candidatesTokensDetails != null && message.candidatesTokensDetails.length)
+                                    for (var i = 0; i < message.candidatesTokensDetails.length; ++i)
+                                        $root.google.ai.generativelanguage.v1.ModalityTokenCount.encode(message.candidatesTokensDetails[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.toolUsePromptTokenCount != null && Object.hasOwnProperty.call(message, "toolUsePromptTokenCount"))
+                                    writer.uint32(/* id 8, wireType 0 =*/64).int32(message.toolUsePromptTokenCount);
+                                if (message.toolUsePromptTokensDetails != null && message.toolUsePromptTokensDetails.length)
+                                    for (var i = 0; i < message.toolUsePromptTokensDetails.length; ++i)
+                                        $root.google.ai.generativelanguage.v1.ModalityTokenCount.encode(message.toolUsePromptTokensDetails[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                if (message.thoughtsTokenCount != null && Object.hasOwnProperty.call(message, "thoughtsTokenCount"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).int32(message.thoughtsTokenCount);
                                 return writer;
                             };
     
@@ -3268,8 +3670,40 @@
                                             message.candidatesTokenCount = reader.int32();
                                             break;
                                         }
+                                    case 8: {
+                                            message.toolUsePromptTokenCount = reader.int32();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.thoughtsTokenCount = reader.int32();
+                                            break;
+                                        }
                                     case 3: {
                                             message.totalTokenCount = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (!(message.promptTokensDetails && message.promptTokensDetails.length))
+                                                message.promptTokensDetails = [];
+                                            message.promptTokensDetails.push($root.google.ai.generativelanguage.v1.ModalityTokenCount.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 6: {
+                                            if (!(message.cacheTokensDetails && message.cacheTokensDetails.length))
+                                                message.cacheTokensDetails = [];
+                                            message.cacheTokensDetails.push($root.google.ai.generativelanguage.v1.ModalityTokenCount.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 7: {
+                                            if (!(message.candidatesTokensDetails && message.candidatesTokensDetails.length))
+                                                message.candidatesTokensDetails = [];
+                                            message.candidatesTokensDetails.push($root.google.ai.generativelanguage.v1.ModalityTokenCount.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 9: {
+                                            if (!(message.toolUsePromptTokensDetails && message.toolUsePromptTokensDetails.length))
+                                                message.toolUsePromptTokensDetails = [];
+                                            message.toolUsePromptTokensDetails.push($root.google.ai.generativelanguage.v1.ModalityTokenCount.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     default:
@@ -3313,9 +3747,51 @@
                                 if (message.candidatesTokenCount != null && message.hasOwnProperty("candidatesTokenCount"))
                                     if (!$util.isInteger(message.candidatesTokenCount))
                                         return "candidatesTokenCount: integer expected";
+                                if (message.toolUsePromptTokenCount != null && message.hasOwnProperty("toolUsePromptTokenCount"))
+                                    if (!$util.isInteger(message.toolUsePromptTokenCount))
+                                        return "toolUsePromptTokenCount: integer expected";
+                                if (message.thoughtsTokenCount != null && message.hasOwnProperty("thoughtsTokenCount"))
+                                    if (!$util.isInteger(message.thoughtsTokenCount))
+                                        return "thoughtsTokenCount: integer expected";
                                 if (message.totalTokenCount != null && message.hasOwnProperty("totalTokenCount"))
                                     if (!$util.isInteger(message.totalTokenCount))
                                         return "totalTokenCount: integer expected";
+                                if (message.promptTokensDetails != null && message.hasOwnProperty("promptTokensDetails")) {
+                                    if (!Array.isArray(message.promptTokensDetails))
+                                        return "promptTokensDetails: array expected";
+                                    for (var i = 0; i < message.promptTokensDetails.length; ++i) {
+                                        var error = $root.google.ai.generativelanguage.v1.ModalityTokenCount.verify(message.promptTokensDetails[i]);
+                                        if (error)
+                                            return "promptTokensDetails." + error;
+                                    }
+                                }
+                                if (message.cacheTokensDetails != null && message.hasOwnProperty("cacheTokensDetails")) {
+                                    if (!Array.isArray(message.cacheTokensDetails))
+                                        return "cacheTokensDetails: array expected";
+                                    for (var i = 0; i < message.cacheTokensDetails.length; ++i) {
+                                        var error = $root.google.ai.generativelanguage.v1.ModalityTokenCount.verify(message.cacheTokensDetails[i]);
+                                        if (error)
+                                            return "cacheTokensDetails." + error;
+                                    }
+                                }
+                                if (message.candidatesTokensDetails != null && message.hasOwnProperty("candidatesTokensDetails")) {
+                                    if (!Array.isArray(message.candidatesTokensDetails))
+                                        return "candidatesTokensDetails: array expected";
+                                    for (var i = 0; i < message.candidatesTokensDetails.length; ++i) {
+                                        var error = $root.google.ai.generativelanguage.v1.ModalityTokenCount.verify(message.candidatesTokensDetails[i]);
+                                        if (error)
+                                            return "candidatesTokensDetails." + error;
+                                    }
+                                }
+                                if (message.toolUsePromptTokensDetails != null && message.hasOwnProperty("toolUsePromptTokensDetails")) {
+                                    if (!Array.isArray(message.toolUsePromptTokensDetails))
+                                        return "toolUsePromptTokensDetails: array expected";
+                                    for (var i = 0; i < message.toolUsePromptTokensDetails.length; ++i) {
+                                        var error = $root.google.ai.generativelanguage.v1.ModalityTokenCount.verify(message.toolUsePromptTokensDetails[i]);
+                                        if (error)
+                                            return "toolUsePromptTokensDetails." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -3335,8 +3811,52 @@
                                     message.promptTokenCount = object.promptTokenCount | 0;
                                 if (object.candidatesTokenCount != null)
                                     message.candidatesTokenCount = object.candidatesTokenCount | 0;
+                                if (object.toolUsePromptTokenCount != null)
+                                    message.toolUsePromptTokenCount = object.toolUsePromptTokenCount | 0;
+                                if (object.thoughtsTokenCount != null)
+                                    message.thoughtsTokenCount = object.thoughtsTokenCount | 0;
                                 if (object.totalTokenCount != null)
                                     message.totalTokenCount = object.totalTokenCount | 0;
+                                if (object.promptTokensDetails) {
+                                    if (!Array.isArray(object.promptTokensDetails))
+                                        throw TypeError(".google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata.promptTokensDetails: array expected");
+                                    message.promptTokensDetails = [];
+                                    for (var i = 0; i < object.promptTokensDetails.length; ++i) {
+                                        if (typeof object.promptTokensDetails[i] !== "object")
+                                            throw TypeError(".google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata.promptTokensDetails: object expected");
+                                        message.promptTokensDetails[i] = $root.google.ai.generativelanguage.v1.ModalityTokenCount.fromObject(object.promptTokensDetails[i]);
+                                    }
+                                }
+                                if (object.cacheTokensDetails) {
+                                    if (!Array.isArray(object.cacheTokensDetails))
+                                        throw TypeError(".google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata.cacheTokensDetails: array expected");
+                                    message.cacheTokensDetails = [];
+                                    for (var i = 0; i < object.cacheTokensDetails.length; ++i) {
+                                        if (typeof object.cacheTokensDetails[i] !== "object")
+                                            throw TypeError(".google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata.cacheTokensDetails: object expected");
+                                        message.cacheTokensDetails[i] = $root.google.ai.generativelanguage.v1.ModalityTokenCount.fromObject(object.cacheTokensDetails[i]);
+                                    }
+                                }
+                                if (object.candidatesTokensDetails) {
+                                    if (!Array.isArray(object.candidatesTokensDetails))
+                                        throw TypeError(".google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata.candidatesTokensDetails: array expected");
+                                    message.candidatesTokensDetails = [];
+                                    for (var i = 0; i < object.candidatesTokensDetails.length; ++i) {
+                                        if (typeof object.candidatesTokensDetails[i] !== "object")
+                                            throw TypeError(".google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata.candidatesTokensDetails: object expected");
+                                        message.candidatesTokensDetails[i] = $root.google.ai.generativelanguage.v1.ModalityTokenCount.fromObject(object.candidatesTokensDetails[i]);
+                                    }
+                                }
+                                if (object.toolUsePromptTokensDetails) {
+                                    if (!Array.isArray(object.toolUsePromptTokensDetails))
+                                        throw TypeError(".google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata.toolUsePromptTokensDetails: array expected");
+                                    message.toolUsePromptTokensDetails = [];
+                                    for (var i = 0; i < object.toolUsePromptTokensDetails.length; ++i) {
+                                        if (typeof object.toolUsePromptTokensDetails[i] !== "object")
+                                            throw TypeError(".google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata.toolUsePromptTokensDetails: object expected");
+                                        message.toolUsePromptTokensDetails[i] = $root.google.ai.generativelanguage.v1.ModalityTokenCount.fromObject(object.toolUsePromptTokensDetails[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -3353,10 +3873,18 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.promptTokensDetails = [];
+                                    object.cacheTokensDetails = [];
+                                    object.candidatesTokensDetails = [];
+                                    object.toolUsePromptTokensDetails = [];
+                                }
                                 if (options.defaults) {
                                     object.promptTokenCount = 0;
                                     object.candidatesTokenCount = 0;
                                     object.totalTokenCount = 0;
+                                    object.toolUsePromptTokenCount = 0;
+                                    object.thoughtsTokenCount = 0;
                                 }
                                 if (message.promptTokenCount != null && message.hasOwnProperty("promptTokenCount"))
                                     object.promptTokenCount = message.promptTokenCount;
@@ -3364,6 +3892,30 @@
                                     object.candidatesTokenCount = message.candidatesTokenCount;
                                 if (message.totalTokenCount != null && message.hasOwnProperty("totalTokenCount"))
                                     object.totalTokenCount = message.totalTokenCount;
+                                if (message.promptTokensDetails && message.promptTokensDetails.length) {
+                                    object.promptTokensDetails = [];
+                                    for (var j = 0; j < message.promptTokensDetails.length; ++j)
+                                        object.promptTokensDetails[j] = $root.google.ai.generativelanguage.v1.ModalityTokenCount.toObject(message.promptTokensDetails[j], options);
+                                }
+                                if (message.cacheTokensDetails && message.cacheTokensDetails.length) {
+                                    object.cacheTokensDetails = [];
+                                    for (var j = 0; j < message.cacheTokensDetails.length; ++j)
+                                        object.cacheTokensDetails[j] = $root.google.ai.generativelanguage.v1.ModalityTokenCount.toObject(message.cacheTokensDetails[j], options);
+                                }
+                                if (message.candidatesTokensDetails && message.candidatesTokensDetails.length) {
+                                    object.candidatesTokensDetails = [];
+                                    for (var j = 0; j < message.candidatesTokensDetails.length; ++j)
+                                        object.candidatesTokensDetails[j] = $root.google.ai.generativelanguage.v1.ModalityTokenCount.toObject(message.candidatesTokensDetails[j], options);
+                                }
+                                if (message.toolUsePromptTokenCount != null && message.hasOwnProperty("toolUsePromptTokenCount"))
+                                    object.toolUsePromptTokenCount = message.toolUsePromptTokenCount;
+                                if (message.toolUsePromptTokensDetails && message.toolUsePromptTokensDetails.length) {
+                                    object.toolUsePromptTokensDetails = [];
+                                    for (var j = 0; j < message.toolUsePromptTokensDetails.length; ++j)
+                                        object.toolUsePromptTokensDetails[j] = $root.google.ai.generativelanguage.v1.ModalityTokenCount.toObject(message.toolUsePromptTokensDetails[j], options);
+                                }
+                                if (message.thoughtsTokenCount != null && message.hasOwnProperty("thoughtsTokenCount"))
+                                    object.thoughtsTokenCount = message.thoughtsTokenCount;
                                 return object;
                             };
     
@@ -6911,6 +7463,7 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             }
@@ -6984,6 +7537,10 @@
                             case "FACT_VERIFICATION":
                             case 7:
                                 message.taskType = 7;
+                                break;
+                            case "CODE_RETRIEVAL_QUERY":
+                            case 8:
+                                message.taskType = 8;
                                 break;
                             }
                             if (object.title != null)
@@ -8252,6 +8809,8 @@
                          * @memberof google.ai.generativelanguage.v1
                          * @interface ICountTokensResponse
                          * @property {number|null} [totalTokens] CountTokensResponse totalTokens
+                         * @property {Array.<google.ai.generativelanguage.v1.IModalityTokenCount>|null} [promptTokensDetails] CountTokensResponse promptTokensDetails
+                         * @property {Array.<google.ai.generativelanguage.v1.IModalityTokenCount>|null} [cacheTokensDetails] CountTokensResponse cacheTokensDetails
                          */
     
                         /**
@@ -8263,6 +8822,8 @@
                          * @param {google.ai.generativelanguage.v1.ICountTokensResponse=} [properties] Properties to set
                          */
                         function CountTokensResponse(properties) {
+                            this.promptTokensDetails = [];
+                            this.cacheTokensDetails = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -8276,6 +8837,22 @@
                          * @instance
                          */
                         CountTokensResponse.prototype.totalTokens = 0;
+    
+                        /**
+                         * CountTokensResponse promptTokensDetails.
+                         * @member {Array.<google.ai.generativelanguage.v1.IModalityTokenCount>} promptTokensDetails
+                         * @memberof google.ai.generativelanguage.v1.CountTokensResponse
+                         * @instance
+                         */
+                        CountTokensResponse.prototype.promptTokensDetails = $util.emptyArray;
+    
+                        /**
+                         * CountTokensResponse cacheTokensDetails.
+                         * @member {Array.<google.ai.generativelanguage.v1.IModalityTokenCount>} cacheTokensDetails
+                         * @memberof google.ai.generativelanguage.v1.CountTokensResponse
+                         * @instance
+                         */
+                        CountTokensResponse.prototype.cacheTokensDetails = $util.emptyArray;
     
                         /**
                          * Creates a new CountTokensResponse instance using the specified properties.
@@ -8303,6 +8880,12 @@
                                 writer = $Writer.create();
                             if (message.totalTokens != null && Object.hasOwnProperty.call(message, "totalTokens"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.totalTokens);
+                            if (message.promptTokensDetails != null && message.promptTokensDetails.length)
+                                for (var i = 0; i < message.promptTokensDetails.length; ++i)
+                                    $root.google.ai.generativelanguage.v1.ModalityTokenCount.encode(message.promptTokensDetails[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.cacheTokensDetails != null && message.cacheTokensDetails.length)
+                                for (var i = 0; i < message.cacheTokensDetails.length; ++i)
+                                    $root.google.ai.generativelanguage.v1.ModalityTokenCount.encode(message.cacheTokensDetails[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -8339,6 +8922,18 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.totalTokens = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.promptTokensDetails && message.promptTokensDetails.length))
+                                            message.promptTokensDetails = [];
+                                        message.promptTokensDetails.push($root.google.ai.generativelanguage.v1.ModalityTokenCount.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.cacheTokensDetails && message.cacheTokensDetails.length))
+                                            message.cacheTokensDetails = [];
+                                        message.cacheTokensDetails.push($root.google.ai.generativelanguage.v1.ModalityTokenCount.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -8379,6 +8974,24 @@
                             if (message.totalTokens != null && message.hasOwnProperty("totalTokens"))
                                 if (!$util.isInteger(message.totalTokens))
                                     return "totalTokens: integer expected";
+                            if (message.promptTokensDetails != null && message.hasOwnProperty("promptTokensDetails")) {
+                                if (!Array.isArray(message.promptTokensDetails))
+                                    return "promptTokensDetails: array expected";
+                                for (var i = 0; i < message.promptTokensDetails.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1.ModalityTokenCount.verify(message.promptTokensDetails[i]);
+                                    if (error)
+                                        return "promptTokensDetails." + error;
+                                }
+                            }
+                            if (message.cacheTokensDetails != null && message.hasOwnProperty("cacheTokensDetails")) {
+                                if (!Array.isArray(message.cacheTokensDetails))
+                                    return "cacheTokensDetails: array expected";
+                                for (var i = 0; i < message.cacheTokensDetails.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1.ModalityTokenCount.verify(message.cacheTokensDetails[i]);
+                                    if (error)
+                                        return "cacheTokensDetails." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -8396,6 +9009,26 @@
                             var message = new $root.google.ai.generativelanguage.v1.CountTokensResponse();
                             if (object.totalTokens != null)
                                 message.totalTokens = object.totalTokens | 0;
+                            if (object.promptTokensDetails) {
+                                if (!Array.isArray(object.promptTokensDetails))
+                                    throw TypeError(".google.ai.generativelanguage.v1.CountTokensResponse.promptTokensDetails: array expected");
+                                message.promptTokensDetails = [];
+                                for (var i = 0; i < object.promptTokensDetails.length; ++i) {
+                                    if (typeof object.promptTokensDetails[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1.CountTokensResponse.promptTokensDetails: object expected");
+                                    message.promptTokensDetails[i] = $root.google.ai.generativelanguage.v1.ModalityTokenCount.fromObject(object.promptTokensDetails[i]);
+                                }
+                            }
+                            if (object.cacheTokensDetails) {
+                                if (!Array.isArray(object.cacheTokensDetails))
+                                    throw TypeError(".google.ai.generativelanguage.v1.CountTokensResponse.cacheTokensDetails: array expected");
+                                message.cacheTokensDetails = [];
+                                for (var i = 0; i < object.cacheTokensDetails.length; ++i) {
+                                    if (typeof object.cacheTokensDetails[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1.CountTokensResponse.cacheTokensDetails: object expected");
+                                    message.cacheTokensDetails[i] = $root.google.ai.generativelanguage.v1.ModalityTokenCount.fromObject(object.cacheTokensDetails[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -8412,10 +9045,24 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.promptTokensDetails = [];
+                                object.cacheTokensDetails = [];
+                            }
                             if (options.defaults)
                                 object.totalTokens = 0;
                             if (message.totalTokens != null && message.hasOwnProperty("totalTokens"))
                                 object.totalTokens = message.totalTokens;
+                            if (message.promptTokensDetails && message.promptTokensDetails.length) {
+                                object.promptTokensDetails = [];
+                                for (var j = 0; j < message.promptTokensDetails.length; ++j)
+                                    object.promptTokensDetails[j] = $root.google.ai.generativelanguage.v1.ModalityTokenCount.toObject(message.promptTokensDetails[j], options);
+                            }
+                            if (message.cacheTokensDetails && message.cacheTokensDetails.length) {
+                                object.cacheTokensDetails = [];
+                                for (var j = 0; j < message.cacheTokensDetails.length; ++j)
+                                    object.cacheTokensDetails[j] = $root.google.ai.generativelanguage.v1.ModalityTokenCount.toObject(message.cacheTokensDetails[j], options);
+                            }
                             return object;
                         };
     
@@ -62141,6 +62788,7 @@
                      * @property {number} BOOLEAN=4 BOOLEAN value
                      * @property {number} ARRAY=5 ARRAY value
                      * @property {number} OBJECT=6 OBJECT value
+                     * @property {number} NULL=7 NULL value
                      */
                     v1beta.Type = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -62151,6 +62799,29 @@
                         values[valuesById[4] = "BOOLEAN"] = 4;
                         values[valuesById[5] = "ARRAY"] = 5;
                         values[valuesById[6] = "OBJECT"] = 6;
+                        values[valuesById[7] = "NULL"] = 7;
+                        return values;
+                    })();
+    
+                    /**
+                     * Modality enum.
+                     * @name google.ai.generativelanguage.v1beta.Modality
+                     * @enum {number}
+                     * @property {number} MODALITY_UNSPECIFIED=0 MODALITY_UNSPECIFIED value
+                     * @property {number} TEXT=1 TEXT value
+                     * @property {number} IMAGE=2 IMAGE value
+                     * @property {number} VIDEO=3 VIDEO value
+                     * @property {number} AUDIO=4 AUDIO value
+                     * @property {number} DOCUMENT=5 DOCUMENT value
+                     */
+                    v1beta.Modality = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "MODALITY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "TEXT"] = 1;
+                        values[valuesById[2] = "IMAGE"] = 2;
+                        values[valuesById[3] = "VIDEO"] = 3;
+                        values[valuesById[4] = "AUDIO"] = 4;
+                        values[valuesById[5] = "DOCUMENT"] = 5;
                         return values;
                     })();
     
@@ -62415,6 +63086,7 @@
                          * @property {google.ai.generativelanguage.v1beta.IFileData|null} [fileData] Part fileData
                          * @property {google.ai.generativelanguage.v1beta.IExecutableCode|null} [executableCode] Part executableCode
                          * @property {google.ai.generativelanguage.v1beta.ICodeExecutionResult|null} [codeExecutionResult] Part codeExecutionResult
+                         * @property {boolean|null} [thought] Part thought
                          */
     
                         /**
@@ -62488,6 +63160,14 @@
                          */
                         Part.prototype.codeExecutionResult = null;
     
+                        /**
+                         * Part thought.
+                         * @member {boolean} thought
+                         * @memberof google.ai.generativelanguage.v1beta.Part
+                         * @instance
+                         */
+                        Part.prototype.thought = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -62540,6 +63220,8 @@
                                 $root.google.ai.generativelanguage.v1beta.ExecutableCode.encode(message.executableCode, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.codeExecutionResult != null && Object.hasOwnProperty.call(message, "codeExecutionResult"))
                                 $root.google.ai.generativelanguage.v1beta.CodeExecutionResult.encode(message.codeExecutionResult, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.thought != null && Object.hasOwnProperty.call(message, "thought"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.thought);
                             return writer;
                         };
     
@@ -62600,6 +63282,10 @@
                                     }
                                 case 10: {
                                         message.codeExecutionResult = $root.google.ai.generativelanguage.v1beta.CodeExecutionResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.thought = reader.bool();
                                         break;
                                     }
                                 default:
@@ -62703,6 +63389,9 @@
                                         return "codeExecutionResult." + error;
                                 }
                             }
+                            if (message.thought != null && message.hasOwnProperty("thought"))
+                                if (typeof message.thought !== "boolean")
+                                    return "thought: boolean expected";
                             return null;
                         };
     
@@ -62750,6 +63439,8 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.Part.codeExecutionResult: object expected");
                                 message.codeExecutionResult = $root.google.ai.generativelanguage.v1beta.CodeExecutionResult.fromObject(object.codeExecutionResult);
                             }
+                            if (object.thought != null)
+                                message.thought = Boolean(object.thought);
                             return message;
                         };
     
@@ -62766,6 +63457,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.thought = false;
                             if (message.text != null && message.hasOwnProperty("text")) {
                                 object.text = message.text;
                                 if (options.oneofs)
@@ -62801,6 +63494,8 @@
                                 if (options.oneofs)
                                     object.data = "codeExecutionResult";
                             }
+                            if (message.thought != null && message.hasOwnProperty("thought"))
+                                object.thought = message.thought;
                             return object;
                         };
     
@@ -65342,6 +66037,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.allowedFunctionNames != null && message.hasOwnProperty("allowedFunctionNames")) {
@@ -65388,6 +66084,10 @@
                             case "NONE":
                             case 3:
                                 message.mode = 3;
+                                break;
+                            case "VALIDATED":
+                            case 4:
+                                message.mode = 4;
                                 break;
                             }
                             if (object.allowedFunctionNames) {
@@ -65461,6 +66161,7 @@
                          * @property {number} AUTO=1 AUTO value
                          * @property {number} ANY=2 ANY value
                          * @property {number} NONE=3 NONE value
+                         * @property {number} VALIDATED=4 VALIDATED value
                          */
                         FunctionCallingConfig.Mode = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -65468,6 +66169,7 @@
                             values[valuesById[1] = "AUTO"] = 1;
                             values[valuesById[2] = "ANY"] = 2;
                             values[valuesById[3] = "NONE"] = 3;
+                            values[valuesById[4] = "VALIDATED"] = 4;
                             return values;
                         })();
     
@@ -66331,6 +67033,7 @@
                          * @interface ISchema
                          * @property {google.ai.generativelanguage.v1beta.Type|null} [type] Schema type
                          * @property {string|null} [format] Schema format
+                         * @property {string|null} [title] Schema title
                          * @property {string|null} [description] Schema description
                          * @property {boolean|null} [nullable] Schema nullable
                          * @property {Array.<string>|null} ["enum"] Schema enum
@@ -66339,6 +67042,11 @@
                          * @property {number|Long|null} [minItems] Schema minItems
                          * @property {Object.<string,google.ai.generativelanguage.v1beta.ISchema>|null} [properties] Schema properties
                          * @property {Array.<string>|null} [required] Schema required
+                         * @property {number|null} [minimum] Schema minimum
+                         * @property {number|null} [maximum] Schema maximum
+                         * @property {Array.<google.ai.generativelanguage.v1beta.ISchema>|null} [anyOf] Schema anyOf
+                         * @property {Array.<string>|null} [propertyOrdering] Schema propertyOrdering
+                         * @property {google.protobuf.IValue|null} ["default"] Schema default
                          */
     
                         /**
@@ -66353,6 +67061,8 @@
                             this["enum"] = [];
                             this.properties = {};
                             this.required = [];
+                            this.anyOf = [];
+                            this.propertyOrdering = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -66374,6 +67084,14 @@
                          * @instance
                          */
                         Schema.prototype.format = "";
+    
+                        /**
+                         * Schema title.
+                         * @member {string} title
+                         * @memberof google.ai.generativelanguage.v1beta.Schema
+                         * @instance
+                         */
+                        Schema.prototype.title = "";
     
                         /**
                          * Schema description.
@@ -66439,6 +67157,46 @@
                          */
                         Schema.prototype.required = $util.emptyArray;
     
+                        /**
+                         * Schema minimum.
+                         * @member {number|null|undefined} minimum
+                         * @memberof google.ai.generativelanguage.v1beta.Schema
+                         * @instance
+                         */
+                        Schema.prototype.minimum = null;
+    
+                        /**
+                         * Schema maximum.
+                         * @member {number|null|undefined} maximum
+                         * @memberof google.ai.generativelanguage.v1beta.Schema
+                         * @instance
+                         */
+                        Schema.prototype.maximum = null;
+    
+                        /**
+                         * Schema anyOf.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.ISchema>} anyOf
+                         * @memberof google.ai.generativelanguage.v1beta.Schema
+                         * @instance
+                         */
+                        Schema.prototype.anyOf = $util.emptyArray;
+    
+                        /**
+                         * Schema propertyOrdering.
+                         * @member {Array.<string>} propertyOrdering
+                         * @memberof google.ai.generativelanguage.v1beta.Schema
+                         * @instance
+                         */
+                        Schema.prototype.propertyOrdering = $util.emptyArray;
+    
+                        /**
+                         * Schema default.
+                         * @member {google.protobuf.IValue|null|undefined} default
+                         * @memberof google.ai.generativelanguage.v1beta.Schema
+                         * @instance
+                         */
+                        Schema.prototype["default"] = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -66450,6 +67208,28 @@
                          */
                         Object.defineProperty(Schema.prototype, "_items", {
                             get: $util.oneOfGetter($oneOfFields = ["items"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Schema _minimum.
+                         * @member {"minimum"|undefined} _minimum
+                         * @memberof google.ai.generativelanguage.v1beta.Schema
+                         * @instance
+                         */
+                        Object.defineProperty(Schema.prototype, "_minimum", {
+                            get: $util.oneOfGetter($oneOfFields = ["minimum"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Schema _maximum.
+                         * @member {"maximum"|undefined} _maximum
+                         * @memberof google.ai.generativelanguage.v1beta.Schema
+                         * @instance
+                         */
+                        Object.defineProperty(Schema.prototype, "_maximum", {
+                            get: $util.oneOfGetter($oneOfFields = ["maximum"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -66498,10 +67278,24 @@
                             if (message.required != null && message.required.length)
                                 for (var i = 0; i < message.required.length; ++i)
                                     writer.uint32(/* id 8, wireType 2 =*/66).string(message.required[i]);
+                            if (message.minimum != null && Object.hasOwnProperty.call(message, "minimum"))
+                                writer.uint32(/* id 11, wireType 1 =*/89).double(message.minimum);
+                            if (message.maximum != null && Object.hasOwnProperty.call(message, "maximum"))
+                                writer.uint32(/* id 12, wireType 1 =*/97).double(message.maximum);
+                            if (message.anyOf != null && message.anyOf.length)
+                                for (var i = 0; i < message.anyOf.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.Schema.encode(message.anyOf[i], writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                             if (message.maxItems != null && Object.hasOwnProperty.call(message, "maxItems"))
                                 writer.uint32(/* id 21, wireType 0 =*/168).int64(message.maxItems);
                             if (message.minItems != null && Object.hasOwnProperty.call(message, "minItems"))
                                 writer.uint32(/* id 22, wireType 0 =*/176).int64(message.minItems);
+                            if (message.propertyOrdering != null && message.propertyOrdering.length)
+                                for (var i = 0; i < message.propertyOrdering.length; ++i)
+                                    writer.uint32(/* id 23, wireType 2 =*/186).string(message.propertyOrdering[i]);
+                            if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                writer.uint32(/* id 24, wireType 2 =*/194).string(message.title);
+                            if (message["default"] != null && Object.hasOwnProperty.call(message, "default"))
+                                $root.google.protobuf.Value.encode(message["default"], writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
                             return writer;
                         };
     
@@ -66542,6 +67336,10 @@
                                     }
                                 case 2: {
                                         message.format = reader.string();
+                                        break;
+                                    }
+                                case 24: {
+                                        message.title = reader.string();
                                         break;
                                     }
                                 case 3: {
@@ -66599,6 +67397,30 @@
                                         message.required.push(reader.string());
                                         break;
                                     }
+                                case 11: {
+                                        message.minimum = reader.double();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.maximum = reader.double();
+                                        break;
+                                    }
+                                case 18: {
+                                        if (!(message.anyOf && message.anyOf.length))
+                                            message.anyOf = [];
+                                        message.anyOf.push($root.google.ai.generativelanguage.v1beta.Schema.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 23: {
+                                        if (!(message.propertyOrdering && message.propertyOrdering.length))
+                                            message.propertyOrdering = [];
+                                        message.propertyOrdering.push(reader.string());
+                                        break;
+                                    }
+                                case 25: {
+                                        message["default"] = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -66646,11 +67468,15 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.format != null && message.hasOwnProperty("format"))
                                 if (!$util.isString(message.format))
                                     return "format: string expected";
+                            if (message.title != null && message.hasOwnProperty("title"))
+                                if (!$util.isString(message.title))
+                                    return "title: string expected";
                             if (message.description != null && message.hasOwnProperty("description"))
                                 if (!$util.isString(message.description))
                                     return "description: string expected";
@@ -66694,6 +67520,37 @@
                                 for (var i = 0; i < message.required.length; ++i)
                                     if (!$util.isString(message.required[i]))
                                         return "required: string[] expected";
+                            }
+                            if (message.minimum != null && message.hasOwnProperty("minimum")) {
+                                properties._minimum = 1;
+                                if (typeof message.minimum !== "number")
+                                    return "minimum: number expected";
+                            }
+                            if (message.maximum != null && message.hasOwnProperty("maximum")) {
+                                properties._maximum = 1;
+                                if (typeof message.maximum !== "number")
+                                    return "maximum: number expected";
+                            }
+                            if (message.anyOf != null && message.hasOwnProperty("anyOf")) {
+                                if (!Array.isArray(message.anyOf))
+                                    return "anyOf: array expected";
+                                for (var i = 0; i < message.anyOf.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.Schema.verify(message.anyOf[i]);
+                                    if (error)
+                                        return "anyOf." + error;
+                                }
+                            }
+                            if (message.propertyOrdering != null && message.hasOwnProperty("propertyOrdering")) {
+                                if (!Array.isArray(message.propertyOrdering))
+                                    return "propertyOrdering: array expected";
+                                for (var i = 0; i < message.propertyOrdering.length; ++i)
+                                    if (!$util.isString(message.propertyOrdering[i]))
+                                        return "propertyOrdering: string[] expected";
+                            }
+                            if (message["default"] != null && message.hasOwnProperty("default")) {
+                                var error = $root.google.protobuf.Value.verify(message["default"]);
+                                if (error)
+                                    return "default." + error;
                             }
                             return null;
                         };
@@ -66745,9 +67602,15 @@
                             case 6:
                                 message.type = 6;
                                 break;
+                            case "NULL":
+                            case 7:
+                                message.type = 7;
+                                break;
                             }
                             if (object.format != null)
                                 message.format = String(object.format);
+                            if (object.title != null)
+                                message.title = String(object.title);
                             if (object.description != null)
                                 message.description = String(object.description);
                             if (object.nullable != null)
@@ -66799,6 +67662,32 @@
                                 for (var i = 0; i < object.required.length; ++i)
                                     message.required[i] = String(object.required[i]);
                             }
+                            if (object.minimum != null)
+                                message.minimum = Number(object.minimum);
+                            if (object.maximum != null)
+                                message.maximum = Number(object.maximum);
+                            if (object.anyOf) {
+                                if (!Array.isArray(object.anyOf))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.Schema.anyOf: array expected");
+                                message.anyOf = [];
+                                for (var i = 0; i < object.anyOf.length; ++i) {
+                                    if (typeof object.anyOf[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.Schema.anyOf: object expected");
+                                    message.anyOf[i] = $root.google.ai.generativelanguage.v1beta.Schema.fromObject(object.anyOf[i]);
+                                }
+                            }
+                            if (object.propertyOrdering) {
+                                if (!Array.isArray(object.propertyOrdering))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.Schema.propertyOrdering: array expected");
+                                message.propertyOrdering = [];
+                                for (var i = 0; i < object.propertyOrdering.length; ++i)
+                                    message.propertyOrdering[i] = String(object.propertyOrdering[i]);
+                            }
+                            if (object["default"] != null) {
+                                if (typeof object["default"] !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.Schema.default: object expected");
+                                message["default"] = $root.google.protobuf.Value.fromObject(object["default"]);
+                            }
                             return message;
                         };
     
@@ -66818,6 +67707,8 @@
                             if (options.arrays || options.defaults) {
                                 object["enum"] = [];
                                 object.required = [];
+                                object.anyOf = [];
+                                object.propertyOrdering = [];
                             }
                             if (options.objects || options.defaults)
                                 object.properties = {};
@@ -66836,6 +67727,8 @@
                                     object.minItems = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.minItems = options.longs === String ? "0" : 0;
+                                object.title = "";
+                                object["default"] = null;
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = options.enums === String ? $root.google.ai.generativelanguage.v1beta.Type[message.type] === undefined ? message.type : $root.google.ai.generativelanguage.v1beta.Type[message.type] : message.type;
@@ -66866,6 +67759,21 @@
                                 for (var j = 0; j < message.required.length; ++j)
                                     object.required[j] = message.required[j];
                             }
+                            if (message.minimum != null && message.hasOwnProperty("minimum")) {
+                                object.minimum = options.json && !isFinite(message.minimum) ? String(message.minimum) : message.minimum;
+                                if (options.oneofs)
+                                    object._minimum = "minimum";
+                            }
+                            if (message.maximum != null && message.hasOwnProperty("maximum")) {
+                                object.maximum = options.json && !isFinite(message.maximum) ? String(message.maximum) : message.maximum;
+                                if (options.oneofs)
+                                    object._maximum = "maximum";
+                            }
+                            if (message.anyOf && message.anyOf.length) {
+                                object.anyOf = [];
+                                for (var j = 0; j < message.anyOf.length; ++j)
+                                    object.anyOf[j] = $root.google.ai.generativelanguage.v1beta.Schema.toObject(message.anyOf[j], options);
+                            }
                             if (message.maxItems != null && message.hasOwnProperty("maxItems"))
                                 if (typeof message.maxItems === "number")
                                     object.maxItems = options.longs === String ? String(message.maxItems) : message.maxItems;
@@ -66876,6 +67784,15 @@
                                     object.minItems = options.longs === String ? String(message.minItems) : message.minItems;
                                 else
                                     object.minItems = options.longs === String ? $util.Long.prototype.toString.call(message.minItems) : options.longs === Number ? new $util.LongBits(message.minItems.low >>> 0, message.minItems.high >>> 0).toNumber() : message.minItems;
+                            if (message.propertyOrdering && message.propertyOrdering.length) {
+                                object.propertyOrdering = [];
+                                for (var j = 0; j < message.propertyOrdering.length; ++j)
+                                    object.propertyOrdering[j] = message.propertyOrdering[j];
+                            }
+                            if (message.title != null && message.hasOwnProperty("title"))
+                                object.title = message.title;
+                            if (message["default"] != null && message.hasOwnProperty("default"))
+                                object["default"] = $root.google.protobuf.Value.toObject(message["default"], options);
                             return object;
                         };
     
@@ -67362,6 +68279,272 @@
                         };
     
                         return GroundingPassages;
+                    })();
+    
+                    v1beta.ModalityTokenCount = (function() {
+    
+                        /**
+                         * Properties of a ModalityTokenCount.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IModalityTokenCount
+                         * @property {google.ai.generativelanguage.v1beta.Modality|null} [modality] ModalityTokenCount modality
+                         * @property {number|null} [tokenCount] ModalityTokenCount tokenCount
+                         */
+    
+                        /**
+                         * Constructs a new ModalityTokenCount.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a ModalityTokenCount.
+                         * @implements IModalityTokenCount
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IModalityTokenCount=} [properties] Properties to set
+                         */
+                        function ModalityTokenCount(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ModalityTokenCount modality.
+                         * @member {google.ai.generativelanguage.v1beta.Modality} modality
+                         * @memberof google.ai.generativelanguage.v1beta.ModalityTokenCount
+                         * @instance
+                         */
+                        ModalityTokenCount.prototype.modality = 0;
+    
+                        /**
+                         * ModalityTokenCount tokenCount.
+                         * @member {number} tokenCount
+                         * @memberof google.ai.generativelanguage.v1beta.ModalityTokenCount
+                         * @instance
+                         */
+                        ModalityTokenCount.prototype.tokenCount = 0;
+    
+                        /**
+                         * Creates a new ModalityTokenCount instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.ModalityTokenCount
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IModalityTokenCount=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.ModalityTokenCount} ModalityTokenCount instance
+                         */
+                        ModalityTokenCount.create = function create(properties) {
+                            return new ModalityTokenCount(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ModalityTokenCount message. Does not implicitly {@link google.ai.generativelanguage.v1beta.ModalityTokenCount.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.ModalityTokenCount
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IModalityTokenCount} message ModalityTokenCount message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModalityTokenCount.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.modality != null && Object.hasOwnProperty.call(message, "modality"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.modality);
+                            if (message.tokenCount != null && Object.hasOwnProperty.call(message, "tokenCount"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.tokenCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ModalityTokenCount message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.ModalityTokenCount.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.ModalityTokenCount
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IModalityTokenCount} message ModalityTokenCount message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModalityTokenCount.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ModalityTokenCount message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.ModalityTokenCount
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.ModalityTokenCount} ModalityTokenCount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModalityTokenCount.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ModalityTokenCount();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.modality = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.tokenCount = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ModalityTokenCount message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.ModalityTokenCount
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.ModalityTokenCount} ModalityTokenCount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModalityTokenCount.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ModalityTokenCount message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.ModalityTokenCount
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ModalityTokenCount.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.modality != null && message.hasOwnProperty("modality"))
+                                switch (message.modality) {
+                                default:
+                                    return "modality: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.tokenCount != null && message.hasOwnProperty("tokenCount"))
+                                if (!$util.isInteger(message.tokenCount))
+                                    return "tokenCount: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ModalityTokenCount message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.ModalityTokenCount
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.ModalityTokenCount} ModalityTokenCount
+                         */
+                        ModalityTokenCount.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.ModalityTokenCount)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.ModalityTokenCount();
+                            switch (object.modality) {
+                            default:
+                                if (typeof object.modality === "number") {
+                                    message.modality = object.modality;
+                                    break;
+                                }
+                                break;
+                            case "MODALITY_UNSPECIFIED":
+                            case 0:
+                                message.modality = 0;
+                                break;
+                            case "TEXT":
+                            case 1:
+                                message.modality = 1;
+                                break;
+                            case "IMAGE":
+                            case 2:
+                                message.modality = 2;
+                                break;
+                            case "VIDEO":
+                            case 3:
+                                message.modality = 3;
+                                break;
+                            case "AUDIO":
+                            case 4:
+                                message.modality = 4;
+                                break;
+                            case "DOCUMENT":
+                            case 5:
+                                message.modality = 5;
+                                break;
+                            }
+                            if (object.tokenCount != null)
+                                message.tokenCount = object.tokenCount | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ModalityTokenCount message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.ModalityTokenCount
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.ModalityTokenCount} message ModalityTokenCount
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ModalityTokenCount.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.modality = options.enums === String ? "MODALITY_UNSPECIFIED" : 0;
+                                object.tokenCount = 0;
+                            }
+                            if (message.modality != null && message.hasOwnProperty("modality"))
+                                object.modality = options.enums === String ? $root.google.ai.generativelanguage.v1beta.Modality[message.modality] === undefined ? message.modality : $root.google.ai.generativelanguage.v1beta.Modality[message.modality] : message.modality;
+                            if (message.tokenCount != null && message.hasOwnProperty("tokenCount"))
+                                object.tokenCount = message.tokenCount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ModalityTokenCount to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.ModalityTokenCount
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ModalityTokenCount.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ModalityTokenCount
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.ModalityTokenCount
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ModalityTokenCount.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.ModalityTokenCount";
+                        };
+    
+                        return ModalityTokenCount;
                     })();
     
                     v1beta.CitationMetadata = (function() {
@@ -71267,7 +72450,9 @@
                          * @property {google.protobuf.ITimestamp|null} [expirationTime] File expirationTime
                          * @property {Uint8Array|null} [sha256Hash] File sha256Hash
                          * @property {string|null} [uri] File uri
+                         * @property {string|null} [downloadUri] File downloadUri
                          * @property {google.ai.generativelanguage.v1beta.File.State|null} [state] File state
+                         * @property {google.ai.generativelanguage.v1beta.File.Source|null} [source] File source
                          * @property {google.rpc.IStatus|null} [error] File error
                          */
     
@@ -71367,12 +72552,28 @@
                         File.prototype.uri = "";
     
                         /**
+                         * File downloadUri.
+                         * @member {string} downloadUri
+                         * @memberof google.ai.generativelanguage.v1beta.File
+                         * @instance
+                         */
+                        File.prototype.downloadUri = "";
+    
+                        /**
                          * File state.
                          * @member {google.ai.generativelanguage.v1beta.File.State} state
                          * @memberof google.ai.generativelanguage.v1beta.File
                          * @instance
                          */
                         File.prototype.state = 0;
+    
+                        /**
+                         * File source.
+                         * @member {google.ai.generativelanguage.v1beta.File.Source} source
+                         * @memberof google.ai.generativelanguage.v1beta.File
+                         * @instance
+                         */
+                        File.prototype.source = 0;
     
                         /**
                          * File error.
@@ -71444,6 +72645,10 @@
                                 $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             if (message.videoMetadata != null && Object.hasOwnProperty.call(message, "videoMetadata"))
                                 $root.google.ai.generativelanguage.v1beta.VideoMetadata.encode(message.videoMetadata, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.source != null && Object.hasOwnProperty.call(message, "source"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.source);
+                            if (message.downloadUri != null && Object.hasOwnProperty.call(message, "downloadUri"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.downloadUri);
                             return writer;
                         };
     
@@ -71518,8 +72723,16 @@
                                         message.uri = reader.string();
                                         break;
                                     }
+                                case 14: {
+                                        message.downloadUri = reader.string();
+                                        break;
+                                    }
                                 case 10: {
                                         message.state = reader.int32();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.source = reader.int32();
                                         break;
                                     }
                                 case 11: {
@@ -71603,6 +72816,9 @@
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 if (!$util.isString(message.uri))
                                     return "uri: string expected";
+                            if (message.downloadUri != null && message.hasOwnProperty("downloadUri"))
+                                if (!$util.isString(message.downloadUri))
+                                    return "downloadUri: string expected";
                             if (message.state != null && message.hasOwnProperty("state"))
                                 switch (message.state) {
                                 default:
@@ -71611,6 +72827,15 @@
                                 case 1:
                                 case 2:
                                 case 10:
+                                    break;
+                                }
+                            if (message.source != null && message.hasOwnProperty("source"))
+                                switch (message.source) {
+                                default:
+                                    return "source: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
                                     break;
                                 }
                             if (message.error != null && message.hasOwnProperty("error")) {
@@ -71675,6 +72900,8 @@
                                     message.sha256Hash = object.sha256Hash;
                             if (object.uri != null)
                                 message.uri = String(object.uri);
+                            if (object.downloadUri != null)
+                                message.downloadUri = String(object.downloadUri);
                             switch (object.state) {
                             default:
                                 if (typeof object.state === "number") {
@@ -71697,6 +72924,26 @@
                             case "FAILED":
                             case 10:
                                 message.state = 10;
+                                break;
+                            }
+                            switch (object.source) {
+                            default:
+                                if (typeof object.source === "number") {
+                                    message.source = object.source;
+                                    break;
+                                }
+                                break;
+                            case "SOURCE_UNSPECIFIED":
+                            case 0:
+                                message.source = 0;
+                                break;
+                            case "UPLOADED":
+                            case 1:
+                                message.source = 1;
+                                break;
+                            case "GENERATED":
+                            case 2:
+                                message.source = 2;
                                 break;
                             }
                             if (object.error != null) {
@@ -71742,6 +72989,8 @@
                                 object.uri = "";
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.error = null;
+                                object.source = options.enums === String ? "SOURCE_UNSPECIFIED" : 0;
+                                object.downloadUri = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -71773,6 +73022,10 @@
                                 if (options.oneofs)
                                     object.metadata = "videoMetadata";
                             }
+                            if (message.source != null && message.hasOwnProperty("source"))
+                                object.source = options.enums === String ? $root.google.ai.generativelanguage.v1beta.File.Source[message.source] === undefined ? message.source : $root.google.ai.generativelanguage.v1beta.File.Source[message.source] : message.source;
+                            if (message.downloadUri != null && message.hasOwnProperty("downloadUri"))
+                                object.downloadUri = message.downloadUri;
                             return object;
                         };
     
@@ -71817,6 +73070,22 @@
                             values[valuesById[1] = "PROCESSING"] = 1;
                             values[valuesById[2] = "ACTIVE"] = 2;
                             values[valuesById[10] = "FAILED"] = 10;
+                            return values;
+                        })();
+    
+                        /**
+                         * Source enum.
+                         * @name google.ai.generativelanguage.v1beta.File.Source
+                         * @enum {number}
+                         * @property {number} SOURCE_UNSPECIFIED=0 SOURCE_UNSPECIFIED value
+                         * @property {number} UPLOADED=1 UPLOADED value
+                         * @property {number} GENERATED=2 GENERATED value
+                         */
+                        File.Source = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SOURCE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "UPLOADED"] = 1;
+                            values[valuesById[2] = "GENERATED"] = 2;
                             return values;
                         })();
     
@@ -72192,6 +73461,39 @@
                          * @instance
                          * @param {google.ai.generativelanguage.v1beta.IDeleteFileRequest} request DeleteFileRequest message or plain object
                          * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.ai.generativelanguage.v1beta.FileService|downloadFile}.
+                         * @memberof google.ai.generativelanguage.v1beta.FileService
+                         * @typedef DownloadFileCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ai.generativelanguage.v1beta.DownloadFileResponse} [response] DownloadFileResponse
+                         */
+    
+                        /**
+                         * Calls DownloadFile.
+                         * @function downloadFile
+                         * @memberof google.ai.generativelanguage.v1beta.FileService
+                         * @instance
+                         * @param {google.ai.generativelanguage.v1beta.IDownloadFileRequest} request DownloadFileRequest message or plain object
+                         * @param {google.ai.generativelanguage.v1beta.FileService.DownloadFileCallback} callback Node-style callback called with the error, if any, and DownloadFileResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(FileService.prototype.downloadFile = function downloadFile(request, callback) {
+                            return this.rpcCall(downloadFile, $root.google.ai.generativelanguage.v1beta.DownloadFileRequest, $root.google.ai.generativelanguage.v1beta.DownloadFileResponse, request, callback);
+                        }, "name", { value: "DownloadFile" });
+    
+                        /**
+                         * Calls DownloadFile.
+                         * @function downloadFile
+                         * @memberof google.ai.generativelanguage.v1beta.FileService
+                         * @instance
+                         * @param {google.ai.generativelanguage.v1beta.IDownloadFileRequest} request DownloadFileRequest message or plain object
+                         * @returns {Promise<google.ai.generativelanguage.v1beta.DownloadFileResponse>} Promise
                          * @variation 2
                          */
     
@@ -73495,6 +74797,384 @@
                         return DeleteFileRequest;
                     })();
     
+                    v1beta.DownloadFileRequest = (function() {
+    
+                        /**
+                         * Properties of a DownloadFileRequest.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IDownloadFileRequest
+                         * @property {string|null} [name] DownloadFileRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DownloadFileRequest.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a DownloadFileRequest.
+                         * @implements IDownloadFileRequest
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IDownloadFileRequest=} [properties] Properties to set
+                         */
+                        function DownloadFileRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DownloadFileRequest name.
+                         * @member {string} name
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileRequest
+                         * @instance
+                         */
+                        DownloadFileRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DownloadFileRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileRequest
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IDownloadFileRequest=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.DownloadFileRequest} DownloadFileRequest instance
+                         */
+                        DownloadFileRequest.create = function create(properties) {
+                            return new DownloadFileRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DownloadFileRequest message. Does not implicitly {@link google.ai.generativelanguage.v1beta.DownloadFileRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileRequest
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IDownloadFileRequest} message DownloadFileRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DownloadFileRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DownloadFileRequest message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.DownloadFileRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileRequest
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IDownloadFileRequest} message DownloadFileRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DownloadFileRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DownloadFileRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.DownloadFileRequest} DownloadFileRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DownloadFileRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.DownloadFileRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DownloadFileRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.DownloadFileRequest} DownloadFileRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DownloadFileRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DownloadFileRequest message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DownloadFileRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DownloadFileRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.DownloadFileRequest} DownloadFileRequest
+                         */
+                        DownloadFileRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.DownloadFileRequest)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.DownloadFileRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DownloadFileRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileRequest
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.DownloadFileRequest} message DownloadFileRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DownloadFileRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DownloadFileRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DownloadFileRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DownloadFileRequest
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DownloadFileRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.DownloadFileRequest";
+                        };
+    
+                        return DownloadFileRequest;
+                    })();
+    
+                    v1beta.DownloadFileResponse = (function() {
+    
+                        /**
+                         * Properties of a DownloadFileResponse.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IDownloadFileResponse
+                         */
+    
+                        /**
+                         * Constructs a new DownloadFileResponse.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a DownloadFileResponse.
+                         * @implements IDownloadFileResponse
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IDownloadFileResponse=} [properties] Properties to set
+                         */
+                        function DownloadFileResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new DownloadFileResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileResponse
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IDownloadFileResponse=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.DownloadFileResponse} DownloadFileResponse instance
+                         */
+                        DownloadFileResponse.create = function create(properties) {
+                            return new DownloadFileResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DownloadFileResponse message. Does not implicitly {@link google.ai.generativelanguage.v1beta.DownloadFileResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileResponse
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IDownloadFileResponse} message DownloadFileResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DownloadFileResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DownloadFileResponse message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.DownloadFileResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileResponse
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IDownloadFileResponse} message DownloadFileResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DownloadFileResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DownloadFileResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.DownloadFileResponse} DownloadFileResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DownloadFileResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.DownloadFileResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DownloadFileResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.DownloadFileResponse} DownloadFileResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DownloadFileResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DownloadFileResponse message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DownloadFileResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DownloadFileResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.DownloadFileResponse} DownloadFileResponse
+                         */
+                        DownloadFileResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.DownloadFileResponse)
+                                return object;
+                            return new $root.google.ai.generativelanguage.v1beta.DownloadFileResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a DownloadFileResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileResponse
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.DownloadFileResponse} message DownloadFileResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DownloadFileResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this DownloadFileResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DownloadFileResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DownloadFileResponse
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.DownloadFileResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DownloadFileResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.DownloadFileResponse";
+                        };
+    
+                        return DownloadFileResponse;
+                    })();
+    
                     v1beta.GenerativeService = (function() {
     
                         /**
@@ -73725,6 +75405,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.ai.generativelanguage.v1beta.GenerativeService|bidiGenerateContent}.
+                         * @memberof google.ai.generativelanguage.v1beta.GenerativeService
+                         * @typedef BidiGenerateContentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage} [response] BidiGenerateContentServerMessage
+                         */
+    
+                        /**
+                         * Calls BidiGenerateContent.
+                         * @function bidiGenerateContent
+                         * @memberof google.ai.generativelanguage.v1beta.GenerativeService
+                         * @instance
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentClientMessage} request BidiGenerateContentClientMessage message or plain object
+                         * @param {google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContentCallback} callback Node-style callback called with the error, if any, and BidiGenerateContentServerMessage
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(GenerativeService.prototype.bidiGenerateContent = function bidiGenerateContent(request, callback) {
+                            return this.rpcCall(bidiGenerateContent, $root.google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage, $root.google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage, request, callback);
+                        }, "name", { value: "BidiGenerateContent" });
+    
+                        /**
+                         * Calls BidiGenerateContent.
+                         * @function bidiGenerateContent
+                         * @memberof google.ai.generativelanguage.v1beta.GenerativeService
+                         * @instance
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentClientMessage} request BidiGenerateContentClientMessage message or plain object
+                         * @returns {Promise<google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage>} Promise
+                         * @variation 2
+                         */
+    
                         return GenerativeService;
                     })();
     
@@ -73740,6 +75453,7 @@
                      * @property {number} CLUSTERING=5 CLUSTERING value
                      * @property {number} QUESTION_ANSWERING=6 QUESTION_ANSWERING value
                      * @property {number} FACT_VERIFICATION=7 FACT_VERIFICATION value
+                     * @property {number} CODE_RETRIEVAL_QUERY=8 CODE_RETRIEVAL_QUERY value
                      */
                     v1beta.TaskType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -73751,6 +75465,7 @@
                         values[valuesById[5] = "CLUSTERING"] = 5;
                         values[valuesById[6] = "QUESTION_ANSWERING"] = 6;
                         values[valuesById[7] = "FACT_VERIFICATION"] = 7;
+                        values[valuesById[8] = "CODE_RETRIEVAL_QUERY"] = 8;
                         return values;
                     })();
     
@@ -74705,6 +76420,7 @@
                          * @memberof google.ai.generativelanguage.v1beta
                          * @interface ISpeechConfig
                          * @property {google.ai.generativelanguage.v1beta.IVoiceConfig|null} [voiceConfig] SpeechConfig voiceConfig
+                         * @property {string|null} [languageCode] SpeechConfig languageCode
                          */
     
                         /**
@@ -74729,6 +76445,14 @@
                          * @instance
                          */
                         SpeechConfig.prototype.voiceConfig = null;
+    
+                        /**
+                         * SpeechConfig languageCode.
+                         * @member {string} languageCode
+                         * @memberof google.ai.generativelanguage.v1beta.SpeechConfig
+                         * @instance
+                         */
+                        SpeechConfig.prototype.languageCode = "";
     
                         /**
                          * Creates a new SpeechConfig instance using the specified properties.
@@ -74756,6 +76480,8 @@
                                 writer = $Writer.create();
                             if (message.voiceConfig != null && Object.hasOwnProperty.call(message, "voiceConfig"))
                                 $root.google.ai.generativelanguage.v1beta.VoiceConfig.encode(message.voiceConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.languageCode);
                             return writer;
                         };
     
@@ -74792,6 +76518,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.voiceConfig = $root.google.ai.generativelanguage.v1beta.VoiceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.languageCode = reader.string();
                                         break;
                                     }
                                 default:
@@ -74834,6 +76564,9 @@
                                 if (error)
                                     return "voiceConfig." + error;
                             }
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                if (!$util.isString(message.languageCode))
+                                    return "languageCode: string expected";
                             return null;
                         };
     
@@ -74854,6 +76587,8 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.SpeechConfig.voiceConfig: object expected");
                                 message.voiceConfig = $root.google.ai.generativelanguage.v1beta.VoiceConfig.fromObject(object.voiceConfig);
                             }
+                            if (object.languageCode != null)
+                                message.languageCode = String(object.languageCode);
                             return message;
                         };
     
@@ -74870,10 +76605,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.voiceConfig = null;
+                                object.languageCode = "";
+                            }
                             if (message.voiceConfig != null && message.hasOwnProperty("voiceConfig"))
                                 object.voiceConfig = $root.google.ai.generativelanguage.v1beta.VoiceConfig.toObject(message.voiceConfig, options);
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                object.languageCode = message.languageCode;
                             return object;
                         };
     
@@ -74906,6 +76645,265 @@
                         return SpeechConfig;
                     })();
     
+                    v1beta.ThinkingConfig = (function() {
+    
+                        /**
+                         * Properties of a ThinkingConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IThinkingConfig
+                         * @property {boolean|null} [includeThoughts] ThinkingConfig includeThoughts
+                         * @property {number|null} [thinkingBudget] ThinkingConfig thinkingBudget
+                         */
+    
+                        /**
+                         * Constructs a new ThinkingConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a ThinkingConfig.
+                         * @implements IThinkingConfig
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IThinkingConfig=} [properties] Properties to set
+                         */
+                        function ThinkingConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ThinkingConfig includeThoughts.
+                         * @member {boolean|null|undefined} includeThoughts
+                         * @memberof google.ai.generativelanguage.v1beta.ThinkingConfig
+                         * @instance
+                         */
+                        ThinkingConfig.prototype.includeThoughts = null;
+    
+                        /**
+                         * ThinkingConfig thinkingBudget.
+                         * @member {number|null|undefined} thinkingBudget
+                         * @memberof google.ai.generativelanguage.v1beta.ThinkingConfig
+                         * @instance
+                         */
+                        ThinkingConfig.prototype.thinkingBudget = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ThinkingConfig _includeThoughts.
+                         * @member {"includeThoughts"|undefined} _includeThoughts
+                         * @memberof google.ai.generativelanguage.v1beta.ThinkingConfig
+                         * @instance
+                         */
+                        Object.defineProperty(ThinkingConfig.prototype, "_includeThoughts", {
+                            get: $util.oneOfGetter($oneOfFields = ["includeThoughts"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * ThinkingConfig _thinkingBudget.
+                         * @member {"thinkingBudget"|undefined} _thinkingBudget
+                         * @memberof google.ai.generativelanguage.v1beta.ThinkingConfig
+                         * @instance
+                         */
+                        Object.defineProperty(ThinkingConfig.prototype, "_thinkingBudget", {
+                            get: $util.oneOfGetter($oneOfFields = ["thinkingBudget"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ThinkingConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.ThinkingConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IThinkingConfig=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.ThinkingConfig} ThinkingConfig instance
+                         */
+                        ThinkingConfig.create = function create(properties) {
+                            return new ThinkingConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ThinkingConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.ThinkingConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.ThinkingConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IThinkingConfig} message ThinkingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ThinkingConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.includeThoughts != null && Object.hasOwnProperty.call(message, "includeThoughts"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.includeThoughts);
+                            if (message.thinkingBudget != null && Object.hasOwnProperty.call(message, "thinkingBudget"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.thinkingBudget);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ThinkingConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.ThinkingConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.ThinkingConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IThinkingConfig} message ThinkingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ThinkingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ThinkingConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.ThinkingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.ThinkingConfig} ThinkingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ThinkingConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ThinkingConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.includeThoughts = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.thinkingBudget = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ThinkingConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.ThinkingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.ThinkingConfig} ThinkingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ThinkingConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ThinkingConfig message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.ThinkingConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ThinkingConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.includeThoughts != null && message.hasOwnProperty("includeThoughts")) {
+                                properties._includeThoughts = 1;
+                                if (typeof message.includeThoughts !== "boolean")
+                                    return "includeThoughts: boolean expected";
+                            }
+                            if (message.thinkingBudget != null && message.hasOwnProperty("thinkingBudget")) {
+                                properties._thinkingBudget = 1;
+                                if (!$util.isInteger(message.thinkingBudget))
+                                    return "thinkingBudget: integer expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ThinkingConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.ThinkingConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.ThinkingConfig} ThinkingConfig
+                         */
+                        ThinkingConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.ThinkingConfig)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.ThinkingConfig();
+                            if (object.includeThoughts != null)
+                                message.includeThoughts = Boolean(object.includeThoughts);
+                            if (object.thinkingBudget != null)
+                                message.thinkingBudget = object.thinkingBudget | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ThinkingConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.ThinkingConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.ThinkingConfig} message ThinkingConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ThinkingConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.includeThoughts != null && message.hasOwnProperty("includeThoughts")) {
+                                object.includeThoughts = message.includeThoughts;
+                                if (options.oneofs)
+                                    object._includeThoughts = "includeThoughts";
+                            }
+                            if (message.thinkingBudget != null && message.hasOwnProperty("thinkingBudget")) {
+                                object.thinkingBudget = message.thinkingBudget;
+                                if (options.oneofs)
+                                    object._thinkingBudget = "thinkingBudget";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ThinkingConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.ThinkingConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ThinkingConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ThinkingConfig
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.ThinkingConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ThinkingConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.ThinkingConfig";
+                        };
+    
+                        return ThinkingConfig;
+                    })();
+    
                     v1beta.GenerationConfig = (function() {
     
                         /**
@@ -74918,6 +76916,7 @@
                          * @property {number|null} [temperature] GenerationConfig temperature
                          * @property {number|null} [topP] GenerationConfig topP
                          * @property {number|null} [topK] GenerationConfig topK
+                         * @property {number|null} [seed] GenerationConfig seed
                          * @property {string|null} [responseMimeType] GenerationConfig responseMimeType
                          * @property {google.ai.generativelanguage.v1beta.ISchema|null} [responseSchema] GenerationConfig responseSchema
                          * @property {number|null} [presencePenalty] GenerationConfig presencePenalty
@@ -74927,6 +76926,8 @@
                          * @property {boolean|null} [enableEnhancedCivicAnswers] GenerationConfig enableEnhancedCivicAnswers
                          * @property {Array.<google.ai.generativelanguage.v1beta.GenerationConfig.Modality>|null} [responseModalities] GenerationConfig responseModalities
                          * @property {google.ai.generativelanguage.v1beta.ISpeechConfig|null} [speechConfig] GenerationConfig speechConfig
+                         * @property {google.ai.generativelanguage.v1beta.IThinkingConfig|null} [thinkingConfig] GenerationConfig thinkingConfig
+                         * @property {google.ai.generativelanguage.v1beta.GenerationConfig.MediaResolution|null} [mediaResolution] GenerationConfig mediaResolution
                          */
     
                         /**
@@ -74993,6 +76994,14 @@
                          * @instance
                          */
                         GenerationConfig.prototype.topK = null;
+    
+                        /**
+                         * GenerationConfig seed.
+                         * @member {number|null|undefined} seed
+                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
+                         * @instance
+                         */
+                        GenerationConfig.prototype.seed = null;
     
                         /**
                          * GenerationConfig responseMimeType.
@@ -75066,6 +77075,22 @@
                          */
                         GenerationConfig.prototype.speechConfig = null;
     
+                        /**
+                         * GenerationConfig thinkingConfig.
+                         * @member {google.ai.generativelanguage.v1beta.IThinkingConfig|null|undefined} thinkingConfig
+                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
+                         * @instance
+                         */
+                        GenerationConfig.prototype.thinkingConfig = null;
+    
+                        /**
+                         * GenerationConfig mediaResolution.
+                         * @member {google.ai.generativelanguage.v1beta.GenerationConfig.MediaResolution|null|undefined} mediaResolution
+                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
+                         * @instance
+                         */
+                        GenerationConfig.prototype.mediaResolution = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -75121,6 +77146,17 @@
                          */
                         Object.defineProperty(GenerationConfig.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * GenerationConfig _seed.
+                         * @member {"seed"|undefined} _seed
+                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
+                         * @instance
+                         */
+                        Object.defineProperty(GenerationConfig.prototype, "_seed", {
+                            get: $util.oneOfGetter($oneOfFields = ["seed"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -75191,6 +77227,28 @@
                         });
     
                         /**
+                         * GenerationConfig _thinkingConfig.
+                         * @member {"thinkingConfig"|undefined} _thinkingConfig
+                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
+                         * @instance
+                         */
+                        Object.defineProperty(GenerationConfig.prototype, "_thinkingConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["thinkingConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * GenerationConfig _mediaResolution.
+                         * @member {"mediaResolution"|undefined} _mediaResolution
+                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
+                         * @instance
+                         */
+                        Object.defineProperty(GenerationConfig.prototype, "_mediaResolution", {
+                            get: $util.oneOfGetter($oneOfFields = ["mediaResolution"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new GenerationConfig instance using the specified properties.
                          * @function create
                          * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
@@ -75227,6 +77285,8 @@
                                 writer.uint32(/* id 6, wireType 5 =*/53).float(message.topP);
                             if (message.topK != null && Object.hasOwnProperty.call(message, "topK"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.topK);
+                            if (message.seed != null && Object.hasOwnProperty.call(message, "seed"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.seed);
                             if (message.responseMimeType != null && Object.hasOwnProperty.call(message, "responseMimeType"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.responseMimeType);
                             if (message.responseSchema != null && Object.hasOwnProperty.call(message, "responseSchema"))
@@ -75249,6 +77309,10 @@
                             }
                             if (message.speechConfig != null && Object.hasOwnProperty.call(message, "speechConfig"))
                                 $root.google.ai.generativelanguage.v1beta.SpeechConfig.encode(message.speechConfig, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                            if (message.thinkingConfig != null && Object.hasOwnProperty.call(message, "thinkingConfig"))
+                                $root.google.ai.generativelanguage.v1beta.ThinkingConfig.encode(message.thinkingConfig, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                            if (message.mediaResolution != null && Object.hasOwnProperty.call(message, "mediaResolution"))
+                                writer.uint32(/* id 23, wireType 0 =*/184).int32(message.mediaResolution);
                             return writer;
                         };
     
@@ -75309,6 +77373,10 @@
                                         message.topK = reader.int32();
                                         break;
                                     }
+                                case 8: {
+                                        message.seed = reader.int32();
+                                        break;
+                                    }
                                 case 13: {
                                         message.responseMimeType = reader.string();
                                         break;
@@ -75350,6 +77418,14 @@
                                     }
                                 case 21: {
                                         message.speechConfig = $root.google.ai.generativelanguage.v1beta.SpeechConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 22: {
+                                        message.thinkingConfig = $root.google.ai.generativelanguage.v1beta.ThinkingConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 23: {
+                                        message.mediaResolution = reader.int32();
                                         break;
                                     }
                                 default:
@@ -75420,6 +77496,11 @@
                                 if (!$util.isInteger(message.topK))
                                     return "topK: integer expected";
                             }
+                            if (message.seed != null && message.hasOwnProperty("seed")) {
+                                properties._seed = 1;
+                                if (!$util.isInteger(message.seed))
+                                    return "seed: integer expected";
+                            }
                             if (message.responseMimeType != null && message.hasOwnProperty("responseMimeType"))
                                 if (!$util.isString(message.responseMimeType))
                                     return "responseMimeType: string expected";
@@ -75475,6 +77556,26 @@
                                         return "speechConfig." + error;
                                 }
                             }
+                            if (message.thinkingConfig != null && message.hasOwnProperty("thinkingConfig")) {
+                                properties._thinkingConfig = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.ThinkingConfig.verify(message.thinkingConfig);
+                                    if (error)
+                                        return "thinkingConfig." + error;
+                                }
+                            }
+                            if (message.mediaResolution != null && message.hasOwnProperty("mediaResolution")) {
+                                properties._mediaResolution = 1;
+                                switch (message.mediaResolution) {
+                                default:
+                                    return "mediaResolution: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            }
                             return null;
                         };
     
@@ -75507,6 +77608,8 @@
                                 message.topP = Number(object.topP);
                             if (object.topK != null)
                                 message.topK = object.topK | 0;
+                            if (object.seed != null)
+                                message.seed = object.seed | 0;
                             if (object.responseMimeType != null)
                                 message.responseMimeType = String(object.responseMimeType);
                             if (object.responseSchema != null) {
@@ -75557,6 +77660,35 @@
                                 if (typeof object.speechConfig !== "object")
                                     throw TypeError(".google.ai.generativelanguage.v1beta.GenerationConfig.speechConfig: object expected");
                                 message.speechConfig = $root.google.ai.generativelanguage.v1beta.SpeechConfig.fromObject(object.speechConfig);
+                            }
+                            if (object.thinkingConfig != null) {
+                                if (typeof object.thinkingConfig !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.GenerationConfig.thinkingConfig: object expected");
+                                message.thinkingConfig = $root.google.ai.generativelanguage.v1beta.ThinkingConfig.fromObject(object.thinkingConfig);
+                            }
+                            switch (object.mediaResolution) {
+                            default:
+                                if (typeof object.mediaResolution === "number") {
+                                    message.mediaResolution = object.mediaResolution;
+                                    break;
+                                }
+                                break;
+                            case "MEDIA_RESOLUTION_UNSPECIFIED":
+                            case 0:
+                                message.mediaResolution = 0;
+                                break;
+                            case "MEDIA_RESOLUTION_LOW":
+                            case 1:
+                                message.mediaResolution = 1;
+                                break;
+                            case "MEDIA_RESOLUTION_MEDIUM":
+                            case 2:
+                                message.mediaResolution = 2;
+                                break;
+                            case "MEDIA_RESOLUTION_HIGH":
+                            case 3:
+                                message.mediaResolution = 3;
+                                break;
                             }
                             return message;
                         };
@@ -75612,6 +77744,11 @@
                                 if (options.oneofs)
                                     object._topK = "topK";
                             }
+                            if (message.seed != null && message.hasOwnProperty("seed")) {
+                                object.seed = message.seed;
+                                if (options.oneofs)
+                                    object._seed = "seed";
+                            }
                             if (message.responseMimeType != null && message.hasOwnProperty("responseMimeType"))
                                 object.responseMimeType = message.responseMimeType;
                             if (message.responseSchema != null && message.hasOwnProperty("responseSchema"))
@@ -75650,6 +77787,16 @@
                                 object.speechConfig = $root.google.ai.generativelanguage.v1beta.SpeechConfig.toObject(message.speechConfig, options);
                                 if (options.oneofs)
                                     object._speechConfig = "speechConfig";
+                            }
+                            if (message.thinkingConfig != null && message.hasOwnProperty("thinkingConfig")) {
+                                object.thinkingConfig = $root.google.ai.generativelanguage.v1beta.ThinkingConfig.toObject(message.thinkingConfig, options);
+                                if (options.oneofs)
+                                    object._thinkingConfig = "thinkingConfig";
+                            }
+                            if (message.mediaResolution != null && message.hasOwnProperty("mediaResolution")) {
+                                object.mediaResolution = options.enums === String ? $root.google.ai.generativelanguage.v1beta.GenerationConfig.MediaResolution[message.mediaResolution] === undefined ? message.mediaResolution : $root.google.ai.generativelanguage.v1beta.GenerationConfig.MediaResolution[message.mediaResolution] : message.mediaResolution;
+                                if (options.oneofs)
+                                    object._mediaResolution = "mediaResolution";
                             }
                             return object;
                         };
@@ -75695,6 +77842,24 @@
                             values[valuesById[1] = "TEXT"] = 1;
                             values[valuesById[2] = "IMAGE"] = 2;
                             values[valuesById[3] = "AUDIO"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * MediaResolution enum.
+                         * @name google.ai.generativelanguage.v1beta.GenerationConfig.MediaResolution
+                         * @enum {number}
+                         * @property {number} MEDIA_RESOLUTION_UNSPECIFIED=0 MEDIA_RESOLUTION_UNSPECIFIED value
+                         * @property {number} MEDIA_RESOLUTION_LOW=1 MEDIA_RESOLUTION_LOW value
+                         * @property {number} MEDIA_RESOLUTION_MEDIUM=2 MEDIA_RESOLUTION_MEDIUM value
+                         * @property {number} MEDIA_RESOLUTION_HIGH=3 MEDIA_RESOLUTION_HIGH value
+                         */
+                        GenerationConfig.MediaResolution = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MEDIA_RESOLUTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MEDIA_RESOLUTION_LOW"] = 1;
+                            values[valuesById[2] = "MEDIA_RESOLUTION_MEDIUM"] = 2;
+                            values[valuesById[3] = "MEDIA_RESOLUTION_HIGH"] = 3;
                             return values;
                         })();
     
@@ -76678,7 +78843,13 @@
                              * @property {number|null} [promptTokenCount] UsageMetadata promptTokenCount
                              * @property {number|null} [cachedContentTokenCount] UsageMetadata cachedContentTokenCount
                              * @property {number|null} [candidatesTokenCount] UsageMetadata candidatesTokenCount
+                             * @property {number|null} [toolUsePromptTokenCount] UsageMetadata toolUsePromptTokenCount
+                             * @property {number|null} [thoughtsTokenCount] UsageMetadata thoughtsTokenCount
                              * @property {number|null} [totalTokenCount] UsageMetadata totalTokenCount
+                             * @property {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>|null} [promptTokensDetails] UsageMetadata promptTokensDetails
+                             * @property {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>|null} [cacheTokensDetails] UsageMetadata cacheTokensDetails
+                             * @property {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>|null} [candidatesTokensDetails] UsageMetadata candidatesTokensDetails
+                             * @property {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>|null} [toolUsePromptTokensDetails] UsageMetadata toolUsePromptTokensDetails
                              */
     
                             /**
@@ -76690,6 +78861,10 @@
                              * @param {google.ai.generativelanguage.v1beta.GenerateContentResponse.IUsageMetadata=} [properties] Properties to set
                              */
                             function UsageMetadata(properties) {
+                                this.promptTokensDetails = [];
+                                this.cacheTokensDetails = [];
+                                this.candidatesTokensDetails = [];
+                                this.toolUsePromptTokensDetails = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -76721,12 +78896,60 @@
                             UsageMetadata.prototype.candidatesTokenCount = 0;
     
                             /**
+                             * UsageMetadata toolUsePromptTokenCount.
+                             * @member {number} toolUsePromptTokenCount
+                             * @memberof google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata
+                             * @instance
+                             */
+                            UsageMetadata.prototype.toolUsePromptTokenCount = 0;
+    
+                            /**
+                             * UsageMetadata thoughtsTokenCount.
+                             * @member {number} thoughtsTokenCount
+                             * @memberof google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata
+                             * @instance
+                             */
+                            UsageMetadata.prototype.thoughtsTokenCount = 0;
+    
+                            /**
                              * UsageMetadata totalTokenCount.
                              * @member {number} totalTokenCount
                              * @memberof google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata
                              * @instance
                              */
                             UsageMetadata.prototype.totalTokenCount = 0;
+    
+                            /**
+                             * UsageMetadata promptTokensDetails.
+                             * @member {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>} promptTokensDetails
+                             * @memberof google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata
+                             * @instance
+                             */
+                            UsageMetadata.prototype.promptTokensDetails = $util.emptyArray;
+    
+                            /**
+                             * UsageMetadata cacheTokensDetails.
+                             * @member {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>} cacheTokensDetails
+                             * @memberof google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata
+                             * @instance
+                             */
+                            UsageMetadata.prototype.cacheTokensDetails = $util.emptyArray;
+    
+                            /**
+                             * UsageMetadata candidatesTokensDetails.
+                             * @member {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>} candidatesTokensDetails
+                             * @memberof google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata
+                             * @instance
+                             */
+                            UsageMetadata.prototype.candidatesTokensDetails = $util.emptyArray;
+    
+                            /**
+                             * UsageMetadata toolUsePromptTokensDetails.
+                             * @member {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>} toolUsePromptTokensDetails
+                             * @memberof google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata
+                             * @instance
+                             */
+                            UsageMetadata.prototype.toolUsePromptTokensDetails = $util.emptyArray;
     
                             /**
                              * Creates a new UsageMetadata instance using the specified properties.
@@ -76760,6 +78983,22 @@
                                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.totalTokenCount);
                                 if (message.cachedContentTokenCount != null && Object.hasOwnProperty.call(message, "cachedContentTokenCount"))
                                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.cachedContentTokenCount);
+                                if (message.promptTokensDetails != null && message.promptTokensDetails.length)
+                                    for (var i = 0; i < message.promptTokensDetails.length; ++i)
+                                        $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.encode(message.promptTokensDetails[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.cacheTokensDetails != null && message.cacheTokensDetails.length)
+                                    for (var i = 0; i < message.cacheTokensDetails.length; ++i)
+                                        $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.encode(message.cacheTokensDetails[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.candidatesTokensDetails != null && message.candidatesTokensDetails.length)
+                                    for (var i = 0; i < message.candidatesTokensDetails.length; ++i)
+                                        $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.encode(message.candidatesTokensDetails[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.toolUsePromptTokenCount != null && Object.hasOwnProperty.call(message, "toolUsePromptTokenCount"))
+                                    writer.uint32(/* id 8, wireType 0 =*/64).int32(message.toolUsePromptTokenCount);
+                                if (message.toolUsePromptTokensDetails != null && message.toolUsePromptTokensDetails.length)
+                                    for (var i = 0; i < message.toolUsePromptTokensDetails.length; ++i)
+                                        $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.encode(message.toolUsePromptTokensDetails[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                if (message.thoughtsTokenCount != null && Object.hasOwnProperty.call(message, "thoughtsTokenCount"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).int32(message.thoughtsTokenCount);
                                 return writer;
                             };
     
@@ -76806,8 +79045,40 @@
                                             message.candidatesTokenCount = reader.int32();
                                             break;
                                         }
+                                    case 8: {
+                                            message.toolUsePromptTokenCount = reader.int32();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.thoughtsTokenCount = reader.int32();
+                                            break;
+                                        }
                                     case 3: {
                                             message.totalTokenCount = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (!(message.promptTokensDetails && message.promptTokensDetails.length))
+                                                message.promptTokensDetails = [];
+                                            message.promptTokensDetails.push($root.google.ai.generativelanguage.v1beta.ModalityTokenCount.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 6: {
+                                            if (!(message.cacheTokensDetails && message.cacheTokensDetails.length))
+                                                message.cacheTokensDetails = [];
+                                            message.cacheTokensDetails.push($root.google.ai.generativelanguage.v1beta.ModalityTokenCount.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 7: {
+                                            if (!(message.candidatesTokensDetails && message.candidatesTokensDetails.length))
+                                                message.candidatesTokensDetails = [];
+                                            message.candidatesTokensDetails.push($root.google.ai.generativelanguage.v1beta.ModalityTokenCount.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 9: {
+                                            if (!(message.toolUsePromptTokensDetails && message.toolUsePromptTokensDetails.length))
+                                                message.toolUsePromptTokensDetails = [];
+                                            message.toolUsePromptTokensDetails.push($root.google.ai.generativelanguage.v1beta.ModalityTokenCount.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     default:
@@ -76854,9 +79125,51 @@
                                 if (message.candidatesTokenCount != null && message.hasOwnProperty("candidatesTokenCount"))
                                     if (!$util.isInteger(message.candidatesTokenCount))
                                         return "candidatesTokenCount: integer expected";
+                                if (message.toolUsePromptTokenCount != null && message.hasOwnProperty("toolUsePromptTokenCount"))
+                                    if (!$util.isInteger(message.toolUsePromptTokenCount))
+                                        return "toolUsePromptTokenCount: integer expected";
+                                if (message.thoughtsTokenCount != null && message.hasOwnProperty("thoughtsTokenCount"))
+                                    if (!$util.isInteger(message.thoughtsTokenCount))
+                                        return "thoughtsTokenCount: integer expected";
                                 if (message.totalTokenCount != null && message.hasOwnProperty("totalTokenCount"))
                                     if (!$util.isInteger(message.totalTokenCount))
                                         return "totalTokenCount: integer expected";
+                                if (message.promptTokensDetails != null && message.hasOwnProperty("promptTokensDetails")) {
+                                    if (!Array.isArray(message.promptTokensDetails))
+                                        return "promptTokensDetails: array expected";
+                                    for (var i = 0; i < message.promptTokensDetails.length; ++i) {
+                                        var error = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.verify(message.promptTokensDetails[i]);
+                                        if (error)
+                                            return "promptTokensDetails." + error;
+                                    }
+                                }
+                                if (message.cacheTokensDetails != null && message.hasOwnProperty("cacheTokensDetails")) {
+                                    if (!Array.isArray(message.cacheTokensDetails))
+                                        return "cacheTokensDetails: array expected";
+                                    for (var i = 0; i < message.cacheTokensDetails.length; ++i) {
+                                        var error = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.verify(message.cacheTokensDetails[i]);
+                                        if (error)
+                                            return "cacheTokensDetails." + error;
+                                    }
+                                }
+                                if (message.candidatesTokensDetails != null && message.hasOwnProperty("candidatesTokensDetails")) {
+                                    if (!Array.isArray(message.candidatesTokensDetails))
+                                        return "candidatesTokensDetails: array expected";
+                                    for (var i = 0; i < message.candidatesTokensDetails.length; ++i) {
+                                        var error = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.verify(message.candidatesTokensDetails[i]);
+                                        if (error)
+                                            return "candidatesTokensDetails." + error;
+                                    }
+                                }
+                                if (message.toolUsePromptTokensDetails != null && message.hasOwnProperty("toolUsePromptTokensDetails")) {
+                                    if (!Array.isArray(message.toolUsePromptTokensDetails))
+                                        return "toolUsePromptTokensDetails: array expected";
+                                    for (var i = 0; i < message.toolUsePromptTokensDetails.length; ++i) {
+                                        var error = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.verify(message.toolUsePromptTokensDetails[i]);
+                                        if (error)
+                                            return "toolUsePromptTokensDetails." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -76878,8 +79191,52 @@
                                     message.cachedContentTokenCount = object.cachedContentTokenCount | 0;
                                 if (object.candidatesTokenCount != null)
                                     message.candidatesTokenCount = object.candidatesTokenCount | 0;
+                                if (object.toolUsePromptTokenCount != null)
+                                    message.toolUsePromptTokenCount = object.toolUsePromptTokenCount | 0;
+                                if (object.thoughtsTokenCount != null)
+                                    message.thoughtsTokenCount = object.thoughtsTokenCount | 0;
                                 if (object.totalTokenCount != null)
                                     message.totalTokenCount = object.totalTokenCount | 0;
+                                if (object.promptTokensDetails) {
+                                    if (!Array.isArray(object.promptTokensDetails))
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata.promptTokensDetails: array expected");
+                                    message.promptTokensDetails = [];
+                                    for (var i = 0; i < object.promptTokensDetails.length; ++i) {
+                                        if (typeof object.promptTokensDetails[i] !== "object")
+                                            throw TypeError(".google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata.promptTokensDetails: object expected");
+                                        message.promptTokensDetails[i] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.fromObject(object.promptTokensDetails[i]);
+                                    }
+                                }
+                                if (object.cacheTokensDetails) {
+                                    if (!Array.isArray(object.cacheTokensDetails))
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata.cacheTokensDetails: array expected");
+                                    message.cacheTokensDetails = [];
+                                    for (var i = 0; i < object.cacheTokensDetails.length; ++i) {
+                                        if (typeof object.cacheTokensDetails[i] !== "object")
+                                            throw TypeError(".google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata.cacheTokensDetails: object expected");
+                                        message.cacheTokensDetails[i] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.fromObject(object.cacheTokensDetails[i]);
+                                    }
+                                }
+                                if (object.candidatesTokensDetails) {
+                                    if (!Array.isArray(object.candidatesTokensDetails))
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata.candidatesTokensDetails: array expected");
+                                    message.candidatesTokensDetails = [];
+                                    for (var i = 0; i < object.candidatesTokensDetails.length; ++i) {
+                                        if (typeof object.candidatesTokensDetails[i] !== "object")
+                                            throw TypeError(".google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata.candidatesTokensDetails: object expected");
+                                        message.candidatesTokensDetails[i] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.fromObject(object.candidatesTokensDetails[i]);
+                                    }
+                                }
+                                if (object.toolUsePromptTokensDetails) {
+                                    if (!Array.isArray(object.toolUsePromptTokensDetails))
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata.toolUsePromptTokensDetails: array expected");
+                                    message.toolUsePromptTokensDetails = [];
+                                    for (var i = 0; i < object.toolUsePromptTokensDetails.length; ++i) {
+                                        if (typeof object.toolUsePromptTokensDetails[i] !== "object")
+                                            throw TypeError(".google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata.toolUsePromptTokensDetails: object expected");
+                                        message.toolUsePromptTokensDetails[i] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.fromObject(object.toolUsePromptTokensDetails[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -76896,11 +79253,19 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.promptTokensDetails = [];
+                                    object.cacheTokensDetails = [];
+                                    object.candidatesTokensDetails = [];
+                                    object.toolUsePromptTokensDetails = [];
+                                }
                                 if (options.defaults) {
                                     object.promptTokenCount = 0;
                                     object.candidatesTokenCount = 0;
                                     object.totalTokenCount = 0;
                                     object.cachedContentTokenCount = 0;
+                                    object.toolUsePromptTokenCount = 0;
+                                    object.thoughtsTokenCount = 0;
                                 }
                                 if (message.promptTokenCount != null && message.hasOwnProperty("promptTokenCount"))
                                     object.promptTokenCount = message.promptTokenCount;
@@ -76910,6 +79275,30 @@
                                     object.totalTokenCount = message.totalTokenCount;
                                 if (message.cachedContentTokenCount != null && message.hasOwnProperty("cachedContentTokenCount"))
                                     object.cachedContentTokenCount = message.cachedContentTokenCount;
+                                if (message.promptTokensDetails && message.promptTokensDetails.length) {
+                                    object.promptTokensDetails = [];
+                                    for (var j = 0; j < message.promptTokensDetails.length; ++j)
+                                        object.promptTokensDetails[j] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.toObject(message.promptTokensDetails[j], options);
+                                }
+                                if (message.cacheTokensDetails && message.cacheTokensDetails.length) {
+                                    object.cacheTokensDetails = [];
+                                    for (var j = 0; j < message.cacheTokensDetails.length; ++j)
+                                        object.cacheTokensDetails[j] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.toObject(message.cacheTokensDetails[j], options);
+                                }
+                                if (message.candidatesTokensDetails && message.candidatesTokensDetails.length) {
+                                    object.candidatesTokensDetails = [];
+                                    for (var j = 0; j < message.candidatesTokensDetails.length; ++j)
+                                        object.candidatesTokensDetails[j] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.toObject(message.candidatesTokensDetails[j], options);
+                                }
+                                if (message.toolUsePromptTokenCount != null && message.hasOwnProperty("toolUsePromptTokenCount"))
+                                    object.toolUsePromptTokenCount = message.toolUsePromptTokenCount;
+                                if (message.toolUsePromptTokensDetails && message.toolUsePromptTokensDetails.length) {
+                                    object.toolUsePromptTokensDetails = [];
+                                    for (var j = 0; j < message.toolUsePromptTokensDetails.length; ++j)
+                                        object.toolUsePromptTokensDetails[j] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.toObject(message.toolUsePromptTokensDetails[j], options);
+                                }
+                                if (message.thoughtsTokenCount != null && message.hasOwnProperty("thoughtsTokenCount"))
+                                    object.thoughtsTokenCount = message.thoughtsTokenCount;
                                 return object;
                             };
     
@@ -82540,6 +84929,7 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             }
@@ -82613,6 +85003,10 @@
                             case "FACT_VERIFICATION":
                             case 7:
                                 message.taskType = 7;
+                                break;
+                            case "CODE_RETRIEVAL_QUERY":
+                            case 8:
+                                message.taskType = 8;
                                 break;
                             }
                             if (object.title != null)
@@ -83882,6 +86276,8 @@
                          * @interface ICountTokensResponse
                          * @property {number|null} [totalTokens] CountTokensResponse totalTokens
                          * @property {number|null} [cachedContentTokenCount] CountTokensResponse cachedContentTokenCount
+                         * @property {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>|null} [promptTokensDetails] CountTokensResponse promptTokensDetails
+                         * @property {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>|null} [cacheTokensDetails] CountTokensResponse cacheTokensDetails
                          */
     
                         /**
@@ -83893,6 +86289,8 @@
                          * @param {google.ai.generativelanguage.v1beta.ICountTokensResponse=} [properties] Properties to set
                          */
                         function CountTokensResponse(properties) {
+                            this.promptTokensDetails = [];
+                            this.cacheTokensDetails = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -83914,6 +86312,22 @@
                          * @instance
                          */
                         CountTokensResponse.prototype.cachedContentTokenCount = 0;
+    
+                        /**
+                         * CountTokensResponse promptTokensDetails.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>} promptTokensDetails
+                         * @memberof google.ai.generativelanguage.v1beta.CountTokensResponse
+                         * @instance
+                         */
+                        CountTokensResponse.prototype.promptTokensDetails = $util.emptyArray;
+    
+                        /**
+                         * CountTokensResponse cacheTokensDetails.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>} cacheTokensDetails
+                         * @memberof google.ai.generativelanguage.v1beta.CountTokensResponse
+                         * @instance
+                         */
+                        CountTokensResponse.prototype.cacheTokensDetails = $util.emptyArray;
     
                         /**
                          * Creates a new CountTokensResponse instance using the specified properties.
@@ -83943,6 +86357,12 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.totalTokens);
                             if (message.cachedContentTokenCount != null && Object.hasOwnProperty.call(message, "cachedContentTokenCount"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.cachedContentTokenCount);
+                            if (message.promptTokensDetails != null && message.promptTokensDetails.length)
+                                for (var i = 0; i < message.promptTokensDetails.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.encode(message.promptTokensDetails[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.cacheTokensDetails != null && message.cacheTokensDetails.length)
+                                for (var i = 0; i < message.cacheTokensDetails.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.encode(message.cacheTokensDetails[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -83983,6 +86403,18 @@
                                     }
                                 case 5: {
                                         message.cachedContentTokenCount = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.promptTokensDetails && message.promptTokensDetails.length))
+                                            message.promptTokensDetails = [];
+                                        message.promptTokensDetails.push($root.google.ai.generativelanguage.v1beta.ModalityTokenCount.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.cacheTokensDetails && message.cacheTokensDetails.length))
+                                            message.cacheTokensDetails = [];
+                                        message.cacheTokensDetails.push($root.google.ai.generativelanguage.v1beta.ModalityTokenCount.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -84026,6 +86458,24 @@
                             if (message.cachedContentTokenCount != null && message.hasOwnProperty("cachedContentTokenCount"))
                                 if (!$util.isInteger(message.cachedContentTokenCount))
                                     return "cachedContentTokenCount: integer expected";
+                            if (message.promptTokensDetails != null && message.hasOwnProperty("promptTokensDetails")) {
+                                if (!Array.isArray(message.promptTokensDetails))
+                                    return "promptTokensDetails: array expected";
+                                for (var i = 0; i < message.promptTokensDetails.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.verify(message.promptTokensDetails[i]);
+                                    if (error)
+                                        return "promptTokensDetails." + error;
+                                }
+                            }
+                            if (message.cacheTokensDetails != null && message.hasOwnProperty("cacheTokensDetails")) {
+                                if (!Array.isArray(message.cacheTokensDetails))
+                                    return "cacheTokensDetails: array expected";
+                                for (var i = 0; i < message.cacheTokensDetails.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.verify(message.cacheTokensDetails[i]);
+                                    if (error)
+                                        return "cacheTokensDetails." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -84045,6 +86495,26 @@
                                 message.totalTokens = object.totalTokens | 0;
                             if (object.cachedContentTokenCount != null)
                                 message.cachedContentTokenCount = object.cachedContentTokenCount | 0;
+                            if (object.promptTokensDetails) {
+                                if (!Array.isArray(object.promptTokensDetails))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.CountTokensResponse.promptTokensDetails: array expected");
+                                message.promptTokensDetails = [];
+                                for (var i = 0; i < object.promptTokensDetails.length; ++i) {
+                                    if (typeof object.promptTokensDetails[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.CountTokensResponse.promptTokensDetails: object expected");
+                                    message.promptTokensDetails[i] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.fromObject(object.promptTokensDetails[i]);
+                                }
+                            }
+                            if (object.cacheTokensDetails) {
+                                if (!Array.isArray(object.cacheTokensDetails))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.CountTokensResponse.cacheTokensDetails: array expected");
+                                message.cacheTokensDetails = [];
+                                for (var i = 0; i < object.cacheTokensDetails.length; ++i) {
+                                    if (typeof object.cacheTokensDetails[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.CountTokensResponse.cacheTokensDetails: object expected");
+                                    message.cacheTokensDetails[i] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.fromObject(object.cacheTokensDetails[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -84061,6 +86531,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.promptTokensDetails = [];
+                                object.cacheTokensDetails = [];
+                            }
                             if (options.defaults) {
                                 object.totalTokens = 0;
                                 object.cachedContentTokenCount = 0;
@@ -84069,6 +86543,16 @@
                                 object.totalTokens = message.totalTokens;
                             if (message.cachedContentTokenCount != null && message.hasOwnProperty("cachedContentTokenCount"))
                                 object.cachedContentTokenCount = message.cachedContentTokenCount;
+                            if (message.promptTokensDetails && message.promptTokensDetails.length) {
+                                object.promptTokensDetails = [];
+                                for (var j = 0; j < message.promptTokensDetails.length; ++j)
+                                    object.promptTokensDetails[j] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.toObject(message.promptTokensDetails[j], options);
+                            }
+                            if (message.cacheTokensDetails && message.cacheTokensDetails.length) {
+                                object.cacheTokensDetails = [];
+                                for (var j = 0; j < message.cacheTokensDetails.length; ++j)
+                                    object.cacheTokensDetails[j] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.toObject(message.cacheTokensDetails[j], options);
+                            }
                             return object;
                         };
     
@@ -84099,6 +86583,6256 @@
                         };
     
                         return CountTokensResponse;
+                    })();
+    
+                    v1beta.RealtimeInputConfig = (function() {
+    
+                        /**
+                         * Properties of a RealtimeInputConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IRealtimeInputConfig
+                         * @property {google.ai.generativelanguage.v1beta.RealtimeInputConfig.IAutomaticActivityDetection|null} [automaticActivityDetection] RealtimeInputConfig automaticActivityDetection
+                         * @property {google.ai.generativelanguage.v1beta.RealtimeInputConfig.ActivityHandling|null} [activityHandling] RealtimeInputConfig activityHandling
+                         * @property {google.ai.generativelanguage.v1beta.RealtimeInputConfig.TurnCoverage|null} [turnCoverage] RealtimeInputConfig turnCoverage
+                         */
+    
+                        /**
+                         * Constructs a new RealtimeInputConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a RealtimeInputConfig.
+                         * @implements IRealtimeInputConfig
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IRealtimeInputConfig=} [properties] Properties to set
+                         */
+                        function RealtimeInputConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RealtimeInputConfig automaticActivityDetection.
+                         * @member {google.ai.generativelanguage.v1beta.RealtimeInputConfig.IAutomaticActivityDetection|null|undefined} automaticActivityDetection
+                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                         * @instance
+                         */
+                        RealtimeInputConfig.prototype.automaticActivityDetection = null;
+    
+                        /**
+                         * RealtimeInputConfig activityHandling.
+                         * @member {google.ai.generativelanguage.v1beta.RealtimeInputConfig.ActivityHandling|null|undefined} activityHandling
+                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                         * @instance
+                         */
+                        RealtimeInputConfig.prototype.activityHandling = null;
+    
+                        /**
+                         * RealtimeInputConfig turnCoverage.
+                         * @member {google.ai.generativelanguage.v1beta.RealtimeInputConfig.TurnCoverage|null|undefined} turnCoverage
+                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                         * @instance
+                         */
+                        RealtimeInputConfig.prototype.turnCoverage = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RealtimeInputConfig _activityHandling.
+                         * @member {"activityHandling"|undefined} _activityHandling
+                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                         * @instance
+                         */
+                        Object.defineProperty(RealtimeInputConfig.prototype, "_activityHandling", {
+                            get: $util.oneOfGetter($oneOfFields = ["activityHandling"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * RealtimeInputConfig _turnCoverage.
+                         * @member {"turnCoverage"|undefined} _turnCoverage
+                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                         * @instance
+                         */
+                        Object.defineProperty(RealtimeInputConfig.prototype, "_turnCoverage", {
+                            get: $util.oneOfGetter($oneOfFields = ["turnCoverage"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new RealtimeInputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IRealtimeInputConfig=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.RealtimeInputConfig} RealtimeInputConfig instance
+                         */
+                        RealtimeInputConfig.create = function create(properties) {
+                            return new RealtimeInputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RealtimeInputConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.RealtimeInputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IRealtimeInputConfig} message RealtimeInputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RealtimeInputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.automaticActivityDetection != null && Object.hasOwnProperty.call(message, "automaticActivityDetection"))
+                                $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.encode(message.automaticActivityDetection, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.activityHandling != null && Object.hasOwnProperty.call(message, "activityHandling"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.activityHandling);
+                            if (message.turnCoverage != null && Object.hasOwnProperty.call(message, "turnCoverage"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.turnCoverage);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RealtimeInputConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.RealtimeInputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IRealtimeInputConfig} message RealtimeInputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RealtimeInputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RealtimeInputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.RealtimeInputConfig} RealtimeInputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RealtimeInputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.automaticActivityDetection = $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.activityHandling = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.turnCoverage = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RealtimeInputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.RealtimeInputConfig} RealtimeInputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RealtimeInputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RealtimeInputConfig message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RealtimeInputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.automaticActivityDetection != null && message.hasOwnProperty("automaticActivityDetection")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.verify(message.automaticActivityDetection);
+                                if (error)
+                                    return "automaticActivityDetection." + error;
+                            }
+                            if (message.activityHandling != null && message.hasOwnProperty("activityHandling")) {
+                                properties._activityHandling = 1;
+                                switch (message.activityHandling) {
+                                default:
+                                    return "activityHandling: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.turnCoverage != null && message.hasOwnProperty("turnCoverage")) {
+                                properties._turnCoverage = 1;
+                                switch (message.turnCoverage) {
+                                default:
+                                    return "turnCoverage: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RealtimeInputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.RealtimeInputConfig} RealtimeInputConfig
+                         */
+                        RealtimeInputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig();
+                            if (object.automaticActivityDetection != null) {
+                                if (typeof object.automaticActivityDetection !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.RealtimeInputConfig.automaticActivityDetection: object expected");
+                                message.automaticActivityDetection = $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.fromObject(object.automaticActivityDetection);
+                            }
+                            switch (object.activityHandling) {
+                            default:
+                                if (typeof object.activityHandling === "number") {
+                                    message.activityHandling = object.activityHandling;
+                                    break;
+                                }
+                                break;
+                            case "ACTIVITY_HANDLING_UNSPECIFIED":
+                            case 0:
+                                message.activityHandling = 0;
+                                break;
+                            case "START_OF_ACTIVITY_INTERRUPTS":
+                            case 1:
+                                message.activityHandling = 1;
+                                break;
+                            case "NO_INTERRUPTION":
+                            case 2:
+                                message.activityHandling = 2;
+                                break;
+                            }
+                            switch (object.turnCoverage) {
+                            default:
+                                if (typeof object.turnCoverage === "number") {
+                                    message.turnCoverage = object.turnCoverage;
+                                    break;
+                                }
+                                break;
+                            case "TURN_COVERAGE_UNSPECIFIED":
+                            case 0:
+                                message.turnCoverage = 0;
+                                break;
+                            case "TURN_INCLUDES_ONLY_ACTIVITY":
+                            case 1:
+                                message.turnCoverage = 1;
+                                break;
+                            case "TURN_INCLUDES_ALL_INPUT":
+                            case 2:
+                                message.turnCoverage = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RealtimeInputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.RealtimeInputConfig} message RealtimeInputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RealtimeInputConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.automaticActivityDetection = null;
+                            if (message.automaticActivityDetection != null && message.hasOwnProperty("automaticActivityDetection"))
+                                object.automaticActivityDetection = $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.toObject(message.automaticActivityDetection, options);
+                            if (message.activityHandling != null && message.hasOwnProperty("activityHandling")) {
+                                object.activityHandling = options.enums === String ? $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.ActivityHandling[message.activityHandling] === undefined ? message.activityHandling : $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.ActivityHandling[message.activityHandling] : message.activityHandling;
+                                if (options.oneofs)
+                                    object._activityHandling = "activityHandling";
+                            }
+                            if (message.turnCoverage != null && message.hasOwnProperty("turnCoverage")) {
+                                object.turnCoverage = options.enums === String ? $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.TurnCoverage[message.turnCoverage] === undefined ? message.turnCoverage : $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.TurnCoverage[message.turnCoverage] : message.turnCoverage;
+                                if (options.oneofs)
+                                    object._turnCoverage = "turnCoverage";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RealtimeInputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RealtimeInputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RealtimeInputConfig
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RealtimeInputConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.RealtimeInputConfig";
+                        };
+    
+                        RealtimeInputConfig.AutomaticActivityDetection = (function() {
+    
+                            /**
+                             * Properties of an AutomaticActivityDetection.
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                             * @interface IAutomaticActivityDetection
+                             * @property {boolean|null} [disabled] AutomaticActivityDetection disabled
+                             * @property {google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.StartSensitivity|null} [startOfSpeechSensitivity] AutomaticActivityDetection startOfSpeechSensitivity
+                             * @property {number|null} [prefixPaddingMs] AutomaticActivityDetection prefixPaddingMs
+                             * @property {google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.EndSensitivity|null} [endOfSpeechSensitivity] AutomaticActivityDetection endOfSpeechSensitivity
+                             * @property {number|null} [silenceDurationMs] AutomaticActivityDetection silenceDurationMs
+                             */
+    
+                            /**
+                             * Constructs a new AutomaticActivityDetection.
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
+                             * @classdesc Represents an AutomaticActivityDetection.
+                             * @implements IAutomaticActivityDetection
+                             * @constructor
+                             * @param {google.ai.generativelanguage.v1beta.RealtimeInputConfig.IAutomaticActivityDetection=} [properties] Properties to set
+                             */
+                            function AutomaticActivityDetection(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AutomaticActivityDetection disabled.
+                             * @member {boolean|null|undefined} disabled
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @instance
+                             */
+                            AutomaticActivityDetection.prototype.disabled = null;
+    
+                            /**
+                             * AutomaticActivityDetection startOfSpeechSensitivity.
+                             * @member {google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.StartSensitivity|null|undefined} startOfSpeechSensitivity
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @instance
+                             */
+                            AutomaticActivityDetection.prototype.startOfSpeechSensitivity = null;
+    
+                            /**
+                             * AutomaticActivityDetection prefixPaddingMs.
+                             * @member {number|null|undefined} prefixPaddingMs
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @instance
+                             */
+                            AutomaticActivityDetection.prototype.prefixPaddingMs = null;
+    
+                            /**
+                             * AutomaticActivityDetection endOfSpeechSensitivity.
+                             * @member {google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.EndSensitivity|null|undefined} endOfSpeechSensitivity
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @instance
+                             */
+                            AutomaticActivityDetection.prototype.endOfSpeechSensitivity = null;
+    
+                            /**
+                             * AutomaticActivityDetection silenceDurationMs.
+                             * @member {number|null|undefined} silenceDurationMs
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @instance
+                             */
+                            AutomaticActivityDetection.prototype.silenceDurationMs = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * AutomaticActivityDetection _disabled.
+                             * @member {"disabled"|undefined} _disabled
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @instance
+                             */
+                            Object.defineProperty(AutomaticActivityDetection.prototype, "_disabled", {
+                                get: $util.oneOfGetter($oneOfFields = ["disabled"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * AutomaticActivityDetection _startOfSpeechSensitivity.
+                             * @member {"startOfSpeechSensitivity"|undefined} _startOfSpeechSensitivity
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @instance
+                             */
+                            Object.defineProperty(AutomaticActivityDetection.prototype, "_startOfSpeechSensitivity", {
+                                get: $util.oneOfGetter($oneOfFields = ["startOfSpeechSensitivity"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * AutomaticActivityDetection _prefixPaddingMs.
+                             * @member {"prefixPaddingMs"|undefined} _prefixPaddingMs
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @instance
+                             */
+                            Object.defineProperty(AutomaticActivityDetection.prototype, "_prefixPaddingMs", {
+                                get: $util.oneOfGetter($oneOfFields = ["prefixPaddingMs"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * AutomaticActivityDetection _endOfSpeechSensitivity.
+                             * @member {"endOfSpeechSensitivity"|undefined} _endOfSpeechSensitivity
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @instance
+                             */
+                            Object.defineProperty(AutomaticActivityDetection.prototype, "_endOfSpeechSensitivity", {
+                                get: $util.oneOfGetter($oneOfFields = ["endOfSpeechSensitivity"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * AutomaticActivityDetection _silenceDurationMs.
+                             * @member {"silenceDurationMs"|undefined} _silenceDurationMs
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @instance
+                             */
+                            Object.defineProperty(AutomaticActivityDetection.prototype, "_silenceDurationMs", {
+                                get: $util.oneOfGetter($oneOfFields = ["silenceDurationMs"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new AutomaticActivityDetection instance using the specified properties.
+                             * @function create
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.RealtimeInputConfig.IAutomaticActivityDetection=} [properties] Properties to set
+                             * @returns {google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection} AutomaticActivityDetection instance
+                             */
+                            AutomaticActivityDetection.create = function create(properties) {
+                                return new AutomaticActivityDetection(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AutomaticActivityDetection message. Does not implicitly {@link google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.RealtimeInputConfig.IAutomaticActivityDetection} message AutomaticActivityDetection message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomaticActivityDetection.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.disabled != null && Object.hasOwnProperty.call(message, "disabled"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.disabled);
+                                if (message.startOfSpeechSensitivity != null && Object.hasOwnProperty.call(message, "startOfSpeechSensitivity"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.startOfSpeechSensitivity);
+                                if (message.prefixPaddingMs != null && Object.hasOwnProperty.call(message, "prefixPaddingMs"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.prefixPaddingMs);
+                                if (message.endOfSpeechSensitivity != null && Object.hasOwnProperty.call(message, "endOfSpeechSensitivity"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.endOfSpeechSensitivity);
+                                if (message.silenceDurationMs != null && Object.hasOwnProperty.call(message, "silenceDurationMs"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.silenceDurationMs);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AutomaticActivityDetection message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.RealtimeInputConfig.IAutomaticActivityDetection} message AutomaticActivityDetection message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomaticActivityDetection.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AutomaticActivityDetection message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection} AutomaticActivityDetection
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomaticActivityDetection.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.disabled = reader.bool();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.startOfSpeechSensitivity = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.prefixPaddingMs = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.endOfSpeechSensitivity = reader.int32();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.silenceDurationMs = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AutomaticActivityDetection message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection} AutomaticActivityDetection
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomaticActivityDetection.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AutomaticActivityDetection message.
+                             * @function verify
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AutomaticActivityDetection.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.disabled != null && message.hasOwnProperty("disabled")) {
+                                    properties._disabled = 1;
+                                    if (typeof message.disabled !== "boolean")
+                                        return "disabled: boolean expected";
+                                }
+                                if (message.startOfSpeechSensitivity != null && message.hasOwnProperty("startOfSpeechSensitivity")) {
+                                    properties._startOfSpeechSensitivity = 1;
+                                    switch (message.startOfSpeechSensitivity) {
+                                    default:
+                                        return "startOfSpeechSensitivity: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                }
+                                if (message.prefixPaddingMs != null && message.hasOwnProperty("prefixPaddingMs")) {
+                                    properties._prefixPaddingMs = 1;
+                                    if (!$util.isInteger(message.prefixPaddingMs))
+                                        return "prefixPaddingMs: integer expected";
+                                }
+                                if (message.endOfSpeechSensitivity != null && message.hasOwnProperty("endOfSpeechSensitivity")) {
+                                    properties._endOfSpeechSensitivity = 1;
+                                    switch (message.endOfSpeechSensitivity) {
+                                    default:
+                                        return "endOfSpeechSensitivity: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                }
+                                if (message.silenceDurationMs != null && message.hasOwnProperty("silenceDurationMs")) {
+                                    properties._silenceDurationMs = 1;
+                                    if (!$util.isInteger(message.silenceDurationMs))
+                                        return "silenceDurationMs: integer expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AutomaticActivityDetection message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection} AutomaticActivityDetection
+                             */
+                            AutomaticActivityDetection.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection)
+                                    return object;
+                                var message = new $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection();
+                                if (object.disabled != null)
+                                    message.disabled = Boolean(object.disabled);
+                                switch (object.startOfSpeechSensitivity) {
+                                default:
+                                    if (typeof object.startOfSpeechSensitivity === "number") {
+                                        message.startOfSpeechSensitivity = object.startOfSpeechSensitivity;
+                                        break;
+                                    }
+                                    break;
+                                case "START_SENSITIVITY_UNSPECIFIED":
+                                case 0:
+                                    message.startOfSpeechSensitivity = 0;
+                                    break;
+                                case "START_SENSITIVITY_HIGH":
+                                case 1:
+                                    message.startOfSpeechSensitivity = 1;
+                                    break;
+                                case "START_SENSITIVITY_LOW":
+                                case 2:
+                                    message.startOfSpeechSensitivity = 2;
+                                    break;
+                                }
+                                if (object.prefixPaddingMs != null)
+                                    message.prefixPaddingMs = object.prefixPaddingMs | 0;
+                                switch (object.endOfSpeechSensitivity) {
+                                default:
+                                    if (typeof object.endOfSpeechSensitivity === "number") {
+                                        message.endOfSpeechSensitivity = object.endOfSpeechSensitivity;
+                                        break;
+                                    }
+                                    break;
+                                case "END_SENSITIVITY_UNSPECIFIED":
+                                case 0:
+                                    message.endOfSpeechSensitivity = 0;
+                                    break;
+                                case "END_SENSITIVITY_HIGH":
+                                case 1:
+                                    message.endOfSpeechSensitivity = 1;
+                                    break;
+                                case "END_SENSITIVITY_LOW":
+                                case 2:
+                                    message.endOfSpeechSensitivity = 2;
+                                    break;
+                                }
+                                if (object.silenceDurationMs != null)
+                                    message.silenceDurationMs = object.silenceDurationMs | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AutomaticActivityDetection message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection} message AutomaticActivityDetection
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AutomaticActivityDetection.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.disabled != null && message.hasOwnProperty("disabled")) {
+                                    object.disabled = message.disabled;
+                                    if (options.oneofs)
+                                        object._disabled = "disabled";
+                                }
+                                if (message.startOfSpeechSensitivity != null && message.hasOwnProperty("startOfSpeechSensitivity")) {
+                                    object.startOfSpeechSensitivity = options.enums === String ? $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.StartSensitivity[message.startOfSpeechSensitivity] === undefined ? message.startOfSpeechSensitivity : $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.StartSensitivity[message.startOfSpeechSensitivity] : message.startOfSpeechSensitivity;
+                                    if (options.oneofs)
+                                        object._startOfSpeechSensitivity = "startOfSpeechSensitivity";
+                                }
+                                if (message.prefixPaddingMs != null && message.hasOwnProperty("prefixPaddingMs")) {
+                                    object.prefixPaddingMs = message.prefixPaddingMs;
+                                    if (options.oneofs)
+                                        object._prefixPaddingMs = "prefixPaddingMs";
+                                }
+                                if (message.endOfSpeechSensitivity != null && message.hasOwnProperty("endOfSpeechSensitivity")) {
+                                    object.endOfSpeechSensitivity = options.enums === String ? $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.EndSensitivity[message.endOfSpeechSensitivity] === undefined ? message.endOfSpeechSensitivity : $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.EndSensitivity[message.endOfSpeechSensitivity] : message.endOfSpeechSensitivity;
+                                    if (options.oneofs)
+                                        object._endOfSpeechSensitivity = "endOfSpeechSensitivity";
+                                }
+                                if (message.silenceDurationMs != null && message.hasOwnProperty("silenceDurationMs")) {
+                                    object.silenceDurationMs = message.silenceDurationMs;
+                                    if (options.oneofs)
+                                        object._silenceDurationMs = "silenceDurationMs";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AutomaticActivityDetection to JSON.
+                             * @function toJSON
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AutomaticActivityDetection.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AutomaticActivityDetection
+                             * @function getTypeUrl
+                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AutomaticActivityDetection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection";
+                            };
+    
+                            /**
+                             * StartSensitivity enum.
+                             * @name google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.StartSensitivity
+                             * @enum {number}
+                             * @property {number} START_SENSITIVITY_UNSPECIFIED=0 START_SENSITIVITY_UNSPECIFIED value
+                             * @property {number} START_SENSITIVITY_HIGH=1 START_SENSITIVITY_HIGH value
+                             * @property {number} START_SENSITIVITY_LOW=2 START_SENSITIVITY_LOW value
+                             */
+                            AutomaticActivityDetection.StartSensitivity = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "START_SENSITIVITY_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "START_SENSITIVITY_HIGH"] = 1;
+                                values[valuesById[2] = "START_SENSITIVITY_LOW"] = 2;
+                                return values;
+                            })();
+    
+                            /**
+                             * EndSensitivity enum.
+                             * @name google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.EndSensitivity
+                             * @enum {number}
+                             * @property {number} END_SENSITIVITY_UNSPECIFIED=0 END_SENSITIVITY_UNSPECIFIED value
+                             * @property {number} END_SENSITIVITY_HIGH=1 END_SENSITIVITY_HIGH value
+                             * @property {number} END_SENSITIVITY_LOW=2 END_SENSITIVITY_LOW value
+                             */
+                            AutomaticActivityDetection.EndSensitivity = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "END_SENSITIVITY_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "END_SENSITIVITY_HIGH"] = 1;
+                                values[valuesById[2] = "END_SENSITIVITY_LOW"] = 2;
+                                return values;
+                            })();
+    
+                            return AutomaticActivityDetection;
+                        })();
+    
+                        /**
+                         * ActivityHandling enum.
+                         * @name google.ai.generativelanguage.v1beta.RealtimeInputConfig.ActivityHandling
+                         * @enum {number}
+                         * @property {number} ACTIVITY_HANDLING_UNSPECIFIED=0 ACTIVITY_HANDLING_UNSPECIFIED value
+                         * @property {number} START_OF_ACTIVITY_INTERRUPTS=1 START_OF_ACTIVITY_INTERRUPTS value
+                         * @property {number} NO_INTERRUPTION=2 NO_INTERRUPTION value
+                         */
+                        RealtimeInputConfig.ActivityHandling = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ACTIVITY_HANDLING_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "START_OF_ACTIVITY_INTERRUPTS"] = 1;
+                            values[valuesById[2] = "NO_INTERRUPTION"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * TurnCoverage enum.
+                         * @name google.ai.generativelanguage.v1beta.RealtimeInputConfig.TurnCoverage
+                         * @enum {number}
+                         * @property {number} TURN_COVERAGE_UNSPECIFIED=0 TURN_COVERAGE_UNSPECIFIED value
+                         * @property {number} TURN_INCLUDES_ONLY_ACTIVITY=1 TURN_INCLUDES_ONLY_ACTIVITY value
+                         * @property {number} TURN_INCLUDES_ALL_INPUT=2 TURN_INCLUDES_ALL_INPUT value
+                         */
+                        RealtimeInputConfig.TurnCoverage = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TURN_COVERAGE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "TURN_INCLUDES_ONLY_ACTIVITY"] = 1;
+                            values[valuesById[2] = "TURN_INCLUDES_ALL_INPUT"] = 2;
+                            return values;
+                        })();
+    
+                        return RealtimeInputConfig;
+                    })();
+    
+                    v1beta.SessionResumptionConfig = (function() {
+    
+                        /**
+                         * Properties of a SessionResumptionConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface ISessionResumptionConfig
+                         * @property {string|null} [handle] SessionResumptionConfig handle
+                         */
+    
+                        /**
+                         * Constructs a new SessionResumptionConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a SessionResumptionConfig.
+                         * @implements ISessionResumptionConfig
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.ISessionResumptionConfig=} [properties] Properties to set
+                         */
+                        function SessionResumptionConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SessionResumptionConfig handle.
+                         * @member {string|null|undefined} handle
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionConfig
+                         * @instance
+                         */
+                        SessionResumptionConfig.prototype.handle = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * SessionResumptionConfig _handle.
+                         * @member {"handle"|undefined} _handle
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionConfig
+                         * @instance
+                         */
+                        Object.defineProperty(SessionResumptionConfig.prototype, "_handle", {
+                            get: $util.oneOfGetter($oneOfFields = ["handle"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new SessionResumptionConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.ISessionResumptionConfig=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.SessionResumptionConfig} SessionResumptionConfig instance
+                         */
+                        SessionResumptionConfig.create = function create(properties) {
+                            return new SessionResumptionConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SessionResumptionConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.SessionResumptionConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.ISessionResumptionConfig} message SessionResumptionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SessionResumptionConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.handle != null && Object.hasOwnProperty.call(message, "handle"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.handle);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SessionResumptionConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.SessionResumptionConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.ISessionResumptionConfig} message SessionResumptionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SessionResumptionConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SessionResumptionConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.SessionResumptionConfig} SessionResumptionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SessionResumptionConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.SessionResumptionConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.handle = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SessionResumptionConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.SessionResumptionConfig} SessionResumptionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SessionResumptionConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SessionResumptionConfig message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SessionResumptionConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.handle != null && message.hasOwnProperty("handle")) {
+                                properties._handle = 1;
+                                if (!$util.isString(message.handle))
+                                    return "handle: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SessionResumptionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.SessionResumptionConfig} SessionResumptionConfig
+                         */
+                        SessionResumptionConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.SessionResumptionConfig)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.SessionResumptionConfig();
+                            if (object.handle != null)
+                                message.handle = String(object.handle);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SessionResumptionConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.SessionResumptionConfig} message SessionResumptionConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SessionResumptionConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.handle != null && message.hasOwnProperty("handle")) {
+                                object.handle = message.handle;
+                                if (options.oneofs)
+                                    object._handle = "handle";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SessionResumptionConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SessionResumptionConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SessionResumptionConfig
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SessionResumptionConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.SessionResumptionConfig";
+                        };
+    
+                        return SessionResumptionConfig;
+                    })();
+    
+                    v1beta.ContextWindowCompressionConfig = (function() {
+    
+                        /**
+                         * Properties of a ContextWindowCompressionConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IContextWindowCompressionConfig
+                         * @property {google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.ISlidingWindow|null} [slidingWindow] ContextWindowCompressionConfig slidingWindow
+                         * @property {number|Long|null} [triggerTokens] ContextWindowCompressionConfig triggerTokens
+                         */
+    
+                        /**
+                         * Constructs a new ContextWindowCompressionConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a ContextWindowCompressionConfig.
+                         * @implements IContextWindowCompressionConfig
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IContextWindowCompressionConfig=} [properties] Properties to set
+                         */
+                        function ContextWindowCompressionConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ContextWindowCompressionConfig slidingWindow.
+                         * @member {google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.ISlidingWindow|null|undefined} slidingWindow
+                         * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
+                         * @instance
+                         */
+                        ContextWindowCompressionConfig.prototype.slidingWindow = null;
+    
+                        /**
+                         * ContextWindowCompressionConfig triggerTokens.
+                         * @member {number|Long|null|undefined} triggerTokens
+                         * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
+                         * @instance
+                         */
+                        ContextWindowCompressionConfig.prototype.triggerTokens = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ContextWindowCompressionConfig compressionMechanism.
+                         * @member {"slidingWindow"|undefined} compressionMechanism
+                         * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
+                         * @instance
+                         */
+                        Object.defineProperty(ContextWindowCompressionConfig.prototype, "compressionMechanism", {
+                            get: $util.oneOfGetter($oneOfFields = ["slidingWindow"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * ContextWindowCompressionConfig _triggerTokens.
+                         * @member {"triggerTokens"|undefined} _triggerTokens
+                         * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
+                         * @instance
+                         */
+                        Object.defineProperty(ContextWindowCompressionConfig.prototype, "_triggerTokens", {
+                            get: $util.oneOfGetter($oneOfFields = ["triggerTokens"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ContextWindowCompressionConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IContextWindowCompressionConfig=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig} ContextWindowCompressionConfig instance
+                         */
+                        ContextWindowCompressionConfig.create = function create(properties) {
+                            return new ContextWindowCompressionConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ContextWindowCompressionConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IContextWindowCompressionConfig} message ContextWindowCompressionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ContextWindowCompressionConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.triggerTokens != null && Object.hasOwnProperty.call(message, "triggerTokens"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.triggerTokens);
+                            if (message.slidingWindow != null && Object.hasOwnProperty.call(message, "slidingWindow"))
+                                $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow.encode(message.slidingWindow, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ContextWindowCompressionConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IContextWindowCompressionConfig} message ContextWindowCompressionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ContextWindowCompressionConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ContextWindowCompressionConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig} ContextWindowCompressionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ContextWindowCompressionConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.slidingWindow = $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.triggerTokens = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ContextWindowCompressionConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig} ContextWindowCompressionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ContextWindowCompressionConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ContextWindowCompressionConfig message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ContextWindowCompressionConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.slidingWindow != null && message.hasOwnProperty("slidingWindow")) {
+                                properties.compressionMechanism = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow.verify(message.slidingWindow);
+                                    if (error)
+                                        return "slidingWindow." + error;
+                                }
+                            }
+                            if (message.triggerTokens != null && message.hasOwnProperty("triggerTokens")) {
+                                properties._triggerTokens = 1;
+                                if (!$util.isInteger(message.triggerTokens) && !(message.triggerTokens && $util.isInteger(message.triggerTokens.low) && $util.isInteger(message.triggerTokens.high)))
+                                    return "triggerTokens: integer|Long expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ContextWindowCompressionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig} ContextWindowCompressionConfig
+                         */
+                        ContextWindowCompressionConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig();
+                            if (object.slidingWindow != null) {
+                                if (typeof object.slidingWindow !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.slidingWindow: object expected");
+                                message.slidingWindow = $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow.fromObject(object.slidingWindow);
+                            }
+                            if (object.triggerTokens != null)
+                                if ($util.Long)
+                                    (message.triggerTokens = $util.Long.fromValue(object.triggerTokens)).unsigned = false;
+                                else if (typeof object.triggerTokens === "string")
+                                    message.triggerTokens = parseInt(object.triggerTokens, 10);
+                                else if (typeof object.triggerTokens === "number")
+                                    message.triggerTokens = object.triggerTokens;
+                                else if (typeof object.triggerTokens === "object")
+                                    message.triggerTokens = new $util.LongBits(object.triggerTokens.low >>> 0, object.triggerTokens.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ContextWindowCompressionConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig} message ContextWindowCompressionConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ContextWindowCompressionConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.triggerTokens != null && message.hasOwnProperty("triggerTokens")) {
+                                if (typeof message.triggerTokens === "number")
+                                    object.triggerTokens = options.longs === String ? String(message.triggerTokens) : message.triggerTokens;
+                                else
+                                    object.triggerTokens = options.longs === String ? $util.Long.prototype.toString.call(message.triggerTokens) : options.longs === Number ? new $util.LongBits(message.triggerTokens.low >>> 0, message.triggerTokens.high >>> 0).toNumber() : message.triggerTokens;
+                                if (options.oneofs)
+                                    object._triggerTokens = "triggerTokens";
+                            }
+                            if (message.slidingWindow != null && message.hasOwnProperty("slidingWindow")) {
+                                object.slidingWindow = $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow.toObject(message.slidingWindow, options);
+                                if (options.oneofs)
+                                    object.compressionMechanism = "slidingWindow";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ContextWindowCompressionConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ContextWindowCompressionConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ContextWindowCompressionConfig
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ContextWindowCompressionConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig";
+                        };
+    
+                        ContextWindowCompressionConfig.SlidingWindow = (function() {
+    
+                            /**
+                             * Properties of a SlidingWindow.
+                             * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
+                             * @interface ISlidingWindow
+                             * @property {number|Long|null} [targetTokens] SlidingWindow targetTokens
+                             */
+    
+                            /**
+                             * Constructs a new SlidingWindow.
+                             * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
+                             * @classdesc Represents a SlidingWindow.
+                             * @implements ISlidingWindow
+                             * @constructor
+                             * @param {google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.ISlidingWindow=} [properties] Properties to set
+                             */
+                            function SlidingWindow(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SlidingWindow targetTokens.
+                             * @member {number|Long|null|undefined} targetTokens
+                             * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow
+                             * @instance
+                             */
+                            SlidingWindow.prototype.targetTokens = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * SlidingWindow _targetTokens.
+                             * @member {"targetTokens"|undefined} _targetTokens
+                             * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow
+                             * @instance
+                             */
+                            Object.defineProperty(SlidingWindow.prototype, "_targetTokens", {
+                                get: $util.oneOfGetter($oneOfFields = ["targetTokens"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new SlidingWindow instance using the specified properties.
+                             * @function create
+                             * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.ISlidingWindow=} [properties] Properties to set
+                             * @returns {google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow} SlidingWindow instance
+                             */
+                            SlidingWindow.create = function create(properties) {
+                                return new SlidingWindow(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SlidingWindow message. Does not implicitly {@link google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.ISlidingWindow} message SlidingWindow message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SlidingWindow.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.targetTokens != null && Object.hasOwnProperty.call(message, "targetTokens"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.targetTokens);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SlidingWindow message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.ISlidingWindow} message SlidingWindow message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SlidingWindow.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SlidingWindow message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow} SlidingWindow
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SlidingWindow.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.targetTokens = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SlidingWindow message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow} SlidingWindow
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SlidingWindow.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SlidingWindow message.
+                             * @function verify
+                             * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SlidingWindow.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.targetTokens != null && message.hasOwnProperty("targetTokens")) {
+                                    properties._targetTokens = 1;
+                                    if (!$util.isInteger(message.targetTokens) && !(message.targetTokens && $util.isInteger(message.targetTokens.low) && $util.isInteger(message.targetTokens.high)))
+                                        return "targetTokens: integer|Long expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SlidingWindow message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow} SlidingWindow
+                             */
+                            SlidingWindow.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow)
+                                    return object;
+                                var message = new $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow();
+                                if (object.targetTokens != null)
+                                    if ($util.Long)
+                                        (message.targetTokens = $util.Long.fromValue(object.targetTokens)).unsigned = false;
+                                    else if (typeof object.targetTokens === "string")
+                                        message.targetTokens = parseInt(object.targetTokens, 10);
+                                    else if (typeof object.targetTokens === "number")
+                                        message.targetTokens = object.targetTokens;
+                                    else if (typeof object.targetTokens === "object")
+                                        message.targetTokens = new $util.LongBits(object.targetTokens.low >>> 0, object.targetTokens.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SlidingWindow message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow} message SlidingWindow
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SlidingWindow.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.targetTokens != null && message.hasOwnProperty("targetTokens")) {
+                                    if (typeof message.targetTokens === "number")
+                                        object.targetTokens = options.longs === String ? String(message.targetTokens) : message.targetTokens;
+                                    else
+                                        object.targetTokens = options.longs === String ? $util.Long.prototype.toString.call(message.targetTokens) : options.longs === Number ? new $util.LongBits(message.targetTokens.low >>> 0, message.targetTokens.high >>> 0).toNumber() : message.targetTokens;
+                                    if (options.oneofs)
+                                        object._targetTokens = "targetTokens";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SlidingWindow to JSON.
+                             * @function toJSON
+                             * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SlidingWindow.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SlidingWindow
+                             * @function getTypeUrl
+                             * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SlidingWindow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow";
+                            };
+    
+                            return SlidingWindow;
+                        })();
+    
+                        return ContextWindowCompressionConfig;
+                    })();
+    
+                    v1beta.AudioTranscriptionConfig = (function() {
+    
+                        /**
+                         * Properties of an AudioTranscriptionConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IAudioTranscriptionConfig
+                         */
+    
+                        /**
+                         * Constructs a new AudioTranscriptionConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents an AudioTranscriptionConfig.
+                         * @implements IAudioTranscriptionConfig
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IAudioTranscriptionConfig=} [properties] Properties to set
+                         */
+                        function AudioTranscriptionConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new AudioTranscriptionConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.AudioTranscriptionConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IAudioTranscriptionConfig=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.AudioTranscriptionConfig} AudioTranscriptionConfig instance
+                         */
+                        AudioTranscriptionConfig.create = function create(properties) {
+                            return new AudioTranscriptionConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AudioTranscriptionConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.AudioTranscriptionConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.AudioTranscriptionConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IAudioTranscriptionConfig} message AudioTranscriptionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AudioTranscriptionConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AudioTranscriptionConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.AudioTranscriptionConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.AudioTranscriptionConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IAudioTranscriptionConfig} message AudioTranscriptionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AudioTranscriptionConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AudioTranscriptionConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.AudioTranscriptionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.AudioTranscriptionConfig} AudioTranscriptionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AudioTranscriptionConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AudioTranscriptionConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.AudioTranscriptionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.AudioTranscriptionConfig} AudioTranscriptionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AudioTranscriptionConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AudioTranscriptionConfig message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.AudioTranscriptionConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AudioTranscriptionConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AudioTranscriptionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.AudioTranscriptionConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.AudioTranscriptionConfig} AudioTranscriptionConfig
+                         */
+                        AudioTranscriptionConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig)
+                                return object;
+                            return new $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig();
+                        };
+    
+                        /**
+                         * Creates a plain object from an AudioTranscriptionConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.AudioTranscriptionConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.AudioTranscriptionConfig} message AudioTranscriptionConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AudioTranscriptionConfig.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this AudioTranscriptionConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.AudioTranscriptionConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AudioTranscriptionConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AudioTranscriptionConfig
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.AudioTranscriptionConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AudioTranscriptionConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.AudioTranscriptionConfig";
+                        };
+    
+                        return AudioTranscriptionConfig;
+                    })();
+    
+                    v1beta.BidiGenerateContentSetup = (function() {
+    
+                        /**
+                         * Properties of a BidiGenerateContentSetup.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IBidiGenerateContentSetup
+                         * @property {string|null} [model] BidiGenerateContentSetup model
+                         * @property {google.ai.generativelanguage.v1beta.IGenerationConfig|null} [generationConfig] BidiGenerateContentSetup generationConfig
+                         * @property {google.ai.generativelanguage.v1beta.IContent|null} [systemInstruction] BidiGenerateContentSetup systemInstruction
+                         * @property {Array.<google.ai.generativelanguage.v1beta.ITool>|null} [tools] BidiGenerateContentSetup tools
+                         * @property {google.ai.generativelanguage.v1beta.IRealtimeInputConfig|null} [realtimeInputConfig] BidiGenerateContentSetup realtimeInputConfig
+                         * @property {google.ai.generativelanguage.v1beta.ISessionResumptionConfig|null} [sessionResumption] BidiGenerateContentSetup sessionResumption
+                         * @property {google.ai.generativelanguage.v1beta.IContextWindowCompressionConfig|null} [contextWindowCompression] BidiGenerateContentSetup contextWindowCompression
+                         * @property {google.ai.generativelanguage.v1beta.IAudioTranscriptionConfig|null} [outputAudioTranscription] BidiGenerateContentSetup outputAudioTranscription
+                         */
+    
+                        /**
+                         * Constructs a new BidiGenerateContentSetup.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a BidiGenerateContentSetup.
+                         * @implements IBidiGenerateContentSetup
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentSetup=} [properties] Properties to set
+                         */
+                        function BidiGenerateContentSetup(properties) {
+                            this.tools = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BidiGenerateContentSetup model.
+                         * @member {string} model
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @instance
+                         */
+                        BidiGenerateContentSetup.prototype.model = "";
+    
+                        /**
+                         * BidiGenerateContentSetup generationConfig.
+                         * @member {google.ai.generativelanguage.v1beta.IGenerationConfig|null|undefined} generationConfig
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @instance
+                         */
+                        BidiGenerateContentSetup.prototype.generationConfig = null;
+    
+                        /**
+                         * BidiGenerateContentSetup systemInstruction.
+                         * @member {google.ai.generativelanguage.v1beta.IContent|null|undefined} systemInstruction
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @instance
+                         */
+                        BidiGenerateContentSetup.prototype.systemInstruction = null;
+    
+                        /**
+                         * BidiGenerateContentSetup tools.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.ITool>} tools
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @instance
+                         */
+                        BidiGenerateContentSetup.prototype.tools = $util.emptyArray;
+    
+                        /**
+                         * BidiGenerateContentSetup realtimeInputConfig.
+                         * @member {google.ai.generativelanguage.v1beta.IRealtimeInputConfig|null|undefined} realtimeInputConfig
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @instance
+                         */
+                        BidiGenerateContentSetup.prototype.realtimeInputConfig = null;
+    
+                        /**
+                         * BidiGenerateContentSetup sessionResumption.
+                         * @member {google.ai.generativelanguage.v1beta.ISessionResumptionConfig|null|undefined} sessionResumption
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @instance
+                         */
+                        BidiGenerateContentSetup.prototype.sessionResumption = null;
+    
+                        /**
+                         * BidiGenerateContentSetup contextWindowCompression.
+                         * @member {google.ai.generativelanguage.v1beta.IContextWindowCompressionConfig|null|undefined} contextWindowCompression
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @instance
+                         */
+                        BidiGenerateContentSetup.prototype.contextWindowCompression = null;
+    
+                        /**
+                         * BidiGenerateContentSetup outputAudioTranscription.
+                         * @member {google.ai.generativelanguage.v1beta.IAudioTranscriptionConfig|null|undefined} outputAudioTranscription
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @instance
+                         */
+                        BidiGenerateContentSetup.prototype.outputAudioTranscription = null;
+    
+                        /**
+                         * Creates a new BidiGenerateContentSetup instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentSetup=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentSetup} BidiGenerateContentSetup instance
+                         */
+                        BidiGenerateContentSetup.create = function create(properties) {
+                            return new BidiGenerateContentSetup(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentSetup message. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentSetup} message BidiGenerateContentSetup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentSetup.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.model);
+                            if (message.generationConfig != null && Object.hasOwnProperty.call(message, "generationConfig"))
+                                $root.google.ai.generativelanguage.v1beta.GenerationConfig.encode(message.generationConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.systemInstruction != null && Object.hasOwnProperty.call(message, "systemInstruction"))
+                                $root.google.ai.generativelanguage.v1beta.Content.encode(message.systemInstruction, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.tools != null && message.tools.length)
+                                for (var i = 0; i < message.tools.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.Tool.encode(message.tools[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.realtimeInputConfig != null && Object.hasOwnProperty.call(message, "realtimeInputConfig"))
+                                $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.encode(message.realtimeInputConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.sessionResumption != null && Object.hasOwnProperty.call(message, "sessionResumption"))
+                                $root.google.ai.generativelanguage.v1beta.SessionResumptionConfig.encode(message.sessionResumption, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.contextWindowCompression != null && Object.hasOwnProperty.call(message, "contextWindowCompression"))
+                                $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.encode(message.contextWindowCompression, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.outputAudioTranscription != null && Object.hasOwnProperty.call(message, "outputAudioTranscription"))
+                                $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig.encode(message.outputAudioTranscription, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentSetup message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentSetup} message BidiGenerateContentSetup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentSetup.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentSetup message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentSetup} BidiGenerateContentSetup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentSetup.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetup();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.model = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.generationConfig = $root.google.ai.generativelanguage.v1beta.GenerationConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.systemInstruction = $root.google.ai.generativelanguage.v1beta.Content.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.tools && message.tools.length))
+                                            message.tools = [];
+                                        message.tools.push($root.google.ai.generativelanguage.v1beta.Tool.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        message.realtimeInputConfig = $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.sessionResumption = $root.google.ai.generativelanguage.v1beta.SessionResumptionConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.contextWindowCompression = $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.outputAudioTranscription = $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentSetup message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentSetup} BidiGenerateContentSetup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentSetup.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BidiGenerateContentSetup message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BidiGenerateContentSetup.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                if (!$util.isString(message.model))
+                                    return "model: string expected";
+                            if (message.generationConfig != null && message.hasOwnProperty("generationConfig")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.GenerationConfig.verify(message.generationConfig);
+                                if (error)
+                                    return "generationConfig." + error;
+                            }
+                            if (message.systemInstruction != null && message.hasOwnProperty("systemInstruction")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.Content.verify(message.systemInstruction);
+                                if (error)
+                                    return "systemInstruction." + error;
+                            }
+                            if (message.tools != null && message.hasOwnProperty("tools")) {
+                                if (!Array.isArray(message.tools))
+                                    return "tools: array expected";
+                                for (var i = 0; i < message.tools.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.Tool.verify(message.tools[i]);
+                                    if (error)
+                                        return "tools." + error;
+                                }
+                            }
+                            if (message.realtimeInputConfig != null && message.hasOwnProperty("realtimeInputConfig")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.verify(message.realtimeInputConfig);
+                                if (error)
+                                    return "realtimeInputConfig." + error;
+                            }
+                            if (message.sessionResumption != null && message.hasOwnProperty("sessionResumption")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.SessionResumptionConfig.verify(message.sessionResumption);
+                                if (error)
+                                    return "sessionResumption." + error;
+                            }
+                            if (message.contextWindowCompression != null && message.hasOwnProperty("contextWindowCompression")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.verify(message.contextWindowCompression);
+                                if (error)
+                                    return "contextWindowCompression." + error;
+                            }
+                            if (message.outputAudioTranscription != null && message.hasOwnProperty("outputAudioTranscription")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig.verify(message.outputAudioTranscription);
+                                if (error)
+                                    return "outputAudioTranscription." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BidiGenerateContentSetup message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentSetup} BidiGenerateContentSetup
+                         */
+                        BidiGenerateContentSetup.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetup)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetup();
+                            if (object.model != null)
+                                message.model = String(object.model);
+                            if (object.generationConfig != null) {
+                                if (typeof object.generationConfig !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.generationConfig: object expected");
+                                message.generationConfig = $root.google.ai.generativelanguage.v1beta.GenerationConfig.fromObject(object.generationConfig);
+                            }
+                            if (object.systemInstruction != null) {
+                                if (typeof object.systemInstruction !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.systemInstruction: object expected");
+                                message.systemInstruction = $root.google.ai.generativelanguage.v1beta.Content.fromObject(object.systemInstruction);
+                            }
+                            if (object.tools) {
+                                if (!Array.isArray(object.tools))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.tools: array expected");
+                                message.tools = [];
+                                for (var i = 0; i < object.tools.length; ++i) {
+                                    if (typeof object.tools[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.tools: object expected");
+                                    message.tools[i] = $root.google.ai.generativelanguage.v1beta.Tool.fromObject(object.tools[i]);
+                                }
+                            }
+                            if (object.realtimeInputConfig != null) {
+                                if (typeof object.realtimeInputConfig !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.realtimeInputConfig: object expected");
+                                message.realtimeInputConfig = $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.fromObject(object.realtimeInputConfig);
+                            }
+                            if (object.sessionResumption != null) {
+                                if (typeof object.sessionResumption !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.sessionResumption: object expected");
+                                message.sessionResumption = $root.google.ai.generativelanguage.v1beta.SessionResumptionConfig.fromObject(object.sessionResumption);
+                            }
+                            if (object.contextWindowCompression != null) {
+                                if (typeof object.contextWindowCompression !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.contextWindowCompression: object expected");
+                                message.contextWindowCompression = $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.fromObject(object.contextWindowCompression);
+                            }
+                            if (object.outputAudioTranscription != null) {
+                                if (typeof object.outputAudioTranscription !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.outputAudioTranscription: object expected");
+                                message.outputAudioTranscription = $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig.fromObject(object.outputAudioTranscription);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BidiGenerateContentSetup message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentSetup} message BidiGenerateContentSetup
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BidiGenerateContentSetup.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.tools = [];
+                            if (options.defaults) {
+                                object.model = "";
+                                object.generationConfig = null;
+                                object.systemInstruction = null;
+                                object.realtimeInputConfig = null;
+                                object.sessionResumption = null;
+                                object.contextWindowCompression = null;
+                                object.outputAudioTranscription = null;
+                            }
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                object.model = message.model;
+                            if (message.generationConfig != null && message.hasOwnProperty("generationConfig"))
+                                object.generationConfig = $root.google.ai.generativelanguage.v1beta.GenerationConfig.toObject(message.generationConfig, options);
+                            if (message.systemInstruction != null && message.hasOwnProperty("systemInstruction"))
+                                object.systemInstruction = $root.google.ai.generativelanguage.v1beta.Content.toObject(message.systemInstruction, options);
+                            if (message.tools && message.tools.length) {
+                                object.tools = [];
+                                for (var j = 0; j < message.tools.length; ++j)
+                                    object.tools[j] = $root.google.ai.generativelanguage.v1beta.Tool.toObject(message.tools[j], options);
+                            }
+                            if (message.realtimeInputConfig != null && message.hasOwnProperty("realtimeInputConfig"))
+                                object.realtimeInputConfig = $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.toObject(message.realtimeInputConfig, options);
+                            if (message.sessionResumption != null && message.hasOwnProperty("sessionResumption"))
+                                object.sessionResumption = $root.google.ai.generativelanguage.v1beta.SessionResumptionConfig.toObject(message.sessionResumption, options);
+                            if (message.contextWindowCompression != null && message.hasOwnProperty("contextWindowCompression"))
+                                object.contextWindowCompression = $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.toObject(message.contextWindowCompression, options);
+                            if (message.outputAudioTranscription != null && message.hasOwnProperty("outputAudioTranscription"))
+                                object.outputAudioTranscription = $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig.toObject(message.outputAudioTranscription, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BidiGenerateContentSetup to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BidiGenerateContentSetup.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BidiGenerateContentSetup
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BidiGenerateContentSetup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.BidiGenerateContentSetup";
+                        };
+    
+                        return BidiGenerateContentSetup;
+                    })();
+    
+                    v1beta.BidiGenerateContentClientContent = (function() {
+    
+                        /**
+                         * Properties of a BidiGenerateContentClientContent.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IBidiGenerateContentClientContent
+                         * @property {Array.<google.ai.generativelanguage.v1beta.IContent>|null} [turns] BidiGenerateContentClientContent turns
+                         * @property {boolean|null} [turnComplete] BidiGenerateContentClientContent turnComplete
+                         */
+    
+                        /**
+                         * Constructs a new BidiGenerateContentClientContent.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a BidiGenerateContentClientContent.
+                         * @implements IBidiGenerateContentClientContent
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentClientContent=} [properties] Properties to set
+                         */
+                        function BidiGenerateContentClientContent(properties) {
+                            this.turns = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BidiGenerateContentClientContent turns.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.IContent>} turns
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent
+                         * @instance
+                         */
+                        BidiGenerateContentClientContent.prototype.turns = $util.emptyArray;
+    
+                        /**
+                         * BidiGenerateContentClientContent turnComplete.
+                         * @member {boolean} turnComplete
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent
+                         * @instance
+                         */
+                        BidiGenerateContentClientContent.prototype.turnComplete = false;
+    
+                        /**
+                         * Creates a new BidiGenerateContentClientContent instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentClientContent=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent} BidiGenerateContentClientContent instance
+                         */
+                        BidiGenerateContentClientContent.create = function create(properties) {
+                            return new BidiGenerateContentClientContent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentClientContent message. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentClientContent} message BidiGenerateContentClientContent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentClientContent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.turns != null && message.turns.length)
+                                for (var i = 0; i < message.turns.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.Content.encode(message.turns[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.turnComplete != null && Object.hasOwnProperty.call(message, "turnComplete"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.turnComplete);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentClientContent message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentClientContent} message BidiGenerateContentClientContent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentClientContent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentClientContent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent} BidiGenerateContentClientContent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentClientContent.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.turns && message.turns.length))
+                                            message.turns = [];
+                                        message.turns.push($root.google.ai.generativelanguage.v1beta.Content.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.turnComplete = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentClientContent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent} BidiGenerateContentClientContent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentClientContent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BidiGenerateContentClientContent message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BidiGenerateContentClientContent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.turns != null && message.hasOwnProperty("turns")) {
+                                if (!Array.isArray(message.turns))
+                                    return "turns: array expected";
+                                for (var i = 0; i < message.turns.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.Content.verify(message.turns[i]);
+                                    if (error)
+                                        return "turns." + error;
+                                }
+                            }
+                            if (message.turnComplete != null && message.hasOwnProperty("turnComplete"))
+                                if (typeof message.turnComplete !== "boolean")
+                                    return "turnComplete: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BidiGenerateContentClientContent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent} BidiGenerateContentClientContent
+                         */
+                        BidiGenerateContentClientContent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent();
+                            if (object.turns) {
+                                if (!Array.isArray(object.turns))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent.turns: array expected");
+                                message.turns = [];
+                                for (var i = 0; i < object.turns.length; ++i) {
+                                    if (typeof object.turns[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent.turns: object expected");
+                                    message.turns[i] = $root.google.ai.generativelanguage.v1beta.Content.fromObject(object.turns[i]);
+                                }
+                            }
+                            if (object.turnComplete != null)
+                                message.turnComplete = Boolean(object.turnComplete);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BidiGenerateContentClientContent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent} message BidiGenerateContentClientContent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BidiGenerateContentClientContent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.turns = [];
+                            if (options.defaults)
+                                object.turnComplete = false;
+                            if (message.turns && message.turns.length) {
+                                object.turns = [];
+                                for (var j = 0; j < message.turns.length; ++j)
+                                    object.turns[j] = $root.google.ai.generativelanguage.v1beta.Content.toObject(message.turns[j], options);
+                            }
+                            if (message.turnComplete != null && message.hasOwnProperty("turnComplete"))
+                                object.turnComplete = message.turnComplete;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BidiGenerateContentClientContent to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BidiGenerateContentClientContent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BidiGenerateContentClientContent
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BidiGenerateContentClientContent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent";
+                        };
+    
+                        return BidiGenerateContentClientContent;
+                    })();
+    
+                    v1beta.BidiGenerateContentRealtimeInput = (function() {
+    
+                        /**
+                         * Properties of a BidiGenerateContentRealtimeInput.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IBidiGenerateContentRealtimeInput
+                         * @property {Array.<google.ai.generativelanguage.v1beta.IBlob>|null} [mediaChunks] BidiGenerateContentRealtimeInput mediaChunks
+                         * @property {google.ai.generativelanguage.v1beta.IBlob|null} [audio] BidiGenerateContentRealtimeInput audio
+                         * @property {boolean|null} [audioStreamEnd] BidiGenerateContentRealtimeInput audioStreamEnd
+                         * @property {google.ai.generativelanguage.v1beta.IBlob|null} [video] BidiGenerateContentRealtimeInput video
+                         * @property {string|null} [text] BidiGenerateContentRealtimeInput text
+                         * @property {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.IActivityStart|null} [activityStart] BidiGenerateContentRealtimeInput activityStart
+                         * @property {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.IActivityEnd|null} [activityEnd] BidiGenerateContentRealtimeInput activityEnd
+                         */
+    
+                        /**
+                         * Constructs a new BidiGenerateContentRealtimeInput.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a BidiGenerateContentRealtimeInput.
+                         * @implements IBidiGenerateContentRealtimeInput
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentRealtimeInput=} [properties] Properties to set
+                         */
+                        function BidiGenerateContentRealtimeInput(properties) {
+                            this.mediaChunks = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BidiGenerateContentRealtimeInput mediaChunks.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.IBlob>} mediaChunks
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @instance
+                         */
+                        BidiGenerateContentRealtimeInput.prototype.mediaChunks = $util.emptyArray;
+    
+                        /**
+                         * BidiGenerateContentRealtimeInput audio.
+                         * @member {google.ai.generativelanguage.v1beta.IBlob|null|undefined} audio
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @instance
+                         */
+                        BidiGenerateContentRealtimeInput.prototype.audio = null;
+    
+                        /**
+                         * BidiGenerateContentRealtimeInput audioStreamEnd.
+                         * @member {boolean|null|undefined} audioStreamEnd
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @instance
+                         */
+                        BidiGenerateContentRealtimeInput.prototype.audioStreamEnd = null;
+    
+                        /**
+                         * BidiGenerateContentRealtimeInput video.
+                         * @member {google.ai.generativelanguage.v1beta.IBlob|null|undefined} video
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @instance
+                         */
+                        BidiGenerateContentRealtimeInput.prototype.video = null;
+    
+                        /**
+                         * BidiGenerateContentRealtimeInput text.
+                         * @member {string|null|undefined} text
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @instance
+                         */
+                        BidiGenerateContentRealtimeInput.prototype.text = null;
+    
+                        /**
+                         * BidiGenerateContentRealtimeInput activityStart.
+                         * @member {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.IActivityStart|null|undefined} activityStart
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @instance
+                         */
+                        BidiGenerateContentRealtimeInput.prototype.activityStart = null;
+    
+                        /**
+                         * BidiGenerateContentRealtimeInput activityEnd.
+                         * @member {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.IActivityEnd|null|undefined} activityEnd
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @instance
+                         */
+                        BidiGenerateContentRealtimeInput.prototype.activityEnd = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BidiGenerateContentRealtimeInput _audioStreamEnd.
+                         * @member {"audioStreamEnd"|undefined} _audioStreamEnd
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @instance
+                         */
+                        Object.defineProperty(BidiGenerateContentRealtimeInput.prototype, "_audioStreamEnd", {
+                            get: $util.oneOfGetter($oneOfFields = ["audioStreamEnd"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * BidiGenerateContentRealtimeInput _text.
+                         * @member {"text"|undefined} _text
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @instance
+                         */
+                        Object.defineProperty(BidiGenerateContentRealtimeInput.prototype, "_text", {
+                            get: $util.oneOfGetter($oneOfFields = ["text"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BidiGenerateContentRealtimeInput instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentRealtimeInput=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput} BidiGenerateContentRealtimeInput instance
+                         */
+                        BidiGenerateContentRealtimeInput.create = function create(properties) {
+                            return new BidiGenerateContentRealtimeInput(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentRealtimeInput message. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentRealtimeInput} message BidiGenerateContentRealtimeInput message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentRealtimeInput.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.mediaChunks != null && message.mediaChunks.length)
+                                for (var i = 0; i < message.mediaChunks.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.Blob.encode(message.mediaChunks[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.audio != null && Object.hasOwnProperty.call(message, "audio"))
+                                $root.google.ai.generativelanguage.v1beta.Blob.encode(message.audio, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.audioStreamEnd != null && Object.hasOwnProperty.call(message, "audioStreamEnd"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.audioStreamEnd);
+                            if (message.video != null && Object.hasOwnProperty.call(message, "video"))
+                                $root.google.ai.generativelanguage.v1beta.Blob.encode(message.video, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.text);
+                            if (message.activityStart != null && Object.hasOwnProperty.call(message, "activityStart"))
+                                $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart.encode(message.activityStart, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.activityEnd != null && Object.hasOwnProperty.call(message, "activityEnd"))
+                                $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd.encode(message.activityEnd, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentRealtimeInput message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentRealtimeInput} message BidiGenerateContentRealtimeInput message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentRealtimeInput.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentRealtimeInput message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput} BidiGenerateContentRealtimeInput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentRealtimeInput.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.mediaChunks && message.mediaChunks.length))
+                                            message.mediaChunks = [];
+                                        message.mediaChunks.push($root.google.ai.generativelanguage.v1beta.Blob.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.audio = $root.google.ai.generativelanguage.v1beta.Blob.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.audioStreamEnd = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.video = $root.google.ai.generativelanguage.v1beta.Blob.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.text = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.activityStart = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.activityEnd = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentRealtimeInput message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput} BidiGenerateContentRealtimeInput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentRealtimeInput.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BidiGenerateContentRealtimeInput message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BidiGenerateContentRealtimeInput.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.mediaChunks != null && message.hasOwnProperty("mediaChunks")) {
+                                if (!Array.isArray(message.mediaChunks))
+                                    return "mediaChunks: array expected";
+                                for (var i = 0; i < message.mediaChunks.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.Blob.verify(message.mediaChunks[i]);
+                                    if (error)
+                                        return "mediaChunks." + error;
+                                }
+                            }
+                            if (message.audio != null && message.hasOwnProperty("audio")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.Blob.verify(message.audio);
+                                if (error)
+                                    return "audio." + error;
+                            }
+                            if (message.audioStreamEnd != null && message.hasOwnProperty("audioStreamEnd")) {
+                                properties._audioStreamEnd = 1;
+                                if (typeof message.audioStreamEnd !== "boolean")
+                                    return "audioStreamEnd: boolean expected";
+                            }
+                            if (message.video != null && message.hasOwnProperty("video")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.Blob.verify(message.video);
+                                if (error)
+                                    return "video." + error;
+                            }
+                            if (message.text != null && message.hasOwnProperty("text")) {
+                                properties._text = 1;
+                                if (!$util.isString(message.text))
+                                    return "text: string expected";
+                            }
+                            if (message.activityStart != null && message.hasOwnProperty("activityStart")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart.verify(message.activityStart);
+                                if (error)
+                                    return "activityStart." + error;
+                            }
+                            if (message.activityEnd != null && message.hasOwnProperty("activityEnd")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd.verify(message.activityEnd);
+                                if (error)
+                                    return "activityEnd." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BidiGenerateContentRealtimeInput message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput} BidiGenerateContentRealtimeInput
+                         */
+                        BidiGenerateContentRealtimeInput.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput();
+                            if (object.mediaChunks) {
+                                if (!Array.isArray(object.mediaChunks))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.mediaChunks: array expected");
+                                message.mediaChunks = [];
+                                for (var i = 0; i < object.mediaChunks.length; ++i) {
+                                    if (typeof object.mediaChunks[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.mediaChunks: object expected");
+                                    message.mediaChunks[i] = $root.google.ai.generativelanguage.v1beta.Blob.fromObject(object.mediaChunks[i]);
+                                }
+                            }
+                            if (object.audio != null) {
+                                if (typeof object.audio !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.audio: object expected");
+                                message.audio = $root.google.ai.generativelanguage.v1beta.Blob.fromObject(object.audio);
+                            }
+                            if (object.audioStreamEnd != null)
+                                message.audioStreamEnd = Boolean(object.audioStreamEnd);
+                            if (object.video != null) {
+                                if (typeof object.video !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.video: object expected");
+                                message.video = $root.google.ai.generativelanguage.v1beta.Blob.fromObject(object.video);
+                            }
+                            if (object.text != null)
+                                message.text = String(object.text);
+                            if (object.activityStart != null) {
+                                if (typeof object.activityStart !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.activityStart: object expected");
+                                message.activityStart = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart.fromObject(object.activityStart);
+                            }
+                            if (object.activityEnd != null) {
+                                if (typeof object.activityEnd !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.activityEnd: object expected");
+                                message.activityEnd = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd.fromObject(object.activityEnd);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BidiGenerateContentRealtimeInput message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput} message BidiGenerateContentRealtimeInput
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BidiGenerateContentRealtimeInput.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.mediaChunks = [];
+                            if (options.defaults) {
+                                object.audio = null;
+                                object.video = null;
+                                object.activityStart = null;
+                                object.activityEnd = null;
+                            }
+                            if (message.mediaChunks && message.mediaChunks.length) {
+                                object.mediaChunks = [];
+                                for (var j = 0; j < message.mediaChunks.length; ++j)
+                                    object.mediaChunks[j] = $root.google.ai.generativelanguage.v1beta.Blob.toObject(message.mediaChunks[j], options);
+                            }
+                            if (message.audio != null && message.hasOwnProperty("audio"))
+                                object.audio = $root.google.ai.generativelanguage.v1beta.Blob.toObject(message.audio, options);
+                            if (message.audioStreamEnd != null && message.hasOwnProperty("audioStreamEnd")) {
+                                object.audioStreamEnd = message.audioStreamEnd;
+                                if (options.oneofs)
+                                    object._audioStreamEnd = "audioStreamEnd";
+                            }
+                            if (message.video != null && message.hasOwnProperty("video"))
+                                object.video = $root.google.ai.generativelanguage.v1beta.Blob.toObject(message.video, options);
+                            if (message.text != null && message.hasOwnProperty("text")) {
+                                object.text = message.text;
+                                if (options.oneofs)
+                                    object._text = "text";
+                            }
+                            if (message.activityStart != null && message.hasOwnProperty("activityStart"))
+                                object.activityStart = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart.toObject(message.activityStart, options);
+                            if (message.activityEnd != null && message.hasOwnProperty("activityEnd"))
+                                object.activityEnd = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd.toObject(message.activityEnd, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BidiGenerateContentRealtimeInput to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BidiGenerateContentRealtimeInput.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BidiGenerateContentRealtimeInput
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BidiGenerateContentRealtimeInput.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput";
+                        };
+    
+                        BidiGenerateContentRealtimeInput.ActivityStart = (function() {
+    
+                            /**
+                             * Properties of an ActivityStart.
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                             * @interface IActivityStart
+                             */
+    
+                            /**
+                             * Constructs a new ActivityStart.
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                             * @classdesc Represents an ActivityStart.
+                             * @implements IActivityStart
+                             * @constructor
+                             * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.IActivityStart=} [properties] Properties to set
+                             */
+                            function ActivityStart(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new ActivityStart instance using the specified properties.
+                             * @function create
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.IActivityStart=} [properties] Properties to set
+                             * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart} ActivityStart instance
+                             */
+                            ActivityStart.create = function create(properties) {
+                                return new ActivityStart(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ActivityStart message. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.IActivityStart} message ActivityStart message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ActivityStart.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ActivityStart message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.IActivityStart} message ActivityStart message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ActivityStart.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ActivityStart message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart} ActivityStart
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ActivityStart.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ActivityStart message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart} ActivityStart
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ActivityStart.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ActivityStart message.
+                             * @function verify
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ActivityStart.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ActivityStart message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart} ActivityStart
+                             */
+                            ActivityStart.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart)
+                                    return object;
+                                return new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart();
+                            };
+    
+                            /**
+                             * Creates a plain object from an ActivityStart message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart} message ActivityStart
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ActivityStart.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this ActivityStart to JSON.
+                             * @function toJSON
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ActivityStart.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ActivityStart
+                             * @function getTypeUrl
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ActivityStart.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart";
+                            };
+    
+                            return ActivityStart;
+                        })();
+    
+                        BidiGenerateContentRealtimeInput.ActivityEnd = (function() {
+    
+                            /**
+                             * Properties of an ActivityEnd.
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                             * @interface IActivityEnd
+                             */
+    
+                            /**
+                             * Constructs a new ActivityEnd.
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
+                             * @classdesc Represents an ActivityEnd.
+                             * @implements IActivityEnd
+                             * @constructor
+                             * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.IActivityEnd=} [properties] Properties to set
+                             */
+                            function ActivityEnd(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new ActivityEnd instance using the specified properties.
+                             * @function create
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.IActivityEnd=} [properties] Properties to set
+                             * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd} ActivityEnd instance
+                             */
+                            ActivityEnd.create = function create(properties) {
+                                return new ActivityEnd(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ActivityEnd message. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.IActivityEnd} message ActivityEnd message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ActivityEnd.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ActivityEnd message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.IActivityEnd} message ActivityEnd message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ActivityEnd.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ActivityEnd message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd} ActivityEnd
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ActivityEnd.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ActivityEnd message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd} ActivityEnd
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ActivityEnd.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ActivityEnd message.
+                             * @function verify
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ActivityEnd.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ActivityEnd message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd} ActivityEnd
+                             */
+                            ActivityEnd.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd)
+                                    return object;
+                                return new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd();
+                            };
+    
+                            /**
+                             * Creates a plain object from an ActivityEnd message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd} message ActivityEnd
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ActivityEnd.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this ActivityEnd to JSON.
+                             * @function toJSON
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ActivityEnd.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ActivityEnd
+                             * @function getTypeUrl
+                             * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ActivityEnd.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd";
+                            };
+    
+                            return ActivityEnd;
+                        })();
+    
+                        return BidiGenerateContentRealtimeInput;
+                    })();
+    
+                    v1beta.BidiGenerateContentToolResponse = (function() {
+    
+                        /**
+                         * Properties of a BidiGenerateContentToolResponse.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IBidiGenerateContentToolResponse
+                         * @property {Array.<google.ai.generativelanguage.v1beta.IFunctionResponse>|null} [functionResponses] BidiGenerateContentToolResponse functionResponses
+                         */
+    
+                        /**
+                         * Constructs a new BidiGenerateContentToolResponse.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a BidiGenerateContentToolResponse.
+                         * @implements IBidiGenerateContentToolResponse
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolResponse=} [properties] Properties to set
+                         */
+                        function BidiGenerateContentToolResponse(properties) {
+                            this.functionResponses = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BidiGenerateContentToolResponse functionResponses.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.IFunctionResponse>} functionResponses
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse
+                         * @instance
+                         */
+                        BidiGenerateContentToolResponse.prototype.functionResponses = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BidiGenerateContentToolResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolResponse=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse} BidiGenerateContentToolResponse instance
+                         */
+                        BidiGenerateContentToolResponse.create = function create(properties) {
+                            return new BidiGenerateContentToolResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentToolResponse message. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolResponse} message BidiGenerateContentToolResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentToolResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.functionResponses != null && message.functionResponses.length)
+                                for (var i = 0; i < message.functionResponses.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.FunctionResponse.encode(message.functionResponses[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentToolResponse message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolResponse} message BidiGenerateContentToolResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentToolResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentToolResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse} BidiGenerateContentToolResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentToolResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.functionResponses && message.functionResponses.length))
+                                            message.functionResponses = [];
+                                        message.functionResponses.push($root.google.ai.generativelanguage.v1beta.FunctionResponse.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentToolResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse} BidiGenerateContentToolResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentToolResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BidiGenerateContentToolResponse message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BidiGenerateContentToolResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.functionResponses != null && message.hasOwnProperty("functionResponses")) {
+                                if (!Array.isArray(message.functionResponses))
+                                    return "functionResponses: array expected";
+                                for (var i = 0; i < message.functionResponses.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.FunctionResponse.verify(message.functionResponses[i]);
+                                    if (error)
+                                        return "functionResponses." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BidiGenerateContentToolResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse} BidiGenerateContentToolResponse
+                         */
+                        BidiGenerateContentToolResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse();
+                            if (object.functionResponses) {
+                                if (!Array.isArray(object.functionResponses))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse.functionResponses: array expected");
+                                message.functionResponses = [];
+                                for (var i = 0; i < object.functionResponses.length; ++i) {
+                                    if (typeof object.functionResponses[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse.functionResponses: object expected");
+                                    message.functionResponses[i] = $root.google.ai.generativelanguage.v1beta.FunctionResponse.fromObject(object.functionResponses[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BidiGenerateContentToolResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse} message BidiGenerateContentToolResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BidiGenerateContentToolResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.functionResponses = [];
+                            if (message.functionResponses && message.functionResponses.length) {
+                                object.functionResponses = [];
+                                for (var j = 0; j < message.functionResponses.length; ++j)
+                                    object.functionResponses[j] = $root.google.ai.generativelanguage.v1beta.FunctionResponse.toObject(message.functionResponses[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BidiGenerateContentToolResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BidiGenerateContentToolResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BidiGenerateContentToolResponse
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BidiGenerateContentToolResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse";
+                        };
+    
+                        return BidiGenerateContentToolResponse;
+                    })();
+    
+                    v1beta.BidiGenerateContentClientMessage = (function() {
+    
+                        /**
+                         * Properties of a BidiGenerateContentClientMessage.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IBidiGenerateContentClientMessage
+                         * @property {google.ai.generativelanguage.v1beta.IBidiGenerateContentSetup|null} [setup] BidiGenerateContentClientMessage setup
+                         * @property {google.ai.generativelanguage.v1beta.IBidiGenerateContentClientContent|null} [clientContent] BidiGenerateContentClientMessage clientContent
+                         * @property {google.ai.generativelanguage.v1beta.IBidiGenerateContentRealtimeInput|null} [realtimeInput] BidiGenerateContentClientMessage realtimeInput
+                         * @property {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolResponse|null} [toolResponse] BidiGenerateContentClientMessage toolResponse
+                         */
+    
+                        /**
+                         * Constructs a new BidiGenerateContentClientMessage.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a BidiGenerateContentClientMessage.
+                         * @implements IBidiGenerateContentClientMessage
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentClientMessage=} [properties] Properties to set
+                         */
+                        function BidiGenerateContentClientMessage(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BidiGenerateContentClientMessage setup.
+                         * @member {google.ai.generativelanguage.v1beta.IBidiGenerateContentSetup|null|undefined} setup
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage
+                         * @instance
+                         */
+                        BidiGenerateContentClientMessage.prototype.setup = null;
+    
+                        /**
+                         * BidiGenerateContentClientMessage clientContent.
+                         * @member {google.ai.generativelanguage.v1beta.IBidiGenerateContentClientContent|null|undefined} clientContent
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage
+                         * @instance
+                         */
+                        BidiGenerateContentClientMessage.prototype.clientContent = null;
+    
+                        /**
+                         * BidiGenerateContentClientMessage realtimeInput.
+                         * @member {google.ai.generativelanguage.v1beta.IBidiGenerateContentRealtimeInput|null|undefined} realtimeInput
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage
+                         * @instance
+                         */
+                        BidiGenerateContentClientMessage.prototype.realtimeInput = null;
+    
+                        /**
+                         * BidiGenerateContentClientMessage toolResponse.
+                         * @member {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolResponse|null|undefined} toolResponse
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage
+                         * @instance
+                         */
+                        BidiGenerateContentClientMessage.prototype.toolResponse = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BidiGenerateContentClientMessage messageType.
+                         * @member {"setup"|"clientContent"|"realtimeInput"|"toolResponse"|undefined} messageType
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage
+                         * @instance
+                         */
+                        Object.defineProperty(BidiGenerateContentClientMessage.prototype, "messageType", {
+                            get: $util.oneOfGetter($oneOfFields = ["setup", "clientContent", "realtimeInput", "toolResponse"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BidiGenerateContentClientMessage instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentClientMessage=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage} BidiGenerateContentClientMessage instance
+                         */
+                        BidiGenerateContentClientMessage.create = function create(properties) {
+                            return new BidiGenerateContentClientMessage(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentClientMessage message. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentClientMessage} message BidiGenerateContentClientMessage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentClientMessage.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.setup != null && Object.hasOwnProperty.call(message, "setup"))
+                                $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.encode(message.setup, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.clientContent != null && Object.hasOwnProperty.call(message, "clientContent"))
+                                $root.google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent.encode(message.clientContent, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.realtimeInput != null && Object.hasOwnProperty.call(message, "realtimeInput"))
+                                $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.encode(message.realtimeInput, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.toolResponse != null && Object.hasOwnProperty.call(message, "toolResponse"))
+                                $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse.encode(message.toolResponse, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentClientMessage message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentClientMessage} message BidiGenerateContentClientMessage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentClientMessage.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentClientMessage message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage} BidiGenerateContentClientMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentClientMessage.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.setup = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.clientContent = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.realtimeInput = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.toolResponse = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentClientMessage message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage} BidiGenerateContentClientMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentClientMessage.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BidiGenerateContentClientMessage message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BidiGenerateContentClientMessage.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.setup != null && message.hasOwnProperty("setup")) {
+                                properties.messageType = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.verify(message.setup);
+                                    if (error)
+                                        return "setup." + error;
+                                }
+                            }
+                            if (message.clientContent != null && message.hasOwnProperty("clientContent")) {
+                                if (properties.messageType === 1)
+                                    return "messageType: multiple values";
+                                properties.messageType = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent.verify(message.clientContent);
+                                    if (error)
+                                        return "clientContent." + error;
+                                }
+                            }
+                            if (message.realtimeInput != null && message.hasOwnProperty("realtimeInput")) {
+                                if (properties.messageType === 1)
+                                    return "messageType: multiple values";
+                                properties.messageType = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.verify(message.realtimeInput);
+                                    if (error)
+                                        return "realtimeInput." + error;
+                                }
+                            }
+                            if (message.toolResponse != null && message.hasOwnProperty("toolResponse")) {
+                                if (properties.messageType === 1)
+                                    return "messageType: multiple values";
+                                properties.messageType = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse.verify(message.toolResponse);
+                                    if (error)
+                                        return "toolResponse." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BidiGenerateContentClientMessage message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage} BidiGenerateContentClientMessage
+                         */
+                        BidiGenerateContentClientMessage.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage();
+                            if (object.setup != null) {
+                                if (typeof object.setup !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage.setup: object expected");
+                                message.setup = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.fromObject(object.setup);
+                            }
+                            if (object.clientContent != null) {
+                                if (typeof object.clientContent !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage.clientContent: object expected");
+                                message.clientContent = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent.fromObject(object.clientContent);
+                            }
+                            if (object.realtimeInput != null) {
+                                if (typeof object.realtimeInput !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage.realtimeInput: object expected");
+                                message.realtimeInput = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.fromObject(object.realtimeInput);
+                            }
+                            if (object.toolResponse != null) {
+                                if (typeof object.toolResponse !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage.toolResponse: object expected");
+                                message.toolResponse = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse.fromObject(object.toolResponse);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BidiGenerateContentClientMessage message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage} message BidiGenerateContentClientMessage
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BidiGenerateContentClientMessage.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.setup != null && message.hasOwnProperty("setup")) {
+                                object.setup = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.toObject(message.setup, options);
+                                if (options.oneofs)
+                                    object.messageType = "setup";
+                            }
+                            if (message.clientContent != null && message.hasOwnProperty("clientContent")) {
+                                object.clientContent = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent.toObject(message.clientContent, options);
+                                if (options.oneofs)
+                                    object.messageType = "clientContent";
+                            }
+                            if (message.realtimeInput != null && message.hasOwnProperty("realtimeInput")) {
+                                object.realtimeInput = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.toObject(message.realtimeInput, options);
+                                if (options.oneofs)
+                                    object.messageType = "realtimeInput";
+                            }
+                            if (message.toolResponse != null && message.hasOwnProperty("toolResponse")) {
+                                object.toolResponse = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse.toObject(message.toolResponse, options);
+                                if (options.oneofs)
+                                    object.messageType = "toolResponse";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BidiGenerateContentClientMessage to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BidiGenerateContentClientMessage.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BidiGenerateContentClientMessage
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BidiGenerateContentClientMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage";
+                        };
+    
+                        return BidiGenerateContentClientMessage;
+                    })();
+    
+                    v1beta.BidiGenerateContentSetupComplete = (function() {
+    
+                        /**
+                         * Properties of a BidiGenerateContentSetupComplete.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IBidiGenerateContentSetupComplete
+                         */
+    
+                        /**
+                         * Constructs a new BidiGenerateContentSetupComplete.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a BidiGenerateContentSetupComplete.
+                         * @implements IBidiGenerateContentSetupComplete
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentSetupComplete=} [properties] Properties to set
+                         */
+                        function BidiGenerateContentSetupComplete(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new BidiGenerateContentSetupComplete instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentSetupComplete=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete} BidiGenerateContentSetupComplete instance
+                         */
+                        BidiGenerateContentSetupComplete.create = function create(properties) {
+                            return new BidiGenerateContentSetupComplete(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentSetupComplete message. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentSetupComplete} message BidiGenerateContentSetupComplete message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentSetupComplete.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentSetupComplete message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentSetupComplete} message BidiGenerateContentSetupComplete message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentSetupComplete.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentSetupComplete message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete} BidiGenerateContentSetupComplete
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentSetupComplete.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentSetupComplete message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete} BidiGenerateContentSetupComplete
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentSetupComplete.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BidiGenerateContentSetupComplete message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BidiGenerateContentSetupComplete.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BidiGenerateContentSetupComplete message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete} BidiGenerateContentSetupComplete
+                         */
+                        BidiGenerateContentSetupComplete.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete)
+                                return object;
+                            return new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete();
+                        };
+    
+                        /**
+                         * Creates a plain object from a BidiGenerateContentSetupComplete message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete} message BidiGenerateContentSetupComplete
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BidiGenerateContentSetupComplete.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this BidiGenerateContentSetupComplete to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BidiGenerateContentSetupComplete.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BidiGenerateContentSetupComplete
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BidiGenerateContentSetupComplete.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete";
+                        };
+    
+                        return BidiGenerateContentSetupComplete;
+                    })();
+    
+                    v1beta.BidiGenerateContentServerContent = (function() {
+    
+                        /**
+                         * Properties of a BidiGenerateContentServerContent.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IBidiGenerateContentServerContent
+                         * @property {google.ai.generativelanguage.v1beta.IContent|null} [modelTurn] BidiGenerateContentServerContent modelTurn
+                         * @property {boolean|null} [generationComplete] BidiGenerateContentServerContent generationComplete
+                         * @property {boolean|null} [turnComplete] BidiGenerateContentServerContent turnComplete
+                         * @property {boolean|null} [interrupted] BidiGenerateContentServerContent interrupted
+                         * @property {google.ai.generativelanguage.v1beta.IGroundingMetadata|null} [groundingMetadata] BidiGenerateContentServerContent groundingMetadata
+                         * @property {google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription|null} [outputTranscription] BidiGenerateContentServerContent outputTranscription
+                         */
+    
+                        /**
+                         * Constructs a new BidiGenerateContentServerContent.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a BidiGenerateContentServerContent.
+                         * @implements IBidiGenerateContentServerContent
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentServerContent=} [properties] Properties to set
+                         */
+                        function BidiGenerateContentServerContent(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BidiGenerateContentServerContent modelTurn.
+                         * @member {google.ai.generativelanguage.v1beta.IContent|null|undefined} modelTurn
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @instance
+                         */
+                        BidiGenerateContentServerContent.prototype.modelTurn = null;
+    
+                        /**
+                         * BidiGenerateContentServerContent generationComplete.
+                         * @member {boolean} generationComplete
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @instance
+                         */
+                        BidiGenerateContentServerContent.prototype.generationComplete = false;
+    
+                        /**
+                         * BidiGenerateContentServerContent turnComplete.
+                         * @member {boolean} turnComplete
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @instance
+                         */
+                        BidiGenerateContentServerContent.prototype.turnComplete = false;
+    
+                        /**
+                         * BidiGenerateContentServerContent interrupted.
+                         * @member {boolean} interrupted
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @instance
+                         */
+                        BidiGenerateContentServerContent.prototype.interrupted = false;
+    
+                        /**
+                         * BidiGenerateContentServerContent groundingMetadata.
+                         * @member {google.ai.generativelanguage.v1beta.IGroundingMetadata|null|undefined} groundingMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @instance
+                         */
+                        BidiGenerateContentServerContent.prototype.groundingMetadata = null;
+    
+                        /**
+                         * BidiGenerateContentServerContent outputTranscription.
+                         * @member {google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription|null|undefined} outputTranscription
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @instance
+                         */
+                        BidiGenerateContentServerContent.prototype.outputTranscription = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BidiGenerateContentServerContent _modelTurn.
+                         * @member {"modelTurn"|undefined} _modelTurn
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @instance
+                         */
+                        Object.defineProperty(BidiGenerateContentServerContent.prototype, "_modelTurn", {
+                            get: $util.oneOfGetter($oneOfFields = ["modelTurn"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BidiGenerateContentServerContent instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentServerContent=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent} BidiGenerateContentServerContent instance
+                         */
+                        BidiGenerateContentServerContent.create = function create(properties) {
+                            return new BidiGenerateContentServerContent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentServerContent message. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentServerContent} message BidiGenerateContentServerContent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentServerContent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.modelTurn != null && Object.hasOwnProperty.call(message, "modelTurn"))
+                                $root.google.ai.generativelanguage.v1beta.Content.encode(message.modelTurn, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.turnComplete != null && Object.hasOwnProperty.call(message, "turnComplete"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.turnComplete);
+                            if (message.interrupted != null && Object.hasOwnProperty.call(message, "interrupted"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.interrupted);
+                            if (message.groundingMetadata != null && Object.hasOwnProperty.call(message, "groundingMetadata"))
+                                $root.google.ai.generativelanguage.v1beta.GroundingMetadata.encode(message.groundingMetadata, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.generationComplete != null && Object.hasOwnProperty.call(message, "generationComplete"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.generationComplete);
+                            if (message.outputTranscription != null && Object.hasOwnProperty.call(message, "outputTranscription"))
+                                $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.encode(message.outputTranscription, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentServerContent message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentServerContent} message BidiGenerateContentServerContent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentServerContent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentServerContent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent} BidiGenerateContentServerContent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentServerContent.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.modelTurn = $root.google.ai.generativelanguage.v1beta.Content.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.generationComplete = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.turnComplete = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.interrupted = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.groundingMetadata = $root.google.ai.generativelanguage.v1beta.GroundingMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.outputTranscription = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentServerContent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent} BidiGenerateContentServerContent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentServerContent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BidiGenerateContentServerContent message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BidiGenerateContentServerContent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.modelTurn != null && message.hasOwnProperty("modelTurn")) {
+                                properties._modelTurn = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.Content.verify(message.modelTurn);
+                                    if (error)
+                                        return "modelTurn." + error;
+                                }
+                            }
+                            if (message.generationComplete != null && message.hasOwnProperty("generationComplete"))
+                                if (typeof message.generationComplete !== "boolean")
+                                    return "generationComplete: boolean expected";
+                            if (message.turnComplete != null && message.hasOwnProperty("turnComplete"))
+                                if (typeof message.turnComplete !== "boolean")
+                                    return "turnComplete: boolean expected";
+                            if (message.interrupted != null && message.hasOwnProperty("interrupted"))
+                                if (typeof message.interrupted !== "boolean")
+                                    return "interrupted: boolean expected";
+                            if (message.groundingMetadata != null && message.hasOwnProperty("groundingMetadata")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.GroundingMetadata.verify(message.groundingMetadata);
+                                if (error)
+                                    return "groundingMetadata." + error;
+                            }
+                            if (message.outputTranscription != null && message.hasOwnProperty("outputTranscription")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.verify(message.outputTranscription);
+                                if (error)
+                                    return "outputTranscription." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BidiGenerateContentServerContent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent} BidiGenerateContentServerContent
+                         */
+                        BidiGenerateContentServerContent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent();
+                            if (object.modelTurn != null) {
+                                if (typeof object.modelTurn !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent.modelTurn: object expected");
+                                message.modelTurn = $root.google.ai.generativelanguage.v1beta.Content.fromObject(object.modelTurn);
+                            }
+                            if (object.generationComplete != null)
+                                message.generationComplete = Boolean(object.generationComplete);
+                            if (object.turnComplete != null)
+                                message.turnComplete = Boolean(object.turnComplete);
+                            if (object.interrupted != null)
+                                message.interrupted = Boolean(object.interrupted);
+                            if (object.groundingMetadata != null) {
+                                if (typeof object.groundingMetadata !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent.groundingMetadata: object expected");
+                                message.groundingMetadata = $root.google.ai.generativelanguage.v1beta.GroundingMetadata.fromObject(object.groundingMetadata);
+                            }
+                            if (object.outputTranscription != null) {
+                                if (typeof object.outputTranscription !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent.outputTranscription: object expected");
+                                message.outputTranscription = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.fromObject(object.outputTranscription);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BidiGenerateContentServerContent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent} message BidiGenerateContentServerContent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BidiGenerateContentServerContent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.turnComplete = false;
+                                object.interrupted = false;
+                                object.groundingMetadata = null;
+                                object.generationComplete = false;
+                                object.outputTranscription = null;
+                            }
+                            if (message.modelTurn != null && message.hasOwnProperty("modelTurn")) {
+                                object.modelTurn = $root.google.ai.generativelanguage.v1beta.Content.toObject(message.modelTurn, options);
+                                if (options.oneofs)
+                                    object._modelTurn = "modelTurn";
+                            }
+                            if (message.turnComplete != null && message.hasOwnProperty("turnComplete"))
+                                object.turnComplete = message.turnComplete;
+                            if (message.interrupted != null && message.hasOwnProperty("interrupted"))
+                                object.interrupted = message.interrupted;
+                            if (message.groundingMetadata != null && message.hasOwnProperty("groundingMetadata"))
+                                object.groundingMetadata = $root.google.ai.generativelanguage.v1beta.GroundingMetadata.toObject(message.groundingMetadata, options);
+                            if (message.generationComplete != null && message.hasOwnProperty("generationComplete"))
+                                object.generationComplete = message.generationComplete;
+                            if (message.outputTranscription != null && message.hasOwnProperty("outputTranscription"))
+                                object.outputTranscription = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.toObject(message.outputTranscription, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BidiGenerateContentServerContent to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BidiGenerateContentServerContent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BidiGenerateContentServerContent
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BidiGenerateContentServerContent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent";
+                        };
+    
+                        return BidiGenerateContentServerContent;
+                    })();
+    
+                    v1beta.BidiGenerateContentToolCall = (function() {
+    
+                        /**
+                         * Properties of a BidiGenerateContentToolCall.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IBidiGenerateContentToolCall
+                         * @property {Array.<google.ai.generativelanguage.v1beta.IFunctionCall>|null} [functionCalls] BidiGenerateContentToolCall functionCalls
+                         */
+    
+                        /**
+                         * Constructs a new BidiGenerateContentToolCall.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a BidiGenerateContentToolCall.
+                         * @implements IBidiGenerateContentToolCall
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolCall=} [properties] Properties to set
+                         */
+                        function BidiGenerateContentToolCall(properties) {
+                            this.functionCalls = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BidiGenerateContentToolCall functionCalls.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.IFunctionCall>} functionCalls
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall
+                         * @instance
+                         */
+                        BidiGenerateContentToolCall.prototype.functionCalls = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BidiGenerateContentToolCall instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolCall=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall} BidiGenerateContentToolCall instance
+                         */
+                        BidiGenerateContentToolCall.create = function create(properties) {
+                            return new BidiGenerateContentToolCall(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentToolCall message. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolCall} message BidiGenerateContentToolCall message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentToolCall.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.functionCalls != null && message.functionCalls.length)
+                                for (var i = 0; i < message.functionCalls.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.FunctionCall.encode(message.functionCalls[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentToolCall message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolCall} message BidiGenerateContentToolCall message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentToolCall.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentToolCall message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall} BidiGenerateContentToolCall
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentToolCall.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        if (!(message.functionCalls && message.functionCalls.length))
+                                            message.functionCalls = [];
+                                        message.functionCalls.push($root.google.ai.generativelanguage.v1beta.FunctionCall.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentToolCall message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall} BidiGenerateContentToolCall
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentToolCall.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BidiGenerateContentToolCall message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BidiGenerateContentToolCall.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.functionCalls != null && message.hasOwnProperty("functionCalls")) {
+                                if (!Array.isArray(message.functionCalls))
+                                    return "functionCalls: array expected";
+                                for (var i = 0; i < message.functionCalls.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.FunctionCall.verify(message.functionCalls[i]);
+                                    if (error)
+                                        return "functionCalls." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BidiGenerateContentToolCall message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall} BidiGenerateContentToolCall
+                         */
+                        BidiGenerateContentToolCall.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall();
+                            if (object.functionCalls) {
+                                if (!Array.isArray(object.functionCalls))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall.functionCalls: array expected");
+                                message.functionCalls = [];
+                                for (var i = 0; i < object.functionCalls.length; ++i) {
+                                    if (typeof object.functionCalls[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall.functionCalls: object expected");
+                                    message.functionCalls[i] = $root.google.ai.generativelanguage.v1beta.FunctionCall.fromObject(object.functionCalls[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BidiGenerateContentToolCall message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall} message BidiGenerateContentToolCall
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BidiGenerateContentToolCall.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.functionCalls = [];
+                            if (message.functionCalls && message.functionCalls.length) {
+                                object.functionCalls = [];
+                                for (var j = 0; j < message.functionCalls.length; ++j)
+                                    object.functionCalls[j] = $root.google.ai.generativelanguage.v1beta.FunctionCall.toObject(message.functionCalls[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BidiGenerateContentToolCall to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BidiGenerateContentToolCall.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BidiGenerateContentToolCall
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BidiGenerateContentToolCall.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall";
+                        };
+    
+                        return BidiGenerateContentToolCall;
+                    })();
+    
+                    v1beta.BidiGenerateContentToolCallCancellation = (function() {
+    
+                        /**
+                         * Properties of a BidiGenerateContentToolCallCancellation.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IBidiGenerateContentToolCallCancellation
+                         * @property {Array.<string>|null} [ids] BidiGenerateContentToolCallCancellation ids
+                         */
+    
+                        /**
+                         * Constructs a new BidiGenerateContentToolCallCancellation.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a BidiGenerateContentToolCallCancellation.
+                         * @implements IBidiGenerateContentToolCallCancellation
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolCallCancellation=} [properties] Properties to set
+                         */
+                        function BidiGenerateContentToolCallCancellation(properties) {
+                            this.ids = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BidiGenerateContentToolCallCancellation ids.
+                         * @member {Array.<string>} ids
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation
+                         * @instance
+                         */
+                        BidiGenerateContentToolCallCancellation.prototype.ids = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BidiGenerateContentToolCallCancellation instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolCallCancellation=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation} BidiGenerateContentToolCallCancellation instance
+                         */
+                        BidiGenerateContentToolCallCancellation.create = function create(properties) {
+                            return new BidiGenerateContentToolCallCancellation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentToolCallCancellation message. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolCallCancellation} message BidiGenerateContentToolCallCancellation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentToolCallCancellation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ids != null && message.ids.length)
+                                for (var i = 0; i < message.ids.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.ids[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentToolCallCancellation message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolCallCancellation} message BidiGenerateContentToolCallCancellation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentToolCallCancellation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentToolCallCancellation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation} BidiGenerateContentToolCallCancellation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentToolCallCancellation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.ids && message.ids.length))
+                                            message.ids = [];
+                                        message.ids.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentToolCallCancellation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation} BidiGenerateContentToolCallCancellation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentToolCallCancellation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BidiGenerateContentToolCallCancellation message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BidiGenerateContentToolCallCancellation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ids != null && message.hasOwnProperty("ids")) {
+                                if (!Array.isArray(message.ids))
+                                    return "ids: array expected";
+                                for (var i = 0; i < message.ids.length; ++i)
+                                    if (!$util.isString(message.ids[i]))
+                                        return "ids: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BidiGenerateContentToolCallCancellation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation} BidiGenerateContentToolCallCancellation
+                         */
+                        BidiGenerateContentToolCallCancellation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation();
+                            if (object.ids) {
+                                if (!Array.isArray(object.ids))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation.ids: array expected");
+                                message.ids = [];
+                                for (var i = 0; i < object.ids.length; ++i)
+                                    message.ids[i] = String(object.ids[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BidiGenerateContentToolCallCancellation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation} message BidiGenerateContentToolCallCancellation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BidiGenerateContentToolCallCancellation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.ids = [];
+                            if (message.ids && message.ids.length) {
+                                object.ids = [];
+                                for (var j = 0; j < message.ids.length; ++j)
+                                    object.ids[j] = message.ids[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BidiGenerateContentToolCallCancellation to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BidiGenerateContentToolCallCancellation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BidiGenerateContentToolCallCancellation
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BidiGenerateContentToolCallCancellation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation";
+                        };
+    
+                        return BidiGenerateContentToolCallCancellation;
+                    })();
+    
+                    v1beta.GoAway = (function() {
+    
+                        /**
+                         * Properties of a GoAway.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IGoAway
+                         * @property {google.protobuf.IDuration|null} [timeLeft] GoAway timeLeft
+                         */
+    
+                        /**
+                         * Constructs a new GoAway.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a GoAway.
+                         * @implements IGoAway
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IGoAway=} [properties] Properties to set
+                         */
+                        function GoAway(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GoAway timeLeft.
+                         * @member {google.protobuf.IDuration|null|undefined} timeLeft
+                         * @memberof google.ai.generativelanguage.v1beta.GoAway
+                         * @instance
+                         */
+                        GoAway.prototype.timeLeft = null;
+    
+                        /**
+                         * Creates a new GoAway instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.GoAway
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IGoAway=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.GoAway} GoAway instance
+                         */
+                        GoAway.create = function create(properties) {
+                            return new GoAway(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GoAway message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GoAway.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.GoAway
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IGoAway} message GoAway message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoAway.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.timeLeft != null && Object.hasOwnProperty.call(message, "timeLeft"))
+                                $root.google.protobuf.Duration.encode(message.timeLeft, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GoAway message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GoAway.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.GoAway
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IGoAway} message GoAway message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoAway.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GoAway message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.GoAway
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.GoAway} GoAway
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoAway.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GoAway();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.timeLeft = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GoAway message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.GoAway
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.GoAway} GoAway
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoAway.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GoAway message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.GoAway
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GoAway.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.timeLeft != null && message.hasOwnProperty("timeLeft")) {
+                                var error = $root.google.protobuf.Duration.verify(message.timeLeft);
+                                if (error)
+                                    return "timeLeft." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GoAway message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.GoAway
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.GoAway} GoAway
+                         */
+                        GoAway.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.GoAway)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.GoAway();
+                            if (object.timeLeft != null) {
+                                if (typeof object.timeLeft !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.GoAway.timeLeft: object expected");
+                                message.timeLeft = $root.google.protobuf.Duration.fromObject(object.timeLeft);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GoAway message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.GoAway
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.GoAway} message GoAway
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GoAway.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.timeLeft = null;
+                            if (message.timeLeft != null && message.hasOwnProperty("timeLeft"))
+                                object.timeLeft = $root.google.protobuf.Duration.toObject(message.timeLeft, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GoAway to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.GoAway
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GoAway.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GoAway
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.GoAway
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GoAway.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.GoAway";
+                        };
+    
+                        return GoAway;
+                    })();
+    
+                    v1beta.SessionResumptionUpdate = (function() {
+    
+                        /**
+                         * Properties of a SessionResumptionUpdate.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface ISessionResumptionUpdate
+                         * @property {string|null} [newHandle] SessionResumptionUpdate newHandle
+                         * @property {boolean|null} [resumable] SessionResumptionUpdate resumable
+                         */
+    
+                        /**
+                         * Constructs a new SessionResumptionUpdate.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a SessionResumptionUpdate.
+                         * @implements ISessionResumptionUpdate
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.ISessionResumptionUpdate=} [properties] Properties to set
+                         */
+                        function SessionResumptionUpdate(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SessionResumptionUpdate newHandle.
+                         * @member {string} newHandle
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionUpdate
+                         * @instance
+                         */
+                        SessionResumptionUpdate.prototype.newHandle = "";
+    
+                        /**
+                         * SessionResumptionUpdate resumable.
+                         * @member {boolean} resumable
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionUpdate
+                         * @instance
+                         */
+                        SessionResumptionUpdate.prototype.resumable = false;
+    
+                        /**
+                         * Creates a new SessionResumptionUpdate instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionUpdate
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.ISessionResumptionUpdate=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.SessionResumptionUpdate} SessionResumptionUpdate instance
+                         */
+                        SessionResumptionUpdate.create = function create(properties) {
+                            return new SessionResumptionUpdate(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SessionResumptionUpdate message. Does not implicitly {@link google.ai.generativelanguage.v1beta.SessionResumptionUpdate.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionUpdate
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.ISessionResumptionUpdate} message SessionResumptionUpdate message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SessionResumptionUpdate.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.newHandle != null && Object.hasOwnProperty.call(message, "newHandle"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.newHandle);
+                            if (message.resumable != null && Object.hasOwnProperty.call(message, "resumable"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.resumable);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SessionResumptionUpdate message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.SessionResumptionUpdate.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionUpdate
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.ISessionResumptionUpdate} message SessionResumptionUpdate message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SessionResumptionUpdate.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SessionResumptionUpdate message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionUpdate
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.SessionResumptionUpdate} SessionResumptionUpdate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SessionResumptionUpdate.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.SessionResumptionUpdate();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.newHandle = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.resumable = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SessionResumptionUpdate message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionUpdate
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.SessionResumptionUpdate} SessionResumptionUpdate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SessionResumptionUpdate.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SessionResumptionUpdate message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionUpdate
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SessionResumptionUpdate.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.newHandle != null && message.hasOwnProperty("newHandle"))
+                                if (!$util.isString(message.newHandle))
+                                    return "newHandle: string expected";
+                            if (message.resumable != null && message.hasOwnProperty("resumable"))
+                                if (typeof message.resumable !== "boolean")
+                                    return "resumable: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SessionResumptionUpdate message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionUpdate
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.SessionResumptionUpdate} SessionResumptionUpdate
+                         */
+                        SessionResumptionUpdate.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.SessionResumptionUpdate)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.SessionResumptionUpdate();
+                            if (object.newHandle != null)
+                                message.newHandle = String(object.newHandle);
+                            if (object.resumable != null)
+                                message.resumable = Boolean(object.resumable);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SessionResumptionUpdate message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionUpdate
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.SessionResumptionUpdate} message SessionResumptionUpdate
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SessionResumptionUpdate.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.newHandle = "";
+                                object.resumable = false;
+                            }
+                            if (message.newHandle != null && message.hasOwnProperty("newHandle"))
+                                object.newHandle = message.newHandle;
+                            if (message.resumable != null && message.hasOwnProperty("resumable"))
+                                object.resumable = message.resumable;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SessionResumptionUpdate to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionUpdate
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SessionResumptionUpdate.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SessionResumptionUpdate
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionUpdate
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SessionResumptionUpdate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.SessionResumptionUpdate";
+                        };
+    
+                        return SessionResumptionUpdate;
+                    })();
+    
+                    v1beta.BidiGenerateContentTranscription = (function() {
+    
+                        /**
+                         * Properties of a BidiGenerateContentTranscription.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IBidiGenerateContentTranscription
+                         * @property {string|null} [text] BidiGenerateContentTranscription text
+                         */
+    
+                        /**
+                         * Constructs a new BidiGenerateContentTranscription.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a BidiGenerateContentTranscription.
+                         * @implements IBidiGenerateContentTranscription
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription=} [properties] Properties to set
+                         */
+                        function BidiGenerateContentTranscription(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BidiGenerateContentTranscription text.
+                         * @member {string} text
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription
+                         * @instance
+                         */
+                        BidiGenerateContentTranscription.prototype.text = "";
+    
+                        /**
+                         * Creates a new BidiGenerateContentTranscription instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription} BidiGenerateContentTranscription instance
+                         */
+                        BidiGenerateContentTranscription.create = function create(properties) {
+                            return new BidiGenerateContentTranscription(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentTranscription message. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription} message BidiGenerateContentTranscription message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentTranscription.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentTranscription message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription} message BidiGenerateContentTranscription message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentTranscription.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentTranscription message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription} BidiGenerateContentTranscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentTranscription.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.text = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentTranscription message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription} BidiGenerateContentTranscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentTranscription.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BidiGenerateContentTranscription message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BidiGenerateContentTranscription.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.text != null && message.hasOwnProperty("text"))
+                                if (!$util.isString(message.text))
+                                    return "text: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BidiGenerateContentTranscription message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription} BidiGenerateContentTranscription
+                         */
+                        BidiGenerateContentTranscription.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription();
+                            if (object.text != null)
+                                message.text = String(object.text);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BidiGenerateContentTranscription message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription} message BidiGenerateContentTranscription
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BidiGenerateContentTranscription.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.text = "";
+                            if (message.text != null && message.hasOwnProperty("text"))
+                                object.text = message.text;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BidiGenerateContentTranscription to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BidiGenerateContentTranscription.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BidiGenerateContentTranscription
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BidiGenerateContentTranscription.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription";
+                        };
+    
+                        return BidiGenerateContentTranscription;
+                    })();
+    
+                    v1beta.BidiGenerateContentServerMessage = (function() {
+    
+                        /**
+                         * Properties of a BidiGenerateContentServerMessage.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IBidiGenerateContentServerMessage
+                         * @property {google.ai.generativelanguage.v1beta.IBidiGenerateContentSetupComplete|null} [setupComplete] BidiGenerateContentServerMessage setupComplete
+                         * @property {google.ai.generativelanguage.v1beta.IBidiGenerateContentServerContent|null} [serverContent] BidiGenerateContentServerMessage serverContent
+                         * @property {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolCall|null} [toolCall] BidiGenerateContentServerMessage toolCall
+                         * @property {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolCallCancellation|null} [toolCallCancellation] BidiGenerateContentServerMessage toolCallCancellation
+                         * @property {google.ai.generativelanguage.v1beta.IGoAway|null} [goAway] BidiGenerateContentServerMessage goAway
+                         * @property {google.ai.generativelanguage.v1beta.ISessionResumptionUpdate|null} [sessionResumptionUpdate] BidiGenerateContentServerMessage sessionResumptionUpdate
+                         * @property {google.ai.generativelanguage.v1beta.IUsageMetadata|null} [usageMetadata] BidiGenerateContentServerMessage usageMetadata
+                         */
+    
+                        /**
+                         * Constructs a new BidiGenerateContentServerMessage.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a BidiGenerateContentServerMessage.
+                         * @implements IBidiGenerateContentServerMessage
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentServerMessage=} [properties] Properties to set
+                         */
+                        function BidiGenerateContentServerMessage(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BidiGenerateContentServerMessage setupComplete.
+                         * @member {google.ai.generativelanguage.v1beta.IBidiGenerateContentSetupComplete|null|undefined} setupComplete
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @instance
+                         */
+                        BidiGenerateContentServerMessage.prototype.setupComplete = null;
+    
+                        /**
+                         * BidiGenerateContentServerMessage serverContent.
+                         * @member {google.ai.generativelanguage.v1beta.IBidiGenerateContentServerContent|null|undefined} serverContent
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @instance
+                         */
+                        BidiGenerateContentServerMessage.prototype.serverContent = null;
+    
+                        /**
+                         * BidiGenerateContentServerMessage toolCall.
+                         * @member {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolCall|null|undefined} toolCall
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @instance
+                         */
+                        BidiGenerateContentServerMessage.prototype.toolCall = null;
+    
+                        /**
+                         * BidiGenerateContentServerMessage toolCallCancellation.
+                         * @member {google.ai.generativelanguage.v1beta.IBidiGenerateContentToolCallCancellation|null|undefined} toolCallCancellation
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @instance
+                         */
+                        BidiGenerateContentServerMessage.prototype.toolCallCancellation = null;
+    
+                        /**
+                         * BidiGenerateContentServerMessage goAway.
+                         * @member {google.ai.generativelanguage.v1beta.IGoAway|null|undefined} goAway
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @instance
+                         */
+                        BidiGenerateContentServerMessage.prototype.goAway = null;
+    
+                        /**
+                         * BidiGenerateContentServerMessage sessionResumptionUpdate.
+                         * @member {google.ai.generativelanguage.v1beta.ISessionResumptionUpdate|null|undefined} sessionResumptionUpdate
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @instance
+                         */
+                        BidiGenerateContentServerMessage.prototype.sessionResumptionUpdate = null;
+    
+                        /**
+                         * BidiGenerateContentServerMessage usageMetadata.
+                         * @member {google.ai.generativelanguage.v1beta.IUsageMetadata|null|undefined} usageMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @instance
+                         */
+                        BidiGenerateContentServerMessage.prototype.usageMetadata = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BidiGenerateContentServerMessage messageType.
+                         * @member {"setupComplete"|"serverContent"|"toolCall"|"toolCallCancellation"|"goAway"|"sessionResumptionUpdate"|undefined} messageType
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @instance
+                         */
+                        Object.defineProperty(BidiGenerateContentServerMessage.prototype, "messageType", {
+                            get: $util.oneOfGetter($oneOfFields = ["setupComplete", "serverContent", "toolCall", "toolCallCancellation", "goAway", "sessionResumptionUpdate"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BidiGenerateContentServerMessage instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentServerMessage=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage} BidiGenerateContentServerMessage instance
+                         */
+                        BidiGenerateContentServerMessage.create = function create(properties) {
+                            return new BidiGenerateContentServerMessage(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentServerMessage message. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentServerMessage} message BidiGenerateContentServerMessage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentServerMessage.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.setupComplete != null && Object.hasOwnProperty.call(message, "setupComplete"))
+                                $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete.encode(message.setupComplete, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.serverContent != null && Object.hasOwnProperty.call(message, "serverContent"))
+                                $root.google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent.encode(message.serverContent, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.toolCall != null && Object.hasOwnProperty.call(message, "toolCall"))
+                                $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall.encode(message.toolCall, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.toolCallCancellation != null && Object.hasOwnProperty.call(message, "toolCallCancellation"))
+                                $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation.encode(message.toolCallCancellation, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.goAway != null && Object.hasOwnProperty.call(message, "goAway"))
+                                $root.google.ai.generativelanguage.v1beta.GoAway.encode(message.goAway, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.sessionResumptionUpdate != null && Object.hasOwnProperty.call(message, "sessionResumptionUpdate"))
+                                $root.google.ai.generativelanguage.v1beta.SessionResumptionUpdate.encode(message.sessionResumptionUpdate, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.usageMetadata != null && Object.hasOwnProperty.call(message, "usageMetadata"))
+                                $root.google.ai.generativelanguage.v1beta.UsageMetadata.encode(message.usageMetadata, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BidiGenerateContentServerMessage message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IBidiGenerateContentServerMessage} message BidiGenerateContentServerMessage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BidiGenerateContentServerMessage.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentServerMessage message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage} BidiGenerateContentServerMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentServerMessage.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.setupComplete = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.serverContent = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.toolCall = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.toolCallCancellation = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.goAway = $root.google.ai.generativelanguage.v1beta.GoAway.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.sessionResumptionUpdate = $root.google.ai.generativelanguage.v1beta.SessionResumptionUpdate.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.usageMetadata = $root.google.ai.generativelanguage.v1beta.UsageMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BidiGenerateContentServerMessage message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage} BidiGenerateContentServerMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BidiGenerateContentServerMessage.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BidiGenerateContentServerMessage message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BidiGenerateContentServerMessage.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.setupComplete != null && message.hasOwnProperty("setupComplete")) {
+                                properties.messageType = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete.verify(message.setupComplete);
+                                    if (error)
+                                        return "setupComplete." + error;
+                                }
+                            }
+                            if (message.serverContent != null && message.hasOwnProperty("serverContent")) {
+                                if (properties.messageType === 1)
+                                    return "messageType: multiple values";
+                                properties.messageType = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent.verify(message.serverContent);
+                                    if (error)
+                                        return "serverContent." + error;
+                                }
+                            }
+                            if (message.toolCall != null && message.hasOwnProperty("toolCall")) {
+                                if (properties.messageType === 1)
+                                    return "messageType: multiple values";
+                                properties.messageType = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall.verify(message.toolCall);
+                                    if (error)
+                                        return "toolCall." + error;
+                                }
+                            }
+                            if (message.toolCallCancellation != null && message.hasOwnProperty("toolCallCancellation")) {
+                                if (properties.messageType === 1)
+                                    return "messageType: multiple values";
+                                properties.messageType = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation.verify(message.toolCallCancellation);
+                                    if (error)
+                                        return "toolCallCancellation." + error;
+                                }
+                            }
+                            if (message.goAway != null && message.hasOwnProperty("goAway")) {
+                                if (properties.messageType === 1)
+                                    return "messageType: multiple values";
+                                properties.messageType = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.GoAway.verify(message.goAway);
+                                    if (error)
+                                        return "goAway." + error;
+                                }
+                            }
+                            if (message.sessionResumptionUpdate != null && message.hasOwnProperty("sessionResumptionUpdate")) {
+                                if (properties.messageType === 1)
+                                    return "messageType: multiple values";
+                                properties.messageType = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.SessionResumptionUpdate.verify(message.sessionResumptionUpdate);
+                                    if (error)
+                                        return "sessionResumptionUpdate." + error;
+                                }
+                            }
+                            if (message.usageMetadata != null && message.hasOwnProperty("usageMetadata")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.UsageMetadata.verify(message.usageMetadata);
+                                if (error)
+                                    return "usageMetadata." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BidiGenerateContentServerMessage message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage} BidiGenerateContentServerMessage
+                         */
+                        BidiGenerateContentServerMessage.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage();
+                            if (object.setupComplete != null) {
+                                if (typeof object.setupComplete !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage.setupComplete: object expected");
+                                message.setupComplete = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete.fromObject(object.setupComplete);
+                            }
+                            if (object.serverContent != null) {
+                                if (typeof object.serverContent !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage.serverContent: object expected");
+                                message.serverContent = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent.fromObject(object.serverContent);
+                            }
+                            if (object.toolCall != null) {
+                                if (typeof object.toolCall !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage.toolCall: object expected");
+                                message.toolCall = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall.fromObject(object.toolCall);
+                            }
+                            if (object.toolCallCancellation != null) {
+                                if (typeof object.toolCallCancellation !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage.toolCallCancellation: object expected");
+                                message.toolCallCancellation = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation.fromObject(object.toolCallCancellation);
+                            }
+                            if (object.goAway != null) {
+                                if (typeof object.goAway !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage.goAway: object expected");
+                                message.goAway = $root.google.ai.generativelanguage.v1beta.GoAway.fromObject(object.goAway);
+                            }
+                            if (object.sessionResumptionUpdate != null) {
+                                if (typeof object.sessionResumptionUpdate !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage.sessionResumptionUpdate: object expected");
+                                message.sessionResumptionUpdate = $root.google.ai.generativelanguage.v1beta.SessionResumptionUpdate.fromObject(object.sessionResumptionUpdate);
+                            }
+                            if (object.usageMetadata != null) {
+                                if (typeof object.usageMetadata !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage.usageMetadata: object expected");
+                                message.usageMetadata = $root.google.ai.generativelanguage.v1beta.UsageMetadata.fromObject(object.usageMetadata);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BidiGenerateContentServerMessage message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage} message BidiGenerateContentServerMessage
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BidiGenerateContentServerMessage.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.usageMetadata = null;
+                            if (message.setupComplete != null && message.hasOwnProperty("setupComplete")) {
+                                object.setupComplete = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete.toObject(message.setupComplete, options);
+                                if (options.oneofs)
+                                    object.messageType = "setupComplete";
+                            }
+                            if (message.serverContent != null && message.hasOwnProperty("serverContent")) {
+                                object.serverContent = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent.toObject(message.serverContent, options);
+                                if (options.oneofs)
+                                    object.messageType = "serverContent";
+                            }
+                            if (message.toolCall != null && message.hasOwnProperty("toolCall")) {
+                                object.toolCall = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall.toObject(message.toolCall, options);
+                                if (options.oneofs)
+                                    object.messageType = "toolCall";
+                            }
+                            if (message.toolCallCancellation != null && message.hasOwnProperty("toolCallCancellation")) {
+                                object.toolCallCancellation = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation.toObject(message.toolCallCancellation, options);
+                                if (options.oneofs)
+                                    object.messageType = "toolCallCancellation";
+                            }
+                            if (message.goAway != null && message.hasOwnProperty("goAway")) {
+                                object.goAway = $root.google.ai.generativelanguage.v1beta.GoAway.toObject(message.goAway, options);
+                                if (options.oneofs)
+                                    object.messageType = "goAway";
+                            }
+                            if (message.sessionResumptionUpdate != null && message.hasOwnProperty("sessionResumptionUpdate")) {
+                                object.sessionResumptionUpdate = $root.google.ai.generativelanguage.v1beta.SessionResumptionUpdate.toObject(message.sessionResumptionUpdate, options);
+                                if (options.oneofs)
+                                    object.messageType = "sessionResumptionUpdate";
+                            }
+                            if (message.usageMetadata != null && message.hasOwnProperty("usageMetadata"))
+                                object.usageMetadata = $root.google.ai.generativelanguage.v1beta.UsageMetadata.toObject(message.usageMetadata, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BidiGenerateContentServerMessage to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BidiGenerateContentServerMessage.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BidiGenerateContentServerMessage
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BidiGenerateContentServerMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage";
+                        };
+    
+                        return BidiGenerateContentServerMessage;
+                    })();
+    
+                    v1beta.UsageMetadata = (function() {
+    
+                        /**
+                         * Properties of a UsageMetadata.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IUsageMetadata
+                         * @property {number|null} [promptTokenCount] UsageMetadata promptTokenCount
+                         * @property {number|null} [cachedContentTokenCount] UsageMetadata cachedContentTokenCount
+                         * @property {number|null} [responseTokenCount] UsageMetadata responseTokenCount
+                         * @property {number|null} [toolUsePromptTokenCount] UsageMetadata toolUsePromptTokenCount
+                         * @property {number|null} [thoughtsTokenCount] UsageMetadata thoughtsTokenCount
+                         * @property {number|null} [totalTokenCount] UsageMetadata totalTokenCount
+                         * @property {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>|null} [promptTokensDetails] UsageMetadata promptTokensDetails
+                         * @property {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>|null} [cacheTokensDetails] UsageMetadata cacheTokensDetails
+                         * @property {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>|null} [responseTokensDetails] UsageMetadata responseTokensDetails
+                         * @property {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>|null} [toolUsePromptTokensDetails] UsageMetadata toolUsePromptTokensDetails
+                         */
+    
+                        /**
+                         * Constructs a new UsageMetadata.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a UsageMetadata.
+                         * @implements IUsageMetadata
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IUsageMetadata=} [properties] Properties to set
+                         */
+                        function UsageMetadata(properties) {
+                            this.promptTokensDetails = [];
+                            this.cacheTokensDetails = [];
+                            this.responseTokensDetails = [];
+                            this.toolUsePromptTokensDetails = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UsageMetadata promptTokenCount.
+                         * @member {number} promptTokenCount
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @instance
+                         */
+                        UsageMetadata.prototype.promptTokenCount = 0;
+    
+                        /**
+                         * UsageMetadata cachedContentTokenCount.
+                         * @member {number} cachedContentTokenCount
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @instance
+                         */
+                        UsageMetadata.prototype.cachedContentTokenCount = 0;
+    
+                        /**
+                         * UsageMetadata responseTokenCount.
+                         * @member {number} responseTokenCount
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @instance
+                         */
+                        UsageMetadata.prototype.responseTokenCount = 0;
+    
+                        /**
+                         * UsageMetadata toolUsePromptTokenCount.
+                         * @member {number} toolUsePromptTokenCount
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @instance
+                         */
+                        UsageMetadata.prototype.toolUsePromptTokenCount = 0;
+    
+                        /**
+                         * UsageMetadata thoughtsTokenCount.
+                         * @member {number} thoughtsTokenCount
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @instance
+                         */
+                        UsageMetadata.prototype.thoughtsTokenCount = 0;
+    
+                        /**
+                         * UsageMetadata totalTokenCount.
+                         * @member {number} totalTokenCount
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @instance
+                         */
+                        UsageMetadata.prototype.totalTokenCount = 0;
+    
+                        /**
+                         * UsageMetadata promptTokensDetails.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>} promptTokensDetails
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @instance
+                         */
+                        UsageMetadata.prototype.promptTokensDetails = $util.emptyArray;
+    
+                        /**
+                         * UsageMetadata cacheTokensDetails.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>} cacheTokensDetails
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @instance
+                         */
+                        UsageMetadata.prototype.cacheTokensDetails = $util.emptyArray;
+    
+                        /**
+                         * UsageMetadata responseTokensDetails.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>} responseTokensDetails
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @instance
+                         */
+                        UsageMetadata.prototype.responseTokensDetails = $util.emptyArray;
+    
+                        /**
+                         * UsageMetadata toolUsePromptTokensDetails.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.IModalityTokenCount>} toolUsePromptTokensDetails
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @instance
+                         */
+                        UsageMetadata.prototype.toolUsePromptTokensDetails = $util.emptyArray;
+    
+                        /**
+                         * Creates a new UsageMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IUsageMetadata=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.UsageMetadata} UsageMetadata instance
+                         */
+                        UsageMetadata.create = function create(properties) {
+                            return new UsageMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UsageMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.UsageMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IUsageMetadata} message UsageMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UsageMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.promptTokenCount != null && Object.hasOwnProperty.call(message, "promptTokenCount"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.promptTokenCount);
+                            if (message.responseTokenCount != null && Object.hasOwnProperty.call(message, "responseTokenCount"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.responseTokenCount);
+                            if (message.totalTokenCount != null && Object.hasOwnProperty.call(message, "totalTokenCount"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.totalTokenCount);
+                            if (message.cachedContentTokenCount != null && Object.hasOwnProperty.call(message, "cachedContentTokenCount"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.cachedContentTokenCount);
+                            if (message.promptTokensDetails != null && message.promptTokensDetails.length)
+                                for (var i = 0; i < message.promptTokensDetails.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.encode(message.promptTokensDetails[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.cacheTokensDetails != null && message.cacheTokensDetails.length)
+                                for (var i = 0; i < message.cacheTokensDetails.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.encode(message.cacheTokensDetails[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.responseTokensDetails != null && message.responseTokensDetails.length)
+                                for (var i = 0; i < message.responseTokensDetails.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.encode(message.responseTokensDetails[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.toolUsePromptTokenCount != null && Object.hasOwnProperty.call(message, "toolUsePromptTokenCount"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.toolUsePromptTokenCount);
+                            if (message.toolUsePromptTokensDetails != null && message.toolUsePromptTokensDetails.length)
+                                for (var i = 0; i < message.toolUsePromptTokensDetails.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.encode(message.toolUsePromptTokensDetails[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.thoughtsTokenCount != null && Object.hasOwnProperty.call(message, "thoughtsTokenCount"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.thoughtsTokenCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UsageMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.UsageMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IUsageMetadata} message UsageMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UsageMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a UsageMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.UsageMetadata} UsageMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UsageMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.UsageMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.promptTokenCount = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.cachedContentTokenCount = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.responseTokenCount = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.toolUsePromptTokenCount = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.thoughtsTokenCount = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.totalTokenCount = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.promptTokensDetails && message.promptTokensDetails.length))
+                                            message.promptTokensDetails = [];
+                                        message.promptTokensDetails.push($root.google.ai.generativelanguage.v1beta.ModalityTokenCount.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.cacheTokensDetails && message.cacheTokensDetails.length))
+                                            message.cacheTokensDetails = [];
+                                        message.cacheTokensDetails.push($root.google.ai.generativelanguage.v1beta.ModalityTokenCount.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.responseTokensDetails && message.responseTokensDetails.length))
+                                            message.responseTokensDetails = [];
+                                        message.responseTokensDetails.push($root.google.ai.generativelanguage.v1beta.ModalityTokenCount.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 9: {
+                                        if (!(message.toolUsePromptTokensDetails && message.toolUsePromptTokensDetails.length))
+                                            message.toolUsePromptTokensDetails = [];
+                                        message.toolUsePromptTokensDetails.push($root.google.ai.generativelanguage.v1beta.ModalityTokenCount.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a UsageMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.UsageMetadata} UsageMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UsageMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a UsageMetadata message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UsageMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.promptTokenCount != null && message.hasOwnProperty("promptTokenCount"))
+                                if (!$util.isInteger(message.promptTokenCount))
+                                    return "promptTokenCount: integer expected";
+                            if (message.cachedContentTokenCount != null && message.hasOwnProperty("cachedContentTokenCount"))
+                                if (!$util.isInteger(message.cachedContentTokenCount))
+                                    return "cachedContentTokenCount: integer expected";
+                            if (message.responseTokenCount != null && message.hasOwnProperty("responseTokenCount"))
+                                if (!$util.isInteger(message.responseTokenCount))
+                                    return "responseTokenCount: integer expected";
+                            if (message.toolUsePromptTokenCount != null && message.hasOwnProperty("toolUsePromptTokenCount"))
+                                if (!$util.isInteger(message.toolUsePromptTokenCount))
+                                    return "toolUsePromptTokenCount: integer expected";
+                            if (message.thoughtsTokenCount != null && message.hasOwnProperty("thoughtsTokenCount"))
+                                if (!$util.isInteger(message.thoughtsTokenCount))
+                                    return "thoughtsTokenCount: integer expected";
+                            if (message.totalTokenCount != null && message.hasOwnProperty("totalTokenCount"))
+                                if (!$util.isInteger(message.totalTokenCount))
+                                    return "totalTokenCount: integer expected";
+                            if (message.promptTokensDetails != null && message.hasOwnProperty("promptTokensDetails")) {
+                                if (!Array.isArray(message.promptTokensDetails))
+                                    return "promptTokensDetails: array expected";
+                                for (var i = 0; i < message.promptTokensDetails.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.verify(message.promptTokensDetails[i]);
+                                    if (error)
+                                        return "promptTokensDetails." + error;
+                                }
+                            }
+                            if (message.cacheTokensDetails != null && message.hasOwnProperty("cacheTokensDetails")) {
+                                if (!Array.isArray(message.cacheTokensDetails))
+                                    return "cacheTokensDetails: array expected";
+                                for (var i = 0; i < message.cacheTokensDetails.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.verify(message.cacheTokensDetails[i]);
+                                    if (error)
+                                        return "cacheTokensDetails." + error;
+                                }
+                            }
+                            if (message.responseTokensDetails != null && message.hasOwnProperty("responseTokensDetails")) {
+                                if (!Array.isArray(message.responseTokensDetails))
+                                    return "responseTokensDetails: array expected";
+                                for (var i = 0; i < message.responseTokensDetails.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.verify(message.responseTokensDetails[i]);
+                                    if (error)
+                                        return "responseTokensDetails." + error;
+                                }
+                            }
+                            if (message.toolUsePromptTokensDetails != null && message.hasOwnProperty("toolUsePromptTokensDetails")) {
+                                if (!Array.isArray(message.toolUsePromptTokensDetails))
+                                    return "toolUsePromptTokensDetails: array expected";
+                                for (var i = 0; i < message.toolUsePromptTokensDetails.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.verify(message.toolUsePromptTokensDetails[i]);
+                                    if (error)
+                                        return "toolUsePromptTokensDetails." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a UsageMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.UsageMetadata} UsageMetadata
+                         */
+                        UsageMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.UsageMetadata)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.UsageMetadata();
+                            if (object.promptTokenCount != null)
+                                message.promptTokenCount = object.promptTokenCount | 0;
+                            if (object.cachedContentTokenCount != null)
+                                message.cachedContentTokenCount = object.cachedContentTokenCount | 0;
+                            if (object.responseTokenCount != null)
+                                message.responseTokenCount = object.responseTokenCount | 0;
+                            if (object.toolUsePromptTokenCount != null)
+                                message.toolUsePromptTokenCount = object.toolUsePromptTokenCount | 0;
+                            if (object.thoughtsTokenCount != null)
+                                message.thoughtsTokenCount = object.thoughtsTokenCount | 0;
+                            if (object.totalTokenCount != null)
+                                message.totalTokenCount = object.totalTokenCount | 0;
+                            if (object.promptTokensDetails) {
+                                if (!Array.isArray(object.promptTokensDetails))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.UsageMetadata.promptTokensDetails: array expected");
+                                message.promptTokensDetails = [];
+                                for (var i = 0; i < object.promptTokensDetails.length; ++i) {
+                                    if (typeof object.promptTokensDetails[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.UsageMetadata.promptTokensDetails: object expected");
+                                    message.promptTokensDetails[i] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.fromObject(object.promptTokensDetails[i]);
+                                }
+                            }
+                            if (object.cacheTokensDetails) {
+                                if (!Array.isArray(object.cacheTokensDetails))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.UsageMetadata.cacheTokensDetails: array expected");
+                                message.cacheTokensDetails = [];
+                                for (var i = 0; i < object.cacheTokensDetails.length; ++i) {
+                                    if (typeof object.cacheTokensDetails[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.UsageMetadata.cacheTokensDetails: object expected");
+                                    message.cacheTokensDetails[i] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.fromObject(object.cacheTokensDetails[i]);
+                                }
+                            }
+                            if (object.responseTokensDetails) {
+                                if (!Array.isArray(object.responseTokensDetails))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.UsageMetadata.responseTokensDetails: array expected");
+                                message.responseTokensDetails = [];
+                                for (var i = 0; i < object.responseTokensDetails.length; ++i) {
+                                    if (typeof object.responseTokensDetails[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.UsageMetadata.responseTokensDetails: object expected");
+                                    message.responseTokensDetails[i] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.fromObject(object.responseTokensDetails[i]);
+                                }
+                            }
+                            if (object.toolUsePromptTokensDetails) {
+                                if (!Array.isArray(object.toolUsePromptTokensDetails))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.UsageMetadata.toolUsePromptTokensDetails: array expected");
+                                message.toolUsePromptTokensDetails = [];
+                                for (var i = 0; i < object.toolUsePromptTokensDetails.length; ++i) {
+                                    if (typeof object.toolUsePromptTokensDetails[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.UsageMetadata.toolUsePromptTokensDetails: object expected");
+                                    message.toolUsePromptTokensDetails[i] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.fromObject(object.toolUsePromptTokensDetails[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a UsageMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.UsageMetadata} message UsageMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UsageMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.promptTokensDetails = [];
+                                object.cacheTokensDetails = [];
+                                object.responseTokensDetails = [];
+                                object.toolUsePromptTokensDetails = [];
+                            }
+                            if (options.defaults) {
+                                object.promptTokenCount = 0;
+                                object.responseTokenCount = 0;
+                                object.totalTokenCount = 0;
+                                object.cachedContentTokenCount = 0;
+                                object.toolUsePromptTokenCount = 0;
+                                object.thoughtsTokenCount = 0;
+                            }
+                            if (message.promptTokenCount != null && message.hasOwnProperty("promptTokenCount"))
+                                object.promptTokenCount = message.promptTokenCount;
+                            if (message.responseTokenCount != null && message.hasOwnProperty("responseTokenCount"))
+                                object.responseTokenCount = message.responseTokenCount;
+                            if (message.totalTokenCount != null && message.hasOwnProperty("totalTokenCount"))
+                                object.totalTokenCount = message.totalTokenCount;
+                            if (message.cachedContentTokenCount != null && message.hasOwnProperty("cachedContentTokenCount"))
+                                object.cachedContentTokenCount = message.cachedContentTokenCount;
+                            if (message.promptTokensDetails && message.promptTokensDetails.length) {
+                                object.promptTokensDetails = [];
+                                for (var j = 0; j < message.promptTokensDetails.length; ++j)
+                                    object.promptTokensDetails[j] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.toObject(message.promptTokensDetails[j], options);
+                            }
+                            if (message.cacheTokensDetails && message.cacheTokensDetails.length) {
+                                object.cacheTokensDetails = [];
+                                for (var j = 0; j < message.cacheTokensDetails.length; ++j)
+                                    object.cacheTokensDetails[j] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.toObject(message.cacheTokensDetails[j], options);
+                            }
+                            if (message.responseTokensDetails && message.responseTokensDetails.length) {
+                                object.responseTokensDetails = [];
+                                for (var j = 0; j < message.responseTokensDetails.length; ++j)
+                                    object.responseTokensDetails[j] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.toObject(message.responseTokensDetails[j], options);
+                            }
+                            if (message.toolUsePromptTokenCount != null && message.hasOwnProperty("toolUsePromptTokenCount"))
+                                object.toolUsePromptTokenCount = message.toolUsePromptTokenCount;
+                            if (message.toolUsePromptTokensDetails && message.toolUsePromptTokensDetails.length) {
+                                object.toolUsePromptTokensDetails = [];
+                                for (var j = 0; j < message.toolUsePromptTokensDetails.length; ++j)
+                                    object.toolUsePromptTokensDetails[j] = $root.google.ai.generativelanguage.v1beta.ModalityTokenCount.toObject(message.toolUsePromptTokensDetails[j], options);
+                            }
+                            if (message.thoughtsTokenCount != null && message.hasOwnProperty("thoughtsTokenCount"))
+                                object.thoughtsTokenCount = message.thoughtsTokenCount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UsageMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UsageMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UsageMetadata
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.UsageMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UsageMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.UsageMetadata";
+                        };
+    
+                        return UsageMetadata;
                     })();
     
                     v1beta.Corpus = (function() {
@@ -94665,6 +103399,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.ai.generativelanguage.v1beta.PredictionService|predictLongRunning}.
+                         * @memberof google.ai.generativelanguage.v1beta.PredictionService
+                         * @typedef PredictLongRunningCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls PredictLongRunning.
+                         * @function predictLongRunning
+                         * @memberof google.ai.generativelanguage.v1beta.PredictionService
+                         * @instance
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningRequest} request PredictLongRunningRequest message or plain object
+                         * @param {google.ai.generativelanguage.v1beta.PredictionService.PredictLongRunningCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PredictionService.prototype.predictLongRunning = function predictLongRunning(request, callback) {
+                            return this.rpcCall(predictLongRunning, $root.google.ai.generativelanguage.v1beta.PredictLongRunningRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "PredictLongRunning" });
+    
+                        /**
+                         * Calls PredictLongRunning.
+                         * @function predictLongRunning
+                         * @memberof google.ai.generativelanguage.v1beta.PredictionService
+                         * @instance
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningRequest} request PredictLongRunningRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return PredictionService;
                     })();
     
@@ -94945,6 +103712,283 @@
                         return PredictRequest;
                     })();
     
+                    v1beta.PredictLongRunningRequest = (function() {
+    
+                        /**
+                         * Properties of a PredictLongRunningRequest.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IPredictLongRunningRequest
+                         * @property {string|null} [model] PredictLongRunningRequest model
+                         * @property {Array.<google.protobuf.IValue>|null} [instances] PredictLongRunningRequest instances
+                         * @property {google.protobuf.IValue|null} [parameters] PredictLongRunningRequest parameters
+                         */
+    
+                        /**
+                         * Constructs a new PredictLongRunningRequest.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a PredictLongRunningRequest.
+                         * @implements IPredictLongRunningRequest
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningRequest=} [properties] Properties to set
+                         */
+                        function PredictLongRunningRequest(properties) {
+                            this.instances = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PredictLongRunningRequest model.
+                         * @member {string} model
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningRequest
+                         * @instance
+                         */
+                        PredictLongRunningRequest.prototype.model = "";
+    
+                        /**
+                         * PredictLongRunningRequest instances.
+                         * @member {Array.<google.protobuf.IValue>} instances
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningRequest
+                         * @instance
+                         */
+                        PredictLongRunningRequest.prototype.instances = $util.emptyArray;
+    
+                        /**
+                         * PredictLongRunningRequest parameters.
+                         * @member {google.protobuf.IValue|null|undefined} parameters
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningRequest
+                         * @instance
+                         */
+                        PredictLongRunningRequest.prototype.parameters = null;
+    
+                        /**
+                         * Creates a new PredictLongRunningRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningRequest
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningRequest=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningRequest} PredictLongRunningRequest instance
+                         */
+                        PredictLongRunningRequest.create = function create(properties) {
+                            return new PredictLongRunningRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PredictLongRunningRequest message. Does not implicitly {@link google.ai.generativelanguage.v1beta.PredictLongRunningRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningRequest
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningRequest} message PredictLongRunningRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PredictLongRunningRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.model);
+                            if (message.instances != null && message.instances.length)
+                                for (var i = 0; i < message.instances.length; ++i)
+                                    $root.google.protobuf.Value.encode(message.instances[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.parameters != null && Object.hasOwnProperty.call(message, "parameters"))
+                                $root.google.protobuf.Value.encode(message.parameters, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PredictLongRunningRequest message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.PredictLongRunningRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningRequest
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningRequest} message PredictLongRunningRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PredictLongRunningRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PredictLongRunningRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningRequest} PredictLongRunningRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PredictLongRunningRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.PredictLongRunningRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.model = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.instances && message.instances.length))
+                                            message.instances = [];
+                                        message.instances.push($root.google.protobuf.Value.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.parameters = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PredictLongRunningRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningRequest} PredictLongRunningRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PredictLongRunningRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PredictLongRunningRequest message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PredictLongRunningRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                if (!$util.isString(message.model))
+                                    return "model: string expected";
+                            if (message.instances != null && message.hasOwnProperty("instances")) {
+                                if (!Array.isArray(message.instances))
+                                    return "instances: array expected";
+                                for (var i = 0; i < message.instances.length; ++i) {
+                                    var error = $root.google.protobuf.Value.verify(message.instances[i]);
+                                    if (error)
+                                        return "instances." + error;
+                                }
+                            }
+                            if (message.parameters != null && message.hasOwnProperty("parameters")) {
+                                var error = $root.google.protobuf.Value.verify(message.parameters);
+                                if (error)
+                                    return "parameters." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PredictLongRunningRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningRequest} PredictLongRunningRequest
+                         */
+                        PredictLongRunningRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.PredictLongRunningRequest)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.PredictLongRunningRequest();
+                            if (object.model != null)
+                                message.model = String(object.model);
+                            if (object.instances) {
+                                if (!Array.isArray(object.instances))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.PredictLongRunningRequest.instances: array expected");
+                                message.instances = [];
+                                for (var i = 0; i < object.instances.length; ++i) {
+                                    if (typeof object.instances[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.PredictLongRunningRequest.instances: object expected");
+                                    message.instances[i] = $root.google.protobuf.Value.fromObject(object.instances[i]);
+                                }
+                            }
+                            if (object.parameters != null) {
+                                if (typeof object.parameters !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.PredictLongRunningRequest.parameters: object expected");
+                                message.parameters = $root.google.protobuf.Value.fromObject(object.parameters);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PredictLongRunningRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningRequest
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.PredictLongRunningRequest} message PredictLongRunningRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PredictLongRunningRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.instances = [];
+                            if (options.defaults) {
+                                object.model = "";
+                                object.parameters = null;
+                            }
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                object.model = message.model;
+                            if (message.instances && message.instances.length) {
+                                object.instances = [];
+                                for (var j = 0; j < message.instances.length; ++j)
+                                    object.instances[j] = $root.google.protobuf.Value.toObject(message.instances[j], options);
+                            }
+                            if (message.parameters != null && message.hasOwnProperty("parameters"))
+                                object.parameters = $root.google.protobuf.Value.toObject(message.parameters, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PredictLongRunningRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PredictLongRunningRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PredictLongRunningRequest
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PredictLongRunningRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.PredictLongRunningRequest";
+                        };
+    
+                        return PredictLongRunningRequest;
+                    })();
+    
                     v1beta.PredictResponse = (function() {
     
                         /**
@@ -95167,6 +104211,1176 @@
                         };
     
                         return PredictResponse;
+                    })();
+    
+                    v1beta.PredictLongRunningResponse = (function() {
+    
+                        /**
+                         * Properties of a PredictLongRunningResponse.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IPredictLongRunningResponse
+                         * @property {google.ai.generativelanguage.v1beta.IGenerateVideoResponse|null} [generateVideoResponse] PredictLongRunningResponse generateVideoResponse
+                         */
+    
+                        /**
+                         * Constructs a new PredictLongRunningResponse.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a PredictLongRunningResponse.
+                         * @implements IPredictLongRunningResponse
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningResponse=} [properties] Properties to set
+                         */
+                        function PredictLongRunningResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PredictLongRunningResponse generateVideoResponse.
+                         * @member {google.ai.generativelanguage.v1beta.IGenerateVideoResponse|null|undefined} generateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningResponse
+                         * @instance
+                         */
+                        PredictLongRunningResponse.prototype.generateVideoResponse = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * PredictLongRunningResponse response.
+                         * @member {"generateVideoResponse"|undefined} response
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningResponse
+                         * @instance
+                         */
+                        Object.defineProperty(PredictLongRunningResponse.prototype, "response", {
+                            get: $util.oneOfGetter($oneOfFields = ["generateVideoResponse"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new PredictLongRunningResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningResponse
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningResponse=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningResponse} PredictLongRunningResponse instance
+                         */
+                        PredictLongRunningResponse.create = function create(properties) {
+                            return new PredictLongRunningResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PredictLongRunningResponse message. Does not implicitly {@link google.ai.generativelanguage.v1beta.PredictLongRunningResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningResponse
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningResponse} message PredictLongRunningResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PredictLongRunningResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.generateVideoResponse != null && Object.hasOwnProperty.call(message, "generateVideoResponse"))
+                                $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse.encode(message.generateVideoResponse, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PredictLongRunningResponse message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.PredictLongRunningResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningResponse
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningResponse} message PredictLongRunningResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PredictLongRunningResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PredictLongRunningResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningResponse} PredictLongRunningResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PredictLongRunningResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.PredictLongRunningResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.generateVideoResponse = $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PredictLongRunningResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningResponse} PredictLongRunningResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PredictLongRunningResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PredictLongRunningResponse message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PredictLongRunningResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.generateVideoResponse != null && message.hasOwnProperty("generateVideoResponse")) {
+                                properties.response = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse.verify(message.generateVideoResponse);
+                                    if (error)
+                                        return "generateVideoResponse." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PredictLongRunningResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningResponse} PredictLongRunningResponse
+                         */
+                        PredictLongRunningResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.PredictLongRunningResponse)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.PredictLongRunningResponse();
+                            if (object.generateVideoResponse != null) {
+                                if (typeof object.generateVideoResponse !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.PredictLongRunningResponse.generateVideoResponse: object expected");
+                                message.generateVideoResponse = $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse.fromObject(object.generateVideoResponse);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PredictLongRunningResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningResponse
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.PredictLongRunningResponse} message PredictLongRunningResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PredictLongRunningResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.generateVideoResponse != null && message.hasOwnProperty("generateVideoResponse")) {
+                                object.generateVideoResponse = $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse.toObject(message.generateVideoResponse, options);
+                                if (options.oneofs)
+                                    object.response = "generateVideoResponse";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PredictLongRunningResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PredictLongRunningResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PredictLongRunningResponse
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PredictLongRunningResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.PredictLongRunningResponse";
+                        };
+    
+                        return PredictLongRunningResponse;
+                    })();
+    
+                    v1beta.PredictLongRunningMetadata = (function() {
+    
+                        /**
+                         * Properties of a PredictLongRunningMetadata.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IPredictLongRunningMetadata
+                         */
+    
+                        /**
+                         * Constructs a new PredictLongRunningMetadata.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a PredictLongRunningMetadata.
+                         * @implements IPredictLongRunningMetadata
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata=} [properties] Properties to set
+                         */
+                        function PredictLongRunningMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new PredictLongRunningMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningMetadata} PredictLongRunningMetadata instance
+                         */
+                        PredictLongRunningMetadata.create = function create(properties) {
+                            return new PredictLongRunningMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PredictLongRunningMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.PredictLongRunningMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata} message PredictLongRunningMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PredictLongRunningMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PredictLongRunningMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.PredictLongRunningMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata} message PredictLongRunningMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PredictLongRunningMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PredictLongRunningMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningMetadata} PredictLongRunningMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PredictLongRunningMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.PredictLongRunningMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PredictLongRunningMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningMetadata} PredictLongRunningMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PredictLongRunningMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PredictLongRunningMetadata message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PredictLongRunningMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PredictLongRunningMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningMetadata} PredictLongRunningMetadata
+                         */
+                        PredictLongRunningMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.PredictLongRunningMetadata)
+                                return object;
+                            return new $root.google.ai.generativelanguage.v1beta.PredictLongRunningMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from a PredictLongRunningMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.PredictLongRunningMetadata} message PredictLongRunningMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PredictLongRunningMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this PredictLongRunningMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PredictLongRunningMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PredictLongRunningMetadata
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PredictLongRunningMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.PredictLongRunningMetadata";
+                        };
+    
+                        return PredictLongRunningMetadata;
+                    })();
+    
+                    v1beta.Media = (function() {
+    
+                        /**
+                         * Properties of a Media.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IMedia
+                         * @property {google.ai.generativelanguage.v1beta.IVideo|null} [video] Media video
+                         */
+    
+                        /**
+                         * Constructs a new Media.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a Media.
+                         * @implements IMedia
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IMedia=} [properties] Properties to set
+                         */
+                        function Media(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Media video.
+                         * @member {google.ai.generativelanguage.v1beta.IVideo|null|undefined} video
+                         * @memberof google.ai.generativelanguage.v1beta.Media
+                         * @instance
+                         */
+                        Media.prototype.video = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Media type.
+                         * @member {"video"|undefined} type
+                         * @memberof google.ai.generativelanguage.v1beta.Media
+                         * @instance
+                         */
+                        Object.defineProperty(Media.prototype, "type", {
+                            get: $util.oneOfGetter($oneOfFields = ["video"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Media instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.Media
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IMedia=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.Media} Media instance
+                         */
+                        Media.create = function create(properties) {
+                            return new Media(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Media message. Does not implicitly {@link google.ai.generativelanguage.v1beta.Media.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.Media
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IMedia} message Media message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Media.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.video != null && Object.hasOwnProperty.call(message, "video"))
+                                $root.google.ai.generativelanguage.v1beta.Video.encode(message.video, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Media message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.Media.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.Media
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IMedia} message Media message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Media.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Media message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.Media
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.Media} Media
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Media.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Media();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.video = $root.google.ai.generativelanguage.v1beta.Video.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Media message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.Media
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.Media} Media
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Media.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Media message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.Media
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Media.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.video != null && message.hasOwnProperty("video")) {
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.Video.verify(message.video);
+                                    if (error)
+                                        return "video." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Media message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.Media
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.Media} Media
+                         */
+                        Media.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.Media)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.Media();
+                            if (object.video != null) {
+                                if (typeof object.video !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.Media.video: object expected");
+                                message.video = $root.google.ai.generativelanguage.v1beta.Video.fromObject(object.video);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Media message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.Media
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.Media} message Media
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Media.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.video != null && message.hasOwnProperty("video")) {
+                                object.video = $root.google.ai.generativelanguage.v1beta.Video.toObject(message.video, options);
+                                if (options.oneofs)
+                                    object.type = "video";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Media to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.Media
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Media.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Media
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.Media
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Media.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.Media";
+                        };
+    
+                        return Media;
+                    })();
+    
+                    v1beta.Video = (function() {
+    
+                        /**
+                         * Properties of a Video.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IVideo
+                         * @property {Uint8Array|null} [video] Video video
+                         * @property {string|null} [uri] Video uri
+                         */
+    
+                        /**
+                         * Constructs a new Video.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a Video.
+                         * @implements IVideo
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IVideo=} [properties] Properties to set
+                         */
+                        function Video(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Video video.
+                         * @member {Uint8Array|null|undefined} video
+                         * @memberof google.ai.generativelanguage.v1beta.Video
+                         * @instance
+                         */
+                        Video.prototype.video = null;
+    
+                        /**
+                         * Video uri.
+                         * @member {string|null|undefined} uri
+                         * @memberof google.ai.generativelanguage.v1beta.Video
+                         * @instance
+                         */
+                        Video.prototype.uri = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Video content.
+                         * @member {"video"|"uri"|undefined} content
+                         * @memberof google.ai.generativelanguage.v1beta.Video
+                         * @instance
+                         */
+                        Object.defineProperty(Video.prototype, "content", {
+                            get: $util.oneOfGetter($oneOfFields = ["video", "uri"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Video instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.Video
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IVideo=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.Video} Video instance
+                         */
+                        Video.create = function create(properties) {
+                            return new Video(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Video message. Does not implicitly {@link google.ai.generativelanguage.v1beta.Video.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.Video
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IVideo} message Video message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Video.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.video != null && Object.hasOwnProperty.call(message, "video"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.video);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Video message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.Video.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.Video
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IVideo} message Video message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Video.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Video message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.Video
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.Video} Video
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Video.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Video();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.video = reader.bytes();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Video message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.Video
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.Video} Video
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Video.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Video message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.Video
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Video.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.video != null && message.hasOwnProperty("video")) {
+                                properties.content = 1;
+                                if (!(message.video && typeof message.video.length === "number" || $util.isString(message.video)))
+                                    return "video: buffer expected";
+                            }
+                            if (message.uri != null && message.hasOwnProperty("uri")) {
+                                if (properties.content === 1)
+                                    return "content: multiple values";
+                                properties.content = 1;
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Video message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.Video
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.Video} Video
+                         */
+                        Video.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.Video)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.Video();
+                            if (object.video != null)
+                                if (typeof object.video === "string")
+                                    $util.base64.decode(object.video, message.video = $util.newBuffer($util.base64.length(object.video)), 0);
+                                else if (object.video.length >= 0)
+                                    message.video = object.video;
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Video message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.Video
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.Video} message Video
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Video.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.video != null && message.hasOwnProperty("video")) {
+                                object.video = options.bytes === String ? $util.base64.encode(message.video, 0, message.video.length) : options.bytes === Array ? Array.prototype.slice.call(message.video) : message.video;
+                                if (options.oneofs)
+                                    object.content = "video";
+                            }
+                            if (message.uri != null && message.hasOwnProperty("uri")) {
+                                object.uri = message.uri;
+                                if (options.oneofs)
+                                    object.content = "uri";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Video to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.Video
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Video.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Video
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.Video
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Video.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.Video";
+                        };
+    
+                        return Video;
+                    })();
+    
+                    v1beta.GenerateVideoResponse = (function() {
+    
+                        /**
+                         * Properties of a GenerateVideoResponse.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IGenerateVideoResponse
+                         * @property {Array.<google.ai.generativelanguage.v1beta.IMedia>|null} [generatedSamples] GenerateVideoResponse generatedSamples
+                         * @property {number|null} [raiMediaFilteredCount] GenerateVideoResponse raiMediaFilteredCount
+                         * @property {Array.<string>|null} [raiMediaFilteredReasons] GenerateVideoResponse raiMediaFilteredReasons
+                         */
+    
+                        /**
+                         * Constructs a new GenerateVideoResponse.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a GenerateVideoResponse.
+                         * @implements IGenerateVideoResponse
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IGenerateVideoResponse=} [properties] Properties to set
+                         */
+                        function GenerateVideoResponse(properties) {
+                            this.generatedSamples = [];
+                            this.raiMediaFilteredReasons = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GenerateVideoResponse generatedSamples.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.IMedia>} generatedSamples
+                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @instance
+                         */
+                        GenerateVideoResponse.prototype.generatedSamples = $util.emptyArray;
+    
+                        /**
+                         * GenerateVideoResponse raiMediaFilteredCount.
+                         * @member {number} raiMediaFilteredCount
+                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @instance
+                         */
+                        GenerateVideoResponse.prototype.raiMediaFilteredCount = 0;
+    
+                        /**
+                         * GenerateVideoResponse raiMediaFilteredReasons.
+                         * @member {Array.<string>} raiMediaFilteredReasons
+                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @instance
+                         */
+                        GenerateVideoResponse.prototype.raiMediaFilteredReasons = $util.emptyArray;
+    
+                        /**
+                         * Creates a new GenerateVideoResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IGenerateVideoResponse=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.GenerateVideoResponse} GenerateVideoResponse instance
+                         */
+                        GenerateVideoResponse.create = function create(properties) {
+                            return new GenerateVideoResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GenerateVideoResponse message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GenerateVideoResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IGenerateVideoResponse} message GenerateVideoResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenerateVideoResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.generatedSamples != null && message.generatedSamples.length)
+                                for (var i = 0; i < message.generatedSamples.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.Media.encode(message.generatedSamples[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.raiMediaFilteredCount != null && Object.hasOwnProperty.call(message, "raiMediaFilteredCount"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.raiMediaFilteredCount);
+                            if (message.raiMediaFilteredReasons != null && message.raiMediaFilteredReasons.length)
+                                for (var i = 0; i < message.raiMediaFilteredReasons.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.raiMediaFilteredReasons[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GenerateVideoResponse message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GenerateVideoResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IGenerateVideoResponse} message GenerateVideoResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenerateVideoResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GenerateVideoResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.GenerateVideoResponse} GenerateVideoResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenerateVideoResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.generatedSamples && message.generatedSamples.length))
+                                            message.generatedSamples = [];
+                                        message.generatedSamples.push($root.google.ai.generativelanguage.v1beta.Media.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.raiMediaFilteredCount = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.raiMediaFilteredReasons && message.raiMediaFilteredReasons.length))
+                                            message.raiMediaFilteredReasons = [];
+                                        message.raiMediaFilteredReasons.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GenerateVideoResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.GenerateVideoResponse} GenerateVideoResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenerateVideoResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GenerateVideoResponse message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GenerateVideoResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.generatedSamples != null && message.hasOwnProperty("generatedSamples")) {
+                                if (!Array.isArray(message.generatedSamples))
+                                    return "generatedSamples: array expected";
+                                for (var i = 0; i < message.generatedSamples.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.Media.verify(message.generatedSamples[i]);
+                                    if (error)
+                                        return "generatedSamples." + error;
+                                }
+                            }
+                            if (message.raiMediaFilteredCount != null && message.hasOwnProperty("raiMediaFilteredCount"))
+                                if (!$util.isInteger(message.raiMediaFilteredCount))
+                                    return "raiMediaFilteredCount: integer expected";
+                            if (message.raiMediaFilteredReasons != null && message.hasOwnProperty("raiMediaFilteredReasons")) {
+                                if (!Array.isArray(message.raiMediaFilteredReasons))
+                                    return "raiMediaFilteredReasons: array expected";
+                                for (var i = 0; i < message.raiMediaFilteredReasons.length; ++i)
+                                    if (!$util.isString(message.raiMediaFilteredReasons[i]))
+                                        return "raiMediaFilteredReasons: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GenerateVideoResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.GenerateVideoResponse} GenerateVideoResponse
+                         */
+                        GenerateVideoResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse();
+                            if (object.generatedSamples) {
+                                if (!Array.isArray(object.generatedSamples))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.GenerateVideoResponse.generatedSamples: array expected");
+                                message.generatedSamples = [];
+                                for (var i = 0; i < object.generatedSamples.length; ++i) {
+                                    if (typeof object.generatedSamples[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.GenerateVideoResponse.generatedSamples: object expected");
+                                    message.generatedSamples[i] = $root.google.ai.generativelanguage.v1beta.Media.fromObject(object.generatedSamples[i]);
+                                }
+                            }
+                            if (object.raiMediaFilteredCount != null)
+                                message.raiMediaFilteredCount = object.raiMediaFilteredCount | 0;
+                            if (object.raiMediaFilteredReasons) {
+                                if (!Array.isArray(object.raiMediaFilteredReasons))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.GenerateVideoResponse.raiMediaFilteredReasons: array expected");
+                                message.raiMediaFilteredReasons = [];
+                                for (var i = 0; i < object.raiMediaFilteredReasons.length; ++i)
+                                    message.raiMediaFilteredReasons[i] = String(object.raiMediaFilteredReasons[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GenerateVideoResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.GenerateVideoResponse} message GenerateVideoResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GenerateVideoResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.generatedSamples = [];
+                                object.raiMediaFilteredReasons = [];
+                            }
+                            if (options.defaults)
+                                object.raiMediaFilteredCount = 0;
+                            if (message.generatedSamples && message.generatedSamples.length) {
+                                object.generatedSamples = [];
+                                for (var j = 0; j < message.generatedSamples.length; ++j)
+                                    object.generatedSamples[j] = $root.google.ai.generativelanguage.v1beta.Media.toObject(message.generatedSamples[j], options);
+                            }
+                            if (message.raiMediaFilteredCount != null && message.hasOwnProperty("raiMediaFilteredCount"))
+                                object.raiMediaFilteredCount = message.raiMediaFilteredCount;
+                            if (message.raiMediaFilteredReasons && message.raiMediaFilteredReasons.length) {
+                                object.raiMediaFilteredReasons = [];
+                                for (var j = 0; j < message.raiMediaFilteredReasons.length; ++j)
+                                    object.raiMediaFilteredReasons[j] = message.raiMediaFilteredReasons[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GenerateVideoResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GenerateVideoResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GenerateVideoResponse
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GenerateVideoResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.GenerateVideoResponse";
+                        };
+    
+                        return GenerateVideoResponse;
                     })();
     
                     v1beta.RetrieverService = (function() {

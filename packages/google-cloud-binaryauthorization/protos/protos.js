@@ -31384,6 +31384,7 @@
              * @property {number} DSSE_ATTESTATION=10 DSSE_ATTESTATION value
              * @property {number} VULNERABILITY_ASSESSMENT=11 VULNERABILITY_ASSESSMENT value
              * @property {number} SBOM_REFERENCE=12 SBOM_REFERENCE value
+             * @property {number} SECRET=13 SECRET value
              */
             v1.NoteKind = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -31400,6 +31401,7 @@
                 values[valuesById[10] = "DSSE_ATTESTATION"] = 10;
                 values[valuesById[11] = "VULNERABILITY_ASSESSMENT"] = 11;
                 values[valuesById[12] = "SBOM_REFERENCE"] = 12;
+                values[valuesById[13] = "SECRET"] = 13;
                 return values;
             })();
     
@@ -32390,6 +32392,7 @@
                  * @memberof grafeas.v1
                  * @interface IFileLocation
                  * @property {string|null} [filePath] FileLocation filePath
+                 * @property {grafeas.v1.ILayerDetails|null} [layerDetails] FileLocation layerDetails
                  */
     
                 /**
@@ -32414,6 +32417,14 @@
                  * @instance
                  */
                 FileLocation.prototype.filePath = "";
+    
+                /**
+                 * FileLocation layerDetails.
+                 * @member {grafeas.v1.ILayerDetails|null|undefined} layerDetails
+                 * @memberof grafeas.v1.FileLocation
+                 * @instance
+                 */
+                FileLocation.prototype.layerDetails = null;
     
                 /**
                  * Creates a new FileLocation instance using the specified properties.
@@ -32441,6 +32452,8 @@
                         writer = $Writer.create();
                     if (message.filePath != null && Object.hasOwnProperty.call(message, "filePath"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.filePath);
+                    if (message.layerDetails != null && Object.hasOwnProperty.call(message, "layerDetails"))
+                        $root.grafeas.v1.LayerDetails.encode(message.layerDetails, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -32477,6 +32490,10 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.filePath = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.layerDetails = $root.grafeas.v1.LayerDetails.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -32517,6 +32534,11 @@
                     if (message.filePath != null && message.hasOwnProperty("filePath"))
                         if (!$util.isString(message.filePath))
                             return "filePath: string expected";
+                    if (message.layerDetails != null && message.hasOwnProperty("layerDetails")) {
+                        var error = $root.grafeas.v1.LayerDetails.verify(message.layerDetails);
+                        if (error)
+                            return "layerDetails." + error;
+                    }
                     return null;
                 };
     
@@ -32534,6 +32556,11 @@
                     var message = new $root.grafeas.v1.FileLocation();
                     if (object.filePath != null)
                         message.filePath = String(object.filePath);
+                    if (object.layerDetails != null) {
+                        if (typeof object.layerDetails !== "object")
+                            throw TypeError(".grafeas.v1.FileLocation.layerDetails: object expected");
+                        message.layerDetails = $root.grafeas.v1.LayerDetails.fromObject(object.layerDetails);
+                    }
                     return message;
                 };
     
@@ -32550,10 +32577,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.filePath = "";
+                        object.layerDetails = null;
+                    }
                     if (message.filePath != null && message.hasOwnProperty("filePath"))
                         object.filePath = message.filePath;
+                    if (message.layerDetails != null && message.hasOwnProperty("layerDetails"))
+                        object.layerDetails = $root.grafeas.v1.LayerDetails.toObject(message.layerDetails, options);
                     return object;
                 };
     
@@ -32584,6 +32615,574 @@
                 };
     
                 return FileLocation;
+            })();
+    
+            v1.BaseImage = (function() {
+    
+                /**
+                 * Properties of a BaseImage.
+                 * @memberof grafeas.v1
+                 * @interface IBaseImage
+                 * @property {string|null} [name] BaseImage name
+                 * @property {string|null} [repository] BaseImage repository
+                 * @property {number|null} [layerCount] BaseImage layerCount
+                 */
+    
+                /**
+                 * Constructs a new BaseImage.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a BaseImage.
+                 * @implements IBaseImage
+                 * @constructor
+                 * @param {grafeas.v1.IBaseImage=} [properties] Properties to set
+                 */
+                function BaseImage(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * BaseImage name.
+                 * @member {string} name
+                 * @memberof grafeas.v1.BaseImage
+                 * @instance
+                 */
+                BaseImage.prototype.name = "";
+    
+                /**
+                 * BaseImage repository.
+                 * @member {string} repository
+                 * @memberof grafeas.v1.BaseImage
+                 * @instance
+                 */
+                BaseImage.prototype.repository = "";
+    
+                /**
+                 * BaseImage layerCount.
+                 * @member {number} layerCount
+                 * @memberof grafeas.v1.BaseImage
+                 * @instance
+                 */
+                BaseImage.prototype.layerCount = 0;
+    
+                /**
+                 * Creates a new BaseImage instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.BaseImage
+                 * @static
+                 * @param {grafeas.v1.IBaseImage=} [properties] Properties to set
+                 * @returns {grafeas.v1.BaseImage} BaseImage instance
+                 */
+                BaseImage.create = function create(properties) {
+                    return new BaseImage(properties);
+                };
+    
+                /**
+                 * Encodes the specified BaseImage message. Does not implicitly {@link grafeas.v1.BaseImage.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.BaseImage
+                 * @static
+                 * @param {grafeas.v1.IBaseImage} message BaseImage message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BaseImage.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.repository != null && Object.hasOwnProperty.call(message, "repository"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.repository);
+                    if (message.layerCount != null && Object.hasOwnProperty.call(message, "layerCount"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.layerCount);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified BaseImage message, length delimited. Does not implicitly {@link grafeas.v1.BaseImage.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.BaseImage
+                 * @static
+                 * @param {grafeas.v1.IBaseImage} message BaseImage message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BaseImage.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a BaseImage message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.BaseImage
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.BaseImage} BaseImage
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BaseImage.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.BaseImage();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.repository = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.layerCount = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a BaseImage message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.BaseImage
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.BaseImage} BaseImage
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BaseImage.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a BaseImage message.
+                 * @function verify
+                 * @memberof grafeas.v1.BaseImage
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                BaseImage.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.repository != null && message.hasOwnProperty("repository"))
+                        if (!$util.isString(message.repository))
+                            return "repository: string expected";
+                    if (message.layerCount != null && message.hasOwnProperty("layerCount"))
+                        if (!$util.isInteger(message.layerCount))
+                            return "layerCount: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a BaseImage message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.BaseImage
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.BaseImage} BaseImage
+                 */
+                BaseImage.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.BaseImage)
+                        return object;
+                    var message = new $root.grafeas.v1.BaseImage();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.repository != null)
+                        message.repository = String(object.repository);
+                    if (object.layerCount != null)
+                        message.layerCount = object.layerCount | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a BaseImage message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.BaseImage
+                 * @static
+                 * @param {grafeas.v1.BaseImage} message BaseImage
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                BaseImage.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.name = "";
+                        object.repository = "";
+                        object.layerCount = 0;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.repository != null && message.hasOwnProperty("repository"))
+                        object.repository = message.repository;
+                    if (message.layerCount != null && message.hasOwnProperty("layerCount"))
+                        object.layerCount = message.layerCount;
+                    return object;
+                };
+    
+                /**
+                 * Converts this BaseImage to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.BaseImage
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                BaseImage.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for BaseImage
+                 * @function getTypeUrl
+                 * @memberof grafeas.v1.BaseImage
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                BaseImage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/grafeas.v1.BaseImage";
+                };
+    
+                return BaseImage;
+            })();
+    
+            v1.LayerDetails = (function() {
+    
+                /**
+                 * Properties of a LayerDetails.
+                 * @memberof grafeas.v1
+                 * @interface ILayerDetails
+                 * @property {number|null} [index] LayerDetails index
+                 * @property {string|null} [diffId] LayerDetails diffId
+                 * @property {string|null} [chainId] LayerDetails chainId
+                 * @property {string|null} [command] LayerDetails command
+                 * @property {Array.<grafeas.v1.IBaseImage>|null} [baseImages] LayerDetails baseImages
+                 */
+    
+                /**
+                 * Constructs a new LayerDetails.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a LayerDetails.
+                 * @implements ILayerDetails
+                 * @constructor
+                 * @param {grafeas.v1.ILayerDetails=} [properties] Properties to set
+                 */
+                function LayerDetails(properties) {
+                    this.baseImages = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * LayerDetails index.
+                 * @member {number} index
+                 * @memberof grafeas.v1.LayerDetails
+                 * @instance
+                 */
+                LayerDetails.prototype.index = 0;
+    
+                /**
+                 * LayerDetails diffId.
+                 * @member {string} diffId
+                 * @memberof grafeas.v1.LayerDetails
+                 * @instance
+                 */
+                LayerDetails.prototype.diffId = "";
+    
+                /**
+                 * LayerDetails chainId.
+                 * @member {string} chainId
+                 * @memberof grafeas.v1.LayerDetails
+                 * @instance
+                 */
+                LayerDetails.prototype.chainId = "";
+    
+                /**
+                 * LayerDetails command.
+                 * @member {string} command
+                 * @memberof grafeas.v1.LayerDetails
+                 * @instance
+                 */
+                LayerDetails.prototype.command = "";
+    
+                /**
+                 * LayerDetails baseImages.
+                 * @member {Array.<grafeas.v1.IBaseImage>} baseImages
+                 * @memberof grafeas.v1.LayerDetails
+                 * @instance
+                 */
+                LayerDetails.prototype.baseImages = $util.emptyArray;
+    
+                /**
+                 * Creates a new LayerDetails instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.LayerDetails
+                 * @static
+                 * @param {grafeas.v1.ILayerDetails=} [properties] Properties to set
+                 * @returns {grafeas.v1.LayerDetails} LayerDetails instance
+                 */
+                LayerDetails.create = function create(properties) {
+                    return new LayerDetails(properties);
+                };
+    
+                /**
+                 * Encodes the specified LayerDetails message. Does not implicitly {@link grafeas.v1.LayerDetails.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.LayerDetails
+                 * @static
+                 * @param {grafeas.v1.ILayerDetails} message LayerDetails message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                LayerDetails.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.index != null && Object.hasOwnProperty.call(message, "index"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.index);
+                    if (message.diffId != null && Object.hasOwnProperty.call(message, "diffId"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.diffId);
+                    if (message.command != null && Object.hasOwnProperty.call(message, "command"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.command);
+                    if (message.baseImages != null && message.baseImages.length)
+                        for (var i = 0; i < message.baseImages.length; ++i)
+                            $root.grafeas.v1.BaseImage.encode(message.baseImages[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.chainId != null && Object.hasOwnProperty.call(message, "chainId"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.chainId);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified LayerDetails message, length delimited. Does not implicitly {@link grafeas.v1.LayerDetails.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.LayerDetails
+                 * @static
+                 * @param {grafeas.v1.ILayerDetails} message LayerDetails message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                LayerDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a LayerDetails message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.LayerDetails
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.LayerDetails} LayerDetails
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                LayerDetails.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.LayerDetails();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.index = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.diffId = reader.string();
+                                break;
+                            }
+                        case 5: {
+                                message.chainId = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.command = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.baseImages && message.baseImages.length))
+                                    message.baseImages = [];
+                                message.baseImages.push($root.grafeas.v1.BaseImage.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a LayerDetails message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.LayerDetails
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.LayerDetails} LayerDetails
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                LayerDetails.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a LayerDetails message.
+                 * @function verify
+                 * @memberof grafeas.v1.LayerDetails
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                LayerDetails.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.index != null && message.hasOwnProperty("index"))
+                        if (!$util.isInteger(message.index))
+                            return "index: integer expected";
+                    if (message.diffId != null && message.hasOwnProperty("diffId"))
+                        if (!$util.isString(message.diffId))
+                            return "diffId: string expected";
+                    if (message.chainId != null && message.hasOwnProperty("chainId"))
+                        if (!$util.isString(message.chainId))
+                            return "chainId: string expected";
+                    if (message.command != null && message.hasOwnProperty("command"))
+                        if (!$util.isString(message.command))
+                            return "command: string expected";
+                    if (message.baseImages != null && message.hasOwnProperty("baseImages")) {
+                        if (!Array.isArray(message.baseImages))
+                            return "baseImages: array expected";
+                        for (var i = 0; i < message.baseImages.length; ++i) {
+                            var error = $root.grafeas.v1.BaseImage.verify(message.baseImages[i]);
+                            if (error)
+                                return "baseImages." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a LayerDetails message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.LayerDetails
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.LayerDetails} LayerDetails
+                 */
+                LayerDetails.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.LayerDetails)
+                        return object;
+                    var message = new $root.grafeas.v1.LayerDetails();
+                    if (object.index != null)
+                        message.index = object.index | 0;
+                    if (object.diffId != null)
+                        message.diffId = String(object.diffId);
+                    if (object.chainId != null)
+                        message.chainId = String(object.chainId);
+                    if (object.command != null)
+                        message.command = String(object.command);
+                    if (object.baseImages) {
+                        if (!Array.isArray(object.baseImages))
+                            throw TypeError(".grafeas.v1.LayerDetails.baseImages: array expected");
+                        message.baseImages = [];
+                        for (var i = 0; i < object.baseImages.length; ++i) {
+                            if (typeof object.baseImages[i] !== "object")
+                                throw TypeError(".grafeas.v1.LayerDetails.baseImages: object expected");
+                            message.baseImages[i] = $root.grafeas.v1.BaseImage.fromObject(object.baseImages[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a LayerDetails message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.LayerDetails
+                 * @static
+                 * @param {grafeas.v1.LayerDetails} message LayerDetails
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                LayerDetails.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.baseImages = [];
+                    if (options.defaults) {
+                        object.index = 0;
+                        object.diffId = "";
+                        object.command = "";
+                        object.chainId = "";
+                    }
+                    if (message.index != null && message.hasOwnProperty("index"))
+                        object.index = message.index;
+                    if (message.diffId != null && message.hasOwnProperty("diffId"))
+                        object.diffId = message.diffId;
+                    if (message.command != null && message.hasOwnProperty("command"))
+                        object.command = message.command;
+                    if (message.baseImages && message.baseImages.length) {
+                        object.baseImages = [];
+                        for (var j = 0; j < message.baseImages.length; ++j)
+                            object.baseImages[j] = $root.grafeas.v1.BaseImage.toObject(message.baseImages[j], options);
+                    }
+                    if (message.chainId != null && message.hasOwnProperty("chainId"))
+                        object.chainId = message.chainId;
+                    return object;
+                };
+    
+                /**
+                 * Converts this LayerDetails to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.LayerDetails
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                LayerDetails.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for LayerDetails
+                 * @function getTypeUrl
+                 * @memberof grafeas.v1.LayerDetails
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                LayerDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/grafeas.v1.LayerDetails";
+                };
+    
+                return LayerDetails;
             })();
     
             v1.License = (function() {

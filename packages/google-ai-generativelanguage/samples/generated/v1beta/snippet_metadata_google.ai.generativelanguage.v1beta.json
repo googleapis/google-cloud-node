@@ -488,6 +488,46 @@
             }
         },
         {
+            "regionTag": "generativelanguage_v1beta_generated_FileService_DownloadFile_async",
+            "title": "CacheService downloadFile Sample",
+            "origin": "API_DEFINITION",
+            "description": " Download the `File`.",
+            "canonical": true,
+            "file": "file_service.download_file.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DownloadFile",
+                "fullName": "google.ai.generativelanguage.v1beta.FileService.DownloadFile",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.ai.generativelanguage.v1beta.DownloadFileResponse",
+                "client": {
+                    "shortName": "FileServiceClient",
+                    "fullName": "google.ai.generativelanguage.v1beta.FileServiceClient"
+                },
+                "method": {
+                    "shortName": "DownloadFile",
+                    "fullName": "google.ai.generativelanguage.v1beta.FileService.DownloadFile",
+                    "service": {
+                        "shortName": "FileService",
+                        "fullName": "google.ai.generativelanguage.v1beta.FileService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "generativelanguage_v1beta_generated_GenerativeService_GenerateContent_async",
             "title": "CacheService generateContent Sample",
             "origin": "API_DEFINITION",
@@ -828,6 +868,58 @@
                 "method": {
                     "shortName": "CountTokens",
                     "fullName": "google.ai.generativelanguage.v1beta.GenerativeService.CountTokens",
+                    "service": {
+                        "shortName": "GenerativeService",
+                        "fullName": "google.ai.generativelanguage.v1beta.GenerativeService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "generativelanguage_v1beta_generated_GenerativeService_BidiGenerateContent_async",
+            "title": "CacheService bidiGenerateContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Low-Latency bidirectional streaming API that supports audio and video streaming inputs can produce multimodal output streams (audio and text).",
+            "canonical": true,
+            "file": "generative_service.bidi_generate_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BidiGenerateContent",
+                "fullName": "google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "setup",
+                        "type": ".google.ai.generativelanguage.v1beta.BidiGenerateContentSetup"
+                    },
+                    {
+                        "name": "client_content",
+                        "type": ".google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent"
+                    },
+                    {
+                        "name": "realtime_input",
+                        "type": ".google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput"
+                    },
+                    {
+                        "name": "tool_response",
+                        "type": ".google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse"
+                    }
+                ],
+                "resultType": ".google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage",
+                "client": {
+                    "shortName": "GenerativeServiceClient",
+                    "fullName": "google.ai.generativelanguage.v1beta.GenerativeServiceClient"
+                },
+                "method": {
+                    "shortName": "BidiGenerateContent",
+                    "fullName": "google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent",
                     "service": {
                         "shortName": "GenerativeService",
                         "fullName": "google.ai.generativelanguage.v1beta.GenerativeService"
@@ -1436,6 +1528,54 @@
                 "method": {
                     "shortName": "Predict",
                     "fullName": "google.ai.generativelanguage.v1beta.PredictionService.Predict",
+                    "service": {
+                        "shortName": "PredictionService",
+                        "fullName": "google.ai.generativelanguage.v1beta.PredictionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "generativelanguage_v1beta_generated_PredictionService_PredictLongRunning_async",
+            "title": "CacheService predictLongRunning Sample",
+            "origin": "API_DEFINITION",
+            "description": " Same as Predict but returns an LRO.",
+            "canonical": true,
+            "file": "prediction_service.predict_long_running.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PredictLongRunning",
+                "fullName": "google.ai.generativelanguage.v1beta.PredictionService.PredictLongRunning",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "model",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "instances",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "parameters",
+                        "type": ".google.protobuf.Value"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "PredictionServiceClient",
+                    "fullName": "google.ai.generativelanguage.v1beta.PredictionServiceClient"
+                },
+                "method": {
+                    "shortName": "PredictLongRunning",
+                    "fullName": "google.ai.generativelanguage.v1beta.PredictionService.PredictLongRunning",
                     "service": {
                         "shortName": "PredictionService",
                         "fullName": "google.ai.generativelanguage.v1beta.PredictionService"

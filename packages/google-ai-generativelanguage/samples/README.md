@@ -84,9 +84,11 @@
   * [Discuss_service.generate_message](#discuss_service.generate_message)
   * [File_service.create_file](#file_service.create_file)
   * [File_service.delete_file](#file_service.delete_file)
+  * [File_service.download_file](#file_service.download_file)
   * [File_service.get_file](#file_service.get_file)
   * [File_service.list_files](#file_service.list_files)
   * [Generative_service.batch_embed_contents](#generative_service.batch_embed_contents)
+  * [Generative_service.bidi_generate_content](#generative_service.bidi_generate_content)
   * [Generative_service.count_tokens](#generative_service.count_tokens)
   * [Generative_service.embed_content](#generative_service.embed_content)
   * [Generative_service.generate_answer](#generative_service.generate_answer)
@@ -106,6 +108,7 @@
   * [Permission_service.transfer_ownership](#permission_service.transfer_ownership)
   * [Permission_service.update_permission](#permission_service.update_permission)
   * [Prediction_service.predict](#prediction_service.predict)
+  * [Prediction_service.predict_long_running](#prediction_service.predict_long_running)
   * [Retriever_service.batch_create_chunks](#retriever_service.batch_create_chunks)
   * [Retriever_service.batch_delete_chunks](#retriever_service.batch_delete_chunks)
   * [Retriever_service.batch_update_chunks](#retriever_service.batch_update_chunks)
@@ -1396,6 +1399,23 @@ __Usage:__
 
 
 
+### File_service.download_file
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta/file_service.download_file.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta/file_service.download_file.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ai-generativelanguage/samples/generated/v1beta/file_service.download_file.js`
+
+
+-----
+
+
+
+
 ### File_service.get_file
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta/file_service.get_file.js).
@@ -1440,6 +1460,23 @@ __Usage:__
 
 
 `node packages/google-ai-generativelanguage/samples/generated/v1beta/generative_service.batch_embed_contents.js`
+
+
+-----
+
+
+
+
+### Generative_service.bidi_generate_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta/generative_service.bidi_generate_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta/generative_service.bidi_generate_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ai-generativelanguage/samples/generated/v1beta/generative_service.bidi_generate_content.js`
 
 
 -----
@@ -1763,6 +1800,23 @@ __Usage:__
 
 
 `node packages/google-ai-generativelanguage/samples/generated/v1beta/prediction_service.predict.js`
+
+
+-----
+
+
+
+
+### Prediction_service.predict_long_running
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta/prediction_service.predict_long_running.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta/prediction_service.predict_long_running.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ai-generativelanguage/samples/generated/v1beta/prediction_service.predict_long_running.js`
 
 
 -----

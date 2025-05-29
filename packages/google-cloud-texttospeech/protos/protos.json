@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -235,7 +238,9 @@
                           "values": {
                             "PHONETIC_ENCODING_UNSPECIFIED": 0,
                             "PHONETIC_ENCODING_IPA": 1,
-                            "PHONETIC_ENCODING_X_SAMPA": 2
+                            "PHONETIC_ENCODING_X_SAMPA": 2,
+                            "PHONETIC_ENCODING_JAPANESE_YOMIGANA": 3,
+                            "PHONETIC_ENCODING_PINYIN": 4
                           }
                         }
                       }
@@ -286,6 +291,7 @@
                         "inputSource": {
                           "oneof": [
                             "text",
+                            "markup",
                             "ssml",
                             "multiSpeakerMarkup"
                           ]
@@ -295,6 +301,10 @@
                         "text": {
                           "type": "string",
                           "id": 1
+                        },
+                        "markup": {
+                          "type": "string",
+                          "id": 5
                         },
                         "ssml": {
                           "type": "string",
@@ -492,7 +502,8 @@
                       "oneofs": {
                         "inputSource": {
                           "oneof": [
-                            "text"
+                            "text",
+                            "markup"
                           ]
                         }
                       },
@@ -500,6 +511,10 @@
                         "text": {
                           "type": "string",
                           "id": 1
+                        },
+                        "markup": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },

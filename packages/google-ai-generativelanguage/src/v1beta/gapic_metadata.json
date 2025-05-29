@@ -127,6 +127,11 @@
                 "deleteFile"
               ]
             },
+            "DownloadFile": {
+              "methods": [
+                "downloadFile"
+              ]
+            },
             "ListFiles": {
               "methods": [
                 "listFiles",
@@ -152,6 +157,11 @@
             "DeleteFile": {
               "methods": [
                 "deleteFile"
+              ]
+            },
+            "DownloadFile": {
+              "methods": [
+                "downloadFile"
               ]
             },
             "ListFiles": {
@@ -198,6 +208,11 @@
             "StreamGenerateContent": {
               "methods": [
                 "streamGenerateContent"
+              ]
+            },
+            "BidiGenerateContent": {
+              "methods": [
+                "bidiGenerateContent"
               ]
             }
           }
@@ -413,6 +428,11 @@
               "methods": [
                 "predict"
               ]
+            },
+            "PredictLongRunning": {
+              "methods": [
+                "predictLongRunning"
+              ]
             }
           }
         },
@@ -422,6 +442,11 @@
             "Predict": {
               "methods": [
                 "predict"
+              ]
+            },
+            "PredictLongRunning": {
+              "methods": [
+                "predictLongRunning"
               ]
             }
           }

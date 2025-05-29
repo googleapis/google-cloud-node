@@ -772,7 +772,7 @@ export namespace google {
                     accountId?: (string|null);
 
                     /** AnnotateAssessmentRequest hashedAccountId */
-                    hashedAccountId?: (Uint8Array|Buffer|string|null);
+                    hashedAccountId?: (Uint8Array|string|null);
 
                     /** AnnotateAssessmentRequest transactionEvent */
                     transactionEvent?: (google.cloud.recaptchaenterprise.v1.ITransactionEvent|null);
@@ -800,7 +800,7 @@ export namespace google {
                     public accountId: string;
 
                     /** AnnotateAssessmentRequest hashedAccountId. */
-                    public hashedAccountId: (Uint8Array|Buffer|string);
+                    public hashedAccountId: (Uint8Array|string);
 
                     /** AnnotateAssessmentRequest transactionEvent. */
                     public transactionEvent?: (google.cloud.recaptchaenterprise.v1.ITransactionEvent|null);
@@ -1259,16 +1259,16 @@ export namespace google {
                 interface IPrivatePasswordLeakVerification {
 
                     /** PrivatePasswordLeakVerification lookupHashPrefix */
-                    lookupHashPrefix?: (Uint8Array|Buffer|string|null);
+                    lookupHashPrefix?: (Uint8Array|string|null);
 
                     /** PrivatePasswordLeakVerification encryptedUserCredentialsHash */
-                    encryptedUserCredentialsHash?: (Uint8Array|Buffer|string|null);
+                    encryptedUserCredentialsHash?: (Uint8Array|string|null);
 
                     /** PrivatePasswordLeakVerification encryptedLeakMatchPrefixes */
                     encryptedLeakMatchPrefixes?: (Uint8Array[]|null);
 
                     /** PrivatePasswordLeakVerification reencryptedUserCredentialsHash */
-                    reencryptedUserCredentialsHash?: (Uint8Array|Buffer|string|null);
+                    reencryptedUserCredentialsHash?: (Uint8Array|string|null);
                 }
 
                 /** Represents a PrivatePasswordLeakVerification. */
@@ -1281,16 +1281,16 @@ export namespace google {
                     constructor(properties?: google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification);
 
                     /** PrivatePasswordLeakVerification lookupHashPrefix. */
-                    public lookupHashPrefix: (Uint8Array|Buffer|string);
+                    public lookupHashPrefix: (Uint8Array|string);
 
                     /** PrivatePasswordLeakVerification encryptedUserCredentialsHash. */
-                    public encryptedUserCredentialsHash: (Uint8Array|Buffer|string);
+                    public encryptedUserCredentialsHash: (Uint8Array|string);
 
                     /** PrivatePasswordLeakVerification encryptedLeakMatchPrefixes. */
                     public encryptedLeakMatchPrefixes: Uint8Array[];
 
                     /** PrivatePasswordLeakVerification reencryptedUserCredentialsHash. */
-                    public reencryptedUserCredentialsHash: (Uint8Array|Buffer|string);
+                    public reencryptedUserCredentialsHash: (Uint8Array|string);
 
                     /**
                      * Creates a new PrivatePasswordLeakVerification instance using the specified properties.
@@ -1552,7 +1552,7 @@ export namespace google {
                     expectedAction?: (string|null);
 
                     /** Event hashedAccountId */
-                    hashedAccountId?: (Uint8Array|Buffer|string|null);
+                    hashedAccountId?: (Uint8Array|string|null);
 
                     /** Event express */
                     express?: (boolean|null);
@@ -1610,7 +1610,7 @@ export namespace google {
                     public expectedAction: string;
 
                     /** Event hashedAccountId. */
-                    public hashedAccountId: (Uint8Array|Buffer|string);
+                    public hashedAccountId: (Uint8Array|string);
 
                     /** Event express. */
                     public express: boolean;
@@ -8361,7 +8361,7 @@ export namespace google {
                     accountId?: (string|null);
 
                     /** SearchRelatedAccountGroupMembershipsRequest hashedAccountId */
-                    hashedAccountId?: (Uint8Array|Buffer|string|null);
+                    hashedAccountId?: (Uint8Array|string|null);
 
                     /** SearchRelatedAccountGroupMembershipsRequest pageSize */
                     pageSize?: (number|null);
@@ -8386,7 +8386,7 @@ export namespace google {
                     public accountId: string;
 
                     /** SearchRelatedAccountGroupMembershipsRequest hashedAccountId. */
-                    public hashedAccountId: (Uint8Array|Buffer|string);
+                    public hashedAccountId: (Uint8Array|string);
 
                     /** SearchRelatedAccountGroupMembershipsRequest pageSize. */
                     public pageSize: number;
@@ -9185,7 +9185,7 @@ export namespace google {
                     accountId?: (string|null);
 
                     /** RelatedAccountGroupMembership hashedAccountId */
-                    hashedAccountId?: (Uint8Array|Buffer|string|null);
+                    hashedAccountId?: (Uint8Array|string|null);
                 }
 
                 /** Represents a RelatedAccountGroupMembership. */
@@ -9204,7 +9204,7 @@ export namespace google {
                     public accountId: string;
 
                     /** RelatedAccountGroupMembership hashedAccountId. */
-                    public hashedAccountId: (Uint8Array|Buffer|string);
+                    public hashedAccountId: (Uint8Array|string);
 
                     /**
                      * Creates a new RelatedAccountGroupMembership instance using the specified properties.
@@ -10047,7 +10047,7 @@ export namespace google {
                     reasons?: (google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Reason[]|null);
 
                     /** AnnotateAssessmentRequest hashedAccountId */
-                    hashedAccountId?: (Uint8Array|Buffer|string|null);
+                    hashedAccountId?: (Uint8Array|string|null);
 
                     /** AnnotateAssessmentRequest transactionEvent */
                     transactionEvent?: (google.cloud.recaptchaenterprise.v1beta1.ITransactionEvent|null);
@@ -10072,7 +10072,7 @@ export namespace google {
                     public reasons: google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Reason[];
 
                     /** AnnotateAssessmentRequest hashedAccountId. */
-                    public hashedAccountId: (Uint8Array|Buffer|string);
+                    public hashedAccountId: (Uint8Array|string);
 
                     /** AnnotateAssessmentRequest transactionEvent. */
                     public transactionEvent?: (google.cloud.recaptchaenterprise.v1beta1.ITransactionEvent|null);
@@ -10281,7 +10281,7 @@ export namespace google {
                 interface IPasswordLeakVerification {
 
                     /** PasswordLeakVerification hashedUserCredentials */
-                    hashedUserCredentials?: (Uint8Array|Buffer|string|null);
+                    hashedUserCredentials?: (Uint8Array|string|null);
 
                     /** PasswordLeakVerification credentialsLeaked */
                     credentialsLeaked?: (boolean|null);
@@ -10300,7 +10300,7 @@ export namespace google {
                     constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.IPasswordLeakVerification);
 
                     /** PasswordLeakVerification hashedUserCredentials. */
-                    public hashedUserCredentials: (Uint8Array|Buffer|string);
+                    public hashedUserCredentials: (Uint8Array|string);
 
                     /** PasswordLeakVerification credentialsLeaked. */
                     public credentialsLeaked: boolean;
@@ -10559,7 +10559,7 @@ export namespace google {
                     expectedAction?: (string|null);
 
                     /** Event hashedAccountId */
-                    hashedAccountId?: (Uint8Array|Buffer|string|null);
+                    hashedAccountId?: (Uint8Array|string|null);
 
                     /** Event transactionData */
                     transactionData?: (google.cloud.recaptchaenterprise.v1beta1.ITransactionData|null);
@@ -10593,7 +10593,7 @@ export namespace google {
                     public expectedAction: string;
 
                     /** Event hashedAccountId. */
-                    public hashedAccountId: (Uint8Array|Buffer|string);
+                    public hashedAccountId: (Uint8Array|string);
 
                     /** Event transactionData. */
                     public transactionData?: (google.cloud.recaptchaenterprise.v1beta1.ITransactionData|null);
@@ -12660,9 +12660,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
-
-            /** Publishing restReferenceDocumentationUri */
-            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -12703,9 +12700,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
-
-            /** Publishing restReferenceDocumentationUri. */
-            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -17036,9 +17030,6 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
-
-            /** ServiceOptions .google.api.apiVersion */
-            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -17287,7 +17278,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|Buffer|string|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -17318,7 +17309,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|Buffer|string);
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -18748,7 +18739,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|Buffer|string|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents an Any. */
@@ -18764,7 +18755,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|Buffer|string);
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new Any instance using the specified properties.

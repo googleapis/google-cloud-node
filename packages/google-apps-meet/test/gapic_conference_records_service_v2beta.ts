@@ -275,9 +275,14 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
         throw err;
       });
       assert(client.conferenceRecordsServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -289,9 +294,14 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
           }
         );
       assert.strictEqual(client.conferenceRecordsServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -473,7 +483,9 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getConferenceRecord(request), expectedError);
     });
   });
@@ -615,7 +627,9 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getParticipant(request), expectedError);
     });
   });
@@ -761,7 +775,9 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getParticipantSession(request),
         expectedError
@@ -906,7 +922,9 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getRecording(request), expectedError);
     });
   });
@@ -1048,7 +1066,9 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getTranscript(request), expectedError);
     });
   });
@@ -1191,7 +1211,9 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getTranscriptEntry(request), expectedError);
     });
   });

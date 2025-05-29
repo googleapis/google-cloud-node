@@ -29,23 +29,21 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The fully qualified name of parent resource to search cases under.
+   *  The name of the parent resource to search for cases under.
    */
   // const parent = 'abc123'
   /**
-   *  An expression written in filter language.
-   *  A query uses the following fields with the operators equals (`=`) and
-   *  `AND`:
+   *  An expression used to filter cases.
+   *  Expressions use the following fields separated by `AND` and specified with
+   *  `=`:
    *  - `organization`: An organization name in the form
    *  `organizations/<organization_id>`.
    *  - `project`: A project name in the form `projects/<project_id>`.
-   *  - `state`: The accepted values are `OPEN` or `CLOSED`.
-   *  - `priority`: The accepted values are `P0`, `P1`, `P2`, `P3`, or `P4`. You
+   *  - `state`: Can be `OPEN` or `CLOSED`.
+   *  - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
    *  can specify multiple values for priority using the `OR` operator. For
    *  example, `priority=P1 OR priority=P2`.
    *  - `creator.email`: The email address of the case creator.
-   *  - `billingAccount`: A billing account in the form
-   *  `billingAccounts/<billing_account_id>`
    *  You must specify either `organization` or `project`.
    *  To search across `displayName`, `description`, and comments, use a global
    *  restriction with no keyword or operator. For example, `"my search"`.
@@ -57,7 +55,6 @@ function main() {
    *  - `organization="organizations/123456789"`
    *  - `project="projects/my-project-id"`
    *  - `project="projects/123456789"`
-   *  - `billing_account="billingAccounts/123456-A0B0C0-CUZ789"`
    *  - `organization="organizations/123456789" AND state=CLOSED`
    *  - `project="projects/my-project-id" AND creator.email="tester@example.com"`
    *  - `project="projects/my-project-id" AND (priority=P0 OR priority=P1)`
