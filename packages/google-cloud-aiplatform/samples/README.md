@@ -476,6 +476,7 @@
   * [Index_service.create_index](#index_service.create_index)
   * [Index_service.delete_index](#index_service.delete_index)
   * [Index_service.get_index](#index_service.get_index)
+  * [Index_service.import_index](#index_service.import_index)
   * [Index_service.list_indexes](#index_service.list_indexes)
   * [Index_service.remove_datapoints](#index_service.remove_datapoints)
   * [Index_service.update_index](#index_service.update_index)
@@ -8623,6 +8624,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.get_index.js`
+
+
+-----
+
+
+
+
+### Index_service.import_index
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.import_index.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.import_index.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.import_index.js`
 
 
 -----

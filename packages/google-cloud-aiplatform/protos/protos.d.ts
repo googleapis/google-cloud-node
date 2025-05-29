@@ -11282,6 +11282,12 @@ export namespace google {
                     /** Part codeExecutionResult */
                     codeExecutionResult?: (google.cloud.aiplatform.v1.ICodeExecutionResult|null);
 
+                    /** Part thought */
+                    thought?: (boolean|null);
+
+                    /** Part thoughtSignature */
+                    thoughtSignature?: (Uint8Array|Buffer|string|null);
+
                     /** Part videoMetadata */
                     videoMetadata?: (google.cloud.aiplatform.v1.IVideoMetadata|null);
                 }
@@ -11316,11 +11322,17 @@ export namespace google {
                     /** Part codeExecutionResult. */
                     public codeExecutionResult?: (google.cloud.aiplatform.v1.ICodeExecutionResult|null);
 
+                    /** Part thought. */
+                    public thought?: (boolean|null);
+
+                    /** Part thoughtSignature. */
+                    public thoughtSignature?: (Uint8Array|Buffer|string|null);
+
                     /** Part videoMetadata. */
                     public videoMetadata?: (google.cloud.aiplatform.v1.IVideoMetadata|null);
 
                     /** Part data. */
-                    public data?: ("text"|"inlineData"|"fileData"|"functionCall"|"functionResponse"|"executableCode"|"codeExecutionResult");
+                    public data?: ("text"|"inlineData"|"fileData"|"functionCall"|"functionResponse"|"executableCode"|"codeExecutionResult"|"thought"|"thoughtSignature");
 
                     /** Part metadata. */
                     public metadata?: "videoMetadata";
@@ -12254,6 +12266,9 @@ export namespace google {
                     /** Properties of a ThinkingConfig. */
                     interface IThinkingConfig {
 
+                        /** ThinkingConfig includeThoughts */
+                        includeThoughts?: (boolean|null);
+
                         /** ThinkingConfig thinkingBudget */
                         thinkingBudget?: (number|null);
                     }
@@ -12267,8 +12282,14 @@ export namespace google {
                          */
                         constructor(properties?: google.cloud.aiplatform.v1.GenerationConfig.IThinkingConfig);
 
+                        /** ThinkingConfig includeThoughts. */
+                        public includeThoughts?: (boolean|null);
+
                         /** ThinkingConfig thinkingBudget. */
                         public thinkingBudget?: (number|null);
+
+                        /** ThinkingConfig _includeThoughts. */
+                        public _includeThoughts?: "includeThoughts";
 
                         /** ThinkingConfig _thinkingBudget. */
                         public _thinkingBudget?: "thinkingBudget";
@@ -15805,6 +15826,15 @@ export namespace google {
 
                     /** VertexAISearch engine */
                     engine?: (string|null);
+
+                    /** VertexAISearch maxResults */
+                    maxResults?: (number|null);
+
+                    /** VertexAISearch filter */
+                    filter?: (string|null);
+
+                    /** VertexAISearch dataStoreSpecs */
+                    dataStoreSpecs?: (google.cloud.aiplatform.v1.VertexAISearch.IDataStoreSpec[]|null);
                 }
 
                 /** Represents a VertexAISearch. */
@@ -15821,6 +15851,15 @@ export namespace google {
 
                     /** VertexAISearch engine. */
                     public engine: string;
+
+                    /** VertexAISearch maxResults. */
+                    public maxResults: number;
+
+                    /** VertexAISearch filter. */
+                    public filter: string;
+
+                    /** VertexAISearch dataStoreSpecs. */
+                    public dataStoreSpecs: google.cloud.aiplatform.v1.VertexAISearch.IDataStoreSpec[];
 
                     /**
                      * Creates a new VertexAISearch instance using the specified properties.
@@ -15898,6 +15937,112 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VertexAISearch {
+
+                    /** Properties of a DataStoreSpec. */
+                    interface IDataStoreSpec {
+
+                        /** DataStoreSpec dataStore */
+                        dataStore?: (string|null);
+
+                        /** DataStoreSpec filter */
+                        filter?: (string|null);
+                    }
+
+                    /** Represents a DataStoreSpec. */
+                    class DataStoreSpec implements IDataStoreSpec {
+
+                        /**
+                         * Constructs a new DataStoreSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.VertexAISearch.IDataStoreSpec);
+
+                        /** DataStoreSpec dataStore. */
+                        public dataStore: string;
+
+                        /** DataStoreSpec filter. */
+                        public filter: string;
+
+                        /**
+                         * Creates a new DataStoreSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataStoreSpec instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.VertexAISearch.IDataStoreSpec): google.cloud.aiplatform.v1.VertexAISearch.DataStoreSpec;
+
+                        /**
+                         * Encodes the specified DataStoreSpec message. Does not implicitly {@link google.cloud.aiplatform.v1.VertexAISearch.DataStoreSpec.verify|verify} messages.
+                         * @param message DataStoreSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.VertexAISearch.IDataStoreSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataStoreSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.VertexAISearch.DataStoreSpec.verify|verify} messages.
+                         * @param message DataStoreSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.VertexAISearch.IDataStoreSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataStoreSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataStoreSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.VertexAISearch.DataStoreSpec;
+
+                        /**
+                         * Decodes a DataStoreSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataStoreSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.VertexAISearch.DataStoreSpec;
+
+                        /**
+                         * Verifies a DataStoreSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataStoreSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataStoreSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.VertexAISearch.DataStoreSpec;
+
+                        /**
+                         * Creates a plain object from a DataStoreSpec message. Also converts values to other types if specified.
+                         * @param message DataStoreSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.VertexAISearch.DataStoreSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataStoreSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataStoreSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a GoogleSearchRetrieval. */
@@ -84995,6 +85140,9 @@ export namespace google {
                         /** UsageMetadata candidatesTokenCount */
                         candidatesTokenCount?: (number|null);
 
+                        /** UsageMetadata thoughtsTokenCount */
+                        thoughtsTokenCount?: (number|null);
+
                         /** UsageMetadata totalTokenCount */
                         totalTokenCount?: (number|null);
 
@@ -85025,6 +85173,9 @@ export namespace google {
 
                         /** UsageMetadata candidatesTokenCount. */
                         public candidatesTokenCount: number;
+
+                        /** UsageMetadata thoughtsTokenCount. */
+                        public thoughtsTokenCount: number;
 
                         /** UsageMetadata totalTokenCount. */
                         public totalTokenCount: number;
