@@ -1420,6 +1420,790 @@ describe('v1.ManagedKafkaClient', () => {
     });
   });
 
+  describe('getAcl', () => {
+    it('invokes getAcl without error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.GetAclRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.GetAclRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.Acl()
+      );
+      client.innerApiCalls.getAcl = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAcl(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.getAcl as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAcl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAcl without error using callback', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.GetAclRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.GetAclRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.Acl()
+      );
+      client.innerApiCalls.getAcl =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAcl(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.managedkafka.v1.IAcl | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.getAcl as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAcl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAcl with error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.GetAclRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.GetAclRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAcl = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getAcl(request), expectedError);
+      const actualRequest = (client.innerApiCalls.getAcl as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAcl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAcl with closed client', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.GetAclRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.GetAclRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getAcl(request), expectedError);
+    });
+  });
+
+  describe('createAcl', () => {
+    it('invokes createAcl without error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.CreateAclRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.CreateAclRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.Acl()
+      );
+      client.innerApiCalls.createAcl = stubSimpleCall(expectedResponse);
+      const [response] = await client.createAcl(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAcl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAcl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAcl without error using callback', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.CreateAclRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.CreateAclRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.Acl()
+      );
+      client.innerApiCalls.createAcl =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAcl(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.managedkafka.v1.IAcl | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAcl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAcl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAcl with error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.CreateAclRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.CreateAclRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAcl = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.createAcl(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAcl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAcl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAcl with closed client', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.CreateAclRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.CreateAclRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.createAcl(request), expectedError);
+    });
+  });
+
+  describe('updateAcl', () => {
+    it('invokes updateAcl without error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.UpdateAclRequest()
+      );
+      request.acl ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.UpdateAclRequest',
+        ['acl', 'name']
+      );
+      request.acl.name = defaultValue1;
+      const expectedHeaderRequestParams = `acl.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.Acl()
+      );
+      client.innerApiCalls.updateAcl = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateAcl(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAcl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAcl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAcl without error using callback', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.UpdateAclRequest()
+      );
+      request.acl ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.UpdateAclRequest',
+        ['acl', 'name']
+      );
+      request.acl.name = defaultValue1;
+      const expectedHeaderRequestParams = `acl.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.Acl()
+      );
+      client.innerApiCalls.updateAcl =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateAcl(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.managedkafka.v1.IAcl | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAcl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAcl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAcl with error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.UpdateAclRequest()
+      );
+      request.acl ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.UpdateAclRequest',
+        ['acl', 'name']
+      );
+      request.acl.name = defaultValue1;
+      const expectedHeaderRequestParams = `acl.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAcl = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.updateAcl(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAcl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAcl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAcl with closed client', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.UpdateAclRequest()
+      );
+      request.acl ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.UpdateAclRequest',
+        ['acl', 'name']
+      );
+      request.acl.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.updateAcl(request), expectedError);
+    });
+  });
+
+  describe('deleteAcl', () => {
+    it('invokes deleteAcl without error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.DeleteAclRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.DeleteAclRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteAcl = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteAcl(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAcl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAcl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAcl without error using callback', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.DeleteAclRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.DeleteAclRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteAcl =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteAcl(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAcl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAcl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAcl with error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.DeleteAclRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.DeleteAclRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAcl = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.deleteAcl(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAcl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAcl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAcl with closed client', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.DeleteAclRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.DeleteAclRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.deleteAcl(request), expectedError);
+    });
+  });
+
+  describe('addAclEntry', () => {
+    it('invokes addAclEntry without error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.AddAclEntryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.AddAclEntryRequest',
+        ['acl']
+      );
+      request.acl = defaultValue1;
+      const expectedHeaderRequestParams = `acl=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.AddAclEntryResponse()
+      );
+      client.innerApiCalls.addAclEntry = stubSimpleCall(expectedResponse);
+      const [response] = await client.addAclEntry(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addAclEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAclEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addAclEntry without error using callback', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.AddAclEntryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.AddAclEntryRequest',
+        ['acl']
+      );
+      request.acl = defaultValue1;
+      const expectedHeaderRequestParams = `acl=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.AddAclEntryResponse()
+      );
+      client.innerApiCalls.addAclEntry =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.addAclEntry(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.managedkafka.v1.IAddAclEntryResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addAclEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAclEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addAclEntry with error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.AddAclEntryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.AddAclEntryRequest',
+        ['acl']
+      );
+      request.acl = defaultValue1;
+      const expectedHeaderRequestParams = `acl=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addAclEntry = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.addAclEntry(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.addAclEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAclEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addAclEntry with closed client', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.AddAclEntryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.AddAclEntryRequest',
+        ['acl']
+      );
+      request.acl = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.addAclEntry(request), expectedError);
+    });
+  });
+
+  describe('removeAclEntry', () => {
+    it('invokes removeAclEntry without error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.RemoveAclEntryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.RemoveAclEntryRequest',
+        ['acl']
+      );
+      request.acl = defaultValue1;
+      const expectedHeaderRequestParams = `acl=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.RemoveAclEntryResponse()
+      );
+      client.innerApiCalls.removeAclEntry = stubSimpleCall(expectedResponse);
+      const [response] = await client.removeAclEntry(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.removeAclEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeAclEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeAclEntry without error using callback', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.RemoveAclEntryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.RemoveAclEntryRequest',
+        ['acl']
+      );
+      request.acl = defaultValue1;
+      const expectedHeaderRequestParams = `acl=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.RemoveAclEntryResponse()
+      );
+      client.innerApiCalls.removeAclEntry =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.removeAclEntry(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.managedkafka.v1.IRemoveAclEntryResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.removeAclEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeAclEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeAclEntry with error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.RemoveAclEntryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.RemoveAclEntryRequest',
+        ['acl']
+      );
+      request.acl = defaultValue1;
+      const expectedHeaderRequestParams = `acl=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.removeAclEntry = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.removeAclEntry(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.removeAclEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeAclEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeAclEntry with closed client', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.RemoveAclEntryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.RemoveAclEntryRequest',
+        ['acl']
+      );
+      request.acl = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.removeAclEntry(request), expectedError);
+    });
+  });
+
   describe('createCluster', () => {
     it('invokes createCluster without error', async () => {
       const client = new managedkafkaModule.v1.ManagedKafkaClient({
@@ -2967,6 +3751,306 @@ describe('v1.ManagedKafkaClient', () => {
       );
     });
   });
+
+  describe('listAcls', () => {
+    it('invokes listAcls without error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.ListAclsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.ListAclsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+      ];
+      client.innerApiCalls.listAcls = stubSimpleCall(expectedResponse);
+      const [response] = await client.listAcls(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAcls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAcls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAcls without error using callback', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.ListAclsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.ListAclsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+      ];
+      client.innerApiCalls.listAcls =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAcls(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.managedkafka.v1.IAcl[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAcls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAcls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAcls with error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.ListAclsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.ListAclsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAcls = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.listAcls(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listAcls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAcls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAclsStream without error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.ListAclsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.ListAclsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+      ];
+      client.descriptors.page.listAcls.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAclsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.managedkafka.v1.Acl[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.managedkafka.v1.Acl) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAcls.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAcls, request)
+      );
+      assert(
+        (client.descriptors.page.listAcls.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listAclsStream with error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.ListAclsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.ListAclsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAcls.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listAclsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.managedkafka.v1.Acl[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.managedkafka.v1.Acl) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAcls.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAcls, request)
+      );
+      assert(
+        (client.descriptors.page.listAcls.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listAcls without error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.ListAclsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.ListAclsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+      ];
+      client.descriptors.page.listAcls.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.managedkafka.v1.IAcl[] = [];
+      const iterable = client.listAclsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listAcls.asyncIterate as SinonStub).getCall(0)
+          .args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAcls.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listAcls with error', async () => {
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedkafka.v1.ListAclsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedkafka.v1.ListAclsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAcls.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listAclsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.managedkafka.v1.IAcl[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listAcls.asyncIterate as SinonStub).getCall(0)
+          .args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAcls.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new managedkafkaModule.v1.ManagedKafkaClient({
@@ -3482,6 +4566,82 @@ describe('v1.ManagedKafkaClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('acl', async () => {
+      const fakePath = '/rendered/path/acl';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        cluster: 'clusterValue',
+        acl: 'aclValue',
+      };
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.aclPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.aclPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('aclPath', () => {
+        const result = client.aclPath(
+          'projectValue',
+          'locationValue',
+          'clusterValue',
+          'aclValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.aclPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAclName', () => {
+        const result = client.matchProjectFromAclName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.aclPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAclName', () => {
+        const result = client.matchLocationFromAclName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.aclPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchClusterFromAclName', () => {
+        const result = client.matchClusterFromAclName(fakePath);
+        assert.strictEqual(result, 'clusterValue');
+        assert(
+          (client.pathTemplates.aclPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAclFromAclName', () => {
+        const result = client.matchAclFromAclName(fakePath);
+        assert.strictEqual(result, 'aclValue');
+        assert(
+          (client.pathTemplates.aclPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('cluster', async () => {
       const fakePath = '/rendered/path/cluster';
       const expectedParameters = {
