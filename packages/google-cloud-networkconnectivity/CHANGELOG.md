@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v4.0.1...network-connectivity-v4.1.0) (2025-05-09)
+
+
+### Features
+
+* [networkconnectivity] add Network Connectivity Center APIs for PSC service automation ([#6207](https://github.com/googleapis/google-cloud-node/issues/6207)) ([34267b5](https://github.com/googleapis/google-cloud-node/commit/34267b59998c2c9138815478d5f09b2fc434cc06))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v4.0.0...network-connectivity-v4.0.1) (2025-03-19)
 
 

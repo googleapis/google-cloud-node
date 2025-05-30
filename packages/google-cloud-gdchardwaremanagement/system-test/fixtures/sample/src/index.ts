@@ -19,9 +19,7 @@
 import {GDCHardwareManagementClient} from '@google-cloud/gdchardwaremanagement';
 
 // check that the client class type name can be used
-function doStuffWithGDCHardwareManagementClient(
-  client: GDCHardwareManagementClient
-) {
+function doStuffWithGDCHardwareManagementClient(client: GDCHardwareManagementClient) {
   client.close();
 }
 

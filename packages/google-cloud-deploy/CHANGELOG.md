@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v5.0.1...deploy-v5.1.0) (2025-05-09)
+
+
+### Features
+
+* [deploy] Add resource definition for Revision ([#6233](https://github.com/googleapis/google-cloud-node/issues/6233)) ([14b4580](https://github.com/googleapis/google-cloud-node/commit/14b458002aab5692c5cdaff37059ed5b657014ab))
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/deploy-v5.0.0...deploy-v5.0.1) (2025-03-21)
 
 

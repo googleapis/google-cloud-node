@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v4.0.1...network-management-v4.1.0) (2025-05-09)
+
+
+### Features
+
+* [networkmanagement] add messages and fields related to Direct VPC Egress ([#6245](https://github.com/googleapis/google-cloud-node/issues/6245)) ([42630e4](https://github.com/googleapis/google-cloud-node/commit/42630e4ccd8cacb016451dfed78060c41ac879a5))
+* Add enum types related to Abort ([42630e4](https://github.com/googleapis/google-cloud-node/commit/42630e4ccd8cacb016451dfed78060c41ac879a5))
+* Add enum types related to Drop ([42630e4](https://github.com/googleapis/google-cloud-node/commit/42630e4ccd8cacb016451dfed78060c41ac879a5))
+* Add enum types related to Firewall ([42630e4](https://github.com/googleapis/google-cloud-node/commit/42630e4ccd8cacb016451dfed78060c41ac879a5))
+* Add enum types related to Google Service ([42630e4](https://github.com/googleapis/google-cloud-node/commit/42630e4ccd8cacb016451dfed78060c41ac879a5))
+* Add messages and fields related to Route ([42630e4](https://github.com/googleapis/google-cloud-node/commit/42630e4ccd8cacb016451dfed78060c41ac879a5))
+* Add messages and fields related to Serverless External ([42630e4](https://github.com/googleapis/google-cloud-node/commit/42630e4ccd8cacb016451dfed78060c41ac879a5))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/network-management-v4.0.0...network-management-v4.0.1) (2025-03-19)
 
 

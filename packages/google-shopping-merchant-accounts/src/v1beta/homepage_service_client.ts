@@ -224,8 +224,17 @@ export class HomepageServiceClient {
       emailPreferencesPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/users/{email}/emailPreferences'
       ),
+      gbpAccountPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/gbpAccounts/{gbp_account}'
+      ),
       homepagePathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/homepage'
+      ),
+      lfpProviderPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/omnichannelSettings/{omnichannel_setting}/lfpProviders/{lfp_provider}'
+      ),
+      omnichannelSettingPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/omnichannelSettings/{omnichannel_setting}'
       ),
       onlineReturnPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/onlineReturnPolicies/{return_policy}'
@@ -1189,6 +1198,44 @@ export class HomepageServiceClient {
   }
 
   /**
+   * Return a fully-qualified gbpAccount resource name string.
+   *
+   * @param {string} account
+   * @param {string} gbp_account
+   * @returns {string} Resource name string.
+   */
+  gbpAccountPath(account: string, gbpAccount: string) {
+    return this.pathTemplates.gbpAccountPathTemplate.render({
+      account: account,
+      gbp_account: gbpAccount,
+    });
+  }
+
+  /**
+   * Parse the account from GbpAccount resource.
+   *
+   * @param {string} gbpAccountName
+   *   A fully-qualified path representing GbpAccount resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromGbpAccountName(gbpAccountName: string) {
+    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName)
+      .account;
+  }
+
+  /**
+   * Parse the gbp_account from GbpAccount resource.
+   *
+   * @param {string} gbpAccountName
+   *   A fully-qualified path representing GbpAccount resource.
+   * @returns {string} A string representing the gbp_account.
+   */
+  matchGbpAccountFromGbpAccountName(gbpAccountName: string) {
+    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName)
+      .gbp_account;
+  }
+
+  /**
    * Return a fully-qualified homepage resource name string.
    *
    * @param {string} account
@@ -1209,6 +1256,104 @@ export class HomepageServiceClient {
    */
   matchAccountFromHomepageName(homepageName: string) {
     return this.pathTemplates.homepagePathTemplate.match(homepageName).account;
+  }
+
+  /**
+   * Return a fully-qualified lfpProvider resource name string.
+   *
+   * @param {string} account
+   * @param {string} omnichannel_setting
+   * @param {string} lfp_provider
+   * @returns {string} Resource name string.
+   */
+  lfpProviderPath(
+    account: string,
+    omnichannelSetting: string,
+    lfpProvider: string
+  ) {
+    return this.pathTemplates.lfpProviderPathTemplate.render({
+      account: account,
+      omnichannel_setting: omnichannelSetting,
+      lfp_provider: lfpProvider,
+    });
+  }
+
+  /**
+   * Parse the account from LfpProvider resource.
+   *
+   * @param {string} lfpProviderName
+   *   A fully-qualified path representing LfpProvider resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromLfpProviderName(lfpProviderName: string) {
+    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName)
+      .account;
+  }
+
+  /**
+   * Parse the omnichannel_setting from LfpProvider resource.
+   *
+   * @param {string} lfpProviderName
+   *   A fully-qualified path representing LfpProvider resource.
+   * @returns {string} A string representing the omnichannel_setting.
+   */
+  matchOmnichannelSettingFromLfpProviderName(lfpProviderName: string) {
+    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName)
+      .omnichannel_setting;
+  }
+
+  /**
+   * Parse the lfp_provider from LfpProvider resource.
+   *
+   * @param {string} lfpProviderName
+   *   A fully-qualified path representing LfpProvider resource.
+   * @returns {string} A string representing the lfp_provider.
+   */
+  matchLfpProviderFromLfpProviderName(lfpProviderName: string) {
+    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName)
+      .lfp_provider;
+  }
+
+  /**
+   * Return a fully-qualified omnichannelSetting resource name string.
+   *
+   * @param {string} account
+   * @param {string} omnichannel_setting
+   * @returns {string} Resource name string.
+   */
+  omnichannelSettingPath(account: string, omnichannelSetting: string) {
+    return this.pathTemplates.omnichannelSettingPathTemplate.render({
+      account: account,
+      omnichannel_setting: omnichannelSetting,
+    });
+  }
+
+  /**
+   * Parse the account from OmnichannelSetting resource.
+   *
+   * @param {string} omnichannelSettingName
+   *   A fully-qualified path representing OmnichannelSetting resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromOmnichannelSettingName(omnichannelSettingName: string) {
+    return this.pathTemplates.omnichannelSettingPathTemplate.match(
+      omnichannelSettingName
+    ).account;
+  }
+
+  /**
+   * Parse the omnichannel_setting from OmnichannelSetting resource.
+   *
+   * @param {string} omnichannelSettingName
+   *   A fully-qualified path representing OmnichannelSetting resource.
+   * @returns {string} A string representing the omnichannel_setting.
+   */
+  matchOmnichannelSettingFromOmnichannelSettingName(
+    omnichannelSettingName: string
+  ) {
+    return this.pathTemplates.omnichannelSettingPathTemplate.match(
+      omnichannelSettingName
+    ).omnichannel_setting;
   }
 
   /**

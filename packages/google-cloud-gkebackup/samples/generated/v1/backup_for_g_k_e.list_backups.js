@@ -59,6 +59,11 @@ function main(parent) {
    *  Optional. Field by which to sort the results.
    */
   // const orderBy = 'abc123'
+  /**
+   *  Optional. If set to true, the response will return partial results when
+   *  some regions are unreachable and the unreachable field will be populated.
+   */
+  // const returnPartialSuccess = true
 
   // Imports the Gkebackup library
   const {BackupForGKEClient} = require('@google-cloud/gke-backup').v1;

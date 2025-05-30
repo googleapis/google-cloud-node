@@ -12,16 +12,29 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Storage_control.create_anywhere_cache](#storage_control.create_anywhere_cache)
   * [Storage_control.create_folder](#storage_control.create_folder)
   * [Storage_control.create_managed_folder](#storage_control.create_managed_folder)
   * [Storage_control.delete_folder](#storage_control.delete_folder)
   * [Storage_control.delete_managed_folder](#storage_control.delete_managed_folder)
+  * [Storage_control.disable_anywhere_cache](#storage_control.disable_anywhere_cache)
+  * [Storage_control.get_anywhere_cache](#storage_control.get_anywhere_cache)
   * [Storage_control.get_folder](#storage_control.get_folder)
+  * [Storage_control.get_folder_intelligence_config](#storage_control.get_folder_intelligence_config)
   * [Storage_control.get_managed_folder](#storage_control.get_managed_folder)
+  * [Storage_control.get_organization_intelligence_config](#storage_control.get_organization_intelligence_config)
+  * [Storage_control.get_project_intelligence_config](#storage_control.get_project_intelligence_config)
   * [Storage_control.get_storage_layout](#storage_control.get_storage_layout)
+  * [Storage_control.list_anywhere_caches](#storage_control.list_anywhere_caches)
   * [Storage_control.list_folders](#storage_control.list_folders)
   * [Storage_control.list_managed_folders](#storage_control.list_managed_folders)
+  * [Storage_control.pause_anywhere_cache](#storage_control.pause_anywhere_cache)
   * [Storage_control.rename_folder](#storage_control.rename_folder)
+  * [Storage_control.resume_anywhere_cache](#storage_control.resume_anywhere_cache)
+  * [Storage_control.update_anywhere_cache](#storage_control.update_anywhere_cache)
+  * [Storage_control.update_folder_intelligence_config](#storage_control.update_folder_intelligence_config)
+  * [Storage_control.update_organization_intelligence_config](#storage_control.update_organization_intelligence_config)
+  * [Storage_control.update_project_intelligence_config](#storage_control.update_project_intelligence_config)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -36,6 +49,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Storage_control.create_anywhere_cache
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.create_anywhere_cache.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.create_anywhere_cache.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.create_anywhere_cache.js`
+
+
+-----
+
 
 
 
@@ -107,6 +137,40 @@ __Usage:__
 
 
 
+### Storage_control.disable_anywhere_cache
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.disable_anywhere_cache.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.disable_anywhere_cache.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.disable_anywhere_cache.js`
+
+
+-----
+
+
+
+
+### Storage_control.get_anywhere_cache
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.get_anywhere_cache.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.get_anywhere_cache.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.get_anywhere_cache.js`
+
+
+-----
+
+
+
+
 ### Storage_control.get_folder
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.get_folder.js).
@@ -117,6 +181,23 @@ __Usage:__
 
 
 `node packages/google-storage-control/samples/generated/v2/storage_control.get_folder.js`
+
+
+-----
+
+
+
+
+### Storage_control.get_folder_intelligence_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.get_folder_intelligence_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.get_folder_intelligence_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.get_folder_intelligence_config.js`
 
 
 -----
@@ -141,6 +222,40 @@ __Usage:__
 
 
 
+### Storage_control.get_organization_intelligence_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.get_organization_intelligence_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.get_organization_intelligence_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.get_organization_intelligence_config.js`
+
+
+-----
+
+
+
+
+### Storage_control.get_project_intelligence_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.get_project_intelligence_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.get_project_intelligence_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.get_project_intelligence_config.js`
+
+
+-----
+
+
+
+
 ### Storage_control.get_storage_layout
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.get_storage_layout.js).
@@ -151,6 +266,23 @@ __Usage:__
 
 
 `node packages/google-storage-control/samples/generated/v2/storage_control.get_storage_layout.js`
+
+
+-----
+
+
+
+
+### Storage_control.list_anywhere_caches
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.list_anywhere_caches.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.list_anywhere_caches.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.list_anywhere_caches.js`
 
 
 -----
@@ -192,6 +324,23 @@ __Usage:__
 
 
 
+### Storage_control.pause_anywhere_cache
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.pause_anywhere_cache.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.pause_anywhere_cache.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.pause_anywhere_cache.js`
+
+
+-----
+
+
+
+
 ### Storage_control.rename_folder
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.rename_folder.js).
@@ -202,6 +351,91 @@ __Usage:__
 
 
 `node packages/google-storage-control/samples/generated/v2/storage_control.rename_folder.js`
+
+
+-----
+
+
+
+
+### Storage_control.resume_anywhere_cache
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.resume_anywhere_cache.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.resume_anywhere_cache.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.resume_anywhere_cache.js`
+
+
+-----
+
+
+
+
+### Storage_control.update_anywhere_cache
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.update_anywhere_cache.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.update_anywhere_cache.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.update_anywhere_cache.js`
+
+
+-----
+
+
+
+
+### Storage_control.update_folder_intelligence_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.update_folder_intelligence_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.update_folder_intelligence_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.update_folder_intelligence_config.js`
+
+
+-----
+
+
+
+
+### Storage_control.update_organization_intelligence_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.update_organization_intelligence_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.update_organization_intelligence_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.update_organization_intelligence_config.js`
+
+
+-----
+
+
+
+
+### Storage_control.update_project_intelligence_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.update_project_intelligence_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.update_project_intelligence_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.update_project_intelligence_config.js`
 
 
 -----

@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
@@ -26,18 +26,17 @@ import {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import * as path from 'path';
-
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v3/metric_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './metric_service_client_config.json';
-
 const version = require('../../../package.json').version;
 
 /**
@@ -49,10 +48,15 @@ const version = require('../../../package.json').version;
 export class MetricServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
+  private _log = logging.log('monitoring');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -60,6 +64,7 @@ export class MetricServiceClient {
     longrunning: {},
     batching: {},
   };
+  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
   metricServiceStub?: Promise<{[name: string]: Function}>;
@@ -69,7 +74,7 @@ export class MetricServiceClient {
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
-   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#creating-the-client-instance).
    * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
@@ -86,23 +91,53 @@ export class MetricServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
-   *     In fallback mode, a special browser-compatible transport implementation is used
-   *     instead of gRPC transport. In browser context (if the `window` object is defined)
-   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
-   *     if you need to override this behavior.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
+   *     For more information, please check the
+   *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new MetricServiceClient({fallback: true}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof MetricServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'monitoring.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     const fallback =
@@ -110,13 +145,21 @@ export class MetricServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -127,41 +170,34 @@ export class MetricServiceClient {
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
+    // Set useJWTAccessWithScope on the auth object.
+    this.auth.useJWTAccessWithScope = true;
+
+    // Set defaultServicePath on the auth object.
+    this.auth.defaultServicePath = this._servicePath;
+
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
-    // For Node.js, pass the path to JSON proto file.
-    // For browsers, pass the JSON content.
-
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
-    this._protos = this._gaxGrpc.loadProto(
-      opts.fallback
-        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        : nodejsProtoPath
-    );
+    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
@@ -274,6 +310,9 @@ export class MetricServiceClient {
       projectUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
       ),
+      snoozePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/snoozes/{snooze}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -309,6 +348,9 @@ export class MetricServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -337,7 +379,8 @@ export class MetricServiceClient {
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.monitoring.v3.MetricService,
-      this._opts
+      this._opts,
+      this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -351,6 +394,7 @@ export class MetricServiceClient {
       'deleteMetricDescriptor',
       'listTimeSeries',
       'createTimeSeries',
+      'createServiceTimeSeries',
     ];
     for (const methodName of metricServiceStubMethods) {
       const callPromise = this.metricServiceStub.then(
@@ -371,7 +415,8 @@ export class MetricServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -382,19 +427,50 @@ export class MetricServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'monitoring.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'monitoring.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -438,8 +514,29 @@ export class MetricServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets a single monitored resource descriptor.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The monitored resource descriptor to get.  The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/monitoredResourceDescriptors/[RESOURCE_TYPE]
+   *
+   *   The `[RESOURCE_TYPE]` is a predefined type, such as
+   *   `cloudsql_database`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.api.MonitoredResourceDescriptor|MonitoredResourceDescriptor}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/metric_service.get_monitored_resource_descriptor.js</caption>
+   * region_tag:monitoring_v3_generated_MetricService_GetMonitoredResourceDescriptor_async
+   */
   getMonitoredResourceDescriptor(
-    request: protos.google.monitoring.v3.IGetMonitoredResourceDescriptorRequest,
+    request?: protos.google.monitoring.v3.IGetMonitoredResourceDescriptorRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -472,30 +569,8 @@ export class MetricServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a single monitored resource descriptor. This method does not require a Workspace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The monitored resource descriptor to get.  The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/monitoredResourceDescriptors/[RESOURCE_TYPE]
-   *
-   *   The `[RESOURCE_TYPE]` is a predefined type, such as
-   *   `cloudsql_database`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [MonitoredResourceDescriptor]{@link google.api.MonitoredResourceDescriptor}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getMonitoredResourceDescriptor(request);
-   */
   getMonitoredResourceDescriptor(
-    request: protos.google.monitoring.v3.IGetMonitoredResourceDescriptorRequest,
+    request?: protos.google.monitoring.v3.IGetMonitoredResourceDescriptorRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -534,18 +609,73 @@ export class MetricServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getMonitoredResourceDescriptor(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getMonitoredResourceDescriptor request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IMonitoredResourceDescriptor,
+          | protos.google.monitoring.v3.IGetMonitoredResourceDescriptorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getMonitoredResourceDescriptor response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMonitoredResourceDescriptor(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IMonitoredResourceDescriptor,
+          (
+            | protos.google.monitoring.v3.IGetMonitoredResourceDescriptorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getMonitoredResourceDescriptor response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
+  /**
+   * Gets a single metric descriptor.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The metric descriptor on which to execute the request. The format
+   *   is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID]
+   *
+   *   An example value of `[METRIC_ID]` is
+   *   `"compute.googleapis.com/instance/disk/read_bytes_count"`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.api.MetricDescriptor|MetricDescriptor}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/metric_service.get_metric_descriptor.js</caption>
+   * region_tag:monitoring_v3_generated_MetricService_GetMetricDescriptor_async
+   */
   getMetricDescriptor(
-    request: protos.google.monitoring.v3.IGetMetricDescriptorRequest,
+    request?: protos.google.monitoring.v3.IGetMetricDescriptorRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -575,30 +705,8 @@ export class MetricServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a single metric descriptor. This method does not require a Workspace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The metric descriptor on which to execute the request. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID]
-   *
-   *   An example value of `[METRIC_ID]` is
-   *   `"compute.googleapis.com/instance/disk/read_bytes_count"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [MetricDescriptor]{@link google.api.MetricDescriptor}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getMetricDescriptor(request);
-   */
   getMetricDescriptor(
-    request: protos.google.monitoring.v3.IGetMetricDescriptorRequest,
+    request?: protos.google.monitoring.v3.IGetMetricDescriptorRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -634,14 +742,70 @@ export class MetricServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getMetricDescriptor(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getMetricDescriptor request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IMetricDescriptor,
+          | protos.google.monitoring.v3.IGetMetricDescriptorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMetricDescriptor response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMetricDescriptor(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IMetricDescriptor,
+          protos.google.monitoring.v3.IGetMetricDescriptorRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMetricDescriptor response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
+  /**
+   * Creates a new metric descriptor.
+   * The creation is executed asynchronously.
+   * User-created metric descriptors define
+   * [custom metrics](https://cloud.google.com/monitoring/custom-metrics).
+   * The metric descriptor is updated if it already exists,
+   * except that metric labels are never removed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+   *   to execute the request. The format is:
+   *   4
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {google.api.MetricDescriptor} request.metricDescriptor
+   *   Required. The new [custom
+   *   metric](https://cloud.google.com/monitoring/custom-metrics) descriptor.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.api.MetricDescriptor|MetricDescriptor}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/metric_service.create_metric_descriptor.js</caption>
+   * region_tag:monitoring_v3_generated_MetricService_CreateMetricDescriptor_async
+   */
   createMetricDescriptor(
-    request: protos.google.monitoring.v3.ICreateMetricDescriptorRequest,
+    request?: protos.google.monitoring.v3.ICreateMetricDescriptorRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -671,32 +835,8 @@ export class MetricServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new metric descriptor.
-   * User-created metric descriptors define
-   * [custom metrics](https://cloud.google.com/monitoring/custom-metrics).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {google.api.MetricDescriptor} request.metricDescriptor
-   *   Required. The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
-   *   descriptor.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [MetricDescriptor]{@link google.api.MetricDescriptor}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createMetricDescriptor(request);
-   */
   createMetricDescriptor(
-    request: protos.google.monitoring.v3.ICreateMetricDescriptorRequest,
+    request?: protos.google.monitoring.v3.ICreateMetricDescriptorRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -732,18 +872,69 @@ export class MetricServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createMetricDescriptor(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createMetricDescriptor request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IMetricDescriptor,
+          | protos.google.monitoring.v3.ICreateMetricDescriptorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createMetricDescriptor response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createMetricDescriptor(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IMetricDescriptor,
+          (
+            | protos.google.monitoring.v3.ICreateMetricDescriptorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createMetricDescriptor response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
+  /**
+   * Deletes a metric descriptor. Only user-created
+   * [custom metrics](https://cloud.google.com/monitoring/custom-metrics) can be
+   * deleted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The metric descriptor on which to execute the request. The format
+   *   is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID]
+   *
+   *   An example of `[METRIC_ID]` is:
+   *   `"custom.googleapis.com/my_test_metric"`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/metric_service.delete_metric_descriptor.js</caption>
+   * region_tag:monitoring_v3_generated_MetricService_DeleteMetricDescriptor_async
+   */
   deleteMetricDescriptor(
-    request: protos.google.monitoring.v3.IDeleteMetricDescriptorRequest,
+    request?: protos.google.monitoring.v3.IDeleteMetricDescriptorRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -773,32 +964,8 @@ export class MetricServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a metric descriptor. Only user-created
-   * [custom metrics](https://cloud.google.com/monitoring/custom-metrics) can be
-   * deleted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The metric descriptor on which to execute the request. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID]
-   *
-   *   An example of `[METRIC_ID]` is:
-   *   `"custom.googleapis.com/my_test_metric"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteMetricDescriptor(request);
-   */
   deleteMetricDescriptor(
-    request: protos.google.monitoring.v3.IDeleteMetricDescriptorRequest,
+    request?: protos.google.monitoring.v3.IDeleteMetricDescriptorRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -834,18 +1001,79 @@ export class MetricServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteMetricDescriptor(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteMetricDescriptor request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.monitoring.v3.IDeleteMetricDescriptorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteMetricDescriptor response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteMetricDescriptor(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.monitoring.v3.IDeleteMetricDescriptorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMetricDescriptor response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
+  /**
+   * Creates or adds data to one or more time series.
+   * The response is empty if all time series in the request were written.
+   * If any time series could not be written, a corresponding failure message is
+   * included in the error response.
+   * This method does not support
+   * [resource locations constraint of an organization
+   * policy](https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations#setting_the_organization_policy).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+   *   to execute the request. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {number[]} request.timeSeries
+   *   Required. The new data to be added to a list of time series.
+   *   Adds at most one data point to each of several time series.  The new data
+   *   point must be more recent than any other point in its time series.  Each
+   *   `TimeSeries` value must fully specify a unique time series by supplying
+   *   all label values for the metric and the monitored resource.
+   *
+   *   The maximum number of `TimeSeries` objects per `Create` request is 200.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/metric_service.create_time_series.js</caption>
+   * region_tag:monitoring_v3_generated_MetricService_CreateTimeSeries_async
+   */
   createTimeSeries(
-    request: protos.google.monitoring.v3.ICreateTimeSeriesRequest,
+    request?: protos.google.monitoring.v3.ICreateTimeSeriesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -871,38 +1099,8 @@ export class MetricServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates or adds data to one or more time series.
-   * The response is empty if all time series in the request were written.
-   * If any time series could not be written, a corresponding failure message is
-   * included in the error response.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {number[]} request.timeSeries
-   *   Required. The new data to be added to a list of time series.
-   *   Adds at most one data point to each of several time series.  The new data
-   *   point must be more recent than any other point in its time series.  Each
-   *   `TimeSeries` value must fully specify a unique time series by supplying
-   *   all label values for the metric and the monitored resource.
-   *
-   *   The maximum number of `TimeSeries` objects per `Create` request is 200.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createTimeSeries(request);
-   */
   createTimeSeries(
-    request: protos.google.monitoring.v3.ICreateTimeSeriesRequest,
+    request?: protos.google.monitoring.v3.ICreateTimeSeriesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -936,15 +1134,211 @@ export class MetricServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createTimeSeries(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createTimeSeries request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.monitoring.v3.ICreateTimeSeriesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTimeSeries response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTimeSeries(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.ICreateTimeSeriesRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTimeSeries response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Creates or adds data to one or more service time series. A service time
+   * series is a time series for a metric from a Google Cloud service. The
+   * response is empty if all time series in the request were written. If any
+   * time series could not be written, a corresponding failure message is
+   * included in the error response. This endpoint rejects writes to
+   * user-defined metrics.
+   * This method is only for use by Google Cloud services. Use
+   * {@link protos.google.monitoring.v3.MetricService.CreateTimeSeries|projects.timeSeries.create}
+   * instead.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+   *   to execute the request. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {number[]} request.timeSeries
+   *   Required. The new data to be added to a list of time series.
+   *   Adds at most one data point to each of several time series.  The new data
+   *   point must be more recent than any other point in its time series.  Each
+   *   `TimeSeries` value must fully specify a unique time series by supplying
+   *   all label values for the metric and the monitored resource.
+   *
+   *   The maximum number of `TimeSeries` objects per `Create` request is 200.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/metric_service.create_service_time_series.js</caption>
+   * region_tag:monitoring_v3_generated_MetricService_CreateServiceTimeSeries_async
+   */
+  createServiceTimeSeries(
+    request?: protos.google.monitoring.v3.ICreateTimeSeriesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.ICreateTimeSeriesRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createServiceTimeSeries(
+    request: protos.google.monitoring.v3.ICreateTimeSeriesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.ICreateTimeSeriesRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createServiceTimeSeries(
+    request: protos.google.monitoring.v3.ICreateTimeSeriesRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.ICreateTimeSeriesRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createServiceTimeSeries(
+    request?: protos.google.monitoring.v3.ICreateTimeSeriesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.monitoring.v3.ICreateTimeSeriesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.ICreateTimeSeriesRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.ICreateTimeSeriesRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createServiceTimeSeries request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.monitoring.v3.ICreateTimeSeriesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createServiceTimeSeries response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createServiceTimeSeries(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.ICreateTimeSeriesRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createServiceTimeSeries response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
+  /**
+   * Lists monitored resource descriptors that match a filter.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+   *   to execute the request. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {string} request.filter
+   *   An optional [filter](https://cloud.google.com/monitoring/api/v3/filters)
+   *   describing the descriptors to be returned.  The filter can reference the
+   *   descriptor's type and labels. For example, the following filter returns
+   *   only Google Compute Engine descriptors that have an `id` label:
+   *
+   *       resource.type = starts_with("gce_") AND resource.label:id
+   * @param {number} request.pageSize
+   *   A positive number that is the maximum number of results to return.
+   * @param {string} request.pageToken
+   *   If this field is not empty then it must contain the `nextPageToken` value
+   *   returned by a previous call to this method.  Using this field causes the
+   *   method to return additional results from the previous method call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.api.MonitoredResourceDescriptor|MonitoredResourceDescriptor}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMonitoredResourceDescriptorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMonitoredResourceDescriptors(
-    request: protos.google.monitoring.v3.IListMonitoredResourceDescriptorsRequest,
+    request?: protos.google.monitoring.v3.IListMonitoredResourceDescriptorsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -974,43 +1368,8 @@ export class MetricServiceClient {
       protos.google.api.IMonitoredResourceDescriptor
     >
   ): void;
-  /**
-   * Lists monitored resource descriptors that match a filter. This method does not require a Workspace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {string} request.filter
-   *   An optional [filter](https://cloud.google.com/monitoring/api/v3/filters)
-   *   describing the descriptors to be returned.  The filter can reference the
-   *   descriptor's type and labels. For example, the following filter returns
-   *   only Google Compute Engine descriptors that have an `id` label:
-   *
-   *       resource.type = starts_with("gce_") AND resource.label:id
-   * @param {number} request.pageSize
-   *   A positive number that is the maximum number of results to return.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [MonitoredResourceDescriptor]{@link google.api.MonitoredResourceDescriptor}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listMonitoredResourceDescriptorsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listMonitoredResourceDescriptors(
-    request: protos.google.monitoring.v3.IListMonitoredResourceDescriptorsRequest,
+    request?: protos.google.monitoring.v3.IListMonitoredResourceDescriptorsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1046,23 +1405,52 @@ export class MetricServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listMonitoredResourceDescriptors(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.monitoring.v3.IListMonitoredResourceDescriptorsRequest,
+          | protos.google.monitoring.v3.IListMonitoredResourceDescriptorsResponse
+          | null
+          | undefined,
+          protos.google.api.IMonitoredResourceDescriptor
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMonitoredResourceDescriptors values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMonitoredResourceDescriptors request %j', request);
+    return this.innerApiCalls
+      .listMonitoredResourceDescriptors(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.api.IMonitoredResourceDescriptor[],
+          protos.google.monitoring.v3.IListMonitoredResourceDescriptorsRequest | null,
+          protos.google.monitoring.v3.IListMonitoredResourceDescriptorsResponse,
+        ]) => {
+          this._log.info(
+            'listMonitoredResourceDescriptors values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listMonitoredResourceDescriptors`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+   *   to execute the request. The format is:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
    * @param {string} request.filter
@@ -1081,13 +1469,12 @@ export class MetricServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [MonitoredResourceDescriptor]{@link google.api.MonitoredResourceDescriptor} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.api.MonitoredResourceDescriptor|MonitoredResourceDescriptor} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listMonitoredResourceDescriptorsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listMonitoredResourceDescriptorsStream(
@@ -1099,13 +1486,18 @@ export class MetricServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    const defaultCallSettings =
+      this._defaults['listMonitoredResourceDescriptors'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMonitoredResourceDescriptors stream %j', request);
     return this.descriptors.page.listMonitoredResourceDescriptors.createStream(
-      this.innerApiCalls.listMonitoredResourceDescriptors as gax.GaxCall,
+      this.innerApiCalls.listMonitoredResourceDescriptors as GaxCall,
       request,
       callSettings
     );
@@ -1118,7 +1510,9 @@ export class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+   *   to execute the request. The format is:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
    * @param {string} request.filter
@@ -1137,18 +1531,14 @@ export class MetricServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [MonitoredResourceDescriptor]{@link google.api.MonitoredResourceDescriptor}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.api.MonitoredResourceDescriptor|MonitoredResourceDescriptor}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example
-   * const iterable = client.listMonitoredResourceDescriptorsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v3/metric_service.list_monitored_resource_descriptors.js</caption>
+   * region_tag:monitoring_v3_generated_MetricService_ListMonitoredResourceDescriptors_async
    */
   listMonitoredResourceDescriptorsAsync(
     request?: protos.google.monitoring.v3.IListMonitoredResourceDescriptorsRequest,
@@ -1159,20 +1549,76 @@ export class MetricServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    const defaultCallSettings =
+      this._defaults['listMonitoredResourceDescriptors'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMonitoredResourceDescriptors iterate %j', request);
     return this.descriptors.page.listMonitoredResourceDescriptors.asyncIterate(
       this.innerApiCalls['listMonitoredResourceDescriptors'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.api.IMonitoredResourceDescriptor>;
   }
+  /**
+   * Lists metric descriptors that match a filter.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+   *   to execute the request. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {string} [request.filter]
+   *   Optional. If this field is empty, all custom and
+   *   system-defined metric descriptors are returned.
+   *   Otherwise, the [filter](https://cloud.google.com/monitoring/api/v3/filters)
+   *   specifies which metric descriptors are to be
+   *   returned. For example, the following filter matches all
+   *   [custom metrics](https://cloud.google.com/monitoring/custom-metrics):
+   *
+   *       metric.type = starts_with("custom.googleapis.com/")
+   * @param {number} [request.pageSize]
+   *   Optional. A positive number that is the maximum number of results to
+   *   return. The default and maximum value is 10,000. If a page_size <= 0 or >
+   *   10,000 is submitted, will instead return a maximum of 10,000 results.
+   * @param {string} [request.pageToken]
+   *   Optional. If this field is not empty then it must contain the
+   *   `nextPageToken` value returned by a previous call to this method.  Using
+   *   this field causes the method to return additional results from the previous
+   *   method call.
+   * @param {boolean} [request.activeOnly]
+   *   Optional. If true, only metrics and monitored resource types that have
+   *   recent data (within roughly 25 hours) will be included in the response.
+   *    - If a metric descriptor enumerates monitored resource types, only the
+   *      monitored resource types for which the metric type has recent data will
+   *      be included in the returned metric descriptor, and if none of them have
+   *      recent data, the metric descriptor will not be returned.
+   *    - If a metric descriptor does not enumerate the compatible monitored
+   *      resource types, it will be returned only if the metric type has recent
+   *      data for some monitored resource type. The returned descriptor will not
+   *      enumerate any monitored resource types.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.api.MetricDescriptor|MetricDescriptor}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMetricDescriptorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMetricDescriptors(
-    request: protos.google.monitoring.v3.IListMetricDescriptorsRequest,
+    request?: protos.google.monitoring.v3.IListMetricDescriptorsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1202,45 +1648,8 @@ export class MetricServiceClient {
       protos.google.api.IMetricDescriptor
     >
   ): void;
-  /**
-   * Lists metric descriptors that match a filter. This method does not require a Workspace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {string} request.filter
-   *   If this field is empty, all custom and
-   *   system-defined metric descriptors are returned.
-   *   Otherwise, the [filter](https://cloud.google.com/monitoring/api/v3/filters)
-   *   specifies which metric descriptors are to be
-   *   returned. For example, the following filter matches all
-   *   [custom metrics](https://cloud.google.com/monitoring/custom-metrics):
-   *
-   *       metric.type = starts_with("custom.googleapis.com/")
-   * @param {number} request.pageSize
-   *   A positive number that is the maximum number of results to return.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [MetricDescriptor]{@link google.api.MetricDescriptor}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listMetricDescriptorsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listMetricDescriptors(
-    request: protos.google.monitoring.v3.IListMetricDescriptorsRequest,
+    request?: protos.google.monitoring.v3.IListMetricDescriptorsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1276,23 +1685,53 @@ export class MetricServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listMetricDescriptors(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.monitoring.v3.IListMetricDescriptorsRequest,
+          | protos.google.monitoring.v3.IListMetricDescriptorsResponse
+          | null
+          | undefined,
+          protos.google.api.IMetricDescriptor
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMetricDescriptors values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMetricDescriptors request %j', request);
+    return this.innerApiCalls
+      .listMetricDescriptors(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.api.IMetricDescriptor[],
+          protos.google.monitoring.v3.IListMetricDescriptorsRequest | null,
+          protos.google.monitoring.v3.IListMetricDescriptorsResponse,
+        ]) => {
+          this._log.info('listMetricDescriptors values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listMetricDescriptors`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+   *   to execute the request. The format is:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {string} request.filter
-   *   If this field is empty, all custom and
+   * @param {string} [request.filter]
+   *   Optional. If this field is empty, all custom and
    *   system-defined metric descriptors are returned.
    *   Otherwise, the [filter](https://cloud.google.com/monitoring/api/v3/filters)
    *   specifies which metric descriptors are to be
@@ -1300,22 +1739,35 @@ export class MetricServiceClient {
    *   [custom metrics](https://cloud.google.com/monitoring/custom-metrics):
    *
    *       metric.type = starts_with("custom.googleapis.com/")
-   * @param {number} request.pageSize
-   *   A positive number that is the maximum number of results to return.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
+   * @param {number} [request.pageSize]
+   *   Optional. A positive number that is the maximum number of results to
+   *   return. The default and maximum value is 10,000. If a page_size <= 0 or >
+   *   10,000 is submitted, will instead return a maximum of 10,000 results.
+   * @param {string} [request.pageToken]
+   *   Optional. If this field is not empty then it must contain the
+   *   `nextPageToken` value returned by a previous call to this method.  Using
+   *   this field causes the method to return additional results from the previous
+   *   method call.
+   * @param {boolean} [request.activeOnly]
+   *   Optional. If true, only metrics and monitored resource types that have
+   *   recent data (within roughly 25 hours) will be included in the response.
+   *    - If a metric descriptor enumerates monitored resource types, only the
+   *      monitored resource types for which the metric type has recent data will
+   *      be included in the returned metric descriptor, and if none of them have
+   *      recent data, the metric descriptor will not be returned.
+   *    - If a metric descriptor does not enumerate the compatible monitored
+   *      resource types, it will be returned only if the metric type has recent
+   *      data for some monitored resource type. The returned descriptor will not
+   *      enumerate any monitored resource types.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [MetricDescriptor]{@link google.api.MetricDescriptor} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.api.MetricDescriptor|MetricDescriptor} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listMetricDescriptorsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listMetricDescriptorsStream(
@@ -1327,13 +1779,17 @@ export class MetricServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    const defaultCallSettings = this._defaults['listMetricDescriptors'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMetricDescriptors stream %j', request);
     return this.descriptors.page.listMetricDescriptors.createStream(
-      this.innerApiCalls.listMetricDescriptors as gax.GaxCall,
+      this.innerApiCalls.listMetricDescriptors as GaxCall,
       request,
       callSettings
     );
@@ -1346,11 +1802,13 @@ export class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+   *   to execute the request. The format is:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {string} request.filter
-   *   If this field is empty, all custom and
+   * @param {string} [request.filter]
+   *   Optional. If this field is empty, all custom and
    *   system-defined metric descriptors are returned.
    *   Otherwise, the [filter](https://cloud.google.com/monitoring/api/v3/filters)
    *   specifies which metric descriptors are to be
@@ -1358,27 +1816,37 @@ export class MetricServiceClient {
    *   [custom metrics](https://cloud.google.com/monitoring/custom-metrics):
    *
    *       metric.type = starts_with("custom.googleapis.com/")
-   * @param {number} request.pageSize
-   *   A positive number that is the maximum number of results to return.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
+   * @param {number} [request.pageSize]
+   *   Optional. A positive number that is the maximum number of results to
+   *   return. The default and maximum value is 10,000. If a page_size <= 0 or >
+   *   10,000 is submitted, will instead return a maximum of 10,000 results.
+   * @param {string} [request.pageToken]
+   *   Optional. If this field is not empty then it must contain the
+   *   `nextPageToken` value returned by a previous call to this method.  Using
+   *   this field causes the method to return additional results from the previous
+   *   method call.
+   * @param {boolean} [request.activeOnly]
+   *   Optional. If true, only metrics and monitored resource types that have
+   *   recent data (within roughly 25 hours) will be included in the response.
+   *    - If a metric descriptor enumerates monitored resource types, only the
+   *      monitored resource types for which the metric type has recent data will
+   *      be included in the returned metric descriptor, and if none of them have
+   *      recent data, the metric descriptor will not be returned.
+   *    - If a metric descriptor does not enumerate the compatible monitored
+   *      resource types, it will be returned only if the metric type has recent
+   *      data for some monitored resource type. The returned descriptor will not
+   *      enumerate any monitored resource types.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [MetricDescriptor]{@link google.api.MetricDescriptor}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.api.MetricDescriptor|MetricDescriptor}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example
-   * const iterable = client.listMetricDescriptorsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v3/metric_service.list_metric_descriptors.js</caption>
+   * region_tag:monitoring_v3_generated_MetricService_ListMetricDescriptors_async
    */
   listMetricDescriptorsAsync(
     request?: protos.google.monitoring.v3.IListMetricDescriptorsRequest,
@@ -1389,69 +1857,47 @@ export class MetricServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    const defaultCallSettings = this._defaults['listMetricDescriptors'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMetricDescriptors iterate %j', request);
     return this.descriptors.page.listMetricDescriptors.asyncIterate(
       this.innerApiCalls['listMetricDescriptors'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.api.IMetricDescriptor>;
   }
-  listTimeSeries(
-    request: protos.google.monitoring.v3.IListTimeSeriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.monitoring.v3.ITimeSeries[],
-      protos.google.monitoring.v3.IListTimeSeriesRequest | null,
-      protos.google.monitoring.v3.IListTimeSeriesResponse,
-    ]
-  >;
-  listTimeSeries(
-    request: protos.google.monitoring.v3.IListTimeSeriesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.monitoring.v3.IListTimeSeriesRequest,
-      protos.google.monitoring.v3.IListTimeSeriesResponse | null | undefined,
-      protos.google.monitoring.v3.ITimeSeries
-    >
-  ): void;
-  listTimeSeries(
-    request: protos.google.monitoring.v3.IListTimeSeriesRequest,
-    callback: PaginationCallback<
-      protos.google.monitoring.v3.IListTimeSeriesRequest,
-      protos.google.monitoring.v3.IListTimeSeriesResponse | null | undefined,
-      protos.google.monitoring.v3.ITimeSeries
-    >
-  ): void;
   /**
-   * Lists time series that match a filter. This method does not require a Workspace.
+   * Lists time series that match a filter.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The project, organization or folder on which to execute the request. The
-   *   format is:
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name),
+   *   organization or folder on which to execute the request. The format is:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
    *       organizations/[ORGANIZATION_ID]
    *       folders/[FOLDER_ID]
    * @param {string} request.filter
-   *   Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
-   *   that specifies which time series should be returned.  The filter must
-   *   specify a single metric type, and can additionally specify metric labels
-   *   and other information. For example:
+   *   Required. A [monitoring
+   *   filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies
+   *   which time series should be returned.  The filter must specify a single
+   *   metric type, and can additionally specify metric labels and other
+   *   information. For example:
    *
    *       metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
    *           metric.labels.instance_name = "my-instance-name"
    * @param {google.monitoring.v3.TimeInterval} request.interval
-   *   Required. The time interval for which results should be returned. Only time series
-   *   that contain data points in the specified interval are included
-   *   in the response.
+   *   Required. The time interval for which results should be returned. Only time
+   *   series that contain data points in the specified interval are included in
+   *   the response.
    * @param {google.monitoring.v3.Aggregation} request.aggregation
    *   Specifies the alignment of data points in individual time series as
    *   well as how to combine the retrieved time series across specified labels.
@@ -1479,18 +1925,44 @@ export class MetricServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [TimeSeries]{@link google.monitoring.v3.TimeSeries}.
+   *   The first element of the array is Array of {@link protos.google.monitoring.v3.TimeSeries|TimeSeries}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listTimeSeriesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTimeSeries(
+    request?: protos.google.monitoring.v3.IListTimeSeriesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.monitoring.v3.ITimeSeries[],
+      protos.google.monitoring.v3.IListTimeSeriesRequest | null,
+      protos.google.monitoring.v3.IListTimeSeriesResponse,
+    ]
+  >;
+  listTimeSeries(
     request: protos.google.monitoring.v3.IListTimeSeriesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.monitoring.v3.IListTimeSeriesRequest,
+      protos.google.monitoring.v3.IListTimeSeriesResponse | null | undefined,
+      protos.google.monitoring.v3.ITimeSeries
+    >
+  ): void;
+  listTimeSeries(
+    request: protos.google.monitoring.v3.IListTimeSeriesRequest,
+    callback: PaginationCallback<
+      protos.google.monitoring.v3.IListTimeSeriesRequest,
+      protos.google.monitoring.v3.IListTimeSeriesResponse | null | undefined,
+      protos.google.monitoring.v3.ITimeSeries
+    >
+  ): void;
+  listTimeSeries(
+    request?: protos.google.monitoring.v3.IListTimeSeriesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1524,36 +1996,66 @@ export class MetricServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listTimeSeries(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.monitoring.v3.IListTimeSeriesRequest,
+          | protos.google.monitoring.v3.IListTimeSeriesResponse
+          | null
+          | undefined,
+          protos.google.monitoring.v3.ITimeSeries
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTimeSeries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTimeSeries request %j', request);
+    return this.innerApiCalls
+      .listTimeSeries(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.monitoring.v3.ITimeSeries[],
+          protos.google.monitoring.v3.IListTimeSeriesRequest | null,
+          protos.google.monitoring.v3.IListTimeSeriesResponse,
+        ]) => {
+          this._log.info('listTimeSeries values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTimeSeries`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The project, organization or folder on which to execute the request. The
-   *   format is:
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name),
+   *   organization or folder on which to execute the request. The format is:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
    *       organizations/[ORGANIZATION_ID]
    *       folders/[FOLDER_ID]
    * @param {string} request.filter
-   *   Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
-   *   that specifies which time series should be returned.  The filter must
-   *   specify a single metric type, and can additionally specify metric labels
-   *   and other information. For example:
+   *   Required. A [monitoring
+   *   filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies
+   *   which time series should be returned.  The filter must specify a single
+   *   metric type, and can additionally specify metric labels and other
+   *   information. For example:
    *
    *       metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
    *           metric.labels.instance_name = "my-instance-name"
    * @param {google.monitoring.v3.TimeInterval} request.interval
-   *   Required. The time interval for which results should be returned. Only time series
-   *   that contain data points in the specified interval are included
-   *   in the response.
+   *   Required. The time interval for which results should be returned. Only time
+   *   series that contain data points in the specified interval are included in
+   *   the response.
    * @param {google.monitoring.v3.Aggregation} request.aggregation
    *   Specifies the alignment of data points in individual time series as
    *   well as how to combine the retrieved time series across specified labels.
@@ -1581,13 +2083,12 @@ export class MetricServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [TimeSeries]{@link google.monitoring.v3.TimeSeries} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.monitoring.v3.TimeSeries|TimeSeries} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTimeSeriesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTimeSeriesStream(
@@ -1599,13 +2100,17 @@ export class MetricServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    const defaultCallSettings = this._defaults['listTimeSeries'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTimeSeries stream %j', request);
     return this.descriptors.page.listTimeSeries.createStream(
-      this.innerApiCalls.listTimeSeries as gax.GaxCall,
+      this.innerApiCalls.listTimeSeries as GaxCall,
       request,
       callSettings
     );
@@ -1618,24 +2123,26 @@ export class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The project, organization or folder on which to execute the request. The
-   *   format is:
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name),
+   *   organization or folder on which to execute the request. The format is:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
    *       organizations/[ORGANIZATION_ID]
    *       folders/[FOLDER_ID]
    * @param {string} request.filter
-   *   Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
-   *   that specifies which time series should be returned.  The filter must
-   *   specify a single metric type, and can additionally specify metric labels
-   *   and other information. For example:
+   *   Required. A [monitoring
+   *   filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies
+   *   which time series should be returned.  The filter must specify a single
+   *   metric type, and can additionally specify metric labels and other
+   *   information. For example:
    *
    *       metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
    *           metric.labels.instance_name = "my-instance-name"
    * @param {google.monitoring.v3.TimeInterval} request.interval
-   *   Required. The time interval for which results should be returned. Only time series
-   *   that contain data points in the specified interval are included
-   *   in the response.
+   *   Required. The time interval for which results should be returned. Only time
+   *   series that contain data points in the specified interval are included in
+   *   the response.
    * @param {google.monitoring.v3.Aggregation} request.aggregation
    *   Specifies the alignment of data points in individual time series as
    *   well as how to combine the retrieved time series across specified labels.
@@ -1663,18 +2170,14 @@ export class MetricServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [TimeSeries]{@link google.monitoring.v3.TimeSeries}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.monitoring.v3.TimeSeries|TimeSeries}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example
-   * const iterable = client.listTimeSeriesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v3/metric_service.list_time_series.js</caption>
+   * region_tag:monitoring_v3_generated_MetricService_ListTimeSeries_async
    */
   listTimeSeriesAsync(
     request?: protos.google.monitoring.v3.IListTimeSeriesRequest,
@@ -1685,15 +2188,18 @@ export class MetricServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    const defaultCallSettings = this._defaults['listTimeSeries'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTimeSeries iterate %j', request);
     return this.descriptors.page.listTimeSeries.asyncIterate(
       this.innerApiCalls['listTimeSeries'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.monitoring.v3.ITimeSeries>;
   }
@@ -3212,15 +3718,51 @@ export class MetricServiceClient {
   }
 
   /**
+   * Return a fully-qualified snooze resource name string.
+   *
+   * @param {string} project
+   * @param {string} snooze
+   * @returns {string} Resource name string.
+   */
+  snoozePath(project: string, snooze: string) {
+    return this.pathTemplates.snoozePathTemplate.render({
+      project: project,
+      snooze: snooze,
+    });
+  }
+
+  /**
+   * Parse the project from Snooze resource.
+   *
+   * @param {string} snoozeName
+   *   A fully-qualified path representing Snooze resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSnoozeName(snoozeName: string) {
+    return this.pathTemplates.snoozePathTemplate.match(snoozeName).project;
+  }
+
+  /**
+   * Parse the snooze from Snooze resource.
+   *
+   * @param {string} snoozeName
+   *   A fully-qualified path representing Snooze resource.
+   * @returns {string} A string representing the snooze.
+   */
+  matchSnoozeFromSnoozeName(snoozeName: string) {
+    return this.pathTemplates.snoozePathTemplate.match(snoozeName).snooze;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.metricServiceStub!.then(stub => {
+    if (this.metricServiceStub && !this._terminated) {
+      return this.metricServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });
