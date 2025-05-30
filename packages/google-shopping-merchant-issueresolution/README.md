@@ -5,7 +5,7 @@
 # [Merchant API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-issueresolution)
 
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/issueresolution.svg)](https://www.npmjs.org/package/@google-cloud/issueresolution)
+[![npm version](https://img.shields.io/npm/v/@google-shopping/issueresolution.svg)](https://www.npmjs.org/package/@google-shopping/issueresolution)
 
 
 
@@ -50,7 +50,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/issueresolution
+npm install @google-shopping/issueresolution
 ```
 
 
@@ -143,7 +143,7 @@ best-efforts basis with the following warnings:
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-For example, `npm install @google-cloud/issueresolution@legacy-8` installs client libraries
+For example, `npm install @google-shopping/issueresolution@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
 ## Versioning
