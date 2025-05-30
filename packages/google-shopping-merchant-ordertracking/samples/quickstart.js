@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(parent, orderTrackingSignalId, orderTrackingSignal) {
@@ -43,7 +41,8 @@ function main(parent, orderTrackingSignalId, orderTrackingSignal) {
   // const orderTrackingSignal = {}
 
   // Imports the Ordertracking library
-  const {OrderTrackingSignalsServiceClient} = require('@google-cloud/ordertracking').v1beta;
+  const {OrderTrackingSignalsServiceClient} =
+    require('@google-cloud/ordertracking').v1beta;
 
   // Instantiates a client
   const ordertrackingClient = new OrderTrackingSignalsServiceClient();
@@ -57,7 +56,8 @@ function main(parent, orderTrackingSignalId, orderTrackingSignal) {
     };
 
     // Run request
-    const response = await ordertrackingClient.createOrderTrackingSignal(request);
+    const response =
+      await ordertrackingClient.createOrderTrackingSignal(request);
     console.log(response);
   }
 
