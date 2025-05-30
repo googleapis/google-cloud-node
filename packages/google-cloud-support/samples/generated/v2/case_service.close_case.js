@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The fully qualified name of the case resource to be closed.
+   *  Required. The name of the case to close.
    */
   // const name = 'abc123'
 

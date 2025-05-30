@@ -29,7 +29,7 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The business account for which to list return policies.
+   *  Required. The merchant account for which to list return policies.
    *  Format: `accounts/{account}`
    */
   // const parent = 'abc123'

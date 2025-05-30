@@ -267,9 +267,14 @@ describe('v1.AccountLabelsServiceClient', () => {
         throw err;
       });
       assert(client.accountLabelsServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -279,9 +284,14 @@ describe('v1.AccountLabelsServiceClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.accountLabelsServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -451,7 +461,9 @@ describe('v1.AccountLabelsServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createAccountLabel(request), expectedError);
     });
   });
@@ -590,7 +602,9 @@ describe('v1.AccountLabelsServiceClient', () => {
       );
       request.accountLabel.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateAccountLabel(request), expectedError);
     });
   });
@@ -725,7 +739,9 @@ describe('v1.AccountLabelsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteAccountLabel(request), expectedError);
     });
   });

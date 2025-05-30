@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,6 +26,21 @@ import * as notificationchannelserviceModule from '../src';
 import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
+
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -113,95 +128,221 @@ function stubAsyncIterationCall<ResponseType>(
 }
 
 describe('v3.NotificationChannelServiceClient', () => {
-  it('has servicePath', () => {
-    const servicePath =
-      notificationchannelserviceModule.v3.NotificationChannelServiceClient
-        .servicePath;
-    assert(servicePath);
-  });
+  describe('Common methods', () => {
+    it('has apiEndpoint', () => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'monitoring.googleapis.com');
+    });
 
-  it('has apiEndpoint', () => {
-    const apiEndpoint =
-      notificationchannelserviceModule.v3.NotificationChannelServiceClient
-        .apiEndpoint;
-    assert(apiEndpoint);
-  });
+    it('has universeDomain', () => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
 
-  it('has port', () => {
-    const port =
-      notificationchannelserviceModule.v3.NotificationChannelServiceClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client =
-      new notificationchannelserviceModule.v3.NotificationChannelServiceClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client =
-      new notificationchannelserviceModule.v3.NotificationChannelServiceClient({
-        fallback: true,
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          notificationchannelserviceModule.v3.NotificationChannelServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'monitoring.googleapis.com');
+        assert(stub.called);
+        stub.restore();
       });
-    assert(client);
-  });
 
-  it('has initialize method and supports deferred initialization', async () => {
-    const client =
-      new notificationchannelserviceModule.v3.NotificationChannelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          notificationchannelserviceModule.v3.NotificationChannelServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'monitoring.googleapis.com');
+        assert(stub.called);
+        stub.restore();
       });
-    assert.strictEqual(client.notificationChannelServiceStub, undefined);
-    await client.initialize();
-    assert(client.notificationChannelServiceStub);
-  });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'monitoring.example.com');
+    });
 
-  it('has close method', () => {
-    const client =
-      new notificationchannelserviceModule.v3.NotificationChannelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-    client.close();
-  });
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'monitoring.example.com');
+    });
 
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client =
-      new notificationchannelserviceModule.v3.NotificationChannelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new notificationchannelserviceModule.v3.NotificationChannelServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'monitoring.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
 
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client =
-      new notificationchannelserviceModule.v3.NotificationChannelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+              {universeDomain: 'configured.example.com'}
+            );
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'monitoring.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
       });
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
       });
     });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
+
+    it('has port', () => {
+      const port =
+        notificationchannelserviceModule.v3.NotificationChannelServiceClient
+          .port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
+
+    it('should create a client with no option', () => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {
+            fallback: true,
+          }
+        );
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.notificationChannelServiceStub, undefined);
+      await client.initialize();
+      assert(client.notificationChannelServiceStub);
+    });
+
+    it('has close method for the initialized client', done => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize().catch(err => {
+        throw err;
+      });
+      assert(client.notificationChannelServiceStub);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
+    });
+
+    it('has close method for the non-initialized client', done => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.notificationChannelServiceStub, undefined);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
   });
 
   describe('getNotificationChannelDescriptor', () => {
@@ -213,19 +354,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetNotificationChannelDescriptorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetNotificationChannelDescriptorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.NotificationChannelDescriptor()
       );
@@ -233,11 +371,14 @@ describe('v3.NotificationChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getNotificationChannelDescriptor(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getNotificationChannelDescriptor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getNotificationChannelDescriptor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNotificationChannelDescriptor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getNotificationChannelDescriptor without error using callback', async () => {
@@ -248,19 +389,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetNotificationChannelDescriptorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetNotificationChannelDescriptorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.NotificationChannelDescriptor()
       );
@@ -283,11 +421,14 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getNotificationChannelDescriptor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getNotificationChannelDescriptor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNotificationChannelDescriptor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getNotificationChannelDescriptor with error', async () => {
@@ -298,19 +439,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetNotificationChannelDescriptorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetNotificationChannelDescriptorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNotificationChannelDescriptor = stubSimpleCall(
         undefined,
@@ -320,10 +458,40 @@ describe('v3.NotificationChannelServiceClient', () => {
         client.getNotificationChannelDescriptor(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getNotificationChannelDescriptor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.getNotificationChannelDescriptor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNotificationChannelDescriptor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getNotificationChannelDescriptor with closed client', async () => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.v3.GetNotificationChannelDescriptorRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetNotificationChannelDescriptorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getNotificationChannelDescriptor(request),
+        expectedError
       );
     });
   });
@@ -337,19 +505,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetNotificationChannelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetNotificationChannelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.NotificationChannel()
       );
@@ -357,11 +522,14 @@ describe('v3.NotificationChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getNotificationChannel(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getNotificationChannel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getNotificationChannel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNotificationChannel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getNotificationChannel without error using callback', async () => {
@@ -372,19 +540,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetNotificationChannelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetNotificationChannelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.NotificationChannel()
       );
@@ -407,11 +572,14 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getNotificationChannel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getNotificationChannel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNotificationChannel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getNotificationChannel with error', async () => {
@@ -422,19 +590,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetNotificationChannelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetNotificationChannelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNotificationChannel = stubSimpleCall(
         undefined,
@@ -444,10 +609,40 @@ describe('v3.NotificationChannelServiceClient', () => {
         client.getNotificationChannel(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getNotificationChannel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.getNotificationChannel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNotificationChannel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getNotificationChannel with closed client', async () => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.v3.GetNotificationChannelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetNotificationChannelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getNotificationChannel(request),
+        expectedError
       );
     });
   });
@@ -461,19 +656,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.CreateNotificationChannelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.CreateNotificationChannelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.NotificationChannel()
       );
@@ -481,11 +673,14 @@ describe('v3.NotificationChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createNotificationChannel(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createNotificationChannel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createNotificationChannel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createNotificationChannel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createNotificationChannel without error using callback', async () => {
@@ -496,19 +691,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.CreateNotificationChannelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.CreateNotificationChannelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.NotificationChannel()
       );
@@ -531,11 +723,14 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createNotificationChannel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createNotificationChannel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createNotificationChannel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createNotificationChannel with error', async () => {
@@ -546,19 +741,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.CreateNotificationChannelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.CreateNotificationChannelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNotificationChannel = stubSimpleCall(
         undefined,
@@ -568,10 +760,40 @@ describe('v3.NotificationChannelServiceClient', () => {
         client.createNotificationChannel(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createNotificationChannel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.createNotificationChannel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createNotificationChannel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createNotificationChannel with closed client', async () => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.v3.CreateNotificationChannelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.CreateNotificationChannelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.createNotificationChannel(request),
+        expectedError
       );
     });
   });
@@ -585,20 +807,17 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.UpdateNotificationChannelRequest()
       );
-      request.notificationChannel = {};
-      request.notificationChannel.name = '';
-      const expectedHeaderRequestParams = 'notification_channel.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.notificationChannel ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.UpdateNotificationChannelRequest',
+        ['notificationChannel', 'name']
+      );
+      request.notificationChannel.name = defaultValue1;
+      const expectedHeaderRequestParams = `notification_channel.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.NotificationChannel()
       );
@@ -606,11 +825,14 @@ describe('v3.NotificationChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateNotificationChannel(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateNotificationChannel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateNotificationChannel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateNotificationChannel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateNotificationChannel without error using callback', async () => {
@@ -621,20 +843,17 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.UpdateNotificationChannelRequest()
       );
-      request.notificationChannel = {};
-      request.notificationChannel.name = '';
-      const expectedHeaderRequestParams = 'notification_channel.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.notificationChannel ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.UpdateNotificationChannelRequest',
+        ['notificationChannel', 'name']
+      );
+      request.notificationChannel.name = defaultValue1;
+      const expectedHeaderRequestParams = `notification_channel.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.NotificationChannel()
       );
@@ -657,11 +876,14 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateNotificationChannel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateNotificationChannel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateNotificationChannel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateNotificationChannel with error', async () => {
@@ -672,20 +894,17 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.UpdateNotificationChannelRequest()
       );
-      request.notificationChannel = {};
-      request.notificationChannel.name = '';
-      const expectedHeaderRequestParams = 'notification_channel.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.notificationChannel ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.UpdateNotificationChannelRequest',
+        ['notificationChannel', 'name']
+      );
+      request.notificationChannel.name = defaultValue1;
+      const expectedHeaderRequestParams = `notification_channel.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNotificationChannel = stubSimpleCall(
         undefined,
@@ -695,10 +914,41 @@ describe('v3.NotificationChannelServiceClient', () => {
         client.updateNotificationChannel(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateNotificationChannel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.updateNotificationChannel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateNotificationChannel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateNotificationChannel with closed client', async () => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.v3.UpdateNotificationChannelRequest()
+      );
+      request.notificationChannel ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.UpdateNotificationChannelRequest',
+        ['notificationChannel', 'name']
+      );
+      request.notificationChannel.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateNotificationChannel(request),
+        expectedError
       );
     });
   });
@@ -712,19 +962,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.DeleteNotificationChannelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.DeleteNotificationChannelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -732,11 +979,14 @@ describe('v3.NotificationChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteNotificationChannel(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteNotificationChannel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteNotificationChannel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteNotificationChannel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteNotificationChannel without error using callback', async () => {
@@ -747,19 +997,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.DeleteNotificationChannelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.DeleteNotificationChannelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -782,11 +1029,14 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteNotificationChannel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteNotificationChannel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteNotificationChannel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteNotificationChannel with error', async () => {
@@ -797,19 +1047,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.DeleteNotificationChannelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.DeleteNotificationChannelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNotificationChannel = stubSimpleCall(
         undefined,
@@ -819,10 +1066,40 @@ describe('v3.NotificationChannelServiceClient', () => {
         client.deleteNotificationChannel(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteNotificationChannel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.deleteNotificationChannel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteNotificationChannel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteNotificationChannel with closed client', async () => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.v3.DeleteNotificationChannelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.DeleteNotificationChannelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.deleteNotificationChannel(request),
+        expectedError
       );
     });
   });
@@ -836,19 +1113,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.SendNotificationChannelVerificationCodeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.SendNotificationChannelVerificationCodeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -857,14 +1131,16 @@ describe('v3.NotificationChannelServiceClient', () => {
       const [response] =
         await client.sendNotificationChannelVerificationCode(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (
-          client.innerApiCalls
-            .sendNotificationChannelVerificationCode as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .sendNotificationChannelVerificationCode as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .sendNotificationChannelVerificationCode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes sendNotificationChannelVerificationCode without error using callback', async () => {
@@ -875,19 +1151,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.SendNotificationChannelVerificationCodeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.SendNotificationChannelVerificationCodeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -910,14 +1183,16 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (
-          client.innerApiCalls
-            .sendNotificationChannelVerificationCode as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .sendNotificationChannelVerificationCode as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .sendNotificationChannelVerificationCode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes sendNotificationChannelVerificationCode with error', async () => {
@@ -928,19 +1203,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.SendNotificationChannelVerificationCodeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.SendNotificationChannelVerificationCodeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.sendNotificationChannelVerificationCode =
         stubSimpleCall(undefined, expectedError);
@@ -948,13 +1220,42 @@ describe('v3.NotificationChannelServiceClient', () => {
         client.sendNotificationChannelVerificationCode(request),
         expectedError
       );
-      assert(
-        (
-          client.innerApiCalls
-            .sendNotificationChannelVerificationCode as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls
+          .sendNotificationChannelVerificationCode as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .sendNotificationChannelVerificationCode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes sendNotificationChannelVerificationCode with closed client', async () => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.v3.SendNotificationChannelVerificationCodeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.SendNotificationChannelVerificationCodeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.sendNotificationChannelVerificationCode(request),
+        expectedError
       );
     });
   });
@@ -968,19 +1269,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetNotificationChannelVerificationCodeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetNotificationChannelVerificationCodeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.GetNotificationChannelVerificationCodeResponse()
       );
@@ -989,14 +1287,14 @@ describe('v3.NotificationChannelServiceClient', () => {
       const [response] =
         await client.getNotificationChannelVerificationCode(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (
-          client.innerApiCalls
-            .getNotificationChannelVerificationCode as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getNotificationChannelVerificationCode as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNotificationChannelVerificationCode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getNotificationChannelVerificationCode without error using callback', async () => {
@@ -1007,19 +1305,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetNotificationChannelVerificationCodeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetNotificationChannelVerificationCodeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.GetNotificationChannelVerificationCodeResponse()
       );
@@ -1042,14 +1337,14 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (
-          client.innerApiCalls
-            .getNotificationChannelVerificationCode as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getNotificationChannelVerificationCode as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNotificationChannelVerificationCode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getNotificationChannelVerificationCode with error', async () => {
@@ -1060,19 +1355,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetNotificationChannelVerificationCodeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetNotificationChannelVerificationCodeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNotificationChannelVerificationCode =
         stubSimpleCall(undefined, expectedError);
@@ -1080,13 +1372,40 @@ describe('v3.NotificationChannelServiceClient', () => {
         client.getNotificationChannelVerificationCode(request),
         expectedError
       );
-      assert(
-        (
-          client.innerApiCalls
-            .getNotificationChannelVerificationCode as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.getNotificationChannelVerificationCode as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNotificationChannelVerificationCode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getNotificationChannelVerificationCode with closed client', async () => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.v3.GetNotificationChannelVerificationCodeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetNotificationChannelVerificationCodeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getNotificationChannelVerificationCode(request),
+        expectedError
       );
     });
   });
@@ -1100,19 +1419,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.VerifyNotificationChannelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.VerifyNotificationChannelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.NotificationChannel()
       );
@@ -1120,11 +1436,14 @@ describe('v3.NotificationChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.verifyNotificationChannel(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.verifyNotificationChannel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.verifyNotificationChannel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.verifyNotificationChannel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes verifyNotificationChannel without error using callback', async () => {
@@ -1135,19 +1454,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.VerifyNotificationChannelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.VerifyNotificationChannelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.NotificationChannel()
       );
@@ -1170,11 +1486,14 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.verifyNotificationChannel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.verifyNotificationChannel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.verifyNotificationChannel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes verifyNotificationChannel with error', async () => {
@@ -1185,19 +1504,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.VerifyNotificationChannelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.VerifyNotificationChannelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.verifyNotificationChannel = stubSimpleCall(
         undefined,
@@ -1207,10 +1523,40 @@ describe('v3.NotificationChannelServiceClient', () => {
         client.verifyNotificationChannel(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.verifyNotificationChannel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.verifyNotificationChannel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.verifyNotificationChannel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes verifyNotificationChannel with closed client', async () => {
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.v3.VerifyNotificationChannelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.VerifyNotificationChannelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.verifyNotificationChannel(request),
+        expectedError
       );
     });
   });
@@ -1224,19 +1570,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListNotificationChannelDescriptorsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListNotificationChannelDescriptorsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.v3.NotificationChannelDescriptor()
@@ -1253,11 +1596,14 @@ describe('v3.NotificationChannelServiceClient', () => {
       const [response] =
         await client.listNotificationChannelDescriptors(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listNotificationChannelDescriptors as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listNotificationChannelDescriptors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNotificationChannelDescriptors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listNotificationChannelDescriptors without error using callback', async () => {
@@ -1268,19 +1614,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListNotificationChannelDescriptorsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListNotificationChannelDescriptorsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.v3.NotificationChannelDescriptor()
@@ -1313,11 +1656,14 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listNotificationChannelDescriptors as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listNotificationChannelDescriptors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNotificationChannelDescriptors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listNotificationChannelDescriptors with error', async () => {
@@ -1328,19 +1674,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListNotificationChannelDescriptorsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListNotificationChannelDescriptorsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNotificationChannelDescriptors = stubSimpleCall(
         undefined,
@@ -1350,11 +1693,14 @@ describe('v3.NotificationChannelServiceClient', () => {
         client.listNotificationChannelDescriptors(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listNotificationChannelDescriptors as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listNotificationChannelDescriptors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNotificationChannelDescriptors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listNotificationChannelDescriptorsStream without error', async () => {
@@ -1365,12 +1711,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListNotificationChannelDescriptorsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListNotificationChannelDescriptorsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.v3.NotificationChannelDescriptor()
@@ -1416,12 +1766,15 @@ describe('v3.NotificationChannelServiceClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listNotificationChannelDescriptors
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1433,12 +1786,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListNotificationChannelDescriptorsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListNotificationChannelDescriptorsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNotificationChannelDescriptors.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1473,12 +1830,15 @@ describe('v3.NotificationChannelServiceClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listNotificationChannelDescriptors
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1490,12 +1850,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListNotificationChannelDescriptorsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListNotificationChannelDescriptorsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.v3.NotificationChannelDescriptor()
@@ -1523,12 +1887,15 @@ describe('v3.NotificationChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listNotificationChannelDescriptors
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1540,12 +1907,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListNotificationChannelDescriptorsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListNotificationChannelDescriptorsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNotificationChannelDescriptors.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1564,12 +1935,15 @@ describe('v3.NotificationChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listNotificationChannelDescriptors
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -1583,19 +1957,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListNotificationChannelsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListNotificationChannelsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.v3.NotificationChannel()
@@ -1611,11 +1982,14 @@ describe('v3.NotificationChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listNotificationChannels(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listNotificationChannels as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listNotificationChannels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNotificationChannels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listNotificationChannels without error using callback', async () => {
@@ -1626,19 +2000,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListNotificationChannelsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListNotificationChannelsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.v3.NotificationChannel()
@@ -1669,11 +2040,14 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listNotificationChannels as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listNotificationChannels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNotificationChannels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listNotificationChannels with error', async () => {
@@ -1684,19 +2058,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListNotificationChannelsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListNotificationChannelsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNotificationChannels = stubSimpleCall(
         undefined,
@@ -1706,11 +2077,14 @@ describe('v3.NotificationChannelServiceClient', () => {
         client.listNotificationChannels(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listNotificationChannels as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listNotificationChannels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNotificationChannels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listNotificationChannelsStream without error', async () => {
@@ -1721,12 +2095,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListNotificationChannelsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListNotificationChannelsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.v3.NotificationChannel()
@@ -1766,12 +2144,15 @@ describe('v3.NotificationChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listNotificationChannels, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listNotificationChannels
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1783,12 +2164,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListNotificationChannelsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListNotificationChannelsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNotificationChannels.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1817,12 +2202,15 @@ describe('v3.NotificationChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listNotificationChannels, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listNotificationChannels
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1834,12 +2222,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListNotificationChannelsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListNotificationChannelsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.v3.NotificationChannel()
@@ -1866,12 +2258,15 @@ describe('v3.NotificationChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listNotificationChannels
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1883,12 +2278,16 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListNotificationChannelsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListNotificationChannelsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNotificationChannels.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1907,18 +2306,21 @@ describe('v3.NotificationChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listNotificationChannels
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
 
   describe('Path templates', () => {
-    describe('folderAlertPolicy', () => {
+    describe('folderAlertPolicy', async () => {
       const fakePath = '/rendered/path/folderAlertPolicy';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1931,7 +2333,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderAlertPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1983,7 +2385,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('folderAlertPolicyCondition', () => {
+    describe('folderAlertPolicyCondition', async () => {
       const fakePath = '/rendered/path/folderAlertPolicyCondition';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1997,7 +2399,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderAlertPolicyConditionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2065,7 +2467,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('folderChannelDescriptor', () => {
+    describe('folderChannelDescriptor', async () => {
       const fakePath = '/rendered/path/folderChannelDescriptor';
       const expectedParameters = {
         folder: 'folderValue',
@@ -2078,7 +2480,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderChannelDescriptorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2133,7 +2535,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('folderGroup', () => {
+    describe('folderGroup', async () => {
       const fakePath = '/rendered/path/folderGroup';
       const expectedParameters = {
         folder: 'folderValue',
@@ -2146,7 +2548,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2185,7 +2587,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('folderNotificationChannel', () => {
+    describe('folderNotificationChannel', async () => {
       const fakePath = '/rendered/path/folderNotificationChannel';
       const expectedParameters = {
         folder: 'folderValue',
@@ -2198,7 +2600,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderNotificationChannelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2253,7 +2655,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('folderService', () => {
+    describe('folderService', async () => {
       const fakePath = '/rendered/path/folderService';
       const expectedParameters = {
         folder: 'folderValue',
@@ -2266,7 +2668,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderServicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2305,7 +2707,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('folderServiceServiceLevelObjective', () => {
+    describe('folderServiceServiceLevelObjective', async () => {
       const fakePath = '/rendered/path/folderServiceServiceLevelObjective';
       const expectedParameters = {
         folder: 'folderValue',
@@ -2319,7 +2721,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match =
@@ -2391,7 +2793,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('folderUptimeCheckConfig', () => {
+    describe('folderUptimeCheckConfig', async () => {
       const fakePath = '/rendered/path/folderUptimeCheckConfig';
       const expectedParameters = {
         folder: 'folderValue',
@@ -2404,7 +2806,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderUptimeCheckConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2459,7 +2861,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('organizationAlertPolicy', () => {
+    describe('organizationAlertPolicy', async () => {
       const fakePath = '/rendered/path/organizationAlertPolicy';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2472,7 +2874,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationAlertPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2525,7 +2927,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('organizationAlertPolicyCondition', () => {
+    describe('organizationAlertPolicyCondition', async () => {
       const fakePath = '/rendered/path/organizationAlertPolicyCondition';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2539,7 +2941,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationAlertPolicyConditionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationAlertPolicyConditionPathTemplate.match =
@@ -2611,7 +3013,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('organizationChannelDescriptor', () => {
+    describe('organizationChannelDescriptor', async () => {
       const fakePath = '/rendered/path/organizationChannelDescriptor';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2624,7 +3026,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationChannelDescriptorPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationChannelDescriptorPathTemplate.match =
@@ -2679,7 +3081,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('organizationGroup', () => {
+    describe('organizationGroup', async () => {
       const fakePath = '/rendered/path/organizationGroup';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2692,7 +3094,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2744,7 +3146,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('organizationNotificationChannel', () => {
+    describe('organizationNotificationChannel', async () => {
       const fakePath = '/rendered/path/organizationNotificationChannel';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2757,7 +3159,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationNotificationChannelPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationNotificationChannelPathTemplate.match =
@@ -2812,7 +3214,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('organizationService', () => {
+    describe('organizationService', async () => {
       const fakePath = '/rendered/path/organizationService';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2825,7 +3227,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationServicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2877,7 +3279,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('organizationServiceServiceLevelObjective', () => {
+    describe('organizationServiceServiceLevelObjective', async () => {
       const fakePath =
         '/rendered/path/organizationServiceServiceLevelObjective';
       const expectedParameters = {
@@ -2892,7 +3294,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match =
@@ -2968,7 +3370,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('organizationUptimeCheckConfig', () => {
+    describe('organizationUptimeCheckConfig', async () => {
       const fakePath = '/rendered/path/organizationUptimeCheckConfig';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2981,7 +3383,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationUptimeCheckConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationUptimeCheckConfigPathTemplate.match =
@@ -3036,7 +3438,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -3048,7 +3450,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3077,7 +3479,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('projectAlertPolicy', () => {
+    describe('projectAlertPolicy', async () => {
       const fakePath = '/rendered/path/projectAlertPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -3090,7 +3492,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAlertPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3142,7 +3544,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('projectAlertPolicyCondition', () => {
+    describe('projectAlertPolicyCondition', async () => {
       const fakePath = '/rendered/path/projectAlertPolicyCondition';
       const expectedParameters = {
         project: 'projectValue',
@@ -3156,7 +3558,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAlertPolicyConditionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectAlertPolicyConditionPathTemplate.match = sinon
@@ -3223,7 +3625,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('projectChannelDescriptor', () => {
+    describe('projectChannelDescriptor', async () => {
       const fakePath = '/rendered/path/projectChannelDescriptor';
       const expectedParameters = {
         project: 'projectValue',
@@ -3236,7 +3638,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectChannelDescriptorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3291,7 +3693,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('projectGroup', () => {
+    describe('projectGroup', async () => {
       const fakePath = '/rendered/path/projectGroup';
       const expectedParameters = {
         project: 'projectValue',
@@ -3304,7 +3706,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3343,7 +3745,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('projectNotificationChannel', () => {
+    describe('projectNotificationChannel', async () => {
       const fakePath = '/rendered/path/projectNotificationChannel';
       const expectedParameters = {
         project: 'projectValue',
@@ -3356,7 +3758,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectNotificationChannelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3411,7 +3813,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('projectService', () => {
+    describe('projectService', async () => {
       const fakePath = '/rendered/path/projectService';
       const expectedParameters = {
         project: 'projectValue',
@@ -3424,7 +3826,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectServicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3466,7 +3868,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('projectServiceServiceLevelObjective', () => {
+    describe('projectServiceServiceLevelObjective', async () => {
       const fakePath = '/rendered/path/projectServiceServiceLevelObjective';
       const expectedParameters = {
         project: 'projectValue',
@@ -3480,7 +3882,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match =
@@ -3552,7 +3954,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       });
     });
 
-    describe('projectUptimeCheckConfig', () => {
+    describe('projectUptimeCheckConfig', async () => {
       const fakePath = '/rendered/path/projectUptimeCheckConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -3565,7 +3967,7 @@ describe('v3.NotificationChannelServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectUptimeCheckConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3614,6 +4016,58 @@ describe('v3.NotificationChannelServiceClient', () => {
             client.pathTemplates.projectUptimeCheckConfigPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('snooze', async () => {
+      const fakePath = '/rendered/path/snooze';
+      const expectedParameters = {
+        project: 'projectValue',
+        snooze: 'snoozeValue',
+      };
+      const client =
+        new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.snoozePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.snoozePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('snoozePath', () => {
+        const result = client.snoozePath('projectValue', 'snoozeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.snoozePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSnoozeName', () => {
+        const result = client.matchProjectFromSnoozeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.snoozePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSnoozeFromSnoozeName', () => {
+        const result = client.matchSnoozeFromSnoozeName(fakePath);
+        assert.strictEqual(result, 'snoozeValue');
+        assert(
+          (client.pathTemplates.snoozePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

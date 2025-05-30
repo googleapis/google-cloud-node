@@ -343,8 +343,6 @@ export class TemplatesServiceClient {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/compute.readonly',
-      'https://www.googleapis.com/auth/userinfo.email',
     ];
   }
 
@@ -368,7 +366,14 @@ export class TemplatesServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Creates a Cloud Dataflow job from a template.
+   * Creates a Cloud Dataflow job from a template. Do not enter confidential
+   * information when you supply string values using the API.
+   *
+   * To create a job, we recommend using `projects.locations.templates.create`
+   * with a [regional endpoint]
+   * (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+   * `projects.templates.create` is not recommended, because your job will
+   * always start in `us-central1`.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -504,7 +509,13 @@ export class TemplatesServiceClient {
       );
   }
   /**
-   * Launch a template.
+   * Launches a template.
+   *
+   * To launch a template, we recommend using
+   * `projects.locations.templates.launch` with a [regional endpoint]
+   * (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+   * `projects.templates.launch` is not recommended, because jobs launched
+   * from the template will always start in `us-central1`.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -514,13 +525,13 @@ export class TemplatesServiceClient {
    *   If true, the request is validated but not actually executed.
    *   Defaults to false.
    * @param {string} request.gcsPath
-   *   A Cloud Storage path to the template from which to create
+   *   A Cloud Storage path to the template to use to create
    *   the job.
-   *   Must be valid Cloud Storage URL, beginning with 'gs://'.
+   *   Must be valid Cloud Storage URL, beginning with `gs://`.
    * @param {google.dataflow.v1beta3.DynamicTemplateLaunchParams} request.dynamicTemplate
-   *   Params for launching a dynamic template.
+   *   Parameters for launching a dynamic template.
    * @param {google.dataflow.v1beta3.LaunchTemplateParameters} request.launchParameters
-   *   The parameters of the template to launch. This should be part of the
+   *   The parameters of the template to launch. Part of the
    *   body of the POST request.
    * @param {string} request.location
    *   The [regional endpoint]
@@ -634,6 +645,12 @@ export class TemplatesServiceClient {
   }
   /**
    * Get the template associated with a template.
+   *
+   * To get the template, we recommend using `projects.locations.templates.get`
+   * with a [regional endpoint]
+   * (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+   * `projects.templates.get` is not recommended, because only
+   * templates that are running in `us-central1` are retrieved.
    *
    * @param {Object} request
    *   The request object that will be sent.

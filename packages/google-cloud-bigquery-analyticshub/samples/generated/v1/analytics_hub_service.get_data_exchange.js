@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The resource name of the data exchange.
-   *  e.g. `projects/myproject/locations/US/dataExchanges/123`.
+   *  e.g. `projects/myproject/locations/us/dataExchanges/123`.
    */
   // const name = 'abc123'
 

@@ -278,9 +278,14 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         throw err;
       });
       assert(client.advisoryNotificationsServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -292,9 +297,14 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
           }
         );
       assert.strictEqual(client.advisoryNotificationsServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -475,7 +485,9 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getNotification(request), expectedError);
     });
   });
@@ -617,7 +629,9 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSettings(request), expectedError);
     });
   });
@@ -763,7 +777,9 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       );
       request.settings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateSettings(request), expectedError);
     });
   });

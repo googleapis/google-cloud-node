@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/asset/v1/asset_enrichment_resourceowners.proto",
   "../../protos/google/cloud/asset/v1/asset_service.proto",
   "../../protos/google/cloud/asset/v1/assets.proto",
   "../../protos/google/cloud/orgpolicy/v1/orgpolicy.proto",

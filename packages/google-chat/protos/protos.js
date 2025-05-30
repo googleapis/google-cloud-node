@@ -30659,7 +30659,11 @@
                      * Properties of a CustomEmoji.
                      * @memberof google.chat.v1
                      * @interface ICustomEmoji
+                     * @property {string|null} [name] CustomEmoji name
                      * @property {string|null} [uid] CustomEmoji uid
+                     * @property {string|null} [emojiName] CustomEmoji emojiName
+                     * @property {string|null} [temporaryImageUri] CustomEmoji temporaryImageUri
+                     * @property {google.chat.v1.CustomEmoji.ICustomEmojiPayload|null} [payload] CustomEmoji payload
                      */
     
                     /**
@@ -30678,12 +30682,44 @@
                     }
     
                     /**
+                     * CustomEmoji name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.CustomEmoji
+                     * @instance
+                     */
+                    CustomEmoji.prototype.name = "";
+    
+                    /**
                      * CustomEmoji uid.
                      * @member {string} uid
                      * @memberof google.chat.v1.CustomEmoji
                      * @instance
                      */
                     CustomEmoji.prototype.uid = "";
+    
+                    /**
+                     * CustomEmoji emojiName.
+                     * @member {string} emojiName
+                     * @memberof google.chat.v1.CustomEmoji
+                     * @instance
+                     */
+                    CustomEmoji.prototype.emojiName = "";
+    
+                    /**
+                     * CustomEmoji temporaryImageUri.
+                     * @member {string} temporaryImageUri
+                     * @memberof google.chat.v1.CustomEmoji
+                     * @instance
+                     */
+                    CustomEmoji.prototype.temporaryImageUri = "";
+    
+                    /**
+                     * CustomEmoji payload.
+                     * @member {google.chat.v1.CustomEmoji.ICustomEmojiPayload|null|undefined} payload
+                     * @memberof google.chat.v1.CustomEmoji
+                     * @instance
+                     */
+                    CustomEmoji.prototype.payload = null;
     
                     /**
                      * Creates a new CustomEmoji instance using the specified properties.
@@ -30711,6 +30747,14 @@
                             writer = $Writer.create();
                         if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.uid);
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                        if (message.emojiName != null && Object.hasOwnProperty.call(message, "emojiName"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.emojiName);
+                        if (message.temporaryImageUri != null && Object.hasOwnProperty.call(message, "temporaryImageUri"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.temporaryImageUri);
+                        if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+                            $root.google.chat.v1.CustomEmoji.CustomEmojiPayload.encode(message.payload, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -30745,8 +30789,24 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
+                            case 2: {
+                                    message.name = reader.string();
+                                    break;
+                                }
                             case 1: {
                                     message.uid = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.emojiName = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.temporaryImageUri = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.payload = $root.google.chat.v1.CustomEmoji.CustomEmojiPayload.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -30784,9 +30844,23 @@
                     CustomEmoji.verify = function verify(message) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
                         if (message.uid != null && message.hasOwnProperty("uid"))
                             if (!$util.isString(message.uid))
                                 return "uid: string expected";
+                        if (message.emojiName != null && message.hasOwnProperty("emojiName"))
+                            if (!$util.isString(message.emojiName))
+                                return "emojiName: string expected";
+                        if (message.temporaryImageUri != null && message.hasOwnProperty("temporaryImageUri"))
+                            if (!$util.isString(message.temporaryImageUri))
+                                return "temporaryImageUri: string expected";
+                        if (message.payload != null && message.hasOwnProperty("payload")) {
+                            var error = $root.google.chat.v1.CustomEmoji.CustomEmojiPayload.verify(message.payload);
+                            if (error)
+                                return "payload." + error;
+                        }
                         return null;
                     };
     
@@ -30802,8 +30876,19 @@
                         if (object instanceof $root.google.chat.v1.CustomEmoji)
                             return object;
                         var message = new $root.google.chat.v1.CustomEmoji();
+                        if (object.name != null)
+                            message.name = String(object.name);
                         if (object.uid != null)
                             message.uid = String(object.uid);
+                        if (object.emojiName != null)
+                            message.emojiName = String(object.emojiName);
+                        if (object.temporaryImageUri != null)
+                            message.temporaryImageUri = String(object.temporaryImageUri);
+                        if (object.payload != null) {
+                            if (typeof object.payload !== "object")
+                                throw TypeError(".google.chat.v1.CustomEmoji.payload: object expected");
+                            message.payload = $root.google.chat.v1.CustomEmoji.CustomEmojiPayload.fromObject(object.payload);
+                        }
                         return message;
                     };
     
@@ -30820,10 +30905,23 @@
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.uid = "";
+                            object.name = "";
+                            object.emojiName = "";
+                            object.temporaryImageUri = "";
+                            object.payload = null;
+                        }
                         if (message.uid != null && message.hasOwnProperty("uid"))
                             object.uid = message.uid;
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.emojiName != null && message.hasOwnProperty("emojiName"))
+                            object.emojiName = message.emojiName;
+                        if (message.temporaryImageUri != null && message.hasOwnProperty("temporaryImageUri"))
+                            object.temporaryImageUri = message.temporaryImageUri;
+                        if (message.payload != null && message.hasOwnProperty("payload"))
+                            object.payload = $root.google.chat.v1.CustomEmoji.CustomEmojiPayload.toObject(message.payload, options);
                         return object;
                     };
     
@@ -30852,6 +30950,242 @@
                         }
                         return typeUrlPrefix + "/google.chat.v1.CustomEmoji";
                     };
+    
+                    CustomEmoji.CustomEmojiPayload = (function() {
+    
+                        /**
+                         * Properties of a CustomEmojiPayload.
+                         * @memberof google.chat.v1.CustomEmoji
+                         * @interface ICustomEmojiPayload
+                         * @property {Uint8Array|null} [fileContent] CustomEmojiPayload fileContent
+                         * @property {string|null} [filename] CustomEmojiPayload filename
+                         */
+    
+                        /**
+                         * Constructs a new CustomEmojiPayload.
+                         * @memberof google.chat.v1.CustomEmoji
+                         * @classdesc Represents a CustomEmojiPayload.
+                         * @implements ICustomEmojiPayload
+                         * @constructor
+                         * @param {google.chat.v1.CustomEmoji.ICustomEmojiPayload=} [properties] Properties to set
+                         */
+                        function CustomEmojiPayload(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomEmojiPayload fileContent.
+                         * @member {Uint8Array} fileContent
+                         * @memberof google.chat.v1.CustomEmoji.CustomEmojiPayload
+                         * @instance
+                         */
+                        CustomEmojiPayload.prototype.fileContent = $util.newBuffer([]);
+    
+                        /**
+                         * CustomEmojiPayload filename.
+                         * @member {string} filename
+                         * @memberof google.chat.v1.CustomEmoji.CustomEmojiPayload
+                         * @instance
+                         */
+                        CustomEmojiPayload.prototype.filename = "";
+    
+                        /**
+                         * Creates a new CustomEmojiPayload instance using the specified properties.
+                         * @function create
+                         * @memberof google.chat.v1.CustomEmoji.CustomEmojiPayload
+                         * @static
+                         * @param {google.chat.v1.CustomEmoji.ICustomEmojiPayload=} [properties] Properties to set
+                         * @returns {google.chat.v1.CustomEmoji.CustomEmojiPayload} CustomEmojiPayload instance
+                         */
+                        CustomEmojiPayload.create = function create(properties) {
+                            return new CustomEmojiPayload(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomEmojiPayload message. Does not implicitly {@link google.chat.v1.CustomEmoji.CustomEmojiPayload.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.chat.v1.CustomEmoji.CustomEmojiPayload
+                         * @static
+                         * @param {google.chat.v1.CustomEmoji.ICustomEmojiPayload} message CustomEmojiPayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomEmojiPayload.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.fileContent != null && Object.hasOwnProperty.call(message, "fileContent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.fileContent);
+                            if (message.filename != null && Object.hasOwnProperty.call(message, "filename"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.filename);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomEmojiPayload message, length delimited. Does not implicitly {@link google.chat.v1.CustomEmoji.CustomEmojiPayload.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.chat.v1.CustomEmoji.CustomEmojiPayload
+                         * @static
+                         * @param {google.chat.v1.CustomEmoji.ICustomEmojiPayload} message CustomEmojiPayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomEmojiPayload.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomEmojiPayload message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.chat.v1.CustomEmoji.CustomEmojiPayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.chat.v1.CustomEmoji.CustomEmojiPayload} CustomEmojiPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomEmojiPayload.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CustomEmoji.CustomEmojiPayload();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.fileContent = reader.bytes();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.filename = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomEmojiPayload message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.chat.v1.CustomEmoji.CustomEmojiPayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.chat.v1.CustomEmoji.CustomEmojiPayload} CustomEmojiPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomEmojiPayload.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomEmojiPayload message.
+                         * @function verify
+                         * @memberof google.chat.v1.CustomEmoji.CustomEmojiPayload
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomEmojiPayload.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.fileContent != null && message.hasOwnProperty("fileContent"))
+                                if (!(message.fileContent && typeof message.fileContent.length === "number" || $util.isString(message.fileContent)))
+                                    return "fileContent: buffer expected";
+                            if (message.filename != null && message.hasOwnProperty("filename"))
+                                if (!$util.isString(message.filename))
+                                    return "filename: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomEmojiPayload message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.chat.v1.CustomEmoji.CustomEmojiPayload
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.chat.v1.CustomEmoji.CustomEmojiPayload} CustomEmojiPayload
+                         */
+                        CustomEmojiPayload.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.chat.v1.CustomEmoji.CustomEmojiPayload)
+                                return object;
+                            var message = new $root.google.chat.v1.CustomEmoji.CustomEmojiPayload();
+                            if (object.fileContent != null)
+                                if (typeof object.fileContent === "string")
+                                    $util.base64.decode(object.fileContent, message.fileContent = $util.newBuffer($util.base64.length(object.fileContent)), 0);
+                                else if (object.fileContent.length >= 0)
+                                    message.fileContent = object.fileContent;
+                            if (object.filename != null)
+                                message.filename = String(object.filename);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomEmojiPayload message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.chat.v1.CustomEmoji.CustomEmojiPayload
+                         * @static
+                         * @param {google.chat.v1.CustomEmoji.CustomEmojiPayload} message CustomEmojiPayload
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomEmojiPayload.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if (options.bytes === String)
+                                    object.fileContent = "";
+                                else {
+                                    object.fileContent = [];
+                                    if (options.bytes !== Array)
+                                        object.fileContent = $util.newBuffer(object.fileContent);
+                                }
+                                object.filename = "";
+                            }
+                            if (message.fileContent != null && message.hasOwnProperty("fileContent"))
+                                object.fileContent = options.bytes === String ? $util.base64.encode(message.fileContent, 0, message.fileContent.length) : options.bytes === Array ? Array.prototype.slice.call(message.fileContent) : message.fileContent;
+                            if (message.filename != null && message.hasOwnProperty("filename"))
+                                object.filename = message.filename;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomEmojiPayload to JSON.
+                         * @function toJSON
+                         * @memberof google.chat.v1.CustomEmoji.CustomEmojiPayload
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomEmojiPayload.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomEmojiPayload
+                         * @function getTypeUrl
+                         * @memberof google.chat.v1.CustomEmoji.CustomEmojiPayload
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomEmojiPayload.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.chat.v1.CustomEmoji.CustomEmojiPayload";
+                        };
+    
+                        return CustomEmojiPayload;
+                    })();
     
                     return CustomEmoji;
                 })();
@@ -32062,6 +32396,1118 @@
                     return DeleteReactionRequest;
                 })();
     
+                v1.CreateCustomEmojiRequest = (function() {
+    
+                    /**
+                     * Properties of a CreateCustomEmojiRequest.
+                     * @memberof google.chat.v1
+                     * @interface ICreateCustomEmojiRequest
+                     * @property {google.chat.v1.ICustomEmoji|null} [customEmoji] CreateCustomEmojiRequest customEmoji
+                     */
+    
+                    /**
+                     * Constructs a new CreateCustomEmojiRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a CreateCustomEmojiRequest.
+                     * @implements ICreateCustomEmojiRequest
+                     * @constructor
+                     * @param {google.chat.v1.ICreateCustomEmojiRequest=} [properties] Properties to set
+                     */
+                    function CreateCustomEmojiRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CreateCustomEmojiRequest customEmoji.
+                     * @member {google.chat.v1.ICustomEmoji|null|undefined} customEmoji
+                     * @memberof google.chat.v1.CreateCustomEmojiRequest
+                     * @instance
+                     */
+                    CreateCustomEmojiRequest.prototype.customEmoji = null;
+    
+                    /**
+                     * Creates a new CreateCustomEmojiRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.CreateCustomEmojiRequest
+                     * @static
+                     * @param {google.chat.v1.ICreateCustomEmojiRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.CreateCustomEmojiRequest} CreateCustomEmojiRequest instance
+                     */
+                    CreateCustomEmojiRequest.create = function create(properties) {
+                        return new CreateCustomEmojiRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CreateCustomEmojiRequest message. Does not implicitly {@link google.chat.v1.CreateCustomEmojiRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.CreateCustomEmojiRequest
+                     * @static
+                     * @param {google.chat.v1.ICreateCustomEmojiRequest} message CreateCustomEmojiRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateCustomEmojiRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.customEmoji != null && Object.hasOwnProperty.call(message, "customEmoji"))
+                            $root.google.chat.v1.CustomEmoji.encode(message.customEmoji, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CreateCustomEmojiRequest message, length delimited. Does not implicitly {@link google.chat.v1.CreateCustomEmojiRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.CreateCustomEmojiRequest
+                     * @static
+                     * @param {google.chat.v1.ICreateCustomEmojiRequest} message CreateCustomEmojiRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateCustomEmojiRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CreateCustomEmojiRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.CreateCustomEmojiRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.CreateCustomEmojiRequest} CreateCustomEmojiRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateCustomEmojiRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CreateCustomEmojiRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.customEmoji = $root.google.chat.v1.CustomEmoji.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CreateCustomEmojiRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.CreateCustomEmojiRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.CreateCustomEmojiRequest} CreateCustomEmojiRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateCustomEmojiRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CreateCustomEmojiRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.CreateCustomEmojiRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CreateCustomEmojiRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.customEmoji != null && message.hasOwnProperty("customEmoji")) {
+                            var error = $root.google.chat.v1.CustomEmoji.verify(message.customEmoji);
+                            if (error)
+                                return "customEmoji." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CreateCustomEmojiRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.CreateCustomEmojiRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.CreateCustomEmojiRequest} CreateCustomEmojiRequest
+                     */
+                    CreateCustomEmojiRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.CreateCustomEmojiRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.CreateCustomEmojiRequest();
+                        if (object.customEmoji != null) {
+                            if (typeof object.customEmoji !== "object")
+                                throw TypeError(".google.chat.v1.CreateCustomEmojiRequest.customEmoji: object expected");
+                            message.customEmoji = $root.google.chat.v1.CustomEmoji.fromObject(object.customEmoji);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CreateCustomEmojiRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.CreateCustomEmojiRequest
+                     * @static
+                     * @param {google.chat.v1.CreateCustomEmojiRequest} message CreateCustomEmojiRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CreateCustomEmojiRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.customEmoji = null;
+                        if (message.customEmoji != null && message.hasOwnProperty("customEmoji"))
+                            object.customEmoji = $root.google.chat.v1.CustomEmoji.toObject(message.customEmoji, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CreateCustomEmojiRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.CreateCustomEmojiRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CreateCustomEmojiRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CreateCustomEmojiRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.CreateCustomEmojiRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CreateCustomEmojiRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.CreateCustomEmojiRequest";
+                    };
+    
+                    return CreateCustomEmojiRequest;
+                })();
+    
+                v1.GetCustomEmojiRequest = (function() {
+    
+                    /**
+                     * Properties of a GetCustomEmojiRequest.
+                     * @memberof google.chat.v1
+                     * @interface IGetCustomEmojiRequest
+                     * @property {string|null} [name] GetCustomEmojiRequest name
+                     */
+    
+                    /**
+                     * Constructs a new GetCustomEmojiRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a GetCustomEmojiRequest.
+                     * @implements IGetCustomEmojiRequest
+                     * @constructor
+                     * @param {google.chat.v1.IGetCustomEmojiRequest=} [properties] Properties to set
+                     */
+                    function GetCustomEmojiRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetCustomEmojiRequest name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.GetCustomEmojiRequest
+                     * @instance
+                     */
+                    GetCustomEmojiRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new GetCustomEmojiRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.GetCustomEmojiRequest
+                     * @static
+                     * @param {google.chat.v1.IGetCustomEmojiRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.GetCustomEmojiRequest} GetCustomEmojiRequest instance
+                     */
+                    GetCustomEmojiRequest.create = function create(properties) {
+                        return new GetCustomEmojiRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetCustomEmojiRequest message. Does not implicitly {@link google.chat.v1.GetCustomEmojiRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.GetCustomEmojiRequest
+                     * @static
+                     * @param {google.chat.v1.IGetCustomEmojiRequest} message GetCustomEmojiRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetCustomEmojiRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetCustomEmojiRequest message, length delimited. Does not implicitly {@link google.chat.v1.GetCustomEmojiRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.GetCustomEmojiRequest
+                     * @static
+                     * @param {google.chat.v1.IGetCustomEmojiRequest} message GetCustomEmojiRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetCustomEmojiRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetCustomEmojiRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.GetCustomEmojiRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.GetCustomEmojiRequest} GetCustomEmojiRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetCustomEmojiRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.GetCustomEmojiRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetCustomEmojiRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.GetCustomEmojiRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.GetCustomEmojiRequest} GetCustomEmojiRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetCustomEmojiRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetCustomEmojiRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.GetCustomEmojiRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetCustomEmojiRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetCustomEmojiRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.GetCustomEmojiRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.GetCustomEmojiRequest} GetCustomEmojiRequest
+                     */
+                    GetCustomEmojiRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.GetCustomEmojiRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.GetCustomEmojiRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetCustomEmojiRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.GetCustomEmojiRequest
+                     * @static
+                     * @param {google.chat.v1.GetCustomEmojiRequest} message GetCustomEmojiRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetCustomEmojiRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetCustomEmojiRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.GetCustomEmojiRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetCustomEmojiRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GetCustomEmojiRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.GetCustomEmojiRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetCustomEmojiRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.GetCustomEmojiRequest";
+                    };
+    
+                    return GetCustomEmojiRequest;
+                })();
+    
+                v1.ListCustomEmojisRequest = (function() {
+    
+                    /**
+                     * Properties of a ListCustomEmojisRequest.
+                     * @memberof google.chat.v1
+                     * @interface IListCustomEmojisRequest
+                     * @property {number|null} [pageSize] ListCustomEmojisRequest pageSize
+                     * @property {string|null} [pageToken] ListCustomEmojisRequest pageToken
+                     * @property {string|null} [filter] ListCustomEmojisRequest filter
+                     */
+    
+                    /**
+                     * Constructs a new ListCustomEmojisRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ListCustomEmojisRequest.
+                     * @implements IListCustomEmojisRequest
+                     * @constructor
+                     * @param {google.chat.v1.IListCustomEmojisRequest=} [properties] Properties to set
+                     */
+                    function ListCustomEmojisRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListCustomEmojisRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.chat.v1.ListCustomEmojisRequest
+                     * @instance
+                     */
+                    ListCustomEmojisRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * ListCustomEmojisRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.chat.v1.ListCustomEmojisRequest
+                     * @instance
+                     */
+                    ListCustomEmojisRequest.prototype.pageToken = "";
+    
+                    /**
+                     * ListCustomEmojisRequest filter.
+                     * @member {string} filter
+                     * @memberof google.chat.v1.ListCustomEmojisRequest
+                     * @instance
+                     */
+                    ListCustomEmojisRequest.prototype.filter = "";
+    
+                    /**
+                     * Creates a new ListCustomEmojisRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ListCustomEmojisRequest
+                     * @static
+                     * @param {google.chat.v1.IListCustomEmojisRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.ListCustomEmojisRequest} ListCustomEmojisRequest instance
+                     */
+                    ListCustomEmojisRequest.create = function create(properties) {
+                        return new ListCustomEmojisRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListCustomEmojisRequest message. Does not implicitly {@link google.chat.v1.ListCustomEmojisRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ListCustomEmojisRequest
+                     * @static
+                     * @param {google.chat.v1.IListCustomEmojisRequest} message ListCustomEmojisRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListCustomEmojisRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.pageSize);
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pageToken);
+                        if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.filter);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListCustomEmojisRequest message, length delimited. Does not implicitly {@link google.chat.v1.ListCustomEmojisRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ListCustomEmojisRequest
+                     * @static
+                     * @param {google.chat.v1.IListCustomEmojisRequest} message ListCustomEmojisRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListCustomEmojisRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListCustomEmojisRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ListCustomEmojisRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ListCustomEmojisRequest} ListCustomEmojisRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListCustomEmojisRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListCustomEmojisRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.filter = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListCustomEmojisRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ListCustomEmojisRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ListCustomEmojisRequest} ListCustomEmojisRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListCustomEmojisRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListCustomEmojisRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.ListCustomEmojisRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListCustomEmojisRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            if (!$util.isString(message.filter))
+                                return "filter: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListCustomEmojisRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ListCustomEmojisRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ListCustomEmojisRequest} ListCustomEmojisRequest
+                     */
+                    ListCustomEmojisRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ListCustomEmojisRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.ListCustomEmojisRequest();
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        if (object.filter != null)
+                            message.filter = String(object.filter);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListCustomEmojisRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ListCustomEmojisRequest
+                     * @static
+                     * @param {google.chat.v1.ListCustomEmojisRequest} message ListCustomEmojisRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListCustomEmojisRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                            object.filter = "";
+                        }
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            object.filter = message.filter;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListCustomEmojisRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ListCustomEmojisRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListCustomEmojisRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListCustomEmojisRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ListCustomEmojisRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListCustomEmojisRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ListCustomEmojisRequest";
+                    };
+    
+                    return ListCustomEmojisRequest;
+                })();
+    
+                v1.ListCustomEmojisResponse = (function() {
+    
+                    /**
+                     * Properties of a ListCustomEmojisResponse.
+                     * @memberof google.chat.v1
+                     * @interface IListCustomEmojisResponse
+                     * @property {Array.<google.chat.v1.ICustomEmoji>|null} [customEmojis] ListCustomEmojisResponse customEmojis
+                     * @property {string|null} [nextPageToken] ListCustomEmojisResponse nextPageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListCustomEmojisResponse.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ListCustomEmojisResponse.
+                     * @implements IListCustomEmojisResponse
+                     * @constructor
+                     * @param {google.chat.v1.IListCustomEmojisResponse=} [properties] Properties to set
+                     */
+                    function ListCustomEmojisResponse(properties) {
+                        this.customEmojis = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListCustomEmojisResponse customEmojis.
+                     * @member {Array.<google.chat.v1.ICustomEmoji>} customEmojis
+                     * @memberof google.chat.v1.ListCustomEmojisResponse
+                     * @instance
+                     */
+                    ListCustomEmojisResponse.prototype.customEmojis = $util.emptyArray;
+    
+                    /**
+                     * ListCustomEmojisResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.chat.v1.ListCustomEmojisResponse
+                     * @instance
+                     */
+                    ListCustomEmojisResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * Creates a new ListCustomEmojisResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ListCustomEmojisResponse
+                     * @static
+                     * @param {google.chat.v1.IListCustomEmojisResponse=} [properties] Properties to set
+                     * @returns {google.chat.v1.ListCustomEmojisResponse} ListCustomEmojisResponse instance
+                     */
+                    ListCustomEmojisResponse.create = function create(properties) {
+                        return new ListCustomEmojisResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListCustomEmojisResponse message. Does not implicitly {@link google.chat.v1.ListCustomEmojisResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ListCustomEmojisResponse
+                     * @static
+                     * @param {google.chat.v1.IListCustomEmojisResponse} message ListCustomEmojisResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListCustomEmojisResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.customEmojis != null && message.customEmojis.length)
+                            for (var i = 0; i < message.customEmojis.length; ++i)
+                                $root.google.chat.v1.CustomEmoji.encode(message.customEmojis[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListCustomEmojisResponse message, length delimited. Does not implicitly {@link google.chat.v1.ListCustomEmojisResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ListCustomEmojisResponse
+                     * @static
+                     * @param {google.chat.v1.IListCustomEmojisResponse} message ListCustomEmojisResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListCustomEmojisResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListCustomEmojisResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ListCustomEmojisResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ListCustomEmojisResponse} ListCustomEmojisResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListCustomEmojisResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListCustomEmojisResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.customEmojis && message.customEmojis.length))
+                                        message.customEmojis = [];
+                                    message.customEmojis.push($root.google.chat.v1.CustomEmoji.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListCustomEmojisResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ListCustomEmojisResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ListCustomEmojisResponse} ListCustomEmojisResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListCustomEmojisResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListCustomEmojisResponse message.
+                     * @function verify
+                     * @memberof google.chat.v1.ListCustomEmojisResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListCustomEmojisResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.customEmojis != null && message.hasOwnProperty("customEmojis")) {
+                            if (!Array.isArray(message.customEmojis))
+                                return "customEmojis: array expected";
+                            for (var i = 0; i < message.customEmojis.length; ++i) {
+                                var error = $root.google.chat.v1.CustomEmoji.verify(message.customEmojis[i]);
+                                if (error)
+                                    return "customEmojis." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListCustomEmojisResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ListCustomEmojisResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ListCustomEmojisResponse} ListCustomEmojisResponse
+                     */
+                    ListCustomEmojisResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ListCustomEmojisResponse)
+                            return object;
+                        var message = new $root.google.chat.v1.ListCustomEmojisResponse();
+                        if (object.customEmojis) {
+                            if (!Array.isArray(object.customEmojis))
+                                throw TypeError(".google.chat.v1.ListCustomEmojisResponse.customEmojis: array expected");
+                            message.customEmojis = [];
+                            for (var i = 0; i < object.customEmojis.length; ++i) {
+                                if (typeof object.customEmojis[i] !== "object")
+                                    throw TypeError(".google.chat.v1.ListCustomEmojisResponse.customEmojis: object expected");
+                                message.customEmojis[i] = $root.google.chat.v1.CustomEmoji.fromObject(object.customEmojis[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListCustomEmojisResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ListCustomEmojisResponse
+                     * @static
+                     * @param {google.chat.v1.ListCustomEmojisResponse} message ListCustomEmojisResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListCustomEmojisResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.customEmojis = [];
+                        if (options.defaults)
+                            object.nextPageToken = "";
+                        if (message.customEmojis && message.customEmojis.length) {
+                            object.customEmojis = [];
+                            for (var j = 0; j < message.customEmojis.length; ++j)
+                                object.customEmojis[j] = $root.google.chat.v1.CustomEmoji.toObject(message.customEmojis[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListCustomEmojisResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ListCustomEmojisResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListCustomEmojisResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListCustomEmojisResponse
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ListCustomEmojisResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListCustomEmojisResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ListCustomEmojisResponse";
+                    };
+    
+                    return ListCustomEmojisResponse;
+                })();
+    
+                v1.DeleteCustomEmojiRequest = (function() {
+    
+                    /**
+                     * Properties of a DeleteCustomEmojiRequest.
+                     * @memberof google.chat.v1
+                     * @interface IDeleteCustomEmojiRequest
+                     * @property {string|null} [name] DeleteCustomEmojiRequest name
+                     */
+    
+                    /**
+                     * Constructs a new DeleteCustomEmojiRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a DeleteCustomEmojiRequest.
+                     * @implements IDeleteCustomEmojiRequest
+                     * @constructor
+                     * @param {google.chat.v1.IDeleteCustomEmojiRequest=} [properties] Properties to set
+                     */
+                    function DeleteCustomEmojiRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DeleteCustomEmojiRequest name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.DeleteCustomEmojiRequest
+                     * @instance
+                     */
+                    DeleteCustomEmojiRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new DeleteCustomEmojiRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.DeleteCustomEmojiRequest
+                     * @static
+                     * @param {google.chat.v1.IDeleteCustomEmojiRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.DeleteCustomEmojiRequest} DeleteCustomEmojiRequest instance
+                     */
+                    DeleteCustomEmojiRequest.create = function create(properties) {
+                        return new DeleteCustomEmojiRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteCustomEmojiRequest message. Does not implicitly {@link google.chat.v1.DeleteCustomEmojiRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.DeleteCustomEmojiRequest
+                     * @static
+                     * @param {google.chat.v1.IDeleteCustomEmojiRequest} message DeleteCustomEmojiRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteCustomEmojiRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteCustomEmojiRequest message, length delimited. Does not implicitly {@link google.chat.v1.DeleteCustomEmojiRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.DeleteCustomEmojiRequest
+                     * @static
+                     * @param {google.chat.v1.IDeleteCustomEmojiRequest} message DeleteCustomEmojiRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteCustomEmojiRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DeleteCustomEmojiRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.DeleteCustomEmojiRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.DeleteCustomEmojiRequest} DeleteCustomEmojiRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteCustomEmojiRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.DeleteCustomEmojiRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DeleteCustomEmojiRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.DeleteCustomEmojiRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.DeleteCustomEmojiRequest} DeleteCustomEmojiRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteCustomEmojiRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DeleteCustomEmojiRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.DeleteCustomEmojiRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DeleteCustomEmojiRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DeleteCustomEmojiRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.DeleteCustomEmojiRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.DeleteCustomEmojiRequest} DeleteCustomEmojiRequest
+                     */
+                    DeleteCustomEmojiRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.DeleteCustomEmojiRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.DeleteCustomEmojiRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DeleteCustomEmojiRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.DeleteCustomEmojiRequest
+                     * @static
+                     * @param {google.chat.v1.DeleteCustomEmojiRequest} message DeleteCustomEmojiRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DeleteCustomEmojiRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DeleteCustomEmojiRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.DeleteCustomEmojiRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DeleteCustomEmojiRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DeleteCustomEmojiRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.DeleteCustomEmojiRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DeleteCustomEmojiRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.DeleteCustomEmojiRequest";
+                    };
+    
+                    return DeleteCustomEmojiRequest;
+                })();
+    
                 v1.User = (function() {
     
                     /**
@@ -33218,6 +34664,138 @@
                      * @memberof google.chat.v1.ChatService
                      * @instance
                      * @param {google.chat.v1.IDeleteReactionRequest} request DeleteReactionRequest message or plain object
+                     * @returns {Promise<google.protobuf.Empty>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|createCustomEmoji}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef CreateCustomEmojiCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.CustomEmoji} [response] CustomEmoji
+                     */
+    
+                    /**
+                     * Calls CreateCustomEmoji.
+                     * @function createCustomEmoji
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.ICreateCustomEmojiRequest} request CreateCustomEmojiRequest message or plain object
+                     * @param {google.chat.v1.ChatService.CreateCustomEmojiCallback} callback Node-style callback called with the error, if any, and CustomEmoji
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.createCustomEmoji = function createCustomEmoji(request, callback) {
+                        return this.rpcCall(createCustomEmoji, $root.google.chat.v1.CreateCustomEmojiRequest, $root.google.chat.v1.CustomEmoji, request, callback);
+                    }, "name", { value: "CreateCustomEmoji" });
+    
+                    /**
+                     * Calls CreateCustomEmoji.
+                     * @function createCustomEmoji
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.ICreateCustomEmojiRequest} request CreateCustomEmojiRequest message or plain object
+                     * @returns {Promise<google.chat.v1.CustomEmoji>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|getCustomEmoji}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef GetCustomEmojiCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.CustomEmoji} [response] CustomEmoji
+                     */
+    
+                    /**
+                     * Calls GetCustomEmoji.
+                     * @function getCustomEmoji
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IGetCustomEmojiRequest} request GetCustomEmojiRequest message or plain object
+                     * @param {google.chat.v1.ChatService.GetCustomEmojiCallback} callback Node-style callback called with the error, if any, and CustomEmoji
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.getCustomEmoji = function getCustomEmoji(request, callback) {
+                        return this.rpcCall(getCustomEmoji, $root.google.chat.v1.GetCustomEmojiRequest, $root.google.chat.v1.CustomEmoji, request, callback);
+                    }, "name", { value: "GetCustomEmoji" });
+    
+                    /**
+                     * Calls GetCustomEmoji.
+                     * @function getCustomEmoji
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IGetCustomEmojiRequest} request GetCustomEmojiRequest message or plain object
+                     * @returns {Promise<google.chat.v1.CustomEmoji>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|listCustomEmojis}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef ListCustomEmojisCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.ListCustomEmojisResponse} [response] ListCustomEmojisResponse
+                     */
+    
+                    /**
+                     * Calls ListCustomEmojis.
+                     * @function listCustomEmojis
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IListCustomEmojisRequest} request ListCustomEmojisRequest message or plain object
+                     * @param {google.chat.v1.ChatService.ListCustomEmojisCallback} callback Node-style callback called with the error, if any, and ListCustomEmojisResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.listCustomEmojis = function listCustomEmojis(request, callback) {
+                        return this.rpcCall(listCustomEmojis, $root.google.chat.v1.ListCustomEmojisRequest, $root.google.chat.v1.ListCustomEmojisResponse, request, callback);
+                    }, "name", { value: "ListCustomEmojis" });
+    
+                    /**
+                     * Calls ListCustomEmojis.
+                     * @function listCustomEmojis
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IListCustomEmojisRequest} request ListCustomEmojisRequest message or plain object
+                     * @returns {Promise<google.chat.v1.ListCustomEmojisResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|deleteCustomEmoji}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef DeleteCustomEmojiCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.protobuf.Empty} [response] Empty
+                     */
+    
+                    /**
+                     * Calls DeleteCustomEmoji.
+                     * @function deleteCustomEmoji
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IDeleteCustomEmojiRequest} request DeleteCustomEmojiRequest message or plain object
+                     * @param {google.chat.v1.ChatService.DeleteCustomEmojiCallback} callback Node-style callback called with the error, if any, and Empty
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.deleteCustomEmoji = function deleteCustomEmoji(request, callback) {
+                        return this.rpcCall(deleteCustomEmoji, $root.google.chat.v1.DeleteCustomEmojiRequest, $root.google.protobuf.Empty, request, callback);
+                    }, "name", { value: "DeleteCustomEmoji" });
+    
+                    /**
+                     * Calls DeleteCustomEmoji.
+                     * @function deleteCustomEmoji
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IDeleteCustomEmojiRequest} request DeleteCustomEmojiRequest message or plain object
                      * @returns {Promise<google.protobuf.Empty>} Promise
                      * @variation 2
                      */

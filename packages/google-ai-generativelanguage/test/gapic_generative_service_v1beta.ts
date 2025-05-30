@@ -87,6 +87,20 @@ function stubServerStreamingCall<ResponseType>(
   return sinon.stub().returns(mockStream);
 }
 
+function stubBidiStreamingCall<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  return sinon.stub().returns(mockStream);
+}
+
 describe('v1beta.GenerativeServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
@@ -230,9 +244,14 @@ describe('v1beta.GenerativeServiceClient', () => {
         throw err;
       });
       assert(client.generativeServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -243,9 +262,14 @@ describe('v1beta.GenerativeServiceClient', () => {
         }
       );
       assert.strictEqual(client.generativeServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -420,7 +444,9 @@ describe('v1beta.GenerativeServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.generateContent(request), expectedError);
     });
   });
@@ -558,7 +584,9 @@ describe('v1beta.GenerativeServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.generateAnswer(request), expectedError);
     });
   });
@@ -696,7 +724,9 @@ describe('v1beta.GenerativeServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.embedContent(request), expectedError);
     });
   });
@@ -835,7 +865,9 @@ describe('v1beta.GenerativeServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.batchEmbedContents(request), expectedError);
     });
   });
@@ -973,7 +1005,9 @@ describe('v1beta.GenerativeServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.countTokens(request), expectedError);
     });
   });
@@ -1140,7 +1174,9 @@ describe('v1beta.GenerativeServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       const stream = client.streamGenerateContent(request, {
         retryRequestOptions: {noResponseRetries: 0},
       });
@@ -1166,6 +1202,100 @@ describe('v1beta.GenerativeServiceClient', () => {
         }
       );
       assert(client);
+    });
+  });
+
+  describe('bidiGenerateContent', () => {
+    it('invokes bidiGenerateContent without error', async () => {
+      const client = new generativeserviceModule.v1beta.GenerativeServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage()
+      );
+
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage()
+      );
+      client.innerApiCalls.bidiGenerateContent =
+        stubBidiStreamingCall(expectedResponse);
+      const stream = client.bidiGenerateContent();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.bidiGenerateContent as SinonStub)
+          .getCall(0)
+          .calledWith(null)
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request
+      );
+    });
+
+    it('invokes bidiGenerateContent with error', async () => {
+      const client = new generativeserviceModule.v1beta.GenerativeServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.bidiGenerateContent = stubBidiStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.bidiGenerateContent();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.innerApiCalls.bidiGenerateContent as SinonStub)
+          .getCall(0)
+          .calledWith(null)
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request
+      );
     });
   });
 

@@ -46,7 +46,9 @@ function main(location, dataset, metrics, outputConfig) {
    */
   // const outputConfig = {}
   /**
-   *  Optional. Autorater config used for evaluation.
+   *  Optional. Autorater config used for evaluation. Currently only publisher
+   *  Gemini models are supported. Format:
+   *  `projects/{PROJECT}/locations/{LOCATION}/publishers/google/models/{MODEL}.`
    */
   // const autoraterConfig = {}
 

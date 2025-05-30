@@ -26,11 +26,6 @@ const AzureClustersClient = v1.AzureClustersClient;
 type AzureClustersClient = v1.AzureClustersClient;
 
 export {v1, AttachedClustersClient, AwsClustersClient, AzureClustersClient};
-export default {
-  v1,
-  AttachedClustersClient,
-  AwsClustersClient,
-  AzureClustersClient,
-};
+export default {v1, AttachedClustersClient, AwsClustersClient, AzureClustersClient};
 import * as protos from '../protos/protos';
 export {protos};

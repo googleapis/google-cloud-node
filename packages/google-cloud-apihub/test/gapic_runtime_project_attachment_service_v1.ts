@@ -288,9 +288,14 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
         throw err;
       });
       assert(client.runtimeProjectAttachmentServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -302,9 +307,14 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
           }
         );
       assert.strictEqual(client.runtimeProjectAttachmentServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -489,7 +499,9 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createRuntimeProjectAttachment(request),
         expectedError
@@ -638,7 +650,9 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getRuntimeProjectAttachment(request),
         expectedError
@@ -787,7 +801,9 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteRuntimeProjectAttachment(request),
         expectedError
@@ -936,7 +952,9 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.lookupRuntimeProjectAttachment(request),
         expectedError

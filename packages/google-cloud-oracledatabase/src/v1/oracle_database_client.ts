@@ -145,12 +145,6 @@ export class OracleDatabaseClient {
     );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
-    if (!opts) {
-      opts = {fallback: true};
-    } else {
-      opts.fallback = opts.fallback ?? true;
-    }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
@@ -6668,8 +6662,10 @@ export class OracleDatabaseClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.locationsClient.close().catch(err => {
+          throw err;
+        });
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

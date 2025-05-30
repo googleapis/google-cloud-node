@@ -260,9 +260,14 @@ describe('v1.ConnectionServiceClient', () => {
         throw err;
       });
       assert(client.connectionServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -271,9 +276,14 @@ describe('v1.ConnectionServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.connectionServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {

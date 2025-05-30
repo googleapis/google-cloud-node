@@ -256,9 +256,14 @@ describe('v1.PolicyTagManagerClient', () => {
         throw err;
       });
       assert(client.policyTagManagerStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -267,9 +272,14 @@ describe('v1.PolicyTagManagerClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.policyTagManagerStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -432,7 +442,9 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createTaxonomy(request), expectedError);
     });
   });
@@ -562,7 +574,9 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteTaxonomy(request), expectedError);
     });
   });
@@ -696,7 +710,9 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.taxonomy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateTaxonomy(request), expectedError);
     });
   });
@@ -826,7 +842,9 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getTaxonomy(request), expectedError);
     });
   });
@@ -956,7 +974,9 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createPolicyTag(request), expectedError);
     });
   });
@@ -1086,7 +1106,9 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deletePolicyTag(request), expectedError);
     });
   });
@@ -1220,7 +1242,9 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.policyTag.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updatePolicyTag(request), expectedError);
     });
   });
@@ -1350,7 +1374,9 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPolicyTag(request), expectedError);
     });
   });
@@ -1480,7 +1506,9 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -1610,7 +1638,9 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -1741,7 +1771,9 @@ describe('v1.PolicyTagManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });

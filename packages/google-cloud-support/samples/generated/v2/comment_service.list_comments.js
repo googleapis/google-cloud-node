@@ -29,17 +29,16 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of Case object for which comments should be
-   *  listed.
+   *  Required. The name of the case for which to list comments.
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of comments fetched with each request. Defaults to 10.
+   *  The maximum number of comments to fetch. Defaults to 10.
    */
   // const pageSize = 1234
   /**
    *  A token identifying the page of results to return. If unspecified, the
-   *  first page is retrieved.
+   *  first page is returned.
    */
   // const pageToken = 'abc123'
 

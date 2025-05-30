@@ -105,6 +105,14 @@
           "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "AssessData": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "AssembleData": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }
