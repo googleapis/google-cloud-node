@@ -20242,6 +20242,9 @@ export namespace google {
                     /** CustomJobSpec reservedIpRanges */
                     reservedIpRanges?: (string[]|null);
 
+                    /** CustomJobSpec pscInterfaceConfig */
+                    pscInterfaceConfig?: (google.cloud.aiplatform.v1.IPscInterfaceConfig|null);
+
                     /** CustomJobSpec baseOutputDirectory */
                     baseOutputDirectory?: (google.cloud.aiplatform.v1.IGcsDestination|null);
 
@@ -20293,6 +20296,9 @@ export namespace google {
 
                     /** CustomJobSpec reservedIpRanges. */
                     public reservedIpRanges: string[];
+
+                    /** CustomJobSpec pscInterfaceConfig. */
+                    public pscInterfaceConfig?: (google.cloud.aiplatform.v1.IPscInterfaceConfig|null);
 
                     /** CustomJobSpec baseOutputDirectory. */
                     public baseOutputDirectory?: (google.cloud.aiplatform.v1.IGcsDestination|null);
@@ -20894,6 +20900,424 @@ export namespace google {
                         SPOT = 4,
                         FLEX_START = 6
                     }
+                }
+
+                /** Properties of a PSCAutomationConfig. */
+                interface IPSCAutomationConfig {
+
+                    /** PSCAutomationConfig projectId */
+                    projectId?: (string|null);
+
+                    /** PSCAutomationConfig network */
+                    network?: (string|null);
+                }
+
+                /** Represents a PSCAutomationConfig. */
+                class PSCAutomationConfig implements IPSCAutomationConfig {
+
+                    /**
+                     * Constructs a new PSCAutomationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IPSCAutomationConfig);
+
+                    /** PSCAutomationConfig projectId. */
+                    public projectId: string;
+
+                    /** PSCAutomationConfig network. */
+                    public network: string;
+
+                    /**
+                     * Creates a new PSCAutomationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PSCAutomationConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IPSCAutomationConfig): google.cloud.aiplatform.v1.PSCAutomationConfig;
+
+                    /**
+                     * Encodes the specified PSCAutomationConfig message. Does not implicitly {@link google.cloud.aiplatform.v1.PSCAutomationConfig.verify|verify} messages.
+                     * @param message PSCAutomationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IPSCAutomationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PSCAutomationConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.PSCAutomationConfig.verify|verify} messages.
+                     * @param message PSCAutomationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IPSCAutomationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PSCAutomationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PSCAutomationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.PSCAutomationConfig;
+
+                    /**
+                     * Decodes a PSCAutomationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PSCAutomationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.PSCAutomationConfig;
+
+                    /**
+                     * Verifies a PSCAutomationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PSCAutomationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PSCAutomationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.PSCAutomationConfig;
+
+                    /**
+                     * Creates a plain object from a PSCAutomationConfig message. Also converts values to other types if specified.
+                     * @param message PSCAutomationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.PSCAutomationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PSCAutomationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PSCAutomationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PrivateServiceConnectConfig. */
+                interface IPrivateServiceConnectConfig {
+
+                    /** PrivateServiceConnectConfig enablePrivateServiceConnect */
+                    enablePrivateServiceConnect?: (boolean|null);
+
+                    /** PrivateServiceConnectConfig projectAllowlist */
+                    projectAllowlist?: (string[]|null);
+
+                    /** PrivateServiceConnectConfig serviceAttachment */
+                    serviceAttachment?: (string|null);
+                }
+
+                /** Represents a PrivateServiceConnectConfig. */
+                class PrivateServiceConnectConfig implements IPrivateServiceConnectConfig {
+
+                    /**
+                     * Constructs a new PrivateServiceConnectConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IPrivateServiceConnectConfig);
+
+                    /** PrivateServiceConnectConfig enablePrivateServiceConnect. */
+                    public enablePrivateServiceConnect: boolean;
+
+                    /** PrivateServiceConnectConfig projectAllowlist. */
+                    public projectAllowlist: string[];
+
+                    /** PrivateServiceConnectConfig serviceAttachment. */
+                    public serviceAttachment: string;
+
+                    /**
+                     * Creates a new PrivateServiceConnectConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PrivateServiceConnectConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IPrivateServiceConnectConfig): google.cloud.aiplatform.v1.PrivateServiceConnectConfig;
+
+                    /**
+                     * Encodes the specified PrivateServiceConnectConfig message. Does not implicitly {@link google.cloud.aiplatform.v1.PrivateServiceConnectConfig.verify|verify} messages.
+                     * @param message PrivateServiceConnectConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IPrivateServiceConnectConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PrivateServiceConnectConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.PrivateServiceConnectConfig.verify|verify} messages.
+                     * @param message PrivateServiceConnectConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IPrivateServiceConnectConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PrivateServiceConnectConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PrivateServiceConnectConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.PrivateServiceConnectConfig;
+
+                    /**
+                     * Decodes a PrivateServiceConnectConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PrivateServiceConnectConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.PrivateServiceConnectConfig;
+
+                    /**
+                     * Verifies a PrivateServiceConnectConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PrivateServiceConnectConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PrivateServiceConnectConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.PrivateServiceConnectConfig;
+
+                    /**
+                     * Creates a plain object from a PrivateServiceConnectConfig message. Also converts values to other types if specified.
+                     * @param message PrivateServiceConnectConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.PrivateServiceConnectConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PrivateServiceConnectConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PrivateServiceConnectConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PscAutomatedEndpoints. */
+                interface IPscAutomatedEndpoints {
+
+                    /** PscAutomatedEndpoints projectId */
+                    projectId?: (string|null);
+
+                    /** PscAutomatedEndpoints network */
+                    network?: (string|null);
+
+                    /** PscAutomatedEndpoints matchAddress */
+                    matchAddress?: (string|null);
+                }
+
+                /** Represents a PscAutomatedEndpoints. */
+                class PscAutomatedEndpoints implements IPscAutomatedEndpoints {
+
+                    /**
+                     * Constructs a new PscAutomatedEndpoints.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IPscAutomatedEndpoints);
+
+                    /** PscAutomatedEndpoints projectId. */
+                    public projectId: string;
+
+                    /** PscAutomatedEndpoints network. */
+                    public network: string;
+
+                    /** PscAutomatedEndpoints matchAddress. */
+                    public matchAddress: string;
+
+                    /**
+                     * Creates a new PscAutomatedEndpoints instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PscAutomatedEndpoints instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IPscAutomatedEndpoints): google.cloud.aiplatform.v1.PscAutomatedEndpoints;
+
+                    /**
+                     * Encodes the specified PscAutomatedEndpoints message. Does not implicitly {@link google.cloud.aiplatform.v1.PscAutomatedEndpoints.verify|verify} messages.
+                     * @param message PscAutomatedEndpoints message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IPscAutomatedEndpoints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PscAutomatedEndpoints message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.PscAutomatedEndpoints.verify|verify} messages.
+                     * @param message PscAutomatedEndpoints message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IPscAutomatedEndpoints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PscAutomatedEndpoints message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PscAutomatedEndpoints
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.PscAutomatedEndpoints;
+
+                    /**
+                     * Decodes a PscAutomatedEndpoints message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PscAutomatedEndpoints
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.PscAutomatedEndpoints;
+
+                    /**
+                     * Verifies a PscAutomatedEndpoints message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PscAutomatedEndpoints message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PscAutomatedEndpoints
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.PscAutomatedEndpoints;
+
+                    /**
+                     * Creates a plain object from a PscAutomatedEndpoints message. Also converts values to other types if specified.
+                     * @param message PscAutomatedEndpoints
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.PscAutomatedEndpoints, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PscAutomatedEndpoints to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PscAutomatedEndpoints
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PscInterfaceConfig. */
+                interface IPscInterfaceConfig {
+
+                    /** PscInterfaceConfig networkAttachment */
+                    networkAttachment?: (string|null);
+                }
+
+                /** Represents a PscInterfaceConfig. */
+                class PscInterfaceConfig implements IPscInterfaceConfig {
+
+                    /**
+                     * Constructs a new PscInterfaceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IPscInterfaceConfig);
+
+                    /** PscInterfaceConfig networkAttachment. */
+                    public networkAttachment: string;
+
+                    /**
+                     * Creates a new PscInterfaceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PscInterfaceConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IPscInterfaceConfig): google.cloud.aiplatform.v1.PscInterfaceConfig;
+
+                    /**
+                     * Encodes the specified PscInterfaceConfig message. Does not implicitly {@link google.cloud.aiplatform.v1.PscInterfaceConfig.verify|verify} messages.
+                     * @param message PscInterfaceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IPscInterfaceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PscInterfaceConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.PscInterfaceConfig.verify|verify} messages.
+                     * @param message PscInterfaceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IPscInterfaceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PscInterfaceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PscInterfaceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.PscInterfaceConfig;
+
+                    /**
+                     * Decodes a PscInterfaceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PscInterfaceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.PscInterfaceConfig;
+
+                    /**
+                     * Verifies a PscInterfaceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PscInterfaceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PscInterfaceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.PscInterfaceConfig;
+
+                    /**
+                     * Creates a plain object from a PscInterfaceConfig message. Also converts values to other types if specified.
+                     * @param message PscInterfaceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.PscInterfaceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PscInterfaceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PscInterfaceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DataItem. */
@@ -29511,327 +29935,6 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
-                }
-
-                /** Properties of a PSCAutomationConfig. */
-                interface IPSCAutomationConfig {
-
-                    /** PSCAutomationConfig projectId */
-                    projectId?: (string|null);
-
-                    /** PSCAutomationConfig network */
-                    network?: (string|null);
-                }
-
-                /** Represents a PSCAutomationConfig. */
-                class PSCAutomationConfig implements IPSCAutomationConfig {
-
-                    /**
-                     * Constructs a new PSCAutomationConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.aiplatform.v1.IPSCAutomationConfig);
-
-                    /** PSCAutomationConfig projectId. */
-                    public projectId: string;
-
-                    /** PSCAutomationConfig network. */
-                    public network: string;
-
-                    /**
-                     * Creates a new PSCAutomationConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns PSCAutomationConfig instance
-                     */
-                    public static create(properties?: google.cloud.aiplatform.v1.IPSCAutomationConfig): google.cloud.aiplatform.v1.PSCAutomationConfig;
-
-                    /**
-                     * Encodes the specified PSCAutomationConfig message. Does not implicitly {@link google.cloud.aiplatform.v1.PSCAutomationConfig.verify|verify} messages.
-                     * @param message PSCAutomationConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.aiplatform.v1.IPSCAutomationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified PSCAutomationConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.PSCAutomationConfig.verify|verify} messages.
-                     * @param message PSCAutomationConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IPSCAutomationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a PSCAutomationConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns PSCAutomationConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.PSCAutomationConfig;
-
-                    /**
-                     * Decodes a PSCAutomationConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns PSCAutomationConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.PSCAutomationConfig;
-
-                    /**
-                     * Verifies a PSCAutomationConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a PSCAutomationConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns PSCAutomationConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.PSCAutomationConfig;
-
-                    /**
-                     * Creates a plain object from a PSCAutomationConfig message. Also converts values to other types if specified.
-                     * @param message PSCAutomationConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.aiplatform.v1.PSCAutomationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this PSCAutomationConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for PSCAutomationConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a PrivateServiceConnectConfig. */
-                interface IPrivateServiceConnectConfig {
-
-                    /** PrivateServiceConnectConfig enablePrivateServiceConnect */
-                    enablePrivateServiceConnect?: (boolean|null);
-
-                    /** PrivateServiceConnectConfig projectAllowlist */
-                    projectAllowlist?: (string[]|null);
-
-                    /** PrivateServiceConnectConfig serviceAttachment */
-                    serviceAttachment?: (string|null);
-                }
-
-                /** Represents a PrivateServiceConnectConfig. */
-                class PrivateServiceConnectConfig implements IPrivateServiceConnectConfig {
-
-                    /**
-                     * Constructs a new PrivateServiceConnectConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.aiplatform.v1.IPrivateServiceConnectConfig);
-
-                    /** PrivateServiceConnectConfig enablePrivateServiceConnect. */
-                    public enablePrivateServiceConnect: boolean;
-
-                    /** PrivateServiceConnectConfig projectAllowlist. */
-                    public projectAllowlist: string[];
-
-                    /** PrivateServiceConnectConfig serviceAttachment. */
-                    public serviceAttachment: string;
-
-                    /**
-                     * Creates a new PrivateServiceConnectConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns PrivateServiceConnectConfig instance
-                     */
-                    public static create(properties?: google.cloud.aiplatform.v1.IPrivateServiceConnectConfig): google.cloud.aiplatform.v1.PrivateServiceConnectConfig;
-
-                    /**
-                     * Encodes the specified PrivateServiceConnectConfig message. Does not implicitly {@link google.cloud.aiplatform.v1.PrivateServiceConnectConfig.verify|verify} messages.
-                     * @param message PrivateServiceConnectConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.aiplatform.v1.IPrivateServiceConnectConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified PrivateServiceConnectConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.PrivateServiceConnectConfig.verify|verify} messages.
-                     * @param message PrivateServiceConnectConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IPrivateServiceConnectConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a PrivateServiceConnectConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns PrivateServiceConnectConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.PrivateServiceConnectConfig;
-
-                    /**
-                     * Decodes a PrivateServiceConnectConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns PrivateServiceConnectConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.PrivateServiceConnectConfig;
-
-                    /**
-                     * Verifies a PrivateServiceConnectConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a PrivateServiceConnectConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns PrivateServiceConnectConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.PrivateServiceConnectConfig;
-
-                    /**
-                     * Creates a plain object from a PrivateServiceConnectConfig message. Also converts values to other types if specified.
-                     * @param message PrivateServiceConnectConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.aiplatform.v1.PrivateServiceConnectConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this PrivateServiceConnectConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for PrivateServiceConnectConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a PscAutomatedEndpoints. */
-                interface IPscAutomatedEndpoints {
-
-                    /** PscAutomatedEndpoints projectId */
-                    projectId?: (string|null);
-
-                    /** PscAutomatedEndpoints network */
-                    network?: (string|null);
-
-                    /** PscAutomatedEndpoints matchAddress */
-                    matchAddress?: (string|null);
-                }
-
-                /** Represents a PscAutomatedEndpoints. */
-                class PscAutomatedEndpoints implements IPscAutomatedEndpoints {
-
-                    /**
-                     * Constructs a new PscAutomatedEndpoints.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.aiplatform.v1.IPscAutomatedEndpoints);
-
-                    /** PscAutomatedEndpoints projectId. */
-                    public projectId: string;
-
-                    /** PscAutomatedEndpoints network. */
-                    public network: string;
-
-                    /** PscAutomatedEndpoints matchAddress. */
-                    public matchAddress: string;
-
-                    /**
-                     * Creates a new PscAutomatedEndpoints instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns PscAutomatedEndpoints instance
-                     */
-                    public static create(properties?: google.cloud.aiplatform.v1.IPscAutomatedEndpoints): google.cloud.aiplatform.v1.PscAutomatedEndpoints;
-
-                    /**
-                     * Encodes the specified PscAutomatedEndpoints message. Does not implicitly {@link google.cloud.aiplatform.v1.PscAutomatedEndpoints.verify|verify} messages.
-                     * @param message PscAutomatedEndpoints message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.aiplatform.v1.IPscAutomatedEndpoints, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified PscAutomatedEndpoints message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.PscAutomatedEndpoints.verify|verify} messages.
-                     * @param message PscAutomatedEndpoints message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IPscAutomatedEndpoints, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a PscAutomatedEndpoints message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns PscAutomatedEndpoints
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.PscAutomatedEndpoints;
-
-                    /**
-                     * Decodes a PscAutomatedEndpoints message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns PscAutomatedEndpoints
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.PscAutomatedEndpoints;
-
-                    /**
-                     * Verifies a PscAutomatedEndpoints message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a PscAutomatedEndpoints message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns PscAutomatedEndpoints
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.PscAutomatedEndpoints;
-
-                    /**
-                     * Creates a plain object from a PscAutomatedEndpoints message. Also converts values to other types if specified.
-                     * @param message PscAutomatedEndpoints
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.aiplatform.v1.PscAutomatedEndpoints, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this PscAutomatedEndpoints to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for PscAutomatedEndpoints
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents an EndpointService */
@@ -106573,6 +106676,9 @@ export namespace google {
                     /** PersistentResource network */
                     network?: (string|null);
 
+                    /** PersistentResource pscInterfaceConfig */
+                    pscInterfaceConfig?: (google.cloud.aiplatform.v1.IPscInterfaceConfig|null);
+
                     /** PersistentResource encryptionSpec */
                     encryptionSpec?: (google.cloud.aiplatform.v1.IEncryptionSpec|null);
 
@@ -106624,6 +106730,9 @@ export namespace google {
 
                     /** PersistentResource network. */
                     public network: string;
+
+                    /** PersistentResource pscInterfaceConfig. */
+                    public pscInterfaceConfig?: (google.cloud.aiplatform.v1.IPscInterfaceConfig|null);
 
                     /** PersistentResource encryptionSpec. */
                     public encryptionSpec?: (google.cloud.aiplatform.v1.IEncryptionSpec|null);
@@ -108821,6 +108930,9 @@ export namespace google {
                     /** PipelineJob reservedIpRanges */
                     reservedIpRanges?: (string[]|null);
 
+                    /** PipelineJob pscInterfaceConfig */
+                    pscInterfaceConfig?: (google.cloud.aiplatform.v1.IPscInterfaceConfig|null);
+
                     /** PipelineJob templateUri */
                     templateUri?: (string|null);
 
@@ -108890,6 +109002,9 @@ export namespace google {
 
                     /** PipelineJob reservedIpRanges. */
                     public reservedIpRanges: string[];
+
+                    /** PipelineJob pscInterfaceConfig. */
+                    public pscInterfaceConfig?: (google.cloud.aiplatform.v1.IPscInterfaceConfig|null);
 
                     /** PipelineJob templateUri. */
                     public templateUri: string;
