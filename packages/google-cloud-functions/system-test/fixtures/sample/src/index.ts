@@ -19,9 +19,7 @@
 import {CloudFunctionsServiceClient} from '@google-cloud/functions';
 
 // check that the client class type name can be used
-function doStuffWithCloudFunctionsServiceClient(
-  client: CloudFunctionsServiceClient
-) {
+function doStuffWithCloudFunctionsServiceClient(client: CloudFunctionsServiceClient) {
   client.close();
 }
 

@@ -25,9306 +25,7238 @@ import * as amlModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.AMLClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new amlModule.v1.AMLClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'financialservices.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new amlModule.v1.AMLClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = amlModule.v1.AMLClient.servicePath;
-        assert.strictEqual(servicePath, 'financialservices.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = amlModule.v1.AMLClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'financialservices.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new amlModule.v1.AMLClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'financialservices.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new amlModule.v1.AMLClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'financialservices.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new amlModule.v1.AMLClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'financialservices.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new amlModule.v1.AMLClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'financialservices.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new amlModule.v1.AMLClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'financialservices.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new amlModule.v1.AMLClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new amlModule.v1.AMLClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = amlModule.v1.AMLClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new amlModule.v1.AMLClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new amlModule.v1.AMLClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.aMLStub, undefined);
-      await client.initialize();
-      assert(client.aMLStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.aMLStub);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.aMLStub, undefined);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getInstance', () => {
-    it('invokes getInstance without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.Instance()
-      );
-      client.innerApiCalls.getInstance = stubSimpleCall(expectedResponse);
-      const [response] = await client.getInstance(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInstance without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.Instance()
-      );
-      client.innerApiCalls.getInstance =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.financialservices.v1.IInstance | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInstance with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getInstance = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getInstance(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInstance with closed client', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getInstance(request), expectedError);
-    });
-  });
-
-  describe('getDataset', () => {
-    it('invokes getDataset without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.Dataset()
-      );
-      client.innerApiCalls.getDataset = stubSimpleCall(expectedResponse);
-      const [response] = await client.getDataset(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDataset without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.Dataset()
-      );
-      client.innerApiCalls.getDataset =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getDataset(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.financialservices.v1.IDataset | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDataset with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getDataset = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getDataset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDataset with closed client', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getDataset(request), expectedError);
-    });
-  });
-
-  describe('getModel', () => {
-    it('invokes getModel without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.Model()
-      );
-      client.innerApiCalls.getModel = stubSimpleCall(expectedResponse);
-      const [response] = await client.getModel(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getModel without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.Model()
-      );
-      client.innerApiCalls.getModel =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getModel(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.financialservices.v1.IModel | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getModel with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getModel = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getModel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getModel with closed client', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getModel(request), expectedError);
-    });
-  });
-
-  describe('getEngineConfig', () => {
-    it('invokes getEngineConfig without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetEngineConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetEngineConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.EngineConfig()
-      );
-      client.innerApiCalls.getEngineConfig = stubSimpleCall(expectedResponse);
-      const [response] = await client.getEngineConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEngineConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEngineConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEngineConfig without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetEngineConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetEngineConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.EngineConfig()
-      );
-      client.innerApiCalls.getEngineConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getEngineConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.financialservices.v1.IEngineConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEngineConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEngineConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEngineConfig with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetEngineConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetEngineConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getEngineConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getEngineConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getEngineConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEngineConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEngineConfig with closed client', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetEngineConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetEngineConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getEngineConfig(request), expectedError);
-    });
-  });
-
-  describe('getEngineVersion', () => {
-    it('invokes getEngineVersion without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetEngineVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetEngineVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.EngineVersion()
-      );
-      client.innerApiCalls.getEngineVersion = stubSimpleCall(expectedResponse);
-      const [response] = await client.getEngineVersion(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEngineVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEngineVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEngineVersion without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetEngineVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetEngineVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.EngineVersion()
-      );
-      client.innerApiCalls.getEngineVersion =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getEngineVersion(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.financialservices.v1.IEngineVersion | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEngineVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEngineVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEngineVersion with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetEngineVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetEngineVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getEngineVersion = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getEngineVersion(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getEngineVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEngineVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEngineVersion with closed client', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetEngineVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetEngineVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getEngineVersion(request), expectedError);
-    });
-  });
-
-  describe('getPredictionResult', () => {
-    it('invokes getPredictionResult without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetPredictionResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetPredictionResultRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.PredictionResult()
-      );
-      client.innerApiCalls.getPredictionResult =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getPredictionResult(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPredictionResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPredictionResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPredictionResult without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetPredictionResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetPredictionResultRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.PredictionResult()
-      );
-      client.innerApiCalls.getPredictionResult =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getPredictionResult(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.financialservices.v1.IPredictionResult | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPredictionResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPredictionResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPredictionResult with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetPredictionResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetPredictionResultRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getPredictionResult = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getPredictionResult(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getPredictionResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPredictionResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPredictionResult with closed client', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetPredictionResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetPredictionResultRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getPredictionResult(request), expectedError);
-    });
-  });
-
-  describe('getBacktestResult', () => {
-    it('invokes getBacktestResult without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetBacktestResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetBacktestResultRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.BacktestResult()
-      );
-      client.innerApiCalls.getBacktestResult = stubSimpleCall(expectedResponse);
-      const [response] = await client.getBacktestResult(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBacktestResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBacktestResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBacktestResult without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetBacktestResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetBacktestResultRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.BacktestResult()
-      );
-      client.innerApiCalls.getBacktestResult =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getBacktestResult(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.financialservices.v1.IBacktestResult | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBacktestResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBacktestResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBacktestResult with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetBacktestResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetBacktestResultRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getBacktestResult = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getBacktestResult(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getBacktestResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBacktestResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBacktestResult with closed client', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.GetBacktestResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.GetBacktestResultRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getBacktestResult(request), expectedError);
-    });
-  });
-
-  describe('createInstance', () => {
-    it('invokes createInstance without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateInstanceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createInstance =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createInstance(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createInstance without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateInstanceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createInstance =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IInstance,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IInstance,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createInstance with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateInstanceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createInstance = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createInstance(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createInstance with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateInstanceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createInstance = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createInstance(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateInstanceProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateInstanceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateInstanceProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateInstanceProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateInstance', () => {
-    it('invokes updateInstance without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateInstanceRequest()
-      );
-      request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateInstanceRequest',
-        ['instance', 'name']
-      );
-      request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateInstance =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateInstance(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateInstance without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateInstanceRequest()
-      );
-      request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateInstanceRequest',
-        ['instance', 'name']
-      );
-      request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateInstance =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IInstance,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IInstance,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateInstance with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateInstanceRequest()
-      );
-      request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateInstanceRequest',
-        ['instance', 'name']
-      );
-      request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateInstance = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateInstance(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateInstance with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateInstanceRequest()
-      );
-      request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateInstanceRequest',
-        ['instance', 'name']
-      );
-      request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateInstance = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateInstance(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateInstanceProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateInstanceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateInstanceProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateInstanceProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteInstance', () => {
-    it('invokes deleteInstance without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteInstance =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteInstance(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteInstance without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteInstance =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteInstance with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteInstance = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteInstance(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteInstance with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteInstance = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteInstance(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteInstanceProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteInstanceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteInstanceProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteInstanceProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('importRegisteredParties', () => {
-    it('invokes importRegisteredParties without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ImportRegisteredPartiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ImportRegisteredPartiesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.importRegisteredParties =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.importRegisteredParties(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.importRegisteredParties as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importRegisteredParties as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importRegisteredParties without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ImportRegisteredPartiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ImportRegisteredPartiesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.importRegisteredParties =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.importRegisteredParties(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.importRegisteredParties as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importRegisteredParties as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importRegisteredParties with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ImportRegisteredPartiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ImportRegisteredPartiesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.importRegisteredParties = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.importRegisteredParties(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.importRegisteredParties as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importRegisteredParties as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importRegisteredParties with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ImportRegisteredPartiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ImportRegisteredPartiesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.importRegisteredParties = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.importRegisteredParties(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.importRegisteredParties as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importRegisteredParties as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkImportRegisteredPartiesProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkImportRegisteredPartiesProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkImportRegisteredPartiesProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkImportRegisteredPartiesProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('exportRegisteredParties', () => {
-    it('invokes exportRegisteredParties without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportRegisteredPartiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportRegisteredPartiesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportRegisteredParties =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.exportRegisteredParties(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportRegisteredParties as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportRegisteredParties as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportRegisteredParties without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportRegisteredPartiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportRegisteredPartiesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportRegisteredParties =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.exportRegisteredParties(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportRegisteredParties as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportRegisteredParties as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportRegisteredParties with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportRegisteredPartiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportRegisteredPartiesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportRegisteredParties = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.exportRegisteredParties(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.exportRegisteredParties as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportRegisteredParties as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportRegisteredParties with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportRegisteredPartiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportRegisteredPartiesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportRegisteredParties = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.exportRegisteredParties(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.exportRegisteredParties as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportRegisteredParties as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkExportRegisteredPartiesProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkExportRegisteredPartiesProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkExportRegisteredPartiesProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkExportRegisteredPartiesProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createDataset', () => {
-    it('invokes createDataset without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateDatasetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createDataset =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createDataset(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDataset without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateDatasetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createDataset =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createDataset(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IDataset,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IDataset,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDataset with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateDatasetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createDataset = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createDataset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDataset with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateDatasetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createDataset = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createDataset(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateDatasetProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateDatasetProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateDatasetProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateDatasetProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateDataset', () => {
-    it('invokes updateDataset without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateDatasetRequest()
-      );
-      request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateDatasetRequest',
-        ['dataset', 'name']
-      );
-      request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateDataset =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateDataset(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDataset without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateDatasetRequest()
-      );
-      request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateDatasetRequest',
-        ['dataset', 'name']
-      );
-      request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateDataset =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateDataset(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IDataset,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IDataset,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDataset with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateDatasetRequest()
-      );
-      request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateDatasetRequest',
-        ['dataset', 'name']
-      );
-      request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateDataset = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateDataset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDataset with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateDatasetRequest()
-      );
-      request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateDatasetRequest',
-        ['dataset', 'name']
-      );
-      request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateDataset = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateDataset(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateDatasetProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateDatasetProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateDatasetProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateDatasetProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteDataset', () => {
-    it('invokes deleteDataset without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteDataset =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteDataset(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDataset without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteDataset =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteDataset(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDataset with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteDataset = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteDataset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDataset with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteDataset = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteDataset(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteDatasetProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteDatasetProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteDatasetProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteDatasetProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createModel', () => {
-    it('invokes createModel without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateModelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createModel = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createModel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createModel without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateModelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createModel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createModel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IModel,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IModel,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createModel with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateModelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createModel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createModel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createModel with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateModelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createModel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createModel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateModelProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateModelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateModelProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateModelProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateModel', () => {
-    it('invokes updateModel without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateModelRequest()
-      );
-      request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateModelRequest',
-        ['model', 'name']
-      );
-      request.model.name = defaultValue1;
-      const expectedHeaderRequestParams = `model.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateModel = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateModel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateModel without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateModelRequest()
-      );
-      request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateModelRequest',
-        ['model', 'name']
-      );
-      request.model.name = defaultValue1;
-      const expectedHeaderRequestParams = `model.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateModel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateModel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IModel,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IModel,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateModel with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateModelRequest()
-      );
-      request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateModelRequest',
-        ['model', 'name']
-      );
-      request.model.name = defaultValue1;
-      const expectedHeaderRequestParams = `model.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateModel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateModel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateModel with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateModelRequest()
-      );
-      request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateModelRequest',
-        ['model', 'name']
-      );
-      request.model.name = defaultValue1;
-      const expectedHeaderRequestParams = `model.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateModel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateModel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateModelProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateModelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateModelProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpdateModelProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('exportModelMetadata', () => {
-    it('invokes exportModelMetadata without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportModelMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportModelMetadataRequest',
-        ['model']
-      );
-      request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportModelMetadata =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.exportModelMetadata(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportModelMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportModelMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportModelMetadata without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportModelMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportModelMetadataRequest',
-        ['model']
-      );
-      request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportModelMetadata =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.exportModelMetadata(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IExportModelMetadataResponse,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IExportModelMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportModelMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportModelMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportModelMetadata with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportModelMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportModelMetadataRequest',
-        ['model']
-      );
-      request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportModelMetadata = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.exportModelMetadata(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.exportModelMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportModelMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportModelMetadata with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportModelMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportModelMetadataRequest',
-        ['model']
-      );
-      request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportModelMetadata = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.exportModelMetadata(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.exportModelMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportModelMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkExportModelMetadataProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkExportModelMetadataProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkExportModelMetadataProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkExportModelMetadataProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteModel', () => {
-    it('invokes deleteModel without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteModel = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteModel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteModel without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteModel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteModel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteModel with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteModel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteModel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteModel with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteModel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteModel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteModelProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteModelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteModelProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteModelProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createEngineConfig', () => {
-    it('invokes createEngineConfig without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateEngineConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateEngineConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createEngineConfig =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createEngineConfig(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createEngineConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEngineConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEngineConfig without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateEngineConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateEngineConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createEngineConfig =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createEngineConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IEngineConfig,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IEngineConfig,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createEngineConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEngineConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEngineConfig with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateEngineConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateEngineConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createEngineConfig = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createEngineConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createEngineConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEngineConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEngineConfig with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateEngineConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateEngineConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createEngineConfig = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createEngineConfig(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createEngineConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEngineConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateEngineConfigProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateEngineConfigProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateEngineConfigProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateEngineConfigProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateEngineConfig', () => {
-    it('invokes updateEngineConfig without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateEngineConfigRequest()
-      );
-      request.engineConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateEngineConfigRequest',
-        ['engineConfig', 'name']
-      );
-      request.engineConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `engine_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateEngineConfig =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateEngineConfig(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateEngineConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEngineConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEngineConfig without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateEngineConfigRequest()
-      );
-      request.engineConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateEngineConfigRequest',
-        ['engineConfig', 'name']
-      );
-      request.engineConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `engine_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateEngineConfig =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateEngineConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IEngineConfig,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IEngineConfig,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateEngineConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEngineConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEngineConfig with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateEngineConfigRequest()
-      );
-      request.engineConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateEngineConfigRequest',
-        ['engineConfig', 'name']
-      );
-      request.engineConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `engine_config.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateEngineConfig = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateEngineConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateEngineConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEngineConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEngineConfig with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateEngineConfigRequest()
-      );
-      request.engineConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateEngineConfigRequest',
-        ['engineConfig', 'name']
-      );
-      request.engineConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `engine_config.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateEngineConfig = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateEngineConfig(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateEngineConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEngineConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateEngineConfigProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateEngineConfigProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateEngineConfigProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateEngineConfigProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('exportEngineConfigMetadata', () => {
-    it('invokes exportEngineConfigMetadata without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportEngineConfigMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportEngineConfigMetadataRequest',
-        ['engineConfig']
-      );
-      request.engineConfig = defaultValue1;
-      const expectedHeaderRequestParams = `engine_config=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportEngineConfigMetadata =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.exportEngineConfigMetadata(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportEngineConfigMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportEngineConfigMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportEngineConfigMetadata without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportEngineConfigMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportEngineConfigMetadataRequest',
-        ['engineConfig']
-      );
-      request.engineConfig = defaultValue1;
-      const expectedHeaderRequestParams = `engine_config=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportEngineConfigMetadata =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.exportEngineConfigMetadata(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportEngineConfigMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportEngineConfigMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportEngineConfigMetadata with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportEngineConfigMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportEngineConfigMetadataRequest',
-        ['engineConfig']
-      );
-      request.engineConfig = defaultValue1;
-      const expectedHeaderRequestParams = `engine_config=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportEngineConfigMetadata = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.exportEngineConfigMetadata(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.exportEngineConfigMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportEngineConfigMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportEngineConfigMetadata with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportEngineConfigMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportEngineConfigMetadataRequest',
-        ['engineConfig']
-      );
-      request.engineConfig = defaultValue1;
-      const expectedHeaderRequestParams = `engine_config=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportEngineConfigMetadata = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.exportEngineConfigMetadata(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.exportEngineConfigMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportEngineConfigMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkExportEngineConfigMetadataProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkExportEngineConfigMetadataProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkExportEngineConfigMetadataProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkExportEngineConfigMetadataProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteEngineConfig', () => {
-    it('invokes deleteEngineConfig without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteEngineConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteEngineConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteEngineConfig =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteEngineConfig(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteEngineConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEngineConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEngineConfig without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteEngineConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteEngineConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteEngineConfig =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteEngineConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteEngineConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEngineConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEngineConfig with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteEngineConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteEngineConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteEngineConfig = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteEngineConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteEngineConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEngineConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEngineConfig with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteEngineConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteEngineConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteEngineConfig = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteEngineConfig(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteEngineConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEngineConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteEngineConfigProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteEngineConfigProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteEngineConfigProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteEngineConfigProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createPredictionResult', () => {
-    it('invokes createPredictionResult without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreatePredictionResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreatePredictionResultRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createPredictionResult =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createPredictionResult(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createPredictionResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPredictionResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPredictionResult without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreatePredictionResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreatePredictionResultRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createPredictionResult =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createPredictionResult(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IPredictionResult,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IPredictionResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createPredictionResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPredictionResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPredictionResult with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreatePredictionResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreatePredictionResultRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createPredictionResult = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createPredictionResult(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createPredictionResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPredictionResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPredictionResult with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreatePredictionResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreatePredictionResultRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createPredictionResult = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createPredictionResult(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createPredictionResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPredictionResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreatePredictionResultProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreatePredictionResultProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreatePredictionResultProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreatePredictionResultProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updatePredictionResult', () => {
-    it('invokes updatePredictionResult without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdatePredictionResultRequest()
-      );
-      request.predictionResult ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdatePredictionResultRequest',
-        ['predictionResult', 'name']
-      );
-      request.predictionResult.name = defaultValue1;
-      const expectedHeaderRequestParams = `prediction_result.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updatePredictionResult =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updatePredictionResult(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updatePredictionResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePredictionResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePredictionResult without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdatePredictionResultRequest()
-      );
-      request.predictionResult ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdatePredictionResultRequest',
-        ['predictionResult', 'name']
-      );
-      request.predictionResult.name = defaultValue1;
-      const expectedHeaderRequestParams = `prediction_result.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updatePredictionResult =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updatePredictionResult(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IPredictionResult,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IPredictionResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updatePredictionResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePredictionResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePredictionResult with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdatePredictionResultRequest()
-      );
-      request.predictionResult ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdatePredictionResultRequest',
-        ['predictionResult', 'name']
-      );
-      request.predictionResult.name = defaultValue1;
-      const expectedHeaderRequestParams = `prediction_result.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updatePredictionResult = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updatePredictionResult(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updatePredictionResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePredictionResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePredictionResult with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdatePredictionResultRequest()
-      );
-      request.predictionResult ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdatePredictionResultRequest',
-        ['predictionResult', 'name']
-      );
-      request.predictionResult.name = defaultValue1;
-      const expectedHeaderRequestParams = `prediction_result.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updatePredictionResult = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updatePredictionResult(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updatePredictionResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePredictionResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdatePredictionResultProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdatePredictionResultProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdatePredictionResultProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdatePredictionResultProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('exportPredictionResultMetadata', () => {
-    it('invokes exportPredictionResultMetadata without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportPredictionResultMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportPredictionResultMetadataRequest',
-        ['predictionResult']
-      );
-      request.predictionResult = defaultValue1;
-      const expectedHeaderRequestParams = `prediction_result=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportPredictionResultMetadata =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.exportPredictionResultMetadata(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportPredictionResultMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportPredictionResultMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportPredictionResultMetadata without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportPredictionResultMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportPredictionResultMetadataRequest',
-        ['predictionResult']
-      );
-      request.predictionResult = defaultValue1;
-      const expectedHeaderRequestParams = `prediction_result=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportPredictionResultMetadata =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.exportPredictionResultMetadata(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportPredictionResultMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportPredictionResultMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportPredictionResultMetadata with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportPredictionResultMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportPredictionResultMetadataRequest',
-        ['predictionResult']
-      );
-      request.predictionResult = defaultValue1;
-      const expectedHeaderRequestParams = `prediction_result=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportPredictionResultMetadata = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.exportPredictionResultMetadata(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.exportPredictionResultMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportPredictionResultMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportPredictionResultMetadata with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportPredictionResultMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportPredictionResultMetadataRequest',
-        ['predictionResult']
-      );
-      request.predictionResult = defaultValue1;
-      const expectedHeaderRequestParams = `prediction_result=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportPredictionResultMetadata = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.exportPredictionResultMetadata(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.exportPredictionResultMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportPredictionResultMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkExportPredictionResultMetadataProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkExportPredictionResultMetadataProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkExportPredictionResultMetadataProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkExportPredictionResultMetadataProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deletePredictionResult', () => {
-    it('invokes deletePredictionResult without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeletePredictionResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeletePredictionResultRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deletePredictionResult =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deletePredictionResult(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePredictionResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePredictionResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePredictionResult without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeletePredictionResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeletePredictionResultRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deletePredictionResult =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deletePredictionResult(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePredictionResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePredictionResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePredictionResult with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeletePredictionResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeletePredictionResultRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deletePredictionResult = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deletePredictionResult(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deletePredictionResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePredictionResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePredictionResult with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeletePredictionResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeletePredictionResultRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deletePredictionResult = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deletePredictionResult(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deletePredictionResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePredictionResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeletePredictionResultProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeletePredictionResultProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeletePredictionResultProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeletePredictionResultProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createBacktestResult', () => {
-    it('invokes createBacktestResult without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateBacktestResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateBacktestResultRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createBacktestResult =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createBacktestResult(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBacktestResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBacktestResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBacktestResult without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateBacktestResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateBacktestResultRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createBacktestResult =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createBacktestResult(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IBacktestResult,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IBacktestResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBacktestResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBacktestResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBacktestResult with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateBacktestResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateBacktestResultRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createBacktestResult = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createBacktestResult(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createBacktestResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBacktestResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBacktestResult with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.CreateBacktestResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.CreateBacktestResultRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createBacktestResult = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createBacktestResult(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createBacktestResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBacktestResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateBacktestResultProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateBacktestResultProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateBacktestResultProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateBacktestResultProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateBacktestResult', () => {
-    it('invokes updateBacktestResult without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateBacktestResultRequest()
-      );
-      request.backtestResult ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateBacktestResultRequest',
-        ['backtestResult', 'name']
-      );
-      request.backtestResult.name = defaultValue1;
-      const expectedHeaderRequestParams = `backtest_result.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateBacktestResult =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateBacktestResult(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateBacktestResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBacktestResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBacktestResult without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateBacktestResultRequest()
-      );
-      request.backtestResult ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateBacktestResultRequest',
-        ['backtestResult', 'name']
-      );
-      request.backtestResult.name = defaultValue1;
-      const expectedHeaderRequestParams = `backtest_result.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateBacktestResult =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateBacktestResult(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IBacktestResult,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IBacktestResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateBacktestResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBacktestResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBacktestResult with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateBacktestResultRequest()
-      );
-      request.backtestResult ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateBacktestResultRequest',
-        ['backtestResult', 'name']
-      );
-      request.backtestResult.name = defaultValue1;
-      const expectedHeaderRequestParams = `backtest_result.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateBacktestResult = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateBacktestResult(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateBacktestResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBacktestResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBacktestResult with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.UpdateBacktestResultRequest()
-      );
-      request.backtestResult ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.UpdateBacktestResultRequest',
-        ['backtestResult', 'name']
-      );
-      request.backtestResult.name = defaultValue1;
-      const expectedHeaderRequestParams = `backtest_result.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateBacktestResult = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateBacktestResult(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateBacktestResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBacktestResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateBacktestResultProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateBacktestResultProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateBacktestResultProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateBacktestResultProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('exportBacktestResultMetadata', () => {
-    it('invokes exportBacktestResultMetadata without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportBacktestResultMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportBacktestResultMetadataRequest',
-        ['backtestResult']
-      );
-      request.backtestResult = defaultValue1;
-      const expectedHeaderRequestParams = `backtest_result=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportBacktestResultMetadata =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.exportBacktestResultMetadata(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportBacktestResultMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportBacktestResultMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportBacktestResultMetadata without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportBacktestResultMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportBacktestResultMetadataRequest',
-        ['backtestResult']
-      );
-      request.backtestResult = defaultValue1;
-      const expectedHeaderRequestParams = `backtest_result=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportBacktestResultMetadata =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.exportBacktestResultMetadata(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportBacktestResultMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportBacktestResultMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportBacktestResultMetadata with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportBacktestResultMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportBacktestResultMetadataRequest',
-        ['backtestResult']
-      );
-      request.backtestResult = defaultValue1;
-      const expectedHeaderRequestParams = `backtest_result=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportBacktestResultMetadata = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.exportBacktestResultMetadata(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.exportBacktestResultMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportBacktestResultMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportBacktestResultMetadata with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ExportBacktestResultMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ExportBacktestResultMetadataRequest',
-        ['backtestResult']
-      );
-      request.backtestResult = defaultValue1;
-      const expectedHeaderRequestParams = `backtest_result=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportBacktestResultMetadata = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.exportBacktestResultMetadata(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.exportBacktestResultMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportBacktestResultMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkExportBacktestResultMetadataProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkExportBacktestResultMetadataProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkExportBacktestResultMetadataProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkExportBacktestResultMetadataProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteBacktestResult', () => {
-    it('invokes deleteBacktestResult without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteBacktestResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteBacktestResultRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteBacktestResult =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteBacktestResult(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBacktestResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBacktestResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBacktestResult without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteBacktestResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteBacktestResultRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteBacktestResult =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteBacktestResult(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.financialservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBacktestResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBacktestResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBacktestResult with call error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteBacktestResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteBacktestResultRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteBacktestResult = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteBacktestResult(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteBacktestResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBacktestResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBacktestResult with LRO error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.DeleteBacktestResultRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.DeleteBacktestResultRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteBacktestResult = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteBacktestResult(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteBacktestResult as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBacktestResult as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteBacktestResultProgress without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteBacktestResultProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteBacktestResultProgress with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteBacktestResultProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listInstances', () => {
-    it('invokes listInstances without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Instance()
-        ),
-      ];
-      client.innerApiCalls.listInstances = stubSimpleCall(expectedResponse);
-      const [response] = await client.listInstances(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listInstances without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Instance()
-        ),
-      ];
-      client.innerApiCalls.listInstances =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listInstances(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.financialservices.v1.IInstance[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listInstances with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listInstances = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listInstances(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listInstancesStream without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Instance()
-        ),
-      ];
-      client.descriptors.page.listInstances.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listInstancesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.financialservices.v1.Instance[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.financialservices.v1.Instance) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listInstances.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listInstances, request)
-      );
-      assert(
-        (client.descriptors.page.listInstances.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listInstancesStream with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listInstances.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listInstancesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.financialservices.v1.Instance[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.financialservices.v1.Instance) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listInstances.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listInstances, request)
-      );
-      assert(
-        (client.descriptors.page.listInstances.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listInstances without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Instance()
-        ),
-      ];
-      client.descriptors.page.listInstances.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.financialservices.v1.IInstance[] =
-        [];
-      const iterable = client.listInstancesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listInstances.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listInstances.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listInstances with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listInstances.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listInstancesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.financialservices.v1.IInstance[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = amlModule.v1.AMLClient.servicePath;
+                assert.strictEqual(servicePath, 'financialservices.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = amlModule.v1.AMLClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'financialservices.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listInstances.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listInstances.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listDatasets', () => {
-    it('invokes listDatasets without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Dataset()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Dataset()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Dataset()
-        ),
-      ];
-      client.innerApiCalls.listDatasets = stubSimpleCall(expectedResponse);
-      const [response] = await client.listDatasets(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDatasets without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Dataset()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Dataset()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Dataset()
-        ),
-      ];
-      client.innerApiCalls.listDatasets =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listDatasets(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.financialservices.v1.IDataset[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDatasets with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listDatasets = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listDatasets(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDatasetsStream without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Dataset()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Dataset()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Dataset()
-        ),
-      ];
-      client.descriptors.page.listDatasets.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listDatasetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.financialservices.v1.Dataset[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.financialservices.v1.Dataset) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new amlModule.v1.AMLClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'financialservices.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listDatasets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDatasets, request)
-      );
-      assert(
-        (client.descriptors.page.listDatasets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listDatasetsStream with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listDatasetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.financialservices.v1.Dataset[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.financialservices.v1.Dataset) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new amlModule.v1.AMLClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'financialservices.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listDatasets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDatasets, request)
-      );
-      assert(
-        (client.descriptors.page.listDatasets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listDatasets without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Dataset()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Dataset()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Dataset()
-        ),
-      ];
-      client.descriptors.page.listDatasets.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.financialservices.v1.IDataset[] = [];
-      const iterable = client.listDatasetsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDatasets.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new amlModule.v1.AMLClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'financialservices.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listDatasets with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDatasets.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listDatasetsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.financialservices.v1.IDataset[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new amlModule.v1.AMLClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'financialservices.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDatasets.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new amlModule.v1.AMLClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listModels', () => {
-    it('invokes listModels without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Model()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Model()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Model()
-        ),
-      ];
-      client.innerApiCalls.listModels = stubSimpleCall(expectedResponse);
-      const [response] = await client.listModels(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = amlModule.v1.AMLClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new amlModule.v1.AMLClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new amlModule.v1.AMLClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.aMLStub, undefined);
+            await client.initialize();
+            assert(client.aMLStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.aMLStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.aMLStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listModels without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Model()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Model()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Model()
-        ),
-      ];
-      client.innerApiCalls.listModels =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listModels(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.financialservices.v1.IModel[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getInstance', () => {
+        it('invokes getInstance without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.Instance()
+            );
+            client.innerApiCalls.getInstance = stubSimpleCall(expectedResponse);
+            const [response] = await client.getInstance(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInstance without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.Instance()
+            );
+            client.innerApiCalls.getInstance = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getInstance(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.financialservices.v1.IInstance|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInstance with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getInstance = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInstance with closed client', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getInstance(request), expectedError);
+        });
+    });
+
+    describe('getDataset', () => {
+        it('invokes getDataset without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.Dataset()
+            );
+            client.innerApiCalls.getDataset = stubSimpleCall(expectedResponse);
+            const [response] = await client.getDataset(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDataset without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.Dataset()
+            );
+            client.innerApiCalls.getDataset = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getDataset(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.financialservices.v1.IDataset|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDataset with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getDataset = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getDataset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDataset with closed client', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getDataset(request), expectedError);
+        });
+    });
+
+    describe('getModel', () => {
+        it('invokes getModel without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.Model()
+            );
+            client.innerApiCalls.getModel = stubSimpleCall(expectedResponse);
+            const [response] = await client.getModel(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getModel without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.Model()
+            );
+            client.innerApiCalls.getModel = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getModel(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.financialservices.v1.IModel|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getModel with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getModel = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getModel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getModel with closed client', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getModel(request), expectedError);
+        });
+    });
+
+    describe('getEngineConfig', () => {
+        it('invokes getEngineConfig without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetEngineConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetEngineConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.EngineConfig()
+            );
+            client.innerApiCalls.getEngineConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getEngineConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEngineConfig without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetEngineConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetEngineConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.EngineConfig()
+            );
+            client.innerApiCalls.getEngineConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getEngineConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.financialservices.v1.IEngineConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEngineConfig with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetEngineConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetEngineConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getEngineConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getEngineConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEngineConfig with closed client', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetEngineConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetEngineConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getEngineConfig(request), expectedError);
+        });
+    });
+
+    describe('getEngineVersion', () => {
+        it('invokes getEngineVersion without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetEngineVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetEngineVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.EngineVersion()
+            );
+            client.innerApiCalls.getEngineVersion = stubSimpleCall(expectedResponse);
+            const [response] = await client.getEngineVersion(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEngineVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEngineVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEngineVersion without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetEngineVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetEngineVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.EngineVersion()
+            );
+            client.innerApiCalls.getEngineVersion = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getEngineVersion(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.financialservices.v1.IEngineVersion|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEngineVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEngineVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEngineVersion with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetEngineVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetEngineVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getEngineVersion = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getEngineVersion(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getEngineVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEngineVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEngineVersion with closed client', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetEngineVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetEngineVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getEngineVersion(request), expectedError);
+        });
+    });
+
+    describe('getPredictionResult', () => {
+        it('invokes getPredictionResult without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetPredictionResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetPredictionResultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.PredictionResult()
+            );
+            client.innerApiCalls.getPredictionResult = stubSimpleCall(expectedResponse);
+            const [response] = await client.getPredictionResult(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPredictionResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPredictionResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPredictionResult without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetPredictionResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetPredictionResultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.PredictionResult()
+            );
+            client.innerApiCalls.getPredictionResult = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getPredictionResult(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.financialservices.v1.IPredictionResult|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPredictionResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPredictionResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPredictionResult with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetPredictionResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetPredictionResultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getPredictionResult = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getPredictionResult(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getPredictionResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPredictionResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPredictionResult with closed client', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetPredictionResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetPredictionResultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getPredictionResult(request), expectedError);
+        });
+    });
+
+    describe('getBacktestResult', () => {
+        it('invokes getBacktestResult without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetBacktestResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetBacktestResultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.BacktestResult()
+            );
+            client.innerApiCalls.getBacktestResult = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBacktestResult(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBacktestResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBacktestResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBacktestResult without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetBacktestResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetBacktestResultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.BacktestResult()
+            );
+            client.innerApiCalls.getBacktestResult = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBacktestResult(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.financialservices.v1.IBacktestResult|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBacktestResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBacktestResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBacktestResult with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetBacktestResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetBacktestResultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBacktestResult = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBacktestResult(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBacktestResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBacktestResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBacktestResult with closed client', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.GetBacktestResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.GetBacktestResultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBacktestResult(request), expectedError);
+        });
+    });
+
+    describe('createInstance', () => {
+        it('invokes createInstance without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateInstanceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createInstance = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createInstance(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createInstance without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateInstanceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createInstance = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createInstance(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createInstance with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateInstanceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createInstance = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createInstance with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateInstanceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createInstance = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createInstance(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateInstanceProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateInstanceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateInstanceProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateInstanceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateInstance', () => {
+        it('invokes updateInstance without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateInstanceRequest()
+            );
+            request.instance ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateInstanceRequest', ['instance', 'name']);
+            request.instance.name = defaultValue1;
+            const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateInstance = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateInstance(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateInstance without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateInstanceRequest()
+            );
+            request.instance ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateInstanceRequest', ['instance', 'name']);
+            request.instance.name = defaultValue1;
+            const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateInstance = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateInstance(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateInstance with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateInstanceRequest()
+            );
+            request.instance ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateInstanceRequest', ['instance', 'name']);
+            request.instance.name = defaultValue1;
+            const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateInstance = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateInstance with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateInstanceRequest()
+            );
+            request.instance ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateInstanceRequest', ['instance', 'name']);
+            request.instance.name = defaultValue1;
+            const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateInstance = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateInstance(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateInstanceProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateInstanceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateInstanceProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateInstanceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteInstance', () => {
+        it('invokes deleteInstance without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteInstance = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteInstance(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteInstance without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteInstance = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteInstance(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteInstance with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteInstance = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteInstance with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteInstance = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteInstance(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteInstanceProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteInstanceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteInstanceProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteInstanceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('importRegisteredParties', () => {
+        it('invokes importRegisteredParties without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ImportRegisteredPartiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ImportRegisteredPartiesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.importRegisteredParties = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.importRegisteredParties(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.importRegisteredParties as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importRegisteredParties as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes importRegisteredParties without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ImportRegisteredPartiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ImportRegisteredPartiesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.importRegisteredParties = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.importRegisteredParties(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.importRegisteredParties as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importRegisteredParties as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes importRegisteredParties with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ImportRegisteredPartiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ImportRegisteredPartiesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.importRegisteredParties = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.importRegisteredParties(request), expectedError);
+            const actualRequest = (client.innerApiCalls.importRegisteredParties as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importRegisteredParties as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes importRegisteredParties with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ImportRegisteredPartiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ImportRegisteredPartiesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.importRegisteredParties = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.importRegisteredParties(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.importRegisteredParties as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importRegisteredParties as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkImportRegisteredPartiesProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkImportRegisteredPartiesProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkImportRegisteredPartiesProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkImportRegisteredPartiesProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('exportRegisteredParties', () => {
+        it('invokes exportRegisteredParties without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportRegisteredPartiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportRegisteredPartiesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportRegisteredParties = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.exportRegisteredParties(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportRegisteredParties as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportRegisteredParties as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportRegisteredParties without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportRegisteredPartiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportRegisteredPartiesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportRegisteredParties = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.exportRegisteredParties(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportRegisteredParties as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportRegisteredParties as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportRegisteredParties with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportRegisteredPartiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportRegisteredPartiesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportRegisteredParties = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.exportRegisteredParties(request), expectedError);
+            const actualRequest = (client.innerApiCalls.exportRegisteredParties as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportRegisteredParties as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportRegisteredParties with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportRegisteredPartiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportRegisteredPartiesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportRegisteredParties = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.exportRegisteredParties(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.exportRegisteredParties as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportRegisteredParties as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkExportRegisteredPartiesProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkExportRegisteredPartiesProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkExportRegisteredPartiesProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkExportRegisteredPartiesProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createDataset', () => {
+        it('invokes createDataset without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateDatasetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createDataset = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createDataset(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDataset without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateDatasetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createDataset = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createDataset(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDataset with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateDatasetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createDataset = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createDataset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDataset with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateDatasetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createDataset = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createDataset(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateDatasetProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateDatasetProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateDatasetProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateDatasetProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateDataset', () => {
+        it('invokes updateDataset without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateDatasetRequest()
+            );
+            request.dataset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateDatasetRequest', ['dataset', 'name']);
+            request.dataset.name = defaultValue1;
+            const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateDataset = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateDataset(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDataset without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateDatasetRequest()
+            );
+            request.dataset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateDatasetRequest', ['dataset', 'name']);
+            request.dataset.name = defaultValue1;
+            const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateDataset = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateDataset(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDataset with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateDatasetRequest()
+            );
+            request.dataset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateDatasetRequest', ['dataset', 'name']);
+            request.dataset.name = defaultValue1;
+            const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateDataset = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateDataset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDataset with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateDatasetRequest()
+            );
+            request.dataset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateDatasetRequest', ['dataset', 'name']);
+            request.dataset.name = defaultValue1;
+            const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateDataset = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateDataset(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateDatasetProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateDatasetProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateDatasetProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateDatasetProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteDataset', () => {
+        it('invokes deleteDataset without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteDataset = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteDataset(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDataset without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteDataset = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteDataset(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDataset with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteDataset = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteDataset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDataset with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteDataset = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteDataset(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteDatasetProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteDatasetProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteDatasetProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteDatasetProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createModel', () => {
+        it('invokes createModel without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateModelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createModel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createModel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createModel without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateModelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createModel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createModel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createModel with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateModelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createModel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createModel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createModel with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateModelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createModel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createModel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateModelProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateModelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateModelProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateModelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateModel', () => {
+        it('invokes updateModel without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateModelRequest()
+            );
+            request.model ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateModelRequest', ['model', 'name']);
+            request.model.name = defaultValue1;
+            const expectedHeaderRequestParams = `model.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateModel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateModel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateModel without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateModelRequest()
+            );
+            request.model ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateModelRequest', ['model', 'name']);
+            request.model.name = defaultValue1;
+            const expectedHeaderRequestParams = `model.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateModel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateModel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateModel with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateModelRequest()
+            );
+            request.model ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateModelRequest', ['model', 'name']);
+            request.model.name = defaultValue1;
+            const expectedHeaderRequestParams = `model.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateModel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateModel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateModel with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateModelRequest()
+            );
+            request.model ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateModelRequest', ['model', 'name']);
+            request.model.name = defaultValue1;
+            const expectedHeaderRequestParams = `model.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateModel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateModel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateModelProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateModelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateModelProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateModelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('exportModelMetadata', () => {
+        it('invokes exportModelMetadata without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportModelMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportModelMetadataRequest', ['model']);
+            request.model = defaultValue1;
+            const expectedHeaderRequestParams = `model=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportModelMetadata = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.exportModelMetadata(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportModelMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportModelMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportModelMetadata without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportModelMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportModelMetadataRequest', ['model']);
+            request.model = defaultValue1;
+            const expectedHeaderRequestParams = `model=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportModelMetadata = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.exportModelMetadata(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IExportModelMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IExportModelMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportModelMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportModelMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportModelMetadata with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportModelMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportModelMetadataRequest', ['model']);
+            request.model = defaultValue1;
+            const expectedHeaderRequestParams = `model=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportModelMetadata = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.exportModelMetadata(request), expectedError);
+            const actualRequest = (client.innerApiCalls.exportModelMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportModelMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportModelMetadata with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportModelMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportModelMetadataRequest', ['model']);
+            request.model = defaultValue1;
+            const expectedHeaderRequestParams = `model=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportModelMetadata = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.exportModelMetadata(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.exportModelMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportModelMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkExportModelMetadataProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkExportModelMetadataProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkExportModelMetadataProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkExportModelMetadataProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteModel', () => {
+        it('invokes deleteModel without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteModel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteModel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteModel without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteModel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteModel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteModel with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteModel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteModel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteModel with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteModel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteModel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteModelProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteModelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteModelProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteModelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createEngineConfig', () => {
+        it('invokes createEngineConfig without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateEngineConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateEngineConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createEngineConfig = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createEngineConfig(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEngineConfig without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateEngineConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateEngineConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createEngineConfig = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createEngineConfig(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEngineConfig with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateEngineConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateEngineConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createEngineConfig = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createEngineConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEngineConfig with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateEngineConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateEngineConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createEngineConfig = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createEngineConfig(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateEngineConfigProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateEngineConfigProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateEngineConfigProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateEngineConfigProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateEngineConfig', () => {
+        it('invokes updateEngineConfig without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateEngineConfigRequest()
+            );
+            request.engineConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateEngineConfigRequest', ['engineConfig', 'name']);
+            request.engineConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `engine_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateEngineConfig = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateEngineConfig(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEngineConfig without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateEngineConfigRequest()
+            );
+            request.engineConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateEngineConfigRequest', ['engineConfig', 'name']);
+            request.engineConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `engine_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateEngineConfig = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateEngineConfig(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEngineConfig with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateEngineConfigRequest()
+            );
+            request.engineConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateEngineConfigRequest', ['engineConfig', 'name']);
+            request.engineConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `engine_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateEngineConfig = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateEngineConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEngineConfig with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateEngineConfigRequest()
+            );
+            request.engineConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateEngineConfigRequest', ['engineConfig', 'name']);
+            request.engineConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `engine_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateEngineConfig = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateEngineConfig(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateEngineConfigProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateEngineConfigProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateEngineConfigProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateEngineConfigProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('exportEngineConfigMetadata', () => {
+        it('invokes exportEngineConfigMetadata without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportEngineConfigMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportEngineConfigMetadataRequest', ['engineConfig']);
+            request.engineConfig = defaultValue1;
+            const expectedHeaderRequestParams = `engine_config=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportEngineConfigMetadata = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.exportEngineConfigMetadata(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportEngineConfigMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportEngineConfigMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportEngineConfigMetadata without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportEngineConfigMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportEngineConfigMetadataRequest', ['engineConfig']);
+            request.engineConfig = defaultValue1;
+            const expectedHeaderRequestParams = `engine_config=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportEngineConfigMetadata = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.exportEngineConfigMetadata(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportEngineConfigMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportEngineConfigMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportEngineConfigMetadata with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportEngineConfigMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportEngineConfigMetadataRequest', ['engineConfig']);
+            request.engineConfig = defaultValue1;
+            const expectedHeaderRequestParams = `engine_config=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportEngineConfigMetadata = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.exportEngineConfigMetadata(request), expectedError);
+            const actualRequest = (client.innerApiCalls.exportEngineConfigMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportEngineConfigMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportEngineConfigMetadata with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportEngineConfigMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportEngineConfigMetadataRequest', ['engineConfig']);
+            request.engineConfig = defaultValue1;
+            const expectedHeaderRequestParams = `engine_config=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportEngineConfigMetadata = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.exportEngineConfigMetadata(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.exportEngineConfigMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportEngineConfigMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkExportEngineConfigMetadataProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkExportEngineConfigMetadataProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkExportEngineConfigMetadataProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkExportEngineConfigMetadataProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteEngineConfig', () => {
+        it('invokes deleteEngineConfig without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteEngineConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteEngineConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteEngineConfig = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteEngineConfig(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEngineConfig without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteEngineConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteEngineConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteEngineConfig = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteEngineConfig(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEngineConfig with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteEngineConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteEngineConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteEngineConfig = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteEngineConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEngineConfig with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteEngineConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteEngineConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteEngineConfig = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteEngineConfig(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteEngineConfigProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteEngineConfigProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteEngineConfigProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteEngineConfigProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createPredictionResult', () => {
+        it('invokes createPredictionResult without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreatePredictionResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreatePredictionResultRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createPredictionResult = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createPredictionResult(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPredictionResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPredictionResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPredictionResult without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreatePredictionResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreatePredictionResultRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createPredictionResult = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createPredictionResult(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPredictionResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPredictionResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPredictionResult with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreatePredictionResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreatePredictionResultRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPredictionResult = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createPredictionResult(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createPredictionResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPredictionResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPredictionResult with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreatePredictionResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreatePredictionResultRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPredictionResult = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createPredictionResult(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createPredictionResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPredictionResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreatePredictionResultProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreatePredictionResultProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreatePredictionResultProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreatePredictionResultProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updatePredictionResult', () => {
+        it('invokes updatePredictionResult without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdatePredictionResultRequest()
+            );
+            request.predictionResult ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdatePredictionResultRequest', ['predictionResult', 'name']);
+            request.predictionResult.name = defaultValue1;
+            const expectedHeaderRequestParams = `prediction_result.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updatePredictionResult = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updatePredictionResult(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePredictionResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePredictionResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePredictionResult without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdatePredictionResultRequest()
+            );
+            request.predictionResult ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdatePredictionResultRequest', ['predictionResult', 'name']);
+            request.predictionResult.name = defaultValue1;
+            const expectedHeaderRequestParams = `prediction_result.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updatePredictionResult = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updatePredictionResult(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePredictionResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePredictionResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePredictionResult with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdatePredictionResultRequest()
+            );
+            request.predictionResult ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdatePredictionResultRequest', ['predictionResult', 'name']);
+            request.predictionResult.name = defaultValue1;
+            const expectedHeaderRequestParams = `prediction_result.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updatePredictionResult = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updatePredictionResult(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updatePredictionResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePredictionResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePredictionResult with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdatePredictionResultRequest()
+            );
+            request.predictionResult ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdatePredictionResultRequest', ['predictionResult', 'name']);
+            request.predictionResult.name = defaultValue1;
+            const expectedHeaderRequestParams = `prediction_result.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updatePredictionResult = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updatePredictionResult(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updatePredictionResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePredictionResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdatePredictionResultProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdatePredictionResultProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdatePredictionResultProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdatePredictionResultProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('exportPredictionResultMetadata', () => {
+        it('invokes exportPredictionResultMetadata without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportPredictionResultMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportPredictionResultMetadataRequest', ['predictionResult']);
+            request.predictionResult = defaultValue1;
+            const expectedHeaderRequestParams = `prediction_result=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportPredictionResultMetadata = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.exportPredictionResultMetadata(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportPredictionResultMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportPredictionResultMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportPredictionResultMetadata without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportPredictionResultMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportPredictionResultMetadataRequest', ['predictionResult']);
+            request.predictionResult = defaultValue1;
+            const expectedHeaderRequestParams = `prediction_result=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportPredictionResultMetadata = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.exportPredictionResultMetadata(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportPredictionResultMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportPredictionResultMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportPredictionResultMetadata with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportPredictionResultMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportPredictionResultMetadataRequest', ['predictionResult']);
+            request.predictionResult = defaultValue1;
+            const expectedHeaderRequestParams = `prediction_result=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportPredictionResultMetadata = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.exportPredictionResultMetadata(request), expectedError);
+            const actualRequest = (client.innerApiCalls.exportPredictionResultMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportPredictionResultMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportPredictionResultMetadata with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportPredictionResultMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportPredictionResultMetadataRequest', ['predictionResult']);
+            request.predictionResult = defaultValue1;
+            const expectedHeaderRequestParams = `prediction_result=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportPredictionResultMetadata = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.exportPredictionResultMetadata(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.exportPredictionResultMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportPredictionResultMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkExportPredictionResultMetadataProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkExportPredictionResultMetadataProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkExportPredictionResultMetadataProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkExportPredictionResultMetadataProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deletePredictionResult', () => {
+        it('invokes deletePredictionResult without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeletePredictionResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeletePredictionResultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deletePredictionResult = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deletePredictionResult(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePredictionResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePredictionResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePredictionResult without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeletePredictionResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeletePredictionResultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deletePredictionResult = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deletePredictionResult(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePredictionResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePredictionResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePredictionResult with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeletePredictionResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeletePredictionResultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deletePredictionResult = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deletePredictionResult(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deletePredictionResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePredictionResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePredictionResult with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeletePredictionResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeletePredictionResultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deletePredictionResult = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deletePredictionResult(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deletePredictionResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePredictionResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeletePredictionResultProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeletePredictionResultProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeletePredictionResultProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeletePredictionResultProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createBacktestResult', () => {
+        it('invokes createBacktestResult without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateBacktestResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateBacktestResultRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createBacktestResult = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createBacktestResult(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBacktestResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBacktestResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBacktestResult without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateBacktestResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateBacktestResultRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createBacktestResult = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createBacktestResult(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBacktestResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBacktestResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBacktestResult with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateBacktestResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateBacktestResultRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBacktestResult = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createBacktestResult(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createBacktestResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBacktestResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBacktestResult with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.CreateBacktestResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.CreateBacktestResultRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBacktestResult = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createBacktestResult(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createBacktestResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBacktestResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateBacktestResultProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateBacktestResultProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateBacktestResultProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateBacktestResultProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateBacktestResult', () => {
+        it('invokes updateBacktestResult without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateBacktestResultRequest()
+            );
+            request.backtestResult ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateBacktestResultRequest', ['backtestResult', 'name']);
+            request.backtestResult.name = defaultValue1;
+            const expectedHeaderRequestParams = `backtest_result.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateBacktestResult = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateBacktestResult(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBacktestResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBacktestResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBacktestResult without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateBacktestResultRequest()
+            );
+            request.backtestResult ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateBacktestResultRequest', ['backtestResult', 'name']);
+            request.backtestResult.name = defaultValue1;
+            const expectedHeaderRequestParams = `backtest_result.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateBacktestResult = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateBacktestResult(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBacktestResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBacktestResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBacktestResult with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateBacktestResultRequest()
+            );
+            request.backtestResult ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateBacktestResultRequest', ['backtestResult', 'name']);
+            request.backtestResult.name = defaultValue1;
+            const expectedHeaderRequestParams = `backtest_result.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateBacktestResult = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateBacktestResult(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateBacktestResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBacktestResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBacktestResult with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.UpdateBacktestResultRequest()
+            );
+            request.backtestResult ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.UpdateBacktestResultRequest', ['backtestResult', 'name']);
+            request.backtestResult.name = defaultValue1;
+            const expectedHeaderRequestParams = `backtest_result.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateBacktestResult = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateBacktestResult(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateBacktestResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBacktestResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateBacktestResultProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateBacktestResultProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateBacktestResultProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateBacktestResultProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('exportBacktestResultMetadata', () => {
+        it('invokes exportBacktestResultMetadata without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportBacktestResultMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportBacktestResultMetadataRequest', ['backtestResult']);
+            request.backtestResult = defaultValue1;
+            const expectedHeaderRequestParams = `backtest_result=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportBacktestResultMetadata = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.exportBacktestResultMetadata(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportBacktestResultMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportBacktestResultMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportBacktestResultMetadata without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportBacktestResultMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportBacktestResultMetadataRequest', ['backtestResult']);
+            request.backtestResult = defaultValue1;
+            const expectedHeaderRequestParams = `backtest_result=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportBacktestResultMetadata = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.exportBacktestResultMetadata(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportBacktestResultMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportBacktestResultMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportBacktestResultMetadata with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportBacktestResultMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportBacktestResultMetadataRequest', ['backtestResult']);
+            request.backtestResult = defaultValue1;
+            const expectedHeaderRequestParams = `backtest_result=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportBacktestResultMetadata = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.exportBacktestResultMetadata(request), expectedError);
+            const actualRequest = (client.innerApiCalls.exportBacktestResultMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportBacktestResultMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportBacktestResultMetadata with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ExportBacktestResultMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ExportBacktestResultMetadataRequest', ['backtestResult']);
+            request.backtestResult = defaultValue1;
+            const expectedHeaderRequestParams = `backtest_result=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportBacktestResultMetadata = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.exportBacktestResultMetadata(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.exportBacktestResultMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportBacktestResultMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkExportBacktestResultMetadataProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkExportBacktestResultMetadataProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkExportBacktestResultMetadataProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkExportBacktestResultMetadataProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteBacktestResult', () => {
+        it('invokes deleteBacktestResult without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteBacktestResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteBacktestResultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteBacktestResult = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteBacktestResult(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBacktestResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBacktestResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBacktestResult without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteBacktestResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteBacktestResultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteBacktestResult = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteBacktestResult(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBacktestResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBacktestResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBacktestResult with call error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteBacktestResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteBacktestResultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBacktestResult = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteBacktestResult(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBacktestResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBacktestResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBacktestResult with LRO error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.DeleteBacktestResultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.DeleteBacktestResultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBacktestResult = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteBacktestResult(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBacktestResult as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBacktestResult as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteBacktestResultProgress without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteBacktestResultProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteBacktestResultProgress with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteBacktestResultProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listInstances', () => {
+        it('invokes listInstances without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Instance()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Instance()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Instance()),
+            ];
+            client.innerApiCalls.listInstances = stubSimpleCall(expectedResponse);
+            const [response] = await client.listInstances(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listInstances without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Instance()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Instance()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Instance()),
+            ];
+            client.innerApiCalls.listInstances = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listInstances(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.financialservices.v1.IInstance[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listInstances with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listInstances = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listInstances(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listInstancesStream without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Instance()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Instance()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Instance()),
+            ];
+            client.descriptors.page.listInstances.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listInstancesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.financialservices.v1.Instance[] = [];
+                stream.on('data', (response: protos.google.cloud.financialservices.v1.Instance) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listInstances.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listInstances, request));
+            assert(
+                (client.descriptors.page.listInstances.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listInstancesStream with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listInstances.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listInstancesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.financialservices.v1.Instance[] = [];
+                stream.on('data', (response: protos.google.cloud.financialservices.v1.Instance) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listInstances.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listInstances, request));
+            assert(
+                (client.descriptors.page.listInstances.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listInstances without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Instance()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Instance()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Instance()),
+            ];
+            client.descriptors.page.listInstances.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.financialservices.v1.IInstance[] = [];
+            const iterable = client.listInstancesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listModels with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listModels = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listModels(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listModelsStream without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Model()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Model()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Model()
-        ),
-      ];
-      client.descriptors.page.listModels.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listModelsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.financialservices.v1.Model[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.financialservices.v1.Model) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listInstances.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listInstances.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listInstances with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listInstances.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listInstancesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.financialservices.v1.IInstance[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listInstances.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listInstances.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listModels.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listModels, request)
-      );
-      assert(
-        (client.descriptors.page.listModels.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listModelsStream with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listModels.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listModelsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.financialservices.v1.Model[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.financialservices.v1.Model) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listDatasets', () => {
+        it('invokes listDatasets without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Dataset()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Dataset()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Dataset()),
+            ];
+            client.innerApiCalls.listDatasets = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDatasets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listDatasets without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Dataset()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Dataset()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Dataset()),
+            ];
+            client.innerApiCalls.listDatasets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDatasets(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.financialservices.v1.IDataset[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listModels.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listModels, request)
-      );
-      assert(
-        (client.descriptors.page.listModels.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listModels without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Model()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Model()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.Model()
-        ),
-      ];
-      client.descriptors.page.listModels.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.financialservices.v1.IModel[] = [];
-      const iterable = client.listModelsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listModels.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listModels.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listDatasets with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDatasets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDatasets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listModels with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listModels.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listModelsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.financialservices.v1.IModel[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listModels.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listModels.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listDatasetsStream without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Dataset()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Dataset()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Dataset()),
+            ];
+            client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDatasetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.financialservices.v1.Dataset[] = [];
+                stream.on('data', (response: protos.google.cloud.financialservices.v1.Dataset) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDatasets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDatasets, request));
+            assert(
+                (client.descriptors.page.listDatasets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listEngineConfigs', () => {
-    it('invokes listEngineConfigs without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListEngineConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListEngineConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineConfig()
-        ),
-      ];
-      client.innerApiCalls.listEngineConfigs = stubSimpleCall(expectedResponse);
-      const [response] = await client.listEngineConfigs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEngineConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEngineConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listDatasetsStream with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDatasetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.financialservices.v1.Dataset[] = [];
+                stream.on('data', (response: protos.google.cloud.financialservices.v1.Dataset) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDatasets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDatasets, request));
+            assert(
+                (client.descriptors.page.listDatasets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listEngineConfigs without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListEngineConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListEngineConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineConfig()
-        ),
-      ];
-      client.innerApiCalls.listEngineConfigs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listEngineConfigs(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.financialservices.v1.IEngineConfig[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listDatasets without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Dataset()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Dataset()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Dataset()),
+            ];
+            client.descriptors.page.listDatasets.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.financialservices.v1.IDataset[] = [];
+            const iterable = client.listDatasetsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEngineConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEngineConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEngineConfigs with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListEngineConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListEngineConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listEngineConfigs = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listEngineConfigs(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listEngineConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEngineConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEngineConfigsStream without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListEngineConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListEngineConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineConfig()
-        ),
-      ];
-      client.descriptors.page.listEngineConfigs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listEngineConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.financialservices.v1.EngineConfig[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.financialservices.v1.EngineConfig) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listDatasets with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDatasets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDatasetsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.financialservices.v1.IDataset[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listEngineConfigs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEngineConfigs, request)
-      );
-      assert(
-        (client.descriptors.page.listEngineConfigs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listEngineConfigsStream with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListEngineConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListEngineConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEngineConfigs.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listEngineConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.financialservices.v1.EngineConfig[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.financialservices.v1.EngineConfig) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listModels', () => {
+        it('invokes listModels without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListModelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListModelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Model()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Model()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Model()),
+            ];
+            client.innerApiCalls.listModels = stubSimpleCall(expectedResponse);
+            const [response] = await client.listModels(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listModels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listModels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listModels without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListModelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListModelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Model()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Model()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Model()),
+            ];
+            client.innerApiCalls.listModels = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listModels(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.financialservices.v1.IModel[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listModels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listModels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listEngineConfigs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEngineConfigs, request)
-      );
-      assert(
-        (client.descriptors.page.listEngineConfigs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listEngineConfigs without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListEngineConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListEngineConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineConfig()
-        ),
-      ];
-      client.descriptors.page.listEngineConfigs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.financialservices.v1.IEngineConfig[] =
-        [];
-      const iterable = client.listEngineConfigsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEngineConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEngineConfigs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listModels with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListModelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListModelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listModels = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listModels(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listModels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listModels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listEngineConfigs with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListEngineConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListEngineConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEngineConfigs.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listEngineConfigsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.financialservices.v1.IEngineConfig[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEngineConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEngineConfigs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listModelsStream without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListModelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListModelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Model()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Model()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Model()),
+            ];
+            client.descriptors.page.listModels.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listModelsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.financialservices.v1.Model[] = [];
+                stream.on('data', (response: protos.google.cloud.financialservices.v1.Model) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listModels.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listModels, request));
+            assert(
+                (client.descriptors.page.listModels.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listEngineVersions', () => {
-    it('invokes listEngineVersions without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListEngineVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListEngineVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineVersion()
-        ),
-      ];
-      client.innerApiCalls.listEngineVersions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listEngineVersions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEngineVersions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEngineVersions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listModelsStream with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListModelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListModelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listModels.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listModelsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.financialservices.v1.Model[] = [];
+                stream.on('data', (response: protos.google.cloud.financialservices.v1.Model) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listModels.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listModels, request));
+            assert(
+                (client.descriptors.page.listModels.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listEngineVersions without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListEngineVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListEngineVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineVersion()
-        ),
-      ];
-      client.innerApiCalls.listEngineVersions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listEngineVersions(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.financialservices.v1.IEngineVersion[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listModels without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListModelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListModelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Model()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Model()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.Model()),
+            ];
+            client.descriptors.page.listModels.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.financialservices.v1.IModel[] = [];
+            const iterable = client.listModelsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEngineVersions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEngineVersions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEngineVersions with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListEngineVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListEngineVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listEngineVersions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listEngineVersions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listEngineVersions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEngineVersions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEngineVersionsStream without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListEngineVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListEngineVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineVersion()
-        ),
-      ];
-      client.descriptors.page.listEngineVersions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listEngineVersionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.financialservices.v1.EngineVersion[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.financialservices.v1.EngineVersion
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listModels.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listModels.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listModels with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListModelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListModelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listModels.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listModelsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.financialservices.v1.IModel[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listModels.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listModels.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listEngineVersions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEngineVersions, request)
-      );
-      assert(
-        (client.descriptors.page.listEngineVersions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listEngineVersionsStream with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListEngineVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListEngineVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEngineVersions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listEngineVersionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.financialservices.v1.EngineVersion[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.financialservices.v1.EngineVersion
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listEngineConfigs', () => {
+        it('invokes listEngineConfigs without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListEngineConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListEngineConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineConfig()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineConfig()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineConfig()),
+            ];
+            client.innerApiCalls.listEngineConfigs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listEngineConfigs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEngineConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEngineConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listEngineConfigs without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListEngineConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListEngineConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineConfig()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineConfig()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineConfig()),
+            ];
+            client.innerApiCalls.listEngineConfigs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listEngineConfigs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.financialservices.v1.IEngineConfig[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEngineConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEngineConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listEngineVersions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEngineVersions, request)
-      );
-      assert(
-        (client.descriptors.page.listEngineVersions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listEngineVersions without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListEngineVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListEngineVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.EngineVersion()
-        ),
-      ];
-      client.descriptors.page.listEngineVersions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.financialservices.v1.IEngineVersion[] =
-        [];
-      const iterable = client.listEngineVersionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEngineVersions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEngineVersions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listEngineConfigs with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListEngineConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListEngineConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listEngineConfigs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listEngineConfigs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listEngineConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEngineConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listEngineVersions with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListEngineVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListEngineVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEngineVersions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listEngineVersionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.financialservices.v1.IEngineVersion[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEngineVersions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEngineVersions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listEngineConfigsStream without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListEngineConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListEngineConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineConfig()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineConfig()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineConfig()),
+            ];
+            client.descriptors.page.listEngineConfigs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listEngineConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.financialservices.v1.EngineConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.financialservices.v1.EngineConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listEngineConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listEngineConfigs, request));
+            assert(
+                (client.descriptors.page.listEngineConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listPredictionResults', () => {
-    it('invokes listPredictionResults without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListPredictionResultsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListPredictionResultsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.PredictionResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.PredictionResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.PredictionResult()
-        ),
-      ];
-      client.innerApiCalls.listPredictionResults =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listPredictionResults(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPredictionResults as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPredictionResults as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listEngineConfigsStream with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListEngineConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListEngineConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listEngineConfigs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listEngineConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.financialservices.v1.EngineConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.financialservices.v1.EngineConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listEngineConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listEngineConfigs, request));
+            assert(
+                (client.descriptors.page.listEngineConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listPredictionResults without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListPredictionResultsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListPredictionResultsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.PredictionResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.PredictionResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.PredictionResult()
-        ),
-      ];
-      client.innerApiCalls.listPredictionResults =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listPredictionResults(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.financialservices.v1.IPredictionResult[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listEngineConfigs without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListEngineConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListEngineConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineConfig()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineConfig()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineConfig()),
+            ];
+            client.descriptors.page.listEngineConfigs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.financialservices.v1.IEngineConfig[] = [];
+            const iterable = client.listEngineConfigsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPredictionResults as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPredictionResults as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPredictionResults with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListPredictionResultsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListPredictionResultsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listPredictionResults = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listPredictionResults(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listPredictionResults as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPredictionResults as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPredictionResultsStream without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListPredictionResultsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListPredictionResultsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.PredictionResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.PredictionResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.PredictionResult()
-        ),
-      ];
-      client.descriptors.page.listPredictionResults.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listPredictionResultsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.financialservices.v1.PredictionResult[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.financialservices.v1.PredictionResult
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listEngineConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listEngineConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listEngineConfigs with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListEngineConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListEngineConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listEngineConfigs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listEngineConfigsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.financialservices.v1.IEngineConfig[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listEngineConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listEngineConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listPredictionResults
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPredictionResults, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listPredictionResults
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
 
-    it('invokes listPredictionResultsStream with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListPredictionResultsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListPredictionResultsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPredictionResults.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listPredictionResultsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.financialservices.v1.PredictionResult[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.financialservices.v1.PredictionResult
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listEngineVersions', () => {
+        it('invokes listEngineVersions without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListEngineVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListEngineVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineVersion()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineVersion()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineVersion()),
+            ];
+            client.innerApiCalls.listEngineVersions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listEngineVersions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEngineVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEngineVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listEngineVersions without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListEngineVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListEngineVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineVersion()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineVersion()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineVersion()),
+            ];
+            client.innerApiCalls.listEngineVersions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listEngineVersions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.financialservices.v1.IEngineVersion[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEngineVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEngineVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listPredictionResults
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPredictionResults, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listPredictionResults
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listPredictionResults without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListPredictionResultsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListPredictionResultsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.PredictionResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.PredictionResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.PredictionResult()
-        ),
-      ];
-      client.descriptors.page.listPredictionResults.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.financialservices.v1.IPredictionResult[] =
-        [];
-      const iterable = client.listPredictionResultsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPredictionResults
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listPredictionResults
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        it('invokes listEngineVersions with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListEngineVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListEngineVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listEngineVersions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listEngineVersions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listEngineVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEngineVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listPredictionResults with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListPredictionResultsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListPredictionResultsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPredictionResults.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listPredictionResultsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.financialservices.v1.IPredictionResult[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPredictionResults
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listPredictionResults
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('invokes listEngineVersionsStream without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListEngineVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListEngineVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineVersion()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineVersion()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineVersion()),
+            ];
+            client.descriptors.page.listEngineVersions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listEngineVersionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.financialservices.v1.EngineVersion[] = [];
+                stream.on('data', (response: protos.google.cloud.financialservices.v1.EngineVersion) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listEngineVersions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listEngineVersions, request));
+            assert(
+                (client.descriptors.page.listEngineVersions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listBacktestResults', () => {
-    it('invokes listBacktestResults without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListBacktestResultsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListBacktestResultsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.BacktestResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.BacktestResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.BacktestResult()
-        ),
-      ];
-      client.innerApiCalls.listBacktestResults =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listBacktestResults(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBacktestResults as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBacktestResults as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listEngineVersionsStream with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListEngineVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListEngineVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listEngineVersions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listEngineVersionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.financialservices.v1.EngineVersion[] = [];
+                stream.on('data', (response: protos.google.cloud.financialservices.v1.EngineVersion) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listEngineVersions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listEngineVersions, request));
+            assert(
+                (client.descriptors.page.listEngineVersions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listBacktestResults without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListBacktestResultsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListBacktestResultsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.BacktestResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.BacktestResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.BacktestResult()
-        ),
-      ];
-      client.innerApiCalls.listBacktestResults =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listBacktestResults(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.financialservices.v1.IBacktestResult[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listEngineVersions without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListEngineVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListEngineVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineVersion()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineVersion()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.EngineVersion()),
+            ];
+            client.descriptors.page.listEngineVersions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.financialservices.v1.IEngineVersion[] = [];
+            const iterable = client.listEngineVersionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBacktestResults as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBacktestResults as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBacktestResults with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListBacktestResultsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListBacktestResultsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listBacktestResults = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listBacktestResults(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listBacktestResults as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBacktestResults as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBacktestResultsStream without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListBacktestResultsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListBacktestResultsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.BacktestResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.BacktestResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.BacktestResult()
-        ),
-      ];
-      client.descriptors.page.listBacktestResults.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listBacktestResultsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.financialservices.v1.BacktestResult[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.financialservices.v1.BacktestResult
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listEngineVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listEngineVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listEngineVersions with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListEngineVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListEngineVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listEngineVersions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listEngineVersionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.financialservices.v1.IEngineVersion[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listEngineVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listEngineVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listBacktestResults.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBacktestResults, request)
-      );
-      assert(
-        (client.descriptors.page.listBacktestResults.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listBacktestResultsStream with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListBacktestResultsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListBacktestResultsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBacktestResults.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listBacktestResultsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.financialservices.v1.BacktestResult[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.financialservices.v1.BacktestResult
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listPredictionResults', () => {
+        it('invokes listPredictionResults without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListPredictionResultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListPredictionResultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.PredictionResult()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.PredictionResult()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.PredictionResult()),
+            ];
+            client.innerApiCalls.listPredictionResults = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPredictionResults(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPredictionResults as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPredictionResults as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listPredictionResults without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListPredictionResultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListPredictionResultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.PredictionResult()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.PredictionResult()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.PredictionResult()),
+            ];
+            client.innerApiCalls.listPredictionResults = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPredictionResults(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.financialservices.v1.IPredictionResult[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPredictionResults as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPredictionResults as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listBacktestResults.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBacktestResults, request)
-      );
-      assert(
-        (client.descriptors.page.listBacktestResults.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listBacktestResults without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListBacktestResultsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListBacktestResultsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.BacktestResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.BacktestResult()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.financialservices.v1.BacktestResult()
-        ),
-      ];
-      client.descriptors.page.listBacktestResults.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.financialservices.v1.IBacktestResult[] =
-        [];
-      const iterable = client.listBacktestResultsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBacktestResults.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBacktestResults.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listPredictionResults with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListPredictionResultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListPredictionResultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPredictionResults = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPredictionResults(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPredictionResults as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPredictionResults as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listBacktestResults with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.financialservices.v1.ListBacktestResultsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.financialservices.v1.ListBacktestResultsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBacktestResults.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listBacktestResultsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.financialservices.v1.IBacktestResult[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBacktestResults.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBacktestResults.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('invokes listPredictionResultsStream without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListPredictionResultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListPredictionResultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.PredictionResult()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.PredictionResult()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.PredictionResult()),
+            ];
+            client.descriptors.page.listPredictionResults.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPredictionResultsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.financialservices.v1.PredictionResult[] = [];
+                stream.on('data', (response: protos.google.cloud.financialservices.v1.PredictionResult) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPredictionResults.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPredictionResults, request));
+            assert(
+                (client.descriptors.page.listPredictionResults.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listPredictionResultsStream with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListPredictionResultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListPredictionResultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPredictionResults.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPredictionResultsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.financialservices.v1.PredictionResult[] = [];
+                stream.on('data', (response: protos.google.cloud.financialservices.v1.PredictionResult) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPredictionResults.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPredictionResults, request));
+            assert(
+                (client.descriptors.page.listPredictionResults.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listPredictionResults without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListPredictionResultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListPredictionResultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.PredictionResult()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.PredictionResult()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.PredictionResult()),
+            ];
+            client.descriptors.page.listPredictionResults.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.financialservices.v1.IPredictionResult[] = [];
+            const iterable = client.listPredictionResultsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPredictionResults.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPredictionResults.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listPredictionResults with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListPredictionResultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListPredictionResultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPredictionResults.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPredictionResultsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.financialservices.v1.IPredictionResult[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPredictionResults.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPredictionResults.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getLocation with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+    describe('listBacktestResults', () => {
+        it('invokes listBacktestResults without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListBacktestResultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListBacktestResultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.BacktestResult()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.BacktestResult()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.BacktestResult()),
+            ];
+            client.innerApiCalls.listBacktestResults = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBacktestResults(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBacktestResults as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBacktestResults as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBacktestResults without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListBacktestResultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListBacktestResultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.BacktestResult()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.BacktestResult()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.BacktestResult()),
+            ];
+            client.innerApiCalls.listBacktestResults = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBacktestResults(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.financialservices.v1.IBacktestResult[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBacktestResults as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBacktestResults as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBacktestResults with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListBacktestResultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListBacktestResultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBacktestResults = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBacktestResults(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBacktestResults as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBacktestResults as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBacktestResultsStream without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListBacktestResultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListBacktestResultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.BacktestResult()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.BacktestResult()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.BacktestResult()),
+            ];
+            client.descriptors.page.listBacktestResults.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listBacktestResultsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.financialservices.v1.BacktestResult[] = [];
+                stream.on('data', (response: protos.google.cloud.financialservices.v1.BacktestResult) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listBacktestResults.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBacktestResults, request));
+            assert(
+                (client.descriptors.page.listBacktestResults.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listBacktestResultsStream with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListBacktestResultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListBacktestResultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBacktestResults.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listBacktestResultsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.financialservices.v1.BacktestResult[] = [];
+                stream.on('data', (response: protos.google.cloud.financialservices.v1.BacktestResult) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listBacktestResults.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBacktestResults, request));
+            assert(
+                (client.descriptors.page.listBacktestResults.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listBacktestResults without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListBacktestResultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListBacktestResultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.BacktestResult()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.BacktestResult()),
+              generateSampleMessage(new protos.google.cloud.financialservices.v1.BacktestResult()),
+            ];
+            client.descriptors.page.listBacktestResults.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.financialservices.v1.IBacktestResult[] = [];
+            const iterable = client.listBacktestResultsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBacktestResults.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBacktestResults.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listBacktestResults with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.financialservices.v1.ListBacktestResultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.financialservices.v1.ListBacktestResultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBacktestResults.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listBacktestResultsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.financialservices.v1.IBacktestResult[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBacktestResults.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBacktestResults.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getOperation with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes cancelOperation with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new amlModule.v1.AMLClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('backtestResult', async () => {
-      const fakePath = '/rendered/path/backtestResult';
-      const expectedParameters = {
-        project_num: 'projectNumValue',
-        location: 'locationValue',
-        instance: 'instanceValue',
-        backtest_result: 'backtestResultValue',
-      };
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.backtestResultPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.backtestResultPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('backtestResultPath', () => {
-        const result = client.backtestResultPath(
-          'projectNumValue',
-          'locationValue',
-          'instanceValue',
-          'backtestResultValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.backtestResultPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectNumFromBacktestResultName', () => {
-        const result = client.matchProjectNumFromBacktestResultName(fakePath);
-        assert.strictEqual(result, 'projectNumValue');
-        assert(
-          (client.pathTemplates.backtestResultPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromBacktestResultName', () => {
-        const result = client.matchLocationFromBacktestResultName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.backtestResultPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInstanceFromBacktestResultName', () => {
-        const result = client.matchInstanceFromBacktestResultName(fakePath);
-        assert.strictEqual(result, 'instanceValue');
-        assert(
-          (client.pathTemplates.backtestResultPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBacktestResultFromBacktestResultName', () => {
-        const result =
-          client.matchBacktestResultFromBacktestResultName(fakePath);
-        assert.strictEqual(result, 'backtestResultValue');
-        assert(
-          (client.pathTemplates.backtestResultPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('dataset', async () => {
-      const fakePath = '/rendered/path/dataset';
-      const expectedParameters = {
-        project_num: 'projectNumValue',
-        location: 'locationValue',
-        instance: 'instanceValue',
-        dataset: 'datasetValue',
-      };
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.datasetPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.datasetPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('datasetPath', () => {
-        const result = client.datasetPath(
-          'projectNumValue',
-          'locationValue',
-          'instanceValue',
-          'datasetValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.datasetPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('backtestResult', async () => {
+            const fakePath = "/rendered/path/backtestResult";
+            const expectedParameters = {
+                project_num: "projectNumValue",
+                location: "locationValue",
+                instance: "instanceValue",
+                backtest_result: "backtestResultValue",
+            };
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.backtestResultPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.backtestResultPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectNumFromDatasetName', () => {
-        const result = client.matchProjectNumFromDatasetName(fakePath);
-        assert.strictEqual(result, 'projectNumValue');
-        assert(
-          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('backtestResultPath', () => {
+                const result = client.backtestResultPath("projectNumValue", "locationValue", "instanceValue", "backtestResultValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.backtestResultPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromDatasetName', () => {
-        const result = client.matchLocationFromDatasetName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectNumFromBacktestResultName', () => {
+                const result = client.matchProjectNumFromBacktestResultName(fakePath);
+                assert.strictEqual(result, "projectNumValue");
+                assert((client.pathTemplates.backtestResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchInstanceFromDatasetName', () => {
-        const result = client.matchInstanceFromDatasetName(fakePath);
-        assert.strictEqual(result, 'instanceValue');
-        assert(
-          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromBacktestResultName', () => {
+                const result = client.matchLocationFromBacktestResultName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.backtestResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchDatasetFromDatasetName', () => {
-        const result = client.matchDatasetFromDatasetName(fakePath);
-        assert.strictEqual(result, 'datasetValue');
-        assert(
-          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchInstanceFromBacktestResultName', () => {
+                const result = client.matchInstanceFromBacktestResultName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.backtestResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBacktestResultFromBacktestResultName', () => {
+                const result = client.matchBacktestResultFromBacktestResultName(fakePath);
+                assert.strictEqual(result, "backtestResultValue");
+                assert((client.pathTemplates.backtestResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dataset', async () => {
+            const fakePath = "/rendered/path/dataset";
+            const expectedParameters = {
+                project_num: "projectNumValue",
+                location: "locationValue",
+                instance: "instanceValue",
+                dataset: "datasetValue",
+            };
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.datasetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.datasetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('datasetPath', () => {
+                const result = client.datasetPath("projectNumValue", "locationValue", "instanceValue", "datasetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.datasetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectNumFromDatasetName', () => {
+                const result = client.matchProjectNumFromDatasetName(fakePath);
+                assert.strictEqual(result, "projectNumValue");
+                assert((client.pathTemplates.datasetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDatasetName', () => {
+                const result = client.matchLocationFromDatasetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.datasetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromDatasetName', () => {
+                const result = client.matchInstanceFromDatasetName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.datasetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDatasetFromDatasetName', () => {
+                const result = client.matchDatasetFromDatasetName(fakePath);
+                assert.strictEqual(result, "datasetValue");
+                assert((client.pathTemplates.datasetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('engineConfig', async () => {
+            const fakePath = "/rendered/path/engineConfig";
+            const expectedParameters = {
+                project_num: "projectNumValue",
+                location: "locationValue",
+                instance: "instanceValue",
+                engine_config: "engineConfigValue",
+            };
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.engineConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.engineConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('engineConfigPath', () => {
+                const result = client.engineConfigPath("projectNumValue", "locationValue", "instanceValue", "engineConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.engineConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectNumFromEngineConfigName', () => {
+                const result = client.matchProjectNumFromEngineConfigName(fakePath);
+                assert.strictEqual(result, "projectNumValue");
+                assert((client.pathTemplates.engineConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEngineConfigName', () => {
+                const result = client.matchLocationFromEngineConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.engineConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromEngineConfigName', () => {
+                const result = client.matchInstanceFromEngineConfigName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.engineConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEngineConfigFromEngineConfigName', () => {
+                const result = client.matchEngineConfigFromEngineConfigName(fakePath);
+                assert.strictEqual(result, "engineConfigValue");
+                assert((client.pathTemplates.engineConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('engineVersion', async () => {
+            const fakePath = "/rendered/path/engineVersion";
+            const expectedParameters = {
+                project_num: "projectNumValue",
+                location: "locationValue",
+                instance: "instanceValue",
+                engine_version: "engineVersionValue",
+            };
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.engineVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.engineVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('engineVersionPath', () => {
+                const result = client.engineVersionPath("projectNumValue", "locationValue", "instanceValue", "engineVersionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.engineVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectNumFromEngineVersionName', () => {
+                const result = client.matchProjectNumFromEngineVersionName(fakePath);
+                assert.strictEqual(result, "projectNumValue");
+                assert((client.pathTemplates.engineVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEngineVersionName', () => {
+                const result = client.matchLocationFromEngineVersionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.engineVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromEngineVersionName', () => {
+                const result = client.matchInstanceFromEngineVersionName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.engineVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEngineVersionFromEngineVersionName', () => {
+                const result = client.matchEngineVersionFromEngineVersionName(fakePath);
+                assert.strictEqual(result, "engineVersionValue");
+                assert((client.pathTemplates.engineVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('instance', async () => {
+            const fakePath = "/rendered/path/instance";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+            };
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.instancePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.instancePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('instancePath', () => {
+                const result = client.instancePath("projectValue", "locationValue", "instanceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.instancePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInstanceName', () => {
+                const result = client.matchProjectFromInstanceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromInstanceName', () => {
+                const result = client.matchLocationFromInstanceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromInstanceName', () => {
+                const result = client.matchInstanceFromInstanceName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('model', async () => {
+            const fakePath = "/rendered/path/model";
+            const expectedParameters = {
+                project_num: "projectNumValue",
+                location: "locationValue",
+                instance: "instanceValue",
+                model: "modelValue",
+            };
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.modelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.modelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('modelPath', () => {
+                const result = client.modelPath("projectNumValue", "locationValue", "instanceValue", "modelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.modelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectNumFromModelName', () => {
+                const result = client.matchProjectNumFromModelName(fakePath);
+                assert.strictEqual(result, "projectNumValue");
+                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromModelName', () => {
+                const result = client.matchLocationFromModelName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromModelName', () => {
+                const result = client.matchInstanceFromModelName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchModelFromModelName', () => {
+                const result = client.matchModelFromModelName(fakePath);
+                assert.strictEqual(result, "modelValue");
+                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('predictionResult', async () => {
+            const fakePath = "/rendered/path/predictionResult";
+            const expectedParameters = {
+                project_num: "projectNumValue",
+                location: "locationValue",
+                instance: "instanceValue",
+                prediction_result: "predictionResultValue",
+            };
+            const client = new amlModule.v1.AMLClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.predictionResultPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.predictionResultPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('predictionResultPath', () => {
+                const result = client.predictionResultPath("projectNumValue", "locationValue", "instanceValue", "predictionResultValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.predictionResultPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectNumFromPredictionResultName', () => {
+                const result = client.matchProjectNumFromPredictionResultName(fakePath);
+                assert.strictEqual(result, "projectNumValue");
+                assert((client.pathTemplates.predictionResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPredictionResultName', () => {
+                const result = client.matchLocationFromPredictionResultName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.predictionResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromPredictionResultName', () => {
+                const result = client.matchInstanceFromPredictionResultName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.predictionResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPredictionResultFromPredictionResultName', () => {
+                const result = client.matchPredictionResultFromPredictionResultName(fakePath);
+                assert.strictEqual(result, "predictionResultValue");
+                assert((client.pathTemplates.predictionResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('engineConfig', async () => {
-      const fakePath = '/rendered/path/engineConfig';
-      const expectedParameters = {
-        project_num: 'projectNumValue',
-        location: 'locationValue',
-        instance: 'instanceValue',
-        engine_config: 'engineConfigValue',
-      };
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.engineConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.engineConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('engineConfigPath', () => {
-        const result = client.engineConfigPath(
-          'projectNumValue',
-          'locationValue',
-          'instanceValue',
-          'engineConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.engineConfigPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectNumFromEngineConfigName', () => {
-        const result = client.matchProjectNumFromEngineConfigName(fakePath);
-        assert.strictEqual(result, 'projectNumValue');
-        assert(
-          (client.pathTemplates.engineConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEngineConfigName', () => {
-        const result = client.matchLocationFromEngineConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.engineConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInstanceFromEngineConfigName', () => {
-        const result = client.matchInstanceFromEngineConfigName(fakePath);
-        assert.strictEqual(result, 'instanceValue');
-        assert(
-          (client.pathTemplates.engineConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEngineConfigFromEngineConfigName', () => {
-        const result = client.matchEngineConfigFromEngineConfigName(fakePath);
-        assert.strictEqual(result, 'engineConfigValue');
-        assert(
-          (client.pathTemplates.engineConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('engineVersion', async () => {
-      const fakePath = '/rendered/path/engineVersion';
-      const expectedParameters = {
-        project_num: 'projectNumValue',
-        location: 'locationValue',
-        instance: 'instanceValue',
-        engine_version: 'engineVersionValue',
-      };
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.engineVersionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.engineVersionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('engineVersionPath', () => {
-        const result = client.engineVersionPath(
-          'projectNumValue',
-          'locationValue',
-          'instanceValue',
-          'engineVersionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.engineVersionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectNumFromEngineVersionName', () => {
-        const result = client.matchProjectNumFromEngineVersionName(fakePath);
-        assert.strictEqual(result, 'projectNumValue');
-        assert(
-          (client.pathTemplates.engineVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEngineVersionName', () => {
-        const result = client.matchLocationFromEngineVersionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.engineVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInstanceFromEngineVersionName', () => {
-        const result = client.matchInstanceFromEngineVersionName(fakePath);
-        assert.strictEqual(result, 'instanceValue');
-        assert(
-          (client.pathTemplates.engineVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEngineVersionFromEngineVersionName', () => {
-        const result = client.matchEngineVersionFromEngineVersionName(fakePath);
-        assert.strictEqual(result, 'engineVersionValue');
-        assert(
-          (client.pathTemplates.engineVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('instance', async () => {
-      const fakePath = '/rendered/path/instance';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        instance: 'instanceValue',
-      };
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.instancePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.instancePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('instancePath', () => {
-        const result = client.instancePath(
-          'projectValue',
-          'locationValue',
-          'instanceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.instancePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromInstanceName', () => {
-        const result = client.matchProjectFromInstanceName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.instancePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromInstanceName', () => {
-        const result = client.matchLocationFromInstanceName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.instancePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInstanceFromInstanceName', () => {
-        const result = client.matchInstanceFromInstanceName(fakePath);
-        assert.strictEqual(result, 'instanceValue');
-        assert(
-          (client.pathTemplates.instancePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('model', async () => {
-      const fakePath = '/rendered/path/model';
-      const expectedParameters = {
-        project_num: 'projectNumValue',
-        location: 'locationValue',
-        instance: 'instanceValue',
-        model: 'modelValue',
-      };
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.modelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.modelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('modelPath', () => {
-        const result = client.modelPath(
-          'projectNumValue',
-          'locationValue',
-          'instanceValue',
-          'modelValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.modelPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectNumFromModelName', () => {
-        const result = client.matchProjectNumFromModelName(fakePath);
-        assert.strictEqual(result, 'projectNumValue');
-        assert(
-          (client.pathTemplates.modelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromModelName', () => {
-        const result = client.matchLocationFromModelName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.modelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInstanceFromModelName', () => {
-        const result = client.matchInstanceFromModelName(fakePath);
-        assert.strictEqual(result, 'instanceValue');
-        assert(
-          (client.pathTemplates.modelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchModelFromModelName', () => {
-        const result = client.matchModelFromModelName(fakePath);
-        assert.strictEqual(result, 'modelValue');
-        assert(
-          (client.pathTemplates.modelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('predictionResult', async () => {
-      const fakePath = '/rendered/path/predictionResult';
-      const expectedParameters = {
-        project_num: 'projectNumValue',
-        location: 'locationValue',
-        instance: 'instanceValue',
-        prediction_result: 'predictionResultValue',
-      };
-      const client = new amlModule.v1.AMLClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.predictionResultPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.predictionResultPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('predictionResultPath', () => {
-        const result = client.predictionResultPath(
-          'projectNumValue',
-          'locationValue',
-          'instanceValue',
-          'predictionResultValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.predictionResultPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectNumFromPredictionResultName', () => {
-        const result = client.matchProjectNumFromPredictionResultName(fakePath);
-        assert.strictEqual(result, 'projectNumValue');
-        assert(
-          (client.pathTemplates.predictionResultPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromPredictionResultName', () => {
-        const result = client.matchLocationFromPredictionResultName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.predictionResultPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInstanceFromPredictionResultName', () => {
-        const result = client.matchInstanceFromPredictionResultName(fakePath);
-        assert.strictEqual(result, 'instanceValue');
-        assert(
-          (client.pathTemplates.predictionResultPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchPredictionResultFromPredictionResultName', () => {
-        const result =
-          client.matchPredictionResultFromPredictionResultName(fakePath);
-        assert.strictEqual(result, 'predictionResultValue');
-        assert(
-          (client.pathTemplates.predictionResultPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

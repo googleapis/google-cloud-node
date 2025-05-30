@@ -18,14 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -107,42 +100,20 @@ export class EssentialContactsServiceClient {
    *     const client = new EssentialContactsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof EssentialContactsServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof EssentialContactsServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'essentialcontacts.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +139,7 @@ export class EssentialContactsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +153,10 @@ export class EssentialContactsServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -221,25 +195,16 @@ export class EssentialContactsServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listContacts: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'contacts'
-      ),
-      computeContacts: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'contacts'
-      ),
+      listContacts:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'contacts'),
+      computeContacts:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'contacts')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.essentialcontacts.v1.EssentialContactsService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.essentialcontacts.v1.EssentialContactsService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -270,44 +235,32 @@ export class EssentialContactsServiceClient {
     // Put together the "service stub" for
     // google.cloud.essentialcontacts.v1.EssentialContactsService.
     this.essentialContactsServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.essentialcontacts.v1.EssentialContactsService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.essentialcontacts.v1
-            .EssentialContactsService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.essentialcontacts.v1.EssentialContactsService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.essentialcontacts.v1.EssentialContactsService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const essentialContactsServiceStubMethods = [
-      'createContact',
-      'updateContact',
-      'listContacts',
-      'getContact',
-      'deleteContact',
-      'computeContacts',
-      'sendTestMessage',
-    ];
+    const essentialContactsServiceStubMethods =
+        ['createContact', 'updateContact', 'listContacts', 'getContact', 'deleteContact', 'computeContacts', 'sendTestMessage'];
     for (const methodName of essentialContactsServiceStubMethods) {
       const callPromise = this.essentialContactsServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -327,14 +280,8 @@ export class EssentialContactsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'essentialcontacts.googleapis.com';
   }
@@ -345,14 +292,8 @@ export class EssentialContactsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'essentialcontacts.googleapis.com';
   }
@@ -383,7 +324,9 @@ export class EssentialContactsServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -392,9 +335,8 @@ export class EssentialContactsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -405,780 +347,566 @@ export class EssentialContactsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Adds a new contact for a resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource to save this contact for.
-   *   Format: organizations/{organization_id}, folders/{folder_id} or
-   *   projects/{project_id}
-   * @param {google.cloud.essentialcontacts.v1.Contact} request.contact
-   *   Required. The contact to create. Must specify an email address and language
-   *   tag.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/essential_contacts_service.create_contact.js</caption>
-   * region_tag:essentialcontacts_v1_generated_EssentialContactsService_CreateContact_async
-   */
+/**
+ * Adds a new contact for a resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource to save this contact for.
+ *   Format: organizations/{organization_id}, folders/{folder_id} or
+ *   projects/{project_id}
+ * @param {google.cloud.essentialcontacts.v1.Contact} request.contact
+ *   Required. The contact to create. Must specify an email address and language
+ *   tag.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/essential_contacts_service.create_contact.js</caption>
+ * region_tag:essentialcontacts_v1_generated_EssentialContactsService_CreateContact_async
+ */
   createContact(
-    request?: protos.google.cloud.essentialcontacts.v1.ICreateContactRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.essentialcontacts.v1.IContact,
-      (
-        | protos.google.cloud.essentialcontacts.v1.ICreateContactRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.essentialcontacts.v1.ICreateContactRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.essentialcontacts.v1.IContact,
+        protos.google.cloud.essentialcontacts.v1.ICreateContactRequest|undefined, {}|undefined
+      ]>;
   createContact(
-    request: protos.google.cloud.essentialcontacts.v1.ICreateContactRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.essentialcontacts.v1.IContact,
-      | protos.google.cloud.essentialcontacts.v1.ICreateContactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createContact(
-    request: protos.google.cloud.essentialcontacts.v1.ICreateContactRequest,
-    callback: Callback<
-      protos.google.cloud.essentialcontacts.v1.IContact,
-      | protos.google.cloud.essentialcontacts.v1.ICreateContactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createContact(
-    request?: protos.google.cloud.essentialcontacts.v1.ICreateContactRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.essentialcontacts.v1.ICreateContactRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.essentialcontacts.v1.IContact,
-          | protos.google.cloud.essentialcontacts.v1.ICreateContactRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.essentialcontacts.v1.IContact,
-      | protos.google.cloud.essentialcontacts.v1.ICreateContactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.essentialcontacts.v1.IContact,
-      (
-        | protos.google.cloud.essentialcontacts.v1.ICreateContactRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.essentialcontacts.v1.ICreateContactRequest|null|undefined,
+          {}|null|undefined>): void;
+  createContact(
+      request: protos.google.cloud.essentialcontacts.v1.ICreateContactRequest,
+      callback: Callback<
+          protos.google.cloud.essentialcontacts.v1.IContact,
+          protos.google.cloud.essentialcontacts.v1.ICreateContactRequest|null|undefined,
+          {}|null|undefined>): void;
+  createContact(
+      request?: protos.google.cloud.essentialcontacts.v1.ICreateContactRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.essentialcontacts.v1.IContact,
+          protos.google.cloud.essentialcontacts.v1.ICreateContactRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.essentialcontacts.v1.IContact,
+          protos.google.cloud.essentialcontacts.v1.ICreateContactRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.essentialcontacts.v1.IContact,
+        protos.google.cloud.essentialcontacts.v1.ICreateContactRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createContact request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.essentialcontacts.v1.IContact,
-          | protos.google.cloud.essentialcontacts.v1.ICreateContactRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.essentialcontacts.v1.IContact,
+        protos.google.cloud.essentialcontacts.v1.ICreateContactRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createContact response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createContact(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.essentialcontacts.v1.IContact,
-          (
-            | protos.google.cloud.essentialcontacts.v1.ICreateContactRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createContact response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.createContact(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.essentialcontacts.v1.IContact,
+        protos.google.cloud.essentialcontacts.v1.ICreateContactRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createContact response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Updates a contact.
-   * Note: A contact's email address cannot be changed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.essentialcontacts.v1.Contact} request.contact
-   *   Required. The contact resource to replace the existing saved contact. Note:
-   *   the email address of the contact cannot be modified.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The update mask applied to the resource. For the `FieldMask`
-   *   definition, see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/essential_contacts_service.update_contact.js</caption>
-   * region_tag:essentialcontacts_v1_generated_EssentialContactsService_UpdateContact_async
-   */
+/**
+ * Updates a contact.
+ * Note: A contact's email address cannot be changed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.essentialcontacts.v1.Contact} request.contact
+ *   Required. The contact resource to replace the existing saved contact. Note:
+ *   the email address of the contact cannot be modified.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The update mask applied to the resource. For the `FieldMask`
+ *   definition, see
+ *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/essential_contacts_service.update_contact.js</caption>
+ * region_tag:essentialcontacts_v1_generated_EssentialContactsService_UpdateContact_async
+ */
   updateContact(
-    request?: protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.essentialcontacts.v1.IContact,
-      (
-        | protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.essentialcontacts.v1.IContact,
+        protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest|undefined, {}|undefined
+      ]>;
   updateContact(
-    request: protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.essentialcontacts.v1.IContact,
-      | protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateContact(
-    request: protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest,
-    callback: Callback<
-      protos.google.cloud.essentialcontacts.v1.IContact,
-      | protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateContact(
-    request?: protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.essentialcontacts.v1.IContact,
-          | protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.essentialcontacts.v1.IContact,
-      | protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.essentialcontacts.v1.IContact,
-      (
-        | protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateContact(
+      request: protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest,
+      callback: Callback<
+          protos.google.cloud.essentialcontacts.v1.IContact,
+          protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateContact(
+      request?: protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.essentialcontacts.v1.IContact,
+          protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.essentialcontacts.v1.IContact,
+          protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.essentialcontacts.v1.IContact,
+        protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'contact.name': request.contact!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'contact.name': request.contact!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateContact request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.essentialcontacts.v1.IContact,
-          | protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.essentialcontacts.v1.IContact,
+        protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateContact response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateContact(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.essentialcontacts.v1.IContact,
-          (
-            | protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateContact response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.updateContact(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.essentialcontacts.v1.IContact,
+        protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateContact response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets a single contact.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the contact to retrieve.
-   *   Format: organizations/{organization_id}/contacts/{contact_id},
-   *   folders/{folder_id}/contacts/{contact_id} or
-   *   projects/{project_id}/contacts/{contact_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/essential_contacts_service.get_contact.js</caption>
-   * region_tag:essentialcontacts_v1_generated_EssentialContactsService_GetContact_async
-   */
+/**
+ * Gets a single contact.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the contact to retrieve.
+ *   Format: organizations/{organization_id}/contacts/{contact_id},
+ *   folders/{folder_id}/contacts/{contact_id} or
+ *   projects/{project_id}/contacts/{contact_id}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/essential_contacts_service.get_contact.js</caption>
+ * region_tag:essentialcontacts_v1_generated_EssentialContactsService_GetContact_async
+ */
   getContact(
-    request?: protos.google.cloud.essentialcontacts.v1.IGetContactRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.essentialcontacts.v1.IContact,
-      protos.google.cloud.essentialcontacts.v1.IGetContactRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.essentialcontacts.v1.IGetContactRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.essentialcontacts.v1.IContact,
+        protos.google.cloud.essentialcontacts.v1.IGetContactRequest|undefined, {}|undefined
+      ]>;
   getContact(
-    request: protos.google.cloud.essentialcontacts.v1.IGetContactRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.essentialcontacts.v1.IContact,
-      | protos.google.cloud.essentialcontacts.v1.IGetContactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getContact(
-    request: protos.google.cloud.essentialcontacts.v1.IGetContactRequest,
-    callback: Callback<
-      protos.google.cloud.essentialcontacts.v1.IContact,
-      | protos.google.cloud.essentialcontacts.v1.IGetContactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getContact(
-    request?: protos.google.cloud.essentialcontacts.v1.IGetContactRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.essentialcontacts.v1.IGetContactRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.essentialcontacts.v1.IContact,
-          | protos.google.cloud.essentialcontacts.v1.IGetContactRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.essentialcontacts.v1.IContact,
-      | protos.google.cloud.essentialcontacts.v1.IGetContactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.essentialcontacts.v1.IContact,
-      protos.google.cloud.essentialcontacts.v1.IGetContactRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.essentialcontacts.v1.IGetContactRequest|null|undefined,
+          {}|null|undefined>): void;
+  getContact(
+      request: protos.google.cloud.essentialcontacts.v1.IGetContactRequest,
+      callback: Callback<
+          protos.google.cloud.essentialcontacts.v1.IContact,
+          protos.google.cloud.essentialcontacts.v1.IGetContactRequest|null|undefined,
+          {}|null|undefined>): void;
+  getContact(
+      request?: protos.google.cloud.essentialcontacts.v1.IGetContactRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.essentialcontacts.v1.IContact,
+          protos.google.cloud.essentialcontacts.v1.IGetContactRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.essentialcontacts.v1.IContact,
+          protos.google.cloud.essentialcontacts.v1.IGetContactRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.essentialcontacts.v1.IContact,
+        protos.google.cloud.essentialcontacts.v1.IGetContactRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getContact request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.essentialcontacts.v1.IContact,
-          | protos.google.cloud.essentialcontacts.v1.IGetContactRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.essentialcontacts.v1.IContact,
+        protos.google.cloud.essentialcontacts.v1.IGetContactRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getContact response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getContact(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.essentialcontacts.v1.IContact,
-          (
-            | protos.google.cloud.essentialcontacts.v1.IGetContactRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getContact response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getContact(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.essentialcontacts.v1.IContact,
+        protos.google.cloud.essentialcontacts.v1.IGetContactRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getContact response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Deletes a contact.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the contact to delete.
-   *   Format: organizations/{organization_id}/contacts/{contact_id},
-   *   folders/{folder_id}/contacts/{contact_id} or
-   *   projects/{project_id}/contacts/{contact_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/essential_contacts_service.delete_contact.js</caption>
-   * region_tag:essentialcontacts_v1_generated_EssentialContactsService_DeleteContact_async
-   */
+/**
+ * Deletes a contact.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the contact to delete.
+ *   Format: organizations/{organization_id}/contacts/{contact_id},
+ *   folders/{folder_id}/contacts/{contact_id} or
+ *   projects/{project_id}/contacts/{contact_id}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/essential_contacts_service.delete_contact.js</caption>
+ * region_tag:essentialcontacts_v1_generated_EssentialContactsService_DeleteContact_async
+ */
   deleteContact(
-    request?: protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest|undefined, {}|undefined
+      ]>;
   deleteContact(
-    request: protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteContact(
-    request: protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteContact(
-    request?: protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteContact(
+      request: protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteContact(
+      request?: protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteContact request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteContact response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteContact(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteContact response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.deleteContact(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteContact response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Allows a contact admin to send a test message to contact to verify that it
-   * has been configured correctly.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string[]} request.contacts
-   *   Required. The list of names of the contacts to send a test message to.
-   *   Format: organizations/{organization_id}/contacts/{contact_id},
-   *   folders/{folder_id}/contacts/{contact_id} or
-   *   projects/{project_id}/contacts/{contact_id}
-   * @param {string} request.resource
-   *   Required. The name of the resource to send the test message for. All
-   *   contacts must either be set directly on this resource or inherited from
-   *   another resource that is an ancestor of this one. Format:
-   *   organizations/{organization_id}, folders/{folder_id} or
-   *   projects/{project_id}
-   * @param {google.cloud.essentialcontacts.v1.NotificationCategory} request.notificationCategory
-   *   Required. The notification category to send the test message for. All
-   *   contacts must be subscribed to this category.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/essential_contacts_service.send_test_message.js</caption>
-   * region_tag:essentialcontacts_v1_generated_EssentialContactsService_SendTestMessage_async
-   */
+/**
+ * Allows a contact admin to send a test message to contact to verify that it
+ * has been configured correctly.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string[]} request.contacts
+ *   Required. The list of names of the contacts to send a test message to.
+ *   Format: organizations/{organization_id}/contacts/{contact_id},
+ *   folders/{folder_id}/contacts/{contact_id} or
+ *   projects/{project_id}/contacts/{contact_id}
+ * @param {string} request.resource
+ *   Required. The name of the resource to send the test message for. All
+ *   contacts must either be set directly on this resource or inherited from
+ *   another resource that is an ancestor of this one. Format:
+ *   organizations/{organization_id}, folders/{folder_id} or
+ *   projects/{project_id}
+ * @param {google.cloud.essentialcontacts.v1.NotificationCategory} request.notificationCategory
+ *   Required. The notification category to send the test message for. All
+ *   contacts must be subscribed to this category.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/essential_contacts_service.send_test_message.js</caption>
+ * region_tag:essentialcontacts_v1_generated_EssentialContactsService_SendTestMessage_async
+ */
   sendTestMessage(
-    request?: protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest|undefined, {}|undefined
+      ]>;
   sendTestMessage(
-    request: protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  sendTestMessage(
-    request: protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  sendTestMessage(
-    request?: protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest|null|undefined,
+          {}|null|undefined>): void;
+  sendTestMessage(
+      request: protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest|null|undefined,
+          {}|null|undefined>): void;
+  sendTestMessage(
+      request?: protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('sendTestMessage request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('sendTestMessage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .sendTestMessage(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('sendTestMessage response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.sendTestMessage(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('sendTestMessage response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
-   * Lists the contacts that have been set on a resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name.
-   *   Format: organizations/{organization_id}, folders/{folder_id} or
-   *   projects/{project_id}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of results to return from this request.
-   *   Non-positive values are ignored. The presence of `next_page_token` in the
-   *   response indicates that more results might be available.
-   *   If not specified, the default page_size is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. If present, retrieves the next batch of results from the
-   *   preceding call to this method. `page_token` must be the value of
-   *   `next_page_token` from the previous response. The values of other method
-   *   parameters should be identical to those in the previous call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listContactsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the contacts that have been set on a resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name.
+ *   Format: organizations/{organization_id}, folders/{folder_id} or
+ *   projects/{project_id}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of results to return from this request.
+ *   Non-positive values are ignored. The presence of `next_page_token` in the
+ *   response indicates that more results might be available.
+ *   If not specified, the default page_size is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. If present, retrieves the next batch of results from the
+ *   preceding call to this method. `page_token` must be the value of
+ *   `next_page_token` from the previous response. The values of other method
+ *   parameters should be identical to those in the previous call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listContactsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listContacts(
-    request?: protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.essentialcontacts.v1.IContact[],
-      protos.google.cloud.essentialcontacts.v1.IListContactsRequest | null,
-      protos.google.cloud.essentialcontacts.v1.IListContactsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.essentialcontacts.v1.IContact[],
+        protos.google.cloud.essentialcontacts.v1.IListContactsRequest|null,
+        protos.google.cloud.essentialcontacts.v1.IListContactsResponse
+      ]>;
   listContacts(
-    request: protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
-      | protos.google.cloud.essentialcontacts.v1.IListContactsResponse
-      | null
-      | undefined,
-      protos.google.cloud.essentialcontacts.v1.IContact
-    >
-  ): void;
-  listContacts(
-    request: protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
-      | protos.google.cloud.essentialcontacts.v1.IListContactsResponse
-      | null
-      | undefined,
-      protos.google.cloud.essentialcontacts.v1.IContact
-    >
-  ): void;
-  listContacts(
-    request?: protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
-          | protos.google.cloud.essentialcontacts.v1.IListContactsResponse
-          | null
-          | undefined,
-          protos.google.cloud.essentialcontacts.v1.IContact
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
-      | protos.google.cloud.essentialcontacts.v1.IListContactsResponse
-      | null
-      | undefined,
-      protos.google.cloud.essentialcontacts.v1.IContact
-    >
-  ): Promise<
-    [
-      protos.google.cloud.essentialcontacts.v1.IContact[],
-      protos.google.cloud.essentialcontacts.v1.IListContactsRequest | null,
-      protos.google.cloud.essentialcontacts.v1.IListContactsResponse,
-    ]
-  > | void {
+          protos.google.cloud.essentialcontacts.v1.IListContactsResponse|null|undefined,
+          protos.google.cloud.essentialcontacts.v1.IContact>): void;
+  listContacts(
+      request: protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
+          protos.google.cloud.essentialcontacts.v1.IListContactsResponse|null|undefined,
+          protos.google.cloud.essentialcontacts.v1.IContact>): void;
+  listContacts(
+      request?: protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
+          protos.google.cloud.essentialcontacts.v1.IListContactsResponse|null|undefined,
+          protos.google.cloud.essentialcontacts.v1.IContact>,
+      callback?: PaginationCallback<
+          protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
+          protos.google.cloud.essentialcontacts.v1.IListContactsResponse|null|undefined,
+          protos.google.cloud.essentialcontacts.v1.IContact>):
+      Promise<[
+        protos.google.cloud.essentialcontacts.v1.IContact[],
+        protos.google.cloud.essentialcontacts.v1.IListContactsRequest|null,
+        protos.google.cloud.essentialcontacts.v1.IListContactsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
-          | protos.google.cloud.essentialcontacts.v1.IListContactsResponse
-          | null
-          | undefined,
-          protos.google.cloud.essentialcontacts.v1.IContact
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
+      protos.google.cloud.essentialcontacts.v1.IListContactsResponse|null|undefined,
+      protos.google.cloud.essentialcontacts.v1.IContact>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listContacts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1187,64 +915,61 @@ export class EssentialContactsServiceClient {
     this._log.info('listContacts request %j', request);
     return this.innerApiCalls
       .listContacts(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.essentialcontacts.v1.IContact[],
-          protos.google.cloud.essentialcontacts.v1.IListContactsRequest | null,
-          protos.google.cloud.essentialcontacts.v1.IListContactsResponse,
-        ]) => {
-          this._log.info('listContacts values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.essentialcontacts.v1.IContact[],
+        protos.google.cloud.essentialcontacts.v1.IListContactsRequest|null,
+        protos.google.cloud.essentialcontacts.v1.IListContactsResponse
+      ]) => {
+        this._log.info('listContacts values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listContacts`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name.
-   *   Format: organizations/{organization_id}, folders/{folder_id} or
-   *   projects/{project_id}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of results to return from this request.
-   *   Non-positive values are ignored. The presence of `next_page_token` in the
-   *   response indicates that more results might be available.
-   *   If not specified, the default page_size is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. If present, retrieves the next batch of results from the
-   *   preceding call to this method. `page_token` must be the value of
-   *   `next_page_token` from the previous response. The values of other method
-   *   parameters should be identical to those in the previous call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listContactsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listContacts`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name.
+ *   Format: organizations/{organization_id}, folders/{folder_id} or
+ *   projects/{project_id}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of results to return from this request.
+ *   Non-positive values are ignored. The presence of `next_page_token` in the
+ *   response indicates that more results might be available.
+ *   If not specified, the default page_size is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. If present, retrieves the next batch of results from the
+ *   preceding call to this method. `page_token` must be the value of
+ *   `next_page_token` from the previous response. The values of other method
+ *   parameters should be identical to those in the previous call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listContactsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listContactsStream(
-    request?: protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listContacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listContacts stream %j', request);
     return this.descriptors.page.listContacts.createStream(
       this.innerApiCalls.listContacts as GaxCall,
@@ -1253,55 +978,54 @@ export class EssentialContactsServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listContacts`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name.
-   *   Format: organizations/{organization_id}, folders/{folder_id} or
-   *   projects/{project_id}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of results to return from this request.
-   *   Non-positive values are ignored. The presence of `next_page_token` in the
-   *   response indicates that more results might be available.
-   *   If not specified, the default page_size is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. If present, retrieves the next batch of results from the
-   *   preceding call to this method. `page_token` must be the value of
-   *   `next_page_token` from the previous response. The values of other method
-   *   parameters should be identical to those in the previous call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/essential_contacts_service.list_contacts.js</caption>
-   * region_tag:essentialcontacts_v1_generated_EssentialContactsService_ListContacts_async
-   */
+/**
+ * Equivalent to `listContacts`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name.
+ *   Format: organizations/{organization_id}, folders/{folder_id} or
+ *   projects/{project_id}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of results to return from this request.
+ *   Non-positive values are ignored. The presence of `next_page_token` in the
+ *   response indicates that more results might be available.
+ *   If not specified, the default page_size is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. If present, retrieves the next batch of results from the
+ *   preceding call to this method. `page_token` must be the value of
+ *   `next_page_token` from the previous response. The values of other method
+ *   parameters should be identical to those in the previous call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/essential_contacts_service.list_contacts.js</caption>
+ * region_tag:essentialcontacts_v1_generated_EssentialContactsService_ListContacts_async
+ */
   listContactsAsync(
-    request?: protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.essentialcontacts.v1.IContact> {
+      request?: protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.essentialcontacts.v1.IContact>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listContacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listContacts iterate %j', request);
     return this.descriptors.page.listContacts.asyncIterate(
       this.innerApiCalls['listContacts'] as GaxCall,
@@ -1309,126 +1033,101 @@ export class EssentialContactsServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.essentialcontacts.v1.IContact>;
   }
-  /**
-   * Lists all contacts for the resource that are subscribed to the
-   * specified notification categories, including contacts inherited from
-   * any parent resources.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the resource to compute contacts for.
-   *   Format: organizations/{organization_id},
-   *   folders/{folder_id} or projects/{project_id}
-   * @param {number[]} request.notificationCategories
-   *   The categories of notifications to compute contacts for. If ALL is included
-   *   in this list, contacts subscribed to any notification category will be
-   *   returned.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of results to return from this request.
-   *   Non-positive values are ignored. The presence of `next_page_token` in the
-   *   response indicates that more results might be available.
-   *   If not specified, the default page_size is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. If present, retrieves the next batch of results from the
-   *   preceding call to this method. `page_token` must be the value of
-   *   `next_page_token` from the previous response. The values of other method
-   *   parameters should be identical to those in the previous call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `computeContactsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all contacts for the resource that are subscribed to the
+ * specified notification categories, including contacts inherited from
+ * any parent resources.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the resource to compute contacts for.
+ *   Format: organizations/{organization_id},
+ *   folders/{folder_id} or projects/{project_id}
+ * @param {number[]} request.notificationCategories
+ *   The categories of notifications to compute contacts for. If ALL is included
+ *   in this list, contacts subscribed to any notification category will be
+ *   returned.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of results to return from this request.
+ *   Non-positive values are ignored. The presence of `next_page_token` in the
+ *   response indicates that more results might be available.
+ *   If not specified, the default page_size is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. If present, retrieves the next batch of results from the
+ *   preceding call to this method. `page_token` must be the value of
+ *   `next_page_token` from the previous response. The values of other method
+ *   parameters should be identical to those in the previous call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `computeContactsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   computeContacts(
-    request?: protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.essentialcontacts.v1.IContact[],
-      protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest | null,
-      protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.essentialcontacts.v1.IContact[],
+        protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest|null,
+        protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse
+      ]>;
   computeContacts(
-    request: protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
-      | protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse
-      | null
-      | undefined,
-      protos.google.cloud.essentialcontacts.v1.IContact
-    >
-  ): void;
-  computeContacts(
-    request: protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
-      | protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse
-      | null
-      | undefined,
-      protos.google.cloud.essentialcontacts.v1.IContact
-    >
-  ): void;
-  computeContacts(
-    request?: protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
-          | protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse
-          | null
-          | undefined,
-          protos.google.cloud.essentialcontacts.v1.IContact
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
-      | protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse
-      | null
-      | undefined,
-      protos.google.cloud.essentialcontacts.v1.IContact
-    >
-  ): Promise<
-    [
-      protos.google.cloud.essentialcontacts.v1.IContact[],
-      protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest | null,
-      protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse,
-    ]
-  > | void {
+          protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse|null|undefined,
+          protos.google.cloud.essentialcontacts.v1.IContact>): void;
+  computeContacts(
+      request: protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
+          protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse|null|undefined,
+          protos.google.cloud.essentialcontacts.v1.IContact>): void;
+  computeContacts(
+      request?: protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
+          protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse|null|undefined,
+          protos.google.cloud.essentialcontacts.v1.IContact>,
+      callback?: PaginationCallback<
+          protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
+          protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse|null|undefined,
+          protos.google.cloud.essentialcontacts.v1.IContact>):
+      Promise<[
+        protos.google.cloud.essentialcontacts.v1.IContact[],
+        protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest|null,
+        protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
-          | protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse
-          | null
-          | undefined,
-          protos.google.cloud.essentialcontacts.v1.IContact
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
+      protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse|null|undefined,
+      protos.google.cloud.essentialcontacts.v1.IContact>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('computeContacts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1437,68 +1136,65 @@ export class EssentialContactsServiceClient {
     this._log.info('computeContacts request %j', request);
     return this.innerApiCalls
       .computeContacts(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.essentialcontacts.v1.IContact[],
-          protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest | null,
-          protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse,
-        ]) => {
-          this._log.info('computeContacts values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.essentialcontacts.v1.IContact[],
+        protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest|null,
+        protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse
+      ]) => {
+        this._log.info('computeContacts values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `computeContacts`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the resource to compute contacts for.
-   *   Format: organizations/{organization_id},
-   *   folders/{folder_id} or projects/{project_id}
-   * @param {number[]} request.notificationCategories
-   *   The categories of notifications to compute contacts for. If ALL is included
-   *   in this list, contacts subscribed to any notification category will be
-   *   returned.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of results to return from this request.
-   *   Non-positive values are ignored. The presence of `next_page_token` in the
-   *   response indicates that more results might be available.
-   *   If not specified, the default page_size is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. If present, retrieves the next batch of results from the
-   *   preceding call to this method. `page_token` must be the value of
-   *   `next_page_token` from the previous response. The values of other method
-   *   parameters should be identical to those in the previous call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `computeContactsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `computeContacts`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the resource to compute contacts for.
+ *   Format: organizations/{organization_id},
+ *   folders/{folder_id} or projects/{project_id}
+ * @param {number[]} request.notificationCategories
+ *   The categories of notifications to compute contacts for. If ALL is included
+ *   in this list, contacts subscribed to any notification category will be
+ *   returned.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of results to return from this request.
+ *   Non-positive values are ignored. The presence of `next_page_token` in the
+ *   response indicates that more results might be available.
+ *   If not specified, the default page_size is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. If present, retrieves the next batch of results from the
+ *   preceding call to this method. `page_token` must be the value of
+ *   `next_page_token` from the previous response. The values of other method
+ *   parameters should be identical to those in the previous call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `computeContactsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   computeContactsStream(
-    request?: protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['computeContacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('computeContacts stream %j', request);
     return this.descriptors.page.computeContacts.createStream(
       this.innerApiCalls.computeContacts as GaxCall,
@@ -1507,59 +1203,58 @@ export class EssentialContactsServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `computeContacts`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the resource to compute contacts for.
-   *   Format: organizations/{organization_id},
-   *   folders/{folder_id} or projects/{project_id}
-   * @param {number[]} request.notificationCategories
-   *   The categories of notifications to compute contacts for. If ALL is included
-   *   in this list, contacts subscribed to any notification category will be
-   *   returned.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of results to return from this request.
-   *   Non-positive values are ignored. The presence of `next_page_token` in the
-   *   response indicates that more results might be available.
-   *   If not specified, the default page_size is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. If present, retrieves the next batch of results from the
-   *   preceding call to this method. `page_token` must be the value of
-   *   `next_page_token` from the previous response. The values of other method
-   *   parameters should be identical to those in the previous call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/essential_contacts_service.compute_contacts.js</caption>
-   * region_tag:essentialcontacts_v1_generated_EssentialContactsService_ComputeContacts_async
-   */
+/**
+ * Equivalent to `computeContacts`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the resource to compute contacts for.
+ *   Format: organizations/{organization_id},
+ *   folders/{folder_id} or projects/{project_id}
+ * @param {number[]} request.notificationCategories
+ *   The categories of notifications to compute contacts for. If ALL is included
+ *   in this list, contacts subscribed to any notification category will be
+ *   returned.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of results to return from this request.
+ *   Non-positive values are ignored. The presence of `next_page_token` in the
+ *   response indicates that more results might be available.
+ *   If not specified, the default page_size is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. If present, retrieves the next batch of results from the
+ *   preceding call to this method. `page_token` must be the value of
+ *   `next_page_token` from the previous response. The values of other method
+ *   parameters should be identical to those in the previous call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/essential_contacts_service.compute_contacts.js</caption>
+ * region_tag:essentialcontacts_v1_generated_EssentialContactsService_ComputeContacts_async
+ */
   computeContactsAsync(
-    request?: protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.essentialcontacts.v1.IContact> {
+      request?: protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.essentialcontacts.v1.IContact>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['computeContacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('computeContacts iterate %j', request);
     return this.descriptors.page.computeContacts.asyncIterate(
       this.innerApiCalls['computeContacts'] as GaxCall,
@@ -1578,7 +1273,7 @@ export class EssentialContactsServiceClient {
    * @param {string} contact
    * @returns {string} Resource name string.
    */
-  folderContactPath(folder: string, contact: string) {
+  folderContactPath(folder:string,contact:string) {
     return this.pathTemplates.folderContactPathTemplate.render({
       folder: folder,
       contact: contact,
@@ -1593,8 +1288,7 @@ export class EssentialContactsServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderContactName(folderContactName: string) {
-    return this.pathTemplates.folderContactPathTemplate.match(folderContactName)
-      .folder;
+    return this.pathTemplates.folderContactPathTemplate.match(folderContactName).folder;
   }
 
   /**
@@ -1605,8 +1299,7 @@ export class EssentialContactsServiceClient {
    * @returns {string} A string representing the contact.
    */
   matchContactFromFolderContactName(folderContactName: string) {
-    return this.pathTemplates.folderContactPathTemplate.match(folderContactName)
-      .contact;
+    return this.pathTemplates.folderContactPathTemplate.match(folderContactName).contact;
   }
 
   /**
@@ -1616,7 +1309,7 @@ export class EssentialContactsServiceClient {
    * @param {string} contact
    * @returns {string} Resource name string.
    */
-  organizationContactPath(organization: string, contact: string) {
+  organizationContactPath(organization:string,contact:string) {
     return this.pathTemplates.organizationContactPathTemplate.render({
       organization: organization,
       contact: contact,
@@ -1630,12 +1323,8 @@ export class EssentialContactsServiceClient {
    *   A fully-qualified path representing organization_contact resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationContactName(
-    organizationContactName: string
-  ) {
-    return this.pathTemplates.organizationContactPathTemplate.match(
-      organizationContactName
-    ).organization;
+  matchOrganizationFromOrganizationContactName(organizationContactName: string) {
+    return this.pathTemplates.organizationContactPathTemplate.match(organizationContactName).organization;
   }
 
   /**
@@ -1646,9 +1335,7 @@ export class EssentialContactsServiceClient {
    * @returns {string} A string representing the contact.
    */
   matchContactFromOrganizationContactName(organizationContactName: string) {
-    return this.pathTemplates.organizationContactPathTemplate.match(
-      organizationContactName
-    ).contact;
+    return this.pathTemplates.organizationContactPathTemplate.match(organizationContactName).contact;
   }
 
   /**
@@ -1657,7 +1344,7 @@ export class EssentialContactsServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1681,7 +1368,7 @@ export class EssentialContactsServiceClient {
    * @param {string} contact
    * @returns {string} Resource name string.
    */
-  projectContactPath(project: string, contact: string) {
+  projectContactPath(project:string,contact:string) {
     return this.pathTemplates.projectContactPathTemplate.render({
       project: project,
       contact: contact,
@@ -1696,9 +1383,7 @@ export class EssentialContactsServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectContactName(projectContactName: string) {
-    return this.pathTemplates.projectContactPathTemplate.match(
-      projectContactName
-    ).project;
+    return this.pathTemplates.projectContactPathTemplate.match(projectContactName).project;
   }
 
   /**
@@ -1709,9 +1394,7 @@ export class EssentialContactsServiceClient {
    * @returns {string} A string representing the contact.
    */
   matchContactFromProjectContactName(projectContactName: string) {
-    return this.pathTemplates.projectContactPathTemplate.match(
-      projectContactName
-    ).contact;
+    return this.pathTemplates.projectContactPathTemplate.match(projectContactName).contact;
   }
 
   /**
