@@ -28,7 +28,7 @@
     var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
     
     // Exported root namespace
-    var $root = $protobuf.roots._google_cloud_ordertracking_protos || ($protobuf.roots._google_cloud_ordertracking_protos = {});
+    var $root = $protobuf.roots._google_shopping_ordertracking_protos || ($protobuf.roots._google_shopping_ordertracking_protos = {});
     
     $root.google = (function() {
     
