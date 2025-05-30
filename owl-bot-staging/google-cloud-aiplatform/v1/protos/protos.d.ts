@@ -14640,6 +14640,9 @@ export namespace google {
 
                     /** Tool codeExecution */
                     codeExecution?: (google.cloud.aiplatform.v1.Tool.ICodeExecution|null);
+
+                    /** Tool urlContext */
+                    urlContext?: (google.cloud.aiplatform.v1.IUrlContext|null);
                 }
 
                 /** Represents a Tool. */
@@ -14668,6 +14671,9 @@ export namespace google {
 
                     /** Tool codeExecution. */
                     public codeExecution?: (google.cloud.aiplatform.v1.Tool.ICodeExecution|null);
+
+                    /** Tool urlContext. */
+                    public urlContext?: (google.cloud.aiplatform.v1.IUrlContext|null);
 
                     /**
                      * Creates a new Tool instance using the specified properties.
@@ -14930,6 +14936,97 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of an UrlContext. */
+                interface IUrlContext {
+                }
+
+                /** Represents an UrlContext. */
+                class UrlContext implements IUrlContext {
+
+                    /**
+                     * Constructs a new UrlContext.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IUrlContext);
+
+                    /**
+                     * Creates a new UrlContext instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UrlContext instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IUrlContext): google.cloud.aiplatform.v1.UrlContext;
+
+                    /**
+                     * Encodes the specified UrlContext message. Does not implicitly {@link google.cloud.aiplatform.v1.UrlContext.verify|verify} messages.
+                     * @param message UrlContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IUrlContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UrlContext message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.UrlContext.verify|verify} messages.
+                     * @param message UrlContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IUrlContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UrlContext message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UrlContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.UrlContext;
+
+                    /**
+                     * Decodes an UrlContext message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UrlContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.UrlContext;
+
+                    /**
+                     * Verifies an UrlContext message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UrlContext message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UrlContext
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.UrlContext;
+
+                    /**
+                     * Creates a plain object from an UrlContext message. Also converts values to other types if specified.
+                     * @param message UrlContext
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.UrlContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UrlContext to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UrlContext
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a FunctionDeclaration. */
