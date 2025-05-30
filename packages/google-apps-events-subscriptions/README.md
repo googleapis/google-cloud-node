@@ -116,7 +116,7 @@ async function callListSubscriptions() {
   };
 
   try {
-  // Run request
+    // Run request
     const iterable = subscriptionsClient.listSubscriptionsAsync(request);
     for await (const response of iterable) {
       console.log(response);
