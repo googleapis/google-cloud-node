@@ -1144,7 +1144,7 @@ export namespace google {
                     agentUri?: (string|null);
 
                     /** ExportAgentResponse agentContent */
-                    agentContent?: (Uint8Array|string|null);
+                    agentContent?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents an ExportAgentResponse. */
@@ -1160,7 +1160,7 @@ export namespace google {
                     public agentUri?: (string|null);
 
                     /** ExportAgentResponse agentContent. */
-                    public agentContent?: (Uint8Array|string|null);
+                    public agentContent?: (Uint8Array|Buffer|string|null);
 
                     /** ExportAgentResponse agent. */
                     public agent?: ("agentUri"|"agentContent");
@@ -1253,7 +1253,7 @@ export namespace google {
                     agentUri?: (string|null);
 
                     /** ImportAgentRequest agentContent */
-                    agentContent?: (Uint8Array|string|null);
+                    agentContent?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents an ImportAgentRequest. */
@@ -1272,7 +1272,7 @@ export namespace google {
                     public agentUri?: (string|null);
 
                     /** ImportAgentRequest agentContent. */
-                    public agentContent?: (Uint8Array|string|null);
+                    public agentContent?: (Uint8Array|Buffer|string|null);
 
                     /** ImportAgentRequest agent. */
                     public agent?: ("agentUri"|"agentContent");
@@ -1365,7 +1365,7 @@ export namespace google {
                     agentUri?: (string|null);
 
                     /** RestoreAgentRequest agentContent */
-                    agentContent?: (Uint8Array|string|null);
+                    agentContent?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a RestoreAgentRequest. */
@@ -1384,7 +1384,7 @@ export namespace google {
                     public agentUri?: (string|null);
 
                     /** RestoreAgentRequest agentContent. */
-                    public agentContent?: (Uint8Array|string|null);
+                    public agentContent?: (Uint8Array|Buffer|string|null);
 
                     /** RestoreAgentRequest agent. */
                     public agent?: ("agentUri"|"agentContent");
@@ -4438,7 +4438,7 @@ export namespace google {
                     replyAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
 
                     /** StreamingAnalyzeContentRequest inputAudio */
-                    inputAudio?: (Uint8Array|string|null);
+                    inputAudio?: (Uint8Array|Buffer|string|null);
 
                     /** StreamingAnalyzeContentRequest inputText */
                     inputText?: (string|null);
@@ -4487,7 +4487,7 @@ export namespace google {
                     public replyAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
 
                     /** StreamingAnalyzeContentRequest inputAudio. */
-                    public inputAudio?: (Uint8Array|string|null);
+                    public inputAudio?: (Uint8Array|Buffer|string|null);
 
                     /** StreamingAnalyzeContentRequest inputText. */
                     public inputText?: (string|null);
@@ -5642,7 +5642,7 @@ export namespace google {
                     config?: (google.cloud.dialogflow.v2.IInputAudioConfig|null);
 
                     /** AudioInput audio */
-                    audio?: (Uint8Array|string|null);
+                    audio?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents an AudioInput. */
@@ -5658,7 +5658,7 @@ export namespace google {
                     public config?: (google.cloud.dialogflow.v2.IInputAudioConfig|null);
 
                     /** AudioInput audio. */
-                    public audio: (Uint8Array|string);
+                    public audio: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new AudioInput instance using the specified properties.
@@ -5745,7 +5745,7 @@ export namespace google {
                     config?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
 
                     /** OutputAudio audio */
-                    audio?: (Uint8Array|string|null);
+                    audio?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents an OutputAudio. */
@@ -5761,7 +5761,7 @@ export namespace google {
                     public config?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
 
                     /** OutputAudio audio. */
-                    public audio: (Uint8Array|string);
+                    public audio: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new OutputAudio instance using the specified properties.
@@ -10285,18 +10285,6 @@ export namespace google {
                     /** InferenceParameter topP. */
                     public topP?: (number|null);
 
-                    /** InferenceParameter _maxOutputTokens. */
-                    public _maxOutputTokens?: "maxOutputTokens";
-
-                    /** InferenceParameter _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** InferenceParameter _topK. */
-                    public _topK?: "topK";
-
-                    /** InferenceParameter _topP. */
-                    public _topP?: "topP";
-
                     /**
                      * Creates a new InferenceParameter instance using the specified properties.
                      * @param [properties] Properties to set
@@ -11364,7 +11352,7 @@ export namespace google {
                     outputAudioConfigMask?: (google.protobuf.IFieldMask|null);
 
                     /** DetectIntentRequest inputAudio */
-                    inputAudio?: (Uint8Array|string|null);
+                    inputAudio?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a DetectIntentRequest. */
@@ -11392,7 +11380,7 @@ export namespace google {
                     public outputAudioConfigMask?: (google.protobuf.IFieldMask|null);
 
                     /** DetectIntentRequest inputAudio. */
-                    public inputAudio: (Uint8Array|string);
+                    public inputAudio: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new DetectIntentRequest instance using the specified properties.
@@ -11485,7 +11473,7 @@ export namespace google {
                     webhookStatus?: (google.rpc.IStatus|null);
 
                     /** DetectIntentResponse outputAudio */
-                    outputAudio?: (Uint8Array|string|null);
+                    outputAudio?: (Uint8Array|Buffer|string|null);
 
                     /** DetectIntentResponse outputAudioConfig */
                     outputAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
@@ -11510,7 +11498,7 @@ export namespace google {
                     public webhookStatus?: (google.rpc.IStatus|null);
 
                     /** DetectIntentResponse outputAudio. */
-                    public outputAudio: (Uint8Array|string);
+                    public outputAudio: (Uint8Array|Buffer|string);
 
                     /** DetectIntentResponse outputAudioConfig. */
                     public outputAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
@@ -12059,7 +12047,7 @@ export namespace google {
                     outputAudioConfigMask?: (google.protobuf.IFieldMask|null);
 
                     /** StreamingDetectIntentRequest inputAudio */
-                    inputAudio?: (Uint8Array|string|null);
+                    inputAudio?: (Uint8Array|Buffer|string|null);
 
                     /** StreamingDetectIntentRequest enableDebuggingInfo */
                     enableDebuggingInfo?: (boolean|null);
@@ -12093,7 +12081,7 @@ export namespace google {
                     public outputAudioConfigMask?: (google.protobuf.IFieldMask|null);
 
                     /** StreamingDetectIntentRequest inputAudio. */
-                    public inputAudio: (Uint8Array|string);
+                    public inputAudio: (Uint8Array|Buffer|string);
 
                     /** StreamingDetectIntentRequest enableDebuggingInfo. */
                     public enableDebuggingInfo: boolean;
@@ -12391,7 +12379,7 @@ export namespace google {
                     webhookStatus?: (google.rpc.IStatus|null);
 
                     /** StreamingDetectIntentResponse outputAudio */
-                    outputAudio?: (Uint8Array|string|null);
+                    outputAudio?: (Uint8Array|Buffer|string|null);
 
                     /** StreamingDetectIntentResponse outputAudioConfig */
                     outputAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
@@ -12422,7 +12410,7 @@ export namespace google {
                     public webhookStatus?: (google.rpc.IStatus|null);
 
                     /** StreamingDetectIntentResponse outputAudio. */
-                    public outputAudio: (Uint8Array|string);
+                    public outputAudio: (Uint8Array|Buffer|string);
 
                     /** StreamingDetectIntentResponse outputAudioConfig. */
                     public outputAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
@@ -22598,7 +22586,7 @@ export namespace google {
                             mimeType?: (string|null);
 
                             /** MimeContent content */
-                            content?: (Uint8Array|string|null);
+                            content?: (Uint8Array|Buffer|string|null);
                         }
 
                         /** Represents a MimeContent. */
@@ -22614,7 +22602,7 @@ export namespace google {
                             public mimeType: string;
 
                             /** MimeContent content. */
-                            public content: (Uint8Array|string);
+                            public content: (Uint8Array|Buffer|string);
 
                             /**
                              * Creates a new MimeContent instance using the specified properties.
@@ -30476,12 +30464,6 @@ export namespace google {
                     /** ConversationDataset satisfiesPzs. */
                     public satisfiesPzs?: (boolean|null);
 
-                    /** ConversationDataset _satisfiesPzi. */
-                    public _satisfiesPzi?: "satisfiesPzi";
-
-                    /** ConversationDataset _satisfiesPzs. */
-                    public _satisfiesPzs?: "satisfiesPzs";
-
                     /**
                      * Creates a new ConversationDataset instance using the specified properties.
                      * @param [properties] Properties to set
@@ -32192,12 +32174,6 @@ export namespace google {
 
                     /** ConversationModel modelMetadata. */
                     public modelMetadata?: ("articleSuggestionModelMetadata"|"smartReplyModelMetadata");
-
-                    /** ConversationModel _satisfiesPzs. */
-                    public _satisfiesPzs?: "satisfiesPzs";
-
-                    /** ConversationModel _satisfiesPzi. */
-                    public _satisfiesPzi?: "satisfiesPzi";
 
                     /**
                      * Creates a new ConversationModel instance using the specified properties.
@@ -35143,7 +35119,7 @@ export namespace google {
                     contentUri?: (string|null);
 
                     /** Document rawContent */
-                    rawContent?: (Uint8Array|string|null);
+                    rawContent?: (Uint8Array|Buffer|string|null);
 
                     /** Document enableAutoReload */
                     enableAutoReload?: (boolean|null);
@@ -35183,7 +35159,7 @@ export namespace google {
                     public contentUri?: (string|null);
 
                     /** Document rawContent. */
-                    public rawContent?: (Uint8Array|string|null);
+                    public rawContent?: (Uint8Array|Buffer|string|null);
 
                     /** Document enableAutoReload. */
                     public enableAutoReload: boolean;
@@ -42761,7 +42737,7 @@ export namespace google {
                     agentUri?: (string|null);
 
                     /** ExportAgentResponse agentContent */
-                    agentContent?: (Uint8Array|string|null);
+                    agentContent?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents an ExportAgentResponse. */
@@ -42777,7 +42753,7 @@ export namespace google {
                     public agentUri?: (string|null);
 
                     /** ExportAgentResponse agentContent. */
-                    public agentContent?: (Uint8Array|string|null);
+                    public agentContent?: (Uint8Array|Buffer|string|null);
 
                     /** ExportAgentResponse agent. */
                     public agent?: ("agentUri"|"agentContent");
@@ -42870,7 +42846,7 @@ export namespace google {
                     agentUri?: (string|null);
 
                     /** ImportAgentRequest agentContent */
-                    agentContent?: (Uint8Array|string|null);
+                    agentContent?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents an ImportAgentRequest. */
@@ -42889,7 +42865,7 @@ export namespace google {
                     public agentUri?: (string|null);
 
                     /** ImportAgentRequest agentContent. */
-                    public agentContent?: (Uint8Array|string|null);
+                    public agentContent?: (Uint8Array|Buffer|string|null);
 
                     /** ImportAgentRequest agent. */
                     public agent?: ("agentUri"|"agentContent");
@@ -42982,7 +42958,7 @@ export namespace google {
                     agentUri?: (string|null);
 
                     /** RestoreAgentRequest agentContent */
-                    agentContent?: (Uint8Array|string|null);
+                    agentContent?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a RestoreAgentRequest. */
@@ -43001,7 +42977,7 @@ export namespace google {
                     public agentUri?: (string|null);
 
                     /** RestoreAgentRequest agentContent. */
-                    public agentContent?: (Uint8Array|string|null);
+                    public agentContent?: (Uint8Array|Buffer|string|null);
 
                     /** RestoreAgentRequest agent. */
                     public agent?: ("agentUri"|"agentContent");
@@ -45822,7 +45798,7 @@ export namespace google {
                     config?: (google.cloud.dialogflow.v2beta1.IInputAudioConfig|null);
 
                     /** AudioInput audio */
-                    audio?: (Uint8Array|string|null);
+                    audio?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents an AudioInput. */
@@ -45838,7 +45814,7 @@ export namespace google {
                     public config?: (google.cloud.dialogflow.v2beta1.IInputAudioConfig|null);
 
                     /** AudioInput audio. */
-                    public audio: (Uint8Array|string);
+                    public audio: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new AudioInput instance using the specified properties.
@@ -45925,7 +45901,7 @@ export namespace google {
                     config?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
 
                     /** OutputAudio audio */
-                    audio?: (Uint8Array|string|null);
+                    audio?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents an OutputAudio. */
@@ -45941,7 +45917,7 @@ export namespace google {
                     public config?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
 
                     /** OutputAudio audio. */
-                    public audio: (Uint8Array|string);
+                    public audio: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new OutputAudio instance using the specified properties.
@@ -46055,7 +46031,7 @@ export namespace google {
                     cxCurrentPage?: (string|null);
 
                     /** AutomatedAgentReply callCompanionAuthCode */
-                    callCompanionAuthCode?: (Uint8Array|string|null);
+                    callCompanionAuthCode?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents an AutomatedAgentReply. */
@@ -46098,7 +46074,7 @@ export namespace google {
                     public cxCurrentPage: string;
 
                     /** AutomatedAgentReply callCompanionAuthCode. */
-                    public callCompanionAuthCode: (Uint8Array|string);
+                    public callCompanionAuthCode: (Uint8Array|Buffer|string);
 
                     /** AutomatedAgentReply response. */
                     public response?: "detectIntentResponse";
@@ -47136,7 +47112,7 @@ export namespace google {
                     replyAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
 
                     /** StreamingAnalyzeContentRequest inputAudio */
-                    inputAudio?: (Uint8Array|string|null);
+                    inputAudio?: (Uint8Array|Buffer|string|null);
 
                     /** StreamingAnalyzeContentRequest inputText */
                     inputText?: (string|null);
@@ -47194,7 +47170,7 @@ export namespace google {
                     public replyAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
 
                     /** StreamingAnalyzeContentRequest inputAudio. */
-                    public inputAudio?: (Uint8Array|string|null);
+                    public inputAudio?: (Uint8Array|Buffer|string|null);
 
                     /** StreamingAnalyzeContentRequest inputText. */
                     public inputText?: (string|null);
@@ -50723,7 +50699,7 @@ export namespace google {
                         interface ISegment {
 
                             /** Segment audio */
-                            audio?: (Uint8Array|string|null);
+                            audio?: (Uint8Array|Buffer|string|null);
 
                             /** Segment uri */
                             uri?: (string|null);
@@ -50742,7 +50718,7 @@ export namespace google {
                             constructor(properties?: google.cloud.dialogflow.v2beta1.ResponseMessage.MixedAudio.ISegment);
 
                             /** Segment audio. */
-                            public audio?: (Uint8Array|string|null);
+                            public audio?: (Uint8Array|Buffer|string|null);
 
                             /** Segment uri. */
                             public uri?: (string|null);
@@ -54153,18 +54129,6 @@ export namespace google {
                     /** InferenceParameter topP. */
                     public topP?: (number|null);
 
-                    /** InferenceParameter _maxOutputTokens. */
-                    public _maxOutputTokens?: "maxOutputTokens";
-
-                    /** InferenceParameter _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** InferenceParameter _topK. */
-                    public _topK?: "topK";
-
-                    /** InferenceParameter _topP. */
-                    public _topP?: "topP";
-
                     /**
                      * Creates a new InferenceParameter instance using the specified properties.
                      * @param [properties] Properties to set
@@ -55232,7 +55196,7 @@ export namespace google {
                     outputAudioConfigMask?: (google.protobuf.IFieldMask|null);
 
                     /** DetectIntentRequest inputAudio */
-                    inputAudio?: (Uint8Array|string|null);
+                    inputAudio?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a DetectIntentRequest. */
@@ -55260,7 +55224,7 @@ export namespace google {
                     public outputAudioConfigMask?: (google.protobuf.IFieldMask|null);
 
                     /** DetectIntentRequest inputAudio. */
-                    public inputAudio: (Uint8Array|string);
+                    public inputAudio: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new DetectIntentRequest instance using the specified properties.
@@ -55356,7 +55320,7 @@ export namespace google {
                     webhookStatus?: (google.rpc.IStatus|null);
 
                     /** DetectIntentResponse outputAudio */
-                    outputAudio?: (Uint8Array|string|null);
+                    outputAudio?: (Uint8Array|Buffer|string|null);
 
                     /** DetectIntentResponse outputAudioConfig */
                     outputAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
@@ -55384,7 +55348,7 @@ export namespace google {
                     public webhookStatus?: (google.rpc.IStatus|null);
 
                     /** DetectIntentResponse outputAudio. */
-                    public outputAudio: (Uint8Array|string);
+                    public outputAudio: (Uint8Array|Buffer|string);
 
                     /** DetectIntentResponse outputAudioConfig. */
                     public outputAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
@@ -56189,7 +56153,7 @@ export namespace google {
                     outputAudioConfigMask?: (google.protobuf.IFieldMask|null);
 
                     /** StreamingDetectIntentRequest inputAudio */
-                    inputAudio?: (Uint8Array|string|null);
+                    inputAudio?: (Uint8Array|Buffer|string|null);
 
                     /** StreamingDetectIntentRequest enableDebuggingInfo */
                     enableDebuggingInfo?: (boolean|null);
@@ -56223,7 +56187,7 @@ export namespace google {
                     public outputAudioConfigMask?: (google.protobuf.IFieldMask|null);
 
                     /** StreamingDetectIntentRequest inputAudio. */
-                    public inputAudio: (Uint8Array|string);
+                    public inputAudio: (Uint8Array|Buffer|string);
 
                     /** StreamingDetectIntentRequest enableDebuggingInfo. */
                     public enableDebuggingInfo: boolean;
@@ -56524,7 +56488,7 @@ export namespace google {
                     webhookStatus?: (google.rpc.IStatus|null);
 
                     /** StreamingDetectIntentResponse outputAudio */
-                    outputAudio?: (Uint8Array|string|null);
+                    outputAudio?: (Uint8Array|Buffer|string|null);
 
                     /** StreamingDetectIntentResponse outputAudioConfig */
                     outputAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
@@ -56558,7 +56522,7 @@ export namespace google {
                     public webhookStatus?: (google.rpc.IStatus|null);
 
                     /** StreamingDetectIntentResponse outputAudio. */
-                    public outputAudio: (Uint8Array|string);
+                    public outputAudio: (Uint8Array|Buffer|string);
 
                     /** StreamingDetectIntentResponse outputAudioConfig. */
                     public outputAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
@@ -68313,7 +68277,7 @@ export namespace google {
                             mimeType?: (string|null);
 
                             /** MimeContent content */
-                            content?: (Uint8Array|string|null);
+                            content?: (Uint8Array|Buffer|string|null);
                         }
 
                         /** Represents a MimeContent. */
@@ -68329,7 +68293,7 @@ export namespace google {
                             public mimeType: string;
 
                             /** MimeContent content. */
-                            public content: (Uint8Array|string);
+                            public content: (Uint8Array|Buffer|string);
 
                             /**
                              * Creates a new MimeContent instance using the specified properties.
@@ -76321,7 +76285,7 @@ export namespace google {
                     content?: (string|null);
 
                     /** Document rawContent */
-                    rawContent?: (Uint8Array|string|null);
+                    rawContent?: (Uint8Array|Buffer|string|null);
 
                     /** Document enableAutoReload */
                     enableAutoReload?: (boolean|null);
@@ -76364,7 +76328,7 @@ export namespace google {
                     public content?: (string|null);
 
                     /** Document rawContent. */
-                    public rawContent?: (Uint8Array|string|null);
+                    public rawContent?: (Uint8Array|Buffer|string|null);
 
                     /** Document enableAutoReload. */
                     public enableAutoReload: boolean;
@@ -83302,12 +83266,6 @@ export namespace google {
                     /** Connection errorDetails. */
                     public errorDetails?: (google.cloud.dialogflow.v2beta1.Connection.IErrorDetails|null);
 
-                    /** Connection _updateTime. */
-                    public _updateTime?: "updateTime";
-
-                    /** Connection _errorDetails. */
-                    public _errorDetails?: "errorDetails";
-
                     /**
                      * Creates a new Connection instance using the specified properties.
                      * @param [properties] Properties to set
@@ -83434,12 +83392,6 @@ export namespace google {
 
                         /** ErrorDetails errorMessage. */
                         public errorMessage?: (string|null);
-
-                        /** ErrorDetails _certificateState. */
-                        public _certificateState?: "certificateState";
-
-                        /** ErrorDetails _errorMessage. */
-                        public _errorMessage?: "errorMessage";
 
                         /**
                          * Creates a new ErrorDetails instance using the specified properties.
@@ -85426,6 +85378,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -85466,6 +85421,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -89684,6 +89642,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -89935,7 +89896,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -89966,7 +89927,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -91105,7 +91066,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -91121,7 +91082,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
