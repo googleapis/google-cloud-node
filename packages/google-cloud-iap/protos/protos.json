@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -1629,7 +1632,6 @@
           },
           "nested": {
             "FileDescriptorSet": {
-              "edition": "proto2",
               "fields": {
                 "file": {
                   "rule": "repeated",
@@ -1639,7 +1641,6 @@
               }
             },
             "Edition": {
-              "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
                 "EDITION_PROTO2": 998,
@@ -1655,7 +1656,6 @@
               }
             },
             "FileDescriptorProto": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -1673,12 +1673,18 @@
                 "publicDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 10
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
                 },
                 "weakDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 11
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -1719,7 +1725,6 @@
               }
             },
             "DescriptorProto": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -1802,7 +1807,6 @@
               }
             },
             "ExtensionRangeOptions": {
-              "edition": "proto2",
               "fields": {
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -1876,7 +1880,6 @@
               }
             },
             "FieldDescriptorProto": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -1956,7 +1959,6 @@
               }
             },
             "OneofDescriptorProto": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -1969,7 +1971,6 @@
               }
             },
             "EnumDescriptorProto": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -2011,7 +2012,6 @@
               }
             },
             "EnumValueDescriptorProto": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -2028,7 +2028,6 @@
               }
             },
             "ServiceDescriptorProto": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -2046,7 +2045,6 @@
               }
             },
             "MethodDescriptorProto": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -2081,7 +2079,6 @@
               }
             },
             "FileOptions": {
-              "edition": "proto2",
               "fields": {
                 "javaPackage": {
                   "type": "string",
@@ -2223,7 +2220,6 @@
               }
             },
             "MessageOptions": {
-              "edition": "proto2",
               "fields": {
                 "messageSetWireFormat": {
                   "type": "bool",
@@ -2297,7 +2293,6 @@
               ]
             },
             "FieldOptions": {
-              "edition": "proto2",
               "fields": {
                 "ctype": {
                   "type": "CType",
@@ -2359,7 +2354,10 @@
                 "targets": {
                   "rule": "repeated",
                   "type": "OptionTargetType",
-                  "id": 19
+                  "id": 19,
+                  "options": {
+                    "packed": false
+                  }
                 },
                 "editionDefaults": {
                   "rule": "repeated",
@@ -2443,7 +2441,6 @@
               }
             },
             "OneofOptions": {
-              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -2463,7 +2460,6 @@
               ]
             },
             "EnumOptions": {
-              "edition": "proto2",
               "fields": {
                 "allowAlias": {
                   "type": "bool",
@@ -2507,7 +2503,6 @@
               ]
             },
             "EnumValueOptions": {
-              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -2541,7 +2536,6 @@
               ]
             },
             "ServiceOptions": {
-              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -2568,7 +2562,6 @@
               ]
             },
             "MethodOptions": {
-              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -2611,7 +2604,6 @@
               }
             },
             "UninterpretedOption": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "rule": "repeated",
@@ -2661,7 +2653,6 @@
               }
             },
             "FeatureSet": {
-              "edition": "proto2",
               "fields": {
                 "fieldPresence": {
                   "type": "FieldPresence",
@@ -2803,7 +2794,6 @@
               }
             },
             "FeatureSetDefaults": {
-              "edition": "proto2",
               "fields": {
                 "defaults": {
                   "rule": "repeated",
@@ -2835,7 +2825,6 @@
               }
             },
             "SourceCodeInfo": {
-              "edition": "proto2",
               "fields": {
                 "location": {
                   "rule": "repeated",
@@ -2849,18 +2838,12 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1,
-                      "options": {
-                        "packed": true
-                      }
+                      "id": 1
                     },
                     "span": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 2,
-                      "options": {
-                        "packed": true
-                      }
+                      "id": 2
                     },
                     "leadingComments": {
                       "type": "string",
@@ -2880,7 +2863,6 @@
               }
             },
             "GeneratedCodeInfo": {
-              "edition": "proto2",
               "fields": {
                 "annotation": {
                   "rule": "repeated",
@@ -2894,10 +2876,7 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1,
-                      "options": {
-                        "packed": true
-                      }
+                      "id": 1
                     },
                     "sourceFile": {
                       "type": "string",

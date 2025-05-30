@@ -19,9 +19,7 @@
 import {EssentialContactsServiceClient} from '@google-cloud/essential-contacts';
 
 // check that the client class type name can be used
-function doStuffWithEssentialContactsServiceClient(
-  client: EssentialContactsServiceClient
-) {
+function doStuffWithEssentialContactsServiceClient(client: EssentialContactsServiceClient) {
   client.close();
 }
 

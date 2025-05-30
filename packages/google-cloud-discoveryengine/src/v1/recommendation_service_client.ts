@@ -18,14 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -108,42 +101,20 @@ export class RecommendationServiceClient {
    *     const client = new RecommendationServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof RecommendationServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof RecommendationServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'discoveryengine.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -169,7 +140,7 @@ export class RecommendationServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -185,9 +156,13 @@ export class RecommendationServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -214,146 +189,111 @@ export class RecommendationServiceClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
-      projectLocationCollectionDataStorePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}'
-        ),
-      projectLocationCollectionDataStoreBranchDocumentPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
-        ),
-      projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
-        ),
-      projectLocationCollectionDataStoreControlPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/controls/{control}'
-        ),
-      projectLocationCollectionDataStoreConversationPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/conversations/{conversation}'
-        ),
-      projectLocationCollectionDataStoreCustomTuningModelPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}'
-        ),
-      projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/documentProcessingConfig'
-        ),
-      projectLocationCollectionDataStoreSchemaPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
-        ),
-      projectLocationCollectionDataStoreServingConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}'
-        ),
-      projectLocationCollectionDataStoreSessionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/sessions/{session}'
-        ),
-      projectLocationCollectionDataStoreSessionAnswerPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/sessions/{session}/answers/{answer}'
-        ),
-      projectLocationCollectionDataStoreSiteSearchEnginePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine'
-        ),
-      projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
-        ),
-      projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
-        ),
-      projectLocationCollectionEngineControlPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/controls/{control}'
-        ),
-      projectLocationCollectionEngineConversationPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/conversations/{conversation}'
-        ),
-      projectLocationCollectionEngineServingConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config}'
-        ),
-      projectLocationCollectionEngineSessionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}'
-        ),
-      projectLocationCollectionEngineSessionAnswerPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/answers/{answer}'
-        ),
+      projectLocationCollectionDataStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}'
+      ),
+      projectLocationCollectionDataStoreBranchDocumentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
+      ),
+      projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
+      ),
+      projectLocationCollectionDataStoreControlPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/controls/{control}'
+      ),
+      projectLocationCollectionDataStoreConversationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/conversations/{conversation}'
+      ),
+      projectLocationCollectionDataStoreCustomTuningModelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}'
+      ),
+      projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/documentProcessingConfig'
+      ),
+      projectLocationCollectionDataStoreSchemaPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
+      ),
+      projectLocationCollectionDataStoreServingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}'
+      ),
+      projectLocationCollectionDataStoreSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/sessions/{session}'
+      ),
+      projectLocationCollectionDataStoreSessionAnswerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/sessions/{session}/answers/{answer}'
+      ),
+      projectLocationCollectionDataStoreSiteSearchEnginePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine'
+      ),
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
+      ),
+      projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
+      ),
+      projectLocationCollectionEngineControlPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/controls/{control}'
+      ),
+      projectLocationCollectionEngineConversationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/conversations/{conversation}'
+      ),
+      projectLocationCollectionEngineServingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config}'
+      ),
+      projectLocationCollectionEngineSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}'
+      ),
+      projectLocationCollectionEngineSessionAnswerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/answers/{answer}'
+      ),
       projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}'
       ),
-      projectLocationDataStoreBranchDocumentPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
-        ),
-      projectLocationDataStoreBranchDocumentChunkPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
-        ),
-      projectLocationDataStoreControlPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/controls/{control}'
-        ),
-      projectLocationDataStoreConversationPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/conversations/{conversation}'
-        ),
-      projectLocationDataStoreCustomTuningModelPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}'
-        ),
-      projectLocationDataStoreDocumentProcessingConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/documentProcessingConfig'
-        ),
-      projectLocationDataStoreSchemaPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/schemas/{schema}'
-        ),
-      projectLocationDataStoreServingConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/servingConfigs/{serving_config}'
-        ),
-      projectLocationDataStoreSessionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/sessions/{session}'
-        ),
-      projectLocationDataStoreSessionAnswerPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/sessions/{session}/answers/{answer}'
-        ),
-      projectLocationDataStoreSiteSearchEnginePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine'
-        ),
-      projectLocationDataStoreSiteSearchEngineSitemapPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
-        ),
-      projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
-        ),
+      projectLocationDataStoreBranchDocumentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
+      ),
+      projectLocationDataStoreBranchDocumentChunkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
+      ),
+      projectLocationDataStoreControlPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/controls/{control}'
+      ),
+      projectLocationDataStoreConversationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/conversations/{conversation}'
+      ),
+      projectLocationDataStoreCustomTuningModelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}'
+      ),
+      projectLocationDataStoreDocumentProcessingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/documentProcessingConfig'
+      ),
+      projectLocationDataStoreSchemaPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/schemas/{schema}'
+      ),
+      projectLocationDataStoreServingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/servingConfigs/{serving_config}'
+      ),
+      projectLocationDataStoreSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/sessions/{session}'
+      ),
+      projectLocationDataStoreSessionAnswerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/sessions/{session}/answers/{answer}'
+      ),
+      projectLocationDataStoreSiteSearchEnginePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine'
+      ),
+      projectLocationDataStoreSiteSearchEngineSitemapPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
+      ),
+      projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1.RecommendationService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.discoveryengine.v1.RecommendationService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -384,36 +324,31 @@ export class RecommendationServiceClient {
     // Put together the "service stub" for
     // google.cloud.discoveryengine.v1.RecommendationService.
     this.recommendationServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1.RecommendationService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.discoveryengine.v1
-            .RecommendationService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.discoveryengine.v1.RecommendationService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.discoveryengine.v1.RecommendationService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const recommendationServiceStubMethods = ['recommend'];
+    const recommendationServiceStubMethods =
+        ['recommend'];
     for (const methodName of recommendationServiceStubMethods) {
       const callPromise = this.recommendationServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -433,14 +368,8 @@ export class RecommendationServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'discoveryengine.googleapis.com';
   }
@@ -451,14 +380,8 @@ export class RecommendationServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'discoveryengine.googleapis.com';
   }
@@ -489,7 +412,9 @@ export class RecommendationServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -498,9 +423,8 @@ export class RecommendationServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -511,240 +435,210 @@ export class RecommendationServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Makes a recommendation, which requires a contextual user event.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.servingConfig
-   *   Required. Full resource name of a
-   *   {@link protos.google.cloud.discoveryengine.v1.ServingConfig|ServingConfig}:
-   *   `projects/* /locations/global/collections/* /engines/* /servingConfigs/*`, or
-   *   `projects/* /locations/global/collections/* /dataStores/* /servingConfigs/*`
-   *
-   *   One default serving config is created along with your recommendation engine
-   *   creation. The engine ID is used as the ID of the default serving
-   *   config. For example, for Engine
-   *   `projects/* /locations/global/collections/* /engines/my-engine`, you can use
-   *   `projects/* /locations/global/collections/* /engines/my-engine/servingConfigs/my-engine`
-   *   for your
-   *   {@link protos.google.cloud.discoveryengine.v1.RecommendationService.Recommend|RecommendationService.Recommend}
-   *   requests.
-   * @param {google.cloud.discoveryengine.v1.UserEvent} request.userEvent
-   *   Required. Context about the user, what they are looking at and what action
-   *   they took to trigger the Recommend request. Note that this user event
-   *   detail won't be ingested to userEvent logs. Thus, a separate userEvent
-   *   write request is required for event logging.
-   *
-   *   Don't set
-   *   {@link protos.google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
-   *   or
-   *   {@link protos.google.cloud.discoveryengine.v1.UserInfo.user_id|UserEvent.user_info.user_id}
-   *   to the same fixed ID for different users. If you are trying to receive
-   *   non-personalized recommendations (not recommended; this can negatively
-   *   impact model performance), instead set
-   *   {@link protos.google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
-   *   to a random unique ID and leave
-   *   {@link protos.google.cloud.discoveryengine.v1.UserInfo.user_id|UserEvent.user_info.user_id}
-   *   unset.
-   * @param {number} request.pageSize
-   *   Maximum number of results to return. Set this property
-   *   to the number of recommendation results needed. If zero, the service
-   *   chooses a reasonable default. The maximum allowed value is 100. Values
-   *   above 100 are set to 100.
-   * @param {string} request.filter
-   *   Filter for restricting recommendation results with a length limit of 5,000
-   *   characters. Currently, only filter expressions on the `filter_tags`
-   *   attribute is supported.
-   *
-   *
-   *   Examples:
-   *
-   *    * `(filter_tags: ANY("Red", "Blue") OR filter_tags: ANY("Hot", "Cold"))`
-   *    * `(filter_tags: ANY("Red", "Blue")) AND NOT (filter_tags: ANY("Green"))`
-   *
-   *   If `attributeFilteringSyntax` is set to true under the `params` field, then
-   *   attribute-based expressions are expected instead of the above described
-   *   tag-based syntax. Examples:
-   *
-   *    * (language: ANY("en", "es")) AND NOT (categories: ANY("Movie"))
-   *    * (available: true) AND
-   *      (language: ANY("en", "es")) OR (categories: ANY("Movie"))
-   *
-   *   If your filter blocks all results, the API returns generic
-   *   (unfiltered) popular Documents. If you only want results strictly matching
-   *   the filters, set `strictFiltering` to `true` in
-   *   {@link protos.google.cloud.discoveryengine.v1.RecommendRequest.params|RecommendRequest.params}
-   *   to receive empty results instead.
-   *
-   *   Note that the API never returns
-   *   {@link protos.google.cloud.discoveryengine.v1.Document|Document}s with `storageStatus`
-   *   as `EXPIRED` or `DELETED` regardless of filter choices.
-   * @param {boolean} request.validateOnly
-   *   Use validate only mode for this recommendation query. If set to `true`, a
-   *   fake model is used that returns arbitrary Document IDs.
-   *   Note that the validate only mode should only be used for testing the API,
-   *   or if the model is not ready.
-   * @param {number[]} request.params
-   *   Additional domain specific parameters for the recommendations.
-   *
-   *   Allowed values:
-   *
-   *   * `returnDocument`: Boolean. If set to `true`, the associated Document
-   *      object is returned in
-   *      {@link protos.google.cloud.discoveryengine.v1.RecommendResponse.RecommendationResult.document|RecommendResponse.RecommendationResult.document}.
-   *   * `returnScore`: Boolean. If set to true, the recommendation score
-   *      corresponding to each returned Document is set in
-   *      {@link protos.google.cloud.discoveryengine.v1.RecommendResponse.RecommendationResult.metadata|RecommendResponse.RecommendationResult.metadata}.
-   *      The given score indicates the probability of a Document conversion given
-   *      the user's context and history.
-   *   * `strictFiltering`: Boolean. True by default. If set to `false`, the
-   *   service
-   *      returns generic (unfiltered) popular Documents instead of empty if
-   *      your filter blocks all recommendation results.
-   *   * `diversityLevel`: String. Default empty. If set to be non-empty, then
-   *      it needs to be one of:
-   *       *  `no-diversity`
-   *       *  `low-diversity`
-   *       *  `medium-diversity`
-   *       *  `high-diversity`
-   *       *  `auto-diversity`
-   *      This gives request-level control and adjusts recommendation results
-   *      based on Document category.
-   *   * `attributeFilteringSyntax`: Boolean. False by default. If set to true,
-   *      the `filter` field is interpreted according to the new,
-   *      attribute-based syntax.
-   * @param {number[]} request.userLabels
-   *   The user labels applied to a resource must meet the following requirements:
-   *
-   *   * Each resource can have multiple labels, up to a maximum of 64.
-   *   * Each label must be a key-value pair.
-   *   * Keys have a minimum length of 1 character and a maximum length of 63
-   *     characters and cannot be empty. Values can be empty and have a maximum
-   *     length of 63 characters.
-   *   * Keys and values can contain only lowercase letters, numeric characters,
-   *     underscores, and dashes. All characters must use UTF-8 encoding, and
-   *     international characters are allowed.
-   *   * The key portion of a label must be unique. However, you can use the same
-   *     key with multiple resources.
-   *   * Keys must start with a lowercase letter or international character.
-   *
-   *   See [Requirements for
-   *   labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
-   *   for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.RecommendResponse|RecommendResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recommendation_service.recommend.js</caption>
-   * region_tag:discoveryengine_v1_generated_RecommendationService_Recommend_async
-   */
+/**
+ * Makes a recommendation, which requires a contextual user event.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.servingConfig
+ *   Required. Full resource name of a
+ *   {@link protos.google.cloud.discoveryengine.v1.ServingConfig|ServingConfig}:
+ *   `projects/* /locations/global/collections/* /engines/* /servingConfigs/*`, or
+ *   `projects/* /locations/global/collections/* /dataStores/* /servingConfigs/*`
+ *
+ *   One default serving config is created along with your recommendation engine
+ *   creation. The engine ID is used as the ID of the default serving
+ *   config. For example, for Engine
+ *   `projects/* /locations/global/collections/* /engines/my-engine`, you can use
+ *   `projects/* /locations/global/collections/* /engines/my-engine/servingConfigs/my-engine`
+ *   for your
+ *   {@link protos.google.cloud.discoveryengine.v1.RecommendationService.Recommend|RecommendationService.Recommend}
+ *   requests.
+ * @param {google.cloud.discoveryengine.v1.UserEvent} request.userEvent
+ *   Required. Context about the user, what they are looking at and what action
+ *   they took to trigger the Recommend request. Note that this user event
+ *   detail won't be ingested to userEvent logs. Thus, a separate userEvent
+ *   write request is required for event logging.
+ *
+ *   Don't set
+ *   {@link protos.google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+ *   or
+ *   {@link protos.google.cloud.discoveryengine.v1.UserInfo.user_id|UserEvent.user_info.user_id}
+ *   to the same fixed ID for different users. If you are trying to receive
+ *   non-personalized recommendations (not recommended; this can negatively
+ *   impact model performance), instead set
+ *   {@link protos.google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+ *   to a random unique ID and leave
+ *   {@link protos.google.cloud.discoveryengine.v1.UserInfo.user_id|UserEvent.user_info.user_id}
+ *   unset.
+ * @param {number} request.pageSize
+ *   Maximum number of results to return. Set this property
+ *   to the number of recommendation results needed. If zero, the service
+ *   chooses a reasonable default. The maximum allowed value is 100. Values
+ *   above 100 are set to 100.
+ * @param {string} request.filter
+ *   Filter for restricting recommendation results with a length limit of 5,000
+ *   characters. Currently, only filter expressions on the `filter_tags`
+ *   attribute is supported.
+ *
+ *
+ *   Examples:
+ *
+ *    * `(filter_tags: ANY("Red", "Blue") OR filter_tags: ANY("Hot", "Cold"))`
+ *    * `(filter_tags: ANY("Red", "Blue")) AND NOT (filter_tags: ANY("Green"))`
+ *
+ *   If `attributeFilteringSyntax` is set to true under the `params` field, then
+ *   attribute-based expressions are expected instead of the above described
+ *   tag-based syntax. Examples:
+ *
+ *    * (language: ANY("en", "es")) AND NOT (categories: ANY("Movie"))
+ *    * (available: true) AND
+ *      (language: ANY("en", "es")) OR (categories: ANY("Movie"))
+ *
+ *   If your filter blocks all results, the API returns generic
+ *   (unfiltered) popular Documents. If you only want results strictly matching
+ *   the filters, set `strictFiltering` to `true` in
+ *   {@link protos.google.cloud.discoveryengine.v1.RecommendRequest.params|RecommendRequest.params}
+ *   to receive empty results instead.
+ *
+ *   Note that the API never returns
+ *   {@link protos.google.cloud.discoveryengine.v1.Document|Document}s with `storageStatus`
+ *   as `EXPIRED` or `DELETED` regardless of filter choices.
+ * @param {boolean} request.validateOnly
+ *   Use validate only mode for this recommendation query. If set to `true`, a
+ *   fake model is used that returns arbitrary Document IDs.
+ *   Note that the validate only mode should only be used for testing the API,
+ *   or if the model is not ready.
+ * @param {number[]} request.params
+ *   Additional domain specific parameters for the recommendations.
+ *
+ *   Allowed values:
+ *
+ *   * `returnDocument`: Boolean. If set to `true`, the associated Document
+ *      object is returned in
+ *      {@link protos.google.cloud.discoveryengine.v1.RecommendResponse.RecommendationResult.document|RecommendResponse.RecommendationResult.document}.
+ *   * `returnScore`: Boolean. If set to true, the recommendation score
+ *      corresponding to each returned Document is set in
+ *      {@link protos.google.cloud.discoveryengine.v1.RecommendResponse.RecommendationResult.metadata|RecommendResponse.RecommendationResult.metadata}.
+ *      The given score indicates the probability of a Document conversion given
+ *      the user's context and history.
+ *   * `strictFiltering`: Boolean. True by default. If set to `false`, the
+ *   service
+ *      returns generic (unfiltered) popular Documents instead of empty if
+ *      your filter blocks all recommendation results.
+ *   * `diversityLevel`: String. Default empty. If set to be non-empty, then
+ *      it needs to be one of:
+ *       *  `no-diversity`
+ *       *  `low-diversity`
+ *       *  `medium-diversity`
+ *       *  `high-diversity`
+ *       *  `auto-diversity`
+ *      This gives request-level control and adjusts recommendation results
+ *      based on Document category.
+ *   * `attributeFilteringSyntax`: Boolean. False by default. If set to true,
+ *      the `filter` field is interpreted according to the new,
+ *      attribute-based syntax.
+ * @param {number[]} request.userLabels
+ *   The user labels applied to a resource must meet the following requirements:
+ *
+ *   * Each resource can have multiple labels, up to a maximum of 64.
+ *   * Each label must be a key-value pair.
+ *   * Keys have a minimum length of 1 character and a maximum length of 63
+ *     characters and cannot be empty. Values can be empty and have a maximum
+ *     length of 63 characters.
+ *   * Keys and values can contain only lowercase letters, numeric characters,
+ *     underscores, and dashes. All characters must use UTF-8 encoding, and
+ *     international characters are allowed.
+ *   * The key portion of a label must be unique. However, you can use the same
+ *     key with multiple resources.
+ *   * Keys must start with a lowercase letter or international character.
+ *
+ *   See [Requirements for
+ *   labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+ *   for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.RecommendResponse|RecommendResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recommendation_service.recommend.js</caption>
+ * region_tag:discoveryengine_v1_generated_RecommendationService_Recommend_async
+ */
   recommend(
-    request?: protos.google.cloud.discoveryengine.v1.IRecommendRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1.IRecommendResponse,
-      protos.google.cloud.discoveryengine.v1.IRecommendRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.discoveryengine.v1.IRecommendRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.discoveryengine.v1.IRecommendResponse,
+        protos.google.cloud.discoveryengine.v1.IRecommendRequest|undefined, {}|undefined
+      ]>;
   recommend(
-    request: protos.google.cloud.discoveryengine.v1.IRecommendRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1.IRecommendResponse,
-      | protos.google.cloud.discoveryengine.v1.IRecommendRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  recommend(
-    request: protos.google.cloud.discoveryengine.v1.IRecommendRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1.IRecommendResponse,
-      | protos.google.cloud.discoveryengine.v1.IRecommendRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  recommend(
-    request?: protos.google.cloud.discoveryengine.v1.IRecommendRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.discoveryengine.v1.IRecommendRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.discoveryengine.v1.IRecommendResponse,
-          | protos.google.cloud.discoveryengine.v1.IRecommendRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1.IRecommendResponse,
-      | protos.google.cloud.discoveryengine.v1.IRecommendRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1.IRecommendResponse,
-      protos.google.cloud.discoveryengine.v1.IRecommendRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.discoveryengine.v1.IRecommendRequest|null|undefined,
+          {}|null|undefined>): void;
+  recommend(
+      request: protos.google.cloud.discoveryengine.v1.IRecommendRequest,
+      callback: Callback<
+          protos.google.cloud.discoveryengine.v1.IRecommendResponse,
+          protos.google.cloud.discoveryengine.v1.IRecommendRequest|null|undefined,
+          {}|null|undefined>): void;
+  recommend(
+      request?: protos.google.cloud.discoveryengine.v1.IRecommendRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.discoveryengine.v1.IRecommendResponse,
+          protos.google.cloud.discoveryengine.v1.IRecommendRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.discoveryengine.v1.IRecommendResponse,
+          protos.google.cloud.discoveryengine.v1.IRecommendRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.discoveryengine.v1.IRecommendResponse,
+        protos.google.cloud.discoveryengine.v1.IRecommendRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        serving_config: request.servingConfig ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'serving_config': request.servingConfig ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('recommend request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.discoveryengine.v1.IRecommendResponse,
-          | protos.google.cloud.discoveryengine.v1.IRecommendRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.discoveryengine.v1.IRecommendResponse,
+        protos.google.cloud.discoveryengine.v1.IRecommendRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('recommend response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .recommend(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.discoveryengine.v1.IRecommendResponse,
-          protos.google.cloud.discoveryengine.v1.IRecommendRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('recommend response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.recommend(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.discoveryengine.v1.IRecommendResponse,
+        protos.google.cloud.discoveryengine.v1.IRecommendRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('recommend response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -784,7 +678,7 @@ export class RecommendationServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -835,12 +729,7 @@ export class RecommendationServiceClient {
    * @param {string} engine
    * @returns {string} Resource name string.
    */
-  enginePath(
-    project: string,
-    location: string,
-    collection: string,
-    engine: string
-  ) {
+  enginePath(project:string,location:string,collection:string,engine:string) {
     return this.pathTemplates.enginePathTemplate.render({
       project: project,
       location: location,
@@ -899,7 +788,7 @@ export class RecommendationServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -925,20 +814,13 @@ export class RecommendationServiceClient {
    * @param {string} data_store
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStorePath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-      }
-    );
+  projectLocationCollectionDataStorePath(project:string,location:string,collection:string,dataStore:string) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+    });
   }
 
   /**
@@ -948,12 +830,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreName(
-    projectLocationCollectionDataStoreName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
-      projectLocationCollectionDataStoreName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreName(projectLocationCollectionDataStoreName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(projectLocationCollectionDataStoreName).project;
   }
 
   /**
@@ -963,12 +841,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreName(
-    projectLocationCollectionDataStoreName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
-      projectLocationCollectionDataStoreName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreName(projectLocationCollectionDataStoreName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(projectLocationCollectionDataStoreName).location;
   }
 
   /**
@@ -978,12 +852,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreName(
-    projectLocationCollectionDataStoreName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
-      projectLocationCollectionDataStoreName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreName(projectLocationCollectionDataStoreName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(projectLocationCollectionDataStoreName).collection;
   }
 
   /**
@@ -993,12 +863,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreName(
-    projectLocationCollectionDataStoreName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
-      projectLocationCollectionDataStoreName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreName(projectLocationCollectionDataStoreName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(projectLocationCollectionDataStoreName).data_store;
   }
 
   /**
@@ -1012,24 +878,15 @@ export class RecommendationServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreBranchDocumentPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    branch: string,
-    document: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        branch: branch,
-        document: document,
-      }
-    );
+  projectLocationCollectionDataStoreBranchDocumentPath(project:string,location:string,collection:string,dataStore:string,branch:string,document:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      branch: branch,
+      document: document,
+    });
   }
 
   /**
@@ -1039,12 +896,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreBranchDocumentName(
-    projectLocationCollectionDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).project;
   }
 
   /**
@@ -1054,12 +907,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreBranchDocumentName(
-    projectLocationCollectionDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).location;
   }
 
   /**
@@ -1069,12 +918,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentName(
-    projectLocationCollectionDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).collection;
   }
 
   /**
@@ -1084,12 +929,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentName(
-    projectLocationCollectionDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).data_store;
   }
 
   /**
@@ -1099,12 +940,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the branch.
    */
-  matchBranchFromProjectLocationCollectionDataStoreBranchDocumentName(
-    projectLocationCollectionDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentName
-    ).branch;
+  matchBranchFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).branch;
   }
 
   /**
@@ -1114,12 +951,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentName(
-    projectLocationCollectionDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentName
-    ).document;
+  matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).document;
   }
 
   /**
@@ -1134,26 +967,16 @@ export class RecommendationServiceClient {
    * @param {string} chunk
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreBranchDocumentChunkPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    branch: string,
-    document: string,
-    chunk: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        branch: branch,
-        document: document,
-        chunk: chunk,
-      }
-    );
+  projectLocationCollectionDataStoreBranchDocumentChunkPath(project:string,location:string,collection:string,dataStore:string,branch:string,document:string,chunk:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      branch: branch,
+      document: document,
+      chunk: chunk,
+    });
   }
 
   /**
@@ -1163,12 +986,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-    projectLocationCollectionDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentChunkName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreBranchDocumentChunkName(projectLocationCollectionDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentChunkName).project;
   }
 
   /**
@@ -1178,12 +997,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-    projectLocationCollectionDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentChunkName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreBranchDocumentChunkName(projectLocationCollectionDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentChunkName).location;
   }
 
   /**
@@ -1193,12 +1008,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-    projectLocationCollectionDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentChunkName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentChunkName(projectLocationCollectionDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentChunkName).collection;
   }
 
   /**
@@ -1208,12 +1019,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-    projectLocationCollectionDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentChunkName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentChunkName(projectLocationCollectionDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentChunkName).data_store;
   }
 
   /**
@@ -1223,12 +1030,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the branch.
    */
-  matchBranchFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-    projectLocationCollectionDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentChunkName
-    ).branch;
+  matchBranchFromProjectLocationCollectionDataStoreBranchDocumentChunkName(projectLocationCollectionDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentChunkName).branch;
   }
 
   /**
@@ -1238,12 +1041,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-    projectLocationCollectionDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentChunkName
-    ).document;
+  matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentChunkName(projectLocationCollectionDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentChunkName).document;
   }
 
   /**
@@ -1253,12 +1052,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the chunk.
    */
-  matchChunkFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-    projectLocationCollectionDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentChunkName
-    ).chunk;
+  matchChunkFromProjectLocationCollectionDataStoreBranchDocumentChunkName(projectLocationCollectionDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentChunkName).chunk;
   }
 
   /**
@@ -1271,22 +1066,14 @@ export class RecommendationServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreControlPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    control: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        control: control,
-      }
-    );
+  projectLocationCollectionDataStoreControlPath(project:string,location:string,collection:string,dataStore:string,control:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      control: control,
+    });
   }
 
   /**
@@ -1296,12 +1083,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_control resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreControlName(
-    projectLocationCollectionDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(
-      projectLocationCollectionDataStoreControlName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreControlName(projectLocationCollectionDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(projectLocationCollectionDataStoreControlName).project;
   }
 
   /**
@@ -1311,12 +1094,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_control resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreControlName(
-    projectLocationCollectionDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(
-      projectLocationCollectionDataStoreControlName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreControlName(projectLocationCollectionDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(projectLocationCollectionDataStoreControlName).location;
   }
 
   /**
@@ -1326,12 +1105,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_control resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreControlName(
-    projectLocationCollectionDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(
-      projectLocationCollectionDataStoreControlName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreControlName(projectLocationCollectionDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(projectLocationCollectionDataStoreControlName).collection;
   }
 
   /**
@@ -1341,12 +1116,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_control resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreControlName(
-    projectLocationCollectionDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(
-      projectLocationCollectionDataStoreControlName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreControlName(projectLocationCollectionDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(projectLocationCollectionDataStoreControlName).data_store;
   }
 
   /**
@@ -1356,12 +1127,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_control resource.
    * @returns {string} A string representing the control.
    */
-  matchControlFromProjectLocationCollectionDataStoreControlName(
-    projectLocationCollectionDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(
-      projectLocationCollectionDataStoreControlName
-    ).control;
+  matchControlFromProjectLocationCollectionDataStoreControlName(projectLocationCollectionDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(projectLocationCollectionDataStoreControlName).control;
   }
 
   /**
@@ -1374,22 +1141,14 @@ export class RecommendationServiceClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreConversationPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    conversation: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        conversation: conversation,
-      }
-    );
+  projectLocationCollectionDataStoreConversationPath(project:string,location:string,collection:string,dataStore:string,conversation:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      conversation: conversation,
+    });
   }
 
   /**
@@ -1399,12 +1158,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreConversationName(
-    projectLocationCollectionDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
-      projectLocationCollectionDataStoreConversationName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreConversationName(projectLocationCollectionDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(projectLocationCollectionDataStoreConversationName).project;
   }
 
   /**
@@ -1414,12 +1169,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreConversationName(
-    projectLocationCollectionDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
-      projectLocationCollectionDataStoreConversationName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreConversationName(projectLocationCollectionDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(projectLocationCollectionDataStoreConversationName).location;
   }
 
   /**
@@ -1429,12 +1180,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreConversationName(
-    projectLocationCollectionDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
-      projectLocationCollectionDataStoreConversationName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreConversationName(projectLocationCollectionDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(projectLocationCollectionDataStoreConversationName).collection;
   }
 
   /**
@@ -1444,12 +1191,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreConversationName(
-    projectLocationCollectionDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
-      projectLocationCollectionDataStoreConversationName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreConversationName(projectLocationCollectionDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(projectLocationCollectionDataStoreConversationName).data_store;
   }
 
   /**
@@ -1459,12 +1202,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectLocationCollectionDataStoreConversationName(
-    projectLocationCollectionDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
-      projectLocationCollectionDataStoreConversationName
-    ).conversation;
+  matchConversationFromProjectLocationCollectionDataStoreConversationName(projectLocationCollectionDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(projectLocationCollectionDataStoreConversationName).conversation;
   }
 
   /**
@@ -1477,22 +1216,14 @@ export class RecommendationServiceClient {
    * @param {string} custom_tuning_model
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreCustomTuningModelPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    customTuningModel: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        custom_tuning_model: customTuningModel,
-      }
-    );
+  projectLocationCollectionDataStoreCustomTuningModelPath(project:string,location:string,collection:string,dataStore:string,customTuningModel:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      custom_tuning_model: customTuningModel,
+    });
   }
 
   /**
@@ -1502,12 +1233,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName(
-    projectLocationCollectionDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationCollectionDataStoreCustomTuningModelName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName(projectLocationCollectionDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(projectLocationCollectionDataStoreCustomTuningModelName).project;
   }
 
   /**
@@ -1517,12 +1244,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName(
-    projectLocationCollectionDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationCollectionDataStoreCustomTuningModelName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName(projectLocationCollectionDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(projectLocationCollectionDataStoreCustomTuningModelName).location;
   }
 
   /**
@@ -1532,12 +1255,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName(
-    projectLocationCollectionDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationCollectionDataStoreCustomTuningModelName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName(projectLocationCollectionDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(projectLocationCollectionDataStoreCustomTuningModelName).collection;
   }
 
   /**
@@ -1547,12 +1266,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName(
-    projectLocationCollectionDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationCollectionDataStoreCustomTuningModelName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName(projectLocationCollectionDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(projectLocationCollectionDataStoreCustomTuningModelName).data_store;
   }
 
   /**
@@ -1562,12 +1277,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the custom_tuning_model.
    */
-  matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName(
-    projectLocationCollectionDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationCollectionDataStoreCustomTuningModelName
-    ).custom_tuning_model;
+  matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName(projectLocationCollectionDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(projectLocationCollectionDataStoreCustomTuningModelName).custom_tuning_model;
   }
 
   /**
@@ -1579,20 +1290,13 @@ export class RecommendationServiceClient {
    * @param {string} data_store
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreDocumentProcessingConfigPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-      }
-    );
+  projectLocationCollectionDataStoreDocumentProcessingConfigPath(project:string,location:string,collection:string,dataStore:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+    });
   }
 
   /**
@@ -1602,12 +1306,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
-    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreDocumentProcessingConfigName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(projectLocationCollectionDataStoreDocumentProcessingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(projectLocationCollectionDataStoreDocumentProcessingConfigName).project;
   }
 
   /**
@@ -1617,12 +1317,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
-    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreDocumentProcessingConfigName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(projectLocationCollectionDataStoreDocumentProcessingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(projectLocationCollectionDataStoreDocumentProcessingConfigName).location;
   }
 
   /**
@@ -1632,12 +1328,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
-    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreDocumentProcessingConfigName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(projectLocationCollectionDataStoreDocumentProcessingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(projectLocationCollectionDataStoreDocumentProcessingConfigName).collection;
   }
 
   /**
@@ -1647,12 +1339,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
-    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreDocumentProcessingConfigName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(projectLocationCollectionDataStoreDocumentProcessingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(projectLocationCollectionDataStoreDocumentProcessingConfigName).data_store;
   }
 
   /**
@@ -1665,22 +1353,14 @@ export class RecommendationServiceClient {
    * @param {string} schema
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreSchemaPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    schema: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        schema: schema,
-      }
-    );
+  projectLocationCollectionDataStoreSchemaPath(project:string,location:string,collection:string,dataStore:string,schema:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      schema: schema,
+    });
   }
 
   /**
@@ -1690,12 +1370,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_schema resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreSchemaName(
-    projectLocationCollectionDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
-      projectLocationCollectionDataStoreSchemaName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreSchemaName(projectLocationCollectionDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(projectLocationCollectionDataStoreSchemaName).project;
   }
 
   /**
@@ -1705,12 +1381,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_schema resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreSchemaName(
-    projectLocationCollectionDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
-      projectLocationCollectionDataStoreSchemaName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreSchemaName(projectLocationCollectionDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(projectLocationCollectionDataStoreSchemaName).location;
   }
 
   /**
@@ -1720,12 +1392,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_schema resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreSchemaName(
-    projectLocationCollectionDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
-      projectLocationCollectionDataStoreSchemaName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreSchemaName(projectLocationCollectionDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(projectLocationCollectionDataStoreSchemaName).collection;
   }
 
   /**
@@ -1735,12 +1403,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_schema resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreSchemaName(
-    projectLocationCollectionDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
-      projectLocationCollectionDataStoreSchemaName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreSchemaName(projectLocationCollectionDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(projectLocationCollectionDataStoreSchemaName).data_store;
   }
 
   /**
@@ -1750,12 +1414,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_schema resource.
    * @returns {string} A string representing the schema.
    */
-  matchSchemaFromProjectLocationCollectionDataStoreSchemaName(
-    projectLocationCollectionDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
-      projectLocationCollectionDataStoreSchemaName
-    ).schema;
+  matchSchemaFromProjectLocationCollectionDataStoreSchemaName(projectLocationCollectionDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(projectLocationCollectionDataStoreSchemaName).schema;
   }
 
   /**
@@ -1768,22 +1428,14 @@ export class RecommendationServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreServingConfigPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    servingConfig: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        serving_config: servingConfig,
-      }
-    );
+  projectLocationCollectionDataStoreServingConfigPath(project:string,location:string,collection:string,dataStore:string,servingConfig:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      serving_config: servingConfig,
+    });
   }
 
   /**
@@ -1793,12 +1445,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreServingConfigName(
-    projectLocationCollectionDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreServingConfigName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreServingConfigName(projectLocationCollectionDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(projectLocationCollectionDataStoreServingConfigName).project;
   }
 
   /**
@@ -1808,12 +1456,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreServingConfigName(
-    projectLocationCollectionDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreServingConfigName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreServingConfigName(projectLocationCollectionDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(projectLocationCollectionDataStoreServingConfigName).location;
   }
 
   /**
@@ -1823,12 +1467,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreServingConfigName(
-    projectLocationCollectionDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreServingConfigName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreServingConfigName(projectLocationCollectionDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(projectLocationCollectionDataStoreServingConfigName).collection;
   }
 
   /**
@@ -1838,12 +1478,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName(
-    projectLocationCollectionDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreServingConfigName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName(projectLocationCollectionDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(projectLocationCollectionDataStoreServingConfigName).data_store;
   }
 
   /**
@@ -1853,12 +1489,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
    * @returns {string} A string representing the serving_config.
    */
-  matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName(
-    projectLocationCollectionDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreServingConfigName
-    ).serving_config;
+  matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName(projectLocationCollectionDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(projectLocationCollectionDataStoreServingConfigName).serving_config;
   }
 
   /**
@@ -1871,22 +1503,14 @@ export class RecommendationServiceClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreSessionPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    session: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        session: session,
-      }
-    );
+  projectLocationCollectionDataStoreSessionPath(project:string,location:string,collection:string,dataStore:string,session:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      session: session,
+    });
   }
 
   /**
@@ -1896,12 +1520,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreSessionName(
-    projectLocationCollectionDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(
-      projectLocationCollectionDataStoreSessionName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).project;
   }
 
   /**
@@ -1911,12 +1531,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreSessionName(
-    projectLocationCollectionDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(
-      projectLocationCollectionDataStoreSessionName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).location;
   }
 
   /**
@@ -1926,12 +1542,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreSessionName(
-    projectLocationCollectionDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(
-      projectLocationCollectionDataStoreSessionName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).collection;
   }
 
   /**
@@ -1941,12 +1553,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreSessionName(
-    projectLocationCollectionDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(
-      projectLocationCollectionDataStoreSessionName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).data_store;
   }
 
   /**
@@ -1956,12 +1564,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationCollectionDataStoreSessionName(
-    projectLocationCollectionDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(
-      projectLocationCollectionDataStoreSessionName
-    ).session;
+  matchSessionFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).session;
   }
 
   /**
@@ -1975,24 +1579,15 @@ export class RecommendationServiceClient {
    * @param {string} answer
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreSessionAnswerPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    session: string,
-    answer: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        session: session,
-        answer: answer,
-      }
-    );
+  projectLocationCollectionDataStoreSessionAnswerPath(project:string,location:string,collection:string,dataStore:string,session:string,answer:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      session: session,
+      answer: answer,
+    });
   }
 
   /**
@@ -2002,12 +1597,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session_answer resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreSessionAnswerName(
-    projectLocationCollectionDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(
-      projectLocationCollectionDataStoreSessionAnswerName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreSessionAnswerName(projectLocationCollectionDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(projectLocationCollectionDataStoreSessionAnswerName).project;
   }
 
   /**
@@ -2017,12 +1608,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session_answer resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreSessionAnswerName(
-    projectLocationCollectionDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(
-      projectLocationCollectionDataStoreSessionAnswerName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreSessionAnswerName(projectLocationCollectionDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(projectLocationCollectionDataStoreSessionAnswerName).location;
   }
 
   /**
@@ -2032,12 +1619,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session_answer resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreSessionAnswerName(
-    projectLocationCollectionDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(
-      projectLocationCollectionDataStoreSessionAnswerName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreSessionAnswerName(projectLocationCollectionDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(projectLocationCollectionDataStoreSessionAnswerName).collection;
   }
 
   /**
@@ -2047,12 +1630,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session_answer resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreSessionAnswerName(
-    projectLocationCollectionDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(
-      projectLocationCollectionDataStoreSessionAnswerName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreSessionAnswerName(projectLocationCollectionDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(projectLocationCollectionDataStoreSessionAnswerName).data_store;
   }
 
   /**
@@ -2062,12 +1641,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session_answer resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationCollectionDataStoreSessionAnswerName(
-    projectLocationCollectionDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(
-      projectLocationCollectionDataStoreSessionAnswerName
-    ).session;
+  matchSessionFromProjectLocationCollectionDataStoreSessionAnswerName(projectLocationCollectionDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(projectLocationCollectionDataStoreSessionAnswerName).session;
   }
 
   /**
@@ -2077,12 +1652,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session_answer resource.
    * @returns {string} A string representing the answer.
    */
-  matchAnswerFromProjectLocationCollectionDataStoreSessionAnswerName(
-    projectLocationCollectionDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(
-      projectLocationCollectionDataStoreSessionAnswerName
-    ).answer;
+  matchAnswerFromProjectLocationCollectionDataStoreSessionAnswerName(projectLocationCollectionDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(projectLocationCollectionDataStoreSessionAnswerName).answer;
   }
 
   /**
@@ -2094,20 +1665,13 @@ export class RecommendationServiceClient {
    * @param {string} data_store
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreSiteSearchEnginePath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-      }
-    );
+  projectLocationCollectionDataStoreSiteSearchEnginePath(project:string,location:string,collection:string,dataStore:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+    });
   }
 
   /**
@@ -2117,12 +1681,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-    projectLocationCollectionDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineName(projectLocationCollectionDataStoreSiteSearchEngineName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineName).project;
   }
 
   /**
@@ -2132,12 +1692,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-    projectLocationCollectionDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineName(projectLocationCollectionDataStoreSiteSearchEngineName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineName).location;
   }
 
   /**
@@ -2147,12 +1703,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-    projectLocationCollectionDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineName(projectLocationCollectionDataStoreSiteSearchEngineName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineName).collection;
   }
 
   /**
@@ -2162,12 +1714,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-    projectLocationCollectionDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineName(projectLocationCollectionDataStoreSiteSearchEngineName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineName).data_store;
   }
 
   /**
@@ -2180,22 +1728,14 @@ export class RecommendationServiceClient {
    * @param {string} sitemap
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    sitemap: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        sitemap: sitemap,
-      }
-    );
+  projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(project:string,location:string,collection:string,dataStore:string,sitemap:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      sitemap: sitemap,
+    });
   }
 
   /**
@@ -2205,12 +1745,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
-    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineSitemapName).project;
   }
 
   /**
@@ -2220,12 +1756,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
-    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineSitemapName).location;
   }
 
   /**
@@ -2235,12 +1767,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
-    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineSitemapName).collection;
   }
 
   /**
@@ -2250,12 +1778,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
-    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineSitemapName).data_store;
   }
 
   /**
@@ -2265,12 +1789,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the sitemap.
    */
-  matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
-    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
-    ).sitemap;
+  matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineSitemapName).sitemap;
   }
 
   /**
@@ -2283,22 +1803,14 @@ export class RecommendationServiceClient {
    * @param {string} target_site
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreSiteSearchEngineTargetSitePath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    targetSite: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        target_site: targetSite,
-      }
-    );
+  projectLocationCollectionDataStoreSiteSearchEngineTargetSitePath(project:string,location:string,collection:string,dataStore:string,targetSite:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      target_site: targetSite,
+    });
   }
 
   /**
@@ -2308,12 +1820,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName).project;
   }
 
   /**
@@ -2323,12 +1831,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName).location;
   }
 
   /**
@@ -2338,12 +1842,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName).collection;
   }
 
   /**
@@ -2353,12 +1853,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName).data_store;
   }
 
   /**
@@ -2368,12 +1864,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the target_site.
    */
-  matchTargetSiteFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
-    ).target_site;
+  matchTargetSiteFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName).target_site;
   }
 
   /**
@@ -2386,22 +1878,14 @@ export class RecommendationServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionEngineControlPath(
-    project: string,
-    location: string,
-    collection: string,
-    engine: string,
-    control: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        engine: engine,
-        control: control,
-      }
-    );
+  projectLocationCollectionEngineControlPath(project:string,location:string,collection:string,engine:string,control:string) {
+    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      control: control,
+    });
   }
 
   /**
@@ -2411,12 +1895,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_control resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionEngineControlName(
-    projectLocationCollectionEngineControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(
-      projectLocationCollectionEngineControlName
-    ).project;
+  matchProjectFromProjectLocationCollectionEngineControlName(projectLocationCollectionEngineControlName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(projectLocationCollectionEngineControlName).project;
   }
 
   /**
@@ -2426,12 +1906,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_control resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionEngineControlName(
-    projectLocationCollectionEngineControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(
-      projectLocationCollectionEngineControlName
-    ).location;
+  matchLocationFromProjectLocationCollectionEngineControlName(projectLocationCollectionEngineControlName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(projectLocationCollectionEngineControlName).location;
   }
 
   /**
@@ -2441,12 +1917,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_control resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionEngineControlName(
-    projectLocationCollectionEngineControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(
-      projectLocationCollectionEngineControlName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionEngineControlName(projectLocationCollectionEngineControlName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(projectLocationCollectionEngineControlName).collection;
   }
 
   /**
@@ -2456,12 +1928,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_control resource.
    * @returns {string} A string representing the engine.
    */
-  matchEngineFromProjectLocationCollectionEngineControlName(
-    projectLocationCollectionEngineControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(
-      projectLocationCollectionEngineControlName
-    ).engine;
+  matchEngineFromProjectLocationCollectionEngineControlName(projectLocationCollectionEngineControlName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(projectLocationCollectionEngineControlName).engine;
   }
 
   /**
@@ -2471,12 +1939,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_control resource.
    * @returns {string} A string representing the control.
    */
-  matchControlFromProjectLocationCollectionEngineControlName(
-    projectLocationCollectionEngineControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(
-      projectLocationCollectionEngineControlName
-    ).control;
+  matchControlFromProjectLocationCollectionEngineControlName(projectLocationCollectionEngineControlName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(projectLocationCollectionEngineControlName).control;
   }
 
   /**
@@ -2489,22 +1953,14 @@ export class RecommendationServiceClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionEngineConversationPath(
-    project: string,
-    location: string,
-    collection: string,
-    engine: string,
-    conversation: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        engine: engine,
-        conversation: conversation,
-      }
-    );
+  projectLocationCollectionEngineConversationPath(project:string,location:string,collection:string,engine:string,conversation:string) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      conversation: conversation,
+    });
   }
 
   /**
@@ -2514,12 +1970,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_conversation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionEngineConversationName(
-    projectLocationCollectionEngineConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(
-      projectLocationCollectionEngineConversationName
-    ).project;
+  matchProjectFromProjectLocationCollectionEngineConversationName(projectLocationCollectionEngineConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(projectLocationCollectionEngineConversationName).project;
   }
 
   /**
@@ -2529,12 +1981,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_conversation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionEngineConversationName(
-    projectLocationCollectionEngineConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(
-      projectLocationCollectionEngineConversationName
-    ).location;
+  matchLocationFromProjectLocationCollectionEngineConversationName(projectLocationCollectionEngineConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(projectLocationCollectionEngineConversationName).location;
   }
 
   /**
@@ -2544,12 +1992,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_conversation resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionEngineConversationName(
-    projectLocationCollectionEngineConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(
-      projectLocationCollectionEngineConversationName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionEngineConversationName(projectLocationCollectionEngineConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(projectLocationCollectionEngineConversationName).collection;
   }
 
   /**
@@ -2559,12 +2003,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_conversation resource.
    * @returns {string} A string representing the engine.
    */
-  matchEngineFromProjectLocationCollectionEngineConversationName(
-    projectLocationCollectionEngineConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(
-      projectLocationCollectionEngineConversationName
-    ).engine;
+  matchEngineFromProjectLocationCollectionEngineConversationName(projectLocationCollectionEngineConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(projectLocationCollectionEngineConversationName).engine;
   }
 
   /**
@@ -2574,12 +2014,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_conversation resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectLocationCollectionEngineConversationName(
-    projectLocationCollectionEngineConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(
-      projectLocationCollectionEngineConversationName
-    ).conversation;
+  matchConversationFromProjectLocationCollectionEngineConversationName(projectLocationCollectionEngineConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(projectLocationCollectionEngineConversationName).conversation;
   }
 
   /**
@@ -2592,22 +2028,14 @@ export class RecommendationServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionEngineServingConfigPath(
-    project: string,
-    location: string,
-    collection: string,
-    engine: string,
-    servingConfig: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        engine: engine,
-        serving_config: servingConfig,
-      }
-    );
+  projectLocationCollectionEngineServingConfigPath(project:string,location:string,collection:string,engine:string,servingConfig:string) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      serving_config: servingConfig,
+    });
   }
 
   /**
@@ -2617,12 +2045,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_serving_config resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionEngineServingConfigName(
-    projectLocationCollectionEngineServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(
-      projectLocationCollectionEngineServingConfigName
-    ).project;
+  matchProjectFromProjectLocationCollectionEngineServingConfigName(projectLocationCollectionEngineServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(projectLocationCollectionEngineServingConfigName).project;
   }
 
   /**
@@ -2632,12 +2056,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_serving_config resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionEngineServingConfigName(
-    projectLocationCollectionEngineServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(
-      projectLocationCollectionEngineServingConfigName
-    ).location;
+  matchLocationFromProjectLocationCollectionEngineServingConfigName(projectLocationCollectionEngineServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(projectLocationCollectionEngineServingConfigName).location;
   }
 
   /**
@@ -2647,12 +2067,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_serving_config resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionEngineServingConfigName(
-    projectLocationCollectionEngineServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(
-      projectLocationCollectionEngineServingConfigName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionEngineServingConfigName(projectLocationCollectionEngineServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(projectLocationCollectionEngineServingConfigName).collection;
   }
 
   /**
@@ -2662,12 +2078,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_serving_config resource.
    * @returns {string} A string representing the engine.
    */
-  matchEngineFromProjectLocationCollectionEngineServingConfigName(
-    projectLocationCollectionEngineServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(
-      projectLocationCollectionEngineServingConfigName
-    ).engine;
+  matchEngineFromProjectLocationCollectionEngineServingConfigName(projectLocationCollectionEngineServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(projectLocationCollectionEngineServingConfigName).engine;
   }
 
   /**
@@ -2677,12 +2089,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_serving_config resource.
    * @returns {string} A string representing the serving_config.
    */
-  matchServingConfigFromProjectLocationCollectionEngineServingConfigName(
-    projectLocationCollectionEngineServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(
-      projectLocationCollectionEngineServingConfigName
-    ).serving_config;
+  matchServingConfigFromProjectLocationCollectionEngineServingConfigName(projectLocationCollectionEngineServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(projectLocationCollectionEngineServingConfigName).serving_config;
   }
 
   /**
@@ -2695,22 +2103,14 @@ export class RecommendationServiceClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionEngineSessionPath(
-    project: string,
-    location: string,
-    collection: string,
-    engine: string,
-    session: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        engine: engine,
-        session: session,
-      }
-    );
+  projectLocationCollectionEngineSessionPath(project:string,location:string,collection:string,engine:string,session:string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      session: session,
+    });
   }
 
   /**
@@ -2720,12 +2120,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionEngineSessionName(
-    projectLocationCollectionEngineSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(
-      projectLocationCollectionEngineSessionName
-    ).project;
+  matchProjectFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).project;
   }
 
   /**
@@ -2735,12 +2131,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionEngineSessionName(
-    projectLocationCollectionEngineSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(
-      projectLocationCollectionEngineSessionName
-    ).location;
+  matchLocationFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).location;
   }
 
   /**
@@ -2750,12 +2142,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionEngineSessionName(
-    projectLocationCollectionEngineSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(
-      projectLocationCollectionEngineSessionName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).collection;
   }
 
   /**
@@ -2765,12 +2153,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session resource.
    * @returns {string} A string representing the engine.
    */
-  matchEngineFromProjectLocationCollectionEngineSessionName(
-    projectLocationCollectionEngineSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(
-      projectLocationCollectionEngineSessionName
-    ).engine;
+  matchEngineFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).engine;
   }
 
   /**
@@ -2780,12 +2164,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationCollectionEngineSessionName(
-    projectLocationCollectionEngineSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(
-      projectLocationCollectionEngineSessionName
-    ).session;
+  matchSessionFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).session;
   }
 
   /**
@@ -2799,24 +2179,15 @@ export class RecommendationServiceClient {
    * @param {string} answer
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionEngineSessionAnswerPath(
-    project: string,
-    location: string,
-    collection: string,
-    engine: string,
-    session: string,
-    answer: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        engine: engine,
-        session: session,
-        answer: answer,
-      }
-    );
+  projectLocationCollectionEngineSessionAnswerPath(project:string,location:string,collection:string,engine:string,session:string,answer:string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      session: session,
+      answer: answer,
+    });
   }
 
   /**
@@ -2826,12 +2197,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session_answer resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionEngineSessionAnswerName(
-    projectLocationCollectionEngineSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(
-      projectLocationCollectionEngineSessionAnswerName
-    ).project;
+  matchProjectFromProjectLocationCollectionEngineSessionAnswerName(projectLocationCollectionEngineSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(projectLocationCollectionEngineSessionAnswerName).project;
   }
 
   /**
@@ -2841,12 +2208,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session_answer resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionEngineSessionAnswerName(
-    projectLocationCollectionEngineSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(
-      projectLocationCollectionEngineSessionAnswerName
-    ).location;
+  matchLocationFromProjectLocationCollectionEngineSessionAnswerName(projectLocationCollectionEngineSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(projectLocationCollectionEngineSessionAnswerName).location;
   }
 
   /**
@@ -2856,12 +2219,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session_answer resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionEngineSessionAnswerName(
-    projectLocationCollectionEngineSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(
-      projectLocationCollectionEngineSessionAnswerName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionEngineSessionAnswerName(projectLocationCollectionEngineSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(projectLocationCollectionEngineSessionAnswerName).collection;
   }
 
   /**
@@ -2871,12 +2230,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session_answer resource.
    * @returns {string} A string representing the engine.
    */
-  matchEngineFromProjectLocationCollectionEngineSessionAnswerName(
-    projectLocationCollectionEngineSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(
-      projectLocationCollectionEngineSessionAnswerName
-    ).engine;
+  matchEngineFromProjectLocationCollectionEngineSessionAnswerName(projectLocationCollectionEngineSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(projectLocationCollectionEngineSessionAnswerName).engine;
   }
 
   /**
@@ -2886,12 +2241,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session_answer resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationCollectionEngineSessionAnswerName(
-    projectLocationCollectionEngineSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(
-      projectLocationCollectionEngineSessionAnswerName
-    ).session;
+  matchSessionFromProjectLocationCollectionEngineSessionAnswerName(projectLocationCollectionEngineSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(projectLocationCollectionEngineSessionAnswerName).session;
   }
 
   /**
@@ -2901,12 +2252,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session_answer resource.
    * @returns {string} A string representing the answer.
    */
-  matchAnswerFromProjectLocationCollectionEngineSessionAnswerName(
-    projectLocationCollectionEngineSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(
-      projectLocationCollectionEngineSessionAnswerName
-    ).answer;
+  matchAnswerFromProjectLocationCollectionEngineSessionAnswerName(projectLocationCollectionEngineSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(projectLocationCollectionEngineSessionAnswerName).answer;
   }
 
   /**
@@ -2917,11 +2264,7 @@ export class RecommendationServiceClient {
    * @param {string} data_store
    * @returns {string} Resource name string.
    */
-  projectLocationDataStorePath(
-    project: string,
-    location: string,
-    dataStore: string
-  ) {
+  projectLocationDataStorePath(project:string,location:string,dataStore:string) {
     return this.pathTemplates.projectLocationDataStorePathTemplate.render({
       project: project,
       location: location,
@@ -2936,12 +2279,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreName(
-    projectLocationDataStoreName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
-      projectLocationDataStoreName
-    ).project;
+  matchProjectFromProjectLocationDataStoreName(projectLocationDataStoreName: string) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(projectLocationDataStoreName).project;
   }
 
   /**
@@ -2951,12 +2290,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreName(
-    projectLocationDataStoreName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
-      projectLocationDataStoreName
-    ).location;
+  matchLocationFromProjectLocationDataStoreName(projectLocationDataStoreName: string) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(projectLocationDataStoreName).location;
   }
 
   /**
@@ -2966,12 +2301,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreName(
-    projectLocationDataStoreName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
-      projectLocationDataStoreName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreName(projectLocationDataStoreName: string) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(projectLocationDataStoreName).data_store;
   }
 
   /**
@@ -2984,22 +2315,14 @@ export class RecommendationServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreBranchDocumentPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    branch: string,
-    document: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        branch: branch,
-        document: document,
-      }
-    );
+  projectLocationDataStoreBranchDocumentPath(project:string,location:string,dataStore:string,branch:string,document:string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      branch: branch,
+      document: document,
+    });
   }
 
   /**
@@ -3009,12 +2332,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreBranchDocumentName(
-    projectLocationDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
-      projectLocationDataStoreBranchDocumentName
-    ).project;
+  matchProjectFromProjectLocationDataStoreBranchDocumentName(projectLocationDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(projectLocationDataStoreBranchDocumentName).project;
   }
 
   /**
@@ -3024,12 +2343,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreBranchDocumentName(
-    projectLocationDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
-      projectLocationDataStoreBranchDocumentName
-    ).location;
+  matchLocationFromProjectLocationDataStoreBranchDocumentName(projectLocationDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(projectLocationDataStoreBranchDocumentName).location;
   }
 
   /**
@@ -3039,12 +2354,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreBranchDocumentName(
-    projectLocationDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
-      projectLocationDataStoreBranchDocumentName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreBranchDocumentName(projectLocationDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(projectLocationDataStoreBranchDocumentName).data_store;
   }
 
   /**
@@ -3054,12 +2365,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the branch.
    */
-  matchBranchFromProjectLocationDataStoreBranchDocumentName(
-    projectLocationDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
-      projectLocationDataStoreBranchDocumentName
-    ).branch;
+  matchBranchFromProjectLocationDataStoreBranchDocumentName(projectLocationDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(projectLocationDataStoreBranchDocumentName).branch;
   }
 
   /**
@@ -3069,12 +2376,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectLocationDataStoreBranchDocumentName(
-    projectLocationDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
-      projectLocationDataStoreBranchDocumentName
-    ).document;
+  matchDocumentFromProjectLocationDataStoreBranchDocumentName(projectLocationDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(projectLocationDataStoreBranchDocumentName).document;
   }
 
   /**
@@ -3088,24 +2391,15 @@ export class RecommendationServiceClient {
    * @param {string} chunk
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreBranchDocumentChunkPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    branch: string,
-    document: string,
-    chunk: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        branch: branch,
-        document: document,
-        chunk: chunk,
-      }
-    );
+  projectLocationDataStoreBranchDocumentChunkPath(project:string,location:string,dataStore:string,branch:string,document:string,chunk:string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      branch: branch,
+      document: document,
+      chunk: chunk,
+    });
   }
 
   /**
@@ -3115,12 +2409,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreBranchDocumentChunkName(
-    projectLocationDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationDataStoreBranchDocumentChunkName
-    ).project;
+  matchProjectFromProjectLocationDataStoreBranchDocumentChunkName(projectLocationDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(projectLocationDataStoreBranchDocumentChunkName).project;
   }
 
   /**
@@ -3130,12 +2420,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreBranchDocumentChunkName(
-    projectLocationDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationDataStoreBranchDocumentChunkName
-    ).location;
+  matchLocationFromProjectLocationDataStoreBranchDocumentChunkName(projectLocationDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(projectLocationDataStoreBranchDocumentChunkName).location;
   }
 
   /**
@@ -3145,12 +2431,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreBranchDocumentChunkName(
-    projectLocationDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationDataStoreBranchDocumentChunkName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreBranchDocumentChunkName(projectLocationDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(projectLocationDataStoreBranchDocumentChunkName).data_store;
   }
 
   /**
@@ -3160,12 +2442,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the branch.
    */
-  matchBranchFromProjectLocationDataStoreBranchDocumentChunkName(
-    projectLocationDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationDataStoreBranchDocumentChunkName
-    ).branch;
+  matchBranchFromProjectLocationDataStoreBranchDocumentChunkName(projectLocationDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(projectLocationDataStoreBranchDocumentChunkName).branch;
   }
 
   /**
@@ -3175,12 +2453,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectLocationDataStoreBranchDocumentChunkName(
-    projectLocationDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationDataStoreBranchDocumentChunkName
-    ).document;
+  matchDocumentFromProjectLocationDataStoreBranchDocumentChunkName(projectLocationDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(projectLocationDataStoreBranchDocumentChunkName).document;
   }
 
   /**
@@ -3190,12 +2464,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the chunk.
    */
-  matchChunkFromProjectLocationDataStoreBranchDocumentChunkName(
-    projectLocationDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationDataStoreBranchDocumentChunkName
-    ).chunk;
+  matchChunkFromProjectLocationDataStoreBranchDocumentChunkName(projectLocationDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(projectLocationDataStoreBranchDocumentChunkName).chunk;
   }
 
   /**
@@ -3207,20 +2477,13 @@ export class RecommendationServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreControlPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    control: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        control: control,
-      }
-    );
+  projectLocationDataStoreControlPath(project:string,location:string,dataStore:string,control:string) {
+    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      control: control,
+    });
   }
 
   /**
@@ -3230,12 +2493,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_control resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreControlName(
-    projectLocationDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.match(
-      projectLocationDataStoreControlName
-    ).project;
+  matchProjectFromProjectLocationDataStoreControlName(projectLocationDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.match(projectLocationDataStoreControlName).project;
   }
 
   /**
@@ -3245,12 +2504,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_control resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreControlName(
-    projectLocationDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.match(
-      projectLocationDataStoreControlName
-    ).location;
+  matchLocationFromProjectLocationDataStoreControlName(projectLocationDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.match(projectLocationDataStoreControlName).location;
   }
 
   /**
@@ -3260,12 +2515,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_control resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreControlName(
-    projectLocationDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.match(
-      projectLocationDataStoreControlName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreControlName(projectLocationDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.match(projectLocationDataStoreControlName).data_store;
   }
 
   /**
@@ -3275,12 +2526,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_control resource.
    * @returns {string} A string representing the control.
    */
-  matchControlFromProjectLocationDataStoreControlName(
-    projectLocationDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.match(
-      projectLocationDataStoreControlName
-    ).control;
+  matchControlFromProjectLocationDataStoreControlName(projectLocationDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.match(projectLocationDataStoreControlName).control;
   }
 
   /**
@@ -3292,20 +2539,13 @@ export class RecommendationServiceClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreConversationPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    conversation: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        conversation: conversation,
-      }
-    );
+  projectLocationDataStoreConversationPath(project:string,location:string,dataStore:string,conversation:string) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      conversation: conversation,
+    });
   }
 
   /**
@@ -3315,12 +2555,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_conversation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreConversationName(
-    projectLocationDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
-      projectLocationDataStoreConversationName
-    ).project;
+  matchProjectFromProjectLocationDataStoreConversationName(projectLocationDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(projectLocationDataStoreConversationName).project;
   }
 
   /**
@@ -3330,12 +2566,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_conversation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreConversationName(
-    projectLocationDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
-      projectLocationDataStoreConversationName
-    ).location;
+  matchLocationFromProjectLocationDataStoreConversationName(projectLocationDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(projectLocationDataStoreConversationName).location;
   }
 
   /**
@@ -3345,12 +2577,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_conversation resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreConversationName(
-    projectLocationDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
-      projectLocationDataStoreConversationName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreConversationName(projectLocationDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(projectLocationDataStoreConversationName).data_store;
   }
 
   /**
@@ -3360,12 +2588,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_conversation resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectLocationDataStoreConversationName(
-    projectLocationDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
-      projectLocationDataStoreConversationName
-    ).conversation;
+  matchConversationFromProjectLocationDataStoreConversationName(projectLocationDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(projectLocationDataStoreConversationName).conversation;
   }
 
   /**
@@ -3377,20 +2601,13 @@ export class RecommendationServiceClient {
    * @param {string} custom_tuning_model
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreCustomTuningModelPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    customTuningModel: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        custom_tuning_model: customTuningModel,
-      }
-    );
+  projectLocationDataStoreCustomTuningModelPath(project:string,location:string,dataStore:string,customTuningModel:string) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      custom_tuning_model: customTuningModel,
+    });
   }
 
   /**
@@ -3400,12 +2617,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreCustomTuningModelName(
-    projectLocationDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationDataStoreCustomTuningModelName
-    ).project;
+  matchProjectFromProjectLocationDataStoreCustomTuningModelName(projectLocationDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(projectLocationDataStoreCustomTuningModelName).project;
   }
 
   /**
@@ -3415,12 +2628,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreCustomTuningModelName(
-    projectLocationDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationDataStoreCustomTuningModelName
-    ).location;
+  matchLocationFromProjectLocationDataStoreCustomTuningModelName(projectLocationDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(projectLocationDataStoreCustomTuningModelName).location;
   }
 
   /**
@@ -3430,12 +2639,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreCustomTuningModelName(
-    projectLocationDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationDataStoreCustomTuningModelName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreCustomTuningModelName(projectLocationDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(projectLocationDataStoreCustomTuningModelName).data_store;
   }
 
   /**
@@ -3445,12 +2650,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the custom_tuning_model.
    */
-  matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName(
-    projectLocationDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationDataStoreCustomTuningModelName
-    ).custom_tuning_model;
+  matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName(projectLocationDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(projectLocationDataStoreCustomTuningModelName).custom_tuning_model;
   }
 
   /**
@@ -3461,18 +2662,12 @@ export class RecommendationServiceClient {
    * @param {string} data_store
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreDocumentProcessingConfigPath(
-    project: string,
-    location: string,
-    dataStore: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-      }
-    );
+  projectLocationDataStoreDocumentProcessingConfigPath(project:string,location:string,dataStore:string) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+    });
   }
 
   /**
@@ -3482,12 +2677,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_documentProcessingConfig resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreDocumentProcessingConfigName(
-    projectLocationDataStoreDocumentProcessingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(
-      projectLocationDataStoreDocumentProcessingConfigName
-    ).project;
+  matchProjectFromProjectLocationDataStoreDocumentProcessingConfigName(projectLocationDataStoreDocumentProcessingConfigName: string) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(projectLocationDataStoreDocumentProcessingConfigName).project;
   }
 
   /**
@@ -3497,12 +2688,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_documentProcessingConfig resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreDocumentProcessingConfigName(
-    projectLocationDataStoreDocumentProcessingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(
-      projectLocationDataStoreDocumentProcessingConfigName
-    ).location;
+  matchLocationFromProjectLocationDataStoreDocumentProcessingConfigName(projectLocationDataStoreDocumentProcessingConfigName: string) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(projectLocationDataStoreDocumentProcessingConfigName).location;
   }
 
   /**
@@ -3512,12 +2699,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_documentProcessingConfig resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreDocumentProcessingConfigName(
-    projectLocationDataStoreDocumentProcessingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(
-      projectLocationDataStoreDocumentProcessingConfigName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreDocumentProcessingConfigName(projectLocationDataStoreDocumentProcessingConfigName: string) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(projectLocationDataStoreDocumentProcessingConfigName).data_store;
   }
 
   /**
@@ -3529,20 +2712,13 @@ export class RecommendationServiceClient {
    * @param {string} schema
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreSchemaPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    schema: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        schema: schema,
-      }
-    );
+  projectLocationDataStoreSchemaPath(project:string,location:string,dataStore:string,schema:string) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      schema: schema,
+    });
   }
 
   /**
@@ -3552,12 +2728,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_schema resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreSchemaName(
-    projectLocationDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
-      projectLocationDataStoreSchemaName
-    ).project;
+  matchProjectFromProjectLocationDataStoreSchemaName(projectLocationDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(projectLocationDataStoreSchemaName).project;
   }
 
   /**
@@ -3567,12 +2739,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_schema resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreSchemaName(
-    projectLocationDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
-      projectLocationDataStoreSchemaName
-    ).location;
+  matchLocationFromProjectLocationDataStoreSchemaName(projectLocationDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(projectLocationDataStoreSchemaName).location;
   }
 
   /**
@@ -3582,12 +2750,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_schema resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreSchemaName(
-    projectLocationDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
-      projectLocationDataStoreSchemaName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreSchemaName(projectLocationDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(projectLocationDataStoreSchemaName).data_store;
   }
 
   /**
@@ -3597,12 +2761,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_schema resource.
    * @returns {string} A string representing the schema.
    */
-  matchSchemaFromProjectLocationDataStoreSchemaName(
-    projectLocationDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
-      projectLocationDataStoreSchemaName
-    ).schema;
+  matchSchemaFromProjectLocationDataStoreSchemaName(projectLocationDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(projectLocationDataStoreSchemaName).schema;
   }
 
   /**
@@ -3614,20 +2774,13 @@ export class RecommendationServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreServingConfigPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    servingConfig: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        serving_config: servingConfig,
-      }
-    );
+  projectLocationDataStoreServingConfigPath(project:string,location:string,dataStore:string,servingConfig:string) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      serving_config: servingConfig,
+    });
   }
 
   /**
@@ -3637,12 +2790,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_serving_config resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreServingConfigName(
-    projectLocationDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
-      projectLocationDataStoreServingConfigName
-    ).project;
+  matchProjectFromProjectLocationDataStoreServingConfigName(projectLocationDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(projectLocationDataStoreServingConfigName).project;
   }
 
   /**
@@ -3652,12 +2801,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_serving_config resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreServingConfigName(
-    projectLocationDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
-      projectLocationDataStoreServingConfigName
-    ).location;
+  matchLocationFromProjectLocationDataStoreServingConfigName(projectLocationDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(projectLocationDataStoreServingConfigName).location;
   }
 
   /**
@@ -3667,12 +2812,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_serving_config resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreServingConfigName(
-    projectLocationDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
-      projectLocationDataStoreServingConfigName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreServingConfigName(projectLocationDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(projectLocationDataStoreServingConfigName).data_store;
   }
 
   /**
@@ -3682,12 +2823,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_serving_config resource.
    * @returns {string} A string representing the serving_config.
    */
-  matchServingConfigFromProjectLocationDataStoreServingConfigName(
-    projectLocationDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
-      projectLocationDataStoreServingConfigName
-    ).serving_config;
+  matchServingConfigFromProjectLocationDataStoreServingConfigName(projectLocationDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(projectLocationDataStoreServingConfigName).serving_config;
   }
 
   /**
@@ -3699,20 +2836,13 @@ export class RecommendationServiceClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreSessionPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    session: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        session: session,
-      }
-    );
+  projectLocationDataStoreSessionPath(project:string,location:string,dataStore:string,session:string) {
+    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      session: session,
+    });
   }
 
   /**
@@ -3722,12 +2852,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_session resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreSessionName(
-    projectLocationDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(
-      projectLocationDataStoreSessionName
-    ).project;
+  matchProjectFromProjectLocationDataStoreSessionName(projectLocationDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(projectLocationDataStoreSessionName).project;
   }
 
   /**
@@ -3737,12 +2863,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_session resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreSessionName(
-    projectLocationDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(
-      projectLocationDataStoreSessionName
-    ).location;
+  matchLocationFromProjectLocationDataStoreSessionName(projectLocationDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(projectLocationDataStoreSessionName).location;
   }
 
   /**
@@ -3752,12 +2874,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_session resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreSessionName(
-    projectLocationDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(
-      projectLocationDataStoreSessionName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreSessionName(projectLocationDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(projectLocationDataStoreSessionName).data_store;
   }
 
   /**
@@ -3767,12 +2885,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_session resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationDataStoreSessionName(
-    projectLocationDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(
-      projectLocationDataStoreSessionName
-    ).session;
+  matchSessionFromProjectLocationDataStoreSessionName(projectLocationDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(projectLocationDataStoreSessionName).session;
   }
 
   /**
@@ -3785,22 +2899,14 @@ export class RecommendationServiceClient {
    * @param {string} answer
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreSessionAnswerPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    session: string,
-    answer: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        session: session,
-        answer: answer,
-      }
-    );
+  projectLocationDataStoreSessionAnswerPath(project:string,location:string,dataStore:string,session:string,answer:string) {
+    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      session: session,
+      answer: answer,
+    });
   }
 
   /**
@@ -3810,12 +2916,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_session_answer resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreSessionAnswerName(
-    projectLocationDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(
-      projectLocationDataStoreSessionAnswerName
-    ).project;
+  matchProjectFromProjectLocationDataStoreSessionAnswerName(projectLocationDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(projectLocationDataStoreSessionAnswerName).project;
   }
 
   /**
@@ -3825,12 +2927,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_session_answer resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreSessionAnswerName(
-    projectLocationDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(
-      projectLocationDataStoreSessionAnswerName
-    ).location;
+  matchLocationFromProjectLocationDataStoreSessionAnswerName(projectLocationDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(projectLocationDataStoreSessionAnswerName).location;
   }
 
   /**
@@ -3840,12 +2938,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_session_answer resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreSessionAnswerName(
-    projectLocationDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(
-      projectLocationDataStoreSessionAnswerName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreSessionAnswerName(projectLocationDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(projectLocationDataStoreSessionAnswerName).data_store;
   }
 
   /**
@@ -3855,12 +2949,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_session_answer resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationDataStoreSessionAnswerName(
-    projectLocationDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(
-      projectLocationDataStoreSessionAnswerName
-    ).session;
+  matchSessionFromProjectLocationDataStoreSessionAnswerName(projectLocationDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(projectLocationDataStoreSessionAnswerName).session;
   }
 
   /**
@@ -3870,12 +2960,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_session_answer resource.
    * @returns {string} A string representing the answer.
    */
-  matchAnswerFromProjectLocationDataStoreSessionAnswerName(
-    projectLocationDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(
-      projectLocationDataStoreSessionAnswerName
-    ).answer;
+  matchAnswerFromProjectLocationDataStoreSessionAnswerName(projectLocationDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(projectLocationDataStoreSessionAnswerName).answer;
   }
 
   /**
@@ -3886,18 +2972,12 @@ export class RecommendationServiceClient {
    * @param {string} data_store
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreSiteSearchEnginePath(
-    project: string,
-    location: string,
-    dataStore: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-      }
-    );
+  projectLocationDataStoreSiteSearchEnginePath(project:string,location:string,dataStore:string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+    });
   }
 
   /**
@@ -3907,12 +2987,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreSiteSearchEngineName(
-    projectLocationDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineName
-    ).project;
+  matchProjectFromProjectLocationDataStoreSiteSearchEngineName(projectLocationDataStoreSiteSearchEngineName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(projectLocationDataStoreSiteSearchEngineName).project;
   }
 
   /**
@@ -3922,12 +2998,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreSiteSearchEngineName(
-    projectLocationDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineName
-    ).location;
+  matchLocationFromProjectLocationDataStoreSiteSearchEngineName(projectLocationDataStoreSiteSearchEngineName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(projectLocationDataStoreSiteSearchEngineName).location;
   }
 
   /**
@@ -3937,12 +3009,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineName(
-    projectLocationDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineName(projectLocationDataStoreSiteSearchEngineName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(projectLocationDataStoreSiteSearchEngineName).data_store;
   }
 
   /**
@@ -3954,20 +3022,13 @@ export class RecommendationServiceClient {
    * @param {string} sitemap
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreSiteSearchEngineSitemapPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    sitemap: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        sitemap: sitemap,
-      }
-    );
+  projectLocationDataStoreSiteSearchEngineSitemapPath(project:string,location:string,dataStore:string,sitemap:string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      sitemap: sitemap,
+    });
   }
 
   /**
@@ -3977,12 +3038,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
-    projectLocationDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineSitemapName
-    ).project;
+  matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(projectLocationDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationDataStoreSiteSearchEngineSitemapName).project;
   }
 
   /**
@@ -3992,12 +3049,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
-    projectLocationDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineSitemapName
-    ).location;
+  matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(projectLocationDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationDataStoreSiteSearchEngineSitemapName).location;
   }
 
   /**
@@ -4007,12 +3060,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
-    projectLocationDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineSitemapName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(projectLocationDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationDataStoreSiteSearchEngineSitemapName).data_store;
   }
 
   /**
@@ -4022,12 +3071,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the sitemap.
    */
-  matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
-    projectLocationDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineSitemapName
-    ).sitemap;
+  matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(projectLocationDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationDataStoreSiteSearchEngineSitemapName).sitemap;
   }
 
   /**
@@ -4039,20 +3084,13 @@ export class RecommendationServiceClient {
    * @param {string} target_site
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreSiteSearchEngineTargetSitePath(
-    project: string,
-    location: string,
-    dataStore: string,
-    targetSite: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        target_site: targetSite,
-      }
-    );
+  projectLocationDataStoreSiteSearchEngineTargetSitePath(project:string,location:string,dataStore:string,targetSite:string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      target_site: targetSite,
+    });
   }
 
   /**
@@ -4062,12 +3100,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineTargetSiteName
-    ).project;
+  matchProjectFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(projectLocationDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationDataStoreSiteSearchEngineTargetSiteName).project;
   }
 
   /**
@@ -4077,12 +3111,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineTargetSiteName
-    ).location;
+  matchLocationFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(projectLocationDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationDataStoreSiteSearchEngineTargetSiteName).location;
   }
 
   /**
@@ -4092,12 +3122,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineTargetSiteName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(projectLocationDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationDataStoreSiteSearchEngineTargetSiteName).data_store;
   }
 
   /**
@@ -4107,12 +3133,8 @@ export class RecommendationServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the target_site.
    */
-  matchTargetSiteFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineTargetSiteName
-    ).target_site;
+  matchTargetSiteFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(projectLocationDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationDataStoreSiteSearchEngineTargetSiteName).target_site;
   }
 
   /**
@@ -4127,7 +3149,7 @@ export class RecommendationServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
+        this.locationsClient.close().catch(err => {throw err});
       });
     }
     return Promise.resolve();

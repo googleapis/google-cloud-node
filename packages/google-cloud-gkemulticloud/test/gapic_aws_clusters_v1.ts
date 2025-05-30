@@ -29,4241 +29,3313 @@ import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.AwsClustersClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new awsclustersModule.v1.AwsClustersClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'gkemulticloud.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new awsclustersModule.v1.AwsClustersClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = awsclustersModule.v1.AwsClustersClient.servicePath;
-        assert.strictEqual(servicePath, 'gkemulticloud.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = awsclustersModule.v1.AwsClustersClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'gkemulticloud.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'gkemulticloud.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'gkemulticloud.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new awsclustersModule.v1.AwsClustersClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'gkemulticloud.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new awsclustersModule.v1.AwsClustersClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'gkemulticloud.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new awsclustersModule.v1.AwsClustersClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'gkemulticloud.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new awsclustersModule.v1.AwsClustersClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new awsclustersModule.v1.AwsClustersClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = awsclustersModule.v1.AwsClustersClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new awsclustersModule.v1.AwsClustersClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.awsClustersStub, undefined);
-      await client.initialize();
-      assert(client.awsClustersStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.awsClustersStub);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.awsClustersStub, undefined);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getAwsCluster', () => {
-    it('invokes getAwsCluster without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.AwsCluster()
-      );
-      client.innerApiCalls.getAwsCluster = stubSimpleCall(expectedResponse);
-      const [response] = await client.getAwsCluster(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAwsCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAwsCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAwsCluster without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.AwsCluster()
-      );
-      client.innerApiCalls.getAwsCluster =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAwsCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkemulticloud.v1.IAwsCluster | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAwsCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAwsCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAwsCluster with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAwsCluster = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getAwsCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getAwsCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAwsCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAwsCluster with closed client', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getAwsCluster(request), expectedError);
-    });
-  });
-
-  describe('generateAwsClusterAgentToken', () => {
-    it('invokes generateAwsClusterAgentToken without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenRequest',
-        ['awsCluster']
-      );
-      request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenResponse()
-      );
-      client.innerApiCalls.generateAwsClusterAgentToken =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.generateAwsClusterAgentToken(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.generateAwsClusterAgentToken as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateAwsClusterAgentToken as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateAwsClusterAgentToken without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenRequest',
-        ['awsCluster']
-      );
-      request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenResponse()
-      );
-      client.innerApiCalls.generateAwsClusterAgentToken =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.generateAwsClusterAgentToken(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.generateAwsClusterAgentToken as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateAwsClusterAgentToken as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateAwsClusterAgentToken with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenRequest',
-        ['awsCluster']
-      );
-      request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.generateAwsClusterAgentToken = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.generateAwsClusterAgentToken(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.generateAwsClusterAgentToken as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateAwsClusterAgentToken as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateAwsClusterAgentToken with closed client', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenRequest',
-        ['awsCluster']
-      );
-      request.awsCluster = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.generateAwsClusterAgentToken(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('generateAwsAccessToken', () => {
-    it('invokes generateAwsAccessToken without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenRequest',
-        ['awsCluster']
-      );
-      request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenResponse()
-      );
-      client.innerApiCalls.generateAwsAccessToken =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.generateAwsAccessToken(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.generateAwsAccessToken as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateAwsAccessToken as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateAwsAccessToken without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenRequest',
-        ['awsCluster']
-      );
-      request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenResponse()
-      );
-      client.innerApiCalls.generateAwsAccessToken =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.generateAwsAccessToken(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.generateAwsAccessToken as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateAwsAccessToken as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateAwsAccessToken with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenRequest',
-        ['awsCluster']
-      );
-      request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.generateAwsAccessToken = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.generateAwsAccessToken(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.generateAwsAccessToken as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateAwsAccessToken as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateAwsAccessToken with closed client', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenRequest',
-        ['awsCluster']
-      );
-      request.awsCluster = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.generateAwsAccessToken(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getAwsNodePool', () => {
-    it('invokes getAwsNodePool without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
-      );
-      client.innerApiCalls.getAwsNodePool = stubSimpleCall(expectedResponse);
-      const [response] = await client.getAwsNodePool(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAwsNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAwsNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAwsNodePool without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
-      );
-      client.innerApiCalls.getAwsNodePool =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAwsNodePool(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkemulticloud.v1.IAwsNodePool | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAwsNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAwsNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAwsNodePool with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAwsNodePool = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getAwsNodePool(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getAwsNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAwsNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAwsNodePool with closed client', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getAwsNodePool(request), expectedError);
-    });
-  });
-
-  describe('getAwsOpenIdConfig', () => {
-    it('invokes getAwsOpenIdConfig without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsOpenIdConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsOpenIdConfigRequest',
-        ['awsCluster']
-      );
-      request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.AwsOpenIdConfig()
-      );
-      client.innerApiCalls.getAwsOpenIdConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getAwsOpenIdConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAwsOpenIdConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAwsOpenIdConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAwsOpenIdConfig without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsOpenIdConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsOpenIdConfigRequest',
-        ['awsCluster']
-      );
-      request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.AwsOpenIdConfig()
-      );
-      client.innerApiCalls.getAwsOpenIdConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAwsOpenIdConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAwsOpenIdConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAwsOpenIdConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAwsOpenIdConfig with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsOpenIdConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsOpenIdConfigRequest',
-        ['awsCluster']
-      );
-      request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAwsOpenIdConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getAwsOpenIdConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getAwsOpenIdConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAwsOpenIdConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAwsOpenIdConfig with closed client', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsOpenIdConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsOpenIdConfigRequest',
-        ['awsCluster']
-      );
-      request.awsCluster = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getAwsOpenIdConfig(request), expectedError);
-    });
-  });
-
-  describe('getAwsJsonWebKeys', () => {
-    it('invokes getAwsJsonWebKeys without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsJsonWebKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsJsonWebKeysRequest',
-        ['awsCluster']
-      );
-      request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.AwsJsonWebKeys()
-      );
-      client.innerApiCalls.getAwsJsonWebKeys = stubSimpleCall(expectedResponse);
-      const [response] = await client.getAwsJsonWebKeys(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAwsJsonWebKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAwsJsonWebKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAwsJsonWebKeys without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsJsonWebKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsJsonWebKeysRequest',
-        ['awsCluster']
-      );
-      request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.AwsJsonWebKeys()
-      );
-      client.innerApiCalls.getAwsJsonWebKeys =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAwsJsonWebKeys(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAwsJsonWebKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAwsJsonWebKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAwsJsonWebKeys with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsJsonWebKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsJsonWebKeysRequest',
-        ['awsCluster']
-      );
-      request.awsCluster = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAwsJsonWebKeys = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getAwsJsonWebKeys(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getAwsJsonWebKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAwsJsonWebKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAwsJsonWebKeys with closed client', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsJsonWebKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsJsonWebKeysRequest',
-        ['awsCluster']
-      );
-      request.awsCluster = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getAwsJsonWebKeys(request), expectedError);
-    });
-  });
-
-  describe('getAwsServerConfig', () => {
-    it('invokes getAwsServerConfig without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsServerConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsServerConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.AwsServerConfig()
-      );
-      client.innerApiCalls.getAwsServerConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getAwsServerConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAwsServerConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAwsServerConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAwsServerConfig without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsServerConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsServerConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.AwsServerConfig()
-      );
-      client.innerApiCalls.getAwsServerConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAwsServerConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkemulticloud.v1.IAwsServerConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAwsServerConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAwsServerConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAwsServerConfig with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsServerConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsServerConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAwsServerConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getAwsServerConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getAwsServerConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAwsServerConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAwsServerConfig with closed client', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.GetAwsServerConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.GetAwsServerConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getAwsServerConfig(request), expectedError);
-    });
-  });
-
-  describe('createAwsCluster', () => {
-    it('invokes createAwsCluster without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.CreateAwsClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.CreateAwsClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createAwsCluster =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createAwsCluster(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAwsCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAwsCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAwsCluster without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.CreateAwsClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.CreateAwsClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createAwsCluster =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createAwsCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkemulticloud.v1.IAwsCluster,
-              protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAwsCluster,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAwsCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAwsCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAwsCluster with call error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.CreateAwsClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.CreateAwsClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAwsCluster = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createAwsCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createAwsCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAwsCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAwsCluster with LRO error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.CreateAwsClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.CreateAwsClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAwsCluster = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createAwsCluster(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createAwsCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAwsCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateAwsClusterProgress without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateAwsClusterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateAwsClusterProgress with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateAwsClusterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateAwsCluster', () => {
-    it('invokes updateAwsCluster without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.UpdateAwsClusterRequest()
-      );
-      request.awsCluster ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.UpdateAwsClusterRequest',
-        ['awsCluster', 'name']
-      );
-      request.awsCluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateAwsCluster =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateAwsCluster(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAwsCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAwsCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAwsCluster without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.UpdateAwsClusterRequest()
-      );
-      request.awsCluster ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.UpdateAwsClusterRequest',
-        ['awsCluster', 'name']
-      );
-      request.awsCluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateAwsCluster =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateAwsCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkemulticloud.v1.IAwsCluster,
-              protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAwsCluster,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAwsCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAwsCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAwsCluster with call error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.UpdateAwsClusterRequest()
-      );
-      request.awsCluster ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.UpdateAwsClusterRequest',
-        ['awsCluster', 'name']
-      );
-      request.awsCluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAwsCluster = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateAwsCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateAwsCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAwsCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAwsCluster with LRO error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.UpdateAwsClusterRequest()
-      );
-      request.awsCluster ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.UpdateAwsClusterRequest',
-        ['awsCluster', 'name']
-      );
-      request.awsCluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `aws_cluster.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAwsCluster = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateAwsCluster(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateAwsCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAwsCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateAwsClusterProgress without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateAwsClusterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateAwsClusterProgress with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateAwsClusterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteAwsCluster', () => {
-    it('invokes deleteAwsCluster without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.DeleteAwsClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.DeleteAwsClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteAwsCluster =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteAwsCluster(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAwsCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAwsCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAwsCluster without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.DeleteAwsClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.DeleteAwsClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteAwsCluster =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteAwsCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAwsCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAwsCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAwsCluster with call error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.DeleteAwsClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.DeleteAwsClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAwsCluster = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteAwsCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteAwsCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAwsCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAwsCluster with LRO error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.DeleteAwsClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.DeleteAwsClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAwsCluster = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteAwsCluster(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteAwsCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAwsCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteAwsClusterProgress without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteAwsClusterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteAwsClusterProgress with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteAwsClusterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createAwsNodePool', () => {
-    it('invokes createAwsNodePool without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.CreateAwsNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.CreateAwsNodePoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createAwsNodePool =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createAwsNodePool(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAwsNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAwsNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAwsNodePool without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.CreateAwsNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.CreateAwsNodePoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createAwsNodePool =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createAwsNodePool(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
-              protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAwsNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAwsNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAwsNodePool with call error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.CreateAwsNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.CreateAwsNodePoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAwsNodePool = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createAwsNodePool(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createAwsNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAwsNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAwsNodePool with LRO error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.CreateAwsNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.CreateAwsNodePoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAwsNodePool = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createAwsNodePool(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createAwsNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAwsNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateAwsNodePoolProgress without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateAwsNodePoolProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateAwsNodePoolProgress with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateAwsNodePoolProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateAwsNodePool', () => {
-    it('invokes updateAwsNodePool without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.UpdateAwsNodePoolRequest()
-      );
-      request.awsNodePool ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.UpdateAwsNodePoolRequest',
-        ['awsNodePool', 'name']
-      );
-      request.awsNodePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `aws_node_pool.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateAwsNodePool =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateAwsNodePool(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAwsNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAwsNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAwsNodePool without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.UpdateAwsNodePoolRequest()
-      );
-      request.awsNodePool ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.UpdateAwsNodePoolRequest',
-        ['awsNodePool', 'name']
-      );
-      request.awsNodePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `aws_node_pool.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateAwsNodePool =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateAwsNodePool(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
-              protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAwsNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAwsNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAwsNodePool with call error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.UpdateAwsNodePoolRequest()
-      );
-      request.awsNodePool ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.UpdateAwsNodePoolRequest',
-        ['awsNodePool', 'name']
-      );
-      request.awsNodePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `aws_node_pool.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAwsNodePool = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateAwsNodePool(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateAwsNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAwsNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAwsNodePool with LRO error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.UpdateAwsNodePoolRequest()
-      );
-      request.awsNodePool ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.UpdateAwsNodePoolRequest',
-        ['awsNodePool', 'name']
-      );
-      request.awsNodePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `aws_node_pool.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAwsNodePool = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateAwsNodePool(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateAwsNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAwsNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateAwsNodePoolProgress without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateAwsNodePoolProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateAwsNodePoolProgress with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateAwsNodePoolProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('rollbackAwsNodePoolUpdate', () => {
-    it('invokes rollbackAwsNodePoolUpdate without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.RollbackAwsNodePoolUpdateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.RollbackAwsNodePoolUpdateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.rollbackAwsNodePoolUpdate =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.rollbackAwsNodePoolUpdate(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.rollbackAwsNodePoolUpdate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rollbackAwsNodePoolUpdate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rollbackAwsNodePoolUpdate without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.RollbackAwsNodePoolUpdateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.RollbackAwsNodePoolUpdateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.rollbackAwsNodePoolUpdate =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.rollbackAwsNodePoolUpdate(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
-              protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.rollbackAwsNodePoolUpdate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rollbackAwsNodePoolUpdate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rollbackAwsNodePoolUpdate with call error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.RollbackAwsNodePoolUpdateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.RollbackAwsNodePoolUpdateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.rollbackAwsNodePoolUpdate = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.rollbackAwsNodePoolUpdate(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.rollbackAwsNodePoolUpdate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rollbackAwsNodePoolUpdate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rollbackAwsNodePoolUpdate with LRO error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.RollbackAwsNodePoolUpdateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.RollbackAwsNodePoolUpdateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.rollbackAwsNodePoolUpdate = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.rollbackAwsNodePoolUpdate(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.rollbackAwsNodePoolUpdate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rollbackAwsNodePoolUpdate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkRollbackAwsNodePoolUpdateProgress without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkRollbackAwsNodePoolUpdateProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkRollbackAwsNodePoolUpdateProgress with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkRollbackAwsNodePoolUpdateProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteAwsNodePool', () => {
-    it('invokes deleteAwsNodePool without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.DeleteAwsNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.DeleteAwsNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteAwsNodePool =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteAwsNodePool(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAwsNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAwsNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAwsNodePool without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.DeleteAwsNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.DeleteAwsNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteAwsNodePool =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteAwsNodePool(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAwsNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAwsNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAwsNodePool with call error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.DeleteAwsNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.DeleteAwsNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAwsNodePool = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteAwsNodePool(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteAwsNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAwsNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAwsNodePool with LRO error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.DeleteAwsNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.DeleteAwsNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAwsNodePool = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteAwsNodePool(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteAwsNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAwsNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteAwsNodePoolProgress without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteAwsNodePoolProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteAwsNodePoolProgress with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteAwsNodePoolProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listAwsClusters', () => {
-    it('invokes listAwsClusters without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.ListAwsClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.ListAwsClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsCluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsCluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsCluster()
-        ),
-      ];
-      client.innerApiCalls.listAwsClusters = stubSimpleCall(expectedResponse);
-      const [response] = await client.listAwsClusters(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAwsClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAwsClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAwsClusters without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.ListAwsClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.ListAwsClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsCluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsCluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsCluster()
-        ),
-      ];
-      client.innerApiCalls.listAwsClusters =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAwsClusters(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkemulticloud.v1.IAwsCluster[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAwsClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAwsClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAwsClusters with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.ListAwsClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.ListAwsClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAwsClusters = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listAwsClusters(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listAwsClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAwsClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAwsClustersStream without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.ListAwsClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.ListAwsClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsCluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsCluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsCluster()
-        ),
-      ];
-      client.descriptors.page.listAwsClusters.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAwsClustersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkemulticloud.v1.AwsCluster[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkemulticloud.v1.AwsCluster) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listAwsClusters.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAwsClusters, request)
-      );
-      assert(
-        (client.descriptors.page.listAwsClusters.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listAwsClustersStream with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.ListAwsClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.ListAwsClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAwsClusters.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAwsClustersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkemulticloud.v1.AwsCluster[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkemulticloud.v1.AwsCluster) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listAwsClusters.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAwsClusters, request)
-      );
-      assert(
-        (client.descriptors.page.listAwsClusters.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listAwsClusters without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.ListAwsClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.ListAwsClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsCluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsCluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsCluster()
-        ),
-      ];
-      client.descriptors.page.listAwsClusters.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gkemulticloud.v1.IAwsCluster[] = [];
-      const iterable = client.listAwsClustersAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAwsClusters.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAwsClusters.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listAwsClusters with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.ListAwsClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.ListAwsClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAwsClusters.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAwsClustersAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gkemulticloud.v1.IAwsCluster[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = awsclustersModule.v1.AwsClustersClient.servicePath;
+                assert.strictEqual(servicePath, 'gkemulticloud.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = awsclustersModule.v1.AwsClustersClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'gkemulticloud.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAwsClusters.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAwsClusters.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listAwsNodePools', () => {
-    it('invokes listAwsNodePools without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
-        ),
-      ];
-      client.innerApiCalls.listAwsNodePools = stubSimpleCall(expectedResponse);
-      const [response] = await client.listAwsNodePools(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAwsNodePools as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAwsNodePools as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAwsNodePools without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
-        ),
-      ];
-      client.innerApiCalls.listAwsNodePools =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAwsNodePools(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkemulticloud.v1.IAwsNodePool[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAwsNodePools as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAwsNodePools as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAwsNodePools with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAwsNodePools = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listAwsNodePools(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listAwsNodePools as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAwsNodePools as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAwsNodePoolsStream without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
-        ),
-      ];
-      client.descriptors.page.listAwsNodePools.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAwsNodePoolsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkemulticloud.v1.AwsNodePool[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkemulticloud.v1.AwsNodePool) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'gkemulticloud.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listAwsNodePools.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAwsNodePools, request)
-      );
-      assert(
-        (client.descriptors.page.listAwsNodePools.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listAwsNodePoolsStream with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAwsNodePools.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAwsNodePoolsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkemulticloud.v1.AwsNodePool[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkemulticloud.v1.AwsNodePool) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'gkemulticloud.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listAwsNodePools.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAwsNodePools, request)
-      );
-      assert(
-        (client.descriptors.page.listAwsNodePools.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listAwsNodePools without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
-        ),
-      ];
-      client.descriptors.page.listAwsNodePools.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gkemulticloud.v1.IAwsNodePool[] = [];
-      const iterable = client.listAwsNodePoolsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAwsNodePools.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAwsNodePools.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new awsclustersModule.v1.AwsClustersClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'gkemulticloud.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listAwsNodePools with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAwsNodePools.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAwsNodePoolsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gkemulticloud.v1.IAwsNodePool[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new awsclustersModule.v1.AwsClustersClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'gkemulticloud.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAwsNodePools.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAwsNodePools.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new awsclustersModule.v1.AwsClustersClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = awsclustersModule.v1.AwsClustersClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new awsclustersModule.v1.AwsClustersClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.awsClustersStub, undefined);
+            await client.initialize();
+            assert(client.awsClustersStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.awsClustersStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.awsClustersStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+
+    describe('getAwsCluster', () => {
+        it('invokes getAwsCluster without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.AwsCluster()
+            );
+            client.innerApiCalls.getAwsCluster = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAwsCluster(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAwsCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAwsCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAwsCluster without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.AwsCluster()
+            );
+            client.innerApiCalls.getAwsCluster = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAwsCluster(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkemulticloud.v1.IAwsCluster|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAwsCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAwsCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAwsCluster with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAwsCluster = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAwsCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAwsCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAwsCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAwsCluster with closed client', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAwsCluster(request), expectedError);
+        });
     });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+    describe('generateAwsClusterAgentToken', () => {
+        it('invokes generateAwsClusterAgentToken without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenRequest', ['awsCluster']);
+            request.awsCluster = defaultValue1;
+            const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenResponse()
+            );
+            client.innerApiCalls.generateAwsClusterAgentToken = stubSimpleCall(expectedResponse);
+            const [response] = await client.generateAwsClusterAgentToken(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateAwsClusterAgentToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateAwsClusterAgentToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateAwsClusterAgentToken without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenRequest', ['awsCluster']);
+            request.awsCluster = defaultValue1;
+            const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenResponse()
+            );
+            client.innerApiCalls.generateAwsClusterAgentToken = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.generateAwsClusterAgentToken(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateAwsClusterAgentToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateAwsClusterAgentToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateAwsClusterAgentToken with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenRequest', ['awsCluster']);
+            request.awsCluster = defaultValue1;
+            const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.generateAwsClusterAgentToken = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.generateAwsClusterAgentToken(request), expectedError);
+            const actualRequest = (client.innerApiCalls.generateAwsClusterAgentToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateAwsClusterAgentToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateAwsClusterAgentToken with closed client', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenRequest', ['awsCluster']);
+            request.awsCluster = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.generateAwsClusterAgentToken(request), expectedError);
+        });
+    });
+
+    describe('generateAwsAccessToken', () => {
+        it('invokes generateAwsAccessToken without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenRequest', ['awsCluster']);
+            request.awsCluster = defaultValue1;
+            const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenResponse()
+            );
+            client.innerApiCalls.generateAwsAccessToken = stubSimpleCall(expectedResponse);
+            const [response] = await client.generateAwsAccessToken(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateAwsAccessToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateAwsAccessToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateAwsAccessToken without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenRequest', ['awsCluster']);
+            request.awsCluster = defaultValue1;
+            const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenResponse()
+            );
+            client.innerApiCalls.generateAwsAccessToken = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.generateAwsAccessToken(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateAwsAccessToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateAwsAccessToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateAwsAccessToken with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenRequest', ['awsCluster']);
+            request.awsCluster = defaultValue1;
+            const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.generateAwsAccessToken = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.generateAwsAccessToken(request), expectedError);
+            const actualRequest = (client.innerApiCalls.generateAwsAccessToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateAwsAccessToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateAwsAccessToken with closed client', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenRequest', ['awsCluster']);
+            request.awsCluster = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.generateAwsAccessToken(request), expectedError);
+        });
+    });
+
+    describe('getAwsNodePool', () => {
+        it('invokes getAwsNodePool without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
+            );
+            client.innerApiCalls.getAwsNodePool = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAwsNodePool(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAwsNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAwsNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAwsNodePool without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.AwsNodePool()
+            );
+            client.innerApiCalls.getAwsNodePool = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAwsNodePool(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkemulticloud.v1.IAwsNodePool|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAwsNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAwsNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAwsNodePool with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAwsNodePool = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAwsNodePool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAwsNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAwsNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAwsNodePool with closed client', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAwsNodePool(request), expectedError);
+        });
+    });
+
+    describe('getAwsOpenIdConfig', () => {
+        it('invokes getAwsOpenIdConfig without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsOpenIdConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsOpenIdConfigRequest', ['awsCluster']);
+            request.awsCluster = defaultValue1;
+            const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.AwsOpenIdConfig()
+            );
+            client.innerApiCalls.getAwsOpenIdConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAwsOpenIdConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAwsOpenIdConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAwsOpenIdConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAwsOpenIdConfig without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsOpenIdConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsOpenIdConfigRequest', ['awsCluster']);
+            request.awsCluster = defaultValue1;
+            const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.AwsOpenIdConfig()
+            );
+            client.innerApiCalls.getAwsOpenIdConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAwsOpenIdConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAwsOpenIdConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAwsOpenIdConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAwsOpenIdConfig with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsOpenIdConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsOpenIdConfigRequest', ['awsCluster']);
+            request.awsCluster = defaultValue1;
+            const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAwsOpenIdConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAwsOpenIdConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAwsOpenIdConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAwsOpenIdConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAwsOpenIdConfig with closed client', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsOpenIdConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsOpenIdConfigRequest', ['awsCluster']);
+            request.awsCluster = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAwsOpenIdConfig(request), expectedError);
+        });
+    });
+
+    describe('getAwsJsonWebKeys', () => {
+        it('invokes getAwsJsonWebKeys without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsJsonWebKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsJsonWebKeysRequest', ['awsCluster']);
+            request.awsCluster = defaultValue1;
+            const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.AwsJsonWebKeys()
+            );
+            client.innerApiCalls.getAwsJsonWebKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAwsJsonWebKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAwsJsonWebKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAwsJsonWebKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAwsJsonWebKeys without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsJsonWebKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsJsonWebKeysRequest', ['awsCluster']);
+            request.awsCluster = defaultValue1;
+            const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.AwsJsonWebKeys()
+            );
+            client.innerApiCalls.getAwsJsonWebKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAwsJsonWebKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAwsJsonWebKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAwsJsonWebKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAwsJsonWebKeys with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsJsonWebKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsJsonWebKeysRequest', ['awsCluster']);
+            request.awsCluster = defaultValue1;
+            const expectedHeaderRequestParams = `aws_cluster=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAwsJsonWebKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAwsJsonWebKeys(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAwsJsonWebKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAwsJsonWebKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAwsJsonWebKeys with closed client', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsJsonWebKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsJsonWebKeysRequest', ['awsCluster']);
+            request.awsCluster = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAwsJsonWebKeys(request), expectedError);
+        });
+    });
+
+    describe('getAwsServerConfig', () => {
+        it('invokes getAwsServerConfig without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsServerConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsServerConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.AwsServerConfig()
+            );
+            client.innerApiCalls.getAwsServerConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAwsServerConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAwsServerConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAwsServerConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAwsServerConfig without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsServerConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsServerConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.AwsServerConfig()
+            );
+            client.innerApiCalls.getAwsServerConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAwsServerConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkemulticloud.v1.IAwsServerConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAwsServerConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAwsServerConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAwsServerConfig with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsServerConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsServerConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAwsServerConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAwsServerConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAwsServerConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAwsServerConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAwsServerConfig with closed client', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.GetAwsServerConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.GetAwsServerConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAwsServerConfig(request), expectedError);
+        });
+    });
+
+    describe('createAwsCluster', () => {
+        it('invokes createAwsCluster without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.CreateAwsClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.CreateAwsClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAwsCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createAwsCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAwsCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAwsCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAwsCluster without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.CreateAwsClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.CreateAwsClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAwsCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createAwsCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAwsCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAwsCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAwsCluster with call error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.CreateAwsClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.CreateAwsClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAwsCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createAwsCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createAwsCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAwsCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAwsCluster with LRO error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.CreateAwsClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.CreateAwsClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAwsCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createAwsCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createAwsCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAwsCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateAwsClusterProgress without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateAwsClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateAwsClusterProgress with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateAwsClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateAwsCluster', () => {
+        it('invokes updateAwsCluster without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.UpdateAwsClusterRequest()
+            );
+            request.awsCluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.UpdateAwsClusterRequest', ['awsCluster', 'name']);
+            request.awsCluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `aws_cluster.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAwsCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateAwsCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAwsCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAwsCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAwsCluster without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.UpdateAwsClusterRequest()
+            );
+            request.awsCluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.UpdateAwsClusterRequest', ['awsCluster', 'name']);
+            request.awsCluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `aws_cluster.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAwsCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAwsCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAwsCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAwsCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAwsCluster with call error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.UpdateAwsClusterRequest()
+            );
+            request.awsCluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.UpdateAwsClusterRequest', ['awsCluster', 'name']);
+            request.awsCluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `aws_cluster.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAwsCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateAwsCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAwsCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAwsCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAwsCluster with LRO error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.UpdateAwsClusterRequest()
+            );
+            request.awsCluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.UpdateAwsClusterRequest', ['awsCluster', 'name']);
+            request.awsCluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `aws_cluster.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAwsCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateAwsCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAwsCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAwsCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateAwsClusterProgress without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateAwsClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateAwsClusterProgress with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateAwsClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteAwsCluster', () => {
+        it('invokes deleteAwsCluster without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.DeleteAwsClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.DeleteAwsClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAwsCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteAwsCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAwsCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAwsCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAwsCluster without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.DeleteAwsClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.DeleteAwsClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAwsCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteAwsCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAwsCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAwsCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAwsCluster with call error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.DeleteAwsClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.DeleteAwsClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAwsCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteAwsCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAwsCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAwsCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAwsCluster with LRO error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.DeleteAwsClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.DeleteAwsClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAwsCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteAwsCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAwsCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAwsCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteAwsClusterProgress without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteAwsClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteAwsClusterProgress with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteAwsClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createAwsNodePool', () => {
+        it('invokes createAwsNodePool without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.CreateAwsNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.CreateAwsNodePoolRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAwsNodePool = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createAwsNodePool(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAwsNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAwsNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAwsNodePool without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.CreateAwsNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.CreateAwsNodePoolRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAwsNodePool = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createAwsNodePool(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAwsNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAwsNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAwsNodePool with call error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.CreateAwsNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.CreateAwsNodePoolRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAwsNodePool = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createAwsNodePool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createAwsNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAwsNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAwsNodePool with LRO error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.CreateAwsNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.CreateAwsNodePoolRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAwsNodePool = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createAwsNodePool(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createAwsNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAwsNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateAwsNodePoolProgress without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateAwsNodePoolProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateAwsNodePoolProgress with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateAwsNodePoolProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateAwsNodePool', () => {
+        it('invokes updateAwsNodePool without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.UpdateAwsNodePoolRequest()
+            );
+            request.awsNodePool ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.UpdateAwsNodePoolRequest', ['awsNodePool', 'name']);
+            request.awsNodePool.name = defaultValue1;
+            const expectedHeaderRequestParams = `aws_node_pool.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAwsNodePool = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateAwsNodePool(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAwsNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAwsNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAwsNodePool without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.UpdateAwsNodePoolRequest()
+            );
+            request.awsNodePool ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.UpdateAwsNodePoolRequest', ['awsNodePool', 'name']);
+            request.awsNodePool.name = defaultValue1;
+            const expectedHeaderRequestParams = `aws_node_pool.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAwsNodePool = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAwsNodePool(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAwsNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAwsNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAwsNodePool with call error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.UpdateAwsNodePoolRequest()
+            );
+            request.awsNodePool ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.UpdateAwsNodePoolRequest', ['awsNodePool', 'name']);
+            request.awsNodePool.name = defaultValue1;
+            const expectedHeaderRequestParams = `aws_node_pool.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAwsNodePool = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateAwsNodePool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAwsNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAwsNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAwsNodePool with LRO error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.UpdateAwsNodePoolRequest()
+            );
+            request.awsNodePool ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.UpdateAwsNodePoolRequest', ['awsNodePool', 'name']);
+            request.awsNodePool.name = defaultValue1;
+            const expectedHeaderRequestParams = `aws_node_pool.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAwsNodePool = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateAwsNodePool(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAwsNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAwsNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateAwsNodePoolProgress without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateAwsNodePoolProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateAwsNodePoolProgress with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateAwsNodePoolProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('rollbackAwsNodePoolUpdate', () => {
+        it('invokes rollbackAwsNodePoolUpdate without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.RollbackAwsNodePoolUpdateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.RollbackAwsNodePoolUpdateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.rollbackAwsNodePoolUpdate = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.rollbackAwsNodePoolUpdate(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.rollbackAwsNodePoolUpdate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rollbackAwsNodePoolUpdate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rollbackAwsNodePoolUpdate without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.RollbackAwsNodePoolUpdateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.RollbackAwsNodePoolUpdateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.rollbackAwsNodePoolUpdate = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.rollbackAwsNodePoolUpdate(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.rollbackAwsNodePoolUpdate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rollbackAwsNodePoolUpdate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rollbackAwsNodePoolUpdate with call error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.RollbackAwsNodePoolUpdateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.RollbackAwsNodePoolUpdateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.rollbackAwsNodePoolUpdate = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.rollbackAwsNodePoolUpdate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.rollbackAwsNodePoolUpdate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rollbackAwsNodePoolUpdate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rollbackAwsNodePoolUpdate with LRO error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.RollbackAwsNodePoolUpdateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.RollbackAwsNodePoolUpdateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.rollbackAwsNodePoolUpdate = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.rollbackAwsNodePoolUpdate(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.rollbackAwsNodePoolUpdate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rollbackAwsNodePoolUpdate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkRollbackAwsNodePoolUpdateProgress without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkRollbackAwsNodePoolUpdateProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkRollbackAwsNodePoolUpdateProgress with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkRollbackAwsNodePoolUpdateProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteAwsNodePool', () => {
+        it('invokes deleteAwsNodePool without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.DeleteAwsNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.DeleteAwsNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAwsNodePool = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteAwsNodePool(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAwsNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAwsNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAwsNodePool without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.DeleteAwsNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.DeleteAwsNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAwsNodePool = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteAwsNodePool(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAwsNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAwsNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAwsNodePool with call error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.DeleteAwsNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.DeleteAwsNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAwsNodePool = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteAwsNodePool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAwsNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAwsNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAwsNodePool with LRO error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.DeleteAwsNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.DeleteAwsNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAwsNodePool = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteAwsNodePool(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAwsNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAwsNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteAwsNodePoolProgress without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteAwsNodePoolProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteAwsNodePoolProgress with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteAwsNodePoolProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listAwsClusters', () => {
+        it('invokes listAwsClusters without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.ListAwsClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.ListAwsClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsCluster()),
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsCluster()),
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsCluster()),
+            ];
+            client.innerApiCalls.listAwsClusters = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAwsClusters(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAwsClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAwsClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAwsClusters without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.ListAwsClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.ListAwsClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsCluster()),
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsCluster()),
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsCluster()),
+            ];
+            client.innerApiCalls.listAwsClusters = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAwsClusters(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkemulticloud.v1.IAwsCluster[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAwsClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAwsClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAwsClusters with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.ListAwsClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.ListAwsClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAwsClusters = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAwsClusters(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAwsClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAwsClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAwsClustersStream without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.ListAwsClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.ListAwsClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsCluster()),
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsCluster()),
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsCluster()),
+            ];
+            client.descriptors.page.listAwsClusters.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAwsClustersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkemulticloud.v1.AwsCluster[] = [];
+                stream.on('data', (response: protos.google.cloud.gkemulticloud.v1.AwsCluster) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAwsClusters.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAwsClusters, request));
+            assert(
+                (client.descriptors.page.listAwsClusters.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listAwsClustersStream with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.ListAwsClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.ListAwsClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAwsClusters.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAwsClustersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkemulticloud.v1.AwsCluster[] = [];
+                stream.on('data', (response: protos.google.cloud.gkemulticloud.v1.AwsCluster) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAwsClusters.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAwsClusters, request));
+            assert(
+                (client.descriptors.page.listAwsClusters.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listAwsClusters without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.ListAwsClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.ListAwsClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsCluster()),
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsCluster()),
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsCluster()),
+            ];
+            client.descriptors.page.listAwsClusters.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkemulticloud.v1.IAwsCluster[] = [];
+            const iterable = client.listAwsClustersAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAwsClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAwsClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listAwsClusters with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.ListAwsClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.ListAwsClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAwsClusters.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAwsClustersAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkemulticloud.v1.IAwsCluster[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAwsClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAwsClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getOperation with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+    describe('listAwsNodePools', () => {
+        it('invokes listAwsNodePools without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsNodePool()),
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsNodePool()),
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsNodePool()),
+            ];
+            client.innerApiCalls.listAwsNodePools = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAwsNodePools(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAwsNodePools as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAwsNodePools as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAwsNodePools without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsNodePool()),
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsNodePool()),
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsNodePool()),
+            ];
+            client.innerApiCalls.listAwsNodePools = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAwsNodePools(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkemulticloud.v1.IAwsNodePool[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAwsNodePools as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAwsNodePools as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAwsNodePools with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAwsNodePools = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAwsNodePools(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAwsNodePools as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAwsNodePools as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAwsNodePoolsStream without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsNodePool()),
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsNodePool()),
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsNodePool()),
+            ];
+            client.descriptors.page.listAwsNodePools.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAwsNodePoolsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkemulticloud.v1.AwsNodePool[] = [];
+                stream.on('data', (response: protos.google.cloud.gkemulticloud.v1.AwsNodePool) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAwsNodePools.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAwsNodePools, request));
+            assert(
+                (client.descriptors.page.listAwsNodePools.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listAwsNodePoolsStream with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAwsNodePools.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAwsNodePoolsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkemulticloud.v1.AwsNodePool[] = [];
+                stream.on('data', (response: protos.google.cloud.gkemulticloud.v1.AwsNodePool) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAwsNodePools.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAwsNodePools, request));
+            assert(
+                (client.descriptors.page.listAwsNodePools.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listAwsNodePools without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsNodePool()),
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsNodePool()),
+              generateSampleMessage(new protos.google.cloud.gkemulticloud.v1.AwsNodePool()),
+            ];
+            client.descriptors.page.listAwsNodePools.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkemulticloud.v1.IAwsNodePool[] = [];
+            const iterable = client.listAwsNodePoolsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAwsNodePools.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAwsNodePools.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listAwsNodePools with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkemulticloud.v1.ListAwsNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAwsNodePools.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAwsNodePoolsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkemulticloud.v1.IAwsNodePool[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAwsNodePools.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAwsNodePools.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes cancelOperation with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('attachedCluster', async () => {
-      const fakePath = '/rendered/path/attachedCluster';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        attached_cluster: 'attachedClusterValue',
-      };
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.attachedClusterPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.attachedClusterPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('attachedClusterPath', () => {
-        const result = client.attachedClusterPath(
-          'projectValue',
-          'locationValue',
-          'attachedClusterValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.attachedClusterPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAttachedClusterName', () => {
-        const result = client.matchProjectFromAttachedClusterName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.attachedClusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAttachedClusterName', () => {
-        const result = client.matchLocationFromAttachedClusterName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.attachedClusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAttachedClusterFromAttachedClusterName', () => {
-        const result =
-          client.matchAttachedClusterFromAttachedClusterName(fakePath);
-        assert.strictEqual(result, 'attachedClusterValue');
-        assert(
-          (client.pathTemplates.attachedClusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('attachedServerConfig', async () => {
-      const fakePath = '/rendered/path/attachedServerConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.attachedServerConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.attachedServerConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('attachedServerConfigPath', () => {
-        const result = client.attachedServerConfigPath(
-          'projectValue',
-          'locationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.attachedServerConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('attachedCluster', async () => {
+            const fakePath = "/rendered/path/attachedCluster";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                attached_cluster: "attachedClusterValue",
+            };
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.attachedClusterPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.attachedClusterPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromAttachedServerConfigName', () => {
-        const result =
-          client.matchProjectFromAttachedServerConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.attachedServerConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('attachedClusterPath', () => {
+                const result = client.attachedClusterPath("projectValue", "locationValue", "attachedClusterValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.attachedClusterPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromAttachedServerConfigName', () => {
-        const result =
-          client.matchLocationFromAttachedServerConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.attachedServerConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromAttachedClusterName', () => {
+                const result = client.matchProjectFromAttachedClusterName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.attachedClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAttachedClusterName', () => {
+                const result = client.matchLocationFromAttachedClusterName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.attachedClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAttachedClusterFromAttachedClusterName', () => {
+                const result = client.matchAttachedClusterFromAttachedClusterName(fakePath);
+                assert.strictEqual(result, "attachedClusterValue");
+                assert((client.pathTemplates.attachedClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('attachedServerConfig', async () => {
+            const fakePath = "/rendered/path/attachedServerConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.attachedServerConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.attachedServerConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('attachedServerConfigPath', () => {
+                const result = client.attachedServerConfigPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.attachedServerConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAttachedServerConfigName', () => {
+                const result = client.matchProjectFromAttachedServerConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.attachedServerConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAttachedServerConfigName', () => {
+                const result = client.matchLocationFromAttachedServerConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.attachedServerConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('awsCluster', async () => {
+            const fakePath = "/rendered/path/awsCluster";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                aws_cluster: "awsClusterValue",
+            };
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.awsClusterPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.awsClusterPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('awsClusterPath', () => {
+                const result = client.awsClusterPath("projectValue", "locationValue", "awsClusterValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.awsClusterPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAwsClusterName', () => {
+                const result = client.matchProjectFromAwsClusterName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.awsClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAwsClusterName', () => {
+                const result = client.matchLocationFromAwsClusterName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.awsClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAwsClusterFromAwsClusterName', () => {
+                const result = client.matchAwsClusterFromAwsClusterName(fakePath);
+                assert.strictEqual(result, "awsClusterValue");
+                assert((client.pathTemplates.awsClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('awsNodePool', async () => {
+            const fakePath = "/rendered/path/awsNodePool";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                aws_cluster: "awsClusterValue",
+                aws_node_pool: "awsNodePoolValue",
+            };
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.awsNodePoolPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.awsNodePoolPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('awsNodePoolPath', () => {
+                const result = client.awsNodePoolPath("projectValue", "locationValue", "awsClusterValue", "awsNodePoolValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.awsNodePoolPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAwsNodePoolName', () => {
+                const result = client.matchProjectFromAwsNodePoolName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.awsNodePoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAwsNodePoolName', () => {
+                const result = client.matchLocationFromAwsNodePoolName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.awsNodePoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAwsClusterFromAwsNodePoolName', () => {
+                const result = client.matchAwsClusterFromAwsNodePoolName(fakePath);
+                assert.strictEqual(result, "awsClusterValue");
+                assert((client.pathTemplates.awsNodePoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAwsNodePoolFromAwsNodePoolName', () => {
+                const result = client.matchAwsNodePoolFromAwsNodePoolName(fakePath);
+                assert.strictEqual(result, "awsNodePoolValue");
+                assert((client.pathTemplates.awsNodePoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('awsServerConfig', async () => {
+            const fakePath = "/rendered/path/awsServerConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.awsServerConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.awsServerConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('awsServerConfigPath', () => {
+                const result = client.awsServerConfigPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.awsServerConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAwsServerConfigName', () => {
+                const result = client.matchProjectFromAwsServerConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.awsServerConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAwsServerConfigName', () => {
+                const result = client.matchLocationFromAwsServerConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.awsServerConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('azureClient', async () => {
+            const fakePath = "/rendered/path/azureClient";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                azure_client: "azureClientValue",
+            };
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.azureClientPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.azureClientPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('azureClientPath', () => {
+                const result = client.azureClientPath("projectValue", "locationValue", "azureClientValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.azureClientPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAzureClientName', () => {
+                const result = client.matchProjectFromAzureClientName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.azureClientPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAzureClientName', () => {
+                const result = client.matchLocationFromAzureClientName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.azureClientPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAzureClientFromAzureClientName', () => {
+                const result = client.matchAzureClientFromAzureClientName(fakePath);
+                assert.strictEqual(result, "azureClientValue");
+                assert((client.pathTemplates.azureClientPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('azureCluster', async () => {
+            const fakePath = "/rendered/path/azureCluster";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                azure_cluster: "azureClusterValue",
+            };
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.azureClusterPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.azureClusterPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('azureClusterPath', () => {
+                const result = client.azureClusterPath("projectValue", "locationValue", "azureClusterValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.azureClusterPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAzureClusterName', () => {
+                const result = client.matchProjectFromAzureClusterName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.azureClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAzureClusterName', () => {
+                const result = client.matchLocationFromAzureClusterName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.azureClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAzureClusterFromAzureClusterName', () => {
+                const result = client.matchAzureClusterFromAzureClusterName(fakePath);
+                assert.strictEqual(result, "azureClusterValue");
+                assert((client.pathTemplates.azureClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('azureNodePool', async () => {
+            const fakePath = "/rendered/path/azureNodePool";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                azure_cluster: "azureClusterValue",
+                azure_node_pool: "azureNodePoolValue",
+            };
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.azureNodePoolPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.azureNodePoolPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('azureNodePoolPath', () => {
+                const result = client.azureNodePoolPath("projectValue", "locationValue", "azureClusterValue", "azureNodePoolValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.azureNodePoolPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAzureNodePoolName', () => {
+                const result = client.matchProjectFromAzureNodePoolName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.azureNodePoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAzureNodePoolName', () => {
+                const result = client.matchLocationFromAzureNodePoolName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.azureNodePoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAzureClusterFromAzureNodePoolName', () => {
+                const result = client.matchAzureClusterFromAzureNodePoolName(fakePath);
+                assert.strictEqual(result, "azureClusterValue");
+                assert((client.pathTemplates.azureNodePoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAzureNodePoolFromAzureNodePoolName', () => {
+                const result = client.matchAzureNodePoolFromAzureNodePoolName(fakePath);
+                assert.strictEqual(result, "azureNodePoolValue");
+                assert((client.pathTemplates.azureNodePoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('azureServerConfig', async () => {
+            const fakePath = "/rendered/path/azureServerConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.azureServerConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.azureServerConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('azureServerConfigPath', () => {
+                const result = client.azureServerConfigPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.azureServerConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAzureServerConfigName', () => {
+                const result = client.matchProjectFromAzureServerConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.azureServerConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAzureServerConfigName', () => {
+                const result = client.matchLocationFromAzureServerConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.azureServerConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new awsclustersModule.v1.AwsClustersClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('awsCluster', async () => {
-      const fakePath = '/rendered/path/awsCluster';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        aws_cluster: 'awsClusterValue',
-      };
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.awsClusterPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.awsClusterPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('awsClusterPath', () => {
-        const result = client.awsClusterPath(
-          'projectValue',
-          'locationValue',
-          'awsClusterValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.awsClusterPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAwsClusterName', () => {
-        const result = client.matchProjectFromAwsClusterName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.awsClusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAwsClusterName', () => {
-        const result = client.matchLocationFromAwsClusterName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.awsClusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAwsClusterFromAwsClusterName', () => {
-        const result = client.matchAwsClusterFromAwsClusterName(fakePath);
-        assert.strictEqual(result, 'awsClusterValue');
-        assert(
-          (client.pathTemplates.awsClusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('awsNodePool', async () => {
-      const fakePath = '/rendered/path/awsNodePool';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        aws_cluster: 'awsClusterValue',
-        aws_node_pool: 'awsNodePoolValue',
-      };
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.awsNodePoolPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.awsNodePoolPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('awsNodePoolPath', () => {
-        const result = client.awsNodePoolPath(
-          'projectValue',
-          'locationValue',
-          'awsClusterValue',
-          'awsNodePoolValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.awsNodePoolPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAwsNodePoolName', () => {
-        const result = client.matchProjectFromAwsNodePoolName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.awsNodePoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAwsNodePoolName', () => {
-        const result = client.matchLocationFromAwsNodePoolName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.awsNodePoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAwsClusterFromAwsNodePoolName', () => {
-        const result = client.matchAwsClusterFromAwsNodePoolName(fakePath);
-        assert.strictEqual(result, 'awsClusterValue');
-        assert(
-          (client.pathTemplates.awsNodePoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAwsNodePoolFromAwsNodePoolName', () => {
-        const result = client.matchAwsNodePoolFromAwsNodePoolName(fakePath);
-        assert.strictEqual(result, 'awsNodePoolValue');
-        assert(
-          (client.pathTemplates.awsNodePoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('awsServerConfig', async () => {
-      const fakePath = '/rendered/path/awsServerConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.awsServerConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.awsServerConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('awsServerConfigPath', () => {
-        const result = client.awsServerConfigPath(
-          'projectValue',
-          'locationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.awsServerConfigPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAwsServerConfigName', () => {
-        const result = client.matchProjectFromAwsServerConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.awsServerConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAwsServerConfigName', () => {
-        const result = client.matchLocationFromAwsServerConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.awsServerConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('azureClient', async () => {
-      const fakePath = '/rendered/path/azureClient';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        azure_client: 'azureClientValue',
-      };
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.azureClientPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.azureClientPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('azureClientPath', () => {
-        const result = client.azureClientPath(
-          'projectValue',
-          'locationValue',
-          'azureClientValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.azureClientPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAzureClientName', () => {
-        const result = client.matchProjectFromAzureClientName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.azureClientPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAzureClientName', () => {
-        const result = client.matchLocationFromAzureClientName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.azureClientPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAzureClientFromAzureClientName', () => {
-        const result = client.matchAzureClientFromAzureClientName(fakePath);
-        assert.strictEqual(result, 'azureClientValue');
-        assert(
-          (client.pathTemplates.azureClientPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('azureCluster', async () => {
-      const fakePath = '/rendered/path/azureCluster';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        azure_cluster: 'azureClusterValue',
-      };
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.azureClusterPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.azureClusterPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('azureClusterPath', () => {
-        const result = client.azureClusterPath(
-          'projectValue',
-          'locationValue',
-          'azureClusterValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.azureClusterPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAzureClusterName', () => {
-        const result = client.matchProjectFromAzureClusterName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.azureClusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAzureClusterName', () => {
-        const result = client.matchLocationFromAzureClusterName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.azureClusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAzureClusterFromAzureClusterName', () => {
-        const result = client.matchAzureClusterFromAzureClusterName(fakePath);
-        assert.strictEqual(result, 'azureClusterValue');
-        assert(
-          (client.pathTemplates.azureClusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('azureNodePool', async () => {
-      const fakePath = '/rendered/path/azureNodePool';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        azure_cluster: 'azureClusterValue',
-        azure_node_pool: 'azureNodePoolValue',
-      };
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.azureNodePoolPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.azureNodePoolPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('azureNodePoolPath', () => {
-        const result = client.azureNodePoolPath(
-          'projectValue',
-          'locationValue',
-          'azureClusterValue',
-          'azureNodePoolValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.azureNodePoolPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAzureNodePoolName', () => {
-        const result = client.matchProjectFromAzureNodePoolName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.azureNodePoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAzureNodePoolName', () => {
-        const result = client.matchLocationFromAzureNodePoolName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.azureNodePoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAzureClusterFromAzureNodePoolName', () => {
-        const result = client.matchAzureClusterFromAzureNodePoolName(fakePath);
-        assert.strictEqual(result, 'azureClusterValue');
-        assert(
-          (client.pathTemplates.azureNodePoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAzureNodePoolFromAzureNodePoolName', () => {
-        const result = client.matchAzureNodePoolFromAzureNodePoolName(fakePath);
-        assert.strictEqual(result, 'azureNodePoolValue');
-        assert(
-          (client.pathTemplates.azureNodePoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('azureServerConfig', async () => {
-      const fakePath = '/rendered/path/azureServerConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.azureServerConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.azureServerConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('azureServerConfigPath', () => {
-        const result = client.azureServerConfigPath(
-          'projectValue',
-          'locationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.azureServerConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAzureServerConfigName', () => {
-        const result = client.matchProjectFromAzureServerConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.azureServerConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAzureServerConfigName', () => {
-        const result = client.matchLocationFromAzureServerConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.azureServerConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new awsclustersModule.v1.AwsClustersClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -55,6 +58,13 @@
                         "content": {
                           "type": "bytes",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "docid": {
+                          "type": "string",
+                          "id": 15,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1148,6 +1158,10 @@
                                 "pageSpan": {
                                   "type": "LayoutPageSpan",
                                   "id": 5
+                                },
+                                "boundingBox": {
+                                  "type": "BoundingPoly",
+                                  "id": 6
                                 }
                               },
                               "nested": {
@@ -2111,6 +2125,20 @@
                             "chunkingConfig": {
                               "type": "ChunkingConfig",
                               "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "returnImages": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "returnBoundingBoxes": {
+                              "type": "bool",
+                              "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -6300,6 +6328,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "docid": {
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "mimeType": {
                           "type": "string",
                           "id": 3
@@ -6359,6 +6394,14 @@
                         "chunkedDocument": {
                           "type": "ChunkedDocument",
                           "id": 18
+                        },
+                        "blobAssets": {
+                          "rule": "repeated",
+                          "type": "BlobAsset",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -7350,6 +7393,14 @@
                             }
                           }
                         },
+                        "Annotations": {
+                          "fields": {
+                            "description": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
                         "DocumentLayout": {
                           "fields": {
                             "blocks": {
@@ -7365,7 +7416,8 @@
                                   "oneof": [
                                     "textBlock",
                                     "tableBlock",
-                                    "listBlock"
+                                    "listBlock",
+                                    "imageBlock"
                                   ]
                                 }
                               },
@@ -7382,6 +7434,10 @@
                                   "type": "LayoutListBlock",
                                   "id": 4
                                 },
+                                "imageBlock": {
+                                  "type": "LayoutImageBlock",
+                                  "id": 7
+                                },
                                 "blockId": {
                                   "type": "string",
                                   "id": 1
@@ -7389,6 +7445,10 @@
                                 "pageSpan": {
                                   "type": "LayoutPageSpan",
                                   "id": 5
+                                },
+                                "boundingBox": {
+                                  "type": "BoundingPoly",
+                                  "id": 6
                                 }
                               },
                               "nested": {
@@ -7486,6 +7546,52 @@
                                       "id": 1
                                     }
                                   }
+                                },
+                                "LayoutImageBlock": {
+                                  "oneofs": {
+                                    "imageSource": {
+                                      "oneof": [
+                                        "blobAssetId",
+                                        "gcsUri",
+                                        "dataUri"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "blobAssetId": {
+                                      "type": "string",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "gcsUri": {
+                                      "type": "string",
+                                      "id": 5,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "dataUri": {
+                                      "type": "string",
+                                      "id": 6,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "mimeType": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "imageText": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "annotations": {
+                                      "type": "Annotations",
+                                      "id": 3
+                                    }
+                                  }
                                 }
                               }
                             }
@@ -7528,6 +7634,11 @@
                                   "rule": "repeated",
                                   "type": "ChunkPageFooter",
                                   "id": 6
+                                },
+                                "chunkFields": {
+                                  "rule": "repeated",
+                                  "type": "ChunkField",
+                                  "id": 7
                                 }
                               },
                               "nested": {
@@ -7566,8 +7677,96 @@
                                       "id": 2
                                     }
                                   }
+                                },
+                                "ImageChunkField": {
+                                  "oneofs": {
+                                    "imageSource": {
+                                      "oneof": [
+                                        "blobAssetId",
+                                        "gcsUri",
+                                        "dataUri"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "blobAssetId": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "gcsUri": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "dataUri": {
+                                      "type": "string",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "annotations": {
+                                      "type": "Annotations",
+                                      "id": 4
+                                    }
+                                  }
+                                },
+                                "TableChunkField": {
+                                  "fields": {
+                                    "annotations": {
+                                      "type": "Annotations",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "ChunkField": {
+                                  "oneofs": {
+                                    "fieldType": {
+                                      "oneof": [
+                                        "imageChunkField",
+                                        "tableChunkField"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "imageChunkField": {
+                                      "type": "ImageChunkField",
+                                      "id": 1
+                                    },
+                                    "tableChunkField": {
+                                      "type": "TableChunkField",
+                                      "id": 2
+                                    }
+                                  }
                                 }
                               }
+                            }
+                          }
+                        },
+                        "BlobAsset": {
+                          "fields": {
+                            "assetId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "content": {
+                              "type": "bytes",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "mimeType": {
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         }
@@ -8624,9 +8823,30 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "enableImageAnnotation": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "enableImageExtraction": {
+                              "type": "bool",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "enableLlmLayoutParsing": {
                               "type": "bool",
                               "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "enableTableAnnotation": {
+                              "type": "bool",
+                              "id": 6,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }

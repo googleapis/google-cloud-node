@@ -29,6955 +29,4198 @@ import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1alpha.ConversationalSearchServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          conversationalsearchserviceModule.v1alpha
-            .ConversationalSearchServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          conversationalsearchserviceModule.v1alpha
-            .ConversationalSearchServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {universeDomain: 'example.com'}
-        );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'discoveryengine.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {universe_domain: 'example.com'}
-        );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'discoveryengine.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'discoveryengine.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-              {universeDomain: 'configured.example.com'}
+        it('has universeDomain', () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'discoveryengine.example.com');
+        });
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'discoveryengine.example.com');
+        });
+
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'discoveryengine.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'discoveryengine.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.conversationalSearchServiceStub, undefined);
+            await client.initialize();
+            assert(client.conversationalSearchServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.conversationalSearchServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.conversationalSearchServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
+    });
+
+    describe('converseConversation', () => {
+        it('invokes converseConversation without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ConverseConversationRequest()
             );
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'discoveryengine.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ConverseConversationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ConverseConversationResponse()
+            );
+            client.innerApiCalls.converseConversation = stubSimpleCall(expectedResponse);
+            const [response] = await client.converseConversation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.converseConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.converseConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {universe_domain: 'example.com', universeDomain: 'example.net'}
-        );
-      });
-    });
 
-    it('has port', () => {
-      const port =
-        conversationalsearchserviceModule.v1alpha
-          .ConversationalSearchServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            fallback: true,
-          }
-        );
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.conversationalSearchServiceStub, undefined);
-      await client.initialize();
-      assert(client.conversationalSearchServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.conversationalSearchServiceStub);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.conversationalSearchServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
+        it('invokes converseConversation without error using callback', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ConverseConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ConverseConversationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ConverseConversationResponse()
+            );
+            client.innerApiCalls.converseConversation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.converseConversation(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.discoveryengine.v1alpha.IConverseConversationResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.converseConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.converseConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
 
-  describe('converseConversation', () => {
-    it('invokes converseConversation without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ConverseConversationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ConverseConversationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ConverseConversationResponse()
-      );
-      client.innerApiCalls.converseConversation =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.converseConversation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.converseConversation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.converseConversation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes converseConversation without error using callback', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ConverseConversationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ConverseConversationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ConverseConversationResponse()
-      );
-      client.innerApiCalls.converseConversation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.converseConversation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1alpha.IConverseConversationResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.converseConversation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.converseConversation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes converseConversation with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ConverseConversationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ConverseConversationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.converseConversation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.converseConversation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.converseConversation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.converseConversation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes converseConversation with closed client', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ConverseConversationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ConverseConversationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.converseConversation(request), expectedError);
-    });
-  });
-
-  describe('createConversation', () => {
-    it('invokes createConversation without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.CreateConversationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.CreateConversationRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-      );
-      client.innerApiCalls.createConversation =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createConversation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createConversation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createConversation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createConversation without error using callback', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.CreateConversationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.CreateConversationRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-      );
-      client.innerApiCalls.createConversation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createConversation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1alpha.IConversation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createConversation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createConversation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createConversation with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.CreateConversationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.CreateConversationRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createConversation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createConversation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createConversation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createConversation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createConversation with closed client', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.CreateConversationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.CreateConversationRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.createConversation(request), expectedError);
-    });
-  });
-
-  describe('deleteConversation', () => {
-    it('invokes deleteConversation without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.DeleteConversationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.DeleteConversationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteConversation =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteConversation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteConversation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConversation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteConversation without error using callback', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.DeleteConversationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.DeleteConversationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteConversation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteConversation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteConversation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConversation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteConversation with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.DeleteConversationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.DeleteConversationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteConversation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteConversation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteConversation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConversation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteConversation with closed client', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.DeleteConversationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.DeleteConversationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.deleteConversation(request), expectedError);
-    });
-  });
-
-  describe('updateConversation', () => {
-    it('invokes updateConversation without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.UpdateConversationRequest()
-      );
-      request.conversation ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.UpdateConversationRequest',
-        ['conversation', 'name']
-      );
-      request.conversation.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversation.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-      );
-      client.innerApiCalls.updateConversation =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateConversation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateConversation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConversation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateConversation without error using callback', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.UpdateConversationRequest()
-      );
-      request.conversation ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.UpdateConversationRequest',
-        ['conversation', 'name']
-      );
-      request.conversation.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversation.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-      );
-      client.innerApiCalls.updateConversation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateConversation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1alpha.IConversation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateConversation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConversation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateConversation with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.UpdateConversationRequest()
-      );
-      request.conversation ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.UpdateConversationRequest',
-        ['conversation', 'name']
-      );
-      request.conversation.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversation.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateConversation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateConversation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateConversation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConversation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateConversation with closed client', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.UpdateConversationRequest()
-      );
-      request.conversation ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.UpdateConversationRequest',
-        ['conversation', 'name']
-      );
-      request.conversation.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.updateConversation(request), expectedError);
-    });
-  });
-
-  describe('getConversation', () => {
-    it('invokes getConversation without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetConversationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetConversationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-      );
-      client.innerApiCalls.getConversation = stubSimpleCall(expectedResponse);
-      const [response] = await client.getConversation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getConversation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getConversation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getConversation without error using callback', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetConversationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetConversationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-      );
-      client.innerApiCalls.getConversation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getConversation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1alpha.IConversation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getConversation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getConversation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getConversation with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetConversationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetConversationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getConversation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getConversation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getConversation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getConversation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getConversation with closed client', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetConversationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetConversationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getConversation(request), expectedError);
-    });
-  });
-
-  describe('answerQuery', () => {
-    it('invokes answerQuery without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.AnswerQueryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.AnswerQueryRequest',
-        ['servingConfig']
-      );
-      request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.AnswerQueryResponse()
-      );
-      client.innerApiCalls.answerQuery = stubSimpleCall(expectedResponse);
-      const [response] = await client.answerQuery(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.answerQuery as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.answerQuery as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes answerQuery without error using callback', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.AnswerQueryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.AnswerQueryRequest',
-        ['servingConfig']
-      );
-      request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.AnswerQueryResponse()
-      );
-      client.innerApiCalls.answerQuery =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.answerQuery(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.answerQuery as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.answerQuery as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes answerQuery with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.AnswerQueryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.AnswerQueryRequest',
-        ['servingConfig']
-      );
-      request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.answerQuery = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.answerQuery(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.answerQuery as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.answerQuery as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes answerQuery with closed client', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.AnswerQueryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.AnswerQueryRequest',
-        ['servingConfig']
-      );
-      request.servingConfig = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.answerQuery(request), expectedError);
-    });
-  });
-
-  describe('getAnswer', () => {
-    it('invokes getAnswer without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetAnswerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetAnswerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.Answer()
-      );
-      client.innerApiCalls.getAnswer = stubSimpleCall(expectedResponse);
-      const [response] = await client.getAnswer(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAnswer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAnswer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAnswer without error using callback', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetAnswerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetAnswerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.Answer()
-      );
-      client.innerApiCalls.getAnswer =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAnswer(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1alpha.IAnswer | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAnswer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAnswer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAnswer with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetAnswerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetAnswerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAnswer = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getAnswer(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getAnswer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAnswer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAnswer with closed client', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetAnswerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetAnswerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getAnswer(request), expectedError);
-    });
-  });
-
-  describe('createSession', () => {
-    it('invokes createSession without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.CreateSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.CreateSessionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.Session()
-      );
-      client.innerApiCalls.createSession = stubSimpleCall(expectedResponse);
-      const [response] = await client.createSession(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSession without error using callback', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.CreateSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.CreateSessionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.Session()
-      );
-      client.innerApiCalls.createSession =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createSession(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1alpha.ISession | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSession with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.CreateSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.CreateSessionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createSession = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createSession(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSession with closed client', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.CreateSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.CreateSessionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.createSession(request), expectedError);
-    });
-  });
-
-  describe('deleteSession', () => {
-    it('invokes deleteSession without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.DeleteSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.DeleteSessionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteSession = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteSession(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSession without error using callback', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.DeleteSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.DeleteSessionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteSession =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteSession(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSession with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.DeleteSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.DeleteSessionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSession = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteSession(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSession with closed client', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.DeleteSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.DeleteSessionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.deleteSession(request), expectedError);
-    });
-  });
-
-  describe('updateSession', () => {
-    it('invokes updateSession without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.UpdateSessionRequest()
-      );
-      request.session ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.UpdateSessionRequest',
-        ['session', 'name']
-      );
-      request.session.name = defaultValue1;
-      const expectedHeaderRequestParams = `session.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.Session()
-      );
-      client.innerApiCalls.updateSession = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateSession(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSession without error using callback', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.UpdateSessionRequest()
-      );
-      request.session ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.UpdateSessionRequest',
-        ['session', 'name']
-      );
-      request.session.name = defaultValue1;
-      const expectedHeaderRequestParams = `session.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.Session()
-      );
-      client.innerApiCalls.updateSession =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateSession(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1alpha.ISession | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSession with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.UpdateSessionRequest()
-      );
-      request.session ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.UpdateSessionRequest',
-        ['session', 'name']
-      );
-      request.session.name = defaultValue1;
-      const expectedHeaderRequestParams = `session.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSession = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateSession(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSession with closed client', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.UpdateSessionRequest()
-      );
-      request.session ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.UpdateSessionRequest',
-        ['session', 'name']
-      );
-      request.session.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.updateSession(request), expectedError);
-    });
-  });
-
-  describe('getSession', () => {
-    it('invokes getSession without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetSessionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.Session()
-      );
-      client.innerApiCalls.getSession = stubSimpleCall(expectedResponse);
-      const [response] = await client.getSession(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSession without error using callback', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetSessionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.Session()
-      );
-      client.innerApiCalls.getSession =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getSession(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1alpha.ISession | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSession with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetSessionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getSession = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getSession(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSession with closed client', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetSessionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getSession(request), expectedError);
-    });
-  });
-
-  describe('listConversations', () => {
-    it('invokes listConversations without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListConversationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListConversationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-        ),
-      ];
-      client.innerApiCalls.listConversations = stubSimpleCall(expectedResponse);
-      const [response] = await client.listConversations(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listConversations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listConversations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listConversations without error using callback', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListConversationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListConversationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-        ),
-      ];
-      client.innerApiCalls.listConversations =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listConversations(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.discoveryengine.v1alpha.IConversation[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listConversations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listConversations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listConversations with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListConversationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListConversationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listConversations = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listConversations(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listConversations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listConversations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listConversationsStream without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListConversationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListConversationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-        ),
-      ];
-      client.descriptors.page.listConversations.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listConversationsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1alpha.Conversation[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.discoveryengine.v1alpha.Conversation
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('invokes converseConversation with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ConverseConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ConverseConversationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.converseConversation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.converseConversation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.converseConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.converseConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes converseConversation with closed client', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ConverseConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ConverseConversationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.converseConversation(request), expectedError);
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listConversations.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listConversations, request)
-      );
-      assert(
-        (client.descriptors.page.listConversations.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listConversationsStream with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListConversationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListConversationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listConversations.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listConversationsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1alpha.Conversation[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.discoveryengine.v1alpha.Conversation
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('createConversation', () => {
+        it('invokes createConversation without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.CreateConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.CreateConversationRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.Conversation()
+            );
+            client.innerApiCalls.createConversation = stubSimpleCall(expectedResponse);
+            const [response] = await client.createConversation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes createConversation without error using callback', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.CreateConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.CreateConversationRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.Conversation()
+            );
+            client.innerApiCalls.createConversation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createConversation(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.discoveryengine.v1alpha.IConversation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listConversations.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listConversations, request)
-      );
-      assert(
-        (client.descriptors.page.listConversations.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+
+        it('invokes createConversation with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.CreateConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.CreateConversationRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createConversation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createConversation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createConversation with closed client', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.CreateConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.CreateConversationRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createConversation(request), expectedError);
+        });
     });
 
-    it('uses async iteration with listConversations without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListConversationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListConversationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Conversation()
-        ),
-      ];
-      client.descriptors.page.listConversations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.discoveryengine.v1alpha.IConversation[] =
-        [];
-      const iterable = client.listConversationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listConversations.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listConversations.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+    describe('deleteConversation', () => {
+        it('invokes deleteConversation without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.DeleteConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.DeleteConversationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteConversation = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteConversation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteConversation without error using callback', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.DeleteConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.DeleteConversationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteConversation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteConversation(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteConversation with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.DeleteConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.DeleteConversationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteConversation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteConversation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteConversation with closed client', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.DeleteConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.DeleteConversationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteConversation(request), expectedError);
+        });
     });
 
-    it('uses async iteration with listConversations with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListConversationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListConversationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listConversations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listConversationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.discoveryengine.v1alpha.IConversation[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listConversations.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listConversations.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+    describe('updateConversation', () => {
+        it('invokes updateConversation without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.UpdateConversationRequest()
+            );
+            request.conversation ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.UpdateConversationRequest', ['conversation', 'name']);
+            request.conversation.name = defaultValue1;
+            const expectedHeaderRequestParams = `conversation.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.Conversation()
+            );
+            client.innerApiCalls.updateConversation = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateConversation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-  describe('listSessions', () => {
-    it('invokes listSessions without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListSessionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListSessionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Session()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Session()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Session()
-        ),
-      ];
-      client.innerApiCalls.listSessions = stubSimpleCall(expectedResponse);
-      const [response] = await client.listSessions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSessions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSessions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('invokes updateConversation without error using callback', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.UpdateConversationRequest()
+            );
+            request.conversation ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.UpdateConversationRequest', ['conversation', 'name']);
+            request.conversation.name = defaultValue1;
+            const expectedHeaderRequestParams = `conversation.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.Conversation()
+            );
+            client.innerApiCalls.updateConversation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateConversation(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.discoveryengine.v1alpha.IConversation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateConversation with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.UpdateConversationRequest()
+            );
+            request.conversation ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.UpdateConversationRequest', ['conversation', 'name']);
+            request.conversation.name = defaultValue1;
+            const expectedHeaderRequestParams = `conversation.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateConversation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateConversation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateConversation with closed client', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.UpdateConversationRequest()
+            );
+            request.conversation ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.UpdateConversationRequest', ['conversation', 'name']);
+            request.conversation.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateConversation(request), expectedError);
+        });
     });
 
-    it('invokes listSessions without error using callback', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListSessionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListSessionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Session()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Session()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Session()
-        ),
-      ];
-      client.innerApiCalls.listSessions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listSessions(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.discoveryengine.v1alpha.ISession[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getConversation', () => {
+        it('invokes getConversation without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.GetConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.GetConversationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.Conversation()
+            );
+            client.innerApiCalls.getConversation = stubSimpleCall(expectedResponse);
+            const [response] = await client.getConversation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getConversation without error using callback', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.GetConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.GetConversationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.Conversation()
+            );
+            client.innerApiCalls.getConversation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getConversation(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.discoveryengine.v1alpha.IConversation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getConversation with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.GetConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.GetConversationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getConversation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getConversation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getConversation with closed client', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.GetConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.GetConversationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getConversation(request), expectedError);
+        });
+    });
+
+    describe('answerQuery', () => {
+        it('invokes answerQuery without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.AnswerQueryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.AnswerQueryRequest', ['servingConfig']);
+            request.servingConfig = defaultValue1;
+            const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.AnswerQueryResponse()
+            );
+            client.innerApiCalls.answerQuery = stubSimpleCall(expectedResponse);
+            const [response] = await client.answerQuery(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.answerQuery as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.answerQuery as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes answerQuery without error using callback', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.AnswerQueryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.AnswerQueryRequest', ['servingConfig']);
+            request.servingConfig = defaultValue1;
+            const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.AnswerQueryResponse()
+            );
+            client.innerApiCalls.answerQuery = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.answerQuery(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.answerQuery as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.answerQuery as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes answerQuery with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.AnswerQueryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.AnswerQueryRequest', ['servingConfig']);
+            request.servingConfig = defaultValue1;
+            const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.answerQuery = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.answerQuery(request), expectedError);
+            const actualRequest = (client.innerApiCalls.answerQuery as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.answerQuery as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes answerQuery with closed client', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.AnswerQueryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.AnswerQueryRequest', ['servingConfig']);
+            request.servingConfig = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.answerQuery(request), expectedError);
+        });
+    });
+
+    describe('getAnswer', () => {
+        it('invokes getAnswer without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.GetAnswerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.GetAnswerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.Answer()
+            );
+            client.innerApiCalls.getAnswer = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAnswer(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAnswer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAnswer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAnswer without error using callback', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.GetAnswerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.GetAnswerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.Answer()
+            );
+            client.innerApiCalls.getAnswer = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAnswer(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.discoveryengine.v1alpha.IAnswer|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAnswer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAnswer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAnswer with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.GetAnswerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.GetAnswerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAnswer = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAnswer(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAnswer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAnswer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAnswer with closed client', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.GetAnswerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.GetAnswerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAnswer(request), expectedError);
+        });
+    });
+
+    describe('createSession', () => {
+        it('invokes createSession without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.CreateSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.CreateSessionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.Session()
+            );
+            client.innerApiCalls.createSession = stubSimpleCall(expectedResponse);
+            const [response] = await client.createSession(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSession without error using callback', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.CreateSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.CreateSessionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.Session()
+            );
+            client.innerApiCalls.createSession = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createSession(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.discoveryengine.v1alpha.ISession|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSession with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.CreateSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.CreateSessionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createSession = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createSession(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSession with closed client', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.CreateSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.CreateSessionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createSession(request), expectedError);
+        });
+    });
+
+    describe('deleteSession', () => {
+        it('invokes deleteSession without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.DeleteSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.DeleteSessionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteSession = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteSession(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSession without error using callback', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.DeleteSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.DeleteSessionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteSession = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteSession(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSession with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.DeleteSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.DeleteSessionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteSession = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteSession(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSession with closed client', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.DeleteSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.DeleteSessionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteSession(request), expectedError);
+        });
+    });
+
+    describe('updateSession', () => {
+        it('invokes updateSession without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.UpdateSessionRequest()
+            );
+            request.session ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.UpdateSessionRequest', ['session', 'name']);
+            request.session.name = defaultValue1;
+            const expectedHeaderRequestParams = `session.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.Session()
+            );
+            client.innerApiCalls.updateSession = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateSession(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSession without error using callback', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.UpdateSessionRequest()
+            );
+            request.session ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.UpdateSessionRequest', ['session', 'name']);
+            request.session.name = defaultValue1;
+            const expectedHeaderRequestParams = `session.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.Session()
+            );
+            client.innerApiCalls.updateSession = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateSession(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.discoveryengine.v1alpha.ISession|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSession with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.UpdateSessionRequest()
+            );
+            request.session ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.UpdateSessionRequest', ['session', 'name']);
+            request.session.name = defaultValue1;
+            const expectedHeaderRequestParams = `session.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSession = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateSession(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSession with closed client', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.UpdateSessionRequest()
+            );
+            request.session ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.UpdateSessionRequest', ['session', 'name']);
+            request.session.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateSession(request), expectedError);
+        });
+    });
+
+    describe('getSession', () => {
+        it('invokes getSession without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.GetSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.GetSessionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.Session()
+            );
+            client.innerApiCalls.getSession = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSession(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSession without error using callback', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.GetSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.GetSessionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.Session()
+            );
+            client.innerApiCalls.getSession = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSession(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.discoveryengine.v1alpha.ISession|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSession with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.GetSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.GetSessionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSession = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getSession(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSession with closed client', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.GetSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.GetSessionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getSession(request), expectedError);
+        });
+    });
+
+    describe('listConversations', () => {
+        it('invokes listConversations without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ListConversationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ListConversationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Conversation()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Conversation()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Conversation()),
+            ];
+            client.innerApiCalls.listConversations = stubSimpleCall(expectedResponse);
+            const [response] = await client.listConversations(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listConversations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listConversations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listConversations without error using callback', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ListConversationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ListConversationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Conversation()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Conversation()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Conversation()),
+            ];
+            client.innerApiCalls.listConversations = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listConversations(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.discoveryengine.v1alpha.IConversation[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listConversations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listConversations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listConversations with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ListConversationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ListConversationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listConversations = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listConversations(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listConversations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listConversations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listConversationsStream without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ListConversationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ListConversationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Conversation()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Conversation()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Conversation()),
+            ];
+            client.descriptors.page.listConversations.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listConversationsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.discoveryengine.v1alpha.Conversation[] = [];
+                stream.on('data', (response: protos.google.cloud.discoveryengine.v1alpha.Conversation) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listConversations.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listConversations, request));
+            assert(
+                (client.descriptors.page.listConversations.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listConversationsStream with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ListConversationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ListConversationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listConversations.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listConversationsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.discoveryengine.v1alpha.Conversation[] = [];
+                stream.on('data', (response: protos.google.cloud.discoveryengine.v1alpha.Conversation) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listConversations.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listConversations, request));
+            assert(
+                (client.descriptors.page.listConversations.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listConversations without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ListConversationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ListConversationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Conversation()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Conversation()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Conversation()),
+            ];
+            client.descriptors.page.listConversations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.discoveryengine.v1alpha.IConversation[] = [];
+            const iterable = client.listConversationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSessions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSessions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSessions with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListSessionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListSessionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listSessions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listSessions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listSessions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSessions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSessionsStream without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListSessionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListSessionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Session()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Session()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Session()
-        ),
-      ];
-      client.descriptors.page.listSessions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listSessionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1alpha.Session[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.discoveryengine.v1alpha.Session) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listConversations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listConversations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listConversations with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ListConversationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ListConversationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listConversations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listConversationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.discoveryengine.v1alpha.IConversation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listConversations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listConversations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listSessions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSessions, request)
-      );
-      assert(
-        (client.descriptors.page.listSessions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listSessionsStream with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListSessionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListSessionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSessions.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listSessionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1alpha.Session[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.discoveryengine.v1alpha.Session) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listSessions', () => {
+        it('invokes listSessions without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ListSessionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ListSessionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Session()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Session()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Session()),
+            ];
+            client.innerApiCalls.listSessions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listSessions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSessions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSessions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listSessions without error using callback', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ListSessionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ListSessionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Session()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Session()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Session()),
+            ];
+            client.innerApiCalls.listSessions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listSessions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.discoveryengine.v1alpha.ISession[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSessions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSessions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listSessions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSessions, request)
-      );
-      assert(
-        (client.descriptors.page.listSessions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listSessions without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListSessionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListSessionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Session()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Session()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Session()
-        ),
-      ];
-      client.descriptors.page.listSessions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.discoveryengine.v1alpha.ISession[] =
-        [];
-      const iterable = client.listSessionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listSessions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSessions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listSessions with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ListSessionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ListSessionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listSessions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listSessions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listSessions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSessions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listSessions with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListSessionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListSessionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSessions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listSessionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.discoveryengine.v1alpha.ISession[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listSessions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSessions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('invokes listSessionsStream without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ListSessionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ListSessionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Session()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Session()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Session()),
+            ];
+            client.descriptors.page.listSessions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listSessionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.discoveryengine.v1alpha.Session[] = [];
+                stream.on('data', (response: protos.google.cloud.discoveryengine.v1alpha.Session) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listSessions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSessions, request));
+            assert(
+                (client.descriptors.page.listSessions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listSessionsStream with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ListSessionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ListSessionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSessions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listSessionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.discoveryengine.v1alpha.Session[] = [];
+                stream.on('data', (response: protos.google.cloud.discoveryengine.v1alpha.Session) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listSessions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSessions, request));
+            assert(
+                (client.descriptors.page.listSessions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listSessions without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ListSessionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ListSessionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Session()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Session()),
+              generateSampleMessage(new protos.google.cloud.discoveryengine.v1alpha.Session()),
+            ];
+            client.descriptors.page.listSessions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.discoveryengine.v1alpha.ISession[] = [];
+            const iterable = client.listSessionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSessions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSessions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listSessions with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1alpha.ListSessionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1alpha.ListSessionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSessions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listSessionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.discoveryengine.v1alpha.ISession[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSessions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSessions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getLocation with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('aclConfig', async () => {
-      const fakePath = '/rendered/path/aclConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.aclConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.aclConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('aclConfigPath', () => {
-        const result = client.aclConfigPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.aclConfigPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAclConfigName', () => {
-        const result = client.matchProjectFromAclConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.aclConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAclConfigName', () => {
-        const result = client.matchLocationFromAclConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.aclConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('engine', async () => {
-      const fakePath = '/rendered/path/engine';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        engine: 'engineValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.enginePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.enginePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('enginePath', () => {
-        const result = client.enginePath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'engineValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.enginePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEngineName', () => {
-        const result = client.matchProjectFromEngineName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.enginePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEngineName', () => {
-        const result = client.matchLocationFromEngineName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.enginePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromEngineName', () => {
-        const result = client.matchCollectionFromEngineName(fakePath);
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (client.pathTemplates.enginePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEngineFromEngineName', () => {
-        const result = client.matchEngineFromEngineName(fakePath);
-        assert.strictEqual(result, 'engineValue');
-        assert(
-          (client.pathTemplates.enginePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    describe('evaluation', async () => {
-      const fakePath = '/rendered/path/evaluation';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        evaluation: 'evaluationValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.evaluationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.evaluationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('evaluationPath', () => {
-        const result = client.evaluationPath(
-          'projectValue',
-          'locationValue',
-          'evaluationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.evaluationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('aclConfig', async () => {
+            const fakePath = "/rendered/path/aclConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.aclConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.aclConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromEvaluationName', () => {
-        const result = client.matchProjectFromEvaluationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.evaluationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('aclConfigPath', () => {
+                const result = client.aclConfigPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.aclConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromEvaluationName', () => {
-        const result = client.matchLocationFromEvaluationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.evaluationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromAclConfigName', () => {
+                const result = client.matchProjectFromAclConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.aclConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchEvaluationFromEvaluationName', () => {
-        const result = client.matchEvaluationFromEvaluationName(fakePath);
-        assert.strictEqual(result, 'evaluationValue');
-        assert(
-          (client.pathTemplates.evaluationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromAclConfigName', () => {
+                const result = client.matchLocationFromAclConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.aclConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('engine', async () => {
+            const fakePath = "/rendered/path/engine";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                engine: "engineValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.enginePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.enginePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('enginePath', () => {
+                const result = client.enginePath("projectValue", "locationValue", "collectionValue", "engineValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.enginePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEngineName', () => {
+                const result = client.matchProjectFromEngineName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.enginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEngineName', () => {
+                const result = client.matchLocationFromEngineName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.enginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromEngineName', () => {
+                const result = client.matchCollectionFromEngineName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.enginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEngineFromEngineName', () => {
+                const result = client.matchEngineFromEngineName(fakePath);
+                assert.strictEqual(result, "engineValue");
+                assert((client.pathTemplates.enginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('evaluation', async () => {
+            const fakePath = "/rendered/path/evaluation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                evaluation: "evaluationValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.evaluationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.evaluationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('evaluationPath', () => {
+                const result = client.evaluationPath("projectValue", "locationValue", "evaluationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.evaluationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEvaluationName', () => {
+                const result = client.matchProjectFromEvaluationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.evaluationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEvaluationName', () => {
+                const result = client.matchLocationFromEvaluationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.evaluationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEvaluationFromEvaluationName', () => {
+                const result = client.matchEvaluationFromEvaluationName(fakePath);
+                assert.strictEqual(result, "evaluationValue");
+                assert((client.pathTemplates.evaluationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStore', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStore";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStorePath', () => {
+                const result = client.projectLocationCollectionDataStorePath("projectValue", "locationValue", "collectionValue", "dataStoreValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStorePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreBranchDocument', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreBranchDocument";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                branch: "branchValue",
+                document: "documentValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreBranchDocumentPath', () => {
+                const result = client.projectLocationCollectionDataStoreBranchDocumentPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "branchValue", "documentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBranchFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
+                const result = client.matchBranchFromProjectLocationCollectionDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "branchValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
+                const result = client.matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "documentValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreBranchDocumentChunk', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreBranchDocumentChunk";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                branch: "branchValue",
+                document: "documentValue",
+                chunk: "chunkValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreBranchDocumentChunkPath', () => {
+                const result = client.projectLocationCollectionDataStoreBranchDocumentChunkPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "branchValue", "documentValue", "chunkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBranchFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchBranchFromProjectLocationCollectionDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "branchValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "documentValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchChunkFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchChunkFromProjectLocationCollectionDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "chunkValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreControl', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreControl";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                control: "controlValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreControlPath', () => {
+                const result = client.projectLocationCollectionDataStoreControlPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "controlValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreControlName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreControlName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreControlName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreControlName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreControlName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreControlName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreControlName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreControlName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchControlFromProjectLocationCollectionDataStoreControlName', () => {
+                const result = client.matchControlFromProjectLocationCollectionDataStoreControlName(fakePath);
+                assert.strictEqual(result, "controlValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreConversation', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreConversation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                conversation: "conversationValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreConversationPath', () => {
+                const result = client.projectLocationCollectionDataStoreConversationPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "conversationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreConversationName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreConversationName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreConversationName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreConversationName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConversationFromProjectLocationCollectionDataStoreConversationName', () => {
+                const result = client.matchConversationFromProjectLocationCollectionDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "conversationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreCustomTuningModel', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreCustomTuningModel";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                custom_tuning_model: "customTuningModelValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreCustomTuningModelPath', () => {
+                const result = client.projectLocationCollectionDataStoreCustomTuningModelPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "customTuningModelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
+                const result = client.matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "customTuningModelValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreDocumentProcessingConfig', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreDocumentProcessingConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreDocumentProcessingConfigPath', () => {
+                const result = client.projectLocationCollectionDataStoreDocumentProcessingConfigPath("projectValue", "locationValue", "collectionValue", "dataStoreValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreDocumentProcessingConfigName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreDocumentProcessingConfigName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreDocumentProcessingConfigName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreDocumentProcessingConfigName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreSchema', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreSchema";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                schema: "schemaValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreSchemaPath', () => {
+                const result = client.projectLocationCollectionDataStoreSchemaPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "schemaValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreSchemaName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreSchemaName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreSchemaName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreSchemaName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSchemaFromProjectLocationCollectionDataStoreSchemaName', () => {
+                const result = client.matchSchemaFromProjectLocationCollectionDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "schemaValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreServingConfig', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreServingConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                serving_config: "servingConfigValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreServingConfigPath', () => {
+                const result = client.projectLocationCollectionDataStoreServingConfigPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "servingConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreServingConfigName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreServingConfigName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreServingConfigName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName', () => {
+                const result = client.matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "servingConfigValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreSession', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreSession";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                session: "sessionValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreSessionPath', () => {
+                const result = client.projectLocationCollectionDataStoreSessionPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "sessionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreSessionName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreSessionName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreSessionName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreSessionName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectLocationCollectionDataStoreSessionName', () => {
+                const result = client.matchSessionFromProjectLocationCollectionDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreSessionAnswer', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreSessionAnswer";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                session: "sessionValue",
+                answer: "answerValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreSessionAnswerPath', () => {
+                const result = client.projectLocationCollectionDataStoreSessionAnswerPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "sessionValue", "answerValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+                const result = client.matchSessionFromProjectLocationCollectionDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAnswerFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+                const result = client.matchAnswerFromProjectLocationCollectionDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "answerValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreSiteSearchEngine', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreSiteSearchEngine";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreSiteSearchEnginePath', () => {
+                const result = client.projectLocationCollectionDataStoreSiteSearchEnginePath("projectValue", "locationValue", "collectionValue", "dataStoreValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionDataStoreSiteSearchEngineTargetSite', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreSiteSearchEngineTargetSite";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                target_site: "targetSiteValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreSiteSearchEngineTargetSitePath', () => {
+                const result = client.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "targetSiteValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTargetSiteFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchTargetSiteFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "targetSiteValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionEngineControl', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionEngineControl";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                engine: "engineValue",
+                control: "controlValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionEngineControlPath', () => {
+                const result = client.projectLocationCollectionEngineControlPath("projectValue", "locationValue", "collectionValue", "engineValue", "controlValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionEngineControlName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionEngineControlName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionEngineControlName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionEngineControlName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionEngineControlName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionEngineControlName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEngineFromProjectLocationCollectionEngineControlName', () => {
+                const result = client.matchEngineFromProjectLocationCollectionEngineControlName(fakePath);
+                assert.strictEqual(result, "engineValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchControlFromProjectLocationCollectionEngineControlName', () => {
+                const result = client.matchControlFromProjectLocationCollectionEngineControlName(fakePath);
+                assert.strictEqual(result, "controlValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionEngineConversation', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionEngineConversation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                engine: "engineValue",
+                conversation: "conversationValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionEngineConversationPath', () => {
+                const result = client.projectLocationCollectionEngineConversationPath("projectValue", "locationValue", "collectionValue", "engineValue", "conversationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionEngineConversationName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionEngineConversationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionEngineConversationName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionEngineConversationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionEngineConversationName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionEngineConversationName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEngineFromProjectLocationCollectionEngineConversationName', () => {
+                const result = client.matchEngineFromProjectLocationCollectionEngineConversationName(fakePath);
+                assert.strictEqual(result, "engineValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConversationFromProjectLocationCollectionEngineConversationName', () => {
+                const result = client.matchConversationFromProjectLocationCollectionEngineConversationName(fakePath);
+                assert.strictEqual(result, "conversationValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionEngineServingConfig', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionEngineServingConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                engine: "engineValue",
+                serving_config: "servingConfigValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionEngineServingConfigPath', () => {
+                const result = client.projectLocationCollectionEngineServingConfigPath("projectValue", "locationValue", "collectionValue", "engineValue", "servingConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionEngineServingConfigName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionEngineServingConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionEngineServingConfigName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionEngineServingConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionEngineServingConfigName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionEngineServingConfigName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEngineFromProjectLocationCollectionEngineServingConfigName', () => {
+                const result = client.matchEngineFromProjectLocationCollectionEngineServingConfigName(fakePath);
+                assert.strictEqual(result, "engineValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServingConfigFromProjectLocationCollectionEngineServingConfigName', () => {
+                const result = client.matchServingConfigFromProjectLocationCollectionEngineServingConfigName(fakePath);
+                assert.strictEqual(result, "servingConfigValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionEngineSession', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionEngineSession";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                engine: "engineValue",
+                session: "sessionValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionEngineSessionPath', () => {
+                const result = client.projectLocationCollectionEngineSessionPath("projectValue", "locationValue", "collectionValue", "engineValue", "sessionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionEngineSessionName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionEngineSessionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionEngineSessionName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionEngineSessionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionEngineSessionName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionEngineSessionName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEngineFromProjectLocationCollectionEngineSessionName', () => {
+                const result = client.matchEngineFromProjectLocationCollectionEngineSessionName(fakePath);
+                assert.strictEqual(result, "engineValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectLocationCollectionEngineSessionName', () => {
+                const result = client.matchSessionFromProjectLocationCollectionEngineSessionName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCollectionEngineSessionAnswer', async () => {
+            const fakePath = "/rendered/path/projectLocationCollectionEngineSessionAnswer";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                engine: "engineValue",
+                session: "sessionValue",
+                answer: "answerValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionEngineSessionAnswerPath', () => {
+                const result = client.projectLocationCollectionEngineSessionAnswerPath("projectValue", "locationValue", "collectionValue", "engineValue", "sessionValue", "answerValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionEngineSessionAnswerName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionEngineSessionAnswerName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionEngineSessionAnswerName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionEngineSessionAnswerName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionEngineSessionAnswerName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionEngineSessionAnswerName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEngineFromProjectLocationCollectionEngineSessionAnswerName', () => {
+                const result = client.matchEngineFromProjectLocationCollectionEngineSessionAnswerName(fakePath);
+                assert.strictEqual(result, "engineValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectLocationCollectionEngineSessionAnswerName', () => {
+                const result = client.matchSessionFromProjectLocationCollectionEngineSessionAnswerName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAnswerFromProjectLocationCollectionEngineSessionAnswerName', () => {
+                const result = client.matchAnswerFromProjectLocationCollectionEngineSessionAnswerName(fakePath);
+                assert.strictEqual(result, "answerValue");
+                assert((client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStore', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStore";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStorePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStorePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStorePath', () => {
+                const result = client.projectLocationDataStorePath("projectValue", "locationValue", "dataStoreValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStorePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreBranchDocument', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreBranchDocument";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                branch: "branchValue",
+                document: "documentValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreBranchDocumentPath', () => {
+                const result = client.projectLocationDataStoreBranchDocumentPath("projectValue", "locationValue", "dataStoreValue", "branchValue", "documentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreBranchDocumentName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreBranchDocumentName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreBranchDocumentName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBranchFromProjectLocationDataStoreBranchDocumentName', () => {
+                const result = client.matchBranchFromProjectLocationDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "branchValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentFromProjectLocationDataStoreBranchDocumentName', () => {
+                const result = client.matchDocumentFromProjectLocationDataStoreBranchDocumentName(fakePath);
+                assert.strictEqual(result, "documentValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreBranchDocumentChunk', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreBranchDocumentChunk";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                branch: "branchValue",
+                document: "documentValue",
+                chunk: "chunkValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreBranchDocumentChunkPath', () => {
+                const result = client.projectLocationDataStoreBranchDocumentChunkPath("projectValue", "locationValue", "dataStoreValue", "branchValue", "documentValue", "chunkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBranchFromProjectLocationDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchBranchFromProjectLocationDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "branchValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentFromProjectLocationDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchDocumentFromProjectLocationDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "documentValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchChunkFromProjectLocationDataStoreBranchDocumentChunkName', () => {
+                const result = client.matchChunkFromProjectLocationDataStoreBranchDocumentChunkName(fakePath);
+                assert.strictEqual(result, "chunkValue");
+                assert((client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreControl', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreControl";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                control: "controlValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreControlPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreControlPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreControlPath', () => {
+                const result = client.projectLocationDataStoreControlPath("projectValue", "locationValue", "dataStoreValue", "controlValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreControlPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreControlName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreControlName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreControlName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreControlName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreControlName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreControlName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchControlFromProjectLocationDataStoreControlName', () => {
+                const result = client.matchControlFromProjectLocationDataStoreControlName(fakePath);
+                assert.strictEqual(result, "controlValue");
+                assert((client.pathTemplates.projectLocationDataStoreControlPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreConversation', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreConversation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                conversation: "conversationValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreConversationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreConversationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreConversationPath', () => {
+                const result = client.projectLocationDataStoreConversationPath("projectValue", "locationValue", "dataStoreValue", "conversationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreConversationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreConversationName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreConversationName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreConversationName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConversationFromProjectLocationDataStoreConversationName', () => {
+                const result = client.matchConversationFromProjectLocationDataStoreConversationName(fakePath);
+                assert.strictEqual(result, "conversationValue");
+                assert((client.pathTemplates.projectLocationDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreCustomTuningModel', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreCustomTuningModel";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                custom_tuning_model: "customTuningModelValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreCustomTuningModelPath', () => {
+                const result = client.projectLocationDataStoreCustomTuningModelPath("projectValue", "locationValue", "dataStoreValue", "customTuningModelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreCustomTuningModelName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreCustomTuningModelName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreCustomTuningModelName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName', () => {
+                const result = client.matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "customTuningModelValue");
+                assert((client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreDocumentProcessingConfig', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreDocumentProcessingConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreDocumentProcessingConfigPath', () => {
+                const result = client.projectLocationDataStoreDocumentProcessingConfigPath("projectValue", "locationValue", "dataStoreValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreDocumentProcessingConfigName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreDocumentProcessingConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreDocumentProcessingConfigName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreDocumentProcessingConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreDocumentProcessingConfigName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreDocumentProcessingConfigName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreSchema', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreSchema";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                schema: "schemaValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreSchemaPath', () => {
+                const result = client.projectLocationDataStoreSchemaPath("projectValue", "locationValue", "dataStoreValue", "schemaValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreSchemaName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreSchemaName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreSchemaName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSchemaFromProjectLocationDataStoreSchemaName', () => {
+                const result = client.matchSchemaFromProjectLocationDataStoreSchemaName(fakePath);
+                assert.strictEqual(result, "schemaValue");
+                assert((client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreServingConfig', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreServingConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                serving_config: "servingConfigValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreServingConfigPath', () => {
+                const result = client.projectLocationDataStoreServingConfigPath("projectValue", "locationValue", "dataStoreValue", "servingConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreServingConfigName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreServingConfigName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreServingConfigName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServingConfigFromProjectLocationDataStoreServingConfigName', () => {
+                const result = client.matchServingConfigFromProjectLocationDataStoreServingConfigName(fakePath);
+                assert.strictEqual(result, "servingConfigValue");
+                assert((client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreSession', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreSession";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                session: "sessionValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreSessionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreSessionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreSessionPath', () => {
+                const result = client.projectLocationDataStoreSessionPath("projectValue", "locationValue", "dataStoreValue", "sessionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreSessionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreSessionName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreSessionName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreSessionName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectLocationDataStoreSessionName', () => {
+                const result = client.matchSessionFromProjectLocationDataStoreSessionName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreSessionAnswer', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreSessionAnswer";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                session: "sessionValue",
+                answer: "answerValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreSessionAnswerPath', () => {
+                const result = client.projectLocationDataStoreSessionAnswerPath("projectValue", "locationValue", "dataStoreValue", "sessionValue", "answerValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreSessionAnswerName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreSessionAnswerName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreSessionAnswerName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectLocationDataStoreSessionAnswerName', () => {
+                const result = client.matchSessionFromProjectLocationDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAnswerFromProjectLocationDataStoreSessionAnswerName', () => {
+                const result = client.matchAnswerFromProjectLocationDataStoreSessionAnswerName(fakePath);
+                assert.strictEqual(result, "answerValue");
+                assert((client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreSiteSearchEngine', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreSiteSearchEngine";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreSiteSearchEnginePath', () => {
+                const result = client.projectLocationDataStoreSiteSearchEnginePath("projectValue", "locationValue", "dataStoreValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreSiteSearchEngineName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreSiteSearchEngineName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreSiteSearchEngineName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreSiteSearchEngineName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreSiteSearchEngineName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreSiteSearchEngineName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreSiteSearchEngineTargetSite', async () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreSiteSearchEngineTargetSite";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                target_site: "targetSiteValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreSiteSearchEngineTargetSitePath', () => {
+                const result = client.projectLocationDataStoreSiteSearchEngineTargetSitePath("projectValue", "locationValue", "dataStoreValue", "targetSiteValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTargetSiteFromProjectLocationDataStoreSiteSearchEngineTargetSiteName', () => {
+                const result = client.matchTargetSiteFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(fakePath);
+                assert.strictEqual(result, "targetSiteValue");
+                assert((client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('sampleQuery', async () => {
+            const fakePath = "/rendered/path/sampleQuery";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                sample_query_set: "sampleQuerySetValue",
+                sample_query: "sampleQueryValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sampleQueryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sampleQueryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sampleQueryPath', () => {
+                const result = client.sampleQueryPath("projectValue", "locationValue", "sampleQuerySetValue", "sampleQueryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sampleQueryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSampleQueryName', () => {
+                const result = client.matchProjectFromSampleQueryName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sampleQueryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSampleQueryName', () => {
+                const result = client.matchLocationFromSampleQueryName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sampleQueryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSampleQuerySetFromSampleQueryName', () => {
+                const result = client.matchSampleQuerySetFromSampleQueryName(fakePath);
+                assert.strictEqual(result, "sampleQuerySetValue");
+                assert((client.pathTemplates.sampleQueryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSampleQueryFromSampleQueryName', () => {
+                const result = client.matchSampleQueryFromSampleQueryName(fakePath);
+                assert.strictEqual(result, "sampleQueryValue");
+                assert((client.pathTemplates.sampleQueryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('sampleQuerySet', async () => {
+            const fakePath = "/rendered/path/sampleQuerySet";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                sample_query_set: "sampleQuerySetValue",
+            };
+            const client = new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sampleQuerySetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sampleQuerySetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sampleQuerySetPath', () => {
+                const result = client.sampleQuerySetPath("projectValue", "locationValue", "sampleQuerySetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sampleQuerySetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSampleQuerySetName', () => {
+                const result = client.matchProjectFromSampleQuerySetName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sampleQuerySetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSampleQuerySetName', () => {
+                const result = client.matchLocationFromSampleQuerySetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sampleQuerySetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSampleQuerySetFromSampleQuerySetName', () => {
+                const result = client.matchSampleQuerySetFromSampleQuerySetName(fakePath);
+                assert.strictEqual(result, "sampleQuerySetValue");
+                assert((client.pathTemplates.sampleQuerySetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStore', async () => {
-      const fakePath = '/rendered/path/projectLocationCollectionDataStore';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStorePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStorePath', () => {
-        const result = client.projectLocationCollectionDataStorePath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'dataStoreValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreBranchDocument', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreBranchDocument';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        branch: 'branchValue',
-        document: 'documentValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreBranchDocumentPath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreBranchDocumentPath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue',
-            'branchValue',
-            'documentValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBranchFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchBranchFromProjectLocationCollectionDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'branchValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'documentValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreBranchDocumentChunk', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreBranchDocumentChunk';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        branch: 'branchValue',
-        document: 'documentValue',
-        chunk: 'chunkValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreBranchDocumentChunkPath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreBranchDocumentChunkPath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue',
-            'branchValue',
-            'documentValue',
-            'chunkValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBranchFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchBranchFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'branchValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'documentValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchChunkFromProjectLocationCollectionDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchChunkFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'chunkValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreControl', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreControl';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        control: 'controlValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreControlPath', () => {
-        const result = client.projectLocationCollectionDataStoreControlPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'dataStoreValue',
-          'controlValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreControlPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreControlName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreControlName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreControlName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreControlName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchControlFromProjectLocationCollectionDataStoreControlName', () => {
-        const result =
-          client.matchControlFromProjectLocationCollectionDataStoreControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'controlValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreConversation', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreConversation';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        conversation: 'conversationValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreConversationPath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreConversationPath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue',
-            'conversationValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreConversationPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreConversationName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreConversationName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreConversationName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreConversationName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConversationFromProjectLocationCollectionDataStoreConversationName', () => {
-        const result =
-          client.matchConversationFromProjectLocationCollectionDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'conversationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreCustomTuningModel', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreCustomTuningModel';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        custom_tuning_model: 'customTuningModelValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreCustomTuningModelPath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreCustomTuningModelPath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue',
-            'customTuningModelValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreCustomTuningModelPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'customTuningModelValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreDocumentProcessingConfig', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreDocumentProcessingConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreDocumentProcessingConfigPath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreDocumentProcessingConfigPath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreDocumentProcessingConfigName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreDocumentProcessingConfigName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreDocumentProcessingConfigName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreDocumentProcessingConfigName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreSchema', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreSchema';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        schema: 'schemaValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreSchemaPath', () => {
-        const result = client.projectLocationCollectionDataStoreSchemaPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'dataStoreValue',
-          'schemaValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSchemaPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreSchemaName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreSchemaName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreSchemaName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreSchemaName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreSchemaName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreSchemaName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreSchemaName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreSchemaName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSchemaFromProjectLocationCollectionDataStoreSchemaName', () => {
-        const result =
-          client.matchSchemaFromProjectLocationCollectionDataStoreSchemaName(
-            fakePath
-          );
-        assert.strictEqual(result, 'schemaValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreServingConfig', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreServingConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        serving_config: 'servingConfigValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreServingConfigPath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreServingConfigPath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue',
-            'servingConfigValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreServingConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreServingConfigName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreServingConfigName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreServingConfigName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName', () => {
-        const result =
-          client.matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'servingConfigValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreSession', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreSession';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        session: 'sessionValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreSessionPath', () => {
-        const result = client.projectLocationCollectionDataStoreSessionPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'dataStoreValue',
-          'sessionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreSessionName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreSessionName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreSessionName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreSessionName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectLocationCollectionDataStoreSessionName', () => {
-        const result =
-          client.matchSessionFromProjectLocationCollectionDataStoreSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreSessionAnswer', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreSessionAnswer';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        session: 'sessionValue',
-        answer: 'answerValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreSessionAnswerPath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreSessionAnswerPath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue',
-            'sessionValue',
-            'answerValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchSessionFromProjectLocationCollectionDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAnswerFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchAnswerFromProjectLocationCollectionDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'answerValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreSiteSearchEngine', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngine';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreSiteSearchEnginePath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreSiteSearchEnginePath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEnginePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEnginePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEnginePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEnginePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEnginePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionDataStoreSiteSearchEngineTargetSite', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngineTargetSite';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        target_site: 'targetSiteValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreSiteSearchEngineTargetSitePath', () => {
-        const result =
-          client.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePath(
-            'projectValue',
-            'locationValue',
-            'collectionValue',
-            'dataStoreValue',
-            'targetSiteValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTargetSiteFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchTargetSiteFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'targetSiteValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionEngineControl', async () => {
-      const fakePath = '/rendered/path/projectLocationCollectionEngineControl';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        engine: 'engineValue',
-        control: 'controlValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionEngineControlPath', () => {
-        const result = client.projectLocationCollectionEngineControlPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'engineValue',
-          'controlValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineControlPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionEngineControlName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionEngineControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionEngineControlName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionEngineControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionEngineControlName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionEngineControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEngineFromProjectLocationCollectionEngineControlName', () => {
-        const result =
-          client.matchEngineFromProjectLocationCollectionEngineControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'engineValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchControlFromProjectLocationCollectionEngineControlName', () => {
-        const result =
-          client.matchControlFromProjectLocationCollectionEngineControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'controlValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionEngineConversation', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionEngineConversation';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        engine: 'engineValue',
-        conversation: 'conversationValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionEngineConversationPath', () => {
-        const result = client.projectLocationCollectionEngineConversationPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'engineValue',
-          'conversationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineConversationPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionEngineConversationName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionEngineConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionEngineConversationName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionEngineConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionEngineConversationName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionEngineConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEngineFromProjectLocationCollectionEngineConversationName', () => {
-        const result =
-          client.matchEngineFromProjectLocationCollectionEngineConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'engineValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConversationFromProjectLocationCollectionEngineConversationName', () => {
-        const result =
-          client.matchConversationFromProjectLocationCollectionEngineConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'conversationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionEngineServingConfig', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionEngineServingConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        engine: 'engineValue',
-        serving_config: 'servingConfigValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionEngineServingConfigPath', () => {
-        const result = client.projectLocationCollectionEngineServingConfigPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'engineValue',
-          'servingConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineServingConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionEngineServingConfigName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionEngineServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionEngineServingConfigName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionEngineServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionEngineServingConfigName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionEngineServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEngineFromProjectLocationCollectionEngineServingConfigName', () => {
-        const result =
-          client.matchEngineFromProjectLocationCollectionEngineServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'engineValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServingConfigFromProjectLocationCollectionEngineServingConfigName', () => {
-        const result =
-          client.matchServingConfigFromProjectLocationCollectionEngineServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'servingConfigValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionEngineSession', async () => {
-      const fakePath = '/rendered/path/projectLocationCollectionEngineSession';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        engine: 'engineValue',
-        session: 'sessionValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionEngineSessionPath', () => {
-        const result = client.projectLocationCollectionEngineSessionPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'engineValue',
-          'sessionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionEngineSessionName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionEngineSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionEngineSessionName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionEngineSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionEngineSessionName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionEngineSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEngineFromProjectLocationCollectionEngineSessionName', () => {
-        const result =
-          client.matchEngineFromProjectLocationCollectionEngineSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'engineValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectLocationCollectionEngineSessionName', () => {
-        const result =
-          client.matchSessionFromProjectLocationCollectionEngineSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationCollectionEngineSessionAnswer', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionEngineSessionAnswer';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        engine: 'engineValue',
-        session: 'sessionValue',
-        answer: 'answerValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionEngineSessionAnswerPath', () => {
-        const result = client.projectLocationCollectionEngineSessionAnswerPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'engineValue',
-          'sessionValue',
-          'answerValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionAnswerPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionEngineSessionAnswerName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionEngineSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionEngineSessionAnswerName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionEngineSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionEngineSessionAnswerName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionEngineSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEngineFromProjectLocationCollectionEngineSessionAnswerName', () => {
-        const result =
-          client.matchEngineFromProjectLocationCollectionEngineSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'engineValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectLocationCollectionEngineSessionAnswerName', () => {
-        const result =
-          client.matchSessionFromProjectLocationCollectionEngineSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAnswerFromProjectLocationCollectionEngineSessionAnswerName', () => {
-        const result =
-          client.matchAnswerFromProjectLocationCollectionEngineSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'answerValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionEngineSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStore', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStore';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStorePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationDataStorePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectLocationDataStorePath', () => {
-        const result = client.projectLocationDataStorePath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStorePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStorePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStorePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreName(fakePath);
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStorePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreBranchDocument', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreBranchDocument';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        branch: 'branchValue',
-        document: 'documentValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreBranchDocumentPath', () => {
-        const result = client.projectLocationDataStoreBranchDocumentPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'branchValue',
-          'documentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBranchFromProjectLocationDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchBranchFromProjectLocationDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'branchValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDocumentFromProjectLocationDataStoreBranchDocumentName', () => {
-        const result =
-          client.matchDocumentFromProjectLocationDataStoreBranchDocumentName(
-            fakePath
-          );
-        assert.strictEqual(result, 'documentValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreBranchDocumentChunk', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationDataStoreBranchDocumentChunk';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        branch: 'branchValue',
-        document: 'documentValue',
-        chunk: 'chunkValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreBranchDocumentChunkPath', () => {
-        const result = client.projectLocationDataStoreBranchDocumentChunkPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'branchValue',
-          'documentValue',
-          'chunkValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentChunkPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBranchFromProjectLocationDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchBranchFromProjectLocationDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'branchValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDocumentFromProjectLocationDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchDocumentFromProjectLocationDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'documentValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchChunkFromProjectLocationDataStoreBranchDocumentChunkName', () => {
-        const result =
-          client.matchChunkFromProjectLocationDataStoreBranchDocumentChunkName(
-            fakePath
-          );
-        assert.strictEqual(result, 'chunkValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreBranchDocumentChunkPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreControl', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreControl';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        control: 'controlValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreControlPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreControlPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreControlPath', () => {
-        const result = client.projectLocationDataStoreControlPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'controlValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreControlPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreControlName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreControlName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreControlName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreControlName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreControlName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreControlName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchControlFromProjectLocationDataStoreControlName', () => {
-        const result =
-          client.matchControlFromProjectLocationDataStoreControlName(fakePath);
-        assert.strictEqual(result, 'controlValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreControlPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreConversation', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreConversation';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        conversation: 'conversationValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreConversationPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreConversationPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreConversationPath', () => {
-        const result = client.projectLocationDataStoreConversationPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'conversationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreConversationPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreConversationName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreConversationName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreConversationName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConversationFromProjectLocationDataStoreConversationName', () => {
-        const result =
-          client.matchConversationFromProjectLocationDataStoreConversationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'conversationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreConversationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreCustomTuningModel', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationDataStoreCustomTuningModel';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        custom_tuning_model: 'customTuningModelValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreCustomTuningModelPath', () => {
-        const result = client.projectLocationDataStoreCustomTuningModelPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'customTuningModelValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreCustomTuningModelPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName', () => {
-        const result =
-          client.matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'customTuningModelValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreCustomTuningModelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreDocumentProcessingConfig', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationDataStoreDocumentProcessingConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreDocumentProcessingConfigPath', () => {
-        const result =
-          client.projectLocationDataStoreDocumentProcessingConfigPath(
-            'projectValue',
-            'locationValue',
-            'dataStoreValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreDocumentProcessingConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreDocumentProcessingConfigName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreDocumentProcessingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreDocumentProcessingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreDocumentProcessingConfigName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreDocumentProcessingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreDocumentProcessingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreDocumentProcessingConfigName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreDocumentProcessingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreDocumentProcessingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreSchema', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreSchema';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        schema: 'schemaValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreSchemaPath', () => {
-        const result = client.projectLocationDataStoreSchemaPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'schemaValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreSchemaName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreSchemaName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreSchemaName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreSchemaName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreSchemaName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreSchemaName(fakePath);
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSchemaFromProjectLocationDataStoreSchemaName', () => {
-        const result =
-          client.matchSchemaFromProjectLocationDataStoreSchemaName(fakePath);
-        assert.strictEqual(result, 'schemaValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreServingConfig', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreServingConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        serving_config: 'servingConfigValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreServingConfigPath', () => {
-        const result = client.projectLocationDataStoreServingConfigPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'servingConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreServingConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreServingConfigName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreServingConfigName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreServingConfigName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServingConfigFromProjectLocationDataStoreServingConfigName', () => {
-        const result =
-          client.matchServingConfigFromProjectLocationDataStoreServingConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'servingConfigValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreServingConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreSession', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreSession';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        session: 'sessionValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreSessionPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreSessionPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreSessionPath', () => {
-        const result = client.projectLocationDataStoreSessionPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'sessionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSessionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreSessionName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreSessionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreSessionName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreSessionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreSessionName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreSessionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectLocationDataStoreSessionName', () => {
-        const result =
-          client.matchSessionFromProjectLocationDataStoreSessionName(fakePath);
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreSessionAnswer', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreSessionAnswer';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        session: 'sessionValue',
-        answer: 'answerValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreSessionAnswerPath', () => {
-        const result = client.projectLocationDataStoreSessionAnswerPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'sessionValue',
-          'answerValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSessionAnswerPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectLocationDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchSessionFromProjectLocationDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAnswerFromProjectLocationDataStoreSessionAnswerName', () => {
-        const result =
-          client.matchAnswerFromProjectLocationDataStoreSessionAnswerName(
-            fakePath
-          );
-        assert.strictEqual(result, 'answerValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSessionAnswerPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreSiteSearchEngine', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationDataStoreSiteSearchEngine';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreSiteSearchEnginePath', () => {
-        const result = client.projectLocationDataStoreSiteSearchEnginePath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEnginePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreSiteSearchEngineName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreSiteSearchEngineName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEnginePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreSiteSearchEngineName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreSiteSearchEngineName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEnginePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreSiteSearchEngineName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreSiteSearchEngineName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEnginePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationDataStoreSiteSearchEngineTargetSite', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationDataStoreSiteSearchEngineTargetSite';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        target_site: 'targetSiteValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreSiteSearchEngineTargetSitePath', () => {
-        const result =
-          client.projectLocationDataStoreSiteSearchEngineTargetSitePath(
-            'projectValue',
-            'locationValue',
-            'dataStoreValue',
-            'targetSiteValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTargetSiteFromProjectLocationDataStoreSiteSearchEngineTargetSiteName', () => {
-        const result =
-          client.matchTargetSiteFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
-            fakePath
-          );
-        assert.strictEqual(result, 'targetSiteValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('sampleQuery', async () => {
-      const fakePath = '/rendered/path/sampleQuery';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        sample_query_set: 'sampleQuerySetValue',
-        sample_query: 'sampleQueryValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.sampleQueryPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.sampleQueryPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('sampleQueryPath', () => {
-        const result = client.sampleQueryPath(
-          'projectValue',
-          'locationValue',
-          'sampleQuerySetValue',
-          'sampleQueryValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.sampleQueryPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromSampleQueryName', () => {
-        const result = client.matchProjectFromSampleQueryName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.sampleQueryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromSampleQueryName', () => {
-        const result = client.matchLocationFromSampleQueryName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.sampleQueryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSampleQuerySetFromSampleQueryName', () => {
-        const result = client.matchSampleQuerySetFromSampleQueryName(fakePath);
-        assert.strictEqual(result, 'sampleQuerySetValue');
-        assert(
-          (client.pathTemplates.sampleQueryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSampleQueryFromSampleQueryName', () => {
-        const result = client.matchSampleQueryFromSampleQueryName(fakePath);
-        assert.strictEqual(result, 'sampleQueryValue');
-        assert(
-          (client.pathTemplates.sampleQueryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('sampleQuerySet', async () => {
-      const fakePath = '/rendered/path/sampleQuerySet';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        sample_query_set: 'sampleQuerySetValue',
-      };
-      const client =
-        new conversationalsearchserviceModule.v1alpha.ConversationalSearchServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.sampleQuerySetPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.sampleQuerySetPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('sampleQuerySetPath', () => {
-        const result = client.sampleQuerySetPath(
-          'projectValue',
-          'locationValue',
-          'sampleQuerySetValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.sampleQuerySetPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromSampleQuerySetName', () => {
-        const result = client.matchProjectFromSampleQuerySetName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.sampleQuerySetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromSampleQuerySetName', () => {
-        const result = client.matchLocationFromSampleQuerySetName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.sampleQuerySetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSampleQuerySetFromSampleQuerySetName', () => {
-        const result =
-          client.matchSampleQuerySetFromSampleQuerySetName(fakePath);
-        assert.strictEqual(result, 'sampleQuerySetValue');
-        assert(
-          (client.pathTemplates.sampleQuerySetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

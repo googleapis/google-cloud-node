@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,15 +16,13 @@ syntax = "proto3";
 
 package google.monitoring.v3;
 
-import "google/api/distribution.proto";
 import "google/api/label.proto";
 import "google/api/metric.proto";
 import "google/api/monitored_resource.proto";
 import "google/monitoring/v3/common.proto";
-import "google/protobuf/duration.proto";
 
 option csharp_namespace = "Google.Cloud.Monitoring.V3";
-option go_package = "google.golang.org/genproto/googleapis/monitoring/v3;monitoring";
+option go_package = "cloud.google.com/go/monitoring/apiv3/v2/monitoringpb;monitoringpb";
 option java_multiple_files = true;
 option java_outer_classname = "MetricProto";
 option java_package = "com.google.monitoring.v3";
@@ -58,7 +56,9 @@ message TimeSeries {
   google.api.Metric metric = 1;
 
   // The associated monitored resource.  Custom metrics can use only certain
-  // monitored resource types in their time series data.
+  // monitored resource types in their time series data. For more information,
+  // see [Monitored resources for custom
+  // metrics](https://cloud.google.com/monitoring/custom-metrics/creating-metrics#custom-metric-resources).
   google.api.MonitoredResource resource = 2;
 
   // Output only. The associated monitored resource metadata. When reading a
@@ -97,8 +97,15 @@ message TimeSeries {
 
   // The units in which the metric value is reported. It is only applicable
   // if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The `unit`
-  // defines the representation of the stored metric values.
+  // defines the representation of the stored metric values. This field can only
+  // be changed through CreateTimeSeries when it is empty.
   string unit = 8;
+
+  // Input only. A detailed description of the time series that will be
+  // associated with the
+  // [google.api.MetricDescriptor][google.api.MetricDescriptor] for the metric.
+  // Once set, this field cannot be changed through CreateTimeSeries.
+  string description = 9;
 }
 
 // A descriptor for the labels and points in a time series.

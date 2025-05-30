@@ -74,6 +74,8 @@
                      * @property {Array.<string>|null} [notificationChannels] AlertPolicy notificationChannels
                      * @property {google.monitoring.v3.IMutationRecord|null} [creationRecord] AlertPolicy creationRecord
                      * @property {google.monitoring.v3.IMutationRecord|null} [mutationRecord] AlertPolicy mutationRecord
+                     * @property {google.monitoring.v3.AlertPolicy.IAlertStrategy|null} [alertStrategy] AlertPolicy alertStrategy
+                     * @property {google.monitoring.v3.AlertPolicy.Severity|null} [severity] AlertPolicy severity
                      */
     
                     /**
@@ -183,6 +185,22 @@
                     AlertPolicy.prototype.mutationRecord = null;
     
                     /**
+                     * AlertPolicy alertStrategy.
+                     * @member {google.monitoring.v3.AlertPolicy.IAlertStrategy|null|undefined} alertStrategy
+                     * @memberof google.monitoring.v3.AlertPolicy
+                     * @instance
+                     */
+                    AlertPolicy.prototype.alertStrategy = null;
+    
+                    /**
+                     * AlertPolicy severity.
+                     * @member {google.monitoring.v3.AlertPolicy.Severity} severity
+                     * @memberof google.monitoring.v3.AlertPolicy
+                     * @instance
+                     */
+                    AlertPolicy.prototype.severity = 0;
+    
+                    /**
                      * Creates a new AlertPolicy instance using the specified properties.
                      * @function create
                      * @memberof google.monitoring.v3.AlertPolicy
@@ -231,6 +249,10 @@
                             $root.google.protobuf.BoolValue.encode(message.enabled, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                         if (message.validity != null && Object.hasOwnProperty.call(message, "validity"))
                             $root.google.rpc.Status.encode(message.validity, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                        if (message.alertStrategy != null && Object.hasOwnProperty.call(message, "alertStrategy"))
+                            $root.google.monitoring.v3.AlertPolicy.AlertStrategy.encode(message.alertStrategy, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                        if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                            writer.uint32(/* id 22, wireType 0 =*/176).int32(message.severity);
                         return writer;
                     };
     
@@ -258,14 +280,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    AlertPolicy.decode = function decode(reader, length, error) {
+                    AlertPolicy.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -332,6 +352,14 @@
                                 }
                             case 11: {
                                     message.mutationRecord = $root.google.monitoring.v3.MutationRecord.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 21: {
+                                    message.alertStrategy = $root.google.monitoring.v3.AlertPolicy.AlertStrategy.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 22: {
+                                    message.severity = reader.int32();
                                     break;
                                 }
                             default:
@@ -434,6 +462,21 @@
                             if (error)
                                 return "mutationRecord." + error;
                         }
+                        if (message.alertStrategy != null && message.hasOwnProperty("alertStrategy")) {
+                            var error = $root.google.monitoring.v3.AlertPolicy.AlertStrategy.verify(message.alertStrategy);
+                            if (error)
+                                return "alertStrategy." + error;
+                        }
+                        if (message.severity != null && message.hasOwnProperty("severity"))
+                            switch (message.severity) {
+                            default:
+                                return "severity: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                                break;
+                            }
                         return null;
                     };
     
@@ -526,6 +569,35 @@
                                 throw TypeError(".google.monitoring.v3.AlertPolicy.mutationRecord: object expected");
                             message.mutationRecord = $root.google.monitoring.v3.MutationRecord.fromObject(object.mutationRecord);
                         }
+                        if (object.alertStrategy != null) {
+                            if (typeof object.alertStrategy !== "object")
+                                throw TypeError(".google.monitoring.v3.AlertPolicy.alertStrategy: object expected");
+                            message.alertStrategy = $root.google.monitoring.v3.AlertPolicy.AlertStrategy.fromObject(object.alertStrategy);
+                        }
+                        switch (object.severity) {
+                        default:
+                            if (typeof object.severity === "number") {
+                                message.severity = object.severity;
+                                break;
+                            }
+                            break;
+                        case "SEVERITY_UNSPECIFIED":
+                        case 0:
+                            message.severity = 0;
+                            break;
+                        case "CRITICAL":
+                        case 1:
+                            message.severity = 1;
+                            break;
+                        case "ERROR":
+                        case 2:
+                            message.severity = 2;
+                            break;
+                        case "WARNING":
+                        case 3:
+                            message.severity = 3;
+                            break;
+                        }
                         return message;
                     };
     
@@ -557,6 +629,8 @@
                             object.documentation = null;
                             object.enabled = null;
                             object.validity = null;
+                            object.alertStrategy = null;
+                            object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -590,6 +664,10 @@
                             object.enabled = $root.google.protobuf.BoolValue.toObject(message.enabled, options);
                         if (message.validity != null && message.hasOwnProperty("validity"))
                             object.validity = $root.google.rpc.Status.toObject(message.validity, options);
+                        if (message.alertStrategy != null && message.hasOwnProperty("alertStrategy"))
+                            object.alertStrategy = $root.google.monitoring.v3.AlertPolicy.AlertStrategy.toObject(message.alertStrategy, options);
+                        if (message.severity != null && message.hasOwnProperty("severity"))
+                            object.severity = options.enums === String ? $root.google.monitoring.v3.AlertPolicy.Severity[message.severity] === undefined ? message.severity : $root.google.monitoring.v3.AlertPolicy.Severity[message.severity] : message.severity;
                         return object;
                     };
     
@@ -627,6 +705,8 @@
                          * @interface IDocumentation
                          * @property {string|null} [content] Documentation content
                          * @property {string|null} [mimeType] Documentation mimeType
+                         * @property {string|null} [subject] Documentation subject
+                         * @property {Array.<google.monitoring.v3.AlertPolicy.Documentation.ILink>|null} [links] Documentation links
                          */
     
                         /**
@@ -638,6 +718,7 @@
                          * @param {google.monitoring.v3.AlertPolicy.IDocumentation=} [properties] Properties to set
                          */
                         function Documentation(properties) {
+                            this.links = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -659,6 +740,22 @@
                          * @instance
                          */
                         Documentation.prototype.mimeType = "";
+    
+                        /**
+                         * Documentation subject.
+                         * @member {string} subject
+                         * @memberof google.monitoring.v3.AlertPolicy.Documentation
+                         * @instance
+                         */
+                        Documentation.prototype.subject = "";
+    
+                        /**
+                         * Documentation links.
+                         * @member {Array.<google.monitoring.v3.AlertPolicy.Documentation.ILink>} links
+                         * @memberof google.monitoring.v3.AlertPolicy.Documentation
+                         * @instance
+                         */
+                        Documentation.prototype.links = $util.emptyArray;
     
                         /**
                          * Creates a new Documentation instance using the specified properties.
@@ -688,6 +785,11 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.content);
                             if (message.mimeType != null && Object.hasOwnProperty.call(message, "mimeType"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.mimeType);
+                            if (message.subject != null && Object.hasOwnProperty.call(message, "subject"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.subject);
+                            if (message.links != null && message.links.length)
+                                for (var i = 0; i < message.links.length; ++i)
+                                    $root.google.monitoring.v3.AlertPolicy.Documentation.Link.encode(message.links[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -715,14 +817,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Documentation.decode = function decode(reader, length, error) {
+                        Documentation.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Documentation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.content = reader.string();
@@ -730,6 +830,16 @@
                                     }
                                 case 2: {
                                         message.mimeType = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.subject = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.links && message.links.length))
+                                            message.links = [];
+                                        message.links.push($root.google.monitoring.v3.AlertPolicy.Documentation.Link.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -773,6 +883,18 @@
                             if (message.mimeType != null && message.hasOwnProperty("mimeType"))
                                 if (!$util.isString(message.mimeType))
                                     return "mimeType: string expected";
+                            if (message.subject != null && message.hasOwnProperty("subject"))
+                                if (!$util.isString(message.subject))
+                                    return "subject: string expected";
+                            if (message.links != null && message.hasOwnProperty("links")) {
+                                if (!Array.isArray(message.links))
+                                    return "links: array expected";
+                                for (var i = 0; i < message.links.length; ++i) {
+                                    var error = $root.google.monitoring.v3.AlertPolicy.Documentation.Link.verify(message.links[i]);
+                                    if (error)
+                                        return "links." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -792,6 +914,18 @@
                                 message.content = String(object.content);
                             if (object.mimeType != null)
                                 message.mimeType = String(object.mimeType);
+                            if (object.subject != null)
+                                message.subject = String(object.subject);
+                            if (object.links) {
+                                if (!Array.isArray(object.links))
+                                    throw TypeError(".google.monitoring.v3.AlertPolicy.Documentation.links: array expected");
+                                message.links = [];
+                                for (var i = 0; i < object.links.length; ++i) {
+                                    if (typeof object.links[i] !== "object")
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.Documentation.links: object expected");
+                                    message.links[i] = $root.google.monitoring.v3.AlertPolicy.Documentation.Link.fromObject(object.links[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -808,14 +942,24 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.links = [];
                             if (options.defaults) {
                                 object.content = "";
                                 object.mimeType = "";
+                                object.subject = "";
                             }
                             if (message.content != null && message.hasOwnProperty("content"))
                                 object.content = message.content;
                             if (message.mimeType != null && message.hasOwnProperty("mimeType"))
                                 object.mimeType = message.mimeType;
+                            if (message.subject != null && message.hasOwnProperty("subject"))
+                                object.subject = message.subject;
+                            if (message.links && message.links.length) {
+                                object.links = [];
+                                for (var j = 0; j < message.links.length; ++j)
+                                    object.links[j] = $root.google.monitoring.v3.AlertPolicy.Documentation.Link.toObject(message.links[j], options);
+                            }
                             return object;
                         };
     
@@ -845,6 +989,233 @@
                             return typeUrlPrefix + "/google.monitoring.v3.AlertPolicy.Documentation";
                         };
     
+                        Documentation.Link = (function() {
+    
+                            /**
+                             * Properties of a Link.
+                             * @memberof google.monitoring.v3.AlertPolicy.Documentation
+                             * @interface ILink
+                             * @property {string|null} [displayName] Link displayName
+                             * @property {string|null} [url] Link url
+                             */
+    
+                            /**
+                             * Constructs a new Link.
+                             * @memberof google.monitoring.v3.AlertPolicy.Documentation
+                             * @classdesc Represents a Link.
+                             * @implements ILink
+                             * @constructor
+                             * @param {google.monitoring.v3.AlertPolicy.Documentation.ILink=} [properties] Properties to set
+                             */
+                            function Link(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Link displayName.
+                             * @member {string} displayName
+                             * @memberof google.monitoring.v3.AlertPolicy.Documentation.Link
+                             * @instance
+                             */
+                            Link.prototype.displayName = "";
+    
+                            /**
+                             * Link url.
+                             * @member {string} url
+                             * @memberof google.monitoring.v3.AlertPolicy.Documentation.Link
+                             * @instance
+                             */
+                            Link.prototype.url = "";
+    
+                            /**
+                             * Creates a new Link instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.v3.AlertPolicy.Documentation.Link
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Documentation.ILink=} [properties] Properties to set
+                             * @returns {google.monitoring.v3.AlertPolicy.Documentation.Link} Link instance
+                             */
+                            Link.create = function create(properties) {
+                                return new Link(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Link message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Documentation.Link.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.v3.AlertPolicy.Documentation.Link
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Documentation.ILink} message Link message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Link.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                                if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Link message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Documentation.Link.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.v3.AlertPolicy.Documentation.Link
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Documentation.ILink} message Link message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Link.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Link message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.v3.AlertPolicy.Documentation.Link
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.v3.AlertPolicy.Documentation.Link} Link
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Link.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Documentation.Link();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.url = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Link message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.v3.AlertPolicy.Documentation.Link
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.v3.AlertPolicy.Documentation.Link} Link
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Link.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Link message.
+                             * @function verify
+                             * @memberof google.monitoring.v3.AlertPolicy.Documentation.Link
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Link.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                if (message.url != null && message.hasOwnProperty("url"))
+                                    if (!$util.isString(message.url))
+                                        return "url: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Link message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.v3.AlertPolicy.Documentation.Link
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.v3.AlertPolicy.Documentation.Link} Link
+                             */
+                            Link.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.v3.AlertPolicy.Documentation.Link)
+                                    return object;
+                                var message = new $root.google.monitoring.v3.AlertPolicy.Documentation.Link();
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                if (object.url != null)
+                                    message.url = String(object.url);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Link message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.v3.AlertPolicy.Documentation.Link
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Documentation.Link} message Link
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Link.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.displayName = "";
+                                    object.url = "";
+                                }
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                if (message.url != null && message.hasOwnProperty("url"))
+                                    object.url = message.url;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Link to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.v3.AlertPolicy.Documentation.Link
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Link.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Link
+                             * @function getTypeUrl
+                             * @memberof google.monitoring.v3.AlertPolicy.Documentation.Link
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Link.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.monitoring.v3.AlertPolicy.Documentation.Link";
+                            };
+    
+                            return Link;
+                        })();
+    
                         return Documentation;
                     })();
     
@@ -858,7 +1229,10 @@
                          * @property {string|null} [displayName] Condition displayName
                          * @property {google.monitoring.v3.AlertPolicy.Condition.IMetricThreshold|null} [conditionThreshold] Condition conditionThreshold
                          * @property {google.monitoring.v3.AlertPolicy.Condition.IMetricAbsence|null} [conditionAbsent] Condition conditionAbsent
+                         * @property {google.monitoring.v3.AlertPolicy.Condition.ILogMatch|null} [conditionMatchedLog] Condition conditionMatchedLog
                          * @property {google.monitoring.v3.AlertPolicy.Condition.IMonitoringQueryLanguageCondition|null} [conditionMonitoringQueryLanguage] Condition conditionMonitoringQueryLanguage
+                         * @property {google.monitoring.v3.AlertPolicy.Condition.IPrometheusQueryLanguageCondition|null} [conditionPrometheusQueryLanguage] Condition conditionPrometheusQueryLanguage
+                         * @property {google.monitoring.v3.AlertPolicy.Condition.ISqlCondition|null} [conditionSql] Condition conditionSql
                          */
     
                         /**
@@ -909,6 +1283,14 @@
                         Condition.prototype.conditionAbsent = null;
     
                         /**
+                         * Condition conditionMatchedLog.
+                         * @member {google.monitoring.v3.AlertPolicy.Condition.ILogMatch|null|undefined} conditionMatchedLog
+                         * @memberof google.monitoring.v3.AlertPolicy.Condition
+                         * @instance
+                         */
+                        Condition.prototype.conditionMatchedLog = null;
+    
+                        /**
                          * Condition conditionMonitoringQueryLanguage.
                          * @member {google.monitoring.v3.AlertPolicy.Condition.IMonitoringQueryLanguageCondition|null|undefined} conditionMonitoringQueryLanguage
                          * @memberof google.monitoring.v3.AlertPolicy.Condition
@@ -916,17 +1298,33 @@
                          */
                         Condition.prototype.conditionMonitoringQueryLanguage = null;
     
+                        /**
+                         * Condition conditionPrometheusQueryLanguage.
+                         * @member {google.monitoring.v3.AlertPolicy.Condition.IPrometheusQueryLanguageCondition|null|undefined} conditionPrometheusQueryLanguage
+                         * @memberof google.monitoring.v3.AlertPolicy.Condition
+                         * @instance
+                         */
+                        Condition.prototype.conditionPrometheusQueryLanguage = null;
+    
+                        /**
+                         * Condition conditionSql.
+                         * @member {google.monitoring.v3.AlertPolicy.Condition.ISqlCondition|null|undefined} conditionSql
+                         * @memberof google.monitoring.v3.AlertPolicy.Condition
+                         * @instance
+                         */
+                        Condition.prototype.conditionSql = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Condition condition.
-                         * @member {"conditionThreshold"|"conditionAbsent"|"conditionMonitoringQueryLanguage"|undefined} condition
+                         * @member {"conditionThreshold"|"conditionAbsent"|"conditionMatchedLog"|"conditionMonitoringQueryLanguage"|"conditionPrometheusQueryLanguage"|"conditionSql"|undefined} condition
                          * @memberof google.monitoring.v3.AlertPolicy.Condition
                          * @instance
                          */
                         Object.defineProperty(Condition.prototype, "condition", {
-                            get: $util.oneOfGetter($oneOfFields = ["conditionThreshold", "conditionAbsent", "conditionMonitoringQueryLanguage"]),
+                            get: $util.oneOfGetter($oneOfFields = ["conditionThreshold", "conditionAbsent", "conditionMatchedLog", "conditionMonitoringQueryLanguage", "conditionPrometheusQueryLanguage", "conditionSql"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -964,6 +1362,12 @@
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.name);
                             if (message.conditionMonitoringQueryLanguage != null && Object.hasOwnProperty.call(message, "conditionMonitoringQueryLanguage"))
                                 $root.google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.encode(message.conditionMonitoringQueryLanguage, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.conditionMatchedLog != null && Object.hasOwnProperty.call(message, "conditionMatchedLog"))
+                                $root.google.monitoring.v3.AlertPolicy.Condition.LogMatch.encode(message.conditionMatchedLog, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.conditionPrometheusQueryLanguage != null && Object.hasOwnProperty.call(message, "conditionPrometheusQueryLanguage"))
+                                $root.google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition.encode(message.conditionPrometheusQueryLanguage, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                            if (message.conditionSql != null && Object.hasOwnProperty.call(message, "conditionSql"))
+                                $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.encode(message.conditionSql, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                             return writer;
                         };
     
@@ -991,14 +1395,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Condition.decode = function decode(reader, length, error) {
+                        Condition.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 12: {
                                         message.name = reader.string();
@@ -1016,8 +1418,20 @@
                                         message.conditionAbsent = $root.google.monitoring.v3.AlertPolicy.Condition.MetricAbsence.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 20: {
+                                        message.conditionMatchedLog = $root.google.monitoring.v3.AlertPolicy.Condition.LogMatch.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 19: {
                                         message.conditionMonitoringQueryLanguage = $root.google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 21: {
+                                        message.conditionPrometheusQueryLanguage = $root.google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 22: {
+                                        message.conditionSql = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -1080,6 +1494,16 @@
                                         return "conditionAbsent." + error;
                                 }
                             }
+                            if (message.conditionMatchedLog != null && message.hasOwnProperty("conditionMatchedLog")) {
+                                if (properties.condition === 1)
+                                    return "condition: multiple values";
+                                properties.condition = 1;
+                                {
+                                    var error = $root.google.monitoring.v3.AlertPolicy.Condition.LogMatch.verify(message.conditionMatchedLog);
+                                    if (error)
+                                        return "conditionMatchedLog." + error;
+                                }
+                            }
                             if (message.conditionMonitoringQueryLanguage != null && message.hasOwnProperty("conditionMonitoringQueryLanguage")) {
                                 if (properties.condition === 1)
                                     return "condition: multiple values";
@@ -1088,6 +1512,26 @@
                                     var error = $root.google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.verify(message.conditionMonitoringQueryLanguage);
                                     if (error)
                                         return "conditionMonitoringQueryLanguage." + error;
+                                }
+                            }
+                            if (message.conditionPrometheusQueryLanguage != null && message.hasOwnProperty("conditionPrometheusQueryLanguage")) {
+                                if (properties.condition === 1)
+                                    return "condition: multiple values";
+                                properties.condition = 1;
+                                {
+                                    var error = $root.google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition.verify(message.conditionPrometheusQueryLanguage);
+                                    if (error)
+                                        return "conditionPrometheusQueryLanguage." + error;
+                                }
+                            }
+                            if (message.conditionSql != null && message.hasOwnProperty("conditionSql")) {
+                                if (properties.condition === 1)
+                                    return "condition: multiple values";
+                                properties.condition = 1;
+                                {
+                                    var error = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.verify(message.conditionSql);
+                                    if (error)
+                                        return "conditionSql." + error;
                                 }
                             }
                             return null;
@@ -1119,10 +1563,25 @@
                                     throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.conditionAbsent: object expected");
                                 message.conditionAbsent = $root.google.monitoring.v3.AlertPolicy.Condition.MetricAbsence.fromObject(object.conditionAbsent);
                             }
+                            if (object.conditionMatchedLog != null) {
+                                if (typeof object.conditionMatchedLog !== "object")
+                                    throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.conditionMatchedLog: object expected");
+                                message.conditionMatchedLog = $root.google.monitoring.v3.AlertPolicy.Condition.LogMatch.fromObject(object.conditionMatchedLog);
+                            }
                             if (object.conditionMonitoringQueryLanguage != null) {
                                 if (typeof object.conditionMonitoringQueryLanguage !== "object")
                                     throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.conditionMonitoringQueryLanguage: object expected");
                                 message.conditionMonitoringQueryLanguage = $root.google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.fromObject(object.conditionMonitoringQueryLanguage);
+                            }
+                            if (object.conditionPrometheusQueryLanguage != null) {
+                                if (typeof object.conditionPrometheusQueryLanguage !== "object")
+                                    throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.conditionPrometheusQueryLanguage: object expected");
+                                message.conditionPrometheusQueryLanguage = $root.google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition.fromObject(object.conditionPrometheusQueryLanguage);
+                            }
+                            if (object.conditionSql != null) {
+                                if (typeof object.conditionSql !== "object")
+                                    throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.conditionSql: object expected");
+                                message.conditionSql = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.fromObject(object.conditionSql);
                             }
                             return message;
                         };
@@ -1162,6 +1621,21 @@
                                 object.conditionMonitoringQueryLanguage = $root.google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.toObject(message.conditionMonitoringQueryLanguage, options);
                                 if (options.oneofs)
                                     object.condition = "conditionMonitoringQueryLanguage";
+                            }
+                            if (message.conditionMatchedLog != null && message.hasOwnProperty("conditionMatchedLog")) {
+                                object.conditionMatchedLog = $root.google.monitoring.v3.AlertPolicy.Condition.LogMatch.toObject(message.conditionMatchedLog, options);
+                                if (options.oneofs)
+                                    object.condition = "conditionMatchedLog";
+                            }
+                            if (message.conditionPrometheusQueryLanguage != null && message.hasOwnProperty("conditionPrometheusQueryLanguage")) {
+                                object.conditionPrometheusQueryLanguage = $root.google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition.toObject(message.conditionPrometheusQueryLanguage, options);
+                                if (options.oneofs)
+                                    object.condition = "conditionPrometheusQueryLanguage";
+                            }
+                            if (message.conditionSql != null && message.hasOwnProperty("conditionSql")) {
+                                object.conditionSql = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.toObject(message.conditionSql, options);
+                                if (options.oneofs)
+                                    object.condition = "conditionSql";
                             }
                             return object;
                         };
@@ -1302,14 +1776,12 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Trigger.decode = function decode(reader, length, error) {
+                            Trigger.decode = function decode(reader, length) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.Trigger();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.count = reader.int32();
@@ -1444,6 +1916,24 @@
                             return Trigger;
                         })();
     
+                        /**
+                         * EvaluationMissingData enum.
+                         * @name google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData
+                         * @enum {number}
+                         * @property {number} EVALUATION_MISSING_DATA_UNSPECIFIED=0 EVALUATION_MISSING_DATA_UNSPECIFIED value
+                         * @property {number} EVALUATION_MISSING_DATA_INACTIVE=1 EVALUATION_MISSING_DATA_INACTIVE value
+                         * @property {number} EVALUATION_MISSING_DATA_ACTIVE=2 EVALUATION_MISSING_DATA_ACTIVE value
+                         * @property {number} EVALUATION_MISSING_DATA_NO_OP=3 EVALUATION_MISSING_DATA_NO_OP value
+                         */
+                        Condition.EvaluationMissingData = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "EVALUATION_MISSING_DATA_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "EVALUATION_MISSING_DATA_INACTIVE"] = 1;
+                            values[valuesById[2] = "EVALUATION_MISSING_DATA_ACTIVE"] = 2;
+                            values[valuesById[3] = "EVALUATION_MISSING_DATA_NO_OP"] = 3;
+                            return values;
+                        })();
+    
                         Condition.MetricThreshold = (function() {
     
                             /**
@@ -1454,10 +1944,12 @@
                              * @property {Array.<google.monitoring.v3.IAggregation>|null} [aggregations] MetricThreshold aggregations
                              * @property {string|null} [denominatorFilter] MetricThreshold denominatorFilter
                              * @property {Array.<google.monitoring.v3.IAggregation>|null} [denominatorAggregations] MetricThreshold denominatorAggregations
+                             * @property {google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.IForecastOptions|null} [forecastOptions] MetricThreshold forecastOptions
                              * @property {google.monitoring.v3.ComparisonType|null} [comparison] MetricThreshold comparison
                              * @property {number|null} [thresholdValue] MetricThreshold thresholdValue
                              * @property {google.protobuf.IDuration|null} [duration] MetricThreshold duration
                              * @property {google.monitoring.v3.AlertPolicy.Condition.ITrigger|null} [trigger] MetricThreshold trigger
+                             * @property {google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData|null} [evaluationMissingData] MetricThreshold evaluationMissingData
                              */
     
                             /**
@@ -1510,6 +2002,14 @@
                             MetricThreshold.prototype.denominatorAggregations = $util.emptyArray;
     
                             /**
+                             * MetricThreshold forecastOptions.
+                             * @member {google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.IForecastOptions|null|undefined} forecastOptions
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.MetricThreshold
+                             * @instance
+                             */
+                            MetricThreshold.prototype.forecastOptions = null;
+    
+                            /**
                              * MetricThreshold comparison.
                              * @member {google.monitoring.v3.ComparisonType} comparison
                              * @memberof google.monitoring.v3.AlertPolicy.Condition.MetricThreshold
@@ -1540,6 +2040,14 @@
                              * @instance
                              */
                             MetricThreshold.prototype.trigger = null;
+    
+                            /**
+                             * MetricThreshold evaluationMissingData.
+                             * @member {google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData} evaluationMissingData
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.MetricThreshold
+                             * @instance
+                             */
+                            MetricThreshold.prototype.evaluationMissingData = 0;
     
                             /**
                              * Creates a new MetricThreshold instance using the specified properties.
@@ -1583,6 +2091,10 @@
                                 if (message.denominatorAggregations != null && message.denominatorAggregations.length)
                                     for (var i = 0; i < message.denominatorAggregations.length; ++i)
                                         $root.google.monitoring.v3.Aggregation.encode(message.denominatorAggregations[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                if (message.evaluationMissingData != null && Object.hasOwnProperty.call(message, "evaluationMissingData"))
+                                    writer.uint32(/* id 11, wireType 0 =*/88).int32(message.evaluationMissingData);
+                                if (message.forecastOptions != null && Object.hasOwnProperty.call(message, "forecastOptions"))
+                                    $root.google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions.encode(message.forecastOptions, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                                 return writer;
                             };
     
@@ -1610,14 +2122,12 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MetricThreshold.decode = function decode(reader, length, error) {
+                            MetricThreshold.decode = function decode(reader, length) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.MetricThreshold();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
                                     switch (tag >>> 3) {
                                     case 2: {
                                             message.filter = reader.string();
@@ -1639,6 +2149,10 @@
                                             message.denominatorAggregations.push($root.google.monitoring.v3.Aggregation.decode(reader, reader.uint32()));
                                             break;
                                         }
+                                    case 12: {
+                                            message.forecastOptions = $root.google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     case 4: {
                                             message.comparison = reader.int32();
                                             break;
@@ -1653,6 +2167,10 @@
                                         }
                                     case 7: {
                                             message.trigger = $root.google.monitoring.v3.AlertPolicy.Condition.Trigger.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.evaluationMissingData = reader.int32();
                                             break;
                                         }
                                     default:
@@ -1714,6 +2232,11 @@
                                             return "denominatorAggregations." + error;
                                     }
                                 }
+                                if (message.forecastOptions != null && message.hasOwnProperty("forecastOptions")) {
+                                    var error = $root.google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions.verify(message.forecastOptions);
+                                    if (error)
+                                        return "forecastOptions." + error;
+                                }
                                 if (message.comparison != null && message.hasOwnProperty("comparison"))
                                     switch (message.comparison) {
                                     default:
@@ -1740,6 +2263,16 @@
                                     if (error)
                                         return "trigger." + error;
                                 }
+                                if (message.evaluationMissingData != null && message.hasOwnProperty("evaluationMissingData"))
+                                    switch (message.evaluationMissingData) {
+                                    default:
+                                        return "evaluationMissingData: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -1778,6 +2311,11 @@
                                             throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.denominatorAggregations: object expected");
                                         message.denominatorAggregations[i] = $root.google.monitoring.v3.Aggregation.fromObject(object.denominatorAggregations[i]);
                                     }
+                                }
+                                if (object.forecastOptions != null) {
+                                    if (typeof object.forecastOptions !== "object")
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.forecastOptions: object expected");
+                                    message.forecastOptions = $root.google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions.fromObject(object.forecastOptions);
                                 }
                                 switch (object.comparison) {
                                 default:
@@ -1827,6 +2365,30 @@
                                         throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.trigger: object expected");
                                     message.trigger = $root.google.monitoring.v3.AlertPolicy.Condition.Trigger.fromObject(object.trigger);
                                 }
+                                switch (object.evaluationMissingData) {
+                                default:
+                                    if (typeof object.evaluationMissingData === "number") {
+                                        message.evaluationMissingData = object.evaluationMissingData;
+                                        break;
+                                    }
+                                    break;
+                                case "EVALUATION_MISSING_DATA_UNSPECIFIED":
+                                case 0:
+                                    message.evaluationMissingData = 0;
+                                    break;
+                                case "EVALUATION_MISSING_DATA_INACTIVE":
+                                case 1:
+                                    message.evaluationMissingData = 1;
+                                    break;
+                                case "EVALUATION_MISSING_DATA_ACTIVE":
+                                case 2:
+                                    message.evaluationMissingData = 2;
+                                    break;
+                                case "EVALUATION_MISSING_DATA_NO_OP":
+                                case 3:
+                                    message.evaluationMissingData = 3;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -1854,6 +2416,8 @@
                                     object.duration = null;
                                     object.trigger = null;
                                     object.denominatorFilter = "";
+                                    object.evaluationMissingData = options.enums === String ? "EVALUATION_MISSING_DATA_UNSPECIFIED" : 0;
+                                    object.forecastOptions = null;
                                 }
                                 if (message.filter != null && message.hasOwnProperty("filter"))
                                     object.filter = message.filter;
@@ -1877,6 +2441,10 @@
                                     for (var j = 0; j < message.denominatorAggregations.length; ++j)
                                         object.denominatorAggregations[j] = $root.google.monitoring.v3.Aggregation.toObject(message.denominatorAggregations[j], options);
                                 }
+                                if (message.evaluationMissingData != null && message.hasOwnProperty("evaluationMissingData"))
+                                    object.evaluationMissingData = options.enums === String ? $root.google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData[message.evaluationMissingData] === undefined ? message.evaluationMissingData : $root.google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData[message.evaluationMissingData] : message.evaluationMissingData;
+                                if (message.forecastOptions != null && message.hasOwnProperty("forecastOptions"))
+                                    object.forecastOptions = $root.google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions.toObject(message.forecastOptions, options);
                                 return object;
                             };
     
@@ -1905,6 +2473,214 @@
                                 }
                                 return typeUrlPrefix + "/google.monitoring.v3.AlertPolicy.Condition.MetricThreshold";
                             };
+    
+                            MetricThreshold.ForecastOptions = (function() {
+    
+                                /**
+                                 * Properties of a ForecastOptions.
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.MetricThreshold
+                                 * @interface IForecastOptions
+                                 * @property {google.protobuf.IDuration|null} [forecastHorizon] ForecastOptions forecastHorizon
+                                 */
+    
+                                /**
+                                 * Constructs a new ForecastOptions.
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.MetricThreshold
+                                 * @classdesc Represents a ForecastOptions.
+                                 * @implements IForecastOptions
+                                 * @constructor
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.IForecastOptions=} [properties] Properties to set
+                                 */
+                                function ForecastOptions(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ForecastOptions forecastHorizon.
+                                 * @member {google.protobuf.IDuration|null|undefined} forecastHorizon
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions
+                                 * @instance
+                                 */
+                                ForecastOptions.prototype.forecastHorizon = null;
+    
+                                /**
+                                 * Creates a new ForecastOptions instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.IForecastOptions=} [properties] Properties to set
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions} ForecastOptions instance
+                                 */
+                                ForecastOptions.create = function create(properties) {
+                                    return new ForecastOptions(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ForecastOptions message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.IForecastOptions} message ForecastOptions message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ForecastOptions.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.forecastHorizon != null && Object.hasOwnProperty.call(message, "forecastHorizon"))
+                                        $root.google.protobuf.Duration.encode(message.forecastHorizon, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ForecastOptions message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.IForecastOptions} message ForecastOptions message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ForecastOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ForecastOptions message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions} ForecastOptions
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ForecastOptions.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.forecastHorizon = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ForecastOptions message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions} ForecastOptions
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ForecastOptions.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ForecastOptions message.
+                                 * @function verify
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ForecastOptions.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.forecastHorizon != null && message.hasOwnProperty("forecastHorizon")) {
+                                        var error = $root.google.protobuf.Duration.verify(message.forecastHorizon);
+                                        if (error)
+                                            return "forecastHorizon." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ForecastOptions message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions} ForecastOptions
+                                 */
+                                ForecastOptions.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions)
+                                        return object;
+                                    var message = new $root.google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions();
+                                    if (object.forecastHorizon != null) {
+                                        if (typeof object.forecastHorizon !== "object")
+                                            throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions.forecastHorizon: object expected");
+                                        message.forecastHorizon = $root.google.protobuf.Duration.fromObject(object.forecastHorizon);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ForecastOptions message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions} message ForecastOptions
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ForecastOptions.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.forecastHorizon = null;
+                                    if (message.forecastHorizon != null && message.hasOwnProperty("forecastHorizon"))
+                                        object.forecastHorizon = $root.google.protobuf.Duration.toObject(message.forecastHorizon, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ForecastOptions to JSON.
+                                 * @function toJSON
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ForecastOptions.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ForecastOptions
+                                 * @function getTypeUrl
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ForecastOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions";
+                                };
+    
+                                return ForecastOptions;
+                            })();
     
                             return MetricThreshold;
                         })();
@@ -2029,14 +2805,12 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MetricAbsence.decode = function decode(reader, length, error) {
+                            MetricAbsence.decode = function decode(reader, length) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.MetricAbsence();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.filter = reader.string();
@@ -2216,6 +2990,268 @@
                             return MetricAbsence;
                         })();
     
+                        Condition.LogMatch = (function() {
+    
+                            /**
+                             * Properties of a LogMatch.
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition
+                             * @interface ILogMatch
+                             * @property {string|null} [filter] LogMatch filter
+                             * @property {Object.<string,string>|null} [labelExtractors] LogMatch labelExtractors
+                             */
+    
+                            /**
+                             * Constructs a new LogMatch.
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition
+                             * @classdesc Represents a LogMatch.
+                             * @implements ILogMatch
+                             * @constructor
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.ILogMatch=} [properties] Properties to set
+                             */
+                            function LogMatch(properties) {
+                                this.labelExtractors = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LogMatch filter.
+                             * @member {string} filter
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.LogMatch
+                             * @instance
+                             */
+                            LogMatch.prototype.filter = "";
+    
+                            /**
+                             * LogMatch labelExtractors.
+                             * @member {Object.<string,string>} labelExtractors
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.LogMatch
+                             * @instance
+                             */
+                            LogMatch.prototype.labelExtractors = $util.emptyObject;
+    
+                            /**
+                             * Creates a new LogMatch instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.LogMatch
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.ILogMatch=} [properties] Properties to set
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.LogMatch} LogMatch instance
+                             */
+                            LogMatch.create = function create(properties) {
+                                return new LogMatch(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LogMatch message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.LogMatch.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.LogMatch
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.ILogMatch} message LogMatch message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LogMatch.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.filter);
+                                if (message.labelExtractors != null && Object.hasOwnProperty.call(message, "labelExtractors"))
+                                    for (var keys = Object.keys(message.labelExtractors), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labelExtractors[keys[i]]).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LogMatch message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.LogMatch.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.LogMatch
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.ILogMatch} message LogMatch message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LogMatch.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LogMatch message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.LogMatch
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.LogMatch} LogMatch
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LogMatch.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.LogMatch(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.filter = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (message.labelExtractors === $util.emptyObject)
+                                                message.labelExtractors = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.labelExtractors[key] = value;
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LogMatch message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.LogMatch
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.LogMatch} LogMatch
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LogMatch.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LogMatch message.
+                             * @function verify
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.LogMatch
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LogMatch.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    if (!$util.isString(message.filter))
+                                        return "filter: string expected";
+                                if (message.labelExtractors != null && message.hasOwnProperty("labelExtractors")) {
+                                    if (!$util.isObject(message.labelExtractors))
+                                        return "labelExtractors: object expected";
+                                    var key = Object.keys(message.labelExtractors);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.labelExtractors[key[i]]))
+                                            return "labelExtractors: string{k:string} expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LogMatch message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.LogMatch
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.LogMatch} LogMatch
+                             */
+                            LogMatch.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.v3.AlertPolicy.Condition.LogMatch)
+                                    return object;
+                                var message = new $root.google.monitoring.v3.AlertPolicy.Condition.LogMatch();
+                                if (object.filter != null)
+                                    message.filter = String(object.filter);
+                                if (object.labelExtractors) {
+                                    if (typeof object.labelExtractors !== "object")
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.LogMatch.labelExtractors: object expected");
+                                    message.labelExtractors = {};
+                                    for (var keys = Object.keys(object.labelExtractors), i = 0; i < keys.length; ++i)
+                                        message.labelExtractors[keys[i]] = String(object.labelExtractors[keys[i]]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LogMatch message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.LogMatch
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.LogMatch} message LogMatch
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LogMatch.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.labelExtractors = {};
+                                if (options.defaults)
+                                    object.filter = "";
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    object.filter = message.filter;
+                                var keys2;
+                                if (message.labelExtractors && (keys2 = Object.keys(message.labelExtractors)).length) {
+                                    object.labelExtractors = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.labelExtractors[keys2[j]] = message.labelExtractors[keys2[j]];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LogMatch to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.LogMatch
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LogMatch.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LogMatch
+                             * @function getTypeUrl
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.LogMatch
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LogMatch.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.monitoring.v3.AlertPolicy.Condition.LogMatch";
+                            };
+    
+                            return LogMatch;
+                        })();
+    
                         Condition.MonitoringQueryLanguageCondition = (function() {
     
                             /**
@@ -2225,6 +3261,7 @@
                              * @property {string|null} [query] MonitoringQueryLanguageCondition query
                              * @property {google.protobuf.IDuration|null} [duration] MonitoringQueryLanguageCondition duration
                              * @property {google.monitoring.v3.AlertPolicy.Condition.ITrigger|null} [trigger] MonitoringQueryLanguageCondition trigger
+                             * @property {google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData|null} [evaluationMissingData] MonitoringQueryLanguageCondition evaluationMissingData
                              */
     
                             /**
@@ -2267,6 +3304,14 @@
                             MonitoringQueryLanguageCondition.prototype.trigger = null;
     
                             /**
+                             * MonitoringQueryLanguageCondition evaluationMissingData.
+                             * @member {google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData} evaluationMissingData
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition
+                             * @instance
+                             */
+                            MonitoringQueryLanguageCondition.prototype.evaluationMissingData = 0;
+    
+                            /**
                              * Creates a new MonitoringQueryLanguageCondition instance using the specified properties.
                              * @function create
                              * @memberof google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition
@@ -2296,6 +3341,8 @@
                                     $root.google.protobuf.Duration.encode(message.duration, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                 if (message.trigger != null && Object.hasOwnProperty.call(message, "trigger"))
                                     $root.google.monitoring.v3.AlertPolicy.Condition.Trigger.encode(message.trigger, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.evaluationMissingData != null && Object.hasOwnProperty.call(message, "evaluationMissingData"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.evaluationMissingData);
                                 return writer;
                             };
     
@@ -2323,14 +3370,12 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MonitoringQueryLanguageCondition.decode = function decode(reader, length, error) {
+                            MonitoringQueryLanguageCondition.decode = function decode(reader, length) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.query = reader.string();
@@ -2342,6 +3387,10 @@
                                         }
                                     case 3: {
                                             message.trigger = $root.google.monitoring.v3.AlertPolicy.Condition.Trigger.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.evaluationMissingData = reader.int32();
                                             break;
                                         }
                                     default:
@@ -2392,6 +3441,16 @@
                                     if (error)
                                         return "trigger." + error;
                                 }
+                                if (message.evaluationMissingData != null && message.hasOwnProperty("evaluationMissingData"))
+                                    switch (message.evaluationMissingData) {
+                                    default:
+                                        return "evaluationMissingData: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -2419,6 +3478,30 @@
                                         throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.trigger: object expected");
                                     message.trigger = $root.google.monitoring.v3.AlertPolicy.Condition.Trigger.fromObject(object.trigger);
                                 }
+                                switch (object.evaluationMissingData) {
+                                default:
+                                    if (typeof object.evaluationMissingData === "number") {
+                                        message.evaluationMissingData = object.evaluationMissingData;
+                                        break;
+                                    }
+                                    break;
+                                case "EVALUATION_MISSING_DATA_UNSPECIFIED":
+                                case 0:
+                                    message.evaluationMissingData = 0;
+                                    break;
+                                case "EVALUATION_MISSING_DATA_INACTIVE":
+                                case 1:
+                                    message.evaluationMissingData = 1;
+                                    break;
+                                case "EVALUATION_MISSING_DATA_ACTIVE":
+                                case 2:
+                                    message.evaluationMissingData = 2;
+                                    break;
+                                case "EVALUATION_MISSING_DATA_NO_OP":
+                                case 3:
+                                    message.evaluationMissingData = 3;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -2439,6 +3522,7 @@
                                     object.query = "";
                                     object.duration = null;
                                     object.trigger = null;
+                                    object.evaluationMissingData = options.enums === String ? "EVALUATION_MISSING_DATA_UNSPECIFIED" : 0;
                                 }
                                 if (message.query != null && message.hasOwnProperty("query"))
                                     object.query = message.query;
@@ -2446,6 +3530,8 @@
                                     object.duration = $root.google.protobuf.Duration.toObject(message.duration, options);
                                 if (message.trigger != null && message.hasOwnProperty("trigger"))
                                     object.trigger = $root.google.monitoring.v3.AlertPolicy.Condition.Trigger.toObject(message.trigger, options);
+                                if (message.evaluationMissingData != null && message.hasOwnProperty("evaluationMissingData"))
+                                    object.evaluationMissingData = options.enums === String ? $root.google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData[message.evaluationMissingData] === undefined ? message.evaluationMissingData : $root.google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData[message.evaluationMissingData] : message.evaluationMissingData;
                                 return object;
                             };
     
@@ -2478,6 +3564,1962 @@
                             return MonitoringQueryLanguageCondition;
                         })();
     
+                        Condition.PrometheusQueryLanguageCondition = (function() {
+    
+                            /**
+                             * Properties of a PrometheusQueryLanguageCondition.
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition
+                             * @interface IPrometheusQueryLanguageCondition
+                             * @property {string|null} [query] PrometheusQueryLanguageCondition query
+                             * @property {google.protobuf.IDuration|null} [duration] PrometheusQueryLanguageCondition duration
+                             * @property {google.protobuf.IDuration|null} [evaluationInterval] PrometheusQueryLanguageCondition evaluationInterval
+                             * @property {Object.<string,string>|null} [labels] PrometheusQueryLanguageCondition labels
+                             * @property {string|null} [ruleGroup] PrometheusQueryLanguageCondition ruleGroup
+                             * @property {string|null} [alertRule] PrometheusQueryLanguageCondition alertRule
+                             * @property {boolean|null} [disableMetricValidation] PrometheusQueryLanguageCondition disableMetricValidation
+                             */
+    
+                            /**
+                             * Constructs a new PrometheusQueryLanguageCondition.
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition
+                             * @classdesc Represents a PrometheusQueryLanguageCondition.
+                             * @implements IPrometheusQueryLanguageCondition
+                             * @constructor
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.IPrometheusQueryLanguageCondition=} [properties] Properties to set
+                             */
+                            function PrometheusQueryLanguageCondition(properties) {
+                                this.labels = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PrometheusQueryLanguageCondition query.
+                             * @member {string} query
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @instance
+                             */
+                            PrometheusQueryLanguageCondition.prototype.query = "";
+    
+                            /**
+                             * PrometheusQueryLanguageCondition duration.
+                             * @member {google.protobuf.IDuration|null|undefined} duration
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @instance
+                             */
+                            PrometheusQueryLanguageCondition.prototype.duration = null;
+    
+                            /**
+                             * PrometheusQueryLanguageCondition evaluationInterval.
+                             * @member {google.protobuf.IDuration|null|undefined} evaluationInterval
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @instance
+                             */
+                            PrometheusQueryLanguageCondition.prototype.evaluationInterval = null;
+    
+                            /**
+                             * PrometheusQueryLanguageCondition labels.
+                             * @member {Object.<string,string>} labels
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @instance
+                             */
+                            PrometheusQueryLanguageCondition.prototype.labels = $util.emptyObject;
+    
+                            /**
+                             * PrometheusQueryLanguageCondition ruleGroup.
+                             * @member {string} ruleGroup
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @instance
+                             */
+                            PrometheusQueryLanguageCondition.prototype.ruleGroup = "";
+    
+                            /**
+                             * PrometheusQueryLanguageCondition alertRule.
+                             * @member {string} alertRule
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @instance
+                             */
+                            PrometheusQueryLanguageCondition.prototype.alertRule = "";
+    
+                            /**
+                             * PrometheusQueryLanguageCondition disableMetricValidation.
+                             * @member {boolean} disableMetricValidation
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @instance
+                             */
+                            PrometheusQueryLanguageCondition.prototype.disableMetricValidation = false;
+    
+                            /**
+                             * Creates a new PrometheusQueryLanguageCondition instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.IPrometheusQueryLanguageCondition=} [properties] Properties to set
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition} PrometheusQueryLanguageCondition instance
+                             */
+                            PrometheusQueryLanguageCondition.create = function create(properties) {
+                                return new PrometheusQueryLanguageCondition(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PrometheusQueryLanguageCondition message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.IPrometheusQueryLanguageCondition} message PrometheusQueryLanguageCondition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PrometheusQueryLanguageCondition.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.query);
+                                if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
+                                    $root.google.protobuf.Duration.encode(message.duration, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.evaluationInterval != null && Object.hasOwnProperty.call(message, "evaluationInterval"))
+                                    $root.google.protobuf.Duration.encode(message.evaluationInterval, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                    for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                                if (message.ruleGroup != null && Object.hasOwnProperty.call(message, "ruleGroup"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.ruleGroup);
+                                if (message.alertRule != null && Object.hasOwnProperty.call(message, "alertRule"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.alertRule);
+                                if (message.disableMetricValidation != null && Object.hasOwnProperty.call(message, "disableMetricValidation"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).bool(message.disableMetricValidation);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PrometheusQueryLanguageCondition message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.IPrometheusQueryLanguageCondition} message PrometheusQueryLanguageCondition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PrometheusQueryLanguageCondition.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PrometheusQueryLanguageCondition message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition} PrometheusQueryLanguageCondition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PrometheusQueryLanguageCondition.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.query = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.duration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.evaluationInterval = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (message.labels === $util.emptyObject)
+                                                message.labels = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.labels[key] = value;
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.ruleGroup = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.alertRule = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.disableMetricValidation = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PrometheusQueryLanguageCondition message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition} PrometheusQueryLanguageCondition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PrometheusQueryLanguageCondition.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PrometheusQueryLanguageCondition message.
+                             * @function verify
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PrometheusQueryLanguageCondition.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    if (!$util.isString(message.query))
+                                        return "query: string expected";
+                                if (message.duration != null && message.hasOwnProperty("duration")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.duration);
+                                    if (error)
+                                        return "duration." + error;
+                                }
+                                if (message.evaluationInterval != null && message.hasOwnProperty("evaluationInterval")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.evaluationInterval);
+                                    if (error)
+                                        return "evaluationInterval." + error;
+                                }
+                                if (message.labels != null && message.hasOwnProperty("labels")) {
+                                    if (!$util.isObject(message.labels))
+                                        return "labels: object expected";
+                                    var key = Object.keys(message.labels);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.labels[key[i]]))
+                                            return "labels: string{k:string} expected";
+                                }
+                                if (message.ruleGroup != null && message.hasOwnProperty("ruleGroup"))
+                                    if (!$util.isString(message.ruleGroup))
+                                        return "ruleGroup: string expected";
+                                if (message.alertRule != null && message.hasOwnProperty("alertRule"))
+                                    if (!$util.isString(message.alertRule))
+                                        return "alertRule: string expected";
+                                if (message.disableMetricValidation != null && message.hasOwnProperty("disableMetricValidation"))
+                                    if (typeof message.disableMetricValidation !== "boolean")
+                                        return "disableMetricValidation: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PrometheusQueryLanguageCondition message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition} PrometheusQueryLanguageCondition
+                             */
+                            PrometheusQueryLanguageCondition.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition)
+                                    return object;
+                                var message = new $root.google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition();
+                                if (object.query != null)
+                                    message.query = String(object.query);
+                                if (object.duration != null) {
+                                    if (typeof object.duration !== "object")
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition.duration: object expected");
+                                    message.duration = $root.google.protobuf.Duration.fromObject(object.duration);
+                                }
+                                if (object.evaluationInterval != null) {
+                                    if (typeof object.evaluationInterval !== "object")
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition.evaluationInterval: object expected");
+                                    message.evaluationInterval = $root.google.protobuf.Duration.fromObject(object.evaluationInterval);
+                                }
+                                if (object.labels) {
+                                    if (typeof object.labels !== "object")
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition.labels: object expected");
+                                    message.labels = {};
+                                    for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                        message.labels[keys[i]] = String(object.labels[keys[i]]);
+                                }
+                                if (object.ruleGroup != null)
+                                    message.ruleGroup = String(object.ruleGroup);
+                                if (object.alertRule != null)
+                                    message.alertRule = String(object.alertRule);
+                                if (object.disableMetricValidation != null)
+                                    message.disableMetricValidation = Boolean(object.disableMetricValidation);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PrometheusQueryLanguageCondition message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition} message PrometheusQueryLanguageCondition
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PrometheusQueryLanguageCondition.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.labels = {};
+                                if (options.defaults) {
+                                    object.query = "";
+                                    object.duration = null;
+                                    object.evaluationInterval = null;
+                                    object.ruleGroup = "";
+                                    object.alertRule = "";
+                                    object.disableMetricValidation = false;
+                                }
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    object.query = message.query;
+                                if (message.duration != null && message.hasOwnProperty("duration"))
+                                    object.duration = $root.google.protobuf.Duration.toObject(message.duration, options);
+                                if (message.evaluationInterval != null && message.hasOwnProperty("evaluationInterval"))
+                                    object.evaluationInterval = $root.google.protobuf.Duration.toObject(message.evaluationInterval, options);
+                                var keys2;
+                                if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                    object.labels = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.labels[keys2[j]] = message.labels[keys2[j]];
+                                }
+                                if (message.ruleGroup != null && message.hasOwnProperty("ruleGroup"))
+                                    object.ruleGroup = message.ruleGroup;
+                                if (message.alertRule != null && message.hasOwnProperty("alertRule"))
+                                    object.alertRule = message.alertRule;
+                                if (message.disableMetricValidation != null && message.hasOwnProperty("disableMetricValidation"))
+                                    object.disableMetricValidation = message.disableMetricValidation;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PrometheusQueryLanguageCondition to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PrometheusQueryLanguageCondition.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PrometheusQueryLanguageCondition
+                             * @function getTypeUrl
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PrometheusQueryLanguageCondition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition";
+                            };
+    
+                            return PrometheusQueryLanguageCondition;
+                        })();
+    
+                        Condition.SqlCondition = (function() {
+    
+                            /**
+                             * Properties of a SqlCondition.
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition
+                             * @interface ISqlCondition
+                             * @property {string|null} [query] SqlCondition query
+                             * @property {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IMinutes|null} [minutes] SqlCondition minutes
+                             * @property {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IHourly|null} [hourly] SqlCondition hourly
+                             * @property {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IDaily|null} [daily] SqlCondition daily
+                             * @property {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IRowCountTest|null} [rowCountTest] SqlCondition rowCountTest
+                             * @property {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IBooleanTest|null} [booleanTest] SqlCondition booleanTest
+                             */
+    
+                            /**
+                             * Constructs a new SqlCondition.
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition
+                             * @classdesc Represents a SqlCondition.
+                             * @implements ISqlCondition
+                             * @constructor
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.ISqlCondition=} [properties] Properties to set
+                             */
+                            function SqlCondition(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SqlCondition query.
+                             * @member {string} query
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @instance
+                             */
+                            SqlCondition.prototype.query = "";
+    
+                            /**
+                             * SqlCondition minutes.
+                             * @member {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IMinutes|null|undefined} minutes
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @instance
+                             */
+                            SqlCondition.prototype.minutes = null;
+    
+                            /**
+                             * SqlCondition hourly.
+                             * @member {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IHourly|null|undefined} hourly
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @instance
+                             */
+                            SqlCondition.prototype.hourly = null;
+    
+                            /**
+                             * SqlCondition daily.
+                             * @member {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IDaily|null|undefined} daily
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @instance
+                             */
+                            SqlCondition.prototype.daily = null;
+    
+                            /**
+                             * SqlCondition rowCountTest.
+                             * @member {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IRowCountTest|null|undefined} rowCountTest
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @instance
+                             */
+                            SqlCondition.prototype.rowCountTest = null;
+    
+                            /**
+                             * SqlCondition booleanTest.
+                             * @member {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IBooleanTest|null|undefined} booleanTest
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @instance
+                             */
+                            SqlCondition.prototype.booleanTest = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * SqlCondition schedule.
+                             * @member {"minutes"|"hourly"|"daily"|undefined} schedule
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @instance
+                             */
+                            Object.defineProperty(SqlCondition.prototype, "schedule", {
+                                get: $util.oneOfGetter($oneOfFields = ["minutes", "hourly", "daily"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * SqlCondition evaluate.
+                             * @member {"rowCountTest"|"booleanTest"|undefined} evaluate
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @instance
+                             */
+                            Object.defineProperty(SqlCondition.prototype, "evaluate", {
+                                get: $util.oneOfGetter($oneOfFields = ["rowCountTest", "booleanTest"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new SqlCondition instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.ISqlCondition=} [properties] Properties to set
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition} SqlCondition instance
+                             */
+                            SqlCondition.create = function create(properties) {
+                                return new SqlCondition(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SqlCondition message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.ISqlCondition} message SqlCondition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SqlCondition.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.query);
+                                if (message.minutes != null && Object.hasOwnProperty.call(message, "minutes"))
+                                    $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes.encode(message.minutes, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.hourly != null && Object.hasOwnProperty.call(message, "hourly"))
+                                    $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly.encode(message.hourly, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.daily != null && Object.hasOwnProperty.call(message, "daily"))
+                                    $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily.encode(message.daily, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.rowCountTest != null && Object.hasOwnProperty.call(message, "rowCountTest"))
+                                    $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest.encode(message.rowCountTest, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.booleanTest != null && Object.hasOwnProperty.call(message, "booleanTest"))
+                                    $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest.encode(message.booleanTest, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SqlCondition message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.ISqlCondition} message SqlCondition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SqlCondition.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SqlCondition message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition} SqlCondition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SqlCondition.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.query = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.minutes = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.hourly = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.daily = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.rowCountTest = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.booleanTest = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SqlCondition message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition} SqlCondition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SqlCondition.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SqlCondition message.
+                             * @function verify
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SqlCondition.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    if (!$util.isString(message.query))
+                                        return "query: string expected";
+                                if (message.minutes != null && message.hasOwnProperty("minutes")) {
+                                    properties.schedule = 1;
+                                    {
+                                        var error = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes.verify(message.minutes);
+                                        if (error)
+                                            return "minutes." + error;
+                                    }
+                                }
+                                if (message.hourly != null && message.hasOwnProperty("hourly")) {
+                                    if (properties.schedule === 1)
+                                        return "schedule: multiple values";
+                                    properties.schedule = 1;
+                                    {
+                                        var error = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly.verify(message.hourly);
+                                        if (error)
+                                            return "hourly." + error;
+                                    }
+                                }
+                                if (message.daily != null && message.hasOwnProperty("daily")) {
+                                    if (properties.schedule === 1)
+                                        return "schedule: multiple values";
+                                    properties.schedule = 1;
+                                    {
+                                        var error = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily.verify(message.daily);
+                                        if (error)
+                                            return "daily." + error;
+                                    }
+                                }
+                                if (message.rowCountTest != null && message.hasOwnProperty("rowCountTest")) {
+                                    properties.evaluate = 1;
+                                    {
+                                        var error = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest.verify(message.rowCountTest);
+                                        if (error)
+                                            return "rowCountTest." + error;
+                                    }
+                                }
+                                if (message.booleanTest != null && message.hasOwnProperty("booleanTest")) {
+                                    if (properties.evaluate === 1)
+                                        return "evaluate: multiple values";
+                                    properties.evaluate = 1;
+                                    {
+                                        var error = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest.verify(message.booleanTest);
+                                        if (error)
+                                            return "booleanTest." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SqlCondition message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition} SqlCondition
+                             */
+                            SqlCondition.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition)
+                                    return object;
+                                var message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition();
+                                if (object.query != null)
+                                    message.query = String(object.query);
+                                if (object.minutes != null) {
+                                    if (typeof object.minutes !== "object")
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.SqlCondition.minutes: object expected");
+                                    message.minutes = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes.fromObject(object.minutes);
+                                }
+                                if (object.hourly != null) {
+                                    if (typeof object.hourly !== "object")
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.SqlCondition.hourly: object expected");
+                                    message.hourly = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly.fromObject(object.hourly);
+                                }
+                                if (object.daily != null) {
+                                    if (typeof object.daily !== "object")
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.SqlCondition.daily: object expected");
+                                    message.daily = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily.fromObject(object.daily);
+                                }
+                                if (object.rowCountTest != null) {
+                                    if (typeof object.rowCountTest !== "object")
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.SqlCondition.rowCountTest: object expected");
+                                    message.rowCountTest = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest.fromObject(object.rowCountTest);
+                                }
+                                if (object.booleanTest != null) {
+                                    if (typeof object.booleanTest !== "object")
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.SqlCondition.booleanTest: object expected");
+                                    message.booleanTest = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest.fromObject(object.booleanTest);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SqlCondition message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition} message SqlCondition
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SqlCondition.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.query = "";
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    object.query = message.query;
+                                if (message.minutes != null && message.hasOwnProperty("minutes")) {
+                                    object.minutes = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes.toObject(message.minutes, options);
+                                    if (options.oneofs)
+                                        object.schedule = "minutes";
+                                }
+                                if (message.hourly != null && message.hasOwnProperty("hourly")) {
+                                    object.hourly = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly.toObject(message.hourly, options);
+                                    if (options.oneofs)
+                                        object.schedule = "hourly";
+                                }
+                                if (message.daily != null && message.hasOwnProperty("daily")) {
+                                    object.daily = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily.toObject(message.daily, options);
+                                    if (options.oneofs)
+                                        object.schedule = "daily";
+                                }
+                                if (message.rowCountTest != null && message.hasOwnProperty("rowCountTest")) {
+                                    object.rowCountTest = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest.toObject(message.rowCountTest, options);
+                                    if (options.oneofs)
+                                        object.evaluate = "rowCountTest";
+                                }
+                                if (message.booleanTest != null && message.hasOwnProperty("booleanTest")) {
+                                    object.booleanTest = $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest.toObject(message.booleanTest, options);
+                                    if (options.oneofs)
+                                        object.evaluate = "booleanTest";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SqlCondition to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SqlCondition.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SqlCondition
+                             * @function getTypeUrl
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SqlCondition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.monitoring.v3.AlertPolicy.Condition.SqlCondition";
+                            };
+    
+                            SqlCondition.Minutes = (function() {
+    
+                                /**
+                                 * Properties of a Minutes.
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                                 * @interface IMinutes
+                                 * @property {number|null} [periodicity] Minutes periodicity
+                                 */
+    
+                                /**
+                                 * Constructs a new Minutes.
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                                 * @classdesc Represents a Minutes.
+                                 * @implements IMinutes
+                                 * @constructor
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IMinutes=} [properties] Properties to set
+                                 */
+                                function Minutes(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Minutes periodicity.
+                                 * @member {number} periodicity
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes
+                                 * @instance
+                                 */
+                                Minutes.prototype.periodicity = 0;
+    
+                                /**
+                                 * Creates a new Minutes instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IMinutes=} [properties] Properties to set
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes} Minutes instance
+                                 */
+                                Minutes.create = function create(properties) {
+                                    return new Minutes(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Minutes message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IMinutes} message Minutes message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Minutes.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.periodicity != null && Object.hasOwnProperty.call(message, "periodicity"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.periodicity);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Minutes message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IMinutes} message Minutes message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Minutes.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Minutes message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes} Minutes
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Minutes.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.periodicity = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Minutes message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes} Minutes
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Minutes.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Minutes message.
+                                 * @function verify
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Minutes.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.periodicity != null && message.hasOwnProperty("periodicity"))
+                                        if (!$util.isInteger(message.periodicity))
+                                            return "periodicity: integer expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Minutes message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes} Minutes
+                                 */
+                                Minutes.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes)
+                                        return object;
+                                    var message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes();
+                                    if (object.periodicity != null)
+                                        message.periodicity = object.periodicity | 0;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Minutes message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes} message Minutes
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Minutes.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.periodicity = 0;
+                                    if (message.periodicity != null && message.hasOwnProperty("periodicity"))
+                                        object.periodicity = message.periodicity;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Minutes to JSON.
+                                 * @function toJSON
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Minutes.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Minutes
+                                 * @function getTypeUrl
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Minutes.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes";
+                                };
+    
+                                return Minutes;
+                            })();
+    
+                            SqlCondition.Hourly = (function() {
+    
+                                /**
+                                 * Properties of an Hourly.
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                                 * @interface IHourly
+                                 * @property {number|null} [periodicity] Hourly periodicity
+                                 * @property {number|null} [minuteOffset] Hourly minuteOffset
+                                 */
+    
+                                /**
+                                 * Constructs a new Hourly.
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                                 * @classdesc Represents an Hourly.
+                                 * @implements IHourly
+                                 * @constructor
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IHourly=} [properties] Properties to set
+                                 */
+                                function Hourly(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Hourly periodicity.
+                                 * @member {number} periodicity
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly
+                                 * @instance
+                                 */
+                                Hourly.prototype.periodicity = 0;
+    
+                                /**
+                                 * Hourly minuteOffset.
+                                 * @member {number|null|undefined} minuteOffset
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly
+                                 * @instance
+                                 */
+                                Hourly.prototype.minuteOffset = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * Hourly _minuteOffset.
+                                 * @member {"minuteOffset"|undefined} _minuteOffset
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly
+                                 * @instance
+                                 */
+                                Object.defineProperty(Hourly.prototype, "_minuteOffset", {
+                                    get: $util.oneOfGetter($oneOfFields = ["minuteOffset"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new Hourly instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IHourly=} [properties] Properties to set
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly} Hourly instance
+                                 */
+                                Hourly.create = function create(properties) {
+                                    return new Hourly(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Hourly message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IHourly} message Hourly message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Hourly.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.periodicity != null && Object.hasOwnProperty.call(message, "periodicity"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.periodicity);
+                                    if (message.minuteOffset != null && Object.hasOwnProperty.call(message, "minuteOffset"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minuteOffset);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Hourly message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IHourly} message Hourly message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Hourly.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an Hourly message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly} Hourly
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Hourly.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.periodicity = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.minuteOffset = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an Hourly message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly} Hourly
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Hourly.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an Hourly message.
+                                 * @function verify
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Hourly.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.periodicity != null && message.hasOwnProperty("periodicity"))
+                                        if (!$util.isInteger(message.periodicity))
+                                            return "periodicity: integer expected";
+                                    if (message.minuteOffset != null && message.hasOwnProperty("minuteOffset")) {
+                                        properties._minuteOffset = 1;
+                                        if (!$util.isInteger(message.minuteOffset))
+                                            return "minuteOffset: integer expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an Hourly message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly} Hourly
+                                 */
+                                Hourly.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly)
+                                        return object;
+                                    var message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly();
+                                    if (object.periodicity != null)
+                                        message.periodicity = object.periodicity | 0;
+                                    if (object.minuteOffset != null)
+                                        message.minuteOffset = object.minuteOffset | 0;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an Hourly message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly} message Hourly
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Hourly.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.periodicity = 0;
+                                    if (message.periodicity != null && message.hasOwnProperty("periodicity"))
+                                        object.periodicity = message.periodicity;
+                                    if (message.minuteOffset != null && message.hasOwnProperty("minuteOffset")) {
+                                        object.minuteOffset = message.minuteOffset;
+                                        if (options.oneofs)
+                                            object._minuteOffset = "minuteOffset";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Hourly to JSON.
+                                 * @function toJSON
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Hourly.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Hourly
+                                 * @function getTypeUrl
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Hourly.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly";
+                                };
+    
+                                return Hourly;
+                            })();
+    
+                            SqlCondition.Daily = (function() {
+    
+                                /**
+                                 * Properties of a Daily.
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                                 * @interface IDaily
+                                 * @property {number|null} [periodicity] Daily periodicity
+                                 * @property {google.type.ITimeOfDay|null} [executionTime] Daily executionTime
+                                 */
+    
+                                /**
+                                 * Constructs a new Daily.
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                                 * @classdesc Represents a Daily.
+                                 * @implements IDaily
+                                 * @constructor
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IDaily=} [properties] Properties to set
+                                 */
+                                function Daily(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Daily periodicity.
+                                 * @member {number} periodicity
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily
+                                 * @instance
+                                 */
+                                Daily.prototype.periodicity = 0;
+    
+                                /**
+                                 * Daily executionTime.
+                                 * @member {google.type.ITimeOfDay|null|undefined} executionTime
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily
+                                 * @instance
+                                 */
+                                Daily.prototype.executionTime = null;
+    
+                                /**
+                                 * Creates a new Daily instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IDaily=} [properties] Properties to set
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily} Daily instance
+                                 */
+                                Daily.create = function create(properties) {
+                                    return new Daily(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Daily message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IDaily} message Daily message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Daily.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.periodicity != null && Object.hasOwnProperty.call(message, "periodicity"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.periodicity);
+                                    if (message.executionTime != null && Object.hasOwnProperty.call(message, "executionTime"))
+                                        $root.google.type.TimeOfDay.encode(message.executionTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Daily message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IDaily} message Daily message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Daily.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Daily message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily} Daily
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Daily.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.periodicity = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.executionTime = $root.google.type.TimeOfDay.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Daily message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily} Daily
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Daily.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Daily message.
+                                 * @function verify
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Daily.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.periodicity != null && message.hasOwnProperty("periodicity"))
+                                        if (!$util.isInteger(message.periodicity))
+                                            return "periodicity: integer expected";
+                                    if (message.executionTime != null && message.hasOwnProperty("executionTime")) {
+                                        var error = $root.google.type.TimeOfDay.verify(message.executionTime);
+                                        if (error)
+                                            return "executionTime." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Daily message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily} Daily
+                                 */
+                                Daily.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily)
+                                        return object;
+                                    var message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily();
+                                    if (object.periodicity != null)
+                                        message.periodicity = object.periodicity | 0;
+                                    if (object.executionTime != null) {
+                                        if (typeof object.executionTime !== "object")
+                                            throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily.executionTime: object expected");
+                                        message.executionTime = $root.google.type.TimeOfDay.fromObject(object.executionTime);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Daily message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily} message Daily
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Daily.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.periodicity = 0;
+                                        object.executionTime = null;
+                                    }
+                                    if (message.periodicity != null && message.hasOwnProperty("periodicity"))
+                                        object.periodicity = message.periodicity;
+                                    if (message.executionTime != null && message.hasOwnProperty("executionTime"))
+                                        object.executionTime = $root.google.type.TimeOfDay.toObject(message.executionTime, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Daily to JSON.
+                                 * @function toJSON
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Daily.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Daily
+                                 * @function getTypeUrl
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Daily.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily";
+                                };
+    
+                                return Daily;
+                            })();
+    
+                            SqlCondition.RowCountTest = (function() {
+    
+                                /**
+                                 * Properties of a RowCountTest.
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                                 * @interface IRowCountTest
+                                 * @property {google.monitoring.v3.ComparisonType|null} [comparison] RowCountTest comparison
+                                 * @property {number|Long|null} [threshold] RowCountTest threshold
+                                 */
+    
+                                /**
+                                 * Constructs a new RowCountTest.
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                                 * @classdesc Represents a RowCountTest.
+                                 * @implements IRowCountTest
+                                 * @constructor
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IRowCountTest=} [properties] Properties to set
+                                 */
+                                function RowCountTest(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RowCountTest comparison.
+                                 * @member {google.monitoring.v3.ComparisonType} comparison
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest
+                                 * @instance
+                                 */
+                                RowCountTest.prototype.comparison = 0;
+    
+                                /**
+                                 * RowCountTest threshold.
+                                 * @member {number|Long} threshold
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest
+                                 * @instance
+                                 */
+                                RowCountTest.prototype.threshold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Creates a new RowCountTest instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IRowCountTest=} [properties] Properties to set
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest} RowCountTest instance
+                                 */
+                                RowCountTest.create = function create(properties) {
+                                    return new RowCountTest(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RowCountTest message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IRowCountTest} message RowCountTest message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RowCountTest.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.comparison != null && Object.hasOwnProperty.call(message, "comparison"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.comparison);
+                                    if (message.threshold != null && Object.hasOwnProperty.call(message, "threshold"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int64(message.threshold);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RowCountTest message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IRowCountTest} message RowCountTest message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RowCountTest.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RowCountTest message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest} RowCountTest
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RowCountTest.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.comparison = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.threshold = reader.int64();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RowCountTest message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest} RowCountTest
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RowCountTest.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RowCountTest message.
+                                 * @function verify
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RowCountTest.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.comparison != null && message.hasOwnProperty("comparison"))
+                                        switch (message.comparison) {
+                                        default:
+                                            return "comparison: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                            break;
+                                        }
+                                    if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                        if (!$util.isInteger(message.threshold) && !(message.threshold && $util.isInteger(message.threshold.low) && $util.isInteger(message.threshold.high)))
+                                            return "threshold: integer|Long expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RowCountTest message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest} RowCountTest
+                                 */
+                                RowCountTest.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest)
+                                        return object;
+                                    var message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest();
+                                    switch (object.comparison) {
+                                    default:
+                                        if (typeof object.comparison === "number") {
+                                            message.comparison = object.comparison;
+                                            break;
+                                        }
+                                        break;
+                                    case "COMPARISON_UNSPECIFIED":
+                                    case 0:
+                                        message.comparison = 0;
+                                        break;
+                                    case "COMPARISON_GT":
+                                    case 1:
+                                        message.comparison = 1;
+                                        break;
+                                    case "COMPARISON_GE":
+                                    case 2:
+                                        message.comparison = 2;
+                                        break;
+                                    case "COMPARISON_LT":
+                                    case 3:
+                                        message.comparison = 3;
+                                        break;
+                                    case "COMPARISON_LE":
+                                    case 4:
+                                        message.comparison = 4;
+                                        break;
+                                    case "COMPARISON_EQ":
+                                    case 5:
+                                        message.comparison = 5;
+                                        break;
+                                    case "COMPARISON_NE":
+                                    case 6:
+                                        message.comparison = 6;
+                                        break;
+                                    }
+                                    if (object.threshold != null)
+                                        if ($util.Long)
+                                            (message.threshold = $util.Long.fromValue(object.threshold)).unsigned = false;
+                                        else if (typeof object.threshold === "string")
+                                            message.threshold = parseInt(object.threshold, 10);
+                                        else if (typeof object.threshold === "number")
+                                            message.threshold = object.threshold;
+                                        else if (typeof object.threshold === "object")
+                                            message.threshold = new $util.LongBits(object.threshold.low >>> 0, object.threshold.high >>> 0).toNumber();
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RowCountTest message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest} message RowCountTest
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RowCountTest.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.comparison = options.enums === String ? "COMPARISON_UNSPECIFIED" : 0;
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.threshold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.threshold = options.longs === String ? "0" : 0;
+                                    }
+                                    if (message.comparison != null && message.hasOwnProperty("comparison"))
+                                        object.comparison = options.enums === String ? $root.google.monitoring.v3.ComparisonType[message.comparison] === undefined ? message.comparison : $root.google.monitoring.v3.ComparisonType[message.comparison] : message.comparison;
+                                    if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                        if (typeof message.threshold === "number")
+                                            object.threshold = options.longs === String ? String(message.threshold) : message.threshold;
+                                        else
+                                            object.threshold = options.longs === String ? $util.Long.prototype.toString.call(message.threshold) : options.longs === Number ? new $util.LongBits(message.threshold.low >>> 0, message.threshold.high >>> 0).toNumber() : message.threshold;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RowCountTest to JSON.
+                                 * @function toJSON
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RowCountTest.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RowCountTest
+                                 * @function getTypeUrl
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RowCountTest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest";
+                                };
+    
+                                return RowCountTest;
+                            })();
+    
+                            SqlCondition.BooleanTest = (function() {
+    
+                                /**
+                                 * Properties of a BooleanTest.
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                                 * @interface IBooleanTest
+                                 * @property {string|null} [column] BooleanTest column
+                                 */
+    
+                                /**
+                                 * Constructs a new BooleanTest.
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition
+                                 * @classdesc Represents a BooleanTest.
+                                 * @implements IBooleanTest
+                                 * @constructor
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IBooleanTest=} [properties] Properties to set
+                                 */
+                                function BooleanTest(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * BooleanTest column.
+                                 * @member {string} column
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest
+                                 * @instance
+                                 */
+                                BooleanTest.prototype.column = "";
+    
+                                /**
+                                 * Creates a new BooleanTest instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IBooleanTest=} [properties] Properties to set
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest} BooleanTest instance
+                                 */
+                                BooleanTest.create = function create(properties) {
+                                    return new BooleanTest(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified BooleanTest message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IBooleanTest} message BooleanTest message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                BooleanTest.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.column != null && Object.hasOwnProperty.call(message, "column"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.column);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified BooleanTest message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IBooleanTest} message BooleanTest message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                BooleanTest.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a BooleanTest message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest} BooleanTest
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                BooleanTest.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.column = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a BooleanTest message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest} BooleanTest
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                BooleanTest.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a BooleanTest message.
+                                 * @function verify
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                BooleanTest.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.column != null && message.hasOwnProperty("column"))
+                                        if (!$util.isString(message.column))
+                                            return "column: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a BooleanTest message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest} BooleanTest
+                                 */
+                                BooleanTest.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest)
+                                        return object;
+                                    var message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest();
+                                    if (object.column != null)
+                                        message.column = String(object.column);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a BooleanTest message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest
+                                 * @static
+                                 * @param {google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest} message BooleanTest
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                BooleanTest.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.column = "";
+                                    if (message.column != null && message.hasOwnProperty("column"))
+                                        object.column = message.column;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this BooleanTest to JSON.
+                                 * @function toJSON
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                BooleanTest.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for BooleanTest
+                                 * @function getTypeUrl
+                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                BooleanTest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest";
+                                };
+    
+                                return BooleanTest;
+                            })();
+    
+                            return SqlCondition;
+                        })();
+    
                         return Condition;
                     })();
     
@@ -2496,6 +5538,850 @@
                         values[valuesById[1] = "AND"] = 1;
                         values[valuesById[2] = "OR"] = 2;
                         values[valuesById[3] = "AND_WITH_MATCHING_RESOURCE"] = 3;
+                        return values;
+                    })();
+    
+                    AlertPolicy.AlertStrategy = (function() {
+    
+                        /**
+                         * Properties of an AlertStrategy.
+                         * @memberof google.monitoring.v3.AlertPolicy
+                         * @interface IAlertStrategy
+                         * @property {google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationRateLimit|null} [notificationRateLimit] AlertStrategy notificationRateLimit
+                         * @property {Array.<google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationPrompt>|null} [notificationPrompts] AlertStrategy notificationPrompts
+                         * @property {google.protobuf.IDuration|null} [autoClose] AlertStrategy autoClose
+                         * @property {Array.<google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationChannelStrategy>|null} [notificationChannelStrategy] AlertStrategy notificationChannelStrategy
+                         */
+    
+                        /**
+                         * Constructs a new AlertStrategy.
+                         * @memberof google.monitoring.v3.AlertPolicy
+                         * @classdesc Represents an AlertStrategy.
+                         * @implements IAlertStrategy
+                         * @constructor
+                         * @param {google.monitoring.v3.AlertPolicy.IAlertStrategy=} [properties] Properties to set
+                         */
+                        function AlertStrategy(properties) {
+                            this.notificationPrompts = [];
+                            this.notificationChannelStrategy = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AlertStrategy notificationRateLimit.
+                         * @member {google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationRateLimit|null|undefined} notificationRateLimit
+                         * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                         * @instance
+                         */
+                        AlertStrategy.prototype.notificationRateLimit = null;
+    
+                        /**
+                         * AlertStrategy notificationPrompts.
+                         * @member {Array.<google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationPrompt>} notificationPrompts
+                         * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                         * @instance
+                         */
+                        AlertStrategy.prototype.notificationPrompts = $util.emptyArray;
+    
+                        /**
+                         * AlertStrategy autoClose.
+                         * @member {google.protobuf.IDuration|null|undefined} autoClose
+                         * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                         * @instance
+                         */
+                        AlertStrategy.prototype.autoClose = null;
+    
+                        /**
+                         * AlertStrategy notificationChannelStrategy.
+                         * @member {Array.<google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationChannelStrategy>} notificationChannelStrategy
+                         * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                         * @instance
+                         */
+                        AlertStrategy.prototype.notificationChannelStrategy = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AlertStrategy instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                         * @static
+                         * @param {google.monitoring.v3.AlertPolicy.IAlertStrategy=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.AlertPolicy.AlertStrategy} AlertStrategy instance
+                         */
+                        AlertStrategy.create = function create(properties) {
+                            return new AlertStrategy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AlertStrategy message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.AlertStrategy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                         * @static
+                         * @param {google.monitoring.v3.AlertPolicy.IAlertStrategy} message AlertStrategy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AlertStrategy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.notificationRateLimit != null && Object.hasOwnProperty.call(message, "notificationRateLimit"))
+                                $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit.encode(message.notificationRateLimit, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.notificationPrompts != null && message.notificationPrompts.length) {
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                for (var i = 0; i < message.notificationPrompts.length; ++i)
+                                    writer.int32(message.notificationPrompts[i]);
+                                writer.ldelim();
+                            }
+                            if (message.autoClose != null && Object.hasOwnProperty.call(message, "autoClose"))
+                                $root.google.protobuf.Duration.encode(message.autoClose, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.notificationChannelStrategy != null && message.notificationChannelStrategy.length)
+                                for (var i = 0; i < message.notificationChannelStrategy.length; ++i)
+                                    $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy.encode(message.notificationChannelStrategy[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AlertStrategy message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.AlertStrategy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                         * @static
+                         * @param {google.monitoring.v3.AlertPolicy.IAlertStrategy} message AlertStrategy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AlertStrategy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AlertStrategy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.AlertPolicy.AlertStrategy} AlertStrategy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AlertStrategy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.AlertStrategy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.notificationRateLimit = $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.notificationPrompts && message.notificationPrompts.length))
+                                            message.notificationPrompts = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.notificationPrompts.push(reader.int32());
+                                        } else
+                                            message.notificationPrompts.push(reader.int32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.autoClose = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.notificationChannelStrategy && message.notificationChannelStrategy.length))
+                                            message.notificationChannelStrategy = [];
+                                        message.notificationChannelStrategy.push($root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AlertStrategy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.AlertPolicy.AlertStrategy} AlertStrategy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AlertStrategy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AlertStrategy message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AlertStrategy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.notificationRateLimit != null && message.hasOwnProperty("notificationRateLimit")) {
+                                var error = $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit.verify(message.notificationRateLimit);
+                                if (error)
+                                    return "notificationRateLimit." + error;
+                            }
+                            if (message.notificationPrompts != null && message.hasOwnProperty("notificationPrompts")) {
+                                if (!Array.isArray(message.notificationPrompts))
+                                    return "notificationPrompts: array expected";
+                                for (var i = 0; i < message.notificationPrompts.length; ++i)
+                                    switch (message.notificationPrompts[i]) {
+                                    default:
+                                        return "notificationPrompts: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 3:
+                                        break;
+                                    }
+                            }
+                            if (message.autoClose != null && message.hasOwnProperty("autoClose")) {
+                                var error = $root.google.protobuf.Duration.verify(message.autoClose);
+                                if (error)
+                                    return "autoClose." + error;
+                            }
+                            if (message.notificationChannelStrategy != null && message.hasOwnProperty("notificationChannelStrategy")) {
+                                if (!Array.isArray(message.notificationChannelStrategy))
+                                    return "notificationChannelStrategy: array expected";
+                                for (var i = 0; i < message.notificationChannelStrategy.length; ++i) {
+                                    var error = $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy.verify(message.notificationChannelStrategy[i]);
+                                    if (error)
+                                        return "notificationChannelStrategy." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AlertStrategy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.AlertPolicy.AlertStrategy} AlertStrategy
+                         */
+                        AlertStrategy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.AlertPolicy.AlertStrategy)
+                                return object;
+                            var message = new $root.google.monitoring.v3.AlertPolicy.AlertStrategy();
+                            if (object.notificationRateLimit != null) {
+                                if (typeof object.notificationRateLimit !== "object")
+                                    throw TypeError(".google.monitoring.v3.AlertPolicy.AlertStrategy.notificationRateLimit: object expected");
+                                message.notificationRateLimit = $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit.fromObject(object.notificationRateLimit);
+                            }
+                            if (object.notificationPrompts) {
+                                if (!Array.isArray(object.notificationPrompts))
+                                    throw TypeError(".google.monitoring.v3.AlertPolicy.AlertStrategy.notificationPrompts: array expected");
+                                message.notificationPrompts = [];
+                                for (var i = 0; i < object.notificationPrompts.length; ++i)
+                                    switch (object.notificationPrompts[i]) {
+                                    default:
+                                        if (typeof object.notificationPrompts[i] === "number") {
+                                            message.notificationPrompts[i] = object.notificationPrompts[i];
+                                            break;
+                                        }
+                                    case "NOTIFICATION_PROMPT_UNSPECIFIED":
+                                    case 0:
+                                        message.notificationPrompts[i] = 0;
+                                        break;
+                                    case "OPENED":
+                                    case 1:
+                                        message.notificationPrompts[i] = 1;
+                                        break;
+                                    case "CLOSED":
+                                    case 3:
+                                        message.notificationPrompts[i] = 3;
+                                        break;
+                                    }
+                            }
+                            if (object.autoClose != null) {
+                                if (typeof object.autoClose !== "object")
+                                    throw TypeError(".google.monitoring.v3.AlertPolicy.AlertStrategy.autoClose: object expected");
+                                message.autoClose = $root.google.protobuf.Duration.fromObject(object.autoClose);
+                            }
+                            if (object.notificationChannelStrategy) {
+                                if (!Array.isArray(object.notificationChannelStrategy))
+                                    throw TypeError(".google.monitoring.v3.AlertPolicy.AlertStrategy.notificationChannelStrategy: array expected");
+                                message.notificationChannelStrategy = [];
+                                for (var i = 0; i < object.notificationChannelStrategy.length; ++i) {
+                                    if (typeof object.notificationChannelStrategy[i] !== "object")
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.AlertStrategy.notificationChannelStrategy: object expected");
+                                    message.notificationChannelStrategy[i] = $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy.fromObject(object.notificationChannelStrategy[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AlertStrategy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                         * @static
+                         * @param {google.monitoring.v3.AlertPolicy.AlertStrategy} message AlertStrategy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AlertStrategy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.notificationPrompts = [];
+                                object.notificationChannelStrategy = [];
+                            }
+                            if (options.defaults) {
+                                object.notificationRateLimit = null;
+                                object.autoClose = null;
+                            }
+                            if (message.notificationRateLimit != null && message.hasOwnProperty("notificationRateLimit"))
+                                object.notificationRateLimit = $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit.toObject(message.notificationRateLimit, options);
+                            if (message.notificationPrompts && message.notificationPrompts.length) {
+                                object.notificationPrompts = [];
+                                for (var j = 0; j < message.notificationPrompts.length; ++j)
+                                    object.notificationPrompts[j] = options.enums === String ? $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationPrompt[message.notificationPrompts[j]] === undefined ? message.notificationPrompts[j] : $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationPrompt[message.notificationPrompts[j]] : message.notificationPrompts[j];
+                            }
+                            if (message.autoClose != null && message.hasOwnProperty("autoClose"))
+                                object.autoClose = $root.google.protobuf.Duration.toObject(message.autoClose, options);
+                            if (message.notificationChannelStrategy && message.notificationChannelStrategy.length) {
+                                object.notificationChannelStrategy = [];
+                                for (var j = 0; j < message.notificationChannelStrategy.length; ++j)
+                                    object.notificationChannelStrategy[j] = $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy.toObject(message.notificationChannelStrategy[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AlertStrategy to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AlertStrategy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AlertStrategy
+                         * @function getTypeUrl
+                         * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AlertStrategy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.monitoring.v3.AlertPolicy.AlertStrategy";
+                        };
+    
+                        AlertStrategy.NotificationRateLimit = (function() {
+    
+                            /**
+                             * Properties of a NotificationRateLimit.
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                             * @interface INotificationRateLimit
+                             * @property {google.protobuf.IDuration|null} [period] NotificationRateLimit period
+                             */
+    
+                            /**
+                             * Constructs a new NotificationRateLimit.
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                             * @classdesc Represents a NotificationRateLimit.
+                             * @implements INotificationRateLimit
+                             * @constructor
+                             * @param {google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationRateLimit=} [properties] Properties to set
+                             */
+                            function NotificationRateLimit(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NotificationRateLimit period.
+                             * @member {google.protobuf.IDuration|null|undefined} period
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit
+                             * @instance
+                             */
+                            NotificationRateLimit.prototype.period = null;
+    
+                            /**
+                             * Creates a new NotificationRateLimit instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationRateLimit=} [properties] Properties to set
+                             * @returns {google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit} NotificationRateLimit instance
+                             */
+                            NotificationRateLimit.create = function create(properties) {
+                                return new NotificationRateLimit(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NotificationRateLimit message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationRateLimit} message NotificationRateLimit message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NotificationRateLimit.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.period != null && Object.hasOwnProperty.call(message, "period"))
+                                    $root.google.protobuf.Duration.encode(message.period, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NotificationRateLimit message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationRateLimit} message NotificationRateLimit message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NotificationRateLimit.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NotificationRateLimit message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit} NotificationRateLimit
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NotificationRateLimit.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.period = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NotificationRateLimit message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit} NotificationRateLimit
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NotificationRateLimit.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NotificationRateLimit message.
+                             * @function verify
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NotificationRateLimit.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.period != null && message.hasOwnProperty("period")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.period);
+                                    if (error)
+                                        return "period." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NotificationRateLimit message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit} NotificationRateLimit
+                             */
+                            NotificationRateLimit.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit)
+                                    return object;
+                                var message = new $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit();
+                                if (object.period != null) {
+                                    if (typeof object.period !== "object")
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit.period: object expected");
+                                    message.period = $root.google.protobuf.Duration.fromObject(object.period);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NotificationRateLimit message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit} message NotificationRateLimit
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NotificationRateLimit.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.period = null;
+                                if (message.period != null && message.hasOwnProperty("period"))
+                                    object.period = $root.google.protobuf.Duration.toObject(message.period, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NotificationRateLimit to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NotificationRateLimit.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for NotificationRateLimit
+                             * @function getTypeUrl
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            NotificationRateLimit.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit";
+                            };
+    
+                            return NotificationRateLimit;
+                        })();
+    
+                        /**
+                         * NotificationPrompt enum.
+                         * @name google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationPrompt
+                         * @enum {number}
+                         * @property {number} NOTIFICATION_PROMPT_UNSPECIFIED=0 NOTIFICATION_PROMPT_UNSPECIFIED value
+                         * @property {number} OPENED=1 OPENED value
+                         * @property {number} CLOSED=3 CLOSED value
+                         */
+                        AlertStrategy.NotificationPrompt = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "NOTIFICATION_PROMPT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "OPENED"] = 1;
+                            values[valuesById[3] = "CLOSED"] = 3;
+                            return values;
+                        })();
+    
+                        AlertStrategy.NotificationChannelStrategy = (function() {
+    
+                            /**
+                             * Properties of a NotificationChannelStrategy.
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                             * @interface INotificationChannelStrategy
+                             * @property {Array.<string>|null} [notificationChannelNames] NotificationChannelStrategy notificationChannelNames
+                             * @property {google.protobuf.IDuration|null} [renotifyInterval] NotificationChannelStrategy renotifyInterval
+                             */
+    
+                            /**
+                             * Constructs a new NotificationChannelStrategy.
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy
+                             * @classdesc Represents a NotificationChannelStrategy.
+                             * @implements INotificationChannelStrategy
+                             * @constructor
+                             * @param {google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationChannelStrategy=} [properties] Properties to set
+                             */
+                            function NotificationChannelStrategy(properties) {
+                                this.notificationChannelNames = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NotificationChannelStrategy notificationChannelNames.
+                             * @member {Array.<string>} notificationChannelNames
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy
+                             * @instance
+                             */
+                            NotificationChannelStrategy.prototype.notificationChannelNames = $util.emptyArray;
+    
+                            /**
+                             * NotificationChannelStrategy renotifyInterval.
+                             * @member {google.protobuf.IDuration|null|undefined} renotifyInterval
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy
+                             * @instance
+                             */
+                            NotificationChannelStrategy.prototype.renotifyInterval = null;
+    
+                            /**
+                             * Creates a new NotificationChannelStrategy instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationChannelStrategy=} [properties] Properties to set
+                             * @returns {google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy} NotificationChannelStrategy instance
+                             */
+                            NotificationChannelStrategy.create = function create(properties) {
+                                return new NotificationChannelStrategy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NotificationChannelStrategy message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationChannelStrategy} message NotificationChannelStrategy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NotificationChannelStrategy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.notificationChannelNames != null && message.notificationChannelNames.length)
+                                    for (var i = 0; i < message.notificationChannelNames.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.notificationChannelNames[i]);
+                                if (message.renotifyInterval != null && Object.hasOwnProperty.call(message, "renotifyInterval"))
+                                    $root.google.protobuf.Duration.encode(message.renotifyInterval, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NotificationChannelStrategy message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationChannelStrategy} message NotificationChannelStrategy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NotificationChannelStrategy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NotificationChannelStrategy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy} NotificationChannelStrategy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NotificationChannelStrategy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.notificationChannelNames && message.notificationChannelNames.length))
+                                                message.notificationChannelNames = [];
+                                            message.notificationChannelNames.push(reader.string());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.renotifyInterval = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NotificationChannelStrategy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy} NotificationChannelStrategy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NotificationChannelStrategy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NotificationChannelStrategy message.
+                             * @function verify
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NotificationChannelStrategy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.notificationChannelNames != null && message.hasOwnProperty("notificationChannelNames")) {
+                                    if (!Array.isArray(message.notificationChannelNames))
+                                        return "notificationChannelNames: array expected";
+                                    for (var i = 0; i < message.notificationChannelNames.length; ++i)
+                                        if (!$util.isString(message.notificationChannelNames[i]))
+                                            return "notificationChannelNames: string[] expected";
+                                }
+                                if (message.renotifyInterval != null && message.hasOwnProperty("renotifyInterval")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.renotifyInterval);
+                                    if (error)
+                                        return "renotifyInterval." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NotificationChannelStrategy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy} NotificationChannelStrategy
+                             */
+                            NotificationChannelStrategy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy)
+                                    return object;
+                                var message = new $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy();
+                                if (object.notificationChannelNames) {
+                                    if (!Array.isArray(object.notificationChannelNames))
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy.notificationChannelNames: array expected");
+                                    message.notificationChannelNames = [];
+                                    for (var i = 0; i < object.notificationChannelNames.length; ++i)
+                                        message.notificationChannelNames[i] = String(object.notificationChannelNames[i]);
+                                }
+                                if (object.renotifyInterval != null) {
+                                    if (typeof object.renotifyInterval !== "object")
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy.renotifyInterval: object expected");
+                                    message.renotifyInterval = $root.google.protobuf.Duration.fromObject(object.renotifyInterval);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NotificationChannelStrategy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy} message NotificationChannelStrategy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NotificationChannelStrategy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.notificationChannelNames = [];
+                                if (options.defaults)
+                                    object.renotifyInterval = null;
+                                if (message.notificationChannelNames && message.notificationChannelNames.length) {
+                                    object.notificationChannelNames = [];
+                                    for (var j = 0; j < message.notificationChannelNames.length; ++j)
+                                        object.notificationChannelNames[j] = message.notificationChannelNames[j];
+                                }
+                                if (message.renotifyInterval != null && message.hasOwnProperty("renotifyInterval"))
+                                    object.renotifyInterval = $root.google.protobuf.Duration.toObject(message.renotifyInterval, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NotificationChannelStrategy to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NotificationChannelStrategy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for NotificationChannelStrategy
+                             * @function getTypeUrl
+                             * @memberof google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            NotificationChannelStrategy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy";
+                            };
+    
+                            return NotificationChannelStrategy;
+                        })();
+    
+                        return AlertStrategy;
+                    })();
+    
+                    /**
+                     * Severity enum.
+                     * @name google.monitoring.v3.AlertPolicy.Severity
+                     * @enum {number}
+                     * @property {number} SEVERITY_UNSPECIFIED=0 SEVERITY_UNSPECIFIED value
+                     * @property {number} CRITICAL=1 CRITICAL value
+                     * @property {number} ERROR=2 ERROR value
+                     * @property {number} WARNING=3 WARNING value
+                     */
+                    AlertPolicy.Severity = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SEVERITY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "CRITICAL"] = 1;
+                        values[valuesById[2] = "ERROR"] = 2;
+                        values[valuesById[3] = "WARNING"] = 3;
                         return values;
                     })();
     
@@ -2645,14 +6531,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TypedValue.decode = function decode(reader, length, error) {
+                    TypedValue.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TypedValue();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.boolValue = reader.bool();
@@ -2953,14 +6837,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TimeInterval.decode = function decode(reader, length, error) {
+                    TimeInterval.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeInterval();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 2: {
                                     message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -3216,14 +7098,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Aggregation.decode = function decode(reader, length, error) {
+                    Aggregation.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Aggregation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.alignmentPeriod = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -3798,14 +7678,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MutationRecord.decode = function decode(reader, length, error) {
+                    MutationRecord.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.MutationRecord();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.mutateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -4232,14 +8110,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateAlertPolicyRequest.decode = function decode(reader, length, error) {
+                    CreateAlertPolicyRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateAlertPolicyRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -4455,14 +8331,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetAlertPolicyRequest.decode = function decode(reader, length, error) {
+                    GetAlertPolicyRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetAlertPolicyRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -4704,14 +8578,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListAlertPoliciesRequest.decode = function decode(reader, length, error) {
+                    ListAlertPoliciesRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListAlertPoliciesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 4: {
                                     message.name = reader.string();
@@ -4982,14 +8854,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListAlertPoliciesResponse.decode = function decode(reader, length, error) {
+                    ListAlertPoliciesResponse.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListAlertPoliciesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     if (!(message.alertPolicies && message.alertPolicies.length))
@@ -5243,14 +9113,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateAlertPolicyRequest.decode = function decode(reader, length, error) {
+                    UpdateAlertPolicyRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UpdateAlertPolicyRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 2: {
                                     message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -5471,14 +9339,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteAlertPolicyRequest.decode = function decode(reader, length, error) {
+                    DeleteAlertPolicyRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DeleteAlertPolicyRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -5678,14 +9544,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DroppedLabels.decode = function decode(reader, length, error) {
+                    DroppedLabels.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DroppedLabels(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (message.label === $util.emptyObject)
@@ -5960,14 +9824,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Group.decode = function decode(reader, length, error) {
+                    Group.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Group();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -6516,14 +10378,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListGroupsRequest.decode = function decode(reader, length, error) {
+                    ListGroupsRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListGroupsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 7: {
                                     message.name = reader.string();
@@ -6812,14 +10672,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListGroupsResponse.decode = function decode(reader, length, error) {
+                    ListGroupsResponse.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListGroupsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.group && message.group.length))
@@ -7049,14 +10907,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetGroupRequest.decode = function decode(reader, length, error) {
+                    GetGroupRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetGroupRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -7276,14 +11132,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateGroupRequest.decode = function decode(reader, length, error) {
+                    CreateGroupRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateGroupRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 4: {
                                     message.name = reader.string();
@@ -7522,14 +11376,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateGroupRequest.decode = function decode(reader, length, error) {
+                    UpdateGroupRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UpdateGroupRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 2: {
                                     message.group = $root.google.monitoring.v3.Group.decode(reader, reader.uint32());
@@ -7756,14 +11608,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteGroupRequest.decode = function decode(reader, length, error) {
+                    DeleteGroupRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DeleteGroupRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -8018,14 +11868,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListGroupMembersRequest.decode = function decode(reader, length, error) {
+                    ListGroupMembersRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListGroupMembersRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 7: {
                                     message.name = reader.string();
@@ -8301,14 +12149,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListGroupMembersResponse.decode = function decode(reader, length, error) {
+                    ListGroupMembersResponse.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListGroupMembersResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.members && message.members.length))
@@ -8562,14 +12408,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Point.decode = function decode(reader, length, error) {
+                    Point.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Point();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.interval = $root.google.monitoring.v3.TimeInterval.decode(reader, reader.uint32());
@@ -8718,6 +12562,7 @@
                      * @property {google.api.MetricDescriptor.ValueType|null} [valueType] TimeSeries valueType
                      * @property {Array.<google.monitoring.v3.IPoint>|null} [points] TimeSeries points
                      * @property {string|null} [unit] TimeSeries unit
+                     * @property {string|null} [description] TimeSeries description
                      */
     
                     /**
@@ -8793,6 +12638,14 @@
                     TimeSeries.prototype.unit = "";
     
                     /**
+                     * TimeSeries description.
+                     * @member {string} description
+                     * @memberof google.monitoring.v3.TimeSeries
+                     * @instance
+                     */
+                    TimeSeries.prototype.description = "";
+    
+                    /**
                      * Creates a new TimeSeries instance using the specified properties.
                      * @function create
                      * @memberof google.monitoring.v3.TimeSeries
@@ -8831,6 +12684,8 @@
                             $root.google.api.MonitoredResourceMetadata.encode(message.metadata, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                         if (message.unit != null && Object.hasOwnProperty.call(message, "unit"))
                             writer.uint32(/* id 8, wireType 2 =*/66).string(message.unit);
+                        if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                            writer.uint32(/* id 9, wireType 2 =*/74).string(message.description);
                         return writer;
                     };
     
@@ -8858,14 +12713,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TimeSeries.decode = function decode(reader, length, error) {
+                    TimeSeries.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeries();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.metric = $root.google.api.Metric.decode(reader, reader.uint32());
@@ -8895,6 +12748,10 @@
                                 }
                             case 8: {
                                     message.unit = reader.string();
+                                    break;
+                                }
+                            case 9: {
+                                    message.description = reader.string();
                                     break;
                                 }
                             default:
@@ -8982,6 +12839,9 @@
                         if (message.unit != null && message.hasOwnProperty("unit"))
                             if (!$util.isString(message.unit))
                                 return "unit: string expected";
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            if (!$util.isString(message.description))
+                                return "description: string expected";
                         return null;
                     };
     
@@ -9084,6 +12944,8 @@
                         }
                         if (object.unit != null)
                             message.unit = String(object.unit);
+                        if (object.description != null)
+                            message.description = String(object.description);
                         return message;
                     };
     
@@ -9109,6 +12971,7 @@
                             object.valueType = options.enums === String ? "VALUE_TYPE_UNSPECIFIED" : 0;
                             object.metadata = null;
                             object.unit = "";
+                            object.description = "";
                         }
                         if (message.metric != null && message.hasOwnProperty("metric"))
                             object.metric = $root.google.api.Metric.toObject(message.metric, options);
@@ -9127,6 +12990,8 @@
                             object.metadata = $root.google.api.MonitoredResourceMetadata.toObject(message.metadata, options);
                         if (message.unit != null && message.hasOwnProperty("unit"))
                             object.unit = message.unit;
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            object.description = message.description;
                         return object;
                     };
     
@@ -9259,14 +13124,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TimeSeriesDescriptor.decode = function decode(reader, length, error) {
+                    TimeSeriesDescriptor.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeriesDescriptor();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.labelDescriptors && message.labelDescriptors.length))
@@ -9545,14 +13408,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ValueDescriptor.decode = function decode(reader, length, error) {
+                        ValueDescriptor.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.key = reader.string();
@@ -9878,14 +13739,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TimeSeriesData.decode = function decode(reader, length, error) {
+                    TimeSeriesData.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeriesData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.labelValues && message.labelValues.length))
@@ -10144,14 +14003,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PointData.decode = function decode(reader, length, error) {
+                        PointData.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeriesData.PointData();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.values && message.values.length))
@@ -10425,14 +14282,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LabelValue.decode = function decode(reader, length, error) {
+                    LabelValue.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.LabelValue();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.boolValue = reader.bool();
@@ -10691,14 +14546,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    QueryError.decode = function decode(reader, length, error) {
+                    QueryError.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.QueryError();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.locator = $root.google.monitoring.v3.TextLocator.decode(reader, reader.uint32());
@@ -10958,14 +14811,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TextLocator.decode = function decode(reader, length, error) {
+                    TextLocator.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TextLocator();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.source = reader.string();
@@ -11235,14 +15086,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Position.decode = function decode(reader, length, error) {
+                        Position.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TextLocator.Position();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.line = reader.int32();
@@ -11667,6 +15516,39 @@
                      * @variation 2
                      */
     
+                    /**
+                     * Callback as used by {@link google.monitoring.v3.MetricService|createServiceTimeSeries}.
+                     * @memberof google.monitoring.v3.MetricService
+                     * @typedef CreateServiceTimeSeriesCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.protobuf.Empty} [response] Empty
+                     */
+    
+                    /**
+                     * Calls CreateServiceTimeSeries.
+                     * @function createServiceTimeSeries
+                     * @memberof google.monitoring.v3.MetricService
+                     * @instance
+                     * @param {google.monitoring.v3.ICreateTimeSeriesRequest} request CreateTimeSeriesRequest message or plain object
+                     * @param {google.monitoring.v3.MetricService.CreateServiceTimeSeriesCallback} callback Node-style callback called with the error, if any, and Empty
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(MetricService.prototype.createServiceTimeSeries = function createServiceTimeSeries(request, callback) {
+                        return this.rpcCall(createServiceTimeSeries, $root.google.monitoring.v3.CreateTimeSeriesRequest, $root.google.protobuf.Empty, request, callback);
+                    }, "name", { value: "CreateServiceTimeSeries" });
+    
+                    /**
+                     * Calls CreateServiceTimeSeries.
+                     * @function createServiceTimeSeries
+                     * @memberof google.monitoring.v3.MetricService
+                     * @instance
+                     * @param {google.monitoring.v3.ICreateTimeSeriesRequest} request CreateTimeSeriesRequest message or plain object
+                     * @returns {Promise<google.protobuf.Empty>} Promise
+                     * @variation 2
+                     */
+    
                     return MetricService;
                 })();
     
@@ -11788,14 +15670,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListMonitoredResourceDescriptorsRequest.decode = function decode(reader, length, error) {
+                    ListMonitoredResourceDescriptorsRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 5: {
                                     message.name = reader.string();
@@ -12043,14 +15923,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListMonitoredResourceDescriptorsResponse.decode = function decode(reader, length, error) {
+                    ListMonitoredResourceDescriptorsResponse.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListMonitoredResourceDescriptorsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.resourceDescriptors && message.resourceDescriptors.length))
@@ -12280,14 +16158,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetMonitoredResourceDescriptorRequest.decode = function decode(reader, length, error) {
+                    GetMonitoredResourceDescriptorRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetMonitoredResourceDescriptorRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -12410,6 +16286,7 @@
                      * @property {string|null} [filter] ListMetricDescriptorsRequest filter
                      * @property {number|null} [pageSize] ListMetricDescriptorsRequest pageSize
                      * @property {string|null} [pageToken] ListMetricDescriptorsRequest pageToken
+                     * @property {boolean|null} [activeOnly] ListMetricDescriptorsRequest activeOnly
                      */
     
                     /**
@@ -12460,6 +16337,14 @@
                     ListMetricDescriptorsRequest.prototype.pageToken = "";
     
                     /**
+                     * ListMetricDescriptorsRequest activeOnly.
+                     * @member {boolean} activeOnly
+                     * @memberof google.monitoring.v3.ListMetricDescriptorsRequest
+                     * @instance
+                     */
+                    ListMetricDescriptorsRequest.prototype.activeOnly = false;
+    
+                    /**
                      * Creates a new ListMetricDescriptorsRequest instance using the specified properties.
                      * @function create
                      * @memberof google.monitoring.v3.ListMetricDescriptorsRequest
@@ -12491,6 +16376,8 @@
                             writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.name);
+                        if (message.activeOnly != null && Object.hasOwnProperty.call(message, "activeOnly"))
+                            writer.uint32(/* id 6, wireType 0 =*/48).bool(message.activeOnly);
                         return writer;
                     };
     
@@ -12518,14 +16405,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListMetricDescriptorsRequest.decode = function decode(reader, length, error) {
+                    ListMetricDescriptorsRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListMetricDescriptorsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 5: {
                                     message.name = reader.string();
@@ -12541,6 +16426,10 @@
                                 }
                             case 4: {
                                     message.pageToken = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    message.activeOnly = reader.bool();
                                     break;
                                 }
                             default:
@@ -12590,6 +16479,9 @@
                         if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                             if (!$util.isString(message.pageToken))
                                 return "pageToken: string expected";
+                        if (message.activeOnly != null && message.hasOwnProperty("activeOnly"))
+                            if (typeof message.activeOnly !== "boolean")
+                                return "activeOnly: boolean expected";
                         return null;
                     };
     
@@ -12613,6 +16505,8 @@
                             message.pageSize = object.pageSize | 0;
                         if (object.pageToken != null)
                             message.pageToken = String(object.pageToken);
+                        if (object.activeOnly != null)
+                            message.activeOnly = Boolean(object.activeOnly);
                         return message;
                     };
     
@@ -12634,6 +16528,7 @@
                             object.pageSize = 0;
                             object.pageToken = "";
                             object.name = "";
+                            object.activeOnly = false;
                         }
                         if (message.filter != null && message.hasOwnProperty("filter"))
                             object.filter = message.filter;
@@ -12643,6 +16538,8 @@
                             object.pageToken = message.pageToken;
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
+                        if (message.activeOnly != null && message.hasOwnProperty("activeOnly"))
+                            object.activeOnly = message.activeOnly;
                         return object;
                     };
     
@@ -12773,14 +16670,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListMetricDescriptorsResponse.decode = function decode(reader, length, error) {
+                    ListMetricDescriptorsResponse.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListMetricDescriptorsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.metricDescriptors && message.metricDescriptors.length))
@@ -13010,14 +16905,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetMetricDescriptorRequest.decode = function decode(reader, length, error) {
+                    GetMetricDescriptorRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetMetricDescriptorRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -13226,14 +17119,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateMetricDescriptorRequest.decode = function decode(reader, length, error) {
+                    CreateMetricDescriptorRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateMetricDescriptorRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -13449,14 +17340,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteMetricDescriptorRequest.decode = function decode(reader, length, error) {
+                    DeleteMetricDescriptorRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DeleteMetricDescriptorRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -13742,14 +17631,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListTimeSeriesRequest.decode = function decode(reader, length, error) {
+                    ListTimeSeriesRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListTimeSeriesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 10: {
                                     message.name = reader.string();
@@ -14129,14 +18016,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListTimeSeriesResponse.decode = function decode(reader, length, error) {
+                    ListTimeSeriesResponse.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListTimeSeriesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.timeSeries && message.timeSeries.length))
@@ -14424,14 +18309,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateTimeSeriesRequest.decode = function decode(reader, length, error) {
+                    CreateTimeSeriesRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateTimeSeriesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -14672,14 +18555,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateTimeSeriesError.decode = function decode(reader, length, error) {
+                    CreateTimeSeriesError.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateTimeSeriesError();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.timeSeries = $root.google.monitoring.v3.TimeSeries.decode(reader, reader.uint32());
@@ -14924,14 +18805,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateTimeSeriesSummary.decode = function decode(reader, length, error) {
+                    CreateTimeSeriesSummary.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateTimeSeriesSummary();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.totalPointCount = reader.int32();
@@ -15182,14 +19061,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Error.decode = function decode(reader, length, error) {
+                        Error.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateTimeSeriesSummary.Error();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.status = $root.google.rpc.Status.decode(reader, reader.uint32());
@@ -15441,14 +19318,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    QueryTimeSeriesRequest.decode = function decode(reader, length, error) {
+                    QueryTimeSeriesRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.QueryTimeSeriesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -15720,14 +19595,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    QueryTimeSeriesResponse.decode = function decode(reader, length, error) {
+                    QueryTimeSeriesResponse.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.QueryTimeSeriesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 8: {
                                     message.timeSeriesDescriptor = $root.google.monitoring.v3.TimeSeriesDescriptor.decode(reader, reader.uint32());
@@ -16020,14 +19893,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    QueryErrorList.decode = function decode(reader, length, error) {
+                    QueryErrorList.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.QueryErrorList();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.errors && message.errors.length))
@@ -16330,14 +20201,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NotificationChannelDescriptor.decode = function decode(reader, length, error) {
+                    NotificationChannelDescriptor.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.NotificationChannelDescriptor();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 6: {
                                     message.name = reader.string();
@@ -16826,14 +20695,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NotificationChannel.decode = function decode(reader, length, error) {
+                    NotificationChannel.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.NotificationChannel(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.type = reader.string();
@@ -17664,14 +21531,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListNotificationChannelDescriptorsRequest.decode = function decode(reader, length, error) {
+                    ListNotificationChannelDescriptorsRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListNotificationChannelDescriptorsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 4: {
                                     message.name = reader.string();
@@ -17907,14 +21772,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListNotificationChannelDescriptorsResponse.decode = function decode(reader, length, error) {
+                    ListNotificationChannelDescriptorsResponse.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListNotificationChannelDescriptorsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.channelDescriptors && message.channelDescriptors.length))
@@ -18144,14 +22007,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetNotificationChannelDescriptorRequest.decode = function decode(reader, length, error) {
+                    GetNotificationChannelDescriptorRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetNotificationChannelDescriptorRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -18360,14 +22221,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateNotificationChannelRequest.decode = function decode(reader, length, error) {
+                    CreateNotificationChannelRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateNotificationChannelRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -18627,14 +22486,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListNotificationChannelsRequest.decode = function decode(reader, length, error) {
+                    ListNotificationChannelsRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListNotificationChannelsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 5: {
                                     message.name = reader.string();
@@ -18905,14 +22762,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListNotificationChannelsResponse.decode = function decode(reader, length, error) {
+                    ListNotificationChannelsResponse.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListNotificationChannelsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     if (!(message.notificationChannels && message.notificationChannels.length))
@@ -19155,14 +23010,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetNotificationChannelRequest.decode = function decode(reader, length, error) {
+                    GetNotificationChannelRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetNotificationChannelRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -19371,14 +23224,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateNotificationChannelRequest.decode = function decode(reader, length, error) {
+                    UpdateNotificationChannelRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UpdateNotificationChannelRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 2: {
                                     message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -19610,14 +23461,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteNotificationChannelRequest.decode = function decode(reader, length, error) {
+                    DeleteNotificationChannelRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DeleteNotificationChannelRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -19828,14 +23677,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SendNotificationChannelVerificationCodeRequest.decode = function decode(reader, length, error) {
+                    SendNotificationChannelVerificationCodeRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.SendNotificationChannelVerificationCodeRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -20044,14 +23891,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetNotificationChannelVerificationCodeRequest.decode = function decode(reader, length, error) {
+                    GetNotificationChannelVerificationCodeRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetNotificationChannelVerificationCodeRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -20278,14 +24123,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetNotificationChannelVerificationCodeResponse.decode = function decode(reader, length, error) {
+                    GetNotificationChannelVerificationCodeResponse.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetNotificationChannelVerificationCodeResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.code = reader.string();
@@ -20512,14 +24355,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    VerifyNotificationChannelRequest.decode = function decode(reader, length, error) {
+                    VerifyNotificationChannelRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.VerifyNotificationChannelRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -20727,7 +24568,13 @@
                      * @property {google.monitoring.v3.Service.IClusterIstio|null} [clusterIstio] Service clusterIstio
                      * @property {google.monitoring.v3.Service.IMeshIstio|null} [meshIstio] Service meshIstio
                      * @property {google.monitoring.v3.Service.IIstioCanonicalService|null} [istioCanonicalService] Service istioCanonicalService
+                     * @property {google.monitoring.v3.Service.ICloudRun|null} [cloudRun] Service cloudRun
+                     * @property {google.monitoring.v3.Service.IGkeNamespace|null} [gkeNamespace] Service gkeNamespace
+                     * @property {google.monitoring.v3.Service.IGkeWorkload|null} [gkeWorkload] Service gkeWorkload
+                     * @property {google.monitoring.v3.Service.IGkeService|null} [gkeService] Service gkeService
+                     * @property {google.monitoring.v3.Service.IBasicService|null} [basicService] Service basicService
                      * @property {google.monitoring.v3.Service.ITelemetry|null} [telemetry] Service telemetry
+                     * @property {Object.<string,string>|null} [userLabels] Service userLabels
                      */
     
                     /**
@@ -20739,6 +24586,7 @@
                      * @param {google.monitoring.v3.IService=} [properties] Properties to set
                      */
                     function Service(properties) {
+                        this.userLabels = {};
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -20810,6 +24658,46 @@
                     Service.prototype.istioCanonicalService = null;
     
                     /**
+                     * Service cloudRun.
+                     * @member {google.monitoring.v3.Service.ICloudRun|null|undefined} cloudRun
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     */
+                    Service.prototype.cloudRun = null;
+    
+                    /**
+                     * Service gkeNamespace.
+                     * @member {google.monitoring.v3.Service.IGkeNamespace|null|undefined} gkeNamespace
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     */
+                    Service.prototype.gkeNamespace = null;
+    
+                    /**
+                     * Service gkeWorkload.
+                     * @member {google.monitoring.v3.Service.IGkeWorkload|null|undefined} gkeWorkload
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     */
+                    Service.prototype.gkeWorkload = null;
+    
+                    /**
+                     * Service gkeService.
+                     * @member {google.monitoring.v3.Service.IGkeService|null|undefined} gkeService
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     */
+                    Service.prototype.gkeService = null;
+    
+                    /**
+                     * Service basicService.
+                     * @member {google.monitoring.v3.Service.IBasicService|null|undefined} basicService
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     */
+                    Service.prototype.basicService = null;
+    
+                    /**
                      * Service telemetry.
                      * @member {google.monitoring.v3.Service.ITelemetry|null|undefined} telemetry
                      * @memberof google.monitoring.v3.Service
@@ -20817,17 +24705,25 @@
                      */
                     Service.prototype.telemetry = null;
     
+                    /**
+                     * Service userLabels.
+                     * @member {Object.<string,string>} userLabels
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     */
+                    Service.prototype.userLabels = $util.emptyObject;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
                     /**
                      * Service identifier.
-                     * @member {"custom"|"appEngine"|"cloudEndpoints"|"clusterIstio"|"meshIstio"|"istioCanonicalService"|undefined} identifier
+                     * @member {"custom"|"appEngine"|"cloudEndpoints"|"clusterIstio"|"meshIstio"|"istioCanonicalService"|"cloudRun"|"gkeNamespace"|"gkeWorkload"|"gkeService"|undefined} identifier
                      * @memberof google.monitoring.v3.Service
                      * @instance
                      */
                     Object.defineProperty(Service.prototype, "identifier", {
-                        get: $util.oneOfGetter($oneOfFields = ["custom", "appEngine", "cloudEndpoints", "clusterIstio", "meshIstio", "istioCanonicalService"]),
+                        get: $util.oneOfGetter($oneOfFields = ["custom", "appEngine", "cloudEndpoints", "clusterIstio", "meshIstio", "istioCanonicalService", "cloudRun", "gkeNamespace", "gkeWorkload", "gkeService"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -20871,8 +24767,21 @@
                             $root.google.monitoring.v3.Service.MeshIstio.encode(message.meshIstio, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                         if (message.istioCanonicalService != null && Object.hasOwnProperty.call(message, "istioCanonicalService"))
                             $root.google.monitoring.v3.Service.IstioCanonicalService.encode(message.istioCanonicalService, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                        if (message.cloudRun != null && Object.hasOwnProperty.call(message, "cloudRun"))
+                            $root.google.monitoring.v3.Service.CloudRun.encode(message.cloudRun, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                         if (message.telemetry != null && Object.hasOwnProperty.call(message, "telemetry"))
                             $root.google.monitoring.v3.Service.Telemetry.encode(message.telemetry, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                        if (message.userLabels != null && Object.hasOwnProperty.call(message, "userLabels"))
+                            for (var keys = Object.keys(message.userLabels), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 14, wireType 2 =*/114).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.userLabels[keys[i]]).ldelim();
+                        if (message.gkeNamespace != null && Object.hasOwnProperty.call(message, "gkeNamespace"))
+                            $root.google.monitoring.v3.Service.GkeNamespace.encode(message.gkeNamespace, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                        if (message.gkeWorkload != null && Object.hasOwnProperty.call(message, "gkeWorkload"))
+                            $root.google.monitoring.v3.Service.GkeWorkload.encode(message.gkeWorkload, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                        if (message.gkeService != null && Object.hasOwnProperty.call(message, "gkeService"))
+                            $root.google.monitoring.v3.Service.GkeService.encode(message.gkeService, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                        if (message.basicService != null && Object.hasOwnProperty.call(message, "basicService"))
+                            $root.google.monitoring.v3.Service.BasicService.encode(message.basicService, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                         return writer;
                     };
     
@@ -20900,14 +24809,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Service.decode = function decode(reader, length, error) {
+                    Service.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service();
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -20941,8 +24848,51 @@
                                     message.istioCanonicalService = $root.google.monitoring.v3.Service.IstioCanonicalService.decode(reader, reader.uint32());
                                     break;
                                 }
+                            case 12: {
+                                    message.cloudRun = $root.google.monitoring.v3.Service.CloudRun.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 15: {
+                                    message.gkeNamespace = $root.google.monitoring.v3.Service.GkeNamespace.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 16: {
+                                    message.gkeWorkload = $root.google.monitoring.v3.Service.GkeWorkload.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 17: {
+                                    message.gkeService = $root.google.monitoring.v3.Service.GkeService.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 19: {
+                                    message.basicService = $root.google.monitoring.v3.Service.BasicService.decode(reader, reader.uint32());
+                                    break;
+                                }
                             case 13: {
                                     message.telemetry = $root.google.monitoring.v3.Service.Telemetry.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 14: {
+                                    if (message.userLabels === $util.emptyObject)
+                                        message.userLabels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.userLabels[key] = value;
                                     break;
                                 }
                             default:
@@ -21045,10 +24995,63 @@
                                     return "istioCanonicalService." + error;
                             }
                         }
+                        if (message.cloudRun != null && message.hasOwnProperty("cloudRun")) {
+                            if (properties.identifier === 1)
+                                return "identifier: multiple values";
+                            properties.identifier = 1;
+                            {
+                                var error = $root.google.monitoring.v3.Service.CloudRun.verify(message.cloudRun);
+                                if (error)
+                                    return "cloudRun." + error;
+                            }
+                        }
+                        if (message.gkeNamespace != null && message.hasOwnProperty("gkeNamespace")) {
+                            if (properties.identifier === 1)
+                                return "identifier: multiple values";
+                            properties.identifier = 1;
+                            {
+                                var error = $root.google.monitoring.v3.Service.GkeNamespace.verify(message.gkeNamespace);
+                                if (error)
+                                    return "gkeNamespace." + error;
+                            }
+                        }
+                        if (message.gkeWorkload != null && message.hasOwnProperty("gkeWorkload")) {
+                            if (properties.identifier === 1)
+                                return "identifier: multiple values";
+                            properties.identifier = 1;
+                            {
+                                var error = $root.google.monitoring.v3.Service.GkeWorkload.verify(message.gkeWorkload);
+                                if (error)
+                                    return "gkeWorkload." + error;
+                            }
+                        }
+                        if (message.gkeService != null && message.hasOwnProperty("gkeService")) {
+                            if (properties.identifier === 1)
+                                return "identifier: multiple values";
+                            properties.identifier = 1;
+                            {
+                                var error = $root.google.monitoring.v3.Service.GkeService.verify(message.gkeService);
+                                if (error)
+                                    return "gkeService." + error;
+                            }
+                        }
+                        if (message.basicService != null && message.hasOwnProperty("basicService")) {
+                            var error = $root.google.monitoring.v3.Service.BasicService.verify(message.basicService);
+                            if (error)
+                                return "basicService." + error;
+                        }
                         if (message.telemetry != null && message.hasOwnProperty("telemetry")) {
                             var error = $root.google.monitoring.v3.Service.Telemetry.verify(message.telemetry);
                             if (error)
                                 return "telemetry." + error;
+                        }
+                        if (message.userLabels != null && message.hasOwnProperty("userLabels")) {
+                            if (!$util.isObject(message.userLabels))
+                                return "userLabels: object expected";
+                            var key = Object.keys(message.userLabels);
+                            for (var i = 0; i < key.length; ++i)
+                                if (!$util.isString(message.userLabels[key[i]]))
+                                    return "userLabels: string{k:string} expected";
                         }
                         return null;
                     };
@@ -21099,10 +25102,42 @@
                                 throw TypeError(".google.monitoring.v3.Service.istioCanonicalService: object expected");
                             message.istioCanonicalService = $root.google.monitoring.v3.Service.IstioCanonicalService.fromObject(object.istioCanonicalService);
                         }
+                        if (object.cloudRun != null) {
+                            if (typeof object.cloudRun !== "object")
+                                throw TypeError(".google.monitoring.v3.Service.cloudRun: object expected");
+                            message.cloudRun = $root.google.monitoring.v3.Service.CloudRun.fromObject(object.cloudRun);
+                        }
+                        if (object.gkeNamespace != null) {
+                            if (typeof object.gkeNamespace !== "object")
+                                throw TypeError(".google.monitoring.v3.Service.gkeNamespace: object expected");
+                            message.gkeNamespace = $root.google.monitoring.v3.Service.GkeNamespace.fromObject(object.gkeNamespace);
+                        }
+                        if (object.gkeWorkload != null) {
+                            if (typeof object.gkeWorkload !== "object")
+                                throw TypeError(".google.monitoring.v3.Service.gkeWorkload: object expected");
+                            message.gkeWorkload = $root.google.monitoring.v3.Service.GkeWorkload.fromObject(object.gkeWorkload);
+                        }
+                        if (object.gkeService != null) {
+                            if (typeof object.gkeService !== "object")
+                                throw TypeError(".google.monitoring.v3.Service.gkeService: object expected");
+                            message.gkeService = $root.google.monitoring.v3.Service.GkeService.fromObject(object.gkeService);
+                        }
+                        if (object.basicService != null) {
+                            if (typeof object.basicService !== "object")
+                                throw TypeError(".google.monitoring.v3.Service.basicService: object expected");
+                            message.basicService = $root.google.monitoring.v3.Service.BasicService.fromObject(object.basicService);
+                        }
                         if (object.telemetry != null) {
                             if (typeof object.telemetry !== "object")
                                 throw TypeError(".google.monitoring.v3.Service.telemetry: object expected");
                             message.telemetry = $root.google.monitoring.v3.Service.Telemetry.fromObject(object.telemetry);
+                        }
+                        if (object.userLabels) {
+                            if (typeof object.userLabels !== "object")
+                                throw TypeError(".google.monitoring.v3.Service.userLabels: object expected");
+                            message.userLabels = {};
+                            for (var keys = Object.keys(object.userLabels), i = 0; i < keys.length; ++i)
+                                message.userLabels[keys[i]] = String(object.userLabels[keys[i]]);
                         }
                         return message;
                     };
@@ -21120,10 +25155,13 @@
                         if (!options)
                             options = {};
                         var object = {};
+                        if (options.objects || options.defaults)
+                            object.userLabels = {};
                         if (options.defaults) {
                             object.name = "";
                             object.displayName = "";
                             object.telemetry = null;
+                            object.basicService = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -21159,8 +25197,36 @@
                             if (options.oneofs)
                                 object.identifier = "istioCanonicalService";
                         }
+                        if (message.cloudRun != null && message.hasOwnProperty("cloudRun")) {
+                            object.cloudRun = $root.google.monitoring.v3.Service.CloudRun.toObject(message.cloudRun, options);
+                            if (options.oneofs)
+                                object.identifier = "cloudRun";
+                        }
                         if (message.telemetry != null && message.hasOwnProperty("telemetry"))
                             object.telemetry = $root.google.monitoring.v3.Service.Telemetry.toObject(message.telemetry, options);
+                        var keys2;
+                        if (message.userLabels && (keys2 = Object.keys(message.userLabels)).length) {
+                            object.userLabels = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.userLabels[keys2[j]] = message.userLabels[keys2[j]];
+                        }
+                        if (message.gkeNamespace != null && message.hasOwnProperty("gkeNamespace")) {
+                            object.gkeNamespace = $root.google.monitoring.v3.Service.GkeNamespace.toObject(message.gkeNamespace, options);
+                            if (options.oneofs)
+                                object.identifier = "gkeNamespace";
+                        }
+                        if (message.gkeWorkload != null && message.hasOwnProperty("gkeWorkload")) {
+                            object.gkeWorkload = $root.google.monitoring.v3.Service.GkeWorkload.toObject(message.gkeWorkload, options);
+                            if (options.oneofs)
+                                object.identifier = "gkeWorkload";
+                        }
+                        if (message.gkeService != null && message.hasOwnProperty("gkeService")) {
+                            object.gkeService = $root.google.monitoring.v3.Service.GkeService.toObject(message.gkeService, options);
+                            if (options.oneofs)
+                                object.identifier = "gkeService";
+                        }
+                        if (message.basicService != null && message.hasOwnProperty("basicService"))
+                            object.basicService = $root.google.monitoring.v3.Service.BasicService.toObject(message.basicService, options);
                         return object;
                     };
     
@@ -21264,14 +25330,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Custom.decode = function decode(reader, length, error) {
+                        Custom.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.Custom();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -21452,14 +25516,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AppEngine.decode = function decode(reader, length, error) {
+                        AppEngine.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.AppEngine();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.moduleId = reader.string();
@@ -21657,14 +25719,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CloudEndpoints.decode = function decode(reader, length, error) {
+                        CloudEndpoints.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.CloudEndpoints();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.service = reader.string();
@@ -21895,14 +25955,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ClusterIstio.decode = function decode(reader, length, error) {
+                        ClusterIstio.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.ClusterIstio();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.location = reader.string();
@@ -22159,14 +26217,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MeshIstio.decode = function decode(reader, length, error) {
+                        MeshIstio.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.MeshIstio();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.meshUid = reader.string();
@@ -22411,14 +26467,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        IstioCanonicalService.decode = function decode(reader, length, error) {
+                        IstioCanonicalService.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.IstioCanonicalService();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.meshUid = reader.string();
@@ -22556,6 +26610,1383 @@
                         return IstioCanonicalService;
                     })();
     
+                    Service.CloudRun = (function() {
+    
+                        /**
+                         * Properties of a CloudRun.
+                         * @memberof google.monitoring.v3.Service
+                         * @interface ICloudRun
+                         * @property {string|null} [serviceName] CloudRun serviceName
+                         * @property {string|null} [location] CloudRun location
+                         */
+    
+                        /**
+                         * Constructs a new CloudRun.
+                         * @memberof google.monitoring.v3.Service
+                         * @classdesc Represents a CloudRun.
+                         * @implements ICloudRun
+                         * @constructor
+                         * @param {google.monitoring.v3.Service.ICloudRun=} [properties] Properties to set
+                         */
+                        function CloudRun(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloudRun serviceName.
+                         * @member {string} serviceName
+                         * @memberof google.monitoring.v3.Service.CloudRun
+                         * @instance
+                         */
+                        CloudRun.prototype.serviceName = "";
+    
+                        /**
+                         * CloudRun location.
+                         * @member {string} location
+                         * @memberof google.monitoring.v3.Service.CloudRun
+                         * @instance
+                         */
+                        CloudRun.prototype.location = "";
+    
+                        /**
+                         * Creates a new CloudRun instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.Service.CloudRun
+                         * @static
+                         * @param {google.monitoring.v3.Service.ICloudRun=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.Service.CloudRun} CloudRun instance
+                         */
+                        CloudRun.create = function create(properties) {
+                            return new CloudRun(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloudRun message. Does not implicitly {@link google.monitoring.v3.Service.CloudRun.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.Service.CloudRun
+                         * @static
+                         * @param {google.monitoring.v3.Service.ICloudRun} message CloudRun message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudRun.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.serviceName != null && Object.hasOwnProperty.call(message, "serviceName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceName);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.location);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloudRun message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.CloudRun.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.Service.CloudRun
+                         * @static
+                         * @param {google.monitoring.v3.Service.ICloudRun} message CloudRun message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudRun.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloudRun message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.Service.CloudRun
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.Service.CloudRun} CloudRun
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudRun.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.CloudRun();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.serviceName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.location = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloudRun message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.Service.CloudRun
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.Service.CloudRun} CloudRun
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudRun.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloudRun message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.Service.CloudRun
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloudRun.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.serviceName != null && message.hasOwnProperty("serviceName"))
+                                if (!$util.isString(message.serviceName))
+                                    return "serviceName: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloudRun message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.Service.CloudRun
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.Service.CloudRun} CloudRun
+                         */
+                        CloudRun.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.Service.CloudRun)
+                                return object;
+                            var message = new $root.google.monitoring.v3.Service.CloudRun();
+                            if (object.serviceName != null)
+                                message.serviceName = String(object.serviceName);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloudRun message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.Service.CloudRun
+                         * @static
+                         * @param {google.monitoring.v3.Service.CloudRun} message CloudRun
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloudRun.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.serviceName = "";
+                                object.location = "";
+                            }
+                            if (message.serviceName != null && message.hasOwnProperty("serviceName"))
+                                object.serviceName = message.serviceName;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloudRun to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.Service.CloudRun
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloudRun.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CloudRun
+                         * @function getTypeUrl
+                         * @memberof google.monitoring.v3.Service.CloudRun
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CloudRun.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.monitoring.v3.Service.CloudRun";
+                        };
+    
+                        return CloudRun;
+                    })();
+    
+                    Service.GkeNamespace = (function() {
+    
+                        /**
+                         * Properties of a GkeNamespace.
+                         * @memberof google.monitoring.v3.Service
+                         * @interface IGkeNamespace
+                         * @property {string|null} [projectId] GkeNamespace projectId
+                         * @property {string|null} [location] GkeNamespace location
+                         * @property {string|null} [clusterName] GkeNamespace clusterName
+                         * @property {string|null} [namespaceName] GkeNamespace namespaceName
+                         */
+    
+                        /**
+                         * Constructs a new GkeNamespace.
+                         * @memberof google.monitoring.v3.Service
+                         * @classdesc Represents a GkeNamespace.
+                         * @implements IGkeNamespace
+                         * @constructor
+                         * @param {google.monitoring.v3.Service.IGkeNamespace=} [properties] Properties to set
+                         */
+                        function GkeNamespace(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkeNamespace projectId.
+                         * @member {string} projectId
+                         * @memberof google.monitoring.v3.Service.GkeNamespace
+                         * @instance
+                         */
+                        GkeNamespace.prototype.projectId = "";
+    
+                        /**
+                         * GkeNamespace location.
+                         * @member {string} location
+                         * @memberof google.monitoring.v3.Service.GkeNamespace
+                         * @instance
+                         */
+                        GkeNamespace.prototype.location = "";
+    
+                        /**
+                         * GkeNamespace clusterName.
+                         * @member {string} clusterName
+                         * @memberof google.monitoring.v3.Service.GkeNamespace
+                         * @instance
+                         */
+                        GkeNamespace.prototype.clusterName = "";
+    
+                        /**
+                         * GkeNamespace namespaceName.
+                         * @member {string} namespaceName
+                         * @memberof google.monitoring.v3.Service.GkeNamespace
+                         * @instance
+                         */
+                        GkeNamespace.prototype.namespaceName = "";
+    
+                        /**
+                         * Creates a new GkeNamespace instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.Service.GkeNamespace
+                         * @static
+                         * @param {google.monitoring.v3.Service.IGkeNamespace=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.Service.GkeNamespace} GkeNamespace instance
+                         */
+                        GkeNamespace.create = function create(properties) {
+                            return new GkeNamespace(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkeNamespace message. Does not implicitly {@link google.monitoring.v3.Service.GkeNamespace.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.Service.GkeNamespace
+                         * @static
+                         * @param {google.monitoring.v3.Service.IGkeNamespace} message GkeNamespace message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeNamespace.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.location);
+                            if (message.clusterName != null && Object.hasOwnProperty.call(message, "clusterName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.clusterName);
+                            if (message.namespaceName != null && Object.hasOwnProperty.call(message, "namespaceName"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.namespaceName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkeNamespace message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.GkeNamespace.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.Service.GkeNamespace
+                         * @static
+                         * @param {google.monitoring.v3.Service.IGkeNamespace} message GkeNamespace message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeNamespace.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkeNamespace message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.Service.GkeNamespace
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.Service.GkeNamespace} GkeNamespace
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeNamespace.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.GkeNamespace();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.projectId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.location = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.clusterName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.namespaceName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkeNamespace message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.Service.GkeNamespace
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.Service.GkeNamespace} GkeNamespace
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeNamespace.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkeNamespace message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.Service.GkeNamespace
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkeNamespace.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            if (message.clusterName != null && message.hasOwnProperty("clusterName"))
+                                if (!$util.isString(message.clusterName))
+                                    return "clusterName: string expected";
+                            if (message.namespaceName != null && message.hasOwnProperty("namespaceName"))
+                                if (!$util.isString(message.namespaceName))
+                                    return "namespaceName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkeNamespace message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.Service.GkeNamespace
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.Service.GkeNamespace} GkeNamespace
+                         */
+                        GkeNamespace.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.Service.GkeNamespace)
+                                return object;
+                            var message = new $root.google.monitoring.v3.Service.GkeNamespace();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            if (object.clusterName != null)
+                                message.clusterName = String(object.clusterName);
+                            if (object.namespaceName != null)
+                                message.namespaceName = String(object.namespaceName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkeNamespace message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.Service.GkeNamespace
+                         * @static
+                         * @param {google.monitoring.v3.Service.GkeNamespace} message GkeNamespace
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkeNamespace.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.location = "";
+                                object.clusterName = "";
+                                object.namespaceName = "";
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            if (message.clusterName != null && message.hasOwnProperty("clusterName"))
+                                object.clusterName = message.clusterName;
+                            if (message.namespaceName != null && message.hasOwnProperty("namespaceName"))
+                                object.namespaceName = message.namespaceName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkeNamespace to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.Service.GkeNamespace
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkeNamespace.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GkeNamespace
+                         * @function getTypeUrl
+                         * @memberof google.monitoring.v3.Service.GkeNamespace
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GkeNamespace.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.monitoring.v3.Service.GkeNamespace";
+                        };
+    
+                        return GkeNamespace;
+                    })();
+    
+                    Service.GkeWorkload = (function() {
+    
+                        /**
+                         * Properties of a GkeWorkload.
+                         * @memberof google.monitoring.v3.Service
+                         * @interface IGkeWorkload
+                         * @property {string|null} [projectId] GkeWorkload projectId
+                         * @property {string|null} [location] GkeWorkload location
+                         * @property {string|null} [clusterName] GkeWorkload clusterName
+                         * @property {string|null} [namespaceName] GkeWorkload namespaceName
+                         * @property {string|null} [topLevelControllerType] GkeWorkload topLevelControllerType
+                         * @property {string|null} [topLevelControllerName] GkeWorkload topLevelControllerName
+                         */
+    
+                        /**
+                         * Constructs a new GkeWorkload.
+                         * @memberof google.monitoring.v3.Service
+                         * @classdesc Represents a GkeWorkload.
+                         * @implements IGkeWorkload
+                         * @constructor
+                         * @param {google.monitoring.v3.Service.IGkeWorkload=} [properties] Properties to set
+                         */
+                        function GkeWorkload(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkeWorkload projectId.
+                         * @member {string} projectId
+                         * @memberof google.monitoring.v3.Service.GkeWorkload
+                         * @instance
+                         */
+                        GkeWorkload.prototype.projectId = "";
+    
+                        /**
+                         * GkeWorkload location.
+                         * @member {string} location
+                         * @memberof google.monitoring.v3.Service.GkeWorkload
+                         * @instance
+                         */
+                        GkeWorkload.prototype.location = "";
+    
+                        /**
+                         * GkeWorkload clusterName.
+                         * @member {string} clusterName
+                         * @memberof google.monitoring.v3.Service.GkeWorkload
+                         * @instance
+                         */
+                        GkeWorkload.prototype.clusterName = "";
+    
+                        /**
+                         * GkeWorkload namespaceName.
+                         * @member {string} namespaceName
+                         * @memberof google.monitoring.v3.Service.GkeWorkload
+                         * @instance
+                         */
+                        GkeWorkload.prototype.namespaceName = "";
+    
+                        /**
+                         * GkeWorkload topLevelControllerType.
+                         * @member {string} topLevelControllerType
+                         * @memberof google.monitoring.v3.Service.GkeWorkload
+                         * @instance
+                         */
+                        GkeWorkload.prototype.topLevelControllerType = "";
+    
+                        /**
+                         * GkeWorkload topLevelControllerName.
+                         * @member {string} topLevelControllerName
+                         * @memberof google.monitoring.v3.Service.GkeWorkload
+                         * @instance
+                         */
+                        GkeWorkload.prototype.topLevelControllerName = "";
+    
+                        /**
+                         * Creates a new GkeWorkload instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.Service.GkeWorkload
+                         * @static
+                         * @param {google.monitoring.v3.Service.IGkeWorkload=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.Service.GkeWorkload} GkeWorkload instance
+                         */
+                        GkeWorkload.create = function create(properties) {
+                            return new GkeWorkload(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkeWorkload message. Does not implicitly {@link google.monitoring.v3.Service.GkeWorkload.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.Service.GkeWorkload
+                         * @static
+                         * @param {google.monitoring.v3.Service.IGkeWorkload} message GkeWorkload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeWorkload.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.location);
+                            if (message.clusterName != null && Object.hasOwnProperty.call(message, "clusterName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.clusterName);
+                            if (message.namespaceName != null && Object.hasOwnProperty.call(message, "namespaceName"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.namespaceName);
+                            if (message.topLevelControllerType != null && Object.hasOwnProperty.call(message, "topLevelControllerType"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.topLevelControllerType);
+                            if (message.topLevelControllerName != null && Object.hasOwnProperty.call(message, "topLevelControllerName"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.topLevelControllerName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkeWorkload message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.GkeWorkload.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.Service.GkeWorkload
+                         * @static
+                         * @param {google.monitoring.v3.Service.IGkeWorkload} message GkeWorkload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeWorkload.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkeWorkload message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.Service.GkeWorkload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.Service.GkeWorkload} GkeWorkload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeWorkload.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.GkeWorkload();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.projectId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.location = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.clusterName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.namespaceName = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.topLevelControllerType = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.topLevelControllerName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkeWorkload message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.Service.GkeWorkload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.Service.GkeWorkload} GkeWorkload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeWorkload.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkeWorkload message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.Service.GkeWorkload
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkeWorkload.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            if (message.clusterName != null && message.hasOwnProperty("clusterName"))
+                                if (!$util.isString(message.clusterName))
+                                    return "clusterName: string expected";
+                            if (message.namespaceName != null && message.hasOwnProperty("namespaceName"))
+                                if (!$util.isString(message.namespaceName))
+                                    return "namespaceName: string expected";
+                            if (message.topLevelControllerType != null && message.hasOwnProperty("topLevelControllerType"))
+                                if (!$util.isString(message.topLevelControllerType))
+                                    return "topLevelControllerType: string expected";
+                            if (message.topLevelControllerName != null && message.hasOwnProperty("topLevelControllerName"))
+                                if (!$util.isString(message.topLevelControllerName))
+                                    return "topLevelControllerName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkeWorkload message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.Service.GkeWorkload
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.Service.GkeWorkload} GkeWorkload
+                         */
+                        GkeWorkload.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.Service.GkeWorkload)
+                                return object;
+                            var message = new $root.google.monitoring.v3.Service.GkeWorkload();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            if (object.clusterName != null)
+                                message.clusterName = String(object.clusterName);
+                            if (object.namespaceName != null)
+                                message.namespaceName = String(object.namespaceName);
+                            if (object.topLevelControllerType != null)
+                                message.topLevelControllerType = String(object.topLevelControllerType);
+                            if (object.topLevelControllerName != null)
+                                message.topLevelControllerName = String(object.topLevelControllerName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkeWorkload message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.Service.GkeWorkload
+                         * @static
+                         * @param {google.monitoring.v3.Service.GkeWorkload} message GkeWorkload
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkeWorkload.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.location = "";
+                                object.clusterName = "";
+                                object.namespaceName = "";
+                                object.topLevelControllerType = "";
+                                object.topLevelControllerName = "";
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            if (message.clusterName != null && message.hasOwnProperty("clusterName"))
+                                object.clusterName = message.clusterName;
+                            if (message.namespaceName != null && message.hasOwnProperty("namespaceName"))
+                                object.namespaceName = message.namespaceName;
+                            if (message.topLevelControllerType != null && message.hasOwnProperty("topLevelControllerType"))
+                                object.topLevelControllerType = message.topLevelControllerType;
+                            if (message.topLevelControllerName != null && message.hasOwnProperty("topLevelControllerName"))
+                                object.topLevelControllerName = message.topLevelControllerName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkeWorkload to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.Service.GkeWorkload
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkeWorkload.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GkeWorkload
+                         * @function getTypeUrl
+                         * @memberof google.monitoring.v3.Service.GkeWorkload
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GkeWorkload.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.monitoring.v3.Service.GkeWorkload";
+                        };
+    
+                        return GkeWorkload;
+                    })();
+    
+                    Service.GkeService = (function() {
+    
+                        /**
+                         * Properties of a GkeService.
+                         * @memberof google.monitoring.v3.Service
+                         * @interface IGkeService
+                         * @property {string|null} [projectId] GkeService projectId
+                         * @property {string|null} [location] GkeService location
+                         * @property {string|null} [clusterName] GkeService clusterName
+                         * @property {string|null} [namespaceName] GkeService namespaceName
+                         * @property {string|null} [serviceName] GkeService serviceName
+                         */
+    
+                        /**
+                         * Constructs a new GkeService.
+                         * @memberof google.monitoring.v3.Service
+                         * @classdesc Represents a GkeService.
+                         * @implements IGkeService
+                         * @constructor
+                         * @param {google.monitoring.v3.Service.IGkeService=} [properties] Properties to set
+                         */
+                        function GkeService(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkeService projectId.
+                         * @member {string} projectId
+                         * @memberof google.monitoring.v3.Service.GkeService
+                         * @instance
+                         */
+                        GkeService.prototype.projectId = "";
+    
+                        /**
+                         * GkeService location.
+                         * @member {string} location
+                         * @memberof google.monitoring.v3.Service.GkeService
+                         * @instance
+                         */
+                        GkeService.prototype.location = "";
+    
+                        /**
+                         * GkeService clusterName.
+                         * @member {string} clusterName
+                         * @memberof google.monitoring.v3.Service.GkeService
+                         * @instance
+                         */
+                        GkeService.prototype.clusterName = "";
+    
+                        /**
+                         * GkeService namespaceName.
+                         * @member {string} namespaceName
+                         * @memberof google.monitoring.v3.Service.GkeService
+                         * @instance
+                         */
+                        GkeService.prototype.namespaceName = "";
+    
+                        /**
+                         * GkeService serviceName.
+                         * @member {string} serviceName
+                         * @memberof google.monitoring.v3.Service.GkeService
+                         * @instance
+                         */
+                        GkeService.prototype.serviceName = "";
+    
+                        /**
+                         * Creates a new GkeService instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.Service.GkeService
+                         * @static
+                         * @param {google.monitoring.v3.Service.IGkeService=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.Service.GkeService} GkeService instance
+                         */
+                        GkeService.create = function create(properties) {
+                            return new GkeService(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkeService message. Does not implicitly {@link google.monitoring.v3.Service.GkeService.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.Service.GkeService
+                         * @static
+                         * @param {google.monitoring.v3.Service.IGkeService} message GkeService message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeService.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.location);
+                            if (message.clusterName != null && Object.hasOwnProperty.call(message, "clusterName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.clusterName);
+                            if (message.namespaceName != null && Object.hasOwnProperty.call(message, "namespaceName"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.namespaceName);
+                            if (message.serviceName != null && Object.hasOwnProperty.call(message, "serviceName"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.serviceName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkeService message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.GkeService.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.Service.GkeService
+                         * @static
+                         * @param {google.monitoring.v3.Service.IGkeService} message GkeService message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeService.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkeService message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.Service.GkeService
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.Service.GkeService} GkeService
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeService.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.GkeService();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.projectId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.location = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.clusterName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.namespaceName = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.serviceName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkeService message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.Service.GkeService
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.Service.GkeService} GkeService
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeService.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkeService message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.Service.GkeService
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkeService.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            if (message.clusterName != null && message.hasOwnProperty("clusterName"))
+                                if (!$util.isString(message.clusterName))
+                                    return "clusterName: string expected";
+                            if (message.namespaceName != null && message.hasOwnProperty("namespaceName"))
+                                if (!$util.isString(message.namespaceName))
+                                    return "namespaceName: string expected";
+                            if (message.serviceName != null && message.hasOwnProperty("serviceName"))
+                                if (!$util.isString(message.serviceName))
+                                    return "serviceName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkeService message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.Service.GkeService
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.Service.GkeService} GkeService
+                         */
+                        GkeService.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.Service.GkeService)
+                                return object;
+                            var message = new $root.google.monitoring.v3.Service.GkeService();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            if (object.clusterName != null)
+                                message.clusterName = String(object.clusterName);
+                            if (object.namespaceName != null)
+                                message.namespaceName = String(object.namespaceName);
+                            if (object.serviceName != null)
+                                message.serviceName = String(object.serviceName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkeService message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.Service.GkeService
+                         * @static
+                         * @param {google.monitoring.v3.Service.GkeService} message GkeService
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkeService.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.location = "";
+                                object.clusterName = "";
+                                object.namespaceName = "";
+                                object.serviceName = "";
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            if (message.clusterName != null && message.hasOwnProperty("clusterName"))
+                                object.clusterName = message.clusterName;
+                            if (message.namespaceName != null && message.hasOwnProperty("namespaceName"))
+                                object.namespaceName = message.namespaceName;
+                            if (message.serviceName != null && message.hasOwnProperty("serviceName"))
+                                object.serviceName = message.serviceName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkeService to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.Service.GkeService
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkeService.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GkeService
+                         * @function getTypeUrl
+                         * @memberof google.monitoring.v3.Service.GkeService
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GkeService.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.monitoring.v3.Service.GkeService";
+                        };
+    
+                        return GkeService;
+                    })();
+    
+                    Service.BasicService = (function() {
+    
+                        /**
+                         * Properties of a BasicService.
+                         * @memberof google.monitoring.v3.Service
+                         * @interface IBasicService
+                         * @property {string|null} [serviceType] BasicService serviceType
+                         * @property {Object.<string,string>|null} [serviceLabels] BasicService serviceLabels
+                         */
+    
+                        /**
+                         * Constructs a new BasicService.
+                         * @memberof google.monitoring.v3.Service
+                         * @classdesc Represents a BasicService.
+                         * @implements IBasicService
+                         * @constructor
+                         * @param {google.monitoring.v3.Service.IBasicService=} [properties] Properties to set
+                         */
+                        function BasicService(properties) {
+                            this.serviceLabels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BasicService serviceType.
+                         * @member {string} serviceType
+                         * @memberof google.monitoring.v3.Service.BasicService
+                         * @instance
+                         */
+                        BasicService.prototype.serviceType = "";
+    
+                        /**
+                         * BasicService serviceLabels.
+                         * @member {Object.<string,string>} serviceLabels
+                         * @memberof google.monitoring.v3.Service.BasicService
+                         * @instance
+                         */
+                        BasicService.prototype.serviceLabels = $util.emptyObject;
+    
+                        /**
+                         * Creates a new BasicService instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.Service.BasicService
+                         * @static
+                         * @param {google.monitoring.v3.Service.IBasicService=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.Service.BasicService} BasicService instance
+                         */
+                        BasicService.create = function create(properties) {
+                            return new BasicService(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BasicService message. Does not implicitly {@link google.monitoring.v3.Service.BasicService.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.Service.BasicService
+                         * @static
+                         * @param {google.monitoring.v3.Service.IBasicService} message BasicService message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BasicService.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.serviceType != null && Object.hasOwnProperty.call(message, "serviceType"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceType);
+                            if (message.serviceLabels != null && Object.hasOwnProperty.call(message, "serviceLabels"))
+                                for (var keys = Object.keys(message.serviceLabels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.serviceLabels[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BasicService message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.BasicService.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.Service.BasicService
+                         * @static
+                         * @param {google.monitoring.v3.Service.IBasicService} message BasicService message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BasicService.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BasicService message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.Service.BasicService
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.Service.BasicService} BasicService
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BasicService.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.BasicService(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.serviceType = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (message.serviceLabels === $util.emptyObject)
+                                            message.serviceLabels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.serviceLabels[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BasicService message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.Service.BasicService
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.Service.BasicService} BasicService
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BasicService.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BasicService message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.Service.BasicService
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BasicService.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.serviceType != null && message.hasOwnProperty("serviceType"))
+                                if (!$util.isString(message.serviceType))
+                                    return "serviceType: string expected";
+                            if (message.serviceLabels != null && message.hasOwnProperty("serviceLabels")) {
+                                if (!$util.isObject(message.serviceLabels))
+                                    return "serviceLabels: object expected";
+                                var key = Object.keys(message.serviceLabels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.serviceLabels[key[i]]))
+                                        return "serviceLabels: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BasicService message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.Service.BasicService
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.Service.BasicService} BasicService
+                         */
+                        BasicService.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.Service.BasicService)
+                                return object;
+                            var message = new $root.google.monitoring.v3.Service.BasicService();
+                            if (object.serviceType != null)
+                                message.serviceType = String(object.serviceType);
+                            if (object.serviceLabels) {
+                                if (typeof object.serviceLabels !== "object")
+                                    throw TypeError(".google.monitoring.v3.Service.BasicService.serviceLabels: object expected");
+                                message.serviceLabels = {};
+                                for (var keys = Object.keys(object.serviceLabels), i = 0; i < keys.length; ++i)
+                                    message.serviceLabels[keys[i]] = String(object.serviceLabels[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BasicService message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.Service.BasicService
+                         * @static
+                         * @param {google.monitoring.v3.Service.BasicService} message BasicService
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BasicService.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.serviceLabels = {};
+                            if (options.defaults)
+                                object.serviceType = "";
+                            if (message.serviceType != null && message.hasOwnProperty("serviceType"))
+                                object.serviceType = message.serviceType;
+                            var keys2;
+                            if (message.serviceLabels && (keys2 = Object.keys(message.serviceLabels)).length) {
+                                object.serviceLabels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.serviceLabels[keys2[j]] = message.serviceLabels[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BasicService to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.Service.BasicService
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BasicService.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BasicService
+                         * @function getTypeUrl
+                         * @memberof google.monitoring.v3.Service.BasicService
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BasicService.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.monitoring.v3.Service.BasicService";
+                        };
+    
+                        return BasicService;
+                    })();
+    
                     Service.Telemetry = (function() {
     
                         /**
@@ -22641,14 +28072,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Telemetry.decode = function decode(reader, length, error) {
+                        Telemetry.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.Telemetry();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.resourceName = reader.string();
@@ -22776,6 +28205,7 @@
                      * @property {number|null} [goal] ServiceLevelObjective goal
                      * @property {google.protobuf.IDuration|null} [rollingPeriod] ServiceLevelObjective rollingPeriod
                      * @property {google.type.CalendarPeriod|null} [calendarPeriod] ServiceLevelObjective calendarPeriod
+                     * @property {Object.<string,string>|null} [userLabels] ServiceLevelObjective userLabels
                      */
     
                     /**
@@ -22787,6 +28217,7 @@
                      * @param {google.monitoring.v3.IServiceLevelObjective=} [properties] Properties to set
                      */
                     function ServiceLevelObjective(properties) {
+                        this.userLabels = {};
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -22841,6 +28272,14 @@
                      */
                     ServiceLevelObjective.prototype.calendarPeriod = null;
     
+                    /**
+                     * ServiceLevelObjective userLabels.
+                     * @member {Object.<string,string>} userLabels
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @instance
+                     */
+                    ServiceLevelObjective.prototype.userLabels = $util.emptyObject;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -22891,6 +28330,9 @@
                             writer.uint32(/* id 6, wireType 0 =*/48).int32(message.calendarPeriod);
                         if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
                             writer.uint32(/* id 11, wireType 2 =*/90).string(message.displayName);
+                        if (message.userLabels != null && Object.hasOwnProperty.call(message, "userLabels"))
+                            for (var keys = Object.keys(message.userLabels), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 12, wireType 2 =*/98).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.userLabels[keys[i]]).ldelim();
                         return writer;
                     };
     
@@ -22918,14 +28360,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ServiceLevelObjective.decode = function decode(reader, length, error) {
+                    ServiceLevelObjective.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ServiceLevelObjective();
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ServiceLevelObjective(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -22949,6 +28389,29 @@
                                 }
                             case 6: {
                                     message.calendarPeriod = reader.int32();
+                                    break;
+                                }
+                            case 12: {
+                                    if (message.userLabels === $util.emptyObject)
+                                        message.userLabels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.userLabels[key] = value;
                                     break;
                                 }
                             default:
@@ -23027,6 +28490,14 @@
                                 break;
                             }
                         }
+                        if (message.userLabels != null && message.hasOwnProperty("userLabels")) {
+                            if (!$util.isObject(message.userLabels))
+                                return "userLabels: object expected";
+                            var key = Object.keys(message.userLabels);
+                            for (var i = 0; i < key.length; ++i)
+                                if (!$util.isString(message.userLabels[key[i]]))
+                                    return "userLabels: string{k:string} expected";
+                        }
                         return null;
                     };
     
@@ -23098,6 +28569,13 @@
                             message.calendarPeriod = 7;
                             break;
                         }
+                        if (object.userLabels) {
+                            if (typeof object.userLabels !== "object")
+                                throw TypeError(".google.monitoring.v3.ServiceLevelObjective.userLabels: object expected");
+                            message.userLabels = {};
+                            for (var keys = Object.keys(object.userLabels), i = 0; i < keys.length; ++i)
+                                message.userLabels[keys[i]] = String(object.userLabels[keys[i]]);
+                        }
                         return message;
                     };
     
@@ -23114,6 +28592,8 @@
                         if (!options)
                             options = {};
                         var object = {};
+                        if (options.objects || options.defaults)
+                            object.userLabels = {};
                         if (options.defaults) {
                             object.name = "";
                             object.serviceLevelIndicator = null;
@@ -23138,6 +28618,12 @@
                         }
                         if (message.displayName != null && message.hasOwnProperty("displayName"))
                             object.displayName = message.displayName;
+                        var keys2;
+                        if (message.userLabels && (keys2 = Object.keys(message.userLabels)).length) {
+                            object.userLabels = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.userLabels[keys2[j]] = message.userLabels[keys2[j]];
+                        }
                         return object;
                     };
     
@@ -23307,14 +28793,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ServiceLevelIndicator.decode = function decode(reader, length, error) {
+                    ServiceLevelIndicator.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ServiceLevelIndicator();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 4: {
                                     message.basicSli = $root.google.monitoring.v3.BasicSli.decode(reader, reader.uint32());
@@ -23634,14 +29118,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    BasicSli.decode = function decode(reader, length, error) {
+                    BasicSli.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.BasicSli();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 7: {
                                     if (!(message.method && message.method.length))
@@ -23939,14 +29421,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AvailabilityCriteria.decode = function decode(reader, length, error) {
+                        AvailabilityCriteria.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.BasicSli.AvailabilityCriteria();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -24127,14 +29607,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LatencyCriteria.decode = function decode(reader, length, error) {
+                        LatencyCriteria.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.BasicSli.LatencyCriteria();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.threshold = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -24351,14 +29829,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Range.decode = function decode(reader, length, error) {
+                    Range.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Range();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.min = reader.double();
@@ -24594,14 +30070,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    RequestBasedSli.decode = function decode(reader, length, error) {
+                    RequestBasedSli.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.RequestBasedSli();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.goodTotalRatio = $root.google.monitoring.v3.TimeSeriesRatio.decode(reader, reader.uint32());
@@ -24855,14 +30329,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TimeSeriesRatio.decode = function decode(reader, length, error) {
+                    TimeSeriesRatio.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeriesRatio();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 4: {
                                     message.goodServiceFilter = reader.string();
@@ -25096,14 +30568,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DistributionCut.decode = function decode(reader, length, error) {
+                    DistributionCut.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DistributionCut();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 4: {
                                     message.distributionFilter = reader.string();
@@ -25377,14 +30847,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    WindowsBasedSli.decode = function decode(reader, length, error) {
+                    WindowsBasedSli.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.WindowsBasedSli();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 5: {
                                     message.goodBadMetricFilter = reader.string();
@@ -25709,14 +31177,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PerformanceThreshold.decode = function decode(reader, length, error) {
+                        PerformanceThreshold.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.WindowsBasedSli.PerformanceThreshold();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.performance = $root.google.monitoring.v3.RequestBasedSli.decode(reader, reader.uint32());
@@ -25972,14 +31438,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MetricRange.decode = function decode(reader, length, error) {
+                        MetricRange.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.WindowsBasedSli.MetricRange();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.timeSeries = reader.string();
@@ -26585,14 +32049,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateServiceRequest.decode = function decode(reader, length, error) {
+                    CreateServiceRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateServiceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -26820,14 +32282,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetServiceRequest.decode = function decode(reader, length, error) {
+                    GetServiceRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetServiceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -27058,14 +32518,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListServicesRequest.decode = function decode(reader, length, error) {
+                    ListServicesRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListServicesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -27313,14 +32771,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListServicesResponse.decode = function decode(reader, length, error) {
+                    ListServicesResponse.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListServicesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.services && message.services.length))
@@ -27561,14 +33017,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateServiceRequest.decode = function decode(reader, length, error) {
+                    UpdateServiceRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UpdateServiceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.service = $root.google.monitoring.v3.Service.decode(reader, reader.uint32());
@@ -27789,14 +33243,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteServiceRequest.decode = function decode(reader, length, error) {
+                    DeleteServiceRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DeleteServiceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -28016,14 +33468,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateServiceLevelObjectiveRequest.decode = function decode(reader, length, error) {
+                    CreateServiceLevelObjectiveRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateServiceLevelObjectiveRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -28262,14 +33712,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetServiceLevelObjectiveRequest.decode = function decode(reader, length, error) {
+                    GetServiceLevelObjectiveRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetServiceLevelObjectiveRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -28548,14 +33996,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListServiceLevelObjectivesRequest.decode = function decode(reader, length, error) {
+                    ListServiceLevelObjectivesRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListServiceLevelObjectivesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -28839,14 +34285,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListServiceLevelObjectivesResponse.decode = function decode(reader, length, error) {
+                    ListServiceLevelObjectivesResponse.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListServiceLevelObjectivesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.serviceLevelObjectives && message.serviceLevelObjectives.length))
@@ -29087,14 +34531,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateServiceLevelObjectiveRequest.decode = function decode(reader, length, error) {
+                    UpdateServiceLevelObjectiveRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UpdateServiceLevelObjectiveRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.serviceLevelObjective = $root.google.monitoring.v3.ServiceLevelObjective.decode(reader, reader.uint32());
@@ -29315,14 +34757,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteServiceLevelObjectiveRequest.decode = function decode(reader, length, error) {
+                    DeleteServiceLevelObjectiveRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DeleteServiceLevelObjectiveRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -29435,6 +34875,1892 @@
                     return DeleteServiceLevelObjectiveRequest;
                 })();
     
+                v3.Snooze = (function() {
+    
+                    /**
+                     * Properties of a Snooze.
+                     * @memberof google.monitoring.v3
+                     * @interface ISnooze
+                     * @property {string|null} [name] Snooze name
+                     * @property {google.monitoring.v3.Snooze.ICriteria|null} [criteria] Snooze criteria
+                     * @property {google.monitoring.v3.ITimeInterval|null} [interval] Snooze interval
+                     * @property {string|null} [displayName] Snooze displayName
+                     */
+    
+                    /**
+                     * Constructs a new Snooze.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a Snooze.
+                     * @implements ISnooze
+                     * @constructor
+                     * @param {google.monitoring.v3.ISnooze=} [properties] Properties to set
+                     */
+                    function Snooze(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Snooze name.
+                     * @member {string} name
+                     * @memberof google.monitoring.v3.Snooze
+                     * @instance
+                     */
+                    Snooze.prototype.name = "";
+    
+                    /**
+                     * Snooze criteria.
+                     * @member {google.monitoring.v3.Snooze.ICriteria|null|undefined} criteria
+                     * @memberof google.monitoring.v3.Snooze
+                     * @instance
+                     */
+                    Snooze.prototype.criteria = null;
+    
+                    /**
+                     * Snooze interval.
+                     * @member {google.monitoring.v3.ITimeInterval|null|undefined} interval
+                     * @memberof google.monitoring.v3.Snooze
+                     * @instance
+                     */
+                    Snooze.prototype.interval = null;
+    
+                    /**
+                     * Snooze displayName.
+                     * @member {string} displayName
+                     * @memberof google.monitoring.v3.Snooze
+                     * @instance
+                     */
+                    Snooze.prototype.displayName = "";
+    
+                    /**
+                     * Creates a new Snooze instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.Snooze
+                     * @static
+                     * @param {google.monitoring.v3.ISnooze=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.Snooze} Snooze instance
+                     */
+                    Snooze.create = function create(properties) {
+                        return new Snooze(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Snooze message. Does not implicitly {@link google.monitoring.v3.Snooze.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.Snooze
+                     * @static
+                     * @param {google.monitoring.v3.ISnooze} message Snooze message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Snooze.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.criteria != null && Object.hasOwnProperty.call(message, "criteria"))
+                            $root.google.monitoring.v3.Snooze.Criteria.encode(message.criteria, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.interval != null && Object.hasOwnProperty.call(message, "interval"))
+                            $root.google.monitoring.v3.TimeInterval.encode(message.interval, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.displayName);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Snooze message, length delimited. Does not implicitly {@link google.monitoring.v3.Snooze.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.Snooze
+                     * @static
+                     * @param {google.monitoring.v3.ISnooze} message Snooze message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Snooze.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Snooze message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.Snooze
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.Snooze} Snooze
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Snooze.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Snooze();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.criteria = $root.google.monitoring.v3.Snooze.Criteria.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.interval = $root.google.monitoring.v3.TimeInterval.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.displayName = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Snooze message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.Snooze
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.Snooze} Snooze
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Snooze.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Snooze message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.Snooze
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Snooze.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.criteria != null && message.hasOwnProperty("criteria")) {
+                            var error = $root.google.monitoring.v3.Snooze.Criteria.verify(message.criteria);
+                            if (error)
+                                return "criteria." + error;
+                        }
+                        if (message.interval != null && message.hasOwnProperty("interval")) {
+                            var error = $root.google.monitoring.v3.TimeInterval.verify(message.interval);
+                            if (error)
+                                return "interval." + error;
+                        }
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            if (!$util.isString(message.displayName))
+                                return "displayName: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Snooze message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.Snooze
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.Snooze} Snooze
+                     */
+                    Snooze.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.Snooze)
+                            return object;
+                        var message = new $root.google.monitoring.v3.Snooze();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.criteria != null) {
+                            if (typeof object.criteria !== "object")
+                                throw TypeError(".google.monitoring.v3.Snooze.criteria: object expected");
+                            message.criteria = $root.google.monitoring.v3.Snooze.Criteria.fromObject(object.criteria);
+                        }
+                        if (object.interval != null) {
+                            if (typeof object.interval !== "object")
+                                throw TypeError(".google.monitoring.v3.Snooze.interval: object expected");
+                            message.interval = $root.google.monitoring.v3.TimeInterval.fromObject(object.interval);
+                        }
+                        if (object.displayName != null)
+                            message.displayName = String(object.displayName);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Snooze message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.Snooze
+                     * @static
+                     * @param {google.monitoring.v3.Snooze} message Snooze
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Snooze.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.criteria = null;
+                            object.interval = null;
+                            object.displayName = "";
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.criteria != null && message.hasOwnProperty("criteria"))
+                            object.criteria = $root.google.monitoring.v3.Snooze.Criteria.toObject(message.criteria, options);
+                        if (message.interval != null && message.hasOwnProperty("interval"))
+                            object.interval = $root.google.monitoring.v3.TimeInterval.toObject(message.interval, options);
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            object.displayName = message.displayName;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Snooze to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.Snooze
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Snooze.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Snooze
+                     * @function getTypeUrl
+                     * @memberof google.monitoring.v3.Snooze
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Snooze.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.monitoring.v3.Snooze";
+                    };
+    
+                    Snooze.Criteria = (function() {
+    
+                        /**
+                         * Properties of a Criteria.
+                         * @memberof google.monitoring.v3.Snooze
+                         * @interface ICriteria
+                         * @property {Array.<string>|null} [policies] Criteria policies
+                         * @property {string|null} [filter] Criteria filter
+                         */
+    
+                        /**
+                         * Constructs a new Criteria.
+                         * @memberof google.monitoring.v3.Snooze
+                         * @classdesc Represents a Criteria.
+                         * @implements ICriteria
+                         * @constructor
+                         * @param {google.monitoring.v3.Snooze.ICriteria=} [properties] Properties to set
+                         */
+                        function Criteria(properties) {
+                            this.policies = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Criteria policies.
+                         * @member {Array.<string>} policies
+                         * @memberof google.monitoring.v3.Snooze.Criteria
+                         * @instance
+                         */
+                        Criteria.prototype.policies = $util.emptyArray;
+    
+                        /**
+                         * Criteria filter.
+                         * @member {string} filter
+                         * @memberof google.monitoring.v3.Snooze.Criteria
+                         * @instance
+                         */
+                        Criteria.prototype.filter = "";
+    
+                        /**
+                         * Creates a new Criteria instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.Snooze.Criteria
+                         * @static
+                         * @param {google.monitoring.v3.Snooze.ICriteria=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.Snooze.Criteria} Criteria instance
+                         */
+                        Criteria.create = function create(properties) {
+                            return new Criteria(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Criteria message. Does not implicitly {@link google.monitoring.v3.Snooze.Criteria.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.Snooze.Criteria
+                         * @static
+                         * @param {google.monitoring.v3.Snooze.ICriteria} message Criteria message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Criteria.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.policies != null && message.policies.length)
+                                for (var i = 0; i < message.policies.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.policies[i]);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Criteria message, length delimited. Does not implicitly {@link google.monitoring.v3.Snooze.Criteria.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.Snooze.Criteria
+                         * @static
+                         * @param {google.monitoring.v3.Snooze.ICriteria} message Criteria message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Criteria.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Criteria message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.Snooze.Criteria
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.Snooze.Criteria} Criteria
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Criteria.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Snooze.Criteria();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.policies && message.policies.length))
+                                            message.policies = [];
+                                        message.policies.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Criteria message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.Snooze.Criteria
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.Snooze.Criteria} Criteria
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Criteria.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Criteria message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.Snooze.Criteria
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Criteria.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.policies != null && message.hasOwnProperty("policies")) {
+                                if (!Array.isArray(message.policies))
+                                    return "policies: array expected";
+                                for (var i = 0; i < message.policies.length; ++i)
+                                    if (!$util.isString(message.policies[i]))
+                                        return "policies: string[] expected";
+                            }
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Criteria message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.Snooze.Criteria
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.Snooze.Criteria} Criteria
+                         */
+                        Criteria.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.Snooze.Criteria)
+                                return object;
+                            var message = new $root.google.monitoring.v3.Snooze.Criteria();
+                            if (object.policies) {
+                                if (!Array.isArray(object.policies))
+                                    throw TypeError(".google.monitoring.v3.Snooze.Criteria.policies: array expected");
+                                message.policies = [];
+                                for (var i = 0; i < object.policies.length; ++i)
+                                    message.policies[i] = String(object.policies[i]);
+                            }
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Criteria message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.Snooze.Criteria
+                         * @static
+                         * @param {google.monitoring.v3.Snooze.Criteria} message Criteria
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Criteria.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.policies = [];
+                            if (options.defaults)
+                                object.filter = "";
+                            if (message.policies && message.policies.length) {
+                                object.policies = [];
+                                for (var j = 0; j < message.policies.length; ++j)
+                                    object.policies[j] = message.policies[j];
+                            }
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Criteria to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.Snooze.Criteria
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Criteria.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Criteria
+                         * @function getTypeUrl
+                         * @memberof google.monitoring.v3.Snooze.Criteria
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Criteria.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.monitoring.v3.Snooze.Criteria";
+                        };
+    
+                        return Criteria;
+                    })();
+    
+                    return Snooze;
+                })();
+    
+                v3.SnoozeService = (function() {
+    
+                    /**
+                     * Constructs a new SnoozeService service.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a SnoozeService
+                     * @extends $protobuf.rpc.Service
+                     * @constructor
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    function SnoozeService(rpcImpl, requestDelimited, responseDelimited) {
+                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                    }
+    
+                    (SnoozeService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = SnoozeService;
+    
+                    /**
+                     * Creates new SnoozeService service using the specified rpc implementation.
+                     * @function create
+                     * @memberof google.monitoring.v3.SnoozeService
+                     * @static
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     * @returns {SnoozeService} RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    SnoozeService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                        return new this(rpcImpl, requestDelimited, responseDelimited);
+                    };
+    
+                    /**
+                     * Callback as used by {@link google.monitoring.v3.SnoozeService|createSnooze}.
+                     * @memberof google.monitoring.v3.SnoozeService
+                     * @typedef CreateSnoozeCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.monitoring.v3.Snooze} [response] Snooze
+                     */
+    
+                    /**
+                     * Calls CreateSnooze.
+                     * @function createSnooze
+                     * @memberof google.monitoring.v3.SnoozeService
+                     * @instance
+                     * @param {google.monitoring.v3.ICreateSnoozeRequest} request CreateSnoozeRequest message or plain object
+                     * @param {google.monitoring.v3.SnoozeService.CreateSnoozeCallback} callback Node-style callback called with the error, if any, and Snooze
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(SnoozeService.prototype.createSnooze = function createSnooze(request, callback) {
+                        return this.rpcCall(createSnooze, $root.google.monitoring.v3.CreateSnoozeRequest, $root.google.monitoring.v3.Snooze, request, callback);
+                    }, "name", { value: "CreateSnooze" });
+    
+                    /**
+                     * Calls CreateSnooze.
+                     * @function createSnooze
+                     * @memberof google.monitoring.v3.SnoozeService
+                     * @instance
+                     * @param {google.monitoring.v3.ICreateSnoozeRequest} request CreateSnoozeRequest message or plain object
+                     * @returns {Promise<google.monitoring.v3.Snooze>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.monitoring.v3.SnoozeService|listSnoozes}.
+                     * @memberof google.monitoring.v3.SnoozeService
+                     * @typedef ListSnoozesCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.monitoring.v3.ListSnoozesResponse} [response] ListSnoozesResponse
+                     */
+    
+                    /**
+                     * Calls ListSnoozes.
+                     * @function listSnoozes
+                     * @memberof google.monitoring.v3.SnoozeService
+                     * @instance
+                     * @param {google.monitoring.v3.IListSnoozesRequest} request ListSnoozesRequest message or plain object
+                     * @param {google.monitoring.v3.SnoozeService.ListSnoozesCallback} callback Node-style callback called with the error, if any, and ListSnoozesResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(SnoozeService.prototype.listSnoozes = function listSnoozes(request, callback) {
+                        return this.rpcCall(listSnoozes, $root.google.monitoring.v3.ListSnoozesRequest, $root.google.monitoring.v3.ListSnoozesResponse, request, callback);
+                    }, "name", { value: "ListSnoozes" });
+    
+                    /**
+                     * Calls ListSnoozes.
+                     * @function listSnoozes
+                     * @memberof google.monitoring.v3.SnoozeService
+                     * @instance
+                     * @param {google.monitoring.v3.IListSnoozesRequest} request ListSnoozesRequest message or plain object
+                     * @returns {Promise<google.monitoring.v3.ListSnoozesResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.monitoring.v3.SnoozeService|getSnooze}.
+                     * @memberof google.monitoring.v3.SnoozeService
+                     * @typedef GetSnoozeCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.monitoring.v3.Snooze} [response] Snooze
+                     */
+    
+                    /**
+                     * Calls GetSnooze.
+                     * @function getSnooze
+                     * @memberof google.monitoring.v3.SnoozeService
+                     * @instance
+                     * @param {google.monitoring.v3.IGetSnoozeRequest} request GetSnoozeRequest message or plain object
+                     * @param {google.monitoring.v3.SnoozeService.GetSnoozeCallback} callback Node-style callback called with the error, if any, and Snooze
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(SnoozeService.prototype.getSnooze = function getSnooze(request, callback) {
+                        return this.rpcCall(getSnooze, $root.google.monitoring.v3.GetSnoozeRequest, $root.google.monitoring.v3.Snooze, request, callback);
+                    }, "name", { value: "GetSnooze" });
+    
+                    /**
+                     * Calls GetSnooze.
+                     * @function getSnooze
+                     * @memberof google.monitoring.v3.SnoozeService
+                     * @instance
+                     * @param {google.monitoring.v3.IGetSnoozeRequest} request GetSnoozeRequest message or plain object
+                     * @returns {Promise<google.monitoring.v3.Snooze>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.monitoring.v3.SnoozeService|updateSnooze}.
+                     * @memberof google.monitoring.v3.SnoozeService
+                     * @typedef UpdateSnoozeCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.monitoring.v3.Snooze} [response] Snooze
+                     */
+    
+                    /**
+                     * Calls UpdateSnooze.
+                     * @function updateSnooze
+                     * @memberof google.monitoring.v3.SnoozeService
+                     * @instance
+                     * @param {google.monitoring.v3.IUpdateSnoozeRequest} request UpdateSnoozeRequest message or plain object
+                     * @param {google.monitoring.v3.SnoozeService.UpdateSnoozeCallback} callback Node-style callback called with the error, if any, and Snooze
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(SnoozeService.prototype.updateSnooze = function updateSnooze(request, callback) {
+                        return this.rpcCall(updateSnooze, $root.google.monitoring.v3.UpdateSnoozeRequest, $root.google.monitoring.v3.Snooze, request, callback);
+                    }, "name", { value: "UpdateSnooze" });
+    
+                    /**
+                     * Calls UpdateSnooze.
+                     * @function updateSnooze
+                     * @memberof google.monitoring.v3.SnoozeService
+                     * @instance
+                     * @param {google.monitoring.v3.IUpdateSnoozeRequest} request UpdateSnoozeRequest message or plain object
+                     * @returns {Promise<google.monitoring.v3.Snooze>} Promise
+                     * @variation 2
+                     */
+    
+                    return SnoozeService;
+                })();
+    
+                v3.CreateSnoozeRequest = (function() {
+    
+                    /**
+                     * Properties of a CreateSnoozeRequest.
+                     * @memberof google.monitoring.v3
+                     * @interface ICreateSnoozeRequest
+                     * @property {string|null} [parent] CreateSnoozeRequest parent
+                     * @property {google.monitoring.v3.ISnooze|null} [snooze] CreateSnoozeRequest snooze
+                     */
+    
+                    /**
+                     * Constructs a new CreateSnoozeRequest.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a CreateSnoozeRequest.
+                     * @implements ICreateSnoozeRequest
+                     * @constructor
+                     * @param {google.monitoring.v3.ICreateSnoozeRequest=} [properties] Properties to set
+                     */
+                    function CreateSnoozeRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CreateSnoozeRequest parent.
+                     * @member {string} parent
+                     * @memberof google.monitoring.v3.CreateSnoozeRequest
+                     * @instance
+                     */
+                    CreateSnoozeRequest.prototype.parent = "";
+    
+                    /**
+                     * CreateSnoozeRequest snooze.
+                     * @member {google.monitoring.v3.ISnooze|null|undefined} snooze
+                     * @memberof google.monitoring.v3.CreateSnoozeRequest
+                     * @instance
+                     */
+                    CreateSnoozeRequest.prototype.snooze = null;
+    
+                    /**
+                     * Creates a new CreateSnoozeRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.CreateSnoozeRequest
+                     * @static
+                     * @param {google.monitoring.v3.ICreateSnoozeRequest=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.CreateSnoozeRequest} CreateSnoozeRequest instance
+                     */
+                    CreateSnoozeRequest.create = function create(properties) {
+                        return new CreateSnoozeRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CreateSnoozeRequest message. Does not implicitly {@link google.monitoring.v3.CreateSnoozeRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.CreateSnoozeRequest
+                     * @static
+                     * @param {google.monitoring.v3.ICreateSnoozeRequest} message CreateSnoozeRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateSnoozeRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.snooze != null && Object.hasOwnProperty.call(message, "snooze"))
+                            $root.google.monitoring.v3.Snooze.encode(message.snooze, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CreateSnoozeRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.CreateSnoozeRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.CreateSnoozeRequest
+                     * @static
+                     * @param {google.monitoring.v3.ICreateSnoozeRequest} message CreateSnoozeRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateSnoozeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CreateSnoozeRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.CreateSnoozeRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.CreateSnoozeRequest} CreateSnoozeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateSnoozeRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateSnoozeRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.snooze = $root.google.monitoring.v3.Snooze.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CreateSnoozeRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.CreateSnoozeRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.CreateSnoozeRequest} CreateSnoozeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateSnoozeRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CreateSnoozeRequest message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.CreateSnoozeRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CreateSnoozeRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.snooze != null && message.hasOwnProperty("snooze")) {
+                            var error = $root.google.monitoring.v3.Snooze.verify(message.snooze);
+                            if (error)
+                                return "snooze." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CreateSnoozeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.CreateSnoozeRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.CreateSnoozeRequest} CreateSnoozeRequest
+                     */
+                    CreateSnoozeRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.CreateSnoozeRequest)
+                            return object;
+                        var message = new $root.google.monitoring.v3.CreateSnoozeRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.snooze != null) {
+                            if (typeof object.snooze !== "object")
+                                throw TypeError(".google.monitoring.v3.CreateSnoozeRequest.snooze: object expected");
+                            message.snooze = $root.google.monitoring.v3.Snooze.fromObject(object.snooze);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CreateSnoozeRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.CreateSnoozeRequest
+                     * @static
+                     * @param {google.monitoring.v3.CreateSnoozeRequest} message CreateSnoozeRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CreateSnoozeRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.snooze = null;
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.snooze != null && message.hasOwnProperty("snooze"))
+                            object.snooze = $root.google.monitoring.v3.Snooze.toObject(message.snooze, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CreateSnoozeRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.CreateSnoozeRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CreateSnoozeRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CreateSnoozeRequest
+                     * @function getTypeUrl
+                     * @memberof google.monitoring.v3.CreateSnoozeRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CreateSnoozeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.monitoring.v3.CreateSnoozeRequest";
+                    };
+    
+                    return CreateSnoozeRequest;
+                })();
+    
+                v3.ListSnoozesRequest = (function() {
+    
+                    /**
+                     * Properties of a ListSnoozesRequest.
+                     * @memberof google.monitoring.v3
+                     * @interface IListSnoozesRequest
+                     * @property {string|null} [parent] ListSnoozesRequest parent
+                     * @property {string|null} [filter] ListSnoozesRequest filter
+                     * @property {number|null} [pageSize] ListSnoozesRequest pageSize
+                     * @property {string|null} [pageToken] ListSnoozesRequest pageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListSnoozesRequest.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a ListSnoozesRequest.
+                     * @implements IListSnoozesRequest
+                     * @constructor
+                     * @param {google.monitoring.v3.IListSnoozesRequest=} [properties] Properties to set
+                     */
+                    function ListSnoozesRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListSnoozesRequest parent.
+                     * @member {string} parent
+                     * @memberof google.monitoring.v3.ListSnoozesRequest
+                     * @instance
+                     */
+                    ListSnoozesRequest.prototype.parent = "";
+    
+                    /**
+                     * ListSnoozesRequest filter.
+                     * @member {string} filter
+                     * @memberof google.monitoring.v3.ListSnoozesRequest
+                     * @instance
+                     */
+                    ListSnoozesRequest.prototype.filter = "";
+    
+                    /**
+                     * ListSnoozesRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.monitoring.v3.ListSnoozesRequest
+                     * @instance
+                     */
+                    ListSnoozesRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * ListSnoozesRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.monitoring.v3.ListSnoozesRequest
+                     * @instance
+                     */
+                    ListSnoozesRequest.prototype.pageToken = "";
+    
+                    /**
+                     * Creates a new ListSnoozesRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.ListSnoozesRequest
+                     * @static
+                     * @param {google.monitoring.v3.IListSnoozesRequest=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.ListSnoozesRequest} ListSnoozesRequest instance
+                     */
+                    ListSnoozesRequest.create = function create(properties) {
+                        return new ListSnoozesRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListSnoozesRequest message. Does not implicitly {@link google.monitoring.v3.ListSnoozesRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.ListSnoozesRequest
+                     * @static
+                     * @param {google.monitoring.v3.IListSnoozesRequest} message ListSnoozesRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListSnoozesRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.pageSize);
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.pageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListSnoozesRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.ListSnoozesRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.ListSnoozesRequest
+                     * @static
+                     * @param {google.monitoring.v3.IListSnoozesRequest} message ListSnoozesRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListSnoozesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListSnoozesRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.ListSnoozesRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.ListSnoozesRequest} ListSnoozesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListSnoozesRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListSnoozesRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.filter = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 5: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListSnoozesRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.ListSnoozesRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.ListSnoozesRequest} ListSnoozesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListSnoozesRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListSnoozesRequest message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.ListSnoozesRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListSnoozesRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            if (!$util.isString(message.filter))
+                                return "filter: string expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListSnoozesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.ListSnoozesRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.ListSnoozesRequest} ListSnoozesRequest
+                     */
+                    ListSnoozesRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.ListSnoozesRequest)
+                            return object;
+                        var message = new $root.google.monitoring.v3.ListSnoozesRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.filter != null)
+                            message.filter = String(object.filter);
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListSnoozesRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.ListSnoozesRequest
+                     * @static
+                     * @param {google.monitoring.v3.ListSnoozesRequest} message ListSnoozesRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListSnoozesRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.filter = "";
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            object.filter = message.filter;
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListSnoozesRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.ListSnoozesRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListSnoozesRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListSnoozesRequest
+                     * @function getTypeUrl
+                     * @memberof google.monitoring.v3.ListSnoozesRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListSnoozesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.monitoring.v3.ListSnoozesRequest";
+                    };
+    
+                    return ListSnoozesRequest;
+                })();
+    
+                v3.ListSnoozesResponse = (function() {
+    
+                    /**
+                     * Properties of a ListSnoozesResponse.
+                     * @memberof google.monitoring.v3
+                     * @interface IListSnoozesResponse
+                     * @property {Array.<google.monitoring.v3.ISnooze>|null} [snoozes] ListSnoozesResponse snoozes
+                     * @property {string|null} [nextPageToken] ListSnoozesResponse nextPageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListSnoozesResponse.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a ListSnoozesResponse.
+                     * @implements IListSnoozesResponse
+                     * @constructor
+                     * @param {google.monitoring.v3.IListSnoozesResponse=} [properties] Properties to set
+                     */
+                    function ListSnoozesResponse(properties) {
+                        this.snoozes = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListSnoozesResponse snoozes.
+                     * @member {Array.<google.monitoring.v3.ISnooze>} snoozes
+                     * @memberof google.monitoring.v3.ListSnoozesResponse
+                     * @instance
+                     */
+                    ListSnoozesResponse.prototype.snoozes = $util.emptyArray;
+    
+                    /**
+                     * ListSnoozesResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.monitoring.v3.ListSnoozesResponse
+                     * @instance
+                     */
+                    ListSnoozesResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * Creates a new ListSnoozesResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.ListSnoozesResponse
+                     * @static
+                     * @param {google.monitoring.v3.IListSnoozesResponse=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.ListSnoozesResponse} ListSnoozesResponse instance
+                     */
+                    ListSnoozesResponse.create = function create(properties) {
+                        return new ListSnoozesResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListSnoozesResponse message. Does not implicitly {@link google.monitoring.v3.ListSnoozesResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.ListSnoozesResponse
+                     * @static
+                     * @param {google.monitoring.v3.IListSnoozesResponse} message ListSnoozesResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListSnoozesResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.snoozes != null && message.snoozes.length)
+                            for (var i = 0; i < message.snoozes.length; ++i)
+                                $root.google.monitoring.v3.Snooze.encode(message.snoozes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListSnoozesResponse message, length delimited. Does not implicitly {@link google.monitoring.v3.ListSnoozesResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.ListSnoozesResponse
+                     * @static
+                     * @param {google.monitoring.v3.IListSnoozesResponse} message ListSnoozesResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListSnoozesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListSnoozesResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.ListSnoozesResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.ListSnoozesResponse} ListSnoozesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListSnoozesResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListSnoozesResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.snoozes && message.snoozes.length))
+                                        message.snoozes = [];
+                                    message.snoozes.push($root.google.monitoring.v3.Snooze.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListSnoozesResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.ListSnoozesResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.ListSnoozesResponse} ListSnoozesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListSnoozesResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListSnoozesResponse message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.ListSnoozesResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListSnoozesResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.snoozes != null && message.hasOwnProperty("snoozes")) {
+                            if (!Array.isArray(message.snoozes))
+                                return "snoozes: array expected";
+                            for (var i = 0; i < message.snoozes.length; ++i) {
+                                var error = $root.google.monitoring.v3.Snooze.verify(message.snoozes[i]);
+                                if (error)
+                                    return "snoozes." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListSnoozesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.ListSnoozesResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.ListSnoozesResponse} ListSnoozesResponse
+                     */
+                    ListSnoozesResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.ListSnoozesResponse)
+                            return object;
+                        var message = new $root.google.monitoring.v3.ListSnoozesResponse();
+                        if (object.snoozes) {
+                            if (!Array.isArray(object.snoozes))
+                                throw TypeError(".google.monitoring.v3.ListSnoozesResponse.snoozes: array expected");
+                            message.snoozes = [];
+                            for (var i = 0; i < object.snoozes.length; ++i) {
+                                if (typeof object.snoozes[i] !== "object")
+                                    throw TypeError(".google.monitoring.v3.ListSnoozesResponse.snoozes: object expected");
+                                message.snoozes[i] = $root.google.monitoring.v3.Snooze.fromObject(object.snoozes[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListSnoozesResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.ListSnoozesResponse
+                     * @static
+                     * @param {google.monitoring.v3.ListSnoozesResponse} message ListSnoozesResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListSnoozesResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.snoozes = [];
+                        if (options.defaults)
+                            object.nextPageToken = "";
+                        if (message.snoozes && message.snoozes.length) {
+                            object.snoozes = [];
+                            for (var j = 0; j < message.snoozes.length; ++j)
+                                object.snoozes[j] = $root.google.monitoring.v3.Snooze.toObject(message.snoozes[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListSnoozesResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.ListSnoozesResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListSnoozesResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListSnoozesResponse
+                     * @function getTypeUrl
+                     * @memberof google.monitoring.v3.ListSnoozesResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListSnoozesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.monitoring.v3.ListSnoozesResponse";
+                    };
+    
+                    return ListSnoozesResponse;
+                })();
+    
+                v3.GetSnoozeRequest = (function() {
+    
+                    /**
+                     * Properties of a GetSnoozeRequest.
+                     * @memberof google.monitoring.v3
+                     * @interface IGetSnoozeRequest
+                     * @property {string|null} [name] GetSnoozeRequest name
+                     */
+    
+                    /**
+                     * Constructs a new GetSnoozeRequest.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a GetSnoozeRequest.
+                     * @implements IGetSnoozeRequest
+                     * @constructor
+                     * @param {google.monitoring.v3.IGetSnoozeRequest=} [properties] Properties to set
+                     */
+                    function GetSnoozeRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetSnoozeRequest name.
+                     * @member {string} name
+                     * @memberof google.monitoring.v3.GetSnoozeRequest
+                     * @instance
+                     */
+                    GetSnoozeRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new GetSnoozeRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.GetSnoozeRequest
+                     * @static
+                     * @param {google.monitoring.v3.IGetSnoozeRequest=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.GetSnoozeRequest} GetSnoozeRequest instance
+                     */
+                    GetSnoozeRequest.create = function create(properties) {
+                        return new GetSnoozeRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetSnoozeRequest message. Does not implicitly {@link google.monitoring.v3.GetSnoozeRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.GetSnoozeRequest
+                     * @static
+                     * @param {google.monitoring.v3.IGetSnoozeRequest} message GetSnoozeRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetSnoozeRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetSnoozeRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.GetSnoozeRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.GetSnoozeRequest
+                     * @static
+                     * @param {google.monitoring.v3.IGetSnoozeRequest} message GetSnoozeRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetSnoozeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetSnoozeRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.GetSnoozeRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.GetSnoozeRequest} GetSnoozeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetSnoozeRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetSnoozeRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetSnoozeRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.GetSnoozeRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.GetSnoozeRequest} GetSnoozeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetSnoozeRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetSnoozeRequest message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.GetSnoozeRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetSnoozeRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetSnoozeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.GetSnoozeRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.GetSnoozeRequest} GetSnoozeRequest
+                     */
+                    GetSnoozeRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.GetSnoozeRequest)
+                            return object;
+                        var message = new $root.google.monitoring.v3.GetSnoozeRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetSnoozeRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.GetSnoozeRequest
+                     * @static
+                     * @param {google.monitoring.v3.GetSnoozeRequest} message GetSnoozeRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetSnoozeRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetSnoozeRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.GetSnoozeRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetSnoozeRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GetSnoozeRequest
+                     * @function getTypeUrl
+                     * @memberof google.monitoring.v3.GetSnoozeRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetSnoozeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.monitoring.v3.GetSnoozeRequest";
+                    };
+    
+                    return GetSnoozeRequest;
+                })();
+    
+                v3.UpdateSnoozeRequest = (function() {
+    
+                    /**
+                     * Properties of an UpdateSnoozeRequest.
+                     * @memberof google.monitoring.v3
+                     * @interface IUpdateSnoozeRequest
+                     * @property {google.monitoring.v3.ISnooze|null} [snooze] UpdateSnoozeRequest snooze
+                     * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSnoozeRequest updateMask
+                     */
+    
+                    /**
+                     * Constructs a new UpdateSnoozeRequest.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents an UpdateSnoozeRequest.
+                     * @implements IUpdateSnoozeRequest
+                     * @constructor
+                     * @param {google.monitoring.v3.IUpdateSnoozeRequest=} [properties] Properties to set
+                     */
+                    function UpdateSnoozeRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * UpdateSnoozeRequest snooze.
+                     * @member {google.monitoring.v3.ISnooze|null|undefined} snooze
+                     * @memberof google.monitoring.v3.UpdateSnoozeRequest
+                     * @instance
+                     */
+                    UpdateSnoozeRequest.prototype.snooze = null;
+    
+                    /**
+                     * UpdateSnoozeRequest updateMask.
+                     * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                     * @memberof google.monitoring.v3.UpdateSnoozeRequest
+                     * @instance
+                     */
+                    UpdateSnoozeRequest.prototype.updateMask = null;
+    
+                    /**
+                     * Creates a new UpdateSnoozeRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.UpdateSnoozeRequest
+                     * @static
+                     * @param {google.monitoring.v3.IUpdateSnoozeRequest=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.UpdateSnoozeRequest} UpdateSnoozeRequest instance
+                     */
+                    UpdateSnoozeRequest.create = function create(properties) {
+                        return new UpdateSnoozeRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateSnoozeRequest message. Does not implicitly {@link google.monitoring.v3.UpdateSnoozeRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.UpdateSnoozeRequest
+                     * @static
+                     * @param {google.monitoring.v3.IUpdateSnoozeRequest} message UpdateSnoozeRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateSnoozeRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.snooze != null && Object.hasOwnProperty.call(message, "snooze"))
+                            $root.google.monitoring.v3.Snooze.encode(message.snooze, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateSnoozeRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.UpdateSnoozeRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.UpdateSnoozeRequest
+                     * @static
+                     * @param {google.monitoring.v3.IUpdateSnoozeRequest} message UpdateSnoozeRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateSnoozeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an UpdateSnoozeRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.UpdateSnoozeRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.UpdateSnoozeRequest} UpdateSnoozeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateSnoozeRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UpdateSnoozeRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.snooze = $root.google.monitoring.v3.Snooze.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an UpdateSnoozeRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.UpdateSnoozeRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.UpdateSnoozeRequest} UpdateSnoozeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateSnoozeRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an UpdateSnoozeRequest message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.UpdateSnoozeRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpdateSnoozeRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.snooze != null && message.hasOwnProperty("snooze")) {
+                            var error = $root.google.monitoring.v3.Snooze.verify(message.snooze);
+                            if (error)
+                                return "snooze." + error;
+                        }
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            if (error)
+                                return "updateMask." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an UpdateSnoozeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.UpdateSnoozeRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.UpdateSnoozeRequest} UpdateSnoozeRequest
+                     */
+                    UpdateSnoozeRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.UpdateSnoozeRequest)
+                            return object;
+                        var message = new $root.google.monitoring.v3.UpdateSnoozeRequest();
+                        if (object.snooze != null) {
+                            if (typeof object.snooze !== "object")
+                                throw TypeError(".google.monitoring.v3.UpdateSnoozeRequest.snooze: object expected");
+                            message.snooze = $root.google.monitoring.v3.Snooze.fromObject(object.snooze);
+                        }
+                        if (object.updateMask != null) {
+                            if (typeof object.updateMask !== "object")
+                                throw TypeError(".google.monitoring.v3.UpdateSnoozeRequest.updateMask: object expected");
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an UpdateSnoozeRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.UpdateSnoozeRequest
+                     * @static
+                     * @param {google.monitoring.v3.UpdateSnoozeRequest} message UpdateSnoozeRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpdateSnoozeRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.snooze = null;
+                            object.updateMask = null;
+                        }
+                        if (message.snooze != null && message.hasOwnProperty("snooze"))
+                            object.snooze = $root.google.monitoring.v3.Snooze.toObject(message.snooze, options);
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this UpdateSnoozeRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.UpdateSnoozeRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpdateSnoozeRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for UpdateSnoozeRequest
+                     * @function getTypeUrl
+                     * @memberof google.monitoring.v3.UpdateSnoozeRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    UpdateSnoozeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.monitoring.v3.UpdateSnoozeRequest";
+                    };
+    
+                    return UpdateSnoozeRequest;
+                })();
+    
                 v3.SpanContext = (function() {
     
                     /**
@@ -29520,14 +36846,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SpanContext.decode = function decode(reader, length, error) {
+                    SpanContext.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.SpanContext();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.spanName = reader.string();
@@ -29638,26 +36962,6 @@
                     };
     
                     return SpanContext;
-                })();
-    
-                /**
-                 * UptimeCheckRegion enum.
-                 * @name google.monitoring.v3.UptimeCheckRegion
-                 * @enum {number}
-                 * @property {number} REGION_UNSPECIFIED=0 REGION_UNSPECIFIED value
-                 * @property {number} USA=1 USA value
-                 * @property {number} EUROPE=2 EUROPE value
-                 * @property {number} SOUTH_AMERICA=3 SOUTH_AMERICA value
-                 * @property {number} ASIA_PACIFIC=4 ASIA_PACIFIC value
-                 */
-                v3.UptimeCheckRegion = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "REGION_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "USA"] = 1;
-                    values[valuesById[2] = "EUROPE"] = 2;
-                    values[valuesById[3] = "SOUTH_AMERICA"] = 3;
-                    values[valuesById[4] = "ASIA_PACIFIC"] = 4;
-                    return values;
                 })();
     
                 v3.InternalChecker = (function() {
@@ -29800,14 +37104,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    InternalChecker.decode = function decode(reader, length, error) {
+                    InternalChecker.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.InternalChecker();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -30021,6 +37323,465 @@
                     return InternalChecker;
                 })();
     
+                v3.SyntheticMonitorTarget = (function() {
+    
+                    /**
+                     * Properties of a SyntheticMonitorTarget.
+                     * @memberof google.monitoring.v3
+                     * @interface ISyntheticMonitorTarget
+                     * @property {google.monitoring.v3.SyntheticMonitorTarget.ICloudFunctionV2Target|null} [cloudFunctionV2] SyntheticMonitorTarget cloudFunctionV2
+                     */
+    
+                    /**
+                     * Constructs a new SyntheticMonitorTarget.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a SyntheticMonitorTarget.
+                     * @implements ISyntheticMonitorTarget
+                     * @constructor
+                     * @param {google.monitoring.v3.ISyntheticMonitorTarget=} [properties] Properties to set
+                     */
+                    function SyntheticMonitorTarget(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SyntheticMonitorTarget cloudFunctionV2.
+                     * @member {google.monitoring.v3.SyntheticMonitorTarget.ICloudFunctionV2Target|null|undefined} cloudFunctionV2
+                     * @memberof google.monitoring.v3.SyntheticMonitorTarget
+                     * @instance
+                     */
+                    SyntheticMonitorTarget.prototype.cloudFunctionV2 = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * SyntheticMonitorTarget target.
+                     * @member {"cloudFunctionV2"|undefined} target
+                     * @memberof google.monitoring.v3.SyntheticMonitorTarget
+                     * @instance
+                     */
+                    Object.defineProperty(SyntheticMonitorTarget.prototype, "target", {
+                        get: $util.oneOfGetter($oneOfFields = ["cloudFunctionV2"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new SyntheticMonitorTarget instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.SyntheticMonitorTarget
+                     * @static
+                     * @param {google.monitoring.v3.ISyntheticMonitorTarget=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.SyntheticMonitorTarget} SyntheticMonitorTarget instance
+                     */
+                    SyntheticMonitorTarget.create = function create(properties) {
+                        return new SyntheticMonitorTarget(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SyntheticMonitorTarget message. Does not implicitly {@link google.monitoring.v3.SyntheticMonitorTarget.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.SyntheticMonitorTarget
+                     * @static
+                     * @param {google.monitoring.v3.ISyntheticMonitorTarget} message SyntheticMonitorTarget message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SyntheticMonitorTarget.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.cloudFunctionV2 != null && Object.hasOwnProperty.call(message, "cloudFunctionV2"))
+                            $root.google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target.encode(message.cloudFunctionV2, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SyntheticMonitorTarget message, length delimited. Does not implicitly {@link google.monitoring.v3.SyntheticMonitorTarget.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.SyntheticMonitorTarget
+                     * @static
+                     * @param {google.monitoring.v3.ISyntheticMonitorTarget} message SyntheticMonitorTarget message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SyntheticMonitorTarget.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SyntheticMonitorTarget message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.SyntheticMonitorTarget
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.SyntheticMonitorTarget} SyntheticMonitorTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SyntheticMonitorTarget.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.SyntheticMonitorTarget();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.cloudFunctionV2 = $root.google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SyntheticMonitorTarget message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.SyntheticMonitorTarget
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.SyntheticMonitorTarget} SyntheticMonitorTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SyntheticMonitorTarget.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SyntheticMonitorTarget message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.SyntheticMonitorTarget
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SyntheticMonitorTarget.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.cloudFunctionV2 != null && message.hasOwnProperty("cloudFunctionV2")) {
+                            properties.target = 1;
+                            {
+                                var error = $root.google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target.verify(message.cloudFunctionV2);
+                                if (error)
+                                    return "cloudFunctionV2." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SyntheticMonitorTarget message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.SyntheticMonitorTarget
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.SyntheticMonitorTarget} SyntheticMonitorTarget
+                     */
+                    SyntheticMonitorTarget.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.SyntheticMonitorTarget)
+                            return object;
+                        var message = new $root.google.monitoring.v3.SyntheticMonitorTarget();
+                        if (object.cloudFunctionV2 != null) {
+                            if (typeof object.cloudFunctionV2 !== "object")
+                                throw TypeError(".google.monitoring.v3.SyntheticMonitorTarget.cloudFunctionV2: object expected");
+                            message.cloudFunctionV2 = $root.google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target.fromObject(object.cloudFunctionV2);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SyntheticMonitorTarget message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.SyntheticMonitorTarget
+                     * @static
+                     * @param {google.monitoring.v3.SyntheticMonitorTarget} message SyntheticMonitorTarget
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SyntheticMonitorTarget.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.cloudFunctionV2 != null && message.hasOwnProperty("cloudFunctionV2")) {
+                            object.cloudFunctionV2 = $root.google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target.toObject(message.cloudFunctionV2, options);
+                            if (options.oneofs)
+                                object.target = "cloudFunctionV2";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SyntheticMonitorTarget to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.SyntheticMonitorTarget
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SyntheticMonitorTarget.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SyntheticMonitorTarget
+                     * @function getTypeUrl
+                     * @memberof google.monitoring.v3.SyntheticMonitorTarget
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SyntheticMonitorTarget.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.monitoring.v3.SyntheticMonitorTarget";
+                    };
+    
+                    SyntheticMonitorTarget.CloudFunctionV2Target = (function() {
+    
+                        /**
+                         * Properties of a CloudFunctionV2Target.
+                         * @memberof google.monitoring.v3.SyntheticMonitorTarget
+                         * @interface ICloudFunctionV2Target
+                         * @property {string|null} [name] CloudFunctionV2Target name
+                         * @property {google.api.IMonitoredResource|null} [cloudRunRevision] CloudFunctionV2Target cloudRunRevision
+                         */
+    
+                        /**
+                         * Constructs a new CloudFunctionV2Target.
+                         * @memberof google.monitoring.v3.SyntheticMonitorTarget
+                         * @classdesc Represents a CloudFunctionV2Target.
+                         * @implements ICloudFunctionV2Target
+                         * @constructor
+                         * @param {google.monitoring.v3.SyntheticMonitorTarget.ICloudFunctionV2Target=} [properties] Properties to set
+                         */
+                        function CloudFunctionV2Target(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloudFunctionV2Target name.
+                         * @member {string} name
+                         * @memberof google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target
+                         * @instance
+                         */
+                        CloudFunctionV2Target.prototype.name = "";
+    
+                        /**
+                         * CloudFunctionV2Target cloudRunRevision.
+                         * @member {google.api.IMonitoredResource|null|undefined} cloudRunRevision
+                         * @memberof google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target
+                         * @instance
+                         */
+                        CloudFunctionV2Target.prototype.cloudRunRevision = null;
+    
+                        /**
+                         * Creates a new CloudFunctionV2Target instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target
+                         * @static
+                         * @param {google.monitoring.v3.SyntheticMonitorTarget.ICloudFunctionV2Target=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target} CloudFunctionV2Target instance
+                         */
+                        CloudFunctionV2Target.create = function create(properties) {
+                            return new CloudFunctionV2Target(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloudFunctionV2Target message. Does not implicitly {@link google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target
+                         * @static
+                         * @param {google.monitoring.v3.SyntheticMonitorTarget.ICloudFunctionV2Target} message CloudFunctionV2Target message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudFunctionV2Target.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.cloudRunRevision != null && Object.hasOwnProperty.call(message, "cloudRunRevision"))
+                                $root.google.api.MonitoredResource.encode(message.cloudRunRevision, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloudFunctionV2Target message, length delimited. Does not implicitly {@link google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target
+                         * @static
+                         * @param {google.monitoring.v3.SyntheticMonitorTarget.ICloudFunctionV2Target} message CloudFunctionV2Target message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudFunctionV2Target.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloudFunctionV2Target message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target} CloudFunctionV2Target
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudFunctionV2Target.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.cloudRunRevision = $root.google.api.MonitoredResource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloudFunctionV2Target message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target} CloudFunctionV2Target
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudFunctionV2Target.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloudFunctionV2Target message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloudFunctionV2Target.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.cloudRunRevision != null && message.hasOwnProperty("cloudRunRevision")) {
+                                var error = $root.google.api.MonitoredResource.verify(message.cloudRunRevision);
+                                if (error)
+                                    return "cloudRunRevision." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloudFunctionV2Target message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target} CloudFunctionV2Target
+                         */
+                        CloudFunctionV2Target.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target)
+                                return object;
+                            var message = new $root.google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.cloudRunRevision != null) {
+                                if (typeof object.cloudRunRevision !== "object")
+                                    throw TypeError(".google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target.cloudRunRevision: object expected");
+                                message.cloudRunRevision = $root.google.api.MonitoredResource.fromObject(object.cloudRunRevision);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloudFunctionV2Target message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target
+                         * @static
+                         * @param {google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target} message CloudFunctionV2Target
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloudFunctionV2Target.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.cloudRunRevision = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.cloudRunRevision != null && message.hasOwnProperty("cloudRunRevision"))
+                                object.cloudRunRevision = $root.google.api.MonitoredResource.toObject(message.cloudRunRevision, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloudFunctionV2Target to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloudFunctionV2Target.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CloudFunctionV2Target
+                         * @function getTypeUrl
+                         * @memberof google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CloudFunctionV2Target.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target";
+                        };
+    
+                        return CloudFunctionV2Target;
+                    })();
+    
+                    return SyntheticMonitorTarget;
+                })();
+    
                 v3.UptimeCheckConfig = (function() {
     
                     /**
@@ -30031,14 +37792,17 @@
                      * @property {string|null} [displayName] UptimeCheckConfig displayName
                      * @property {google.api.IMonitoredResource|null} [monitoredResource] UptimeCheckConfig monitoredResource
                      * @property {google.monitoring.v3.UptimeCheckConfig.IResourceGroup|null} [resourceGroup] UptimeCheckConfig resourceGroup
+                     * @property {google.monitoring.v3.ISyntheticMonitorTarget|null} [syntheticMonitor] UptimeCheckConfig syntheticMonitor
                      * @property {google.monitoring.v3.UptimeCheckConfig.IHttpCheck|null} [httpCheck] UptimeCheckConfig httpCheck
                      * @property {google.monitoring.v3.UptimeCheckConfig.ITcpCheck|null} [tcpCheck] UptimeCheckConfig tcpCheck
                      * @property {google.protobuf.IDuration|null} [period] UptimeCheckConfig period
                      * @property {google.protobuf.IDuration|null} [timeout] UptimeCheckConfig timeout
                      * @property {Array.<google.monitoring.v3.UptimeCheckConfig.IContentMatcher>|null} [contentMatchers] UptimeCheckConfig contentMatchers
+                     * @property {google.monitoring.v3.UptimeCheckConfig.CheckerType|null} [checkerType] UptimeCheckConfig checkerType
                      * @property {Array.<google.monitoring.v3.UptimeCheckRegion>|null} [selectedRegions] UptimeCheckConfig selectedRegions
                      * @property {boolean|null} [isInternal] UptimeCheckConfig isInternal
                      * @property {Array.<google.monitoring.v3.IInternalChecker>|null} [internalCheckers] UptimeCheckConfig internalCheckers
+                     * @property {Object.<string,string>|null} [userLabels] UptimeCheckConfig userLabels
                      */
     
                     /**
@@ -30053,6 +37817,7 @@
                         this.contentMatchers = [];
                         this.selectedRegions = [];
                         this.internalCheckers = [];
+                        this.userLabels = {};
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -30090,6 +37855,14 @@
                      * @instance
                      */
                     UptimeCheckConfig.prototype.resourceGroup = null;
+    
+                    /**
+                     * UptimeCheckConfig syntheticMonitor.
+                     * @member {google.monitoring.v3.ISyntheticMonitorTarget|null|undefined} syntheticMonitor
+                     * @memberof google.monitoring.v3.UptimeCheckConfig
+                     * @instance
+                     */
+                    UptimeCheckConfig.prototype.syntheticMonitor = null;
     
                     /**
                      * UptimeCheckConfig httpCheck.
@@ -30132,6 +37905,14 @@
                     UptimeCheckConfig.prototype.contentMatchers = $util.emptyArray;
     
                     /**
+                     * UptimeCheckConfig checkerType.
+                     * @member {google.monitoring.v3.UptimeCheckConfig.CheckerType} checkerType
+                     * @memberof google.monitoring.v3.UptimeCheckConfig
+                     * @instance
+                     */
+                    UptimeCheckConfig.prototype.checkerType = 0;
+    
+                    /**
                      * UptimeCheckConfig selectedRegions.
                      * @member {Array.<google.monitoring.v3.UptimeCheckRegion>} selectedRegions
                      * @memberof google.monitoring.v3.UptimeCheckConfig
@@ -30155,17 +37936,25 @@
                      */
                     UptimeCheckConfig.prototype.internalCheckers = $util.emptyArray;
     
+                    /**
+                     * UptimeCheckConfig userLabels.
+                     * @member {Object.<string,string>} userLabels
+                     * @memberof google.monitoring.v3.UptimeCheckConfig
+                     * @instance
+                     */
+                    UptimeCheckConfig.prototype.userLabels = $util.emptyObject;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
                     /**
                      * UptimeCheckConfig resource.
-                     * @member {"monitoredResource"|"resourceGroup"|undefined} resource
+                     * @member {"monitoredResource"|"resourceGroup"|"syntheticMonitor"|undefined} resource
                      * @memberof google.monitoring.v3.UptimeCheckConfig
                      * @instance
                      */
                     Object.defineProperty(UptimeCheckConfig.prototype, "resource", {
-                        get: $util.oneOfGetter($oneOfFields = ["monitoredResource", "resourceGroup"]),
+                        get: $util.oneOfGetter($oneOfFields = ["monitoredResource", "resourceGroup", "syntheticMonitor"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -30234,6 +38023,13 @@
                                 $root.google.monitoring.v3.InternalChecker.encode(message.internalCheckers[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                         if (message.isInternal != null && Object.hasOwnProperty.call(message, "isInternal"))
                             writer.uint32(/* id 15, wireType 0 =*/120).bool(message.isInternal);
+                        if (message.checkerType != null && Object.hasOwnProperty.call(message, "checkerType"))
+                            writer.uint32(/* id 17, wireType 0 =*/136).int32(message.checkerType);
+                        if (message.userLabels != null && Object.hasOwnProperty.call(message, "userLabels"))
+                            for (var keys = Object.keys(message.userLabels), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 20, wireType 2 =*/162).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.userLabels[keys[i]]).ldelim();
+                        if (message.syntheticMonitor != null && Object.hasOwnProperty.call(message, "syntheticMonitor"))
+                            $root.google.monitoring.v3.SyntheticMonitorTarget.encode(message.syntheticMonitor, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                         return writer;
                     };
     
@@ -30261,14 +38057,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UptimeCheckConfig.decode = function decode(reader, length, error) {
+                    UptimeCheckConfig.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig();
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -30284,6 +38078,10 @@
                                 }
                             case 4: {
                                     message.resourceGroup = $root.google.monitoring.v3.UptimeCheckConfig.ResourceGroup.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 21: {
+                                    message.syntheticMonitor = $root.google.monitoring.v3.SyntheticMonitorTarget.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 5: {
@@ -30308,6 +38106,10 @@
                                     message.contentMatchers.push($root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher.decode(reader, reader.uint32()));
                                     break;
                                 }
+                            case 17: {
+                                    message.checkerType = reader.int32();
+                                    break;
+                                }
                             case 10: {
                                     if (!(message.selectedRegions && message.selectedRegions.length))
                                         message.selectedRegions = [];
@@ -30327,6 +38129,29 @@
                                     if (!(message.internalCheckers && message.internalCheckers.length))
                                         message.internalCheckers = [];
                                     message.internalCheckers.push($root.google.monitoring.v3.InternalChecker.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 20: {
+                                    if (message.userLabels === $util.emptyObject)
+                                        message.userLabels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.userLabels[key] = value;
                                     break;
                                 }
                             default:
@@ -30389,6 +38214,16 @@
                                     return "resourceGroup." + error;
                             }
                         }
+                        if (message.syntheticMonitor != null && message.hasOwnProperty("syntheticMonitor")) {
+                            if (properties.resource === 1)
+                                return "resource: multiple values";
+                            properties.resource = 1;
+                            {
+                                var error = $root.google.monitoring.v3.SyntheticMonitorTarget.verify(message.syntheticMonitor);
+                                if (error)
+                                    return "syntheticMonitor." + error;
+                            }
+                        }
                         if (message.httpCheck != null && message.hasOwnProperty("httpCheck")) {
                             properties.checkRequestType = 1;
                             {
@@ -30426,6 +38261,15 @@
                                     return "contentMatchers." + error;
                             }
                         }
+                        if (message.checkerType != null && message.hasOwnProperty("checkerType"))
+                            switch (message.checkerType) {
+                            default:
+                                return "checkerType: enum value expected";
+                            case 0:
+                            case 1:
+                            case 3:
+                                break;
+                            }
                         if (message.selectedRegions != null && message.hasOwnProperty("selectedRegions")) {
                             if (!Array.isArray(message.selectedRegions))
                                 return "selectedRegions: array expected";
@@ -30438,6 +38282,9 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
+                                case 7:
                                     break;
                                 }
                         }
@@ -30452,6 +38299,14 @@
                                 if (error)
                                     return "internalCheckers." + error;
                             }
+                        }
+                        if (message.userLabels != null && message.hasOwnProperty("userLabels")) {
+                            if (!$util.isObject(message.userLabels))
+                                return "userLabels: object expected";
+                            var key = Object.keys(message.userLabels);
+                            for (var i = 0; i < key.length; ++i)
+                                if (!$util.isString(message.userLabels[key[i]]))
+                                    return "userLabels: string{k:string} expected";
                         }
                         return null;
                     };
@@ -30482,6 +38337,11 @@
                                 throw TypeError(".google.monitoring.v3.UptimeCheckConfig.resourceGroup: object expected");
                             message.resourceGroup = $root.google.monitoring.v3.UptimeCheckConfig.ResourceGroup.fromObject(object.resourceGroup);
                         }
+                        if (object.syntheticMonitor != null) {
+                            if (typeof object.syntheticMonitor !== "object")
+                                throw TypeError(".google.monitoring.v3.UptimeCheckConfig.syntheticMonitor: object expected");
+                            message.syntheticMonitor = $root.google.monitoring.v3.SyntheticMonitorTarget.fromObject(object.syntheticMonitor);
+                        }
                         if (object.httpCheck != null) {
                             if (typeof object.httpCheck !== "object")
                                 throw TypeError(".google.monitoring.v3.UptimeCheckConfig.httpCheck: object expected");
@@ -30511,6 +38371,26 @@
                                     throw TypeError(".google.monitoring.v3.UptimeCheckConfig.contentMatchers: object expected");
                                 message.contentMatchers[i] = $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher.fromObject(object.contentMatchers[i]);
                             }
+                        }
+                        switch (object.checkerType) {
+                        default:
+                            if (typeof object.checkerType === "number") {
+                                message.checkerType = object.checkerType;
+                                break;
+                            }
+                            break;
+                        case "CHECKER_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.checkerType = 0;
+                            break;
+                        case "STATIC_IP_CHECKERS":
+                        case 1:
+                            message.checkerType = 1;
+                            break;
+                        case "VPC_CHECKERS":
+                        case 3:
+                            message.checkerType = 3;
+                            break;
                         }
                         if (object.selectedRegions) {
                             if (!Array.isArray(object.selectedRegions))
@@ -30543,6 +38423,18 @@
                                 case 4:
                                     message.selectedRegions[i] = 4;
                                     break;
+                                case "USA_OREGON":
+                                case 5:
+                                    message.selectedRegions[i] = 5;
+                                    break;
+                                case "USA_IOWA":
+                                case 6:
+                                    message.selectedRegions[i] = 6;
+                                    break;
+                                case "USA_VIRGINIA":
+                                case 7:
+                                    message.selectedRegions[i] = 7;
+                                    break;
                                 }
                         }
                         if (object.isInternal != null)
@@ -30556,6 +38448,13 @@
                                     throw TypeError(".google.monitoring.v3.UptimeCheckConfig.internalCheckers: object expected");
                                 message.internalCheckers[i] = $root.google.monitoring.v3.InternalChecker.fromObject(object.internalCheckers[i]);
                             }
+                        }
+                        if (object.userLabels) {
+                            if (typeof object.userLabels !== "object")
+                                throw TypeError(".google.monitoring.v3.UptimeCheckConfig.userLabels: object expected");
+                            message.userLabels = {};
+                            for (var keys = Object.keys(object.userLabels), i = 0; i < keys.length; ++i)
+                                message.userLabels[keys[i]] = String(object.userLabels[keys[i]]);
                         }
                         return message;
                     };
@@ -30578,12 +38477,15 @@
                             object.selectedRegions = [];
                             object.internalCheckers = [];
                         }
+                        if (options.objects || options.defaults)
+                            object.userLabels = {};
                         if (options.defaults) {
                             object.name = "";
                             object.displayName = "";
                             object.period = null;
                             object.timeout = null;
                             object.isInternal = false;
+                            object.checkerType = options.enums === String ? "CHECKER_TYPE_UNSPECIFIED" : 0;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -30630,6 +38532,19 @@
                         }
                         if (message.isInternal != null && message.hasOwnProperty("isInternal"))
                             object.isInternal = message.isInternal;
+                        if (message.checkerType != null && message.hasOwnProperty("checkerType"))
+                            object.checkerType = options.enums === String ? $root.google.monitoring.v3.UptimeCheckConfig.CheckerType[message.checkerType] === undefined ? message.checkerType : $root.google.monitoring.v3.UptimeCheckConfig.CheckerType[message.checkerType] : message.checkerType;
+                        var keys2;
+                        if (message.userLabels && (keys2 = Object.keys(message.userLabels)).length) {
+                            object.userLabels = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.userLabels[keys2[j]] = message.userLabels[keys2[j]];
+                        }
+                        if (message.syntheticMonitor != null && message.hasOwnProperty("syntheticMonitor")) {
+                            object.syntheticMonitor = $root.google.monitoring.v3.SyntheticMonitorTarget.toObject(message.syntheticMonitor, options);
+                            if (options.oneofs)
+                                object.resource = "syntheticMonitor";
+                        }
                         return object;
                     };
     
@@ -30755,14 +38670,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ResourceGroup.decode = function decode(reader, length, error) {
+                        ResourceGroup.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.ResourceGroup();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.groupId = reader.string();
@@ -30912,6 +38825,209 @@
                         return ResourceGroup;
                     })();
     
+                    UptimeCheckConfig.PingConfig = (function() {
+    
+                        /**
+                         * Properties of a PingConfig.
+                         * @memberof google.monitoring.v3.UptimeCheckConfig
+                         * @interface IPingConfig
+                         * @property {number|null} [pingsCount] PingConfig pingsCount
+                         */
+    
+                        /**
+                         * Constructs a new PingConfig.
+                         * @memberof google.monitoring.v3.UptimeCheckConfig
+                         * @classdesc Represents a PingConfig.
+                         * @implements IPingConfig
+                         * @constructor
+                         * @param {google.monitoring.v3.UptimeCheckConfig.IPingConfig=} [properties] Properties to set
+                         */
+                        function PingConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PingConfig pingsCount.
+                         * @member {number} pingsCount
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.PingConfig
+                         * @instance
+                         */
+                        PingConfig.prototype.pingsCount = 0;
+    
+                        /**
+                         * Creates a new PingConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.PingConfig
+                         * @static
+                         * @param {google.monitoring.v3.UptimeCheckConfig.IPingConfig=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.UptimeCheckConfig.PingConfig} PingConfig instance
+                         */
+                        PingConfig.create = function create(properties) {
+                            return new PingConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PingConfig message. Does not implicitly {@link google.monitoring.v3.UptimeCheckConfig.PingConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.PingConfig
+                         * @static
+                         * @param {google.monitoring.v3.UptimeCheckConfig.IPingConfig} message PingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PingConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pingsCount != null && Object.hasOwnProperty.call(message, "pingsCount"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.pingsCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PingConfig message, length delimited. Does not implicitly {@link google.monitoring.v3.UptimeCheckConfig.PingConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.PingConfig
+                         * @static
+                         * @param {google.monitoring.v3.UptimeCheckConfig.IPingConfig} message PingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PingConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.PingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.UptimeCheckConfig.PingConfig} PingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PingConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.PingConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.pingsCount = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PingConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.PingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.UptimeCheckConfig.PingConfig} PingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PingConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PingConfig message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.PingConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PingConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pingsCount != null && message.hasOwnProperty("pingsCount"))
+                                if (!$util.isInteger(message.pingsCount))
+                                    return "pingsCount: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PingConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.PingConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.UptimeCheckConfig.PingConfig} PingConfig
+                         */
+                        PingConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.UptimeCheckConfig.PingConfig)
+                                return object;
+                            var message = new $root.google.monitoring.v3.UptimeCheckConfig.PingConfig();
+                            if (object.pingsCount != null)
+                                message.pingsCount = object.pingsCount | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PingConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.PingConfig
+                         * @static
+                         * @param {google.monitoring.v3.UptimeCheckConfig.PingConfig} message PingConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PingConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.pingsCount = 0;
+                            if (message.pingsCount != null && message.hasOwnProperty("pingsCount"))
+                                object.pingsCount = message.pingsCount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PingConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.PingConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PingConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PingConfig
+                         * @function getTypeUrl
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.PingConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PingConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.monitoring.v3.UptimeCheckConfig.PingConfig";
+                        };
+    
+                        return PingConfig;
+                    })();
+    
                     UptimeCheckConfig.HttpCheck = (function() {
     
                         /**
@@ -30926,8 +39042,12 @@
                          * @property {boolean|null} [maskHeaders] HttpCheck maskHeaders
                          * @property {Object.<string,string>|null} [headers] HttpCheck headers
                          * @property {google.monitoring.v3.UptimeCheckConfig.HttpCheck.ContentType|null} [contentType] HttpCheck contentType
+                         * @property {string|null} [customContentType] HttpCheck customContentType
                          * @property {boolean|null} [validateSsl] HttpCheck validateSsl
                          * @property {Uint8Array|null} [body] HttpCheck body
+                         * @property {Array.<google.monitoring.v3.UptimeCheckConfig.HttpCheck.IResponseStatusCode>|null} [acceptedResponseStatusCodes] HttpCheck acceptedResponseStatusCodes
+                         * @property {google.monitoring.v3.UptimeCheckConfig.IPingConfig|null} [pingConfig] HttpCheck pingConfig
+                         * @property {google.monitoring.v3.UptimeCheckConfig.HttpCheck.IServiceAgentAuthentication|null} [serviceAgentAuthentication] HttpCheck serviceAgentAuthentication
                          */
     
                         /**
@@ -30940,6 +39060,7 @@
                          */
                         function HttpCheck(properties) {
                             this.headers = {};
+                            this.acceptedResponseStatusCodes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -31011,6 +39132,14 @@
                         HttpCheck.prototype.contentType = 0;
     
                         /**
+                         * HttpCheck customContentType.
+                         * @member {string} customContentType
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck
+                         * @instance
+                         */
+                        HttpCheck.prototype.customContentType = "";
+    
+                        /**
                          * HttpCheck validateSsl.
                          * @member {boolean} validateSsl
                          * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck
@@ -31025,6 +39154,44 @@
                          * @instance
                          */
                         HttpCheck.prototype.body = $util.newBuffer([]);
+    
+                        /**
+                         * HttpCheck acceptedResponseStatusCodes.
+                         * @member {Array.<google.monitoring.v3.UptimeCheckConfig.HttpCheck.IResponseStatusCode>} acceptedResponseStatusCodes
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck
+                         * @instance
+                         */
+                        HttpCheck.prototype.acceptedResponseStatusCodes = $util.emptyArray;
+    
+                        /**
+                         * HttpCheck pingConfig.
+                         * @member {google.monitoring.v3.UptimeCheckConfig.IPingConfig|null|undefined} pingConfig
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck
+                         * @instance
+                         */
+                        HttpCheck.prototype.pingConfig = null;
+    
+                        /**
+                         * HttpCheck serviceAgentAuthentication.
+                         * @member {google.monitoring.v3.UptimeCheckConfig.HttpCheck.IServiceAgentAuthentication|null|undefined} serviceAgentAuthentication
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck
+                         * @instance
+                         */
+                        HttpCheck.prototype.serviceAgentAuthentication = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * HttpCheck authMethod.
+                         * @member {"serviceAgentAuthentication"|undefined} authMethod
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck
+                         * @instance
+                         */
+                        Object.defineProperty(HttpCheck.prototype, "authMethod", {
+                            get: $util.oneOfGetter($oneOfFields = ["serviceAgentAuthentication"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new HttpCheck instance using the specified properties.
@@ -31071,6 +39238,15 @@
                                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.contentType);
                             if (message.body != null && Object.hasOwnProperty.call(message, "body"))
                                 writer.uint32(/* id 10, wireType 2 =*/82).bytes(message.body);
+                            if (message.acceptedResponseStatusCodes != null && message.acceptedResponseStatusCodes.length)
+                                for (var i = 0; i < message.acceptedResponseStatusCodes.length; ++i)
+                                    $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.encode(message.acceptedResponseStatusCodes[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.pingConfig != null && Object.hasOwnProperty.call(message, "pingConfig"))
+                                $root.google.monitoring.v3.UptimeCheckConfig.PingConfig.encode(message.pingConfig, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.customContentType != null && Object.hasOwnProperty.call(message, "customContentType"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.customContentType);
+                            if (message.serviceAgentAuthentication != null && Object.hasOwnProperty.call(message, "serviceAgentAuthentication"))
+                                $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.encode(message.serviceAgentAuthentication, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -31098,14 +39274,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        HttpCheck.decode = function decode(reader, length, error) {
+                        HttpCheck.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 8: {
                                         message.requestMethod = reader.int32();
@@ -31158,12 +39332,30 @@
                                         message.contentType = reader.int32();
                                         break;
                                     }
+                                case 13: {
+                                        message.customContentType = reader.string();
+                                        break;
+                                    }
                                 case 7: {
                                         message.validateSsl = reader.bool();
                                         break;
                                     }
                                 case 10: {
                                         message.body = reader.bytes();
+                                        break;
+                                    }
+                                case 11: {
+                                        if (!(message.acceptedResponseStatusCodes && message.acceptedResponseStatusCodes.length))
+                                            message.acceptedResponseStatusCodes = [];
+                                        message.acceptedResponseStatusCodes.push($root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 12: {
+                                        message.pingConfig = $root.google.monitoring.v3.UptimeCheckConfig.PingConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.serviceAgentAuthentication = $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -31201,6 +39393,7 @@
                         HttpCheck.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.requestMethod != null && message.hasOwnProperty("requestMethod"))
                                 switch (message.requestMethod) {
                                 default:
@@ -31241,14 +39434,40 @@
                                     return "contentType: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
                                     break;
                                 }
+                            if (message.customContentType != null && message.hasOwnProperty("customContentType"))
+                                if (!$util.isString(message.customContentType))
+                                    return "customContentType: string expected";
                             if (message.validateSsl != null && message.hasOwnProperty("validateSsl"))
                                 if (typeof message.validateSsl !== "boolean")
                                     return "validateSsl: boolean expected";
                             if (message.body != null && message.hasOwnProperty("body"))
                                 if (!(message.body && typeof message.body.length === "number" || $util.isString(message.body)))
                                     return "body: buffer expected";
+                            if (message.acceptedResponseStatusCodes != null && message.hasOwnProperty("acceptedResponseStatusCodes")) {
+                                if (!Array.isArray(message.acceptedResponseStatusCodes))
+                                    return "acceptedResponseStatusCodes: array expected";
+                                for (var i = 0; i < message.acceptedResponseStatusCodes.length; ++i) {
+                                    var error = $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.verify(message.acceptedResponseStatusCodes[i]);
+                                    if (error)
+                                        return "acceptedResponseStatusCodes." + error;
+                                }
+                            }
+                            if (message.pingConfig != null && message.hasOwnProperty("pingConfig")) {
+                                var error = $root.google.monitoring.v3.UptimeCheckConfig.PingConfig.verify(message.pingConfig);
+                                if (error)
+                                    return "pingConfig." + error;
+                            }
+                            if (message.serviceAgentAuthentication != null && message.hasOwnProperty("serviceAgentAuthentication")) {
+                                properties.authMethod = 1;
+                                {
+                                    var error = $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.verify(message.serviceAgentAuthentication);
+                                    if (error)
+                                        return "serviceAgentAuthentication." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -31319,7 +39538,13 @@
                             case 1:
                                 message.contentType = 1;
                                 break;
+                            case "USER_PROVIDED":
+                            case 2:
+                                message.contentType = 2;
+                                break;
                             }
+                            if (object.customContentType != null)
+                                message.customContentType = String(object.customContentType);
                             if (object.validateSsl != null)
                                 message.validateSsl = Boolean(object.validateSsl);
                             if (object.body != null)
@@ -31327,6 +39552,26 @@
                                     $util.base64.decode(object.body, message.body = $util.newBuffer($util.base64.length(object.body)), 0);
                                 else if (object.body.length >= 0)
                                     message.body = object.body;
+                            if (object.acceptedResponseStatusCodes) {
+                                if (!Array.isArray(object.acceptedResponseStatusCodes))
+                                    throw TypeError(".google.monitoring.v3.UptimeCheckConfig.HttpCheck.acceptedResponseStatusCodes: array expected");
+                                message.acceptedResponseStatusCodes = [];
+                                for (var i = 0; i < object.acceptedResponseStatusCodes.length; ++i) {
+                                    if (typeof object.acceptedResponseStatusCodes[i] !== "object")
+                                        throw TypeError(".google.monitoring.v3.UptimeCheckConfig.HttpCheck.acceptedResponseStatusCodes: object expected");
+                                    message.acceptedResponseStatusCodes[i] = $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.fromObject(object.acceptedResponseStatusCodes[i]);
+                                }
+                            }
+                            if (object.pingConfig != null) {
+                                if (typeof object.pingConfig !== "object")
+                                    throw TypeError(".google.monitoring.v3.UptimeCheckConfig.HttpCheck.pingConfig: object expected");
+                                message.pingConfig = $root.google.monitoring.v3.UptimeCheckConfig.PingConfig.fromObject(object.pingConfig);
+                            }
+                            if (object.serviceAgentAuthentication != null) {
+                                if (typeof object.serviceAgentAuthentication !== "object")
+                                    throw TypeError(".google.monitoring.v3.UptimeCheckConfig.HttpCheck.serviceAgentAuthentication: object expected");
+                                message.serviceAgentAuthentication = $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.fromObject(object.serviceAgentAuthentication);
+                            }
                             return message;
                         };
     
@@ -31343,6 +39588,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.acceptedResponseStatusCodes = [];
                             if (options.objects || options.defaults)
                                 object.headers = {};
                             if (options.defaults) {
@@ -31361,6 +39608,8 @@
                                     if (options.bytes !== Array)
                                         object.body = $util.newBuffer(object.body);
                                 }
+                                object.pingConfig = null;
+                                object.customContentType = "";
                             }
                             if (message.useSsl != null && message.hasOwnProperty("useSsl"))
                                 object.useSsl = message.useSsl;
@@ -31386,6 +39635,20 @@
                                 object.contentType = options.enums === String ? $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ContentType[message.contentType] === undefined ? message.contentType : $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ContentType[message.contentType] : message.contentType;
                             if (message.body != null && message.hasOwnProperty("body"))
                                 object.body = options.bytes === String ? $util.base64.encode(message.body, 0, message.body.length) : options.bytes === Array ? Array.prototype.slice.call(message.body) : message.body;
+                            if (message.acceptedResponseStatusCodes && message.acceptedResponseStatusCodes.length) {
+                                object.acceptedResponseStatusCodes = [];
+                                for (var j = 0; j < message.acceptedResponseStatusCodes.length; ++j)
+                                    object.acceptedResponseStatusCodes[j] = $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.toObject(message.acceptedResponseStatusCodes[j], options);
+                            }
+                            if (message.pingConfig != null && message.hasOwnProperty("pingConfig"))
+                                object.pingConfig = $root.google.monitoring.v3.UptimeCheckConfig.PingConfig.toObject(message.pingConfig, options);
+                            if (message.customContentType != null && message.hasOwnProperty("customContentType"))
+                                object.customContentType = message.customContentType;
+                            if (message.serviceAgentAuthentication != null && message.hasOwnProperty("serviceAgentAuthentication")) {
+                                object.serviceAgentAuthentication = $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.toObject(message.serviceAgentAuthentication, options);
+                                if (options.oneofs)
+                                    object.authMethod = "serviceAgentAuthentication";
+                            }
                             return object;
                         };
     
@@ -31414,6 +39677,22 @@
                             }
                             return typeUrlPrefix + "/google.monitoring.v3.UptimeCheckConfig.HttpCheck";
                         };
+    
+                        /**
+                         * RequestMethod enum.
+                         * @name google.monitoring.v3.UptimeCheckConfig.HttpCheck.RequestMethod
+                         * @enum {number}
+                         * @property {number} METHOD_UNSPECIFIED=0 METHOD_UNSPECIFIED value
+                         * @property {number} GET=1 GET value
+                         * @property {number} POST=2 POST value
+                         */
+                        HttpCheck.RequestMethod = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "METHOD_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "GET"] = 1;
+                            values[valuesById[2] = "POST"] = 2;
+                            return values;
+                        })();
     
                         HttpCheck.BasicAuthentication = (function() {
     
@@ -31511,14 +39790,12 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            BasicAuthentication.decode = function decode(reader, length, error) {
+                            BasicAuthentication.decode = function decode(reader, length) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.BasicAuthentication();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.username = reader.string();
@@ -31645,33 +39922,573 @@
                         })();
     
                         /**
-                         * RequestMethod enum.
-                         * @name google.monitoring.v3.UptimeCheckConfig.HttpCheck.RequestMethod
-                         * @enum {number}
-                         * @property {number} METHOD_UNSPECIFIED=0 METHOD_UNSPECIFIED value
-                         * @property {number} GET=1 GET value
-                         * @property {number} POST=2 POST value
-                         */
-                        HttpCheck.RequestMethod = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "METHOD_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "GET"] = 1;
-                            values[valuesById[2] = "POST"] = 2;
-                            return values;
-                        })();
-    
-                        /**
                          * ContentType enum.
                          * @name google.monitoring.v3.UptimeCheckConfig.HttpCheck.ContentType
                          * @enum {number}
                          * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
                          * @property {number} URL_ENCODED=1 URL_ENCODED value
+                         * @property {number} USER_PROVIDED=2 USER_PROVIDED value
                          */
                         HttpCheck.ContentType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "URL_ENCODED"] = 1;
+                            values[valuesById[2] = "USER_PROVIDED"] = 2;
                             return values;
+                        })();
+    
+                        HttpCheck.ResponseStatusCode = (function() {
+    
+                            /**
+                             * Properties of a ResponseStatusCode.
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck
+                             * @interface IResponseStatusCode
+                             * @property {number|null} [statusValue] ResponseStatusCode statusValue
+                             * @property {google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.StatusClass|null} [statusClass] ResponseStatusCode statusClass
+                             */
+    
+                            /**
+                             * Constructs a new ResponseStatusCode.
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck
+                             * @classdesc Represents a ResponseStatusCode.
+                             * @implements IResponseStatusCode
+                             * @constructor
+                             * @param {google.monitoring.v3.UptimeCheckConfig.HttpCheck.IResponseStatusCode=} [properties] Properties to set
+                             */
+                            function ResponseStatusCode(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ResponseStatusCode statusValue.
+                             * @member {number|null|undefined} statusValue
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode
+                             * @instance
+                             */
+                            ResponseStatusCode.prototype.statusValue = null;
+    
+                            /**
+                             * ResponseStatusCode statusClass.
+                             * @member {google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.StatusClass|null|undefined} statusClass
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode
+                             * @instance
+                             */
+                            ResponseStatusCode.prototype.statusClass = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * ResponseStatusCode statusCode.
+                             * @member {"statusValue"|"statusClass"|undefined} statusCode
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode
+                             * @instance
+                             */
+                            Object.defineProperty(ResponseStatusCode.prototype, "statusCode", {
+                                get: $util.oneOfGetter($oneOfFields = ["statusValue", "statusClass"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new ResponseStatusCode instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode
+                             * @static
+                             * @param {google.monitoring.v3.UptimeCheckConfig.HttpCheck.IResponseStatusCode=} [properties] Properties to set
+                             * @returns {google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode} ResponseStatusCode instance
+                             */
+                            ResponseStatusCode.create = function create(properties) {
+                                return new ResponseStatusCode(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ResponseStatusCode message. Does not implicitly {@link google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode
+                             * @static
+                             * @param {google.monitoring.v3.UptimeCheckConfig.HttpCheck.IResponseStatusCode} message ResponseStatusCode message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ResponseStatusCode.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.statusValue != null && Object.hasOwnProperty.call(message, "statusValue"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.statusValue);
+                                if (message.statusClass != null && Object.hasOwnProperty.call(message, "statusClass"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.statusClass);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ResponseStatusCode message, length delimited. Does not implicitly {@link google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode
+                             * @static
+                             * @param {google.monitoring.v3.UptimeCheckConfig.HttpCheck.IResponseStatusCode} message ResponseStatusCode message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ResponseStatusCode.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ResponseStatusCode message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode} ResponseStatusCode
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ResponseStatusCode.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.statusValue = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.statusClass = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ResponseStatusCode message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode} ResponseStatusCode
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ResponseStatusCode.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ResponseStatusCode message.
+                             * @function verify
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ResponseStatusCode.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.statusValue != null && message.hasOwnProperty("statusValue")) {
+                                    properties.statusCode = 1;
+                                    if (!$util.isInteger(message.statusValue))
+                                        return "statusValue: integer expected";
+                                }
+                                if (message.statusClass != null && message.hasOwnProperty("statusClass")) {
+                                    if (properties.statusCode === 1)
+                                        return "statusCode: multiple values";
+                                    properties.statusCode = 1;
+                                    switch (message.statusClass) {
+                                    default:
+                                        return "statusClass: enum value expected";
+                                    case 0:
+                                    case 100:
+                                    case 200:
+                                    case 300:
+                                    case 400:
+                                    case 500:
+                                    case 1000:
+                                        break;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ResponseStatusCode message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode} ResponseStatusCode
+                             */
+                            ResponseStatusCode.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode)
+                                    return object;
+                                var message = new $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode();
+                                if (object.statusValue != null)
+                                    message.statusValue = object.statusValue | 0;
+                                switch (object.statusClass) {
+                                default:
+                                    if (typeof object.statusClass === "number") {
+                                        message.statusClass = object.statusClass;
+                                        break;
+                                    }
+                                    break;
+                                case "STATUS_CLASS_UNSPECIFIED":
+                                case 0:
+                                    message.statusClass = 0;
+                                    break;
+                                case "STATUS_CLASS_1XX":
+                                case 100:
+                                    message.statusClass = 100;
+                                    break;
+                                case "STATUS_CLASS_2XX":
+                                case 200:
+                                    message.statusClass = 200;
+                                    break;
+                                case "STATUS_CLASS_3XX":
+                                case 300:
+                                    message.statusClass = 300;
+                                    break;
+                                case "STATUS_CLASS_4XX":
+                                case 400:
+                                    message.statusClass = 400;
+                                    break;
+                                case "STATUS_CLASS_5XX":
+                                case 500:
+                                    message.statusClass = 500;
+                                    break;
+                                case "STATUS_CLASS_ANY":
+                                case 1000:
+                                    message.statusClass = 1000;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ResponseStatusCode message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode
+                             * @static
+                             * @param {google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode} message ResponseStatusCode
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ResponseStatusCode.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.statusValue != null && message.hasOwnProperty("statusValue")) {
+                                    object.statusValue = message.statusValue;
+                                    if (options.oneofs)
+                                        object.statusCode = "statusValue";
+                                }
+                                if (message.statusClass != null && message.hasOwnProperty("statusClass")) {
+                                    object.statusClass = options.enums === String ? $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.StatusClass[message.statusClass] === undefined ? message.statusClass : $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.StatusClass[message.statusClass] : message.statusClass;
+                                    if (options.oneofs)
+                                        object.statusCode = "statusClass";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ResponseStatusCode to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ResponseStatusCode.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ResponseStatusCode
+                             * @function getTypeUrl
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ResponseStatusCode.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode";
+                            };
+    
+                            /**
+                             * StatusClass enum.
+                             * @name google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.StatusClass
+                             * @enum {number}
+                             * @property {number} STATUS_CLASS_UNSPECIFIED=0 STATUS_CLASS_UNSPECIFIED value
+                             * @property {number} STATUS_CLASS_1XX=100 STATUS_CLASS_1XX value
+                             * @property {number} STATUS_CLASS_2XX=200 STATUS_CLASS_2XX value
+                             * @property {number} STATUS_CLASS_3XX=300 STATUS_CLASS_3XX value
+                             * @property {number} STATUS_CLASS_4XX=400 STATUS_CLASS_4XX value
+                             * @property {number} STATUS_CLASS_5XX=500 STATUS_CLASS_5XX value
+                             * @property {number} STATUS_CLASS_ANY=1000 STATUS_CLASS_ANY value
+                             */
+                            ResponseStatusCode.StatusClass = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STATUS_CLASS_UNSPECIFIED"] = 0;
+                                values[valuesById[100] = "STATUS_CLASS_1XX"] = 100;
+                                values[valuesById[200] = "STATUS_CLASS_2XX"] = 200;
+                                values[valuesById[300] = "STATUS_CLASS_3XX"] = 300;
+                                values[valuesById[400] = "STATUS_CLASS_4XX"] = 400;
+                                values[valuesById[500] = "STATUS_CLASS_5XX"] = 500;
+                                values[valuesById[1000] = "STATUS_CLASS_ANY"] = 1000;
+                                return values;
+                            })();
+    
+                            return ResponseStatusCode;
+                        })();
+    
+                        HttpCheck.ServiceAgentAuthentication = (function() {
+    
+                            /**
+                             * Properties of a ServiceAgentAuthentication.
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck
+                             * @interface IServiceAgentAuthentication
+                             * @property {google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.ServiceAgentAuthenticationType|null} [type] ServiceAgentAuthentication type
+                             */
+    
+                            /**
+                             * Constructs a new ServiceAgentAuthentication.
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck
+                             * @classdesc Represents a ServiceAgentAuthentication.
+                             * @implements IServiceAgentAuthentication
+                             * @constructor
+                             * @param {google.monitoring.v3.UptimeCheckConfig.HttpCheck.IServiceAgentAuthentication=} [properties] Properties to set
+                             */
+                            function ServiceAgentAuthentication(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ServiceAgentAuthentication type.
+                             * @member {google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.ServiceAgentAuthenticationType} type
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication
+                             * @instance
+                             */
+                            ServiceAgentAuthentication.prototype.type = 0;
+    
+                            /**
+                             * Creates a new ServiceAgentAuthentication instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication
+                             * @static
+                             * @param {google.monitoring.v3.UptimeCheckConfig.HttpCheck.IServiceAgentAuthentication=} [properties] Properties to set
+                             * @returns {google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication} ServiceAgentAuthentication instance
+                             */
+                            ServiceAgentAuthentication.create = function create(properties) {
+                                return new ServiceAgentAuthentication(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ServiceAgentAuthentication message. Does not implicitly {@link google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication
+                             * @static
+                             * @param {google.monitoring.v3.UptimeCheckConfig.HttpCheck.IServiceAgentAuthentication} message ServiceAgentAuthentication message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ServiceAgentAuthentication.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ServiceAgentAuthentication message, length delimited. Does not implicitly {@link google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication
+                             * @static
+                             * @param {google.monitoring.v3.UptimeCheckConfig.HttpCheck.IServiceAgentAuthentication} message ServiceAgentAuthentication message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ServiceAgentAuthentication.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ServiceAgentAuthentication message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication} ServiceAgentAuthentication
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ServiceAgentAuthentication.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ServiceAgentAuthentication message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication} ServiceAgentAuthentication
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ServiceAgentAuthentication.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ServiceAgentAuthentication message.
+                             * @function verify
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ServiceAgentAuthentication.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ServiceAgentAuthentication message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication} ServiceAgentAuthentication
+                             */
+                            ServiceAgentAuthentication.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication)
+                                    return object;
+                                var message = new $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication();
+                                switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
+                                case "SERVICE_AGENT_AUTHENTICATION_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "OIDC_TOKEN":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ServiceAgentAuthentication message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication
+                             * @static
+                             * @param {google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication} message ServiceAgentAuthentication
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ServiceAgentAuthentication.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.type = options.enums === String ? "SERVICE_AGENT_AUTHENTICATION_TYPE_UNSPECIFIED" : 0;
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = options.enums === String ? $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.ServiceAgentAuthenticationType[message.type] === undefined ? message.type : $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.ServiceAgentAuthenticationType[message.type] : message.type;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ServiceAgentAuthentication to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ServiceAgentAuthentication.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ServiceAgentAuthentication
+                             * @function getTypeUrl
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ServiceAgentAuthentication.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication";
+                            };
+    
+                            /**
+                             * ServiceAgentAuthenticationType enum.
+                             * @name google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.ServiceAgentAuthenticationType
+                             * @enum {number}
+                             * @property {number} SERVICE_AGENT_AUTHENTICATION_TYPE_UNSPECIFIED=0 SERVICE_AGENT_AUTHENTICATION_TYPE_UNSPECIFIED value
+                             * @property {number} OIDC_TOKEN=1 OIDC_TOKEN value
+                             */
+                            ServiceAgentAuthentication.ServiceAgentAuthenticationType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "SERVICE_AGENT_AUTHENTICATION_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "OIDC_TOKEN"] = 1;
+                                return values;
+                            })();
+    
+                            return ServiceAgentAuthentication;
                         })();
     
                         return HttpCheck;
@@ -31684,6 +40501,7 @@
                          * @memberof google.monitoring.v3.UptimeCheckConfig
                          * @interface ITcpCheck
                          * @property {number|null} [port] TcpCheck port
+                         * @property {google.monitoring.v3.UptimeCheckConfig.IPingConfig|null} [pingConfig] TcpCheck pingConfig
                          */
     
                         /**
@@ -31708,6 +40526,14 @@
                          * @instance
                          */
                         TcpCheck.prototype.port = 0;
+    
+                        /**
+                         * TcpCheck pingConfig.
+                         * @member {google.monitoring.v3.UptimeCheckConfig.IPingConfig|null|undefined} pingConfig
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.TcpCheck
+                         * @instance
+                         */
+                        TcpCheck.prototype.pingConfig = null;
     
                         /**
                          * Creates a new TcpCheck instance using the specified properties.
@@ -31735,6 +40561,8 @@
                                 writer = $Writer.create();
                             if (message.port != null && Object.hasOwnProperty.call(message, "port"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.port);
+                            if (message.pingConfig != null && Object.hasOwnProperty.call(message, "pingConfig"))
+                                $root.google.monitoring.v3.UptimeCheckConfig.PingConfig.encode(message.pingConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -31762,17 +40590,19 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TcpCheck.decode = function decode(reader, length, error) {
+                        TcpCheck.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.TcpCheck();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.port = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pingConfig = $root.google.monitoring.v3.UptimeCheckConfig.PingConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -31813,6 +40643,11 @@
                             if (message.port != null && message.hasOwnProperty("port"))
                                 if (!$util.isInteger(message.port))
                                     return "port: integer expected";
+                            if (message.pingConfig != null && message.hasOwnProperty("pingConfig")) {
+                                var error = $root.google.monitoring.v3.UptimeCheckConfig.PingConfig.verify(message.pingConfig);
+                                if (error)
+                                    return "pingConfig." + error;
+                            }
                             return null;
                         };
     
@@ -31830,6 +40665,11 @@
                             var message = new $root.google.monitoring.v3.UptimeCheckConfig.TcpCheck();
                             if (object.port != null)
                                 message.port = object.port | 0;
+                            if (object.pingConfig != null) {
+                                if (typeof object.pingConfig !== "object")
+                                    throw TypeError(".google.monitoring.v3.UptimeCheckConfig.TcpCheck.pingConfig: object expected");
+                                message.pingConfig = $root.google.monitoring.v3.UptimeCheckConfig.PingConfig.fromObject(object.pingConfig);
+                            }
                             return message;
                         };
     
@@ -31846,10 +40686,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.port = 0;
+                                object.pingConfig = null;
+                            }
                             if (message.port != null && message.hasOwnProperty("port"))
                                 object.port = message.port;
+                            if (message.pingConfig != null && message.hasOwnProperty("pingConfig"))
+                                object.pingConfig = $root.google.monitoring.v3.UptimeCheckConfig.PingConfig.toObject(message.pingConfig, options);
                             return object;
                         };
     
@@ -31890,6 +40734,7 @@
                          * @interface IContentMatcher
                          * @property {string|null} [content] ContentMatcher content
                          * @property {google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption|null} [matcher] ContentMatcher matcher
+                         * @property {google.monitoring.v3.UptimeCheckConfig.ContentMatcher.IJsonPathMatcher|null} [jsonPathMatcher] ContentMatcher jsonPathMatcher
                          */
     
                         /**
@@ -31924,6 +40769,28 @@
                         ContentMatcher.prototype.matcher = 0;
     
                         /**
+                         * ContentMatcher jsonPathMatcher.
+                         * @member {google.monitoring.v3.UptimeCheckConfig.ContentMatcher.IJsonPathMatcher|null|undefined} jsonPathMatcher
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher
+                         * @instance
+                         */
+                        ContentMatcher.prototype.jsonPathMatcher = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ContentMatcher additionalMatcherInfo.
+                         * @member {"jsonPathMatcher"|undefined} additionalMatcherInfo
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher
+                         * @instance
+                         */
+                        Object.defineProperty(ContentMatcher.prototype, "additionalMatcherInfo", {
+                            get: $util.oneOfGetter($oneOfFields = ["jsonPathMatcher"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new ContentMatcher instance using the specified properties.
                          * @function create
                          * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher
@@ -31951,6 +40818,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.content);
                             if (message.matcher != null && Object.hasOwnProperty.call(message, "matcher"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.matcher);
+                            if (message.jsonPathMatcher != null && Object.hasOwnProperty.call(message, "jsonPathMatcher"))
+                                $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.encode(message.jsonPathMatcher, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -31978,14 +40847,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ContentMatcher.decode = function decode(reader, length, error) {
+                        ContentMatcher.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.content = reader.string();
@@ -31993,6 +40860,10 @@
                                     }
                                 case 2: {
                                         message.matcher = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.jsonPathMatcher = $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -32030,6 +40901,7 @@
                         ContentMatcher.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.content != null && message.hasOwnProperty("content"))
                                 if (!$util.isString(message.content))
                                     return "content: string expected";
@@ -32042,8 +40914,18 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
+                            if (message.jsonPathMatcher != null && message.hasOwnProperty("jsonPathMatcher")) {
+                                properties.additionalMatcherInfo = 1;
+                                {
+                                    var error = $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.verify(message.jsonPathMatcher);
+                                    if (error)
+                                        return "jsonPathMatcher." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -32088,6 +40970,19 @@
                             case 4:
                                 message.matcher = 4;
                                 break;
+                            case "MATCHES_JSON_PATH":
+                            case 5:
+                                message.matcher = 5;
+                                break;
+                            case "NOT_MATCHES_JSON_PATH":
+                            case 6:
+                                message.matcher = 6;
+                                break;
+                            }
+                            if (object.jsonPathMatcher != null) {
+                                if (typeof object.jsonPathMatcher !== "object")
+                                    throw TypeError(".google.monitoring.v3.UptimeCheckConfig.ContentMatcher.jsonPathMatcher: object expected");
+                                message.jsonPathMatcher = $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.fromObject(object.jsonPathMatcher);
                             }
                             return message;
                         };
@@ -32113,6 +41008,11 @@
                                 object.content = message.content;
                             if (message.matcher != null && message.hasOwnProperty("matcher"))
                                 object.matcher = options.enums === String ? $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption[message.matcher] === undefined ? message.matcher : $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption[message.matcher] : message.matcher;
+                            if (message.jsonPathMatcher != null && message.hasOwnProperty("jsonPathMatcher")) {
+                                object.jsonPathMatcher = $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.toObject(message.jsonPathMatcher, options);
+                                if (options.oneofs)
+                                    object.additionalMatcherInfo = "jsonPathMatcher";
+                            }
                             return object;
                         };
     
@@ -32151,6 +41051,8 @@
                          * @property {number} NOT_CONTAINS_STRING=2 NOT_CONTAINS_STRING value
                          * @property {number} MATCHES_REGEX=3 MATCHES_REGEX value
                          * @property {number} NOT_MATCHES_REGEX=4 NOT_MATCHES_REGEX value
+                         * @property {number} MATCHES_JSON_PATH=5 MATCHES_JSON_PATH value
+                         * @property {number} NOT_MATCHES_JSON_PATH=6 NOT_MATCHES_JSON_PATH value
                          */
                         ContentMatcher.ContentMatcherOption = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -32159,10 +41061,295 @@
                             values[valuesById[2] = "NOT_CONTAINS_STRING"] = 2;
                             values[valuesById[3] = "MATCHES_REGEX"] = 3;
                             values[valuesById[4] = "NOT_MATCHES_REGEX"] = 4;
+                            values[valuesById[5] = "MATCHES_JSON_PATH"] = 5;
+                            values[valuesById[6] = "NOT_MATCHES_JSON_PATH"] = 6;
                             return values;
                         })();
     
+                        ContentMatcher.JsonPathMatcher = (function() {
+    
+                            /**
+                             * Properties of a JsonPathMatcher.
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher
+                             * @interface IJsonPathMatcher
+                             * @property {string|null} [jsonPath] JsonPathMatcher jsonPath
+                             * @property {google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.JsonPathMatcherOption|null} [jsonMatcher] JsonPathMatcher jsonMatcher
+                             */
+    
+                            /**
+                             * Constructs a new JsonPathMatcher.
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher
+                             * @classdesc Represents a JsonPathMatcher.
+                             * @implements IJsonPathMatcher
+                             * @constructor
+                             * @param {google.monitoring.v3.UptimeCheckConfig.ContentMatcher.IJsonPathMatcher=} [properties] Properties to set
+                             */
+                            function JsonPathMatcher(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * JsonPathMatcher jsonPath.
+                             * @member {string} jsonPath
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher
+                             * @instance
+                             */
+                            JsonPathMatcher.prototype.jsonPath = "";
+    
+                            /**
+                             * JsonPathMatcher jsonMatcher.
+                             * @member {google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.JsonPathMatcherOption} jsonMatcher
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher
+                             * @instance
+                             */
+                            JsonPathMatcher.prototype.jsonMatcher = 0;
+    
+                            /**
+                             * Creates a new JsonPathMatcher instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher
+                             * @static
+                             * @param {google.monitoring.v3.UptimeCheckConfig.ContentMatcher.IJsonPathMatcher=} [properties] Properties to set
+                             * @returns {google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher} JsonPathMatcher instance
+                             */
+                            JsonPathMatcher.create = function create(properties) {
+                                return new JsonPathMatcher(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified JsonPathMatcher message. Does not implicitly {@link google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher
+                             * @static
+                             * @param {google.monitoring.v3.UptimeCheckConfig.ContentMatcher.IJsonPathMatcher} message JsonPathMatcher message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            JsonPathMatcher.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.jsonPath != null && Object.hasOwnProperty.call(message, "jsonPath"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.jsonPath);
+                                if (message.jsonMatcher != null && Object.hasOwnProperty.call(message, "jsonMatcher"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.jsonMatcher);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified JsonPathMatcher message, length delimited. Does not implicitly {@link google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher
+                             * @static
+                             * @param {google.monitoring.v3.UptimeCheckConfig.ContentMatcher.IJsonPathMatcher} message JsonPathMatcher message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            JsonPathMatcher.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a JsonPathMatcher message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher} JsonPathMatcher
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            JsonPathMatcher.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.jsonPath = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.jsonMatcher = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a JsonPathMatcher message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher} JsonPathMatcher
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            JsonPathMatcher.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a JsonPathMatcher message.
+                             * @function verify
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            JsonPathMatcher.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.jsonPath != null && message.hasOwnProperty("jsonPath"))
+                                    if (!$util.isString(message.jsonPath))
+                                        return "jsonPath: string expected";
+                                if (message.jsonMatcher != null && message.hasOwnProperty("jsonMatcher"))
+                                    switch (message.jsonMatcher) {
+                                    default:
+                                        return "jsonMatcher: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a JsonPathMatcher message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher} JsonPathMatcher
+                             */
+                            JsonPathMatcher.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher)
+                                    return object;
+                                var message = new $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher();
+                                if (object.jsonPath != null)
+                                    message.jsonPath = String(object.jsonPath);
+                                switch (object.jsonMatcher) {
+                                default:
+                                    if (typeof object.jsonMatcher === "number") {
+                                        message.jsonMatcher = object.jsonMatcher;
+                                        break;
+                                    }
+                                    break;
+                                case "JSON_PATH_MATCHER_OPTION_UNSPECIFIED":
+                                case 0:
+                                    message.jsonMatcher = 0;
+                                    break;
+                                case "EXACT_MATCH":
+                                case 1:
+                                    message.jsonMatcher = 1;
+                                    break;
+                                case "REGEX_MATCH":
+                                case 2:
+                                    message.jsonMatcher = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a JsonPathMatcher message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher
+                             * @static
+                             * @param {google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher} message JsonPathMatcher
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            JsonPathMatcher.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.jsonPath = "";
+                                    object.jsonMatcher = options.enums === String ? "JSON_PATH_MATCHER_OPTION_UNSPECIFIED" : 0;
+                                }
+                                if (message.jsonPath != null && message.hasOwnProperty("jsonPath"))
+                                    object.jsonPath = message.jsonPath;
+                                if (message.jsonMatcher != null && message.hasOwnProperty("jsonMatcher"))
+                                    object.jsonMatcher = options.enums === String ? $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.JsonPathMatcherOption[message.jsonMatcher] === undefined ? message.jsonMatcher : $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.JsonPathMatcherOption[message.jsonMatcher] : message.jsonMatcher;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this JsonPathMatcher to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            JsonPathMatcher.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for JsonPathMatcher
+                             * @function getTypeUrl
+                             * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            JsonPathMatcher.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher";
+                            };
+    
+                            /**
+                             * JsonPathMatcherOption enum.
+                             * @name google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.JsonPathMatcherOption
+                             * @enum {number}
+                             * @property {number} JSON_PATH_MATCHER_OPTION_UNSPECIFIED=0 JSON_PATH_MATCHER_OPTION_UNSPECIFIED value
+                             * @property {number} EXACT_MATCH=1 EXACT_MATCH value
+                             * @property {number} REGEX_MATCH=2 REGEX_MATCH value
+                             */
+                            JsonPathMatcher.JsonPathMatcherOption = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "JSON_PATH_MATCHER_OPTION_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "EXACT_MATCH"] = 1;
+                                values[valuesById[2] = "REGEX_MATCH"] = 2;
+                                return values;
+                            })();
+    
+                            return JsonPathMatcher;
+                        })();
+    
                         return ContentMatcher;
+                    })();
+    
+                    /**
+                     * CheckerType enum.
+                     * @name google.monitoring.v3.UptimeCheckConfig.CheckerType
+                     * @enum {number}
+                     * @property {number} CHECKER_TYPE_UNSPECIFIED=0 CHECKER_TYPE_UNSPECIFIED value
+                     * @property {number} STATIC_IP_CHECKERS=1 STATIC_IP_CHECKERS value
+                     * @property {number} VPC_CHECKERS=3 VPC_CHECKERS value
+                     */
+                    UptimeCheckConfig.CheckerType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "CHECKER_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "STATIC_IP_CHECKERS"] = 1;
+                        values[valuesById[3] = "VPC_CHECKERS"] = 3;
+                        return values;
                     })();
     
                     return UptimeCheckConfig;
@@ -32275,14 +41462,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UptimeCheckIp.decode = function decode(reader, length, error) {
+                    UptimeCheckIp.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckIp();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.region = reader.int32();
@@ -32340,6 +41525,9 @@
                             case 2:
                             case 3:
                             case 4:
+                            case 5:
+                            case 6:
+                            case 7:
                                 break;
                             }
                         if (message.location != null && message.hasOwnProperty("location"))
@@ -32389,6 +41577,18 @@
                         case "ASIA_PACIFIC":
                         case 4:
                             message.region = 4;
+                            break;
+                        case "USA_OREGON":
+                        case 5:
+                            message.region = 5;
+                            break;
+                        case "USA_IOWA":
+                        case 6:
+                            message.region = 6;
+                            break;
+                        case "USA_VIRGINIA":
+                        case 7:
+                            message.region = 7;
                             break;
                         }
                         if (object.location != null)
@@ -32452,6 +41652,32 @@
                     };
     
                     return UptimeCheckIp;
+                })();
+    
+                /**
+                 * UptimeCheckRegion enum.
+                 * @name google.monitoring.v3.UptimeCheckRegion
+                 * @enum {number}
+                 * @property {number} REGION_UNSPECIFIED=0 REGION_UNSPECIFIED value
+                 * @property {number} USA=1 USA value
+                 * @property {number} EUROPE=2 EUROPE value
+                 * @property {number} SOUTH_AMERICA=3 SOUTH_AMERICA value
+                 * @property {number} ASIA_PACIFIC=4 ASIA_PACIFIC value
+                 * @property {number} USA_OREGON=5 USA_OREGON value
+                 * @property {number} USA_IOWA=6 USA_IOWA value
+                 * @property {number} USA_VIRGINIA=7 USA_VIRGINIA value
+                 */
+                v3.UptimeCheckRegion = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "REGION_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "USA"] = 1;
+                    values[valuesById[2] = "EUROPE"] = 2;
+                    values[valuesById[3] = "SOUTH_AMERICA"] = 3;
+                    values[valuesById[4] = "ASIA_PACIFIC"] = 4;
+                    values[valuesById[5] = "USA_OREGON"] = 5;
+                    values[valuesById[6] = "USA_IOWA"] = 6;
+                    values[valuesById[7] = "USA_VIRGINIA"] = 7;
+                    return values;
                 })();
     
                 /**
@@ -32710,6 +41936,7 @@
                      * @memberof google.monitoring.v3
                      * @interface IListUptimeCheckConfigsRequest
                      * @property {string|null} [parent] ListUptimeCheckConfigsRequest parent
+                     * @property {string|null} [filter] ListUptimeCheckConfigsRequest filter
                      * @property {number|null} [pageSize] ListUptimeCheckConfigsRequest pageSize
                      * @property {string|null} [pageToken] ListUptimeCheckConfigsRequest pageToken
                      */
@@ -32736,6 +41963,14 @@
                      * @instance
                      */
                     ListUptimeCheckConfigsRequest.prototype.parent = "";
+    
+                    /**
+                     * ListUptimeCheckConfigsRequest filter.
+                     * @member {string} filter
+                     * @memberof google.monitoring.v3.ListUptimeCheckConfigsRequest
+                     * @instance
+                     */
+                    ListUptimeCheckConfigsRequest.prototype.filter = "";
     
                     /**
                      * ListUptimeCheckConfigsRequest pageSize.
@@ -32779,6 +42014,8 @@
                             writer = $Writer.create();
                         if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
                         if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
                         if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
@@ -32810,17 +42047,19 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListUptimeCheckConfigsRequest.decode = function decode(reader, length, error) {
+                    ListUptimeCheckConfigsRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListUptimeCheckConfigsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.filter = reader.string();
                                     break;
                                 }
                             case 3: {
@@ -32869,6 +42108,9 @@
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            if (!$util.isString(message.filter))
+                                return "filter: string expected";
                         if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                             if (!$util.isInteger(message.pageSize))
                                 return "pageSize: integer expected";
@@ -32892,6 +42134,8 @@
                         var message = new $root.google.monitoring.v3.ListUptimeCheckConfigsRequest();
                         if (object.parent != null)
                             message.parent = String(object.parent);
+                        if (object.filter != null)
+                            message.filter = String(object.filter);
                         if (object.pageSize != null)
                             message.pageSize = object.pageSize | 0;
                         if (object.pageToken != null)
@@ -32914,11 +42158,14 @@
                         var object = {};
                         if (options.defaults) {
                             object.parent = "";
+                            object.filter = "";
                             object.pageSize = 0;
                             object.pageToken = "";
                         }
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             object.parent = message.parent;
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            object.filter = message.filter;
                         if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                             object.pageSize = message.pageSize;
                         if (message.pageToken != null && message.hasOwnProperty("pageToken"))
@@ -33064,14 +42311,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListUptimeCheckConfigsResponse.decode = function decode(reader, length, error) {
+                    ListUptimeCheckConfigsResponse.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListUptimeCheckConfigsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.uptimeCheckConfigs && message.uptimeCheckConfigs.length))
@@ -33314,14 +42559,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetUptimeCheckConfigRequest.decode = function decode(reader, length, error) {
+                    GetUptimeCheckConfigRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetUptimeCheckConfigRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -33530,14 +42773,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateUptimeCheckConfigRequest.decode = function decode(reader, length, error) {
+                    CreateUptimeCheckConfigRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateUptimeCheckConfigRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -33764,14 +43005,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateUptimeCheckConfigRequest.decode = function decode(reader, length, error) {
+                    UpdateUptimeCheckConfigRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UpdateUptimeCheckConfigRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 2: {
                                     message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -33992,14 +43231,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteUptimeCheckConfigRequest.decode = function decode(reader, length, error) {
+                    DeleteUptimeCheckConfigRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DeleteUptimeCheckConfigRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -34208,14 +43445,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListUptimeCheckIpsRequest.decode = function decode(reader, length, error) {
+                    ListUptimeCheckIpsRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListUptimeCheckIpsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 2: {
                                     message.pageSize = reader.int32();
@@ -34439,14 +43674,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListUptimeCheckIpsResponse.decode = function decode(reader, length, error) {
+                    ListUptimeCheckIpsResponse.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListUptimeCheckIpsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.uptimeCheckIps && message.uptimeCheckIps.length))
@@ -34792,14 +44025,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length, error) {
+                ResourceDescriptor.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -35189,14 +44420,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length, error) {
+                ResourceReference.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -35480,14 +44709,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Distribution.decode = function decode(reader, length, error) {
+                Distribution.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.count = reader.int64();
@@ -35840,14 +45067,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Range.decode = function decode(reader, length, error) {
+                    Range.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.Range();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.min = reader.double();
@@ -36094,14 +45319,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    BucketOptions.decode = function decode(reader, length, error) {
+                    BucketOptions.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.BucketOptions();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.linearBuckets = $root.google.api.Distribution.BucketOptions.Linear.decode(reader, reader.uint32());
@@ -36376,14 +45599,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Linear.decode = function decode(reader, length, error) {
+                        Linear.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.BucketOptions.Linear();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.numFiniteBuckets = reader.int32();
@@ -36628,14 +45849,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Exponential.decode = function decode(reader, length, error) {
+                        Exponential.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.BucketOptions.Exponential();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.numFiniteBuckets = reader.int32();
@@ -36863,14 +46082,12 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Explicit.decode = function decode(reader, length, error) {
+                        Explicit.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.BucketOptions.Explicit();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.bounds && message.bounds.length))
@@ -37114,14 +46331,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Exemplar.decode = function decode(reader, length, error) {
+                    Exemplar.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.Exemplar();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.value = reader.double();
@@ -37385,14 +46600,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length, error) {
+                Http.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -37737,14 +46950,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length, error) {
+                HttpRule.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -38123,14 +47334,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length, error) {
+                CustomHttpPattern.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -38357,14 +47566,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length, error) {
+                CommonLanguageSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -38728,14 +47935,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length, error) {
+                ClientLibrarySettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -39074,7 +48279,6 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
-                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -39176,14 +48380,6 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
-                 * Publishing restReferenceDocumentationUri.
-                 * @member {string} restReferenceDocumentationUri
-                 * @memberof google.api.Publishing
-                 * @instance
-                 */
-                Publishing.prototype.restReferenceDocumentationUri = "";
-    
-                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -39230,8 +48426,6 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
-                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
-                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -39259,14 +48453,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length, error) {
+                Publishing.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -39312,10 +48504,6 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
-                                break;
-                            }
-                        case 111: {
-                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -39410,9 +48598,6 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
-                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
-                        if (!$util.isString(message.restReferenceDocumentationUri))
-                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -39507,8 +48692,6 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
-                    if (object.restReferenceDocumentationUri != null)
-                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -39538,7 +48721,6 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
-                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -39569,8 +48751,6 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
-                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
-                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -39712,14 +48892,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length, error) {
+                JavaSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -39981,14 +49159,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length, error) {
+                CppSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -40191,14 +49367,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length, error) {
+                PhpSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -40401,14 +49575,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length, error) {
+                PythonSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -40611,14 +49783,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length, error) {
+                NodeSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -40886,14 +50056,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length, error) {
+                DotnetSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -41267,14 +50435,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length, error) {
+                RubySettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -41477,14 +50643,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length, error) {
+                GoSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -41711,14 +50875,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length, error) {
+                MethodSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -41991,14 +51153,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length, error) {
+                    LongRunning.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -42376,14 +51536,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MonitoredResourceDescriptor.decode = function decode(reader, length, error) {
+                MonitoredResourceDescriptor.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MonitoredResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 5: {
                                 message.name = reader.string();
@@ -42724,14 +51882,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MonitoredResource.decode = function decode(reader, length, error) {
+                MonitoredResource.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MonitoredResource(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -42988,14 +52144,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MonitoredResourceMetadata.decode = function decode(reader, length, error) {
+                MonitoredResourceMetadata.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MonitoredResourceMetadata(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.systemLabels = $root.google.protobuf.Struct.decode(reader, reader.uint32());
@@ -43266,14 +52420,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                LabelDescriptor.decode = function decode(reader, length, error) {
+                LabelDescriptor.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.LabelDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.key = reader.string();
@@ -43650,14 +52802,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MetricDescriptor.decode = function decode(reader, length, error) {
+                MetricDescriptor.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MetricDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -44199,14 +53349,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MetricDescriptorMetadata.decode = function decode(reader, length, error) {
+                    MetricDescriptorMetadata.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MetricDescriptor.MetricDescriptorMetadata();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.launchStage = reader.int32();
@@ -44504,14 +53652,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Metric.decode = function decode(reader, length, error) {
+                Metric.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Metric(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 3: {
                                 message.type = reader.string();
@@ -44670,6 +53816,263 @@
                 return Metric;
             })();
     
+            api.FieldInfo = (function() {
+    
+                /**
+                 * Properties of a FieldInfo.
+                 * @memberof google.api
+                 * @interface IFieldInfo
+                 * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 */
+    
+                /**
+                 * Constructs a new FieldInfo.
+                 * @memberof google.api
+                 * @classdesc Represents a FieldInfo.
+                 * @implements IFieldInfo
+                 * @constructor
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 */
+                function FieldInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldInfo format.
+                 * @member {google.api.FieldInfo.Format} format
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.format = 0;
+    
+                /**
+                 * Creates a new FieldInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 * @returns {google.api.FieldInfo} FieldInfo instance
+                 */
+                FieldInfo.create = function create(properties) {
+                    return new FieldInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.format = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldInfo message.
+                 * @function verify
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        switch (message.format) {
+                        default:
+                            return "format: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 */
+                FieldInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.FieldInfo)
+                        return object;
+                    var message = new $root.google.api.FieldInfo();
+                    switch (object.format) {
+                    default:
+                        if (typeof object.format === "number") {
+                            message.format = object.format;
+                            break;
+                        }
+                        break;
+                    case "FORMAT_UNSPECIFIED":
+                    case 0:
+                        message.format = 0;
+                        break;
+                    case "UUID4":
+                    case 1:
+                        message.format = 1;
+                        break;
+                    case "IPV4":
+                    case 2:
+                        message.format = 2;
+                        break;
+                    case "IPV6":
+                    case 3:
+                        message.format = 3;
+                        break;
+                    case "IPV4_OR_IPV6":
+                    case 4:
+                        message.format = 4;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.FieldInfo} message FieldInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldInfo
+                 * @function getTypeUrl
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.FieldInfo";
+                };
+    
+                /**
+                 * Format enum.
+                 * @name google.api.FieldInfo.Format
+                 * @enum {number}
+                 * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
+                 * @property {number} UUID4=1 UUID4 value
+                 * @property {number} IPV4=2 IPV4 value
+                 * @property {number} IPV6=3 IPV6 value
+                 * @property {number} IPV4_OR_IPV6=4 IPV4_OR_IPV6 value
+                 */
+                FieldInfo.Format = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "UUID4"] = 1;
+                    values[valuesById[2] = "IPV4"] = 2;
+                    values[valuesById[3] = "IPV6"] = 3;
+                    values[valuesById[4] = "IPV4_OR_IPV6"] = 4;
+                    return values;
+                })();
+    
+                return FieldInfo;
+            })();
+    
             return api;
         })();
     
@@ -44769,14 +54172,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length, error) {
+                FileDescriptorSet.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -45171,14 +54572,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length, error) {
+                FileDescriptorProto.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -45840,14 +55239,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length, error) {
+                DescriptorProto.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -46327,14 +55724,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length, error) {
+                    ExtensionRange.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -46573,14 +55968,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length, error) {
+                    ReservedRange.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -46831,14 +56224,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length, error) {
+                ExtensionRangeOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -47178,14 +56569,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length, error) {
+                    Declaration.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -47559,14 +56948,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length, error) {
+                FieldDescriptorProto.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -48086,14 +57473,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length, error) {
+                OneofDescriptorProto.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -48359,14 +57744,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length, error) {
+                EnumDescriptorProto.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -48680,14 +58063,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length, error) {
+                    EnumReservedRange.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -48923,14 +58304,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
+                EnumValueDescriptorProto.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -49182,14 +58561,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length, error) {
+                ServiceDescriptorProto.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -49492,14 +58869,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length, error) {
+                MethodDescriptorProto.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -49998,14 +59373,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length, error) {
+                FileOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -50620,14 +59993,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length, error) {
+                MessageOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -50876,6 +60247,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
+                 * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
                  */
     
                 /**
@@ -51018,6 +60390,14 @@
                 FieldOptions.prototype[".google.api.resourceReference"] = null;
     
                 /**
+                 * FieldOptions .google.api.fieldInfo.
+                 * @member {google.api.IFieldInfo|null|undefined} .google.api.fieldInfo
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldInfo"] = null;
+    
+                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -51070,11 +60450,16 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
+                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
+                            writer.int32(message[".google.api.fieldBehavior"][i]);
+                        writer.ldelim();
+                    }
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
+                    if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
+                        $root.google.api.FieldInfo.encode(message[".google.api.fieldInfo"], writer.uint32(/* id 291403980, wireType 2 =*/2331231842).fork()).ldelim();
                     return writer;
                 };
     
@@ -51102,14 +60487,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length, error) {
+                FieldOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -51187,6 +60570,10 @@
                             }
                         case 1055: {
                                 message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 291403980: {
+                                message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -51335,6 +60722,11 @@
                         var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
                         if (error)
                             return ".google.api.resourceReference." + error;
+                    }
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo")) {
+                        var error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"]);
+                        if (error)
+                            return ".google.api.fieldInfo." + error;
                     }
                     return null;
                 };
@@ -51555,6 +60947,11 @@
                             throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
                         message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
                     }
+                    if (object[".google.api.fieldInfo"] != null) {
+                        if (typeof object[".google.api.fieldInfo"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldInfo: object expected");
+                        message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.fromObject(object[".google.api.fieldInfo"]);
+                    }
                     return message;
                 };
     
@@ -51589,6 +60986,7 @@
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
                         object[".google.api.resourceReference"] = null;
+                        object[".google.api.fieldInfo"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -51632,6 +61030,8 @@
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo"))
+                        object[".google.api.fieldInfo"] = $root.google.api.FieldInfo.toObject(message[".google.api.fieldInfo"], options);
                     return object;
                 };
     
@@ -51835,14 +61235,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length, error) {
+                    EditionDefault.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -52133,14 +61531,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length, error) {
+                OneofOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -52421,14 +61817,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length, error) {
+                EnumOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -52735,14 +62129,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length, error) {
+                EnumValueOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -52928,7 +62320,6 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
-                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -52988,14 +62379,6 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
-                 * ServiceOptions .google.api.apiVersion.
-                 * @member {string} .google.api.apiVersion
-                 * @memberof google.protobuf.ServiceOptions
-                 * @instance
-                 */
-                ServiceOptions.prototype[".google.api.apiVersion"] = "";
-    
-                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -53030,8 +62413,6 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
-                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
-                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -53059,14 +62440,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length, error) {
+                ServiceOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -53088,10 +62467,6 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
-                                break;
-                            }
-                        case 525000001: {
-                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -53152,9 +62527,6 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
-                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
-                        if (!$util.isString(message[".google.api.apiVersion"]))
-                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -53191,8 +62563,6 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
-                    if (object[".google.api.apiVersion"] != null)
-                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -53216,7 +62586,6 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
-                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -53231,8 +62600,6 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
-                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
-                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -53409,14 +62776,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length, error) {
+                MethodOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -53828,14 +63193,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length, error) {
+                UninterpretedOption.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -54169,14 +63532,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length, error) {
+                    NamePart.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -54447,14 +63808,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length, error) {
+                FeatureSet.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -54984,14 +64343,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length, error) {
+                FeatureSetDefaults.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -55370,14 +64727,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -55662,14 +65017,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length, error) {
+                SourceCodeInfo.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -55939,14 +65292,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length, error) {
+                    Location.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -56252,14 +65603,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length, error) {
+                GeneratedCodeInfo.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -56522,14 +65871,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length, error) {
+                    Annotation.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -56850,14 +66197,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length, error) {
+                Any.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type_url = reader.string();
@@ -57088,14 +66433,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length, error) {
+                Timestamp.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -57331,14 +66674,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length, error) {
+                Duration.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -57563,14 +66904,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DoubleValue.decode = function decode(reader, length, error) {
+                DoubleValue.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DoubleValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.double();
@@ -57768,14 +67107,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FloatValue.decode = function decode(reader, length, error) {
+                FloatValue.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FloatValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.float();
@@ -57973,14 +67310,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Int64Value.decode = function decode(reader, length, error) {
+                Int64Value.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int64Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.int64();
@@ -58192,14 +67527,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UInt64Value.decode = function decode(reader, length, error) {
+                UInt64Value.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt64Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.uint64();
@@ -58411,14 +67744,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Int32Value.decode = function decode(reader, length, error) {
+                Int32Value.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int32Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.int32();
@@ -58616,14 +67947,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UInt32Value.decode = function decode(reader, length, error) {
+                UInt32Value.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt32Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.uint32();
@@ -58821,14 +68150,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                BoolValue.decode = function decode(reader, length, error) {
+                BoolValue.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BoolValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.bool();
@@ -59026,14 +68353,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                StringValue.decode = function decode(reader, length, error) {
+                StringValue.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.StringValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.string();
@@ -59231,14 +68556,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                BytesValue.decode = function decode(reader, length, error) {
+                BytesValue.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BytesValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.bytes();
@@ -59434,14 +68757,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length, error) {
+                Empty.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -59624,14 +68945,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length, error) {
+                FieldMask.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -59847,14 +69166,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Struct.decode = function decode(reader, length, error) {
+                Struct.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (message.fields === $util.emptyObject)
@@ -60159,14 +69476,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Value.decode = function decode(reader, length, error) {
+                Value.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.nullValue = reader.int32();
@@ -60498,14 +69813,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListValue.decode = function decode(reader, length, error) {
+                ListValue.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ListValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.values && message.values.length))
@@ -60758,14 +70071,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Status.decode = function decode(reader, length, error) {
+                Status.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.code = reader.int32();
@@ -60934,6 +70245,279 @@
              * @namespace
              */
             var type = {};
+    
+            type.TimeOfDay = (function() {
+    
+                /**
+                 * Properties of a TimeOfDay.
+                 * @memberof google.type
+                 * @interface ITimeOfDay
+                 * @property {number|null} [hours] TimeOfDay hours
+                 * @property {number|null} [minutes] TimeOfDay minutes
+                 * @property {number|null} [seconds] TimeOfDay seconds
+                 * @property {number|null} [nanos] TimeOfDay nanos
+                 */
+    
+                /**
+                 * Constructs a new TimeOfDay.
+                 * @memberof google.type
+                 * @classdesc Represents a TimeOfDay.
+                 * @implements ITimeOfDay
+                 * @constructor
+                 * @param {google.type.ITimeOfDay=} [properties] Properties to set
+                 */
+                function TimeOfDay(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * TimeOfDay hours.
+                 * @member {number} hours
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.hours = 0;
+    
+                /**
+                 * TimeOfDay minutes.
+                 * @member {number} minutes
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.minutes = 0;
+    
+                /**
+                 * TimeOfDay seconds.
+                 * @member {number} seconds
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.seconds = 0;
+    
+                /**
+                 * TimeOfDay nanos.
+                 * @member {number} nanos
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new TimeOfDay instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.ITimeOfDay=} [properties] Properties to set
+                 * @returns {google.type.TimeOfDay} TimeOfDay instance
+                 */
+                TimeOfDay.create = function create(properties) {
+                    return new TimeOfDay(properties);
+                };
+    
+                /**
+                 * Encodes the specified TimeOfDay message. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.ITimeOfDay} message TimeOfDay message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TimeOfDay.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.hours != null && Object.hasOwnProperty.call(message, "hours"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.hours);
+                    if (message.minutes != null && Object.hasOwnProperty.call(message, "minutes"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minutes);
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified TimeOfDay message, length delimited. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.ITimeOfDay} message TimeOfDay message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TimeOfDay.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a TimeOfDay message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.TimeOfDay} TimeOfDay
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TimeOfDay.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.TimeOfDay();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.hours = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.minutes = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.seconds = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a TimeOfDay message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.TimeOfDay} TimeOfDay
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TimeOfDay.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a TimeOfDay message.
+                 * @function verify
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                TimeOfDay.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.hours != null && message.hasOwnProperty("hours"))
+                        if (!$util.isInteger(message.hours))
+                            return "hours: integer expected";
+                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                        if (!$util.isInteger(message.minutes))
+                            return "minutes: integer expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds))
+                            return "seconds: integer expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a TimeOfDay message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.TimeOfDay} TimeOfDay
+                 */
+                TimeOfDay.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.TimeOfDay)
+                        return object;
+                    var message = new $root.google.type.TimeOfDay();
+                    if (object.hours != null)
+                        message.hours = object.hours | 0;
+                    if (object.minutes != null)
+                        message.minutes = object.minutes | 0;
+                    if (object.seconds != null)
+                        message.seconds = object.seconds | 0;
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a TimeOfDay message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.TimeOfDay} message TimeOfDay
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                TimeOfDay.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.hours = 0;
+                        object.minutes = 0;
+                        object.seconds = 0;
+                        object.nanos = 0;
+                    }
+                    if (message.hours != null && message.hasOwnProperty("hours"))
+                        object.hours = message.hours;
+                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                        object.minutes = message.minutes;
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        object.seconds = message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this TimeOfDay to JSON.
+                 * @function toJSON
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                TimeOfDay.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for TimeOfDay
+                 * @function getTypeUrl
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                TimeOfDay.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.TimeOfDay";
+                };
+    
+                return TimeOfDay;
+            })();
     
             /**
              * CalendarPeriod enum.
