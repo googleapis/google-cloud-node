@@ -2917,6 +2917,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -3168,7 +3171,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -3199,7 +3202,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -4338,7 +4341,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -4354,7 +4357,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -5286,9 +5289,6 @@ export namespace google {
                         /** ConfigSync metricsGcpServiceAccountEmail. */
                         public metricsGcpServiceAccountEmail: string;
 
-                        /** ConfigSync _enabled. */
-                        public _enabled?: "enabled";
-
                         /**
                          * Creates a new ConfigSync instance using the specified properties.
                          * @param [properties] Properties to set
@@ -5675,12 +5675,6 @@ export namespace google {
 
                         /** PolicyController logDeniesEnabled. */
                         public logDeniesEnabled: boolean;
-
-                        /** PolicyController _templateLibraryInstalled. */
-                        public _templateLibraryInstalled?: "templateLibraryInstalled";
-
-                        /** PolicyController _auditIntervalSeconds. */
-                        public _auditIntervalSeconds?: "auditIntervalSeconds";
 
                         /**
                          * Creates a new PolicyController instance using the specified properties.
@@ -8248,12 +8242,6 @@ export namespace google {
                         /** PolicyController mutationEnabled. */
                         public mutationEnabled: boolean;
 
-                        /** PolicyController _templateLibraryInstalled. */
-                        public _templateLibraryInstalled?: "templateLibraryInstalled";
-
-                        /** PolicyController _auditIntervalSeconds. */
-                        public _auditIntervalSeconds?: "auditIntervalSeconds";
-
                         /**
                          * Creates a new PolicyController instance using the specified properties.
                          * @param [properties] Properties to set
@@ -10744,9 +10732,6 @@ export namespace google {
                         /** ConfigSync stopSyncing. */
                         public stopSyncing: boolean;
 
-                        /** ConfigSync _enabled. */
-                        public _enabled?: "enabled";
-
                         /**
                          * Creates a new ConfigSync instance using the specified properties.
                          * @param [properties] Properties to set
@@ -11151,12 +11136,6 @@ export namespace google {
 
                         /** PolicyController updateTime. */
                         public updateTime?: (google.protobuf.ITimestamp|null);
-
-                        /** PolicyController _templateLibraryInstalled. */
-                        public _templateLibraryInstalled?: "templateLibraryInstalled";
-
-                        /** PolicyController _auditIntervalSeconds. */
-                        public _auditIntervalSeconds?: "auditIntervalSeconds";
 
                         /**
                          * Creates a new PolicyController instance using the specified properties.
@@ -15611,7 +15590,7 @@ export namespace google {
                     identityProvider?: (string|null);
 
                     /** Authority oidcJwks */
-                    oidcJwks?: (Uint8Array|string|null);
+                    oidcJwks?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents an Authority. */
@@ -15633,7 +15612,7 @@ export namespace google {
                     public identityProvider: string;
 
                     /** Authority oidcJwks. */
-                    public oidcJwks: (Uint8Array|string);
+                    public oidcJwks: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new Authority instance using the specified properties.
@@ -16644,7 +16623,7 @@ export namespace google {
                     namespace?: (string|null);
 
                     /** GenerateConnectManifestRequest proxy */
-                    proxy?: (Uint8Array|string|null);
+                    proxy?: (Uint8Array|Buffer|string|null);
 
                     /** GenerateConnectManifestRequest version */
                     version?: (string|null);
@@ -16656,7 +16635,7 @@ export namespace google {
                     registry?: (string|null);
 
                     /** GenerateConnectManifestRequest imagePullSecretContent */
-                    imagePullSecretContent?: (Uint8Array|string|null);
+                    imagePullSecretContent?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a GenerateConnectManifestRequest. */
@@ -16675,7 +16654,7 @@ export namespace google {
                     public namespace: string;
 
                     /** GenerateConnectManifestRequest proxy. */
-                    public proxy: (Uint8Array|string);
+                    public proxy: (Uint8Array|Buffer|string);
 
                     /** GenerateConnectManifestRequest version. */
                     public version: string;
@@ -16687,7 +16666,7 @@ export namespace google {
                     public registry: string;
 
                     /** GenerateConnectManifestRequest imagePullSecretContent. */
-                    public imagePullSecretContent: (Uint8Array|string);
+                    public imagePullSecretContent: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new GenerateConnectManifestRequest instance using the specified properties.
@@ -22681,7 +22660,7 @@ export namespace google {
                     issuer?: (string|null);
 
                     /** Authority oidcJwks */
-                    oidcJwks?: (Uint8Array|string|null);
+                    oidcJwks?: (Uint8Array|Buffer|string|null);
 
                     /** Authority identityProvider */
                     identityProvider?: (string|null);
@@ -22703,7 +22682,7 @@ export namespace google {
                     public issuer: string;
 
                     /** Authority oidcJwks. */
-                    public oidcJwks: (Uint8Array|string);
+                    public oidcJwks: (Uint8Array|Buffer|string);
 
                     /** Authority identityProvider. */
                     public identityProvider: string;
@@ -23551,7 +23530,7 @@ export namespace google {
                     namespace?: (string|null);
 
                     /** GenerateConnectManifestRequest proxy */
-                    proxy?: (Uint8Array|string|null);
+                    proxy?: (Uint8Array|Buffer|string|null);
 
                     /** GenerateConnectManifestRequest version */
                     version?: (string|null);
@@ -23563,7 +23542,7 @@ export namespace google {
                     registry?: (string|null);
 
                     /** GenerateConnectManifestRequest imagePullSecretContent */
-                    imagePullSecretContent?: (Uint8Array|string|null);
+                    imagePullSecretContent?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a GenerateConnectManifestRequest. */
@@ -23582,7 +23561,7 @@ export namespace google {
                     public namespace: string;
 
                     /** GenerateConnectManifestRequest proxy. */
-                    public proxy: (Uint8Array|string);
+                    public proxy: (Uint8Array|Buffer|string);
 
                     /** GenerateConnectManifestRequest version. */
                     public version: string;
@@ -23594,7 +23573,7 @@ export namespace google {
                     public registry: string;
 
                     /** GenerateConnectManifestRequest imagePullSecretContent. */
-                    public imagePullSecretContent: (Uint8Array|string);
+                    public imagePullSecretContent: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new GenerateConnectManifestRequest instance using the specified properties.
@@ -24831,18 +24810,6 @@ export namespace google {
                         /** HubConfig deploymentConfigs. */
                         public deploymentConfigs: { [k: string]: google.cloud.gkehub.policycontroller.v1beta.IPolicyControllerDeploymentConfig };
 
-                        /** HubConfig _auditIntervalSeconds. */
-                        public _auditIntervalSeconds?: "auditIntervalSeconds";
-
-                        /** HubConfig _monitoring. */
-                        public _monitoring?: "monitoring";
-
-                        /** HubConfig _policyContent. */
-                        public _policyContent?: "policyContent";
-
-                        /** HubConfig _constraintViolationLimit. */
-                        public _constraintViolationLimit?: "constraintViolationLimit";
-
                         /**
                          * Creates a new HubConfig instance using the specified properties.
                          * @param [properties] Properties to set
@@ -24976,15 +24943,6 @@ export namespace google {
                         /** PolicyControllerDeploymentConfig podAffinity. */
                         public podAffinity: (google.cloud.gkehub.policycontroller.v1beta.PolicyControllerDeploymentConfig.Affinity|keyof typeof google.cloud.gkehub.policycontroller.v1beta.PolicyControllerDeploymentConfig.Affinity);
 
-                        /** PolicyControllerDeploymentConfig _replicaCount. */
-                        public _replicaCount?: "replicaCount";
-
-                        /** PolicyControllerDeploymentConfig _containerResources. */
-                        public _containerResources?: "containerResources";
-
-                        /** PolicyControllerDeploymentConfig _podAntiAffinity. */
-                        public _podAntiAffinity?: "podAntiAffinity";
-
                         /**
                          * Creates a new PolicyControllerDeploymentConfig instance using the specified properties.
                          * @param [properties] Properties to set
@@ -25102,18 +25060,6 @@ export namespace google {
                             /** Toleration effect. */
                             public effect?: (string|null);
 
-                            /** Toleration _key. */
-                            public _key?: "key";
-
-                            /** Toleration _operator. */
-                            public _operator?: "operator";
-
-                            /** Toleration _value. */
-                            public _value?: "value";
-
-                            /** Toleration _effect. */
-                            public _effect?: "effect";
-
                             /**
                              * Creates a new Toleration instance using the specified properties.
                              * @param [properties] Properties to set
@@ -25225,12 +25171,6 @@ export namespace google {
                         /** ResourceRequirements requests. */
                         public requests?: (google.cloud.gkehub.policycontroller.v1beta.IResourceList|null);
 
-                        /** ResourceRequirements _limits. */
-                        public _limits?: "limits";
-
-                        /** ResourceRequirements _requests. */
-                        public _requests?: "requests";
-
                         /**
                          * Creates a new ResourceRequirements instance using the specified properties.
                          * @param [properties] Properties to set
@@ -25333,12 +25273,6 @@ export namespace google {
 
                         /** ResourceList cpu. */
                         public cpu?: (string|null);
-
-                        /** ResourceList _memory. */
-                        public _memory?: "memory";
-
-                        /** ResourceList _cpu. */
-                        public _cpu?: "cpu";
 
                         /**
                          * Creates a new ResourceList instance using the specified properties.
@@ -29190,7 +29124,7 @@ export namespace google {
                     identityProvider?: (string|null);
 
                     /** Authority oidcJwks */
-                    oidcJwks?: (Uint8Array|string|null);
+                    oidcJwks?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents an Authority. */
@@ -29212,7 +29146,7 @@ export namespace google {
                     public identityProvider: string;
 
                     /** Authority oidcJwks. */
-                    public oidcJwks: (Uint8Array|string);
+                    public oidcJwks: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new Authority instance using the specified properties.
@@ -30220,7 +30154,7 @@ export namespace google {
                     registry?: (string|null);
 
                     /** GenerateConnectManifestRequest imagePullSecretContent */
-                    imagePullSecretContent?: (Uint8Array|string|null);
+                    imagePullSecretContent?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a GenerateConnectManifestRequest. */
@@ -30248,7 +30182,7 @@ export namespace google {
                     public registry: string;
 
                     /** GenerateConnectManifestRequest imagePullSecretContent. */
-                    public imagePullSecretContent: (Uint8Array|string);
+                    public imagePullSecretContent: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new GenerateConnectManifestRequest instance using the specified properties.
@@ -30638,7 +30572,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** ConnectAgent proxy */
-                    proxy?: (Uint8Array|string|null);
+                    proxy?: (Uint8Array|Buffer|string|null);
 
                     /** ConnectAgent namespace */
                     namespace?: (string|null);
@@ -30657,7 +30591,7 @@ export namespace google {
                     public name: string;
 
                     /** ConnectAgent proxy. */
-                    public proxy: (Uint8Array|string);
+                    public proxy: (Uint8Array|Buffer|string);
 
                     /** ConnectAgent namespace. */
                     public namespace: string;
@@ -32214,6 +32148,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -32254,6 +32191,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.

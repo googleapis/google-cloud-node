@@ -4916,9 +4916,13 @@ export class DataprocMetastoreClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.iamClient.close().catch(err => {
+          throw err;
+        });
+        this.locationsClient.close().catch(err => {
+          throw err;
+        });
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

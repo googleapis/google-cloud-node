@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const filestore = require('@google-cloud/filestore');
 
 function main() {
-  const cloudFilestoreManagerClient =
-    new filestore.CloudFilestoreManagerClient();
+  const cloudFilestoreManagerClient = new filestore.CloudFilestoreManagerClient();
 }
 
 main();

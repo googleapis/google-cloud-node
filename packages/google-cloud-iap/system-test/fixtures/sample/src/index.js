@@ -16,14 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const iap = require('@google-cloud/iap');
 
 function main() {
-  const identityAwareProxyAdminServiceClient =
-    new iap.IdentityAwareProxyAdminServiceClient();
-  const identityAwareProxyOAuthServiceClient =
-    new iap.IdentityAwareProxyOAuthServiceClient();
+  const identityAwareProxyAdminServiceClient = new iap.IdentityAwareProxyAdminServiceClient();
+  const identityAwareProxyOAuthServiceClient = new iap.IdentityAwareProxyOAuthServiceClient();
 }
 
 main();
