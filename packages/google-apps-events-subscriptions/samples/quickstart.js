@@ -75,13 +75,17 @@ function main(filter) {
   async function callListSubscriptions() {
     // Construct request
     const request = {
-      filter,
+      filter: 'event_types:"google.workspace.chat.membership.v1.updated"',
     };
 
+    try {
     // Run request
-    const iterable = subscriptionsClient.listSubscriptionsAsync(request);
-    for await (const response of iterable) {
-      console.log(response);
+      const iterable = subscriptionsClient.listSubscriptionsAsync(request);
+      for await (const response of iterable) {
+        console.log(response);
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
 
