@@ -32353,6 +32353,7 @@
                          * @interface IDocument
                          * @property {string|null} [uri] Document uri
                          * @property {Uint8Array|null} [content] Document content
+                         * @property {string|null} [docid] Document docid
                          * @property {string|null} [mimeType] Document mimeType
                          * @property {string|null} [text] Document text
                          * @property {Array.<google.cloud.documentai.v1.Document.IStyle>|null} [textStyles] Document textStyles
@@ -32403,6 +32404,14 @@
                          * @instance
                          */
                         Document.prototype.content = null;
+    
+                        /**
+                         * Document docid.
+                         * @member {string} docid
+                         * @memberof google.cloud.documentai.v1.Document
+                         * @instance
+                         */
+                        Document.prototype.docid = "";
     
                         /**
                          * Document mimeType.
@@ -32568,6 +32577,8 @@
                             if (message.textChanges != null && message.textChanges.length)
                                 for (var i = 0; i < message.textChanges.length; ++i)
                                     $root.google.cloud.documentai.v1.Document.TextChange.encode(message.textChanges[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.docid != null && Object.hasOwnProperty.call(message, "docid"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.docid);
                             if (message.documentLayout != null && Object.hasOwnProperty.call(message, "documentLayout"))
                                 $root.google.cloud.documentai.v1.Document.DocumentLayout.encode(message.documentLayout, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             if (message.chunkedDocument != null && Object.hasOwnProperty.call(message, "chunkedDocument"))
@@ -32612,6 +32623,10 @@
                                     }
                                 case 2: {
                                         message.content = reader.bytes();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.docid = reader.string();
                                         break;
                                     }
                                 case 3: {
@@ -32722,6 +32737,9 @@
                                 if (!(message.content && typeof message.content.length === "number" || $util.isString(message.content)))
                                     return "content: buffer expected";
                             }
+                            if (message.docid != null && message.hasOwnProperty("docid"))
+                                if (!$util.isString(message.docid))
+                                    return "docid: string expected";
                             if (message.mimeType != null && message.hasOwnProperty("mimeType"))
                                 if (!$util.isString(message.mimeType))
                                     return "mimeType: string expected";
@@ -32824,6 +32842,8 @@
                                     $util.base64.decode(object.content, message.content = $util.newBuffer($util.base64.length(object.content)), 0);
                                 else if (object.content.length >= 0)
                                     message.content = object.content;
+                            if (object.docid != null)
+                                message.docid = String(object.docid);
                             if (object.mimeType != null)
                                 message.mimeType = String(object.mimeType);
                             if (object.text != null)
@@ -32937,6 +32957,7 @@
                                 object.text = "";
                                 object.shardInfo = null;
                                 object.error = null;
+                                object.docid = "";
                                 object.documentLayout = null;
                                 object.chunkedDocument = null;
                             }
@@ -32988,6 +33009,8 @@
                                 for (var j = 0; j < message.textChanges.length; ++j)
                                     object.textChanges[j] = $root.google.cloud.documentai.v1.Document.TextChange.toObject(message.textChanges[j], options);
                             }
+                            if (message.docid != null && message.hasOwnProperty("docid"))
+                                object.docid = message.docid;
                             if (message.documentLayout != null && message.hasOwnProperty("documentLayout"))
                                 object.documentLayout = $root.google.cloud.documentai.v1.Document.DocumentLayout.toObject(message.documentLayout, options);
                             if (message.chunkedDocument != null && message.hasOwnProperty("chunkedDocument"))
@@ -44725,6 +44748,7 @@
                                  * @property {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.ILayoutListBlock|null} [listBlock] DocumentLayoutBlock listBlock
                                  * @property {string|null} [blockId] DocumentLayoutBlock blockId
                                  * @property {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.ILayoutPageSpan|null} [pageSpan] DocumentLayoutBlock pageSpan
+                                 * @property {google.cloud.documentai.v1.IBoundingPoly|null} [boundingBox] DocumentLayoutBlock boundingBox
                                  */
     
                                 /**
@@ -44782,6 +44806,14 @@
                                  */
                                 DocumentLayoutBlock.prototype.pageSpan = null;
     
+                                /**
+                                 * DocumentLayoutBlock boundingBox.
+                                 * @member {google.cloud.documentai.v1.IBoundingPoly|null|undefined} boundingBox
+                                 * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock
+                                 * @instance
+                                 */
+                                DocumentLayoutBlock.prototype.boundingBox = null;
+    
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
@@ -44830,6 +44862,8 @@
                                         $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutListBlock.encode(message.listBlock, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                     if (message.pageSpan != null && Object.hasOwnProperty.call(message, "pageSpan"))
                                         $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutPageSpan.encode(message.pageSpan, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                    if (message.boundingBox != null && Object.hasOwnProperty.call(message, "boundingBox"))
+                                        $root.google.cloud.documentai.v1.BoundingPoly.encode(message.boundingBox, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -44882,6 +44916,10 @@
                                             }
                                         case 5: {
                                                 message.pageSpan = $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutPageSpan.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.boundingBox = $root.google.cloud.documentai.v1.BoundingPoly.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         default:
@@ -44956,6 +44994,11 @@
                                         if (error)
                                             return "pageSpan." + error;
                                     }
+                                    if (message.boundingBox != null && message.hasOwnProperty("boundingBox")) {
+                                        var error = $root.google.cloud.documentai.v1.BoundingPoly.verify(message.boundingBox);
+                                        if (error)
+                                            return "boundingBox." + error;
+                                    }
                                     return null;
                                 };
     
@@ -44993,6 +45036,11 @@
                                             throw TypeError(".google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.pageSpan: object expected");
                                         message.pageSpan = $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutPageSpan.fromObject(object.pageSpan);
                                     }
+                                    if (object.boundingBox != null) {
+                                        if (typeof object.boundingBox !== "object")
+                                            throw TypeError(".google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.boundingBox: object expected");
+                                        message.boundingBox = $root.google.cloud.documentai.v1.BoundingPoly.fromObject(object.boundingBox);
+                                    }
                                     return message;
                                 };
     
@@ -45012,6 +45060,7 @@
                                     if (options.defaults) {
                                         object.blockId = "";
                                         object.pageSpan = null;
+                                        object.boundingBox = null;
                                     }
                                     if (message.blockId != null && message.hasOwnProperty("blockId"))
                                         object.blockId = message.blockId;
@@ -45032,6 +45081,8 @@
                                     }
                                     if (message.pageSpan != null && message.hasOwnProperty("pageSpan"))
                                         object.pageSpan = $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutPageSpan.toObject(message.pageSpan, options);
+                                    if (message.boundingBox != null && message.hasOwnProperty("boundingBox"))
+                                        object.boundingBox = $root.google.cloud.documentai.v1.BoundingPoly.toObject(message.boundingBox, options);
                                     return object;
                                 };
     

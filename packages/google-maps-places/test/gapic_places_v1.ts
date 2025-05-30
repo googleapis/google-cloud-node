@@ -191,9 +191,14 @@ describe('v1.PlacesClient', () => {
         throw err;
       });
       assert(client.placesStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -202,9 +207,14 @@ describe('v1.PlacesClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.placesStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -320,7 +330,9 @@ describe('v1.PlacesClient', () => {
         new protos.google.maps.places.v1.SearchNearbyRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.searchNearby(request), expectedError);
     });
   });
@@ -403,7 +415,9 @@ describe('v1.PlacesClient', () => {
         new protos.google.maps.places.v1.SearchTextRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.searchText(request), expectedError);
     });
   });
@@ -533,7 +547,9 @@ describe('v1.PlacesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPhotoMedia(request), expectedError);
     });
   });
@@ -660,7 +676,9 @@ describe('v1.PlacesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPlace(request), expectedError);
     });
   });
@@ -744,7 +762,9 @@ describe('v1.PlacesClient', () => {
         new protos.google.maps.places.v1.AutocompletePlacesRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.autocompletePlaces(request), expectedError);
     });
   });

@@ -29,8 +29,7 @@ function main(parent, case) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the Google Cloud Resource under which the case should
-   *  be created.
+   *  Required. The name of the parent under which the case should be created.
    */
   // const parent = 'abc123'
   /**

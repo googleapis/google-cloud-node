@@ -272,9 +272,14 @@ describe('v1.DocumentSchemaServiceClient', () => {
         throw err;
       });
       assert(client.documentSchemaServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -284,9 +289,14 @@ describe('v1.DocumentSchemaServiceClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.documentSchemaServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -456,7 +466,9 @@ describe('v1.DocumentSchemaServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createDocumentSchema(request), expectedError);
     });
   });
@@ -591,7 +603,9 @@ describe('v1.DocumentSchemaServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateDocumentSchema(request), expectedError);
     });
   });
@@ -725,7 +739,9 @@ describe('v1.DocumentSchemaServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDocumentSchema(request), expectedError);
     });
   });
@@ -860,7 +876,9 @@ describe('v1.DocumentSchemaServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteDocumentSchema(request), expectedError);
     });
   });

@@ -269,9 +269,14 @@ describe('v1.PlacementServiceClient', () => {
         throw err;
       });
       assert(client.placementServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -280,9 +285,14 @@ describe('v1.PlacementServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.placementServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -445,7 +455,9 @@ describe('v1.PlacementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPlacement(request), expectedError);
     });
   });

@@ -160,6 +160,10 @@ function main(location) {
    */
   // const trajectorySingleToolUseInput = {}
   /**
+   *  Rubric Based Instruction Following metric.
+   */
+  // const rubricBasedInstructionFollowingInput = {}
+  /**
    *  Required. The resource name of the Location to evaluate the instances.
    *  Format: `projects/{project}/locations/{location}`
    */

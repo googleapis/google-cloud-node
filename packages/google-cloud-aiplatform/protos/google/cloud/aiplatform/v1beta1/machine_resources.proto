@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -57,6 +57,13 @@ message MachineSpec {
   // Immutable. The topology of the TPUs. Corresponds to the TPU topologies
   // available from GKE. (Example: tpu_topology: "2x2x1").
   string tpu_topology = 4 [(google.api.field_behavior) = IMMUTABLE];
+
+  // Optional. Immutable. The number of nodes per replica for multihost GPU
+  // deployments.
+  int32 multihost_gpu_node_count = 6 [
+    (google.api.field_behavior) = IMMUTABLE,
+    (google.api.field_behavior) = OPTIONAL
+  ];
 
   // Optional. Immutable. Configuration controlling how this resource pool
   // consumes reservation.

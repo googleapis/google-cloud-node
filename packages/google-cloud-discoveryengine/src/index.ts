@@ -53,47 +53,7 @@ type SiteSearchEngineServiceClient = v1.SiteSearchEngineServiceClient;
 const UserEventServiceClient = v1.UserEventServiceClient;
 type UserEventServiceClient = v1.UserEventServiceClient;
 
-export {
-  v1,
-  v1alpha,
-  v1beta,
-  CompletionServiceClient,
-  ControlServiceClient,
-  ConversationalSearchServiceClient,
-  DataStoreServiceClient,
-  DocumentServiceClient,
-  EngineServiceClient,
-  GroundedGenerationServiceClient,
-  ProjectServiceClient,
-  RankServiceClient,
-  RecommendationServiceClient,
-  SchemaServiceClient,
-  SearchServiceClient,
-  SearchTuningServiceClient,
-  ServingConfigServiceClient,
-  SiteSearchEngineServiceClient,
-  UserEventServiceClient,
-};
-export default {
-  v1,
-  v1alpha,
-  v1beta,
-  CompletionServiceClient,
-  ControlServiceClient,
-  ConversationalSearchServiceClient,
-  DataStoreServiceClient,
-  DocumentServiceClient,
-  EngineServiceClient,
-  GroundedGenerationServiceClient,
-  ProjectServiceClient,
-  RankServiceClient,
-  RecommendationServiceClient,
-  SchemaServiceClient,
-  SearchServiceClient,
-  SearchTuningServiceClient,
-  ServingConfigServiceClient,
-  SiteSearchEngineServiceClient,
-  UserEventServiceClient,
-};
+export {v1, v1alpha, v1beta, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, DataStoreServiceClient, DocumentServiceClient, EngineServiceClient, GroundedGenerationServiceClient, ProjectServiceClient, RankServiceClient, RecommendationServiceClient, SchemaServiceClient, SearchServiceClient, SearchTuningServiceClient, ServingConfigServiceClient, SiteSearchEngineServiceClient, UserEventServiceClient};
+export default {v1, v1alpha, v1beta, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, DataStoreServiceClient, DocumentServiceClient, EngineServiceClient, GroundedGenerationServiceClient, ProjectServiceClient, RankServiceClient, RecommendationServiceClient, SchemaServiceClient, SearchServiceClient, SearchTuningServiceClient, ServingConfigServiceClient, SiteSearchEngineServiceClient, UserEventServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

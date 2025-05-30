@@ -191,9 +191,14 @@ describe('v1.SolarClient', () => {
         throw err;
       });
       assert(client.solarStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -202,9 +207,14 @@ describe('v1.SolarClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.solarStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -324,7 +334,9 @@ describe('v1.SolarClient', () => {
         new protos.google.maps.solar.v1.FindClosestBuildingInsightsRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.findClosestBuildingInsights(request),
         expectedError
@@ -410,7 +422,9 @@ describe('v1.SolarClient', () => {
         new protos.google.maps.solar.v1.GetDataLayersRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDataLayers(request), expectedError);
     });
   });
@@ -490,7 +504,9 @@ describe('v1.SolarClient', () => {
         new protos.google.maps.solar.v1.GetGeoTiffRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getGeoTiff(request), expectedError);
     });
   });

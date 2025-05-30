@@ -35,6 +35,21 @@
                 "getPartner"
               ]
             },
+            "CreateCustomer": {
+              "methods": [
+                "createCustomer"
+              ]
+            },
+            "UpdateCustomer": {
+              "methods": [
+                "updateCustomer"
+              ]
+            },
+            "DeleteCustomer": {
+              "methods": [
+                "deleteCustomer"
+              ]
+            },
             "ListWorkloads": {
               "methods": [
                 "listWorkloads",
@@ -84,6 +99,21 @@
             "GetPartner": {
               "methods": [
                 "getPartner"
+              ]
+            },
+            "CreateCustomer": {
+              "methods": [
+                "createCustomer"
+              ]
+            },
+            "UpdateCustomer": {
+              "methods": [
+                "updateCustomer"
+              ]
+            },
+            "DeleteCustomer": {
+              "methods": [
+                "deleteCustomer"
               ]
             },
             "ListWorkloads": {

@@ -21,6 +21,7 @@ const alloydb = require('@google-cloud/alloydb');
 
 function main() {
   const alloyDBAdminClient = new alloydb.AlloyDBAdminClient();
+  const alloyDBCSQLAdminClient = new alloydb.AlloyDBCSQLAdminClient();
 }
 
 main();

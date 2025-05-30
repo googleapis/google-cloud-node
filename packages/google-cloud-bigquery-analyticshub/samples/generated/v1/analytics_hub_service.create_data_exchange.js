@@ -30,12 +30,12 @@ function main(parent, dataExchangeId, dataExchange) {
    */
   /**
    *  Required. The parent resource path of the data exchange.
-   *  e.g. `projects/myproject/locations/US`.
+   *  e.g. `projects/myproject/locations/us`.
    */
   // const parent = 'abc123'
   /**
    *  Required. The ID of the data exchange.
-   *  Must contain only ASCII letters, numbers (0-9), underscores (_).
+   *  Must contain only Unicode letters, numbers (0-9), underscores (_).
    *  Max length: 100 bytes.
    */
   // const dataExchangeId = 'abc123'

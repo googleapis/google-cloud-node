@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/cloud/aiplatform/v1beta1/openapi.proto";
 import "google/cloud/aiplatform/v1beta1/tool.proto";
+import "google/cloud/aiplatform/v1beta1/vertex_rag_data.proto";
 import "google/protobuf/duration.proto";
 import "google/type/date.proto";
 
@@ -235,6 +236,35 @@ message GenerationConfig {
     }
   }
 
+  // Config for thinking features.
+  message ThinkingConfig {
+    // Optional. Indicates the thinking budget in tokens.
+    // This is only applied when enable_thinking is true.
+    optional int32 thinking_budget = 3 [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // Config for model selection.
+  message ModelConfig {
+    // Options for feature selection preference.
+    enum FeatureSelectionPreference {
+      // Unspecified feature selection preference.
+      FEATURE_SELECTION_PREFERENCE_UNSPECIFIED = 0;
+
+      // Prefer higher quality over lower cost.
+      PRIORITIZE_QUALITY = 1;
+
+      // Balanced feature selection preference.
+      BALANCED = 2;
+
+      // Prefer lower cost over higher quality.
+      PRIORITIZE_COST = 3;
+    }
+
+    // Required. Feature selection preference.
+    FeatureSelectionPreference feature_selection_preference = 1
+        [(google.api.field_behavior) = REQUIRED];
+  }
+
   // The modalities of the response.
   enum Modality {
     // Unspecified modality. Will be processed as text.
@@ -335,6 +365,14 @@ message GenerationConfig {
   // Optional. The speech generation config.
   optional SpeechConfig speech_config = 23
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Config for thinking features.
+  // An error will be returned if this field is set for models that don't
+  // support thinking.
+  ThinkingConfig thinking_config = 25 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Config for model selection.
+  ModelConfig model_config = 27 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Safety settings.
@@ -606,6 +644,13 @@ message GroundingChunk {
 
   // Chunk from context retrieved by the retrieval tools.
   message RetrievedContext {
+    // Tool-specific details about the retrieved context.
+    oneof context_details {
+      // Additional context for the RAG retrieval result. This is only populated
+      // when using the RAG retrieval tool.
+      RagChunk rag_chunk = 4;
+    }
+
     // URI reference of the attribution.
     optional string uri = 1;
 

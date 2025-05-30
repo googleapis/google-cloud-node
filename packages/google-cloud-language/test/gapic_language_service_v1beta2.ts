@@ -195,9 +195,14 @@ describe('v1beta2.LanguageServiceClient', () => {
         throw err;
       });
       assert(client.languageServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -206,9 +211,14 @@ describe('v1beta2.LanguageServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.languageServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -324,7 +334,9 @@ describe('v1beta2.LanguageServiceClient', () => {
         new protos.google.cloud.language.v1beta2.AnalyzeSentimentRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.analyzeSentiment(request), expectedError);
     });
   });
@@ -407,7 +419,9 @@ describe('v1beta2.LanguageServiceClient', () => {
         new protos.google.cloud.language.v1beta2.AnalyzeEntitiesRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.analyzeEntities(request), expectedError);
     });
   });
@@ -494,7 +508,9 @@ describe('v1beta2.LanguageServiceClient', () => {
         new protos.google.cloud.language.v1beta2.AnalyzeEntitySentimentRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.analyzeEntitySentiment(request),
         expectedError
@@ -580,7 +596,9 @@ describe('v1beta2.LanguageServiceClient', () => {
         new protos.google.cloud.language.v1beta2.AnalyzeSyntaxRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.analyzeSyntax(request), expectedError);
     });
   });
@@ -663,7 +681,9 @@ describe('v1beta2.LanguageServiceClient', () => {
         new protos.google.cloud.language.v1beta2.ClassifyTextRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.classifyText(request), expectedError);
     });
   });
@@ -746,7 +766,9 @@ describe('v1beta2.LanguageServiceClient', () => {
         new protos.google.cloud.language.v1beta2.ModerateTextRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.moderateText(request), expectedError);
     });
   });
@@ -829,7 +851,9 @@ describe('v1beta2.LanguageServiceClient', () => {
         new protos.google.cloud.language.v1beta2.AnnotateTextRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.annotateText(request), expectedError);
     });
   });
