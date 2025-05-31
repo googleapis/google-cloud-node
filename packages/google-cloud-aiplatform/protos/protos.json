@@ -3014,6 +3014,11 @@
                             "responseSchema"
                           ]
                         },
+                        "_responseJsonSchema": {
+                          "oneof": [
+                            "responseJsonSchema"
+                          ]
+                        },
                         "_routingConfig": {
                           "oneof": [
                             "routingConfig"
@@ -3119,6 +3124,14 @@
                         "responseSchema": {
                           "type": "Schema",
                           "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "responseJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 28,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -4074,6 +4087,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "urlContext": {
+                          "type": "UrlContext",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -4084,6 +4104,9 @@
                           "fields": {}
                         }
                       }
+                    },
+                    "UrlContext": {
+                      "fields": {}
                     },
                     "FunctionDeclaration": {
                       "fields": {
@@ -4108,9 +4131,23 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "parametersJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "response": {
                           "type": "Schema",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "responseJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5411,6 +5448,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "pscInterfaceConfig": {
+                          "type": "PscInterfaceConfig",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "baseOutputDirectory": {
                           "type": "GcsDestination",
                           "id": 6
@@ -5625,6 +5669,75 @@
                             "STANDARD": 3,
                             "SPOT": 4,
                             "FLEX_START": 6
+                          }
+                        }
+                      }
+                    },
+                    "PSCAutomationConfig": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PrivateServiceConnectConfig": {
+                      "fields": {
+                        "enablePrivateServiceConnect": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "projectAllowlist": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "serviceAttachment": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "PscAutomatedEndpoints": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "matchAddress": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PscInterfaceConfig": {
+                      "fields": {
+                        "networkAttachment": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/NetworkAttachment"
                           }
                         }
                       }
@@ -8178,63 +8291,6 @@
                               "id": 1
                             }
                           }
-                        }
-                      }
-                    },
-                    "PSCAutomationConfig": {
-                      "fields": {
-                        "projectId": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "network": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "PrivateServiceConnectConfig": {
-                      "fields": {
-                        "enablePrivateServiceConnect": {
-                          "type": "bool",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "projectAllowlist": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        },
-                        "serviceAttachment": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "PscAutomatedEndpoints": {
-                      "fields": {
-                        "projectId": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "network": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "matchAddress": {
-                          "type": "string",
-                          "id": 3
                         }
                       }
                     },
@@ -28924,6 +28980,13 @@
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
                         },
+                        "pscInterfaceConfig": {
+                          "type": "PscInterfaceConfig",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 12,
@@ -29580,6 +29643,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 25
+                        },
+                        "pscInterfaceConfig": {
+                          "type": "PscInterfaceConfig",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "templateUri": {
                           "type": "string",
@@ -40027,7 +40097,14 @@
                           "type": "bool",
                           "id": 10,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "thoughtSignature": {
+                          "type": "bytes",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -40435,6 +40512,11 @@
                         },
                         "ThinkingConfig": {
                           "oneofs": {
+                            "_includeThoughts": {
+                              "oneof": [
+                                "includeThoughts"
+                              ]
+                            },
                             "_thinkingBudget": {
                               "oneof": [
                                 "thinkingBudget"
@@ -40442,6 +40524,14 @@
                             }
                           },
                           "fields": {
+                            "includeThoughts": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
                             "thinkingBudget": {
                               "type": "int32",
                               "id": 3,
@@ -41323,6 +41413,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "urlContext": {
+                          "type": "UrlContext",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -41333,6 +41430,9 @@
                           "fields": {}
                         }
                       }
+                    },
+                    "UrlContext": {
+                      "fields": {}
                     },
                     "ToolUseExample": {
                       "oneofs": {

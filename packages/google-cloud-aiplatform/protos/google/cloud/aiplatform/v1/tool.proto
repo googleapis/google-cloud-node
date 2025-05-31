@@ -84,7 +84,13 @@ message Tool {
   // Optional. CodeExecution tool type.
   // Enables the model to execute code as part of generation.
   CodeExecution code_execution = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Tool to support URL context retrieval.
+  UrlContext url_context = 8 [(google.api.field_behavior) = OPTIONAL];
 }
+
+// Tool to support URL context.
+message UrlContext {}
 
 // Structured representation of a function declaration as defined by the
 // [OpenAPI 3.0 specification](https://spec.openapis.org/oas/v3.0.3). Included
@@ -118,10 +124,38 @@ message FunctionDeclaration {
   //  - param1
   Schema parameters = 3 [(google.api.field_behavior) = OPTIONAL];
 
+  // Optional. Describes the parameters to the function in JSON Schema format.
+  // The schema must describe an object where the properties are the parameters
+  // to the function. For example:
+  //
+  // ```
+  // {
+  //   "type": "object",
+  //   "properties": {
+  //     "name": { "type": "string" },
+  //     "age": { "type": "integer" }
+  //   },
+  //   "additionalProperties": false,
+  //   "required": ["name", "age"],
+  //   "propertyOrdering": ["name", "age"]
+  // }
+  // ```
+  //
+  // This field is mutually exclusive with `parameters`.
+  google.protobuf.Value parameters_json_schema = 5
+      [(google.api.field_behavior) = OPTIONAL];
+
   // Optional. Describes the output from this function in JSON Schema format.
   // Reflects the Open API 3.03 Response Object. The Schema defines the type
   // used for the response value of the function.
   Schema response = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Describes the output from this function in JSON Schema format.
+  // The value specified by the schema is the response value of the function.
+  //
+  // This field is mutually exclusive with `response`.
+  google.protobuf.Value response_json_schema = 6
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // A predicted [FunctionCall] returned from the model that contains a string
