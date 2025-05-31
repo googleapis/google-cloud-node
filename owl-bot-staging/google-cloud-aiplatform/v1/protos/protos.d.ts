@@ -11766,6 +11766,9 @@ export namespace google {
                     /** GenerationConfig responseSchema */
                     responseSchema?: (google.cloud.aiplatform.v1.ISchema|null);
 
+                    /** GenerationConfig responseJsonSchema */
+                    responseJsonSchema?: (google.protobuf.IValue|null);
+
                     /** GenerationConfig routingConfig */
                     routingConfig?: (google.cloud.aiplatform.v1.GenerationConfig.IRoutingConfig|null);
 
@@ -11821,6 +11824,9 @@ export namespace google {
                     /** GenerationConfig responseSchema. */
                     public responseSchema?: (google.cloud.aiplatform.v1.ISchema|null);
 
+                    /** GenerationConfig responseJsonSchema. */
+                    public responseJsonSchema?: (google.protobuf.IValue|null);
+
                     /** GenerationConfig routingConfig. */
                     public routingConfig?: (google.cloud.aiplatform.v1.GenerationConfig.IRoutingConfig|null);
 
@@ -11859,6 +11865,9 @@ export namespace google {
 
                     /** GenerationConfig _responseSchema. */
                     public _responseSchema?: "responseSchema";
+
+                    /** GenerationConfig _responseJsonSchema. */
+                    public _responseJsonSchema?: "responseJsonSchema";
 
                     /** GenerationConfig _routingConfig. */
                     public _routingConfig?: "routingConfig";
@@ -15041,8 +15050,14 @@ export namespace google {
                     /** FunctionDeclaration parameters */
                     parameters?: (google.cloud.aiplatform.v1.ISchema|null);
 
+                    /** FunctionDeclaration parametersJsonSchema */
+                    parametersJsonSchema?: (google.protobuf.IValue|null);
+
                     /** FunctionDeclaration response */
                     response?: (google.cloud.aiplatform.v1.ISchema|null);
+
+                    /** FunctionDeclaration responseJsonSchema */
+                    responseJsonSchema?: (google.protobuf.IValue|null);
                 }
 
                 /** Represents a FunctionDeclaration. */
@@ -15063,8 +15078,14 @@ export namespace google {
                     /** FunctionDeclaration parameters. */
                     public parameters?: (google.cloud.aiplatform.v1.ISchema|null);
 
+                    /** FunctionDeclaration parametersJsonSchema. */
+                    public parametersJsonSchema?: (google.protobuf.IValue|null);
+
                     /** FunctionDeclaration response. */
                     public response?: (google.cloud.aiplatform.v1.ISchema|null);
+
+                    /** FunctionDeclaration responseJsonSchema. */
+                    public responseJsonSchema?: (google.protobuf.IValue|null);
 
                     /**
                      * Creates a new FunctionDeclaration instance using the specified properties.

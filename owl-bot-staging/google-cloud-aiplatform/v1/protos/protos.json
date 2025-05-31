@@ -3011,6 +3011,11 @@
                             "responseSchema"
                           ]
                         },
+                        "_responseJsonSchema": {
+                          "oneof": [
+                            "responseJsonSchema"
+                          ]
+                        },
                         "_routingConfig": {
                           "oneof": [
                             "routingConfig"
@@ -3116,6 +3121,14 @@
                         "responseSchema": {
                           "type": "Schema",
                           "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "responseJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 28,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -4115,9 +4128,23 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "parametersJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "response": {
                           "type": "Schema",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "responseJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
