@@ -66,6 +66,225 @@
                      */
                     var v1 = {};
     
+                    v1.ResourceOwners = (function() {
+    
+                        /**
+                         * Properties of a ResourceOwners.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IResourceOwners
+                         * @property {Array.<string>|null} [resourceOwners] ResourceOwners resourceOwners
+                         */
+    
+                        /**
+                         * Constructs a new ResourceOwners.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a ResourceOwners.
+                         * @implements IResourceOwners
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IResourceOwners=} [properties] Properties to set
+                         */
+                        function ResourceOwners(properties) {
+                            this.resourceOwners = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResourceOwners resourceOwners.
+                         * @member {Array.<string>} resourceOwners
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @instance
+                         */
+                        ResourceOwners.prototype.resourceOwners = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ResourceOwners instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {google.cloud.asset.v1.IResourceOwners=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.ResourceOwners} ResourceOwners instance
+                         */
+                        ResourceOwners.create = function create(properties) {
+                            return new ResourceOwners(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceOwners message. Does not implicitly {@link google.cloud.asset.v1.ResourceOwners.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {google.cloud.asset.v1.IResourceOwners} message ResourceOwners message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceOwners.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resourceOwners != null && message.resourceOwners.length)
+                                for (var i = 0; i < message.resourceOwners.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceOwners[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceOwners message, length delimited. Does not implicitly {@link google.cloud.asset.v1.ResourceOwners.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {google.cloud.asset.v1.IResourceOwners} message ResourceOwners message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceOwners.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResourceOwners message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.ResourceOwners} ResourceOwners
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceOwners.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ResourceOwners();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.resourceOwners && message.resourceOwners.length))
+                                            message.resourceOwners = [];
+                                        message.resourceOwners.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResourceOwners message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.ResourceOwners} ResourceOwners
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceOwners.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResourceOwners message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResourceOwners.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resourceOwners != null && message.hasOwnProperty("resourceOwners")) {
+                                if (!Array.isArray(message.resourceOwners))
+                                    return "resourceOwners: array expected";
+                                for (var i = 0; i < message.resourceOwners.length; ++i)
+                                    if (!$util.isString(message.resourceOwners[i]))
+                                        return "resourceOwners: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResourceOwners message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.ResourceOwners} ResourceOwners
+                         */
+                        ResourceOwners.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.ResourceOwners)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.ResourceOwners();
+                            if (object.resourceOwners) {
+                                if (!Array.isArray(object.resourceOwners))
+                                    throw TypeError(".google.cloud.asset.v1.ResourceOwners.resourceOwners: array expected");
+                                message.resourceOwners = [];
+                                for (var i = 0; i < object.resourceOwners.length; ++i)
+                                    message.resourceOwners[i] = String(object.resourceOwners[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResourceOwners message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {google.cloud.asset.v1.ResourceOwners} message ResourceOwners
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResourceOwners.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.resourceOwners = [];
+                            if (message.resourceOwners && message.resourceOwners.length) {
+                                object.resourceOwners = [];
+                                for (var j = 0; j < message.resourceOwners.length; ++j)
+                                    object.resourceOwners[j] = message.resourceOwners[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResourceOwners to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResourceOwners.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResourceOwners
+                         * @function getTypeUrl
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResourceOwners.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.asset.v1.ResourceOwners";
+                        };
+    
+                        return ResourceOwners;
+                    })();
+    
                     v1.AssetService = (function() {
     
                         /**
@@ -20201,6 +20420,8 @@
                                         case 1:
                                         case 2:
                                         case 3:
+                                        case 4:
+                                        case 5:
                                             break;
                                         }
                                 }
@@ -20272,6 +20493,14 @@
                                         case "DELETE":
                                         case 3:
                                             message.methodTypes[i] = 3;
+                                            break;
+                                        case "REMOVE_GRANT":
+                                        case 4:
+                                            message.methodTypes[i] = 4;
+                                            break;
+                                        case "GOVERN_TAGS":
+                                        case 5:
+                                            message.methodTypes[i] = 5;
                                             break;
                                         }
                                 }
@@ -20385,6 +20614,8 @@
                              * @property {number} CREATE=1 CREATE value
                              * @property {number} UPDATE=2 UPDATE value
                              * @property {number} DELETE=3 DELETE value
+                             * @property {number} REMOVE_GRANT=4 REMOVE_GRANT value
+                             * @property {number} GOVERN_TAGS=5 GOVERN_TAGS value
                              */
                             CustomConstraint.MethodType = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -20392,6 +20623,8 @@
                                 values[valuesById[1] = "CREATE"] = 1;
                                 values[valuesById[2] = "UPDATE"] = 2;
                                 values[valuesById[3] = "DELETE"] = 3;
+                                values[valuesById[4] = "REMOVE_GRANT"] = 4;
+                                values[valuesById[5] = "GOVERN_TAGS"] = 5;
                                 return values;
                             })();
     
@@ -24647,6 +24880,233 @@
                         return TimeWindow;
                     })();
     
+                    v1.AssetEnrichment = (function() {
+    
+                        /**
+                         * Properties of an AssetEnrichment.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IAssetEnrichment
+                         * @property {google.cloud.asset.v1.IResourceOwners|null} [resourceOwners] AssetEnrichment resourceOwners
+                         */
+    
+                        /**
+                         * Constructs a new AssetEnrichment.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents an AssetEnrichment.
+                         * @implements IAssetEnrichment
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IAssetEnrichment=} [properties] Properties to set
+                         */
+                        function AssetEnrichment(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AssetEnrichment resourceOwners.
+                         * @member {google.cloud.asset.v1.IResourceOwners|null|undefined} resourceOwners
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @instance
+                         */
+                        AssetEnrichment.prototype.resourceOwners = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AssetEnrichment EnrichmentData.
+                         * @member {"resourceOwners"|undefined} EnrichmentData
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @instance
+                         */
+                        Object.defineProperty(AssetEnrichment.prototype, "EnrichmentData", {
+                            get: $util.oneOfGetter($oneOfFields = ["resourceOwners"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AssetEnrichment instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {google.cloud.asset.v1.IAssetEnrichment=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.AssetEnrichment} AssetEnrichment instance
+                         */
+                        AssetEnrichment.create = function create(properties) {
+                            return new AssetEnrichment(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AssetEnrichment message. Does not implicitly {@link google.cloud.asset.v1.AssetEnrichment.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {google.cloud.asset.v1.IAssetEnrichment} message AssetEnrichment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AssetEnrichment.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resourceOwners != null && Object.hasOwnProperty.call(message, "resourceOwners"))
+                                $root.google.cloud.asset.v1.ResourceOwners.encode(message.resourceOwners, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AssetEnrichment message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AssetEnrichment.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {google.cloud.asset.v1.IAssetEnrichment} message AssetEnrichment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AssetEnrichment.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AssetEnrichment message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.AssetEnrichment} AssetEnrichment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AssetEnrichment.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AssetEnrichment();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 7: {
+                                        message.resourceOwners = $root.google.cloud.asset.v1.ResourceOwners.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AssetEnrichment message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.AssetEnrichment} AssetEnrichment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AssetEnrichment.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AssetEnrichment message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AssetEnrichment.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.resourceOwners != null && message.hasOwnProperty("resourceOwners")) {
+                                properties.EnrichmentData = 1;
+                                {
+                                    var error = $root.google.cloud.asset.v1.ResourceOwners.verify(message.resourceOwners);
+                                    if (error)
+                                        return "resourceOwners." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AssetEnrichment message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.AssetEnrichment} AssetEnrichment
+                         */
+                        AssetEnrichment.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.AssetEnrichment)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.AssetEnrichment();
+                            if (object.resourceOwners != null) {
+                                if (typeof object.resourceOwners !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.AssetEnrichment.resourceOwners: object expected");
+                                message.resourceOwners = $root.google.cloud.asset.v1.ResourceOwners.fromObject(object.resourceOwners);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AssetEnrichment message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {google.cloud.asset.v1.AssetEnrichment} message AssetEnrichment
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AssetEnrichment.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.resourceOwners != null && message.hasOwnProperty("resourceOwners")) {
+                                object.resourceOwners = $root.google.cloud.asset.v1.ResourceOwners.toObject(message.resourceOwners, options);
+                                if (options.oneofs)
+                                    object.EnrichmentData = "resourceOwners";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AssetEnrichment to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AssetEnrichment.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AssetEnrichment
+                         * @function getTypeUrl
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AssetEnrichment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.asset.v1.AssetEnrichment";
+                        };
+    
+                        return AssetEnrichment;
+                    })();
+    
                     v1.Asset = (function() {
     
                         /**
@@ -27040,6 +27500,7 @@
                          * @property {Array.<string>|null} [tagValueIds] ResourceSearchResult tagValueIds
                          * @property {Array.<google.cloud.asset.v1.ITag>|null} [tags] ResourceSearchResult tags
                          * @property {Array.<google.cloud.asset.v1.IEffectiveTagDetails>|null} [effectiveTags] ResourceSearchResult effectiveTags
+                         * @property {Array.<google.cloud.asset.v1.IAssetEnrichment>|null} [enrichments] ResourceSearchResult enrichments
                          * @property {string|null} [parentAssetType] ResourceSearchResult parentAssetType
                          * @property {Object.<string,string>|null} [sccSecurityMarks] ResourceSearchResult sccSecurityMarks
                          */
@@ -27065,6 +27526,7 @@
                             this.tagValueIds = [];
                             this.tags = [];
                             this.effectiveTags = [];
+                            this.enrichments = [];
                             this.sccSecurityMarks = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -27273,6 +27735,14 @@
                         ResourceSearchResult.prototype.effectiveTags = $util.emptyArray;
     
                         /**
+                         * ResourceSearchResult enrichments.
+                         * @member {Array.<google.cloud.asset.v1.IAssetEnrichment>} enrichments
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.enrichments = $util.emptyArray;
+    
+                        /**
                          * ResourceSearchResult parentAssetType.
                          * @member {string} parentAssetType
                          * @memberof google.cloud.asset.v1.ResourceSearchResult
@@ -27376,6 +27846,9 @@
                             if (message.effectiveTags != null && message.effectiveTags.length)
                                 for (var i = 0; i < message.effectiveTags.length; ++i)
                                     $root.google.cloud.asset.v1.EffectiveTagDetails.encode(message.effectiveTags[i], writer.uint32(/* id 30, wireType 2 =*/242).fork()).ldelim();
+                            if (message.enrichments != null && message.enrichments.length)
+                                for (var i = 0; i < message.enrichments.length; ++i)
+                                    $root.google.cloud.asset.v1.AssetEnrichment.encode(message.enrichments[i], writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
                             if (message.sccSecurityMarks != null && Object.hasOwnProperty.call(message, "sccSecurityMarks"))
                                 for (var keys = Object.keys(message.sccSecurityMarks), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 32, wireType 2 =*/258).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.sccSecurityMarks[keys[i]]).ldelim();
@@ -27571,6 +28044,12 @@
                                         if (!(message.effectiveTags && message.effectiveTags.length))
                                             message.effectiveTags = [];
                                         message.effectiveTags.push($root.google.cloud.asset.v1.EffectiveTagDetails.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 31: {
+                                        if (!(message.enrichments && message.enrichments.length))
+                                            message.enrichments = [];
+                                        message.enrichments.push($root.google.cloud.asset.v1.AssetEnrichment.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 103: {
@@ -27776,6 +28255,15 @@
                                         return "effectiveTags." + error;
                                 }
                             }
+                            if (message.enrichments != null && message.hasOwnProperty("enrichments")) {
+                                if (!Array.isArray(message.enrichments))
+                                    return "enrichments: array expected";
+                                for (var i = 0; i < message.enrichments.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.AssetEnrichment.verify(message.enrichments[i]);
+                                    if (error)
+                                        return "enrichments." + error;
+                                }
+                            }
                             if (message.parentAssetType != null && message.hasOwnProperty("parentAssetType"))
                                 if (!$util.isString(message.parentAssetType))
                                     return "parentAssetType: string expected";
@@ -27936,6 +28424,16 @@
                                     message.effectiveTags[i] = $root.google.cloud.asset.v1.EffectiveTagDetails.fromObject(object.effectiveTags[i]);
                                 }
                             }
+                            if (object.enrichments) {
+                                if (!Array.isArray(object.enrichments))
+                                    throw TypeError(".google.cloud.asset.v1.ResourceSearchResult.enrichments: array expected");
+                                message.enrichments = [];
+                                for (var i = 0; i < object.enrichments.length; ++i) {
+                                    if (typeof object.enrichments[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.ResourceSearchResult.enrichments: object expected");
+                                    message.enrichments[i] = $root.google.cloud.asset.v1.AssetEnrichment.fromObject(object.enrichments[i]);
+                                }
+                            }
                             if (object.parentAssetType != null)
                                 message.parentAssetType = String(object.parentAssetType);
                             if (object.sccSecurityMarks) {
@@ -27972,6 +28470,7 @@
                                 object.kmsKeys = [];
                                 object.tags = [];
                                 object.effectiveTags = [];
+                                object.enrichments = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.labels = {};
@@ -28080,6 +28579,11 @@
                                 object.effectiveTags = [];
                                 for (var j = 0; j < message.effectiveTags.length; ++j)
                                     object.effectiveTags[j] = $root.google.cloud.asset.v1.EffectiveTagDetails.toObject(message.effectiveTags[j], options);
+                            }
+                            if (message.enrichments && message.enrichments.length) {
+                                object.enrichments = [];
+                                for (var j = 0; j < message.enrichments.length; ++j)
+                                    object.enrichments[j] = $root.google.cloud.asset.v1.AssetEnrichment.toObject(message.enrichments[j], options);
                             }
                             if (message.sccSecurityMarks && (keys2 = Object.keys(message.sccSecurityMarks)).length) {
                                 object.sccSecurityMarks = {};

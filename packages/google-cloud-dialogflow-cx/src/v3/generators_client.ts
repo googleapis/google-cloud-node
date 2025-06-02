@@ -18,17 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -112,41 +102,20 @@ export class GeneratorsClient {
    *     const client = new GeneratorsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof GeneratorsClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'dialogflow.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -172,7 +141,7 @@ export class GeneratorsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -188,9 +157,13 @@ export class GeneratorsClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -259,22 +232,18 @@ export class GeneratorsClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
-      projectLocationAgentEnvironmentSessionEntityTypePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}/entityTypes/{entity_type}'
-        ),
-      projectLocationAgentFlowTransitionRouteGroupPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
-        ),
-      projectLocationAgentSessionEntityTypePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}/entityTypes/{entity_type}'
-        ),
-      projectLocationAgentTransitionRouteGroupPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}'
-        ),
+      projectLocationAgentEnvironmentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}/entityTypes/{entity_type}'
+      ),
+      projectLocationAgentFlowTransitionRouteGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
+      ),
+      projectLocationAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}/entityTypes/{entity_type}'
+      ),
+      projectLocationAgentTransitionRouteGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}'
+      ),
       securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/securitySettings/{security_settings}'
       ),
@@ -296,11 +265,8 @@ export class GeneratorsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listGenerators: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'generators'
-      ),
+      listGenerators:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'generators')
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -309,55 +275,24 @@ export class GeneratorsClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v3/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v3/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v3/{name=projects/*/operations/*}:cancel',
-          additional_bindings: [
-            {post: '/v3/{name=projects/*/locations/*/operations/*}:cancel'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v3/{name=projects/*/operations/*}',
-          additional_bindings: [
-            {get: '/v3/{name=projects/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v3/{name=projects/*}/operations',
-          additional_bindings: [
-            {get: '/v3/{name=projects/*/locations/*}/operations'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v3/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v3/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v3/{name=projects/*/operations/*}:cancel',additional_bindings: [{post: '/v3/{name=projects/*/locations/*/operations/*}:cancel',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v3/{name=projects/*/operations/*}',additional_bindings: [{get: '/v3/{name=projects/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v3/{name=projects/*}/operations',additional_bindings: [{get: '/v3/{name=projects/*/locations/*}/operations',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
 
-    this.descriptors.longrunning = {};
+    this.descriptors.longrunning = {
+    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.dialogflow.cx.v3.Generators',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.dialogflow.cx.v3.Generators', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -388,41 +323,32 @@ export class GeneratorsClient {
     // Put together the "service stub" for
     // google.cloud.dialogflow.cx.v3.Generators.
     this.generatorsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.dialogflow.cx.v3.Generators'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.dialogflow.cx.v3.Generators') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dialogflow.cx.v3.Generators,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const generatorsStubMethods = [
-      'listGenerators',
-      'getGenerator',
-      'createGenerator',
-      'updateGenerator',
-      'deleteGenerator',
-    ];
+    const generatorsStubMethods =
+        ['listGenerators', 'getGenerator', 'createGenerator', 'updateGenerator', 'deleteGenerator'];
     for (const methodName of generatorsStubMethods) {
       const callPromise = this.generatorsStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -442,14 +368,8 @@ export class GeneratorsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dialogflow.googleapis.com';
   }
@@ -460,14 +380,8 @@ export class GeneratorsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dialogflow.googleapis.com';
   }
@@ -500,7 +414,7 @@ export class GeneratorsClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/dialogflow',
+      'https://www.googleapis.com/auth/dialogflow'
     ];
   }
 
@@ -510,9 +424,8 @@ export class GeneratorsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -523,625 +436,471 @@ export class GeneratorsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Retrieves the specified generator.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the generator.
-   *   Format:
-   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generators/<GeneratorID>`.
-   * @param {string} request.languageCode
-   *   The language to list generators for.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Generator|Generator}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/generators.get_generator.js</caption>
-   * region_tag:dialogflow_v3_generated_Generators_GetGenerator_async
-   */
+/**
+ * Retrieves the specified generator.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the generator.
+ *   Format:
+ *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generators/<GeneratorID>`.
+ * @param {string} request.languageCode
+ *   The language to list generators for.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Generator|Generator}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/generators.get_generator.js</caption>
+ * region_tag:dialogflow_v3_generated_Generators_GetGenerator_async
+ */
   getGenerator(
-    request?: protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3.IGenerator,
-      protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dialogflow.cx.v3.IGenerator,
+        protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest|undefined, {}|undefined
+      ]>;
   getGenerator(
-    request: protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3.IGenerator,
-      | protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGenerator(
-    request: protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3.IGenerator,
-      | protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGenerator(
-    request?: protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dialogflow.cx.v3.IGenerator,
-          | protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dialogflow.cx.v3.IGenerator,
-      | protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3.IGenerator,
-      protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGenerator(
+      request: protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest,
+      callback: Callback<
+          protos.google.cloud.dialogflow.cx.v3.IGenerator,
+          protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGenerator(
+      request?: protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dialogflow.cx.v3.IGenerator,
+          protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dialogflow.cx.v3.IGenerator,
+          protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dialogflow.cx.v3.IGenerator,
+        protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getGenerator request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dialogflow.cx.v3.IGenerator,
-          | protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dialogflow.cx.v3.IGenerator,
+        protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getGenerator response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getGenerator(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dialogflow.cx.v3.IGenerator,
-          protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getGenerator response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getGenerator(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dialogflow.cx.v3.IGenerator,
+        protos.google.cloud.dialogflow.cx.v3.IGetGeneratorRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getGenerator response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Creates a generator in the specified agent.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The agent to create a generator for.
-   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
-   * @param {google.cloud.dialogflow.cx.v3.Generator} request.generator
-   *   Required. The generator to create.
-   * @param {string} request.languageCode
-   *   The language to create generators for the following fields:
-   *   *  `Generator.prompt_text.text`
-   *   If not specified, the agent's default language is used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Generator|Generator}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/generators.create_generator.js</caption>
-   * region_tag:dialogflow_v3_generated_Generators_CreateGenerator_async
-   */
+/**
+ * Creates a generator in the specified agent.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The agent to create a generator for.
+ *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
+ * @param {google.cloud.dialogflow.cx.v3.Generator} request.generator
+ *   Required. The generator to create.
+ * @param {string} request.languageCode
+ *   The language to create generators for the following fields:
+ *   *  `Generator.prompt_text.text`
+ *   If not specified, the agent's default language is used.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Generator|Generator}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/generators.create_generator.js</caption>
+ * region_tag:dialogflow_v3_generated_Generators_CreateGenerator_async
+ */
   createGenerator(
-    request?: protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3.IGenerator,
-      protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dialogflow.cx.v3.IGenerator,
+        protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest|undefined, {}|undefined
+      ]>;
   createGenerator(
-    request: protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3.IGenerator,
-      | protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createGenerator(
-    request: protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3.IGenerator,
-      | protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createGenerator(
-    request?: protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dialogflow.cx.v3.IGenerator,
-          | protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dialogflow.cx.v3.IGenerator,
-      | protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3.IGenerator,
-      protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest|null|undefined,
+          {}|null|undefined>): void;
+  createGenerator(
+      request: protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest,
+      callback: Callback<
+          protos.google.cloud.dialogflow.cx.v3.IGenerator,
+          protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest|null|undefined,
+          {}|null|undefined>): void;
+  createGenerator(
+      request?: protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dialogflow.cx.v3.IGenerator,
+          protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dialogflow.cx.v3.IGenerator,
+          protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dialogflow.cx.v3.IGenerator,
+        protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createGenerator request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dialogflow.cx.v3.IGenerator,
-          | protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dialogflow.cx.v3.IGenerator,
+        protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createGenerator response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createGenerator(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dialogflow.cx.v3.IGenerator,
-          (
-            | protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createGenerator response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.createGenerator(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dialogflow.cx.v3.IGenerator,
+        protos.google.cloud.dialogflow.cx.v3.ICreateGeneratorRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createGenerator response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Update the specified generator.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dialogflow.cx.v3.Generator} request.generator
-   *   Required. The generator to update.
-   * @param {string} request.languageCode
-   *   The language to list generators for.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The mask to control which fields get updated. If the mask is not present,
-   *   all fields will be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Generator|Generator}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/generators.update_generator.js</caption>
-   * region_tag:dialogflow_v3_generated_Generators_UpdateGenerator_async
-   */
+/**
+ * Update the specified generator.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.dialogflow.cx.v3.Generator} request.generator
+ *   Required. The generator to update.
+ * @param {string} request.languageCode
+ *   The language to list generators for.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The mask to control which fields get updated. If the mask is not present,
+ *   all fields will be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Generator|Generator}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/generators.update_generator.js</caption>
+ * region_tag:dialogflow_v3_generated_Generators_UpdateGenerator_async
+ */
   updateGenerator(
-    request?: protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3.IGenerator,
-      protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dialogflow.cx.v3.IGenerator,
+        protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest|undefined, {}|undefined
+      ]>;
   updateGenerator(
-    request: protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3.IGenerator,
-      | protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateGenerator(
-    request: protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3.IGenerator,
-      | protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateGenerator(
-    request?: protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dialogflow.cx.v3.IGenerator,
-          | protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dialogflow.cx.v3.IGenerator,
-      | protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3.IGenerator,
-      protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateGenerator(
+      request: protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest,
+      callback: Callback<
+          protos.google.cloud.dialogflow.cx.v3.IGenerator,
+          protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateGenerator(
+      request?: protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dialogflow.cx.v3.IGenerator,
+          protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dialogflow.cx.v3.IGenerator,
+          protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dialogflow.cx.v3.IGenerator,
+        protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'generator.name': request.generator!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'generator.name': request.generator!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateGenerator request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dialogflow.cx.v3.IGenerator,
-          | protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dialogflow.cx.v3.IGenerator,
+        protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateGenerator response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateGenerator(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dialogflow.cx.v3.IGenerator,
-          (
-            | protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateGenerator response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.updateGenerator(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dialogflow.cx.v3.IGenerator,
+        protos.google.cloud.dialogflow.cx.v3.IUpdateGeneratorRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateGenerator response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Deletes the specified generators.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the generator to delete.
-   *   Format:
-   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generators/<GeneratorID>`.
-   * @param {boolean} request.force
-   *   This field has no effect for generators not being used.
-   *   For generators that are used by pages/flows/transition route groups:
-   *
-   *   *  If `force` is set to false, an error will be returned with message
-   *      indicating the referenced resources.
-   *   *  If `force` is set to true, Dialogflow will remove the generator, as well
-   *      as any references to the generator (i.e.
-   *      {@link protos.Fulfillment.generator|Generator}) in fulfillments.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/generators.delete_generator.js</caption>
-   * region_tag:dialogflow_v3_generated_Generators_DeleteGenerator_async
-   */
+/**
+ * Deletes the specified generators.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the generator to delete.
+ *   Format:
+ *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generators/<GeneratorID>`.
+ * @param {boolean} request.force
+ *   This field has no effect for generators not being used.
+ *   For generators that are used by pages/flows/transition route groups:
+ *
+ *   *  If `force` is set to false, an error will be returned with message
+ *      indicating the referenced resources.
+ *   *  If `force` is set to true, Dialogflow will remove the generator, as well
+ *      as any references to the generator (i.e.
+ *      {@link protos.Fulfillment.generator|Generator}) in fulfillments.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/generators.delete_generator.js</caption>
+ * region_tag:dialogflow_v3_generated_Generators_DeleteGenerator_async
+ */
   deleteGenerator(
-    request?: protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest|undefined, {}|undefined
+      ]>;
   deleteGenerator(
-    request: protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteGenerator(
-    request: protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteGenerator(
-    request?: protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteGenerator(
+      request: protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteGenerator(
+      request?: protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteGenerator request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteGenerator response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteGenerator(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteGenerator response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.deleteGenerator(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dialogflow.cx.v3.IDeleteGeneratorRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteGenerator response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
-   * Returns the list of all generators in the specified agent.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The agent to list all generators for.
-   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
-   * @param {string} request.languageCode
-   *   The language to list generators for.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3.Generator|Generator}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listGeneratorsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Returns the list of all generators in the specified agent.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The agent to list all generators for.
+ *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
+ * @param {string} request.languageCode
+ *   The language to list generators for.
+ * @param {number} request.pageSize
+ *   The maximum number of items to return in a single page. By default 100 and
+ *   at most 1000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3.Generator|Generator}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listGeneratorsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGenerators(
-    request?: protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3.IGenerator[],
-      protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListGeneratorsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dialogflow.cx.v3.IGenerator[],
+        protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest|null,
+        protos.google.cloud.dialogflow.cx.v3.IListGeneratorsResponse
+      ]>;
   listGenerators(
-    request: protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
-      | protos.google.cloud.dialogflow.cx.v3.IListGeneratorsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.cx.v3.IGenerator
-    >
-  ): void;
-  listGenerators(
-    request: protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
-      | protos.google.cloud.dialogflow.cx.v3.IListGeneratorsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.cx.v3.IGenerator
-    >
-  ): void;
-  listGenerators(
-    request?: protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
-          | protos.google.cloud.dialogflow.cx.v3.IListGeneratorsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dialogflow.cx.v3.IGenerator
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
-      | protos.google.cloud.dialogflow.cx.v3.IListGeneratorsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.cx.v3.IGenerator
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3.IGenerator[],
-      protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListGeneratorsResponse,
-    ]
-  > | void {
+          protos.google.cloud.dialogflow.cx.v3.IListGeneratorsResponse|null|undefined,
+          protos.google.cloud.dialogflow.cx.v3.IGenerator>): void;
+  listGenerators(
+      request: protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
+          protos.google.cloud.dialogflow.cx.v3.IListGeneratorsResponse|null|undefined,
+          protos.google.cloud.dialogflow.cx.v3.IGenerator>): void;
+  listGenerators(
+      request?: protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
+          protos.google.cloud.dialogflow.cx.v3.IListGeneratorsResponse|null|undefined,
+          protos.google.cloud.dialogflow.cx.v3.IGenerator>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
+          protos.google.cloud.dialogflow.cx.v3.IListGeneratorsResponse|null|undefined,
+          protos.google.cloud.dialogflow.cx.v3.IGenerator>):
+      Promise<[
+        protos.google.cloud.dialogflow.cx.v3.IGenerator[],
+        protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest|null,
+        protos.google.cloud.dialogflow.cx.v3.IListGeneratorsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
-          | protos.google.cloud.dialogflow.cx.v3.IListGeneratorsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dialogflow.cx.v3.IGenerator
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
+      protos.google.cloud.dialogflow.cx.v3.IListGeneratorsResponse|null|undefined,
+      protos.google.cloud.dialogflow.cx.v3.IGenerator>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listGenerators values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1150,60 +909,57 @@ export class GeneratorsClient {
     this._log.info('listGenerators request %j', request);
     return this.innerApiCalls
       .listGenerators(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dialogflow.cx.v3.IGenerator[],
-          protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest | null,
-          protos.google.cloud.dialogflow.cx.v3.IListGeneratorsResponse,
-        ]) => {
-          this._log.info('listGenerators values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dialogflow.cx.v3.IGenerator[],
+        protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest|null,
+        protos.google.cloud.dialogflow.cx.v3.IListGeneratorsResponse
+      ]) => {
+        this._log.info('listGenerators values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listGenerators`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The agent to list all generators for.
-   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
-   * @param {string} request.languageCode
-   *   The language to list generators for.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3.Generator|Generator} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listGeneratorsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listGenerators`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The agent to list all generators for.
+ *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
+ * @param {string} request.languageCode
+ *   The language to list generators for.
+ * @param {number} request.pageSize
+ *   The maximum number of items to return in a single page. By default 100 and
+ *   at most 1000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3.Generator|Generator} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listGeneratorsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGeneratorsStream(
-    request?: protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listGenerators'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listGenerators stream %j', request);
     return this.descriptors.page.listGenerators.createStream(
       this.innerApiCalls.listGenerators as GaxCall,
@@ -1212,51 +968,50 @@ export class GeneratorsClient {
     );
   }
 
-  /**
-   * Equivalent to `listGenerators`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The agent to list all generators for.
-   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
-   * @param {string} request.languageCode
-   *   The language to list generators for.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dialogflow.cx.v3.Generator|Generator}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/generators.list_generators.js</caption>
-   * region_tag:dialogflow_v3_generated_Generators_ListGenerators_async
-   */
+/**
+ * Equivalent to `listGenerators`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The agent to list all generators for.
+ *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
+ * @param {string} request.languageCode
+ *   The language to list generators for.
+ * @param {number} request.pageSize
+ *   The maximum number of items to return in a single page. By default 100 and
+ *   at most 1000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dialogflow.cx.v3.Generator|Generator}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/generators.list_generators.js</caption>
+ * region_tag:dialogflow_v3_generated_Generators_ListGenerators_async
+ */
   listGeneratorsAsync(
-    request?: protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dialogflow.cx.v3.IGenerator> {
+      request?: protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dialogflow.cx.v3.IGenerator>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listGenerators'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listGenerators iterate %j', request);
     return this.descriptors.page.listGenerators.asyncIterate(
       this.innerApiCalls['listGenerators'] as GaxCall,
@@ -1264,7 +1019,7 @@ export class GeneratorsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3.IGenerator>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1304,7 +1059,7 @@ export class GeneratorsClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1342,7 +1097,7 @@ export class GeneratorsClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1387,20 +1142,20 @@ export class GeneratorsClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1437,13 +1192,13 @@ export class GeneratorsClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1477,7 +1232,7 @@ export class GeneratorsClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1492,20 +1247,20 @@ export class GeneratorsClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1549,20 +1304,20 @@ export class GeneratorsClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1578,7 +1333,7 @@ export class GeneratorsClient {
    * @param {string} agent
    * @returns {string} Resource name string.
    */
-  agentPath(project: string, location: string, agent: string) {
+  agentPath(project:string,location:string,agent:string) {
     return this.pathTemplates.agentPathTemplate.render({
       project: project,
       location: location,
@@ -1627,11 +1382,7 @@ export class GeneratorsClient {
    * @param {string} agent
    * @returns {string} Resource name string.
    */
-  agentGenerativeSettingsPath(
-    project: string,
-    location: string,
-    agent: string
-  ) {
+  agentGenerativeSettingsPath(project:string,location:string,agent:string) {
     return this.pathTemplates.agentGenerativeSettingsPathTemplate.render({
       project: project,
       location: location,
@@ -1646,12 +1397,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing AgentGenerativeSettings resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromAgentGenerativeSettingsName(
-    agentGenerativeSettingsName: string
-  ) {
-    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
-      agentGenerativeSettingsName
-    ).project;
+  matchProjectFromAgentGenerativeSettingsName(agentGenerativeSettingsName: string) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(agentGenerativeSettingsName).project;
   }
 
   /**
@@ -1661,12 +1408,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing AgentGenerativeSettings resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromAgentGenerativeSettingsName(
-    agentGenerativeSettingsName: string
-  ) {
-    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
-      agentGenerativeSettingsName
-    ).location;
+  matchLocationFromAgentGenerativeSettingsName(agentGenerativeSettingsName: string) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(agentGenerativeSettingsName).location;
   }
 
   /**
@@ -1676,12 +1419,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing AgentGenerativeSettings resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromAgentGenerativeSettingsName(
-    agentGenerativeSettingsName: string
-  ) {
-    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
-      agentGenerativeSettingsName
-    ).agent;
+  matchAgentFromAgentGenerativeSettingsName(agentGenerativeSettingsName: string) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(agentGenerativeSettingsName).agent;
   }
 
   /**
@@ -1692,7 +1431,7 @@ export class GeneratorsClient {
    * @param {string} agent
    * @returns {string} Resource name string.
    */
-  agentValidationResultPath(project: string, location: string, agent: string) {
+  agentValidationResultPath(project:string,location:string,agent:string) {
     return this.pathTemplates.agentValidationResultPathTemplate.render({
       project: project,
       location: location,
@@ -1708,9 +1447,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAgentValidationResultName(agentValidationResultName: string) {
-    return this.pathTemplates.agentValidationResultPathTemplate.match(
-      agentValidationResultName
-    ).project;
+    return this.pathTemplates.agentValidationResultPathTemplate.match(agentValidationResultName).project;
   }
 
   /**
@@ -1720,12 +1457,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing AgentValidationResult resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromAgentValidationResultName(
-    agentValidationResultName: string
-  ) {
-    return this.pathTemplates.agentValidationResultPathTemplate.match(
-      agentValidationResultName
-    ).location;
+  matchLocationFromAgentValidationResultName(agentValidationResultName: string) {
+    return this.pathTemplates.agentValidationResultPathTemplate.match(agentValidationResultName).location;
   }
 
   /**
@@ -1736,9 +1469,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromAgentValidationResultName(agentValidationResultName: string) {
-    return this.pathTemplates.agentValidationResultPathTemplate.match(
-      agentValidationResultName
-    ).agent;
+    return this.pathTemplates.agentValidationResultPathTemplate.match(agentValidationResultName).agent;
   }
 
   /**
@@ -1750,12 +1481,7 @@ export class GeneratorsClient {
    * @param {string} changelog
    * @returns {string} Resource name string.
    */
-  changelogPath(
-    project: string,
-    location: string,
-    agent: string,
-    changelog: string
-  ) {
+  changelogPath(project:string,location:string,agent:string,changelog:string) {
     return this.pathTemplates.changelogPathTemplate.render({
       project: project,
       location: location,
@@ -1772,8 +1498,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName)
-      .project;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName).project;
   }
 
   /**
@@ -1784,8 +1509,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName)
-      .location;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName).location;
   }
 
   /**
@@ -1807,8 +1531,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the changelog.
    */
   matchChangelogFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName)
-      .changelog;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName).changelog;
   }
 
   /**
@@ -1821,13 +1544,7 @@ export class GeneratorsClient {
    * @param {string} continuous_test_result
    * @returns {string} Resource name string.
    */
-  continuousTestResultPath(
-    project: string,
-    location: string,
-    agent: string,
-    environment: string,
-    continuousTestResult: string
-  ) {
+  continuousTestResultPath(project:string,location:string,agent:string,environment:string,continuousTestResult:string) {
     return this.pathTemplates.continuousTestResultPathTemplate.render({
       project: project,
       location: location,
@@ -1845,9 +1562,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromContinuousTestResultName(continuousTestResultName: string) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(
-      continuousTestResultName
-    ).project;
+    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).project;
   }
 
   /**
@@ -1858,9 +1573,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromContinuousTestResultName(continuousTestResultName: string) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(
-      continuousTestResultName
-    ).location;
+    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).location;
   }
 
   /**
@@ -1871,9 +1584,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromContinuousTestResultName(continuousTestResultName: string) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(
-      continuousTestResultName
-    ).agent;
+    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).agent;
   }
 
   /**
@@ -1883,12 +1594,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing ContinuousTestResult resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromContinuousTestResultName(
-    continuousTestResultName: string
-  ) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(
-      continuousTestResultName
-    ).environment;
+  matchEnvironmentFromContinuousTestResultName(continuousTestResultName: string) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).environment;
   }
 
   /**
@@ -1898,12 +1605,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing ContinuousTestResult resource.
    * @returns {string} A string representing the continuous_test_result.
    */
-  matchContinuousTestResultFromContinuousTestResultName(
-    continuousTestResultName: string
-  ) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(
-      continuousTestResultName
-    ).continuous_test_result;
+  matchContinuousTestResultFromContinuousTestResultName(continuousTestResultName: string) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).continuous_test_result;
   }
 
   /**
@@ -1916,13 +1619,7 @@ export class GeneratorsClient {
    * @param {string} deployment
    * @returns {string} Resource name string.
    */
-  deploymentPath(
-    project: string,
-    location: string,
-    agent: string,
-    environment: string,
-    deployment: string
-  ) {
+  deploymentPath(project:string,location:string,agent:string,environment:string,deployment:string) {
     return this.pathTemplates.deploymentPathTemplate.render({
       project: project,
       location: location,
@@ -1940,8 +1637,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .project;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).project;
   }
 
   /**
@@ -1952,8 +1648,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .location;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).location;
   }
 
   /**
@@ -1964,8 +1659,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .agent;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).agent;
   }
 
   /**
@@ -1976,8 +1670,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .environment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).environment;
   }
 
   /**
@@ -1988,8 +1681,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .deployment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
   }
 
   /**
@@ -2001,12 +1693,7 @@ export class GeneratorsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  entityTypePath(
-    project: string,
-    location: string,
-    agent: string,
-    entityType: string
-  ) {
+  entityTypePath(project:string,location:string,agent:string,entityType:string) {
     return this.pathTemplates.entityTypePathTemplate.render({
       project: project,
       location: location,
@@ -2023,8 +1710,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .project;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).project;
   }
 
   /**
@@ -2035,8 +1721,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .location;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).location;
   }
 
   /**
@@ -2047,8 +1732,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .agent;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).agent;
   }
 
   /**
@@ -2059,8 +1743,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the entity_type.
    */
   matchEntityTypeFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .entity_type;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).entity_type;
   }
 
   /**
@@ -2072,12 +1755,7 @@ export class GeneratorsClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  environmentPath(
-    project: string,
-    location: string,
-    agent: string,
-    environment: string
-  ) {
+  environmentPath(project:string,location:string,agent:string,environment:string) {
     return this.pathTemplates.environmentPathTemplate.render({
       project: project,
       location: location,
@@ -2094,8 +1772,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .project;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).project;
   }
 
   /**
@@ -2106,8 +1783,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .location;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).location;
   }
 
   /**
@@ -2118,8 +1794,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .agent;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).agent;
   }
 
   /**
@@ -2130,8 +1805,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .environment;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).environment;
   }
 
   /**
@@ -2144,13 +1818,7 @@ export class GeneratorsClient {
    * @param {string} experiment
    * @returns {string} Resource name string.
    */
-  experimentPath(
-    project: string,
-    location: string,
-    agent: string,
-    environment: string,
-    experiment: string
-  ) {
+  experimentPath(project:string,location:string,agent:string,environment:string,experiment:string) {
     return this.pathTemplates.experimentPathTemplate.render({
       project: project,
       location: location,
@@ -2168,8 +1836,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName)
-      .project;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName).project;
   }
 
   /**
@@ -2180,8 +1847,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName)
-      .location;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName).location;
   }
 
   /**
@@ -2192,8 +1858,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName)
-      .agent;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName).agent;
   }
 
   /**
@@ -2204,8 +1869,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName)
-      .environment;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName).environment;
   }
 
   /**
@@ -2216,8 +1880,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the experiment.
    */
   matchExperimentFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName)
-      .experiment;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName).experiment;
   }
 
   /**
@@ -2229,7 +1892,7 @@ export class GeneratorsClient {
    * @param {string} flow
    * @returns {string} Resource name string.
    */
-  flowPath(project: string, location: string, agent: string, flow: string) {
+  flowPath(project:string,location:string,agent:string,flow:string) {
     return this.pathTemplates.flowPathTemplate.render({
       project: project,
       location: location,
@@ -2291,12 +1954,7 @@ export class GeneratorsClient {
    * @param {string} flow
    * @returns {string} Resource name string.
    */
-  flowValidationResultPath(
-    project: string,
-    location: string,
-    agent: string,
-    flow: string
-  ) {
+  flowValidationResultPath(project:string,location:string,agent:string,flow:string) {
     return this.pathTemplates.flowValidationResultPathTemplate.render({
       project: project,
       location: location,
@@ -2313,9 +1971,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFlowValidationResultName(flowValidationResultName: string) {
-    return this.pathTemplates.flowValidationResultPathTemplate.match(
-      flowValidationResultName
-    ).project;
+    return this.pathTemplates.flowValidationResultPathTemplate.match(flowValidationResultName).project;
   }
 
   /**
@@ -2326,9 +1982,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFlowValidationResultName(flowValidationResultName: string) {
-    return this.pathTemplates.flowValidationResultPathTemplate.match(
-      flowValidationResultName
-    ).location;
+    return this.pathTemplates.flowValidationResultPathTemplate.match(flowValidationResultName).location;
   }
 
   /**
@@ -2339,9 +1993,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromFlowValidationResultName(flowValidationResultName: string) {
-    return this.pathTemplates.flowValidationResultPathTemplate.match(
-      flowValidationResultName
-    ).agent;
+    return this.pathTemplates.flowValidationResultPathTemplate.match(flowValidationResultName).agent;
   }
 
   /**
@@ -2352,9 +2004,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the flow.
    */
   matchFlowFromFlowValidationResultName(flowValidationResultName: string) {
-    return this.pathTemplates.flowValidationResultPathTemplate.match(
-      flowValidationResultName
-    ).flow;
+    return this.pathTemplates.flowValidationResultPathTemplate.match(flowValidationResultName).flow;
   }
 
   /**
@@ -2366,12 +2016,7 @@ export class GeneratorsClient {
    * @param {string} generator
    * @returns {string} Resource name string.
    */
-  generatorPath(
-    project: string,
-    location: string,
-    agent: string,
-    generator: string
-  ) {
+  generatorPath(project:string,location:string,agent:string,generator:string) {
     return this.pathTemplates.generatorPathTemplate.render({
       project: project,
       location: location,
@@ -2388,8 +2033,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName)
-      .project;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName).project;
   }
 
   /**
@@ -2400,8 +2044,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName)
-      .location;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName).location;
   }
 
   /**
@@ -2423,8 +2066,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the generator.
    */
   matchGeneratorFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName)
-      .generator;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName).generator;
   }
 
   /**
@@ -2436,7 +2078,7 @@ export class GeneratorsClient {
    * @param {string} intent
    * @returns {string} Resource name string.
    */
-  intentPath(project: string, location: string, agent: string, intent: string) {
+  intentPath(project:string,location:string,agent:string,intent:string) {
     return this.pathTemplates.intentPathTemplate.render({
       project: project,
       location: location,
@@ -2496,7 +2138,7 @@ export class GeneratorsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2535,13 +2177,7 @@ export class GeneratorsClient {
    * @param {string} page
    * @returns {string} Resource name string.
    */
-  pagePath(
-    project: string,
-    location: string,
-    agent: string,
-    flow: string,
-    page: string
-  ) {
+  pagePath(project:string,location:string,agent:string,flow:string,page:string) {
     return this.pathTemplates.pagePathTemplate.render({
       project: project,
       location: location,
@@ -2612,7 +2248,7 @@ export class GeneratorsClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2640,24 +2276,15 @@ export class GeneratorsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectLocationAgentEnvironmentSessionEntityTypePath(
-    project: string,
-    location: string,
-    agent: string,
-    environment: string,
-    session: string,
-    entityType: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        agent: agent,
-        environment: environment,
-        session: session,
-        entity_type: entityType,
-      }
-    );
+  projectLocationAgentEnvironmentSessionEntityTypePath(project:string,location:string,agent:string,environment:string,session:string,entityType:string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      environment: environment,
+      session: session,
+      entity_type: entityType,
+    });
   }
 
   /**
@@ -2667,12 +2294,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-    projectLocationAgentEnvironmentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentSessionEntityTypeName
-    ).project;
+  matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).project;
   }
 
   /**
@@ -2682,12 +2305,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-    projectLocationAgentEnvironmentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentSessionEntityTypeName
-    ).location;
+  matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).location;
   }
 
   /**
@@ -2697,12 +2316,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-    projectLocationAgentEnvironmentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentSessionEntityTypeName
-    ).agent;
+  matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).agent;
   }
 
   /**
@@ -2712,12 +2327,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-    projectLocationAgentEnvironmentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentSessionEntityTypeName
-    ).environment;
+  matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).environment;
   }
 
   /**
@@ -2727,12 +2338,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-    projectLocationAgentEnvironmentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentSessionEntityTypeName
-    ).session;
+  matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).session;
   }
 
   /**
@@ -2742,12 +2349,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-    projectLocationAgentEnvironmentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentSessionEntityTypeName
-    ).entity_type;
+  matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).entity_type;
   }
 
   /**
@@ -2760,22 +2363,14 @@ export class GeneratorsClient {
    * @param {string} transition_route_group
    * @returns {string} Resource name string.
    */
-  projectLocationAgentFlowTransitionRouteGroupPath(
-    project: string,
-    location: string,
-    agent: string,
-    flow: string,
-    transitionRouteGroup: string
-  ) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        agent: agent,
-        flow: flow,
-        transition_route_group: transitionRouteGroup,
-      }
-    );
+  projectLocationAgentFlowTransitionRouteGroupPath(project:string,location:string,agent:string,flow:string,transitionRouteGroup:string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      flow: flow,
+      transition_route_group: transitionRouteGroup,
+    });
   }
 
   /**
@@ -2785,12 +2380,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentFlowTransitionRouteGroupName(
-    projectLocationAgentFlowTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentFlowTransitionRouteGroupName
-    ).project;
+  matchProjectFromProjectLocationAgentFlowTransitionRouteGroupName(projectLocationAgentFlowTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupName).project;
   }
 
   /**
@@ -2800,12 +2391,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentFlowTransitionRouteGroupName(
-    projectLocationAgentFlowTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentFlowTransitionRouteGroupName
-    ).location;
+  matchLocationFromProjectLocationAgentFlowTransitionRouteGroupName(projectLocationAgentFlowTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupName).location;
   }
 
   /**
@@ -2815,12 +2402,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentFlowTransitionRouteGroupName(
-    projectLocationAgentFlowTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentFlowTransitionRouteGroupName
-    ).agent;
+  matchAgentFromProjectLocationAgentFlowTransitionRouteGroupName(projectLocationAgentFlowTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupName).agent;
   }
 
   /**
@@ -2830,12 +2413,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
    * @returns {string} A string representing the flow.
    */
-  matchFlowFromProjectLocationAgentFlowTransitionRouteGroupName(
-    projectLocationAgentFlowTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentFlowTransitionRouteGroupName
-    ).flow;
+  matchFlowFromProjectLocationAgentFlowTransitionRouteGroupName(projectLocationAgentFlowTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupName).flow;
   }
 
   /**
@@ -2845,12 +2424,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
    * @returns {string} A string representing the transition_route_group.
    */
-  matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupName(
-    projectLocationAgentFlowTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentFlowTransitionRouteGroupName
-    ).transition_route_group;
+  matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupName(projectLocationAgentFlowTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupName).transition_route_group;
   }
 
   /**
@@ -2863,22 +2438,14 @@ export class GeneratorsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectLocationAgentSessionEntityTypePath(
-    project: string,
-    location: string,
-    agent: string,
-    session: string,
-    entityType: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        agent: agent,
-        session: session,
-        entity_type: entityType,
-      }
-    );
+  projectLocationAgentSessionEntityTypePath(project:string,location:string,agent:string,session:string,entityType:string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      session: session,
+      entity_type: entityType,
+    });
   }
 
   /**
@@ -2888,12 +2455,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentSessionEntityTypeName(
-    projectLocationAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
-      projectLocationAgentSessionEntityTypeName
-    ).project;
+  matchProjectFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).project;
   }
 
   /**
@@ -2903,12 +2466,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentSessionEntityTypeName(
-    projectLocationAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
-      projectLocationAgentSessionEntityTypeName
-    ).location;
+  matchLocationFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).location;
   }
 
   /**
@@ -2918,12 +2477,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentSessionEntityTypeName(
-    projectLocationAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
-      projectLocationAgentSessionEntityTypeName
-    ).agent;
+  matchAgentFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).agent;
   }
 
   /**
@@ -2933,12 +2488,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentSessionEntityTypeName(
-    projectLocationAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
-      projectLocationAgentSessionEntityTypeName
-    ).session;
+  matchSessionFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).session;
   }
 
   /**
@@ -2948,12 +2499,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(
-    projectLocationAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
-      projectLocationAgentSessionEntityTypeName
-    ).entity_type;
+  matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).entity_type;
   }
 
   /**
@@ -2965,20 +2512,13 @@ export class GeneratorsClient {
    * @param {string} transition_route_group
    * @returns {string} Resource name string.
    */
-  projectLocationAgentTransitionRouteGroupPath(
-    project: string,
-    location: string,
-    agent: string,
-    transitionRouteGroup: string
-  ) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        agent: agent,
-        transition_route_group: transitionRouteGroup,
-      }
-    );
+  projectLocationAgentTransitionRouteGroupPath(project:string,location:string,agent:string,transitionRouteGroup:string) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      transition_route_group: transitionRouteGroup,
+    });
   }
 
   /**
@@ -2988,12 +2528,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_transition_route_group resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentTransitionRouteGroupName(
-    projectLocationAgentTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentTransitionRouteGroupName
-    ).project;
+  matchProjectFromProjectLocationAgentTransitionRouteGroupName(projectLocationAgentTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(projectLocationAgentTransitionRouteGroupName).project;
   }
 
   /**
@@ -3003,12 +2539,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_transition_route_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentTransitionRouteGroupName(
-    projectLocationAgentTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentTransitionRouteGroupName
-    ).location;
+  matchLocationFromProjectLocationAgentTransitionRouteGroupName(projectLocationAgentTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(projectLocationAgentTransitionRouteGroupName).location;
   }
 
   /**
@@ -3018,12 +2550,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_transition_route_group resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentTransitionRouteGroupName(
-    projectLocationAgentTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentTransitionRouteGroupName
-    ).agent;
+  matchAgentFromProjectLocationAgentTransitionRouteGroupName(projectLocationAgentTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(projectLocationAgentTransitionRouteGroupName).agent;
   }
 
   /**
@@ -3033,12 +2561,8 @@ export class GeneratorsClient {
    *   A fully-qualified path representing project_location_agent_transition_route_group resource.
    * @returns {string} A string representing the transition_route_group.
    */
-  matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupName(
-    projectLocationAgentTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentTransitionRouteGroupName
-    ).transition_route_group;
+  matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupName(projectLocationAgentTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(projectLocationAgentTransitionRouteGroupName).transition_route_group;
   }
 
   /**
@@ -3049,11 +2573,7 @@ export class GeneratorsClient {
    * @param {string} security_settings
    * @returns {string} Resource name string.
    */
-  securitySettingsPath(
-    project: string,
-    location: string,
-    securitySettings: string
-  ) {
+  securitySettingsPath(project:string,location:string,securitySettings:string) {
     return this.pathTemplates.securitySettingsPathTemplate.render({
       project: project,
       location: location,
@@ -3069,9 +2589,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(
-      securitySettingsName
-    ).project;
+    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).project;
   }
 
   /**
@@ -3082,9 +2600,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(
-      securitySettingsName
-    ).location;
+    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).location;
   }
 
   /**
@@ -3095,9 +2611,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the security_settings.
    */
   matchSecuritySettingsFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(
-      securitySettingsName
-    ).security_settings;
+    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).security_settings;
   }
 
   /**
@@ -3109,12 +2623,7 @@ export class GeneratorsClient {
    * @param {string} test_case
    * @returns {string} Resource name string.
    */
-  testCasePath(
-    project: string,
-    location: string,
-    agent: string,
-    testCase: string
-  ) {
+  testCasePath(project:string,location:string,agent:string,testCase:string) {
     return this.pathTemplates.testCasePathTemplate.render({
       project: project,
       location: location,
@@ -3164,8 +2673,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the test_case.
    */
   matchTestCaseFromTestCaseName(testCaseName: string) {
-    return this.pathTemplates.testCasePathTemplate.match(testCaseName)
-      .test_case;
+    return this.pathTemplates.testCasePathTemplate.match(testCaseName).test_case;
   }
 
   /**
@@ -3178,13 +2686,7 @@ export class GeneratorsClient {
    * @param {string} result
    * @returns {string} Resource name string.
    */
-  testCaseResultPath(
-    project: string,
-    location: string,
-    agent: string,
-    testCase: string,
-    result: string
-  ) {
+  testCaseResultPath(project:string,location:string,agent:string,testCase:string,result:string) {
     return this.pathTemplates.testCaseResultPathTemplate.render({
       project: project,
       location: location,
@@ -3202,9 +2704,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(
-      testCaseResultName
-    ).project;
+    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).project;
   }
 
   /**
@@ -3215,9 +2715,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(
-      testCaseResultName
-    ).location;
+    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).location;
   }
 
   /**
@@ -3228,9 +2726,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(
-      testCaseResultName
-    ).agent;
+    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).agent;
   }
 
   /**
@@ -3241,9 +2737,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the test_case.
    */
   matchTestCaseFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(
-      testCaseResultName
-    ).test_case;
+    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).test_case;
   }
 
   /**
@@ -3254,9 +2748,7 @@ export class GeneratorsClient {
    * @returns {string} A string representing the result.
    */
   matchResultFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(
-      testCaseResultName
-    ).result;
+    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).result;
   }
 
   /**
@@ -3269,13 +2761,7 @@ export class GeneratorsClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  versionPath(
-    project: string,
-    location: string,
-    agent: string,
-    flow: string,
-    version: string
-  ) {
+  versionPath(project:string,location:string,agent:string,flow:string,version:string) {
     return this.pathTemplates.versionPathTemplate.render({
       project: project,
       location: location,
@@ -3349,12 +2835,7 @@ export class GeneratorsClient {
    * @param {string} webhook
    * @returns {string} Resource name string.
    */
-  webhookPath(
-    project: string,
-    location: string,
-    agent: string,
-    webhook: string
-  ) {
+  webhookPath(project:string,location:string,agent:string,webhook:string) {
     return this.pathTemplates.webhookPathTemplate.render({
       project: project,
       location: location,
@@ -3419,8 +2900,8 @@ export class GeneratorsClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.locationsClient.close().catch(err => {throw err});
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

@@ -256,9 +256,14 @@ describe('v1.ImageVersionsClient', () => {
         throw err;
       });
       assert(client.imageVersionsStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -267,9 +272,14 @@ describe('v1.ImageVersionsClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.imageVersionsStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
