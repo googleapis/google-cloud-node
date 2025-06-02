@@ -185,6 +185,11 @@
                 "createTimeSeries"
               ]
             },
+            "CreateServiceTimeSeries": {
+              "methods": [
+                "createServiceTimeSeries"
+              ]
+            },
             "ListMonitoredResourceDescriptors": {
               "methods": [
                 "listMonitoredResourceDescriptors",
@@ -234,6 +239,11 @@
             "CreateTimeSeries": {
               "methods": [
                 "createTimeSeries"
+              ]
+            },
+            "CreateServiceTimeSeries": {
+              "methods": [
+                "createServiceTimeSeries"
               ]
             },
             "ListMonitoredResourceDescriptors": {
@@ -527,6 +537,64 @@
                 "listServiceLevelObjectives",
                 "listServiceLevelObjectivesStream",
                 "listServiceLevelObjectivesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SnoozeService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SnoozeServiceClient",
+          "rpcs": {
+            "CreateSnooze": {
+              "methods": [
+                "createSnooze"
+              ]
+            },
+            "GetSnooze": {
+              "methods": [
+                "getSnooze"
+              ]
+            },
+            "UpdateSnooze": {
+              "methods": [
+                "updateSnooze"
+              ]
+            },
+            "ListSnoozes": {
+              "methods": [
+                "listSnoozes",
+                "listSnoozesStream",
+                "listSnoozesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SnoozeServiceClient",
+          "rpcs": {
+            "CreateSnooze": {
+              "methods": [
+                "createSnooze"
+              ]
+            },
+            "GetSnooze": {
+              "methods": [
+                "getSnooze"
+              ]
+            },
+            "UpdateSnooze": {
+              "methods": [
+                "updateSnooze"
+              ]
+            },
+            "ListSnoozes": {
+              "methods": [
+                "listSnoozes",
+                "listSnoozesStream",
+                "listSnoozesAsync"
               ]
             }
           }

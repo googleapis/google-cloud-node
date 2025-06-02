@@ -25,3311 +25,2624 @@ import * as functionserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  IamProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v2alpha.FunctionServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'cloudfunctions.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          functionserviceModule.v2alpha.FunctionServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'cloudfunctions.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          functionserviceModule.v2alpha.FunctionServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'cloudfunctions.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudfunctions.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudfunctions.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new functionserviceModule.v2alpha.FunctionServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudfunctions.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'cloudfunctions.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new functionserviceModule.v2alpha.FunctionServiceClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = functionserviceModule.v2alpha.FunctionServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'cloudfunctions.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'cloudfunctions.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
-        });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new functionserviceModule.v2alpha.FunctionServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = functionserviceModule.v2alpha.FunctionServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.functionServiceStub, undefined);
-      await client.initialize();
-      assert(client.functionServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.functionServiceStub);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.functionServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getFunction', () => {
-    it('invokes getFunction without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.GetFunctionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.GetFunctionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.Function()
-      );
-      client.innerApiCalls.getFunction = stubSimpleCall(expectedResponse);
-      const [response] = await client.getFunction(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getFunction as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getFunction as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getFunction without error using callback', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.GetFunctionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.GetFunctionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.Function()
-      );
-      client.innerApiCalls.getFunction =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getFunction(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.functions.v2alpha.IFunction | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getFunction as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getFunction as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getFunction with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.GetFunctionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.GetFunctionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getFunction = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getFunction(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getFunction as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getFunction as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getFunction with closed client', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.GetFunctionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.GetFunctionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getFunction(request), expectedError);
-    });
-  });
-
-  describe('generateUploadUrl', () => {
-    it('invokes generateUploadUrl without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.GenerateUploadUrlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.GenerateUploadUrlRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.GenerateUploadUrlResponse()
-      );
-      client.innerApiCalls.generateUploadUrl = stubSimpleCall(expectedResponse);
-      const [response] = await client.generateUploadUrl(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.generateUploadUrl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateUploadUrl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateUploadUrl without error using callback', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.GenerateUploadUrlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.GenerateUploadUrlRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.GenerateUploadUrlResponse()
-      );
-      client.innerApiCalls.generateUploadUrl =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.generateUploadUrl(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.functions.v2alpha.IGenerateUploadUrlResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.generateUploadUrl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateUploadUrl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateUploadUrl with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.GenerateUploadUrlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.GenerateUploadUrlRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.generateUploadUrl = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.generateUploadUrl(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.generateUploadUrl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateUploadUrl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateUploadUrl with closed client', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.GenerateUploadUrlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.GenerateUploadUrlRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.generateUploadUrl(request), expectedError);
-    });
-  });
-
-  describe('generateDownloadUrl', () => {
-    it('invokes generateDownloadUrl without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.GenerateDownloadUrlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.GenerateDownloadUrlRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.GenerateDownloadUrlResponse()
-      );
-      client.innerApiCalls.generateDownloadUrl =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.generateDownloadUrl(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.generateDownloadUrl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateDownloadUrl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateDownloadUrl without error using callback', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.GenerateDownloadUrlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.GenerateDownloadUrlRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.GenerateDownloadUrlResponse()
-      );
-      client.innerApiCalls.generateDownloadUrl =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.generateDownloadUrl(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.functions.v2alpha.IGenerateDownloadUrlResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.generateDownloadUrl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateDownloadUrl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateDownloadUrl with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.GenerateDownloadUrlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.GenerateDownloadUrlRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.generateDownloadUrl = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.generateDownloadUrl(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.generateDownloadUrl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateDownloadUrl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateDownloadUrl with closed client', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.GenerateDownloadUrlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.GenerateDownloadUrlRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.generateDownloadUrl(request), expectedError);
-    });
-  });
-
-  describe('listRuntimes', () => {
-    it('invokes listRuntimes without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.ListRuntimesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.ListRuntimesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.ListRuntimesResponse()
-      );
-      client.innerApiCalls.listRuntimes = stubSimpleCall(expectedResponse);
-      const [response] = await client.listRuntimes(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRuntimes as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRuntimes as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRuntimes without error using callback', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.ListRuntimesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.ListRuntimesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.ListRuntimesResponse()
-      );
-      client.innerApiCalls.listRuntimes =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listRuntimes(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.functions.v2alpha.IListRuntimesResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRuntimes as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRuntimes as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRuntimes with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.ListRuntimesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.ListRuntimesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listRuntimes = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listRuntimes(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listRuntimes as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRuntimes as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRuntimes with closed client', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.ListRuntimesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.ListRuntimesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.listRuntimes(request), expectedError);
-    });
-  });
-
-  describe('createFunction', () => {
-    it('invokes createFunction without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.CreateFunctionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.CreateFunctionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createFunction =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createFunction(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createFunction as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createFunction as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createFunction without error using callback', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.CreateFunctionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.CreateFunctionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createFunction =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createFunction(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.functions.v2alpha.IFunction,
-              protos.google.cloud.functions.v2alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.functions.v2alpha.IFunction,
-        protos.google.cloud.functions.v2alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createFunction as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createFunction as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createFunction with call error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.CreateFunctionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.CreateFunctionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createFunction = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createFunction(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createFunction as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createFunction as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createFunction with LRO error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.CreateFunctionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.CreateFunctionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createFunction = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createFunction(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createFunction as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createFunction as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateFunctionProgress without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateFunctionProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateFunctionProgress with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateFunctionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateFunction', () => {
-    it('invokes updateFunction without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.UpdateFunctionRequest()
-      );
-      request.function ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.UpdateFunctionRequest',
-        ['function', 'name']
-      );
-      request.function.name = defaultValue1;
-      const expectedHeaderRequestParams = `function.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateFunction =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateFunction(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateFunction as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateFunction as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateFunction without error using callback', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.UpdateFunctionRequest()
-      );
-      request.function ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.UpdateFunctionRequest',
-        ['function', 'name']
-      );
-      request.function.name = defaultValue1;
-      const expectedHeaderRequestParams = `function.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateFunction =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateFunction(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.functions.v2alpha.IFunction,
-              protos.google.cloud.functions.v2alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.functions.v2alpha.IFunction,
-        protos.google.cloud.functions.v2alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateFunction as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateFunction as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateFunction with call error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.UpdateFunctionRequest()
-      );
-      request.function ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.UpdateFunctionRequest',
-        ['function', 'name']
-      );
-      request.function.name = defaultValue1;
-      const expectedHeaderRequestParams = `function.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateFunction = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateFunction(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateFunction as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateFunction as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateFunction with LRO error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.UpdateFunctionRequest()
-      );
-      request.function ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.UpdateFunctionRequest',
-        ['function', 'name']
-      );
-      request.function.name = defaultValue1;
-      const expectedHeaderRequestParams = `function.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateFunction = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateFunction(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateFunction as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateFunction as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateFunctionProgress without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateFunctionProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateFunctionProgress with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateFunctionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteFunction', () => {
-    it('invokes deleteFunction without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.DeleteFunctionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.DeleteFunctionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteFunction =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteFunction(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteFunction as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteFunction as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteFunction without error using callback', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.DeleteFunctionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.DeleteFunctionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteFunction =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteFunction(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.functions.v2alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.functions.v2alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteFunction as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteFunction as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteFunction with call error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.DeleteFunctionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.DeleteFunctionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteFunction = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteFunction(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteFunction as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteFunction as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteFunction with LRO error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.DeleteFunctionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.DeleteFunctionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteFunction = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteFunction(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteFunction as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteFunction as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteFunctionProgress without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteFunctionProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteFunctionProgress with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteFunctionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listFunctions', () => {
-    it('invokes listFunctions without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.ListFunctionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.ListFunctionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.functions.v2alpha.Function()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.functions.v2alpha.Function()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.functions.v2alpha.Function()
-        ),
-      ];
-      client.innerApiCalls.listFunctions = stubSimpleCall(expectedResponse);
-      const [response] = await client.listFunctions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listFunctions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listFunctions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listFunctions without error using callback', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.ListFunctionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.ListFunctionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.functions.v2alpha.Function()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.functions.v2alpha.Function()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.functions.v2alpha.Function()
-        ),
-      ];
-      client.innerApiCalls.listFunctions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listFunctions(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.functions.v2alpha.IFunction[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listFunctions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listFunctions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listFunctions with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.ListFunctionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.ListFunctionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listFunctions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listFunctions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listFunctions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listFunctions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listFunctionsStream without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.ListFunctionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.ListFunctionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.functions.v2alpha.Function()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.functions.v2alpha.Function()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.functions.v2alpha.Function()
-        ),
-      ];
-      client.descriptors.page.listFunctions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listFunctionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.functions.v2alpha.Function[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.functions.v2alpha.Function) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listFunctions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listFunctions, request)
-      );
-      assert(
-        (client.descriptors.page.listFunctions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listFunctionsStream with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.ListFunctionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.ListFunctionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listFunctions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listFunctionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.functions.v2alpha.Function[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.functions.v2alpha.Function) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listFunctions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listFunctions, request)
-      );
-      assert(
-        (client.descriptors.page.listFunctions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listFunctions without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.ListFunctionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.ListFunctionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.functions.v2alpha.Function()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.functions.v2alpha.Function()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.functions.v2alpha.Function()
-        ),
-      ];
-      client.descriptors.page.listFunctions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.functions.v2alpha.IFunction[] = [];
-      const iterable = client.listFunctionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listFunctions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listFunctions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listFunctions with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.functions.v2alpha.ListFunctionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.functions.v2alpha.ListFunctionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listFunctions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listFunctionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.functions.v2alpha.IFunction[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = functionserviceModule.v2alpha.FunctionServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'cloudfunctions.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listFunctions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listFunctions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getIamPolicy', () => {
-    it('invokes getIamPolicy without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
-      const response = await client.getIamPolicy(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getIamPolicy without error using callback', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.getIamPolicy = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getIamPolicy(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.Policy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
-    });
-    it('invokes getIamPolicy with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(
-        client.getIamPolicy(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('setIamPolicy', () => {
-    it('invokes setIamPolicy without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
-      const response = await client.setIamPolicy(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes setIamPolicy without error using callback', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.setIamPolicy = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setIamPolicy(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.Policy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
-    });
-    it('invokes setIamPolicy with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(
-        client.setIamPolicy(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('testIamPermissions', () => {
-    it('invokes testIamPermissions without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
-      const response = await client.testIamPermissions(
-        request,
-        expectedOptions
-      );
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes testIamPermissions without error using callback', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.iamClient.testIamPermissions = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.testIamPermissions(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
-    });
-    it('invokes testIamPermissions with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.testIamPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.testIamPermissions(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
-    });
-    it('invokes getLocation with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudfunctions.example.com');
+        });
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudfunctions.example.com');
+        });
+
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new functionserviceModule.v2alpha.FunctionServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudfunctions.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new functionserviceModule.v2alpha.FunctionServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudfunctions.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new functionserviceModule.v2alpha.FunctionServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = functionserviceModule.v2alpha.FunctionServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.functionServiceStub, undefined);
+            await client.initialize();
+            assert(client.functionServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.functionServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.functionServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+
+    describe('getFunction', () => {
+        it('invokes getFunction without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.GetFunctionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.GetFunctionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.Function()
+            );
+            client.innerApiCalls.getFunction = stubSimpleCall(expectedResponse);
+            const [response] = await client.getFunction(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getFunction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getFunction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getFunction without error using callback', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.GetFunctionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.GetFunctionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.Function()
+            );
+            client.innerApiCalls.getFunction = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getFunction(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.functions.v2alpha.IFunction|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getFunction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getFunction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getFunction with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.GetFunctionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.GetFunctionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getFunction = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getFunction(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getFunction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getFunction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getFunction with closed client', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.GetFunctionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.GetFunctionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getFunction(request), expectedError);
+        });
     });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+    describe('generateUploadUrl', () => {
+        it('invokes generateUploadUrl without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.GenerateUploadUrlRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.GenerateUploadUrlRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.GenerateUploadUrlResponse()
+            );
+            client.innerApiCalls.generateUploadUrl = stubSimpleCall(expectedResponse);
+            const [response] = await client.generateUploadUrl(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateUploadUrl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateUploadUrl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateUploadUrl without error using callback', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.GenerateUploadUrlRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.GenerateUploadUrlRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.GenerateUploadUrlResponse()
+            );
+            client.innerApiCalls.generateUploadUrl = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.generateUploadUrl(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.functions.v2alpha.IGenerateUploadUrlResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateUploadUrl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateUploadUrl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateUploadUrl with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.GenerateUploadUrlRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.GenerateUploadUrlRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.generateUploadUrl = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.generateUploadUrl(request), expectedError);
+            const actualRequest = (client.innerApiCalls.generateUploadUrl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateUploadUrl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateUploadUrl with closed client', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.GenerateUploadUrlRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.GenerateUploadUrlRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.generateUploadUrl(request), expectedError);
+        });
+    });
+
+    describe('generateDownloadUrl', () => {
+        it('invokes generateDownloadUrl without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.GenerateDownloadUrlRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.GenerateDownloadUrlRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.GenerateDownloadUrlResponse()
+            );
+            client.innerApiCalls.generateDownloadUrl = stubSimpleCall(expectedResponse);
+            const [response] = await client.generateDownloadUrl(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateDownloadUrl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateDownloadUrl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateDownloadUrl without error using callback', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.GenerateDownloadUrlRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.GenerateDownloadUrlRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.GenerateDownloadUrlResponse()
+            );
+            client.innerApiCalls.generateDownloadUrl = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.generateDownloadUrl(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.functions.v2alpha.IGenerateDownloadUrlResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateDownloadUrl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateDownloadUrl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateDownloadUrl with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.GenerateDownloadUrlRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.GenerateDownloadUrlRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.generateDownloadUrl = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.generateDownloadUrl(request), expectedError);
+            const actualRequest = (client.innerApiCalls.generateDownloadUrl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateDownloadUrl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateDownloadUrl with closed client', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.GenerateDownloadUrlRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.GenerateDownloadUrlRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.generateDownloadUrl(request), expectedError);
+        });
+    });
+
+    describe('listRuntimes', () => {
+        it('invokes listRuntimes without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.ListRuntimesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.ListRuntimesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.ListRuntimesResponse()
+            );
+            client.innerApiCalls.listRuntimes = stubSimpleCall(expectedResponse);
+            const [response] = await client.listRuntimes(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRuntimes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRuntimes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listRuntimes without error using callback', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.ListRuntimesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.ListRuntimesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.ListRuntimesResponse()
+            );
+            client.innerApiCalls.listRuntimes = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listRuntimes(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.functions.v2alpha.IListRuntimesResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRuntimes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRuntimes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listRuntimes with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.ListRuntimesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.ListRuntimesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listRuntimes = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listRuntimes(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listRuntimes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRuntimes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listRuntimes with closed client', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.ListRuntimesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.ListRuntimesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.listRuntimes(request), expectedError);
+        });
+    });
+
+    describe('createFunction', () => {
+        it('invokes createFunction without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.CreateFunctionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.CreateFunctionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createFunction = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createFunction(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createFunction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createFunction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createFunction without error using callback', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.CreateFunctionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.CreateFunctionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createFunction = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createFunction(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.functions.v2alpha.IFunction, protos.google.cloud.functions.v2alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.functions.v2alpha.IFunction, protos.google.cloud.functions.v2alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createFunction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createFunction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createFunction with call error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.CreateFunctionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.CreateFunctionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createFunction = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createFunction(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createFunction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createFunction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createFunction with LRO error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.CreateFunctionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.CreateFunctionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createFunction = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createFunction(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createFunction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createFunction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateFunctionProgress without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateFunctionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateFunctionProgress with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateFunctionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateFunction', () => {
+        it('invokes updateFunction without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.UpdateFunctionRequest()
+            );
+            request.function ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.UpdateFunctionRequest', ['function', 'name']);
+            request.function.name = defaultValue1;
+            const expectedHeaderRequestParams = `function.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateFunction = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateFunction(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateFunction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateFunction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateFunction without error using callback', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.UpdateFunctionRequest()
+            );
+            request.function ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.UpdateFunctionRequest', ['function', 'name']);
+            request.function.name = defaultValue1;
+            const expectedHeaderRequestParams = `function.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateFunction = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateFunction(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.functions.v2alpha.IFunction, protos.google.cloud.functions.v2alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.functions.v2alpha.IFunction, protos.google.cloud.functions.v2alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateFunction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateFunction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateFunction with call error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.UpdateFunctionRequest()
+            );
+            request.function ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.UpdateFunctionRequest', ['function', 'name']);
+            request.function.name = defaultValue1;
+            const expectedHeaderRequestParams = `function.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateFunction = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateFunction(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateFunction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateFunction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateFunction with LRO error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.UpdateFunctionRequest()
+            );
+            request.function ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.UpdateFunctionRequest', ['function', 'name']);
+            request.function.name = defaultValue1;
+            const expectedHeaderRequestParams = `function.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateFunction = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateFunction(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateFunction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateFunction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateFunctionProgress without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateFunctionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateFunctionProgress with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateFunctionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteFunction', () => {
+        it('invokes deleteFunction without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.DeleteFunctionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.DeleteFunctionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteFunction = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteFunction(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteFunction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteFunction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteFunction without error using callback', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.DeleteFunctionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.DeleteFunctionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteFunction = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteFunction(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.functions.v2alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.functions.v2alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteFunction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteFunction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteFunction with call error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.DeleteFunctionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.DeleteFunctionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteFunction = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteFunction(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteFunction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteFunction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteFunction with LRO error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.DeleteFunctionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.DeleteFunctionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteFunction = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteFunction(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteFunction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteFunction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteFunctionProgress without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteFunctionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteFunctionProgress with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteFunctionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listFunctions', () => {
+        it('invokes listFunctions without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.ListFunctionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.ListFunctionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.functions.v2alpha.Function()),
+              generateSampleMessage(new protos.google.cloud.functions.v2alpha.Function()),
+              generateSampleMessage(new protos.google.cloud.functions.v2alpha.Function()),
+            ];
+            client.innerApiCalls.listFunctions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listFunctions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listFunctions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listFunctions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listFunctions without error using callback', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.ListFunctionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.ListFunctionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.functions.v2alpha.Function()),
+              generateSampleMessage(new protos.google.cloud.functions.v2alpha.Function()),
+              generateSampleMessage(new protos.google.cloud.functions.v2alpha.Function()),
+            ];
+            client.innerApiCalls.listFunctions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listFunctions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.functions.v2alpha.IFunction[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listFunctions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listFunctions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listFunctions with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.ListFunctionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.ListFunctionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listFunctions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listFunctions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listFunctions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listFunctions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listFunctionsStream without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.ListFunctionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.ListFunctionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.functions.v2alpha.Function()),
+              generateSampleMessage(new protos.google.cloud.functions.v2alpha.Function()),
+              generateSampleMessage(new protos.google.cloud.functions.v2alpha.Function()),
+            ];
+            client.descriptors.page.listFunctions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listFunctionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.functions.v2alpha.Function[] = [];
+                stream.on('data', (response: protos.google.cloud.functions.v2alpha.Function) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listFunctions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listFunctions, request));
+            assert(
+                (client.descriptors.page.listFunctions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listFunctionsStream with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.ListFunctionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.ListFunctionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listFunctions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listFunctionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.functions.v2alpha.Function[] = [];
+                stream.on('data', (response: protos.google.cloud.functions.v2alpha.Function) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listFunctions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listFunctions, request));
+            assert(
+                (client.descriptors.page.listFunctions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listFunctions without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.ListFunctionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.ListFunctionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.functions.v2alpha.Function()),
+              generateSampleMessage(new protos.google.cloud.functions.v2alpha.Function()),
+              generateSampleMessage(new protos.google.cloud.functions.v2alpha.Function()),
+            ];
+            client.descriptors.page.listFunctions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.functions.v2alpha.IFunction[] = [];
+            const iterable = client.listFunctionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listFunctions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listFunctions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listFunctions with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.functions.v2alpha.ListFunctionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.functions.v2alpha.ListFunctionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listFunctions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listFunctionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.functions.v2alpha.IFunction[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listFunctions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listFunctions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getOperation with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getIamPolicy', () => {
+        it('invokes getIamPolicy without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
+            const response = await client.getIamPolicy(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getIamPolicy without error using callback', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.getIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIamPolicy(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getIamPolicy with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIamPolicy(request, expectedOptions), expectedError);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('setIamPolicy', () => {
+        it('invokes setIamPolicy without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
+            const response = await client.setIamPolicy(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes setIamPolicy without error using callback', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.setIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setIamPolicy(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0));
+        });
+        it('invokes setIamPolicy with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setIamPolicy(request, expectedOptions), expectedError);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('testIamPermissions', () => {
+        it('invokes testIamPermissions without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
+            const response = await client.testIamPermissions(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes testIamPermissions without error using callback', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.iamClient.testIamPermissions = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.testIamPermissions(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.TestIamPermissionsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0));
+        });
+        it('invokes testIamPermissions with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.testIamPermissions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.testIamPermissions(request, expectedOptions), expectedError);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes cancelOperation with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('build', async () => {
-      const fakePath = '/rendered/path/build';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        build: 'buildValue',
-      };
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.buildPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.buildPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('buildPath', () => {
-        const result = client.buildPath(
-          'projectValue',
-          'locationValue',
-          'buildValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.buildPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromBuildName', () => {
-        const result = client.matchProjectFromBuildName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.buildPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromBuildName', () => {
-        const result = client.matchLocationFromBuildName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.buildPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBuildFromBuildName', () => {
-        const result = client.matchBuildFromBuildName(fakePath);
-        assert.strictEqual(result, 'buildValue');
-        assert(
-          (client.pathTemplates.buildPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('channel', async () => {
-      const fakePath = '/rendered/path/channel';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        channel: 'channelValue',
-      };
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.channelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.channelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('channelPath', () => {
-        const result = client.channelPath(
-          'projectValue',
-          'locationValue',
-          'channelValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.channelPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('build', async () => {
+            const fakePath = "/rendered/path/build";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                build: "buildValue",
+            };
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.buildPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.buildPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromChannelName', () => {
-        const result = client.matchProjectFromChannelName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.channelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('buildPath', () => {
+                const result = client.buildPath("projectValue", "locationValue", "buildValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.buildPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromChannelName', () => {
-        const result = client.matchLocationFromChannelName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.channelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromBuildName', () => {
+                const result = client.matchProjectFromBuildName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.buildPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchChannelFromChannelName', () => {
-        const result = client.matchChannelFromChannelName(fakePath);
-        assert.strictEqual(result, 'channelValue');
-        assert(
-          (client.pathTemplates.channelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromBuildName', () => {
+                const result = client.matchLocationFromBuildName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.buildPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBuildFromBuildName', () => {
+                const result = client.matchBuildFromBuildName(fakePath);
+                assert.strictEqual(result, "buildValue");
+                assert((client.pathTemplates.buildPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('channel', async () => {
+            const fakePath = "/rendered/path/channel";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                channel: "channelValue",
+            };
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.channelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.channelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('channelPath', () => {
+                const result = client.channelPath("projectValue", "locationValue", "channelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.channelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromChannelName', () => {
+                const result = client.matchProjectFromChannelName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.channelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromChannelName', () => {
+                const result = client.matchLocationFromChannelName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.channelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchChannelFromChannelName', () => {
+                const result = client.matchChannelFromChannelName(fakePath);
+                assert.strictEqual(result, "channelValue");
+                assert((client.pathTemplates.channelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('connector', async () => {
+            const fakePath = "/rendered/path/connector";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                connector: "connectorValue",
+            };
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.connectorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.connectorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('connectorPath', () => {
+                const result = client.connectorPath("projectValue", "locationValue", "connectorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.connectorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromConnectorName', () => {
+                const result = client.matchProjectFromConnectorName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.connectorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromConnectorName', () => {
+                const result = client.matchLocationFromConnectorName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.connectorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConnectorFromConnectorName', () => {
+                const result = client.matchConnectorFromConnectorName(fakePath);
+                assert.strictEqual(result, "connectorValue");
+                assert((client.pathTemplates.connectorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('cryptoKey', async () => {
+            const fakePath = "/rendered/path/cryptoKey";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                key_ring: "keyRingValue",
+                crypto_key: "cryptoKeyValue",
+            };
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cryptoKeyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cryptoKeyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cryptoKeyPath', () => {
+                const result = client.cryptoKeyPath("projectValue", "locationValue", "keyRingValue", "cryptoKeyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cryptoKeyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCryptoKeyName', () => {
+                const result = client.matchProjectFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCryptoKeyName', () => {
+                const result = client.matchLocationFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchKeyRingFromCryptoKeyName', () => {
+                const result = client.matchKeyRingFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "keyRingValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyFromCryptoKeyName', () => {
+                const result = client.matchCryptoKeyFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "cryptoKeyValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('function', async () => {
+            const fakePath = "/rendered/path/function";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                function: "functionValue",
+            };
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.functionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.functionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('functionPath', () => {
+                const result = client.functionPath("projectValue", "locationValue", "functionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.functionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromFunctionName', () => {
+                const result = client.matchProjectFromFunctionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.functionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFunctionName', () => {
+                const result = client.matchLocationFromFunctionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.functionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFunctionFromFunctionName', () => {
+                const result = client.matchFunctionFromFunctionName(fakePath);
+                assert.strictEqual(result, "functionValue");
+                assert((client.pathTemplates.functionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('repository', async () => {
+            const fakePath = "/rendered/path/repository";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                repository: "repositoryValue",
+            };
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.repositoryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.repositoryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('repositoryPath', () => {
+                const result = client.repositoryPath("projectValue", "locationValue", "repositoryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.repositoryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRepositoryName', () => {
+                const result = client.matchProjectFromRepositoryName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRepositoryName', () => {
+                const result = client.matchLocationFromRepositoryName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRepositoryFromRepositoryName', () => {
+                const result = client.matchRepositoryFromRepositoryName(fakePath);
+                assert.strictEqual(result, "repositoryValue");
+                assert((client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('service', async () => {
+            const fakePath = "/rendered/path/service";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                service: "serviceValue",
+            };
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.servicePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.servicePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('servicePath', () => {
+                const result = client.servicePath("projectValue", "locationValue", "serviceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.servicePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromServiceName', () => {
+                const result = client.matchProjectFromServiceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.servicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromServiceName', () => {
+                const result = client.matchLocationFromServiceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.servicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromServiceName', () => {
+                const result = client.matchServiceFromServiceName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.servicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('topic', async () => {
+            const fakePath = "/rendered/path/topic";
+            const expectedParameters = {
+                project: "projectValue",
+                topic: "topicValue",
+            };
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.topicPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.topicPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('topicPath', () => {
+                const result = client.topicPath("projectValue", "topicValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.topicPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTopicName', () => {
+                const result = client.matchProjectFromTopicName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.topicPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTopicFromTopicName', () => {
+                const result = client.matchTopicFromTopicName(fakePath);
+                assert.strictEqual(result, "topicValue");
+                assert((client.pathTemplates.topicPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('trigger', async () => {
+            const fakePath = "/rendered/path/trigger";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                trigger: "triggerValue",
+            };
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.triggerPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.triggerPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('triggerPath', () => {
+                const result = client.triggerPath("projectValue", "locationValue", "triggerValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.triggerPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTriggerName', () => {
+                const result = client.matchProjectFromTriggerName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.triggerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromTriggerName', () => {
+                const result = client.matchLocationFromTriggerName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.triggerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTriggerFromTriggerName', () => {
+                const result = client.matchTriggerFromTriggerName(fakePath);
+                assert.strictEqual(result, "triggerValue");
+                assert((client.pathTemplates.triggerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('workerPool', async () => {
+            const fakePath = "/rendered/path/workerPool";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                worker_pool: "workerPoolValue",
+            };
+            const client = new functionserviceModule.v2alpha.FunctionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.workerPoolPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.workerPoolPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('workerPoolPath', () => {
+                const result = client.workerPoolPath("projectValue", "locationValue", "workerPoolValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.workerPoolPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromWorkerPoolName', () => {
+                const result = client.matchProjectFromWorkerPoolName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromWorkerPoolName', () => {
+                const result = client.matchLocationFromWorkerPoolName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWorkerPoolFromWorkerPoolName', () => {
+                const result = client.matchWorkerPoolFromWorkerPoolName(fakePath);
+                assert.strictEqual(result, "workerPoolValue");
+                assert((client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('connector', async () => {
-      const fakePath = '/rendered/path/connector';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        connector: 'connectorValue',
-      };
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.connectorPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.connectorPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('connectorPath', () => {
-        const result = client.connectorPath(
-          'projectValue',
-          'locationValue',
-          'connectorValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.connectorPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromConnectorName', () => {
-        const result = client.matchProjectFromConnectorName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.connectorPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromConnectorName', () => {
-        const result = client.matchLocationFromConnectorName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.connectorPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConnectorFromConnectorName', () => {
-        const result = client.matchConnectorFromConnectorName(fakePath);
-        assert.strictEqual(result, 'connectorValue');
-        assert(
-          (client.pathTemplates.connectorPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('cryptoKey', async () => {
-      const fakePath = '/rendered/path/cryptoKey';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        key_ring: 'keyRingValue',
-        crypto_key: 'cryptoKeyValue',
-      };
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.cryptoKeyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.cryptoKeyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('cryptoKeyPath', () => {
-        const result = client.cryptoKeyPath(
-          'projectValue',
-          'locationValue',
-          'keyRingValue',
-          'cryptoKeyValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromCryptoKeyName', () => {
-        const result = client.matchProjectFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromCryptoKeyName', () => {
-        const result = client.matchLocationFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchKeyRingFromCryptoKeyName', () => {
-        const result = client.matchKeyRingFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'keyRingValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCryptoKeyFromCryptoKeyName', () => {
-        const result = client.matchCryptoKeyFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'cryptoKeyValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('function', async () => {
-      const fakePath = '/rendered/path/function';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        function: 'functionValue',
-      };
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.functionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.functionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('functionPath', () => {
-        const result = client.functionPath(
-          'projectValue',
-          'locationValue',
-          'functionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.functionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromFunctionName', () => {
-        const result = client.matchProjectFromFunctionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.functionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromFunctionName', () => {
-        const result = client.matchLocationFromFunctionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.functionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFunctionFromFunctionName', () => {
-        const result = client.matchFunctionFromFunctionName(fakePath);
-        assert.strictEqual(result, 'functionValue');
-        assert(
-          (client.pathTemplates.functionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('repository', async () => {
-      const fakePath = '/rendered/path/repository';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        repository: 'repositoryValue',
-      };
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.repositoryPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.repositoryPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('repositoryPath', () => {
-        const result = client.repositoryPath(
-          'projectValue',
-          'locationValue',
-          'repositoryValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.repositoryPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromRepositoryName', () => {
-        const result = client.matchProjectFromRepositoryName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromRepositoryName', () => {
-        const result = client.matchLocationFromRepositoryName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRepositoryFromRepositoryName', () => {
-        const result = client.matchRepositoryFromRepositoryName(fakePath);
-        assert.strictEqual(result, 'repositoryValue');
-        assert(
-          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('service', async () => {
-      const fakePath = '/rendered/path/service';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        service: 'serviceValue',
-      };
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.servicePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.servicePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('servicePath', () => {
-        const result = client.servicePath(
-          'projectValue',
-          'locationValue',
-          'serviceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.servicePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromServiceName', () => {
-        const result = client.matchProjectFromServiceName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.servicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromServiceName', () => {
-        const result = client.matchLocationFromServiceName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.servicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromServiceName', () => {
-        const result = client.matchServiceFromServiceName(fakePath);
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (client.pathTemplates.servicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('topic', async () => {
-      const fakePath = '/rendered/path/topic';
-      const expectedParameters = {
-        project: 'projectValue',
-        topic: 'topicValue',
-      };
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.topicPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.topicPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('topicPath', () => {
-        const result = client.topicPath('projectValue', 'topicValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.topicPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromTopicName', () => {
-        const result = client.matchProjectFromTopicName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.topicPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTopicFromTopicName', () => {
-        const result = client.matchTopicFromTopicName(fakePath);
-        assert.strictEqual(result, 'topicValue');
-        assert(
-          (client.pathTemplates.topicPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('trigger', async () => {
-      const fakePath = '/rendered/path/trigger';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        trigger: 'triggerValue',
-      };
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.triggerPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.triggerPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('triggerPath', () => {
-        const result = client.triggerPath(
-          'projectValue',
-          'locationValue',
-          'triggerValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.triggerPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromTriggerName', () => {
-        const result = client.matchProjectFromTriggerName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.triggerPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromTriggerName', () => {
-        const result = client.matchLocationFromTriggerName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.triggerPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTriggerFromTriggerName', () => {
-        const result = client.matchTriggerFromTriggerName(fakePath);
-        assert.strictEqual(result, 'triggerValue');
-        assert(
-          (client.pathTemplates.triggerPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('workerPool', async () => {
-      const fakePath = '/rendered/path/workerPool';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        worker_pool: 'workerPoolValue',
-      };
-      const client = new functionserviceModule.v2alpha.FunctionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.workerPoolPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.workerPoolPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('workerPoolPath', () => {
-        const result = client.workerPoolPath(
-          'projectValue',
-          'locationValue',
-          'workerPoolValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.workerPoolPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromWorkerPoolName', () => {
-        const result = client.matchProjectFromWorkerPoolName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromWorkerPoolName', () => {
-        const result = client.matchLocationFromWorkerPoolName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchWorkerPoolFromWorkerPoolName', () => {
-        const result = client.matchWorkerPoolFromWorkerPoolName(fakePath);
-        assert.strictEqual(result, 'workerPoolValue');
-        assert(
-          (client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

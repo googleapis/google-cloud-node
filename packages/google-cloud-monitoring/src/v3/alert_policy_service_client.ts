@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
@@ -26,40 +26,44 @@ import {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import * as path from 'path';
-
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v3/alert_policy_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './alert_policy_service_client_config.json';
-
 const version = require('../../../package.json').version;
 
 /**
  *  The AlertPolicyService API is used to manage (list, create, delete,
- *  edit) alert policies in Stackdriver Monitoring. An alerting policy is
+ *  edit) alert policies in Cloud Monitoring. An alerting policy is
  *  a description of the conditions under which some aspect of your
  *  system is considered to be "unhealthy" and the ways to notify
  *  people or services about this state. In addition to using this API, alert
  *  policies can also be managed through
- *  [Stackdriver Monitoring](https://cloud.google.com/monitoring/docs/),
+ *  [Cloud Monitoring](https://cloud.google.com/monitoring/docs/),
  *  which can be reached by clicking the "Monitoring" tab in
- *  [Cloud Console](https://console.cloud.google.com/).
+ *  [Cloud console](https://console.cloud.google.com/).
  * @class
  * @memberof v3
  */
 export class AlertPolicyServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
+  private _log = logging.log('monitoring');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -67,6 +71,7 @@ export class AlertPolicyServiceClient {
     longrunning: {},
     batching: {},
   };
+  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
   alertPolicyServiceStub?: Promise<{[name: string]: Function}>;
@@ -76,7 +81,7 @@ export class AlertPolicyServiceClient {
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
-   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#creating-the-client-instance).
    * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
@@ -93,23 +98,53 @@ export class AlertPolicyServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
-   *     In fallback mode, a special browser-compatible transport implementation is used
-   *     instead of gRPC transport. In browser context (if the `window` object is defined)
-   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
-   *     if you need to override this behavior.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
+   *     For more information, please check the
+   *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new AlertPolicyServiceClient({fallback: true}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AlertPolicyServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'monitoring.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     const fallback =
@@ -117,13 +152,21 @@ export class AlertPolicyServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -134,41 +177,34 @@ export class AlertPolicyServiceClient {
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
+    // Set useJWTAccessWithScope on the auth object.
+    this.auth.useJWTAccessWithScope = true;
+
+    // Set defaultServicePath on the auth object.
+    this.auth.defaultServicePath = this._servicePath;
+
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
-    // For Node.js, pass the path to JSON proto file.
-    // For browsers, pass the JSON content.
-
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
-    this._protos = this._gaxGrpc.loadProto(
-      opts.fallback
-        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        : nodejsProtoPath
-    );
+    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
@@ -256,6 +292,9 @@ export class AlertPolicyServiceClient {
       projectUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
       ),
+      snoozePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/snoozes/{snooze}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -281,6 +320,9 @@ export class AlertPolicyServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -309,7 +351,8 @@ export class AlertPolicyServiceClient {
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.monitoring.v3.AlertPolicyService,
-      this._opts
+      this._opts,
+      this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -340,7 +383,8 @@ export class AlertPolicyServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -351,19 +395,50 @@ export class AlertPolicyServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'monitoring.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'monitoring.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -406,8 +481,26 @@ export class AlertPolicyServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets a single alerting policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The alerting policy to retrieve. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID]
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.AlertPolicy|AlertPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/alert_policy_service.get_alert_policy.js</caption>
+   * region_tag:monitoring_v3_generated_AlertPolicyService_GetAlertPolicy_async
+   */
   getAlertPolicy(
-    request: protos.google.monitoring.v3.IGetAlertPolicyRequest,
+    request?: protos.google.monitoring.v3.IGetAlertPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -433,27 +526,8 @@ export class AlertPolicyServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a single alerting policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The alerting policy to retrieve. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID]
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AlertPolicy]{@link google.monitoring.v3.AlertPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getAlertPolicy(request);
-   */
   getAlertPolicy(
-    request: protos.google.monitoring.v3.IGetAlertPolicyRequest,
+    request?: protos.google.monitoring.v3.IGetAlertPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -485,14 +559,76 @@ export class AlertPolicyServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAlertPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAlertPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IAlertPolicy,
+          protos.google.monitoring.v3.IGetAlertPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAlertPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAlertPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IAlertPolicy,
+          protos.google.monitoring.v3.IGetAlertPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAlertPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
+  /**
+   * Creates a new alerting policy.
+   *
+   * Design your application to single-thread API calls that modify the state of
+   * alerting policies in a single project. This includes calls to
+   * CreateAlertPolicy, DeleteAlertPolicy and UpdateAlertPolicy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) in which
+   *   to create the alerting policy. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   *
+   *   Note that this field names the parent container in which the alerting
+   *   policy will be written, not the name of the created policy. |name| must be
+   *   a host project of a Metrics Scope, otherwise INVALID_ARGUMENT error will
+   *   return. The alerting policy that is returned will have a name that contains
+   *   a normalized representation of this name as a prefix but adds a suffix of
+   *   the form `/alertPolicies/[ALERT_POLICY_ID]`, identifying the policy in the
+   *   container.
+   * @param {google.monitoring.v3.AlertPolicy} request.alertPolicy
+   *   Required. The requested alerting policy. You should omit the `name` field
+   *   in this policy. The name will be returned in the new policy, including a
+   *   new `[ALERT_POLICY_ID]` value.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.AlertPolicy|AlertPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/alert_policy_service.create_alert_policy.js</caption>
+   * region_tag:monitoring_v3_generated_AlertPolicyService_CreateAlertPolicy_async
+   */
   createAlertPolicy(
-    request: protos.google.monitoring.v3.ICreateAlertPolicyRequest,
+    request?: protos.google.monitoring.v3.ICreateAlertPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -518,39 +654,8 @@ export class AlertPolicyServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new alerting policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project in which to create the alerting policy. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   *
-   *   Note that this field names the parent container in which the alerting
-   *   policy will be written, not the name of the created policy. |name| must be
-   *   a host project of a workspace, otherwise INVALID_ARGUMENT error will
-   *   return. The alerting policy that is returned will have a name that contains
-   *   a normalized representation of this name as a prefix but adds a suffix of
-   *   the form `/alertPolicies/[ALERT_POLICY_ID]`, identifying the policy in the
-   *   container.
-   * @param {google.monitoring.v3.AlertPolicy} request.alertPolicy
-   *   Required. The requested alerting policy. You should omit the `name` field in this
-   *   policy. The name will be returned in the new policy, including
-   *   a new `[ALERT_POLICY_ID]` value.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AlertPolicy]{@link google.monitoring.v3.AlertPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createAlertPolicy(request);
-   */
   createAlertPolicy(
-    request: protos.google.monitoring.v3.ICreateAlertPolicyRequest,
+    request?: protos.google.monitoring.v3.ICreateAlertPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -584,14 +689,66 @@ export class AlertPolicyServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createAlertPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createAlertPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IAlertPolicy,
+          | protos.google.monitoring.v3.ICreateAlertPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAlertPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAlertPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IAlertPolicy,
+          protos.google.monitoring.v3.ICreateAlertPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAlertPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
+  /**
+   * Deletes an alerting policy.
+   *
+   * Design your application to single-thread API calls that modify the state of
+   * alerting policies in a single project. This includes calls to
+   * CreateAlertPolicy, DeleteAlertPolicy and UpdateAlertPolicy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The alerting policy to delete. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID]
+   *
+   *   For more information, see {@link protos.google.monitoring.v3.AlertPolicy|AlertPolicy}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/alert_policy_service.delete_alert_policy.js</caption>
+   * region_tag:monitoring_v3_generated_AlertPolicyService_DeleteAlertPolicy_async
+   */
   deleteAlertPolicy(
-    request: protos.google.monitoring.v3.IDeleteAlertPolicyRequest,
+    request?: protos.google.monitoring.v3.IDeleteAlertPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -617,29 +774,8 @@ export class AlertPolicyServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes an alerting policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The alerting policy to delete. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID]
-   *
-   *   For more information, see {@link google.monitoring.v3.AlertPolicy|AlertPolicy}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteAlertPolicy(request);
-   */
   deleteAlertPolicy(
-    request: protos.google.monitoring.v3.IDeleteAlertPolicyRequest,
+    request?: protos.google.monitoring.v3.IDeleteAlertPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -673,48 +809,53 @@ export class AlertPolicyServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteAlertPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteAlertPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.monitoring.v3.IDeleteAlertPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAlertPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAlertPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.IDeleteAlertPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAlertPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-  updateAlertPolicy(
-    request: protos.google.monitoring.v3.IUpdateAlertPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.monitoring.v3.IAlertPolicy,
-      protos.google.monitoring.v3.IUpdateAlertPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  updateAlertPolicy(
-    request: protos.google.monitoring.v3.IUpdateAlertPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.monitoring.v3.IAlertPolicy,
-      protos.google.monitoring.v3.IUpdateAlertPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAlertPolicy(
-    request: protos.google.monitoring.v3.IUpdateAlertPolicyRequest,
-    callback: Callback<
-      protos.google.monitoring.v3.IAlertPolicy,
-      protos.google.monitoring.v3.IUpdateAlertPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates an alerting policy. You can either replace the entire policy with
    * a new one or replace only certain fields in the current alerting policy by
    * specifying the fields to be updated via `updateMask`. Returns the
    * updated alerting policy.
    *
+   * Design your application to single-thread API calls that modify the state of
+   * alerting policies in a single project. This includes calls to
+   * CreateAlertPolicy, DeleteAlertPolicy and UpdateAlertPolicy.
+   *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
+   * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. A list of alerting policy field names. If this field is not
    *   empty, each listed field in the existing alerting policy is set to the
    *   value of the corresponding field in the supplied policy (`alert_policy`),
@@ -744,15 +885,41 @@ export class AlertPolicyServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AlertPolicy]{@link google.monitoring.v3.AlertPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.AlertPolicy|AlertPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example
-   * const [response] = await client.updateAlertPolicy(request);
+   * @example <caption>include:samples/generated/v3/alert_policy_service.update_alert_policy.js</caption>
+   * region_tag:monitoring_v3_generated_AlertPolicyService_UpdateAlertPolicy_async
    */
   updateAlertPolicy(
+    request?: protos.google.monitoring.v3.IUpdateAlertPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.IUpdateAlertPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateAlertPolicy(
     request: protos.google.monitoring.v3.IUpdateAlertPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.IUpdateAlertPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAlertPolicy(
+    request: protos.google.monitoring.v3.IUpdateAlertPolicyRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.IUpdateAlertPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAlertPolicy(
+    request?: protos.google.monitoring.v3.IUpdateAlertPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -786,15 +953,92 @@ export class AlertPolicyServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'alert_policy.name': request.alertPolicy!.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        'alert_policy.name': request.alertPolicy!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAlertPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAlertPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IAlertPolicy,
+          | protos.google.monitoring.v3.IUpdateAlertPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAlertPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAlertPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IAlertPolicy,
+          protos.google.monitoring.v3.IUpdateAlertPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAlertPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
+  /**
+   * Lists the existing alerting policies for the workspace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+   *   alert policies are to be listed. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   *
+   *   Note that this field names the parent container in which the alerting
+   *   policies to be listed are stored. To retrieve a single alerting policy
+   *   by name, use the
+   *   {@link protos.google.monitoring.v3.AlertPolicyService.GetAlertPolicy|GetAlertPolicy}
+   *   operation, instead.
+   * @param {string} [request.filter]
+   *   Optional. If provided, this field specifies the criteria that must be met
+   *   by alert policies to be included in the response.
+   *
+   *   For more details, see [sorting and
+   *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields by which to sort the result.
+   *   Supports the same set of field references as the `filter` field. Entries
+   *   can be prefixed with a minus sign to sort by the field in descending order.
+   *
+   *   For more details, see [sorting and
+   *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   * @param {string} [request.pageToken]
+   *   Optional. If this field is not empty then it must contain the
+   *   `nextPageToken` value returned by a previous call to this method.  Using
+   *   this field causes the method to return more results from the previous
+   *   method call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.monitoring.v3.AlertPolicy|AlertPolicy}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAlertPoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAlertPolicies(
-    request: protos.google.monitoring.v3.IListAlertPoliciesRequest,
+    request?: protos.google.monitoring.v3.IListAlertPoliciesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -820,55 +1064,8 @@ export class AlertPolicyServiceClient {
       protos.google.monitoring.v3.IAlertPolicy
     >
   ): void;
-  /**
-   * Lists the existing alerting policies for the workspace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project whose alert policies are to be listed. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   *
-   *   Note that this field names the parent container in which the alerting
-   *   policies to be listed are stored. To retrieve a single alerting policy
-   *   by name, use the
-   *   {@link google.monitoring.v3.AlertPolicyService.GetAlertPolicy|GetAlertPolicy}
-   *   operation, instead.
-   * @param {string} request.filter
-   *   If provided, this field specifies the criteria that must be met by
-   *   alert policies to be included in the response.
-   *
-   *   For more details, see [sorting and
-   *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
-   * @param {string} request.orderBy
-   *   A comma-separated list of fields by which to sort the result. Supports
-   *   the same set of field references as the `filter` field. Entries can be
-   *   prefixed with a minus sign to sort by the field in descending order.
-   *
-   *   For more details, see [sorting and
-   *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return more results from the previous method call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [AlertPolicy]{@link google.monitoring.v3.AlertPolicy}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAlertPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listAlertPolicies(
-    request: protos.google.monitoring.v3.IListAlertPoliciesRequest,
+    request?: protos.google.monitoring.v3.IListAlertPoliciesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -902,56 +1099,86 @@ export class AlertPolicyServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAlertPolicies(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.monitoring.v3.IListAlertPoliciesRequest,
+          | protos.google.monitoring.v3.IListAlertPoliciesResponse
+          | null
+          | undefined,
+          protos.google.monitoring.v3.IAlertPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAlertPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAlertPolicies request %j', request);
+    return this.innerApiCalls
+      .listAlertPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.monitoring.v3.IAlertPolicy[],
+          protos.google.monitoring.v3.IListAlertPoliciesRequest | null,
+          protos.google.monitoring.v3.IListAlertPoliciesResponse,
+        ]) => {
+          this._log.info('listAlertPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAlertPolicies`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The project whose alert policies are to be listed. The format is:
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+   *   alert policies are to be listed. The format is:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
    *
    *   Note that this field names the parent container in which the alerting
    *   policies to be listed are stored. To retrieve a single alerting policy
    *   by name, use the
-   *   {@link google.monitoring.v3.AlertPolicyService.GetAlertPolicy|GetAlertPolicy}
+   *   {@link protos.google.monitoring.v3.AlertPolicyService.GetAlertPolicy|GetAlertPolicy}
    *   operation, instead.
-   * @param {string} request.filter
-   *   If provided, this field specifies the criteria that must be met by
-   *   alert policies to be included in the response.
+   * @param {string} [request.filter]
+   *   Optional. If provided, this field specifies the criteria that must be met
+   *   by alert policies to be included in the response.
    *
    *   For more details, see [sorting and
    *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
-   * @param {string} request.orderBy
-   *   A comma-separated list of fields by which to sort the result. Supports
-   *   the same set of field references as the `filter` field. Entries can be
-   *   prefixed with a minus sign to sort by the field in descending order.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields by which to sort the result.
+   *   Supports the same set of field references as the `filter` field. Entries
+   *   can be prefixed with a minus sign to sort by the field in descending order.
    *
    *   For more details, see [sorting and
    *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return more results from the previous method call.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   * @param {string} [request.pageToken]
+   *   Optional. If this field is not empty then it must contain the
+   *   `nextPageToken` value returned by a previous call to this method.  Using
+   *   this field causes the method to return more results from the previous
+   *   method call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [AlertPolicy]{@link google.monitoring.v3.AlertPolicy} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.monitoring.v3.AlertPolicy|AlertPolicy} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAlertPoliciesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAlertPoliciesStream(
@@ -963,13 +1190,17 @@ export class AlertPolicyServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    const defaultCallSettings = this._defaults['listAlertPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAlertPolicies stream %j', request);
     return this.descriptors.page.listAlertPolicies.createStream(
-      this.innerApiCalls.listAlertPolicies as gax.GaxCall,
+      this.innerApiCalls.listAlertPolicies as GaxCall,
       request,
       callSettings
     );
@@ -982,49 +1213,48 @@ export class AlertPolicyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The project whose alert policies are to be listed. The format is:
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+   *   alert policies are to be listed. The format is:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
    *
    *   Note that this field names the parent container in which the alerting
    *   policies to be listed are stored. To retrieve a single alerting policy
    *   by name, use the
-   *   {@link google.monitoring.v3.AlertPolicyService.GetAlertPolicy|GetAlertPolicy}
+   *   {@link protos.google.monitoring.v3.AlertPolicyService.GetAlertPolicy|GetAlertPolicy}
    *   operation, instead.
-   * @param {string} request.filter
-   *   If provided, this field specifies the criteria that must be met by
-   *   alert policies to be included in the response.
+   * @param {string} [request.filter]
+   *   Optional. If provided, this field specifies the criteria that must be met
+   *   by alert policies to be included in the response.
    *
    *   For more details, see [sorting and
    *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
-   * @param {string} request.orderBy
-   *   A comma-separated list of fields by which to sort the result. Supports
-   *   the same set of field references as the `filter` field. Entries can be
-   *   prefixed with a minus sign to sort by the field in descending order.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields by which to sort the result.
+   *   Supports the same set of field references as the `filter` field. Entries
+   *   can be prefixed with a minus sign to sort by the field in descending order.
    *
    *   For more details, see [sorting and
    *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return more results from the previous method call.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   * @param {string} [request.pageToken]
+   *   Optional. If this field is not empty then it must contain the
+   *   `nextPageToken` value returned by a previous call to this method.  Using
+   *   this field causes the method to return more results from the previous
+   *   method call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [AlertPolicy]{@link google.monitoring.v3.AlertPolicy}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.monitoring.v3.AlertPolicy|AlertPolicy}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example
-   * const iterable = client.listAlertPoliciesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v3/alert_policy_service.list_alert_policies.js</caption>
+   * region_tag:monitoring_v3_generated_AlertPolicyService_ListAlertPolicies_async
    */
   listAlertPoliciesAsync(
     request?: protos.google.monitoring.v3.IListAlertPoliciesRequest,
@@ -1035,15 +1265,18 @@ export class AlertPolicyServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    const defaultCallSettings = this._defaults['listAlertPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAlertPolicies iterate %j', request);
     return this.descriptors.page.listAlertPolicies.asyncIterate(
       this.innerApiCalls['listAlertPolicies'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.monitoring.v3.IAlertPolicy>;
   }
@@ -2240,15 +2473,51 @@ export class AlertPolicyServiceClient {
   }
 
   /**
+   * Return a fully-qualified snooze resource name string.
+   *
+   * @param {string} project
+   * @param {string} snooze
+   * @returns {string} Resource name string.
+   */
+  snoozePath(project: string, snooze: string) {
+    return this.pathTemplates.snoozePathTemplate.render({
+      project: project,
+      snooze: snooze,
+    });
+  }
+
+  /**
+   * Parse the project from Snooze resource.
+   *
+   * @param {string} snoozeName
+   *   A fully-qualified path representing Snooze resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSnoozeName(snoozeName: string) {
+    return this.pathTemplates.snoozePathTemplate.match(snoozeName).project;
+  }
+
+  /**
+   * Parse the snooze from Snooze resource.
+   *
+   * @param {string} snoozeName
+   *   A fully-qualified path representing Snooze resource.
+   * @returns {string} A string representing the snooze.
+   */
+  matchSnoozeFromSnoozeName(snoozeName: string) {
+    return this.pathTemplates.snoozePathTemplate.match(snoozeName).snooze;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.alertPolicyServiceStub!.then(stub => {
+    if (this.alertPolicyServiceStub && !this._terminated) {
+      return this.alertPolicyServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });
