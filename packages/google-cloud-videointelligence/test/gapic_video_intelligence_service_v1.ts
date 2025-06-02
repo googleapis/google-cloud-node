@@ -232,9 +232,14 @@ describe('v1.VideoIntelligenceServiceClient', () => {
         throw err;
       });
       assert(client.videoIntelligenceServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -244,9 +249,14 @@ describe('v1.VideoIntelligenceServiceClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.videoIntelligenceServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {

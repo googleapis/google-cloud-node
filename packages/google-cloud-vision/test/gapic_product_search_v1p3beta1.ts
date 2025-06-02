@@ -289,9 +289,14 @@ describe('v1p3beta1.ProductSearchClient', () => {
         throw err;
       });
       assert(client.productSearchStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -300,9 +305,14 @@ describe('v1p3beta1.ProductSearchClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.productSearchStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -465,7 +475,9 @@ describe('v1p3beta1.ProductSearchClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createProductSet(request), expectedError);
     });
   });
@@ -595,7 +607,9 @@ describe('v1p3beta1.ProductSearchClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getProductSet(request), expectedError);
     });
   });
@@ -729,7 +743,9 @@ describe('v1p3beta1.ProductSearchClient', () => {
       );
       request.productSet.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateProductSet(request), expectedError);
     });
   });
@@ -859,7 +875,9 @@ describe('v1p3beta1.ProductSearchClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteProductSet(request), expectedError);
     });
   });
@@ -989,7 +1007,9 @@ describe('v1p3beta1.ProductSearchClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createProduct(request), expectedError);
     });
   });
@@ -1119,7 +1139,9 @@ describe('v1p3beta1.ProductSearchClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getProduct(request), expectedError);
     });
   });
@@ -1253,7 +1275,9 @@ describe('v1p3beta1.ProductSearchClient', () => {
       );
       request.product.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateProduct(request), expectedError);
     });
   });
@@ -1383,7 +1407,9 @@ describe('v1p3beta1.ProductSearchClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteProduct(request), expectedError);
     });
   });
@@ -1514,7 +1540,9 @@ describe('v1p3beta1.ProductSearchClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createReferenceImage(request), expectedError);
     });
   });
@@ -1645,7 +1673,9 @@ describe('v1p3beta1.ProductSearchClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteReferenceImage(request), expectedError);
     });
   });
@@ -1775,7 +1805,9 @@ describe('v1p3beta1.ProductSearchClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getReferenceImage(request), expectedError);
     });
   });
@@ -1909,7 +1941,9 @@ describe('v1p3beta1.ProductSearchClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.addProductToProductSet(request),
         expectedError
@@ -2046,7 +2080,9 @@ describe('v1p3beta1.ProductSearchClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.removeProductFromProductSet(request),
         expectedError
