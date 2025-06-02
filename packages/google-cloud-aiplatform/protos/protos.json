@@ -40261,6 +40261,11 @@
                             "responseSchema"
                           ]
                         },
+                        "_responseJsonSchema": {
+                          "oneof": [
+                            "responseJsonSchema"
+                          ]
+                        },
                         "_routingConfig": {
                           "oneof": [
                             "routingConfig"
@@ -40381,6 +40386,14 @@
                         "responseSchema": {
                           "type": "Schema",
                           "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "responseJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 28,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -41523,9 +41536,23 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "parametersJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "response": {
                           "type": "Schema",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "responseJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -82502,7 +82529,10 @@
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
               "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
+              "extend": "google.protobuf.FieldOptions",
+              "options": {
+                "packed": false
+              }
             },
             "FieldBehavior": {
               "values": {
@@ -82697,6 +82727,11 @@
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
             },
+            "apiVersion": {
+              "type": "string",
+              "id": 525000001,
+              "extend": "google.protobuf.ServiceOptions"
+            },
             "CommonLanguageSettings": {
               "fields": {
                 "referenceDocsUri": {
@@ -82805,6 +82840,10 @@
                 "protoReferenceDocumentationUri": {
                   "type": "string",
                   "id": 110
+                },
+                "restReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 111
                 }
               }
             },
@@ -84100,8 +84139,20 @@
                   1001
                 ],
                 [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
+                ],
+                [
                   9995,
                   9999
+                ],
+                [
+                  10000,
+                  10000
                 ]
               ],
               "reserved": [
