@@ -85,7 +85,8 @@ npm install @google-cloud/storagebatchoperations
 // const orderBy = 'abc123'
 
 // Imports the Storagebatchoperations library
-const {StorageBatchOperationsClient} = require('@google-cloud/storagebatchoperations').v1;
+const {StorageBatchOperationsClient} =
+  require('@google-cloud/storagebatchoperations').v1;
 
 // Instantiates a client
 const storagebatchoperationsClient = new StorageBatchOperationsClient();
@@ -99,7 +100,7 @@ async function callListJobs() {
   // Run request
   const iterable = storagebatchoperationsClient.listJobsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
