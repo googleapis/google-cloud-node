@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.7.1...redis-cluster-v0.8.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6302](https://github.com/googleapis/google-cloud-node/issues/6302)) ([abc35be](https://github.com/googleapis/google-cloud-node/commit/abc35be4817709467e6c6b2a12ac4e749ffed72d))
+
 ## [0.7.1](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.7.0...redis-cluster-v0.7.1) (2025-03-21)
 
 
