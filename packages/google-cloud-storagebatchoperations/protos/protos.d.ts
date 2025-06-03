@@ -3179,9 +3179,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
-
-            /** Publishing restReferenceDocumentationUri */
-            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -3222,9 +3219,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
-
-            /** Publishing restReferenceDocumentationUri. */
-            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -7443,9 +7437,6 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
-
-            /** ServiceOptions .google.api.apiVersion */
-            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -7697,7 +7688,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|Buffer|string|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -7728,7 +7719,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|Buffer|string);
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -8970,7 +8961,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|Buffer|string|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents an Any. */
@@ -8986,7 +8977,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|Buffer|string);
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new Any instance using the specified properties.

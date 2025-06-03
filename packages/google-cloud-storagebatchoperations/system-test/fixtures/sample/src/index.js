@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-const StorageBatchOperationsClient = v1.StorageBatchOperationsClient;
-type StorageBatchOperationsClient = v1.StorageBatchOperationsClient;
-export {v1, StorageBatchOperationsClient};
-export default {v1, StorageBatchOperationsClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const storagebatchoperations = require('@google-cloud/storagebatchoperations');
+
+function main() {
+  const storageBatchOperationsClient =
+    new storagebatchoperations.StorageBatchOperationsClient();
+}
+
+main();
