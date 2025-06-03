@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The resource name of the listing.
-   *  e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
+   *  e.g. `projects/myproject/locations/us/dataExchanges/123/listings/456`.
    */
   // const name = 'abc123'
 

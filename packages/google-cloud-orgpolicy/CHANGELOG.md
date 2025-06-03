@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/org-policy-v4.0.1...org-policy-v4.1.0) (2025-05-09)
+
+
+### Features
+
+* [orgpolicy] Add managed constraints new fields (e.g. parameter) ([#6277](https://github.com/googleapis/google-cloud-node/issues/6277)) ([424082d](https://github.com/googleapis/google-cloud-node/commit/424082dcf128f8bae4c129f8fbae904f71e60825))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/org-policy-v4.0.0...org-policy-v4.0.1) (2025-03-21)
 
 

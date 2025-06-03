@@ -288,9 +288,14 @@ describe('v1.DomainMappingsClient', () => {
         throw err;
       });
       assert(client.domainMappingsStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -299,9 +304,14 @@ describe('v1.DomainMappingsClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.domainMappingsStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -464,7 +474,9 @@ describe('v1.DomainMappingsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDomainMapping(request), expectedError);
     });
   });

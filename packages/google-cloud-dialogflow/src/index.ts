@@ -58,51 +58,7 @@ type SessionsClient = v2.SessionsClient;
 const VersionsClient = v2.VersionsClient;
 type VersionsClient = v2.VersionsClient;
 
-export {
-  v2,
-  v2beta1,
-  AgentsClient,
-  AnswerRecordsClient,
-  ContextsClient,
-  ConversationDatasetsClient,
-  ConversationModelsClient,
-  ConversationProfilesClient,
-  ConversationsClient,
-  DocumentsClient,
-  EncryptionSpecServiceClient,
-  EntityTypesClient,
-  EnvironmentsClient,
-  FulfillmentsClient,
-  GeneratorsClient,
-  IntentsClient,
-  KnowledgeBasesClient,
-  ParticipantsClient,
-  SessionEntityTypesClient,
-  SessionsClient,
-  VersionsClient,
-};
-export default {
-  v2,
-  v2beta1,
-  AgentsClient,
-  AnswerRecordsClient,
-  ContextsClient,
-  ConversationDatasetsClient,
-  ConversationModelsClient,
-  ConversationProfilesClient,
-  ConversationsClient,
-  DocumentsClient,
-  EncryptionSpecServiceClient,
-  EntityTypesClient,
-  EnvironmentsClient,
-  FulfillmentsClient,
-  GeneratorsClient,
-  IntentsClient,
-  KnowledgeBasesClient,
-  ParticipantsClient,
-  SessionEntityTypesClient,
-  SessionsClient,
-  VersionsClient,
-};
+export {v2, v2beta1, AgentsClient, AnswerRecordsClient, ContextsClient, ConversationDatasetsClient, ConversationModelsClient, ConversationProfilesClient, ConversationsClient, DocumentsClient, EncryptionSpecServiceClient, EntityTypesClient, EnvironmentsClient, FulfillmentsClient, GeneratorsClient, IntentsClient, KnowledgeBasesClient, ParticipantsClient, SessionEntityTypesClient, SessionsClient, VersionsClient};
+export default {v2, v2beta1, AgentsClient, AnswerRecordsClient, ContextsClient, ConversationDatasetsClient, ConversationModelsClient, ConversationProfilesClient, ConversationsClient, DocumentsClient, EncryptionSpecServiceClient, EntityTypesClient, EnvironmentsClient, FulfillmentsClient, GeneratorsClient, IntentsClient, KnowledgeBasesClient, ParticipantsClient, SessionEntityTypesClient, SessionsClient, VersionsClient};
 import * as protos from '../protos/protos';
 export {protos};

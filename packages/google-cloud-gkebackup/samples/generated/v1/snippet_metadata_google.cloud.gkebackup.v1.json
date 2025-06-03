@@ -244,6 +244,338 @@
             }
         },
         {
+            "regionTag": "gkebackup_v1_generated_BackupForGKE_CreateBackupChannel_async",
+            "title": "BackupForGKE createBackupChannel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new BackupChannel in a given location.",
+            "canonical": true,
+            "file": "backup_for_g_k_e.create_backup_channel.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateBackupChannel",
+                "fullName": "google.cloud.gkebackup.v1.BackupForGKE.CreateBackupChannel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "backup_channel",
+                        "type": ".google.cloud.gkebackup.v1.BackupChannel"
+                    },
+                    {
+                        "name": "backup_channel_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "BackupForGKEClient",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKEClient"
+                },
+                "method": {
+                    "shortName": "CreateBackupChannel",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKE.CreateBackupChannel",
+                    "service": {
+                        "shortName": "BackupForGKE",
+                        "fullName": "google.cloud.gkebackup.v1.BackupForGKE"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkebackup_v1_generated_BackupForGKE_ListBackupChannels_async",
+            "title": "BackupForGKE listBackupChannels Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists BackupChannels in a given location.",
+            "canonical": true,
+            "file": "backup_for_g_k_e.list_backup_channels.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 83,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListBackupChannels",
+                "fullName": "google.cloud.gkebackup.v1.BackupForGKE.ListBackupChannels",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.gkebackup.v1.ListBackupChannelsResponse",
+                "client": {
+                    "shortName": "BackupForGKEClient",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKEClient"
+                },
+                "method": {
+                    "shortName": "ListBackupChannels",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKE.ListBackupChannels",
+                    "service": {
+                        "shortName": "BackupForGKE",
+                        "fullName": "google.cloud.gkebackup.v1.BackupForGKE"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkebackup_v1_generated_BackupForGKE_GetBackupChannel_async",
+            "title": "BackupForGKE getBackupChannel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieve the details of a single BackupChannel.",
+            "canonical": true,
+            "file": "backup_for_g_k_e.get_backup_channel.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetBackupChannel",
+                "fullName": "google.cloud.gkebackup.v1.BackupForGKE.GetBackupChannel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.gkebackup.v1.BackupChannel",
+                "client": {
+                    "shortName": "BackupForGKEClient",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKEClient"
+                },
+                "method": {
+                    "shortName": "GetBackupChannel",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKE.GetBackupChannel",
+                    "service": {
+                        "shortName": "BackupForGKE",
+                        "fullName": "google.cloud.gkebackup.v1.BackupForGKE"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkebackup_v1_generated_BackupForGKE_UpdateBackupChannel_async",
+            "title": "BackupForGKE updateBackupChannel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update a BackupChannel.",
+            "canonical": true,
+            "file": "backup_for_g_k_e.update_backup_channel.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateBackupChannel",
+                "fullName": "google.cloud.gkebackup.v1.BackupForGKE.UpdateBackupChannel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "backup_channel",
+                        "type": ".google.cloud.gkebackup.v1.BackupChannel"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "BackupForGKEClient",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKEClient"
+                },
+                "method": {
+                    "shortName": "UpdateBackupChannel",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKE.UpdateBackupChannel",
+                    "service": {
+                        "shortName": "BackupForGKE",
+                        "fullName": "google.cloud.gkebackup.v1.BackupForGKE"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkebackup_v1_generated_BackupForGKE_DeleteBackupChannel_async",
+            "title": "BackupForGKE deleteBackupChannel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes an existing BackupChannel.",
+            "canonical": true,
+            "file": "backup_for_g_k_e.delete_backup_channel.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteBackupChannel",
+                "fullName": "google.cloud.gkebackup.v1.BackupForGKE.DeleteBackupChannel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "etag",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "BackupForGKEClient",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKEClient"
+                },
+                "method": {
+                    "shortName": "DeleteBackupChannel",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKE.DeleteBackupChannel",
+                    "service": {
+                        "shortName": "BackupForGKE",
+                        "fullName": "google.cloud.gkebackup.v1.BackupForGKE"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkebackup_v1_generated_BackupForGKE_ListBackupPlanBindings_async",
+            "title": "BackupForGKE listBackupPlanBindings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists BackupPlanBindings in a given location.",
+            "canonical": true,
+            "file": "backup_for_g_k_e.list_backup_plan_bindings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 83,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListBackupPlanBindings",
+                "fullName": "google.cloud.gkebackup.v1.BackupForGKE.ListBackupPlanBindings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.gkebackup.v1.ListBackupPlanBindingsResponse",
+                "client": {
+                    "shortName": "BackupForGKEClient",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKEClient"
+                },
+                "method": {
+                    "shortName": "ListBackupPlanBindings",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKE.ListBackupPlanBindings",
+                    "service": {
+                        "shortName": "BackupForGKE",
+                        "fullName": "google.cloud.gkebackup.v1.BackupForGKE"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkebackup_v1_generated_BackupForGKE_GetBackupPlanBinding_async",
+            "title": "BackupForGKE getBackupPlanBinding Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieve the details of a single BackupPlanBinding.",
+            "canonical": true,
+            "file": "backup_for_g_k_e.get_backup_plan_binding.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetBackupPlanBinding",
+                "fullName": "google.cloud.gkebackup.v1.BackupForGKE.GetBackupPlanBinding",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.gkebackup.v1.BackupPlanBinding",
+                "client": {
+                    "shortName": "BackupForGKEClient",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKEClient"
+                },
+                "method": {
+                    "shortName": "GetBackupPlanBinding",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKE.GetBackupPlanBinding",
+                    "service": {
+                        "shortName": "BackupForGKE",
+                        "fullName": "google.cloud.gkebackup.v1.BackupForGKE"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "gkebackup_v1_generated_BackupForGKE_CreateBackup_async",
             "title": "BackupForGKE createBackup Sample",
             "origin": "API_DEFINITION",
@@ -302,7 +634,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 87,
                     "type": "FULL"
                 }
             ],
@@ -330,6 +662,10 @@
                     {
                         "name": "order_by",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.gkebackup.v1.ListBackupsResponse",
@@ -804,6 +1140,334 @@
                 "method": {
                     "shortName": "DeleteRestorePlan",
                     "fullName": "google.cloud.gkebackup.v1.BackupForGKE.DeleteRestorePlan",
+                    "service": {
+                        "shortName": "BackupForGKE",
+                        "fullName": "google.cloud.gkebackup.v1.BackupForGKE"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkebackup_v1_generated_BackupForGKE_CreateRestoreChannel_async",
+            "title": "BackupForGKE createRestoreChannel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new RestoreChannel in a given location.",
+            "canonical": true,
+            "file": "backup_for_g_k_e.create_restore_channel.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateRestoreChannel",
+                "fullName": "google.cloud.gkebackup.v1.BackupForGKE.CreateRestoreChannel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "restore_channel",
+                        "type": ".google.cloud.gkebackup.v1.RestoreChannel"
+                    },
+                    {
+                        "name": "restore_channel_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "BackupForGKEClient",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKEClient"
+                },
+                "method": {
+                    "shortName": "CreateRestoreChannel",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKE.CreateRestoreChannel",
+                    "service": {
+                        "shortName": "BackupForGKE",
+                        "fullName": "google.cloud.gkebackup.v1.BackupForGKE"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkebackup_v1_generated_BackupForGKE_ListRestoreChannels_async",
+            "title": "BackupForGKE listRestoreChannels Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists RestoreChannels in a given location.",
+            "canonical": true,
+            "file": "backup_for_g_k_e.list_restore_channels.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 83,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListRestoreChannels",
+                "fullName": "google.cloud.gkebackup.v1.BackupForGKE.ListRestoreChannels",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.gkebackup.v1.ListRestoreChannelsResponse",
+                "client": {
+                    "shortName": "BackupForGKEClient",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKEClient"
+                },
+                "method": {
+                    "shortName": "ListRestoreChannels",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKE.ListRestoreChannels",
+                    "service": {
+                        "shortName": "BackupForGKE",
+                        "fullName": "google.cloud.gkebackup.v1.BackupForGKE"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkebackup_v1_generated_BackupForGKE_GetRestoreChannel_async",
+            "title": "BackupForGKE getRestoreChannel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieve the details of a single RestoreChannel.",
+            "canonical": true,
+            "file": "backup_for_g_k_e.get_restore_channel.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetRestoreChannel",
+                "fullName": "google.cloud.gkebackup.v1.BackupForGKE.GetRestoreChannel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.gkebackup.v1.RestoreChannel",
+                "client": {
+                    "shortName": "BackupForGKEClient",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKEClient"
+                },
+                "method": {
+                    "shortName": "GetRestoreChannel",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKE.GetRestoreChannel",
+                    "service": {
+                        "shortName": "BackupForGKE",
+                        "fullName": "google.cloud.gkebackup.v1.BackupForGKE"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkebackup_v1_generated_BackupForGKE_UpdateRestoreChannel_async",
+            "title": "BackupForGKE updateRestoreChannel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update a RestoreChannel.",
+            "canonical": true,
+            "file": "backup_for_g_k_e.update_restore_channel.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateRestoreChannel",
+                "fullName": "google.cloud.gkebackup.v1.BackupForGKE.UpdateRestoreChannel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "restore_channel",
+                        "type": ".google.cloud.gkebackup.v1.RestoreChannel"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "BackupForGKEClient",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKEClient"
+                },
+                "method": {
+                    "shortName": "UpdateRestoreChannel",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKE.UpdateRestoreChannel",
+                    "service": {
+                        "shortName": "BackupForGKE",
+                        "fullName": "google.cloud.gkebackup.v1.BackupForGKE"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkebackup_v1_generated_BackupForGKE_DeleteRestoreChannel_async",
+            "title": "BackupForGKE deleteRestoreChannel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes an existing RestoreChannel.",
+            "canonical": true,
+            "file": "backup_for_g_k_e.delete_restore_channel.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteRestoreChannel",
+                "fullName": "google.cloud.gkebackup.v1.BackupForGKE.DeleteRestoreChannel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "etag",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "BackupForGKEClient",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKEClient"
+                },
+                "method": {
+                    "shortName": "DeleteRestoreChannel",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKE.DeleteRestoreChannel",
+                    "service": {
+                        "shortName": "BackupForGKE",
+                        "fullName": "google.cloud.gkebackup.v1.BackupForGKE"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkebackup_v1_generated_BackupForGKE_ListRestorePlanBindings_async",
+            "title": "BackupForGKE listRestorePlanBindings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists RestorePlanBindings in a given location.",
+            "canonical": true,
+            "file": "backup_for_g_k_e.list_restore_plan_bindings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 83,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListRestorePlanBindings",
+                "fullName": "google.cloud.gkebackup.v1.BackupForGKE.ListRestorePlanBindings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.gkebackup.v1.ListRestorePlanBindingsResponse",
+                "client": {
+                    "shortName": "BackupForGKEClient",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKEClient"
+                },
+                "method": {
+                    "shortName": "ListRestorePlanBindings",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKE.ListRestorePlanBindings",
+                    "service": {
+                        "shortName": "BackupForGKE",
+                        "fullName": "google.cloud.gkebackup.v1.BackupForGKE"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkebackup_v1_generated_BackupForGKE_GetRestorePlanBinding_async",
+            "title": "BackupForGKE getRestorePlanBinding Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieve the details of a single RestorePlanBinding.",
+            "canonical": true,
+            "file": "backup_for_g_k_e.get_restore_plan_binding.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetRestorePlanBinding",
+                "fullName": "google.cloud.gkebackup.v1.BackupForGKE.GetRestorePlanBinding",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.gkebackup.v1.RestorePlanBinding",
+                "client": {
+                    "shortName": "BackupForGKEClient",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKEClient"
+                },
+                "method": {
+                    "shortName": "GetRestorePlanBinding",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKE.GetRestorePlanBinding",
                     "service": {
                         "shortName": "BackupForGKE",
                         "fullName": "google.cloud.gkebackup.v1.BackupForGKE"

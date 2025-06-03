@@ -21955,6 +21955,7 @@
                          * @interface IMigrationConfig
                          * @property {google.cloud.datacatalog.v1.TagTemplateMigration|null} [tagTemplateMigration] MigrationConfig tagTemplateMigration
                          * @property {google.cloud.datacatalog.v1.CatalogUIExperience|null} [catalogUiExperience] MigrationConfig catalogUiExperience
+                         * @property {google.protobuf.ITimestamp|null} [templateMigrationEnabledTime] MigrationConfig templateMigrationEnabledTime
                          */
     
                         /**
@@ -21989,6 +21990,14 @@
                         MigrationConfig.prototype.catalogUiExperience = 0;
     
                         /**
+                         * MigrationConfig templateMigrationEnabledTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} templateMigrationEnabledTime
+                         * @memberof google.cloud.datacatalog.v1.MigrationConfig
+                         * @instance
+                         */
+                        MigrationConfig.prototype.templateMigrationEnabledTime = null;
+    
+                        /**
                          * Creates a new MigrationConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datacatalog.v1.MigrationConfig
@@ -22016,6 +22025,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.tagTemplateMigration);
                             if (message.catalogUiExperience != null && Object.hasOwnProperty.call(message, "catalogUiExperience"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.catalogUiExperience);
+                            if (message.templateMigrationEnabledTime != null && Object.hasOwnProperty.call(message, "templateMigrationEnabledTime"))
+                                $root.google.protobuf.Timestamp.encode(message.templateMigrationEnabledTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -22056,6 +22067,10 @@
                                     }
                                 case 2: {
                                         message.catalogUiExperience = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.templateMigrationEnabledTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -22111,6 +22126,11 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.templateMigrationEnabledTime != null && message.hasOwnProperty("templateMigrationEnabledTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.templateMigrationEnabledTime);
+                                if (error)
+                                    return "templateMigrationEnabledTime." + error;
+                            }
                             return null;
                         };
     
@@ -22166,6 +22186,11 @@
                                 message.catalogUiExperience = 2;
                                 break;
                             }
+                            if (object.templateMigrationEnabledTime != null) {
+                                if (typeof object.templateMigrationEnabledTime !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1.MigrationConfig.templateMigrationEnabledTime: object expected");
+                                message.templateMigrationEnabledTime = $root.google.protobuf.Timestamp.fromObject(object.templateMigrationEnabledTime);
+                            }
                             return message;
                         };
     
@@ -22185,11 +22210,14 @@
                             if (options.defaults) {
                                 object.tagTemplateMigration = options.enums === String ? "TAG_TEMPLATE_MIGRATION_UNSPECIFIED" : 0;
                                 object.catalogUiExperience = options.enums === String ? "CATALOG_UI_EXPERIENCE_UNSPECIFIED" : 0;
+                                object.templateMigrationEnabledTime = null;
                             }
                             if (message.tagTemplateMigration != null && message.hasOwnProperty("tagTemplateMigration"))
                                 object.tagTemplateMigration = options.enums === String ? $root.google.cloud.datacatalog.v1.TagTemplateMigration[message.tagTemplateMigration] === undefined ? message.tagTemplateMigration : $root.google.cloud.datacatalog.v1.TagTemplateMigration[message.tagTemplateMigration] : message.tagTemplateMigration;
                             if (message.catalogUiExperience != null && message.hasOwnProperty("catalogUiExperience"))
                                 object.catalogUiExperience = options.enums === String ? $root.google.cloud.datacatalog.v1.CatalogUIExperience[message.catalogUiExperience] === undefined ? message.catalogUiExperience : $root.google.cloud.datacatalog.v1.CatalogUIExperience[message.catalogUiExperience] : message.catalogUiExperience;
+                            if (message.templateMigrationEnabledTime != null && message.hasOwnProperty("templateMigrationEnabledTime"))
+                                object.templateMigrationEnabledTime = $root.google.protobuf.Timestamp.toObject(message.templateMigrationEnabledTime, options);
                             return object;
                         };
     

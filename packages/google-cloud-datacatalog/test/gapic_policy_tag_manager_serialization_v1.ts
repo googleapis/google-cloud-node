@@ -212,9 +212,14 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
         throw err;
       });
       assert(client.policyTagManagerSerializationStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -226,9 +231,14 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
           }
         );
       assert.strictEqual(client.policyTagManagerSerializationStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -409,7 +419,9 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.replaceTaxonomy(request), expectedError);
     });
   });
@@ -551,7 +563,9 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.importTaxonomies(request), expectedError);
     });
   });
@@ -693,7 +707,9 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.exportTaxonomies(request), expectedError);
     });
   });

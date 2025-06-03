@@ -207,9 +207,14 @@ describe('v3.PolicyTroubleshooterClient', () => {
         throw err;
       });
       assert(client.policyTroubleshooterStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -219,9 +224,14 @@ describe('v3.PolicyTroubleshooterClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.policyTroubleshooterStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -347,7 +357,9 @@ describe('v3.PolicyTroubleshooterClient', () => {
         new protos.google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.troubleshootIamPolicy(request),
         expectedError

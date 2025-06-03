@@ -18,18 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -114,41 +103,20 @@ export class AMLClient {
    *     const client = new AMLClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AMLClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'financialservices.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -174,7 +142,7 @@ export class AMLClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -190,9 +158,13 @@ export class AMLClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -240,41 +212,20 @@ export class AMLClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listInstances: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'instances'
-      ),
-      listDatasets: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'datasets'
-      ),
-      listModels: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'models'
-      ),
-      listEngineConfigs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'engineConfigs'
-      ),
-      listEngineVersions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'engineVersions'
-      ),
-      listPredictionResults: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'predictionResults'
-      ),
-      listBacktestResults: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'backtestResults'
-      ),
+      listInstances:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'instances'),
+      listDatasets:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'datasets'),
+      listModels:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'models'),
+      listEngineConfigs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'engineConfigs'),
+      listEngineVersions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'engineVersions'),
+      listPredictionResults:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'predictionResults'),
+      listBacktestResults:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'backtestResults')
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -283,348 +234,213 @@ export class AMLClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createInstanceResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.Instance'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.Instance') as gax.protobuf.Type;
     const createInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const updateInstanceResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.Instance'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.Instance') as gax.protobuf.Type;
     const updateInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteInstanceResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const importRegisteredPartiesResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.ImportRegisteredPartiesResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.ImportRegisteredPartiesResponse') as gax.protobuf.Type;
     const importRegisteredPartiesMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const exportRegisteredPartiesResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.ExportRegisteredPartiesResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.ExportRegisteredPartiesResponse') as gax.protobuf.Type;
     const exportRegisteredPartiesMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const createDatasetResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.Dataset'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.Dataset') as gax.protobuf.Type;
     const createDatasetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const updateDatasetResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.Dataset'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.Dataset') as gax.protobuf.Type;
     const updateDatasetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteDatasetResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteDatasetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const createModelResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.Model'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.Model') as gax.protobuf.Type;
     const createModelMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const updateModelResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.Model'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.Model') as gax.protobuf.Type;
     const updateModelMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const exportModelMetadataResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.ExportModelMetadataResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.ExportModelMetadataResponse') as gax.protobuf.Type;
     const exportModelMetadataMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteModelResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteModelMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const createEngineConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.EngineConfig'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.EngineConfig') as gax.protobuf.Type;
     const createEngineConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const updateEngineConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.EngineConfig'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.EngineConfig') as gax.protobuf.Type;
     const updateEngineConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const exportEngineConfigMetadataResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.ExportEngineConfigMetadataResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.ExportEngineConfigMetadataResponse') as gax.protobuf.Type;
     const exportEngineConfigMetadataMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteEngineConfigResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteEngineConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const createPredictionResultResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.PredictionResult'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.PredictionResult') as gax.protobuf.Type;
     const createPredictionResultMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const updatePredictionResultResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.PredictionResult'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.PredictionResult') as gax.protobuf.Type;
     const updatePredictionResultMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const exportPredictionResultMetadataResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.ExportPredictionResultMetadataResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.ExportPredictionResultMetadataResponse') as gax.protobuf.Type;
     const exportPredictionResultMetadataMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const deletePredictionResultResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deletePredictionResultMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const createBacktestResultResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.BacktestResult'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.BacktestResult') as gax.protobuf.Type;
     const createBacktestResultMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const updateBacktestResultResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.BacktestResult'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.BacktestResult') as gax.protobuf.Type;
     const updateBacktestResultMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const exportBacktestResultMetadataResponse = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.ExportBacktestResultMetadataResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.ExportBacktestResultMetadataResponse') as gax.protobuf.Type;
     const exportBacktestResultMetadataMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteBacktestResultResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteBacktestResultMetadata = protoFilesRoot.lookup(
-      '.google.cloud.financialservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.financialservices.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createInstanceResponse.decode.bind(createInstanceResponse),
-        createInstanceMetadata.decode.bind(createInstanceMetadata)
-      ),
+        createInstanceMetadata.decode.bind(createInstanceMetadata)),
       updateInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateInstanceResponse.decode.bind(updateInstanceResponse),
-        updateInstanceMetadata.decode.bind(updateInstanceMetadata)
-      ),
+        updateInstanceMetadata.decode.bind(updateInstanceMetadata)),
       deleteInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteInstanceResponse.decode.bind(deleteInstanceResponse),
-        deleteInstanceMetadata.decode.bind(deleteInstanceMetadata)
-      ),
+        deleteInstanceMetadata.decode.bind(deleteInstanceMetadata)),
       importRegisteredParties: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        importRegisteredPartiesResponse.decode.bind(
-          importRegisteredPartiesResponse
-        ),
-        importRegisteredPartiesMetadata.decode.bind(
-          importRegisteredPartiesMetadata
-        )
-      ),
+        importRegisteredPartiesResponse.decode.bind(importRegisteredPartiesResponse),
+        importRegisteredPartiesMetadata.decode.bind(importRegisteredPartiesMetadata)),
       exportRegisteredParties: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        exportRegisteredPartiesResponse.decode.bind(
-          exportRegisteredPartiesResponse
-        ),
-        exportRegisteredPartiesMetadata.decode.bind(
-          exportRegisteredPartiesMetadata
-        )
-      ),
+        exportRegisteredPartiesResponse.decode.bind(exportRegisteredPartiesResponse),
+        exportRegisteredPartiesMetadata.decode.bind(exportRegisteredPartiesMetadata)),
       createDataset: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createDatasetResponse.decode.bind(createDatasetResponse),
-        createDatasetMetadata.decode.bind(createDatasetMetadata)
-      ),
+        createDatasetMetadata.decode.bind(createDatasetMetadata)),
       updateDataset: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateDatasetResponse.decode.bind(updateDatasetResponse),
-        updateDatasetMetadata.decode.bind(updateDatasetMetadata)
-      ),
+        updateDatasetMetadata.decode.bind(updateDatasetMetadata)),
       deleteDataset: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteDatasetResponse.decode.bind(deleteDatasetResponse),
-        deleteDatasetMetadata.decode.bind(deleteDatasetMetadata)
-      ),
+        deleteDatasetMetadata.decode.bind(deleteDatasetMetadata)),
       createModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createModelResponse.decode.bind(createModelResponse),
-        createModelMetadata.decode.bind(createModelMetadata)
-      ),
+        createModelMetadata.decode.bind(createModelMetadata)),
       updateModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateModelResponse.decode.bind(updateModelResponse),
-        updateModelMetadata.decode.bind(updateModelMetadata)
-      ),
+        updateModelMetadata.decode.bind(updateModelMetadata)),
       exportModelMetadata: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportModelMetadataResponse.decode.bind(exportModelMetadataResponse),
-        exportModelMetadataMetadata.decode.bind(exportModelMetadataMetadata)
-      ),
+        exportModelMetadataMetadata.decode.bind(exportModelMetadataMetadata)),
       deleteModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteModelResponse.decode.bind(deleteModelResponse),
-        deleteModelMetadata.decode.bind(deleteModelMetadata)
-      ),
+        deleteModelMetadata.decode.bind(deleteModelMetadata)),
       createEngineConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createEngineConfigResponse.decode.bind(createEngineConfigResponse),
-        createEngineConfigMetadata.decode.bind(createEngineConfigMetadata)
-      ),
+        createEngineConfigMetadata.decode.bind(createEngineConfigMetadata)),
       updateEngineConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateEngineConfigResponse.decode.bind(updateEngineConfigResponse),
-        updateEngineConfigMetadata.decode.bind(updateEngineConfigMetadata)
-      ),
+        updateEngineConfigMetadata.decode.bind(updateEngineConfigMetadata)),
       exportEngineConfigMetadata: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        exportEngineConfigMetadataResponse.decode.bind(
-          exportEngineConfigMetadataResponse
-        ),
-        exportEngineConfigMetadataMetadata.decode.bind(
-          exportEngineConfigMetadataMetadata
-        )
-      ),
+        exportEngineConfigMetadataResponse.decode.bind(exportEngineConfigMetadataResponse),
+        exportEngineConfigMetadataMetadata.decode.bind(exportEngineConfigMetadataMetadata)),
       deleteEngineConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteEngineConfigResponse.decode.bind(deleteEngineConfigResponse),
-        deleteEngineConfigMetadata.decode.bind(deleteEngineConfigMetadata)
-      ),
+        deleteEngineConfigMetadata.decode.bind(deleteEngineConfigMetadata)),
       createPredictionResult: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createPredictionResultResponse.decode.bind(
-          createPredictionResultResponse
-        ),
-        createPredictionResultMetadata.decode.bind(
-          createPredictionResultMetadata
-        )
-      ),
+        createPredictionResultResponse.decode.bind(createPredictionResultResponse),
+        createPredictionResultMetadata.decode.bind(createPredictionResultMetadata)),
       updatePredictionResult: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updatePredictionResultResponse.decode.bind(
-          updatePredictionResultResponse
-        ),
-        updatePredictionResultMetadata.decode.bind(
-          updatePredictionResultMetadata
-        )
-      ),
+        updatePredictionResultResponse.decode.bind(updatePredictionResultResponse),
+        updatePredictionResultMetadata.decode.bind(updatePredictionResultMetadata)),
       exportPredictionResultMetadata: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        exportPredictionResultMetadataResponse.decode.bind(
-          exportPredictionResultMetadataResponse
-        ),
-        exportPredictionResultMetadataMetadata.decode.bind(
-          exportPredictionResultMetadataMetadata
-        )
-      ),
+        exportPredictionResultMetadataResponse.decode.bind(exportPredictionResultMetadataResponse),
+        exportPredictionResultMetadataMetadata.decode.bind(exportPredictionResultMetadataMetadata)),
       deletePredictionResult: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deletePredictionResultResponse.decode.bind(
-          deletePredictionResultResponse
-        ),
-        deletePredictionResultMetadata.decode.bind(
-          deletePredictionResultMetadata
-        )
-      ),
+        deletePredictionResultResponse.decode.bind(deletePredictionResultResponse),
+        deletePredictionResultMetadata.decode.bind(deletePredictionResultMetadata)),
       createBacktestResult: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createBacktestResultResponse.decode.bind(createBacktestResultResponse),
-        createBacktestResultMetadata.decode.bind(createBacktestResultMetadata)
-      ),
+        createBacktestResultMetadata.decode.bind(createBacktestResultMetadata)),
       updateBacktestResult: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateBacktestResultResponse.decode.bind(updateBacktestResultResponse),
-        updateBacktestResultMetadata.decode.bind(updateBacktestResultMetadata)
-      ),
+        updateBacktestResultMetadata.decode.bind(updateBacktestResultMetadata)),
       exportBacktestResultMetadata: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        exportBacktestResultMetadataResponse.decode.bind(
-          exportBacktestResultMetadataResponse
-        ),
-        exportBacktestResultMetadataMetadata.decode.bind(
-          exportBacktestResultMetadataMetadata
-        )
-      ),
+        exportBacktestResultMetadataResponse.decode.bind(exportBacktestResultMetadataResponse),
+        exportBacktestResultMetadataMetadata.decode.bind(exportBacktestResultMetadataMetadata)),
       deleteBacktestResult: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteBacktestResultResponse.decode.bind(deleteBacktestResultResponse),
-        deleteBacktestResultMetadata.decode.bind(deleteBacktestResultMetadata)
-      ),
+        deleteBacktestResultMetadata.decode.bind(deleteBacktestResultMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.financialservices.v1.AML',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.financialservices.v1.AML', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -655,72 +471,28 @@ export class AMLClient {
     // Put together the "service stub" for
     // google.cloud.financialservices.v1.AML.
     this.aMLStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.financialservices.v1.AML'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.financialservices.v1.AML') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.financialservices.v1.AML,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const aMLStubMethods = [
-      'listInstances',
-      'getInstance',
-      'createInstance',
-      'updateInstance',
-      'deleteInstance',
-      'importRegisteredParties',
-      'exportRegisteredParties',
-      'listDatasets',
-      'getDataset',
-      'createDataset',
-      'updateDataset',
-      'deleteDataset',
-      'listModels',
-      'getModel',
-      'createModel',
-      'updateModel',
-      'exportModelMetadata',
-      'deleteModel',
-      'listEngineConfigs',
-      'getEngineConfig',
-      'createEngineConfig',
-      'updateEngineConfig',
-      'exportEngineConfigMetadata',
-      'deleteEngineConfig',
-      'getEngineVersion',
-      'listEngineVersions',
-      'listPredictionResults',
-      'getPredictionResult',
-      'createPredictionResult',
-      'updatePredictionResult',
-      'exportPredictionResultMetadata',
-      'deletePredictionResult',
-      'listBacktestResults',
-      'getBacktestResult',
-      'createBacktestResult',
-      'updateBacktestResult',
-      'exportBacktestResultMetadata',
-      'deleteBacktestResult',
-    ];
+    const aMLStubMethods =
+        ['listInstances', 'getInstance', 'createInstance', 'updateInstance', 'deleteInstance', 'importRegisteredParties', 'exportRegisteredParties', 'listDatasets', 'getDataset', 'createDataset', 'updateDataset', 'deleteDataset', 'listModels', 'getModel', 'createModel', 'updateModel', 'exportModelMetadata', 'deleteModel', 'listEngineConfigs', 'getEngineConfig', 'createEngineConfig', 'updateEngineConfig', 'exportEngineConfigMetadata', 'deleteEngineConfig', 'getEngineVersion', 'listEngineVersions', 'listPredictionResults', 'getPredictionResult', 'createPredictionResult', 'updatePredictionResult', 'exportPredictionResultMetadata', 'deletePredictionResult', 'listBacktestResults', 'getBacktestResult', 'createBacktestResult', 'updateBacktestResult', 'exportBacktestResultMetadata', 'deleteBacktestResult'];
     for (const methodName of aMLStubMethods) {
       const callPromise = this.aMLStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -745,14 +517,8 @@ export class AMLClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'financialservices.googleapis.com';
   }
@@ -763,14 +529,8 @@ export class AMLClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'financialservices.googleapis.com';
   }
@@ -801,7 +561,9 @@ export class AMLClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -810,9 +572,8 @@ export class AMLClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -823,5424 +584,3647 @@ export class AMLClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets an instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Instance.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.financialservices.v1.Instance|Instance}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.get_instance.js</caption>
-   * region_tag:financialservices_v1_generated_AML_GetInstance_async
-   */
+/**
+ * Gets an instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Instance.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.financialservices.v1.Instance|Instance}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.get_instance.js</caption>
+ * region_tag:financialservices_v1_generated_AML_GetInstance_async
+ */
   getInstance(
-    request?: protos.google.cloud.financialservices.v1.IGetInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IInstance,
-      protos.google.cloud.financialservices.v1.IGetInstanceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IGetInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IInstance,
+        protos.google.cloud.financialservices.v1.IGetInstanceRequest|undefined, {}|undefined
+      ]>;
   getInstance(
-    request: protos.google.cloud.financialservices.v1.IGetInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.financialservices.v1.IInstance,
-      | protos.google.cloud.financialservices.v1.IGetInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getInstance(
-    request: protos.google.cloud.financialservices.v1.IGetInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.financialservices.v1.IInstance,
-      | protos.google.cloud.financialservices.v1.IGetInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getInstance(
-    request?: protos.google.cloud.financialservices.v1.IGetInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.financialservices.v1.IGetInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.financialservices.v1.IInstance,
-          | protos.google.cloud.financialservices.v1.IGetInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.financialservices.v1.IInstance,
-      | protos.google.cloud.financialservices.v1.IGetInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IInstance,
-      protos.google.cloud.financialservices.v1.IGetInstanceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.financialservices.v1.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getInstance(
+      request: protos.google.cloud.financialservices.v1.IGetInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.financialservices.v1.IInstance,
+          protos.google.cloud.financialservices.v1.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getInstance(
+      request?: protos.google.cloud.financialservices.v1.IGetInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.financialservices.v1.IInstance,
+          protos.google.cloud.financialservices.v1.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.financialservices.v1.IInstance,
+          protos.google.cloud.financialservices.v1.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IInstance,
+        protos.google.cloud.financialservices.v1.IGetInstanceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getInstance request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.financialservices.v1.IInstance,
-          | protos.google.cloud.financialservices.v1.IGetInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.financialservices.v1.IInstance,
+        protos.google.cloud.financialservices.v1.IGetInstanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getInstance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getInstance(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.financialservices.v1.IInstance,
-          (
-            | protos.google.cloud.financialservices.v1.IGetInstanceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getInstance response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getInstance(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.financialservices.v1.IInstance,
+        protos.google.cloud.financialservices.v1.IGetInstanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getInstance response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets a dataset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Dataset
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.financialservices.v1.Dataset|Dataset}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.get_dataset.js</caption>
-   * region_tag:financialservices_v1_generated_AML_GetDataset_async
-   */
+/**
+ * Gets a dataset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Dataset
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.financialservices.v1.Dataset|Dataset}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.get_dataset.js</caption>
+ * region_tag:financialservices_v1_generated_AML_GetDataset_async
+ */
   getDataset(
-    request?: protos.google.cloud.financialservices.v1.IGetDatasetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IDataset,
-      protos.google.cloud.financialservices.v1.IGetDatasetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IGetDatasetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IDataset,
+        protos.google.cloud.financialservices.v1.IGetDatasetRequest|undefined, {}|undefined
+      ]>;
   getDataset(
-    request: protos.google.cloud.financialservices.v1.IGetDatasetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.financialservices.v1.IDataset,
-      | protos.google.cloud.financialservices.v1.IGetDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataset(
-    request: protos.google.cloud.financialservices.v1.IGetDatasetRequest,
-    callback: Callback<
-      protos.google.cloud.financialservices.v1.IDataset,
-      | protos.google.cloud.financialservices.v1.IGetDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataset(
-    request?: protos.google.cloud.financialservices.v1.IGetDatasetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.financialservices.v1.IGetDatasetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.financialservices.v1.IDataset,
-          | protos.google.cloud.financialservices.v1.IGetDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.financialservices.v1.IDataset,
-      | protos.google.cloud.financialservices.v1.IGetDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IDataset,
-      protos.google.cloud.financialservices.v1.IGetDatasetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.financialservices.v1.IGetDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataset(
+      request: protos.google.cloud.financialservices.v1.IGetDatasetRequest,
+      callback: Callback<
+          protos.google.cloud.financialservices.v1.IDataset,
+          protos.google.cloud.financialservices.v1.IGetDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataset(
+      request?: protos.google.cloud.financialservices.v1.IGetDatasetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.financialservices.v1.IDataset,
+          protos.google.cloud.financialservices.v1.IGetDatasetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.financialservices.v1.IDataset,
+          protos.google.cloud.financialservices.v1.IGetDatasetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IDataset,
+        protos.google.cloud.financialservices.v1.IGetDatasetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDataset request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.financialservices.v1.IDataset,
-          | protos.google.cloud.financialservices.v1.IGetDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.financialservices.v1.IDataset,
+        protos.google.cloud.financialservices.v1.IGetDatasetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDataset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDataset(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.financialservices.v1.IDataset,
-          (
-            | protos.google.cloud.financialservices.v1.IGetDatasetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDataset response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getDataset(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.financialservices.v1.IDataset,
+        protos.google.cloud.financialservices.v1.IGetDatasetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDataset response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets a model.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Model
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.financialservices.v1.Model|Model}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.get_model.js</caption>
-   * region_tag:financialservices_v1_generated_AML_GetModel_async
-   */
+/**
+ * Gets a model.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Model
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.financialservices.v1.Model|Model}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.get_model.js</caption>
+ * region_tag:financialservices_v1_generated_AML_GetModel_async
+ */
   getModel(
-    request?: protos.google.cloud.financialservices.v1.IGetModelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IModel,
-      protos.google.cloud.financialservices.v1.IGetModelRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IGetModelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IModel,
+        protos.google.cloud.financialservices.v1.IGetModelRequest|undefined, {}|undefined
+      ]>;
   getModel(
-    request: protos.google.cloud.financialservices.v1.IGetModelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.financialservices.v1.IModel,
-      | protos.google.cloud.financialservices.v1.IGetModelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getModel(
-    request: protos.google.cloud.financialservices.v1.IGetModelRequest,
-    callback: Callback<
-      protos.google.cloud.financialservices.v1.IModel,
-      | protos.google.cloud.financialservices.v1.IGetModelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getModel(
-    request?: protos.google.cloud.financialservices.v1.IGetModelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.financialservices.v1.IGetModelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.financialservices.v1.IModel,
-          | protos.google.cloud.financialservices.v1.IGetModelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.financialservices.v1.IModel,
-      | protos.google.cloud.financialservices.v1.IGetModelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IModel,
-      protos.google.cloud.financialservices.v1.IGetModelRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.financialservices.v1.IGetModelRequest|null|undefined,
+          {}|null|undefined>): void;
+  getModel(
+      request: protos.google.cloud.financialservices.v1.IGetModelRequest,
+      callback: Callback<
+          protos.google.cloud.financialservices.v1.IModel,
+          protos.google.cloud.financialservices.v1.IGetModelRequest|null|undefined,
+          {}|null|undefined>): void;
+  getModel(
+      request?: protos.google.cloud.financialservices.v1.IGetModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.financialservices.v1.IModel,
+          protos.google.cloud.financialservices.v1.IGetModelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.financialservices.v1.IModel,
+          protos.google.cloud.financialservices.v1.IGetModelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IModel,
+        protos.google.cloud.financialservices.v1.IGetModelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getModel request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.financialservices.v1.IModel,
-          | protos.google.cloud.financialservices.v1.IGetModelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.financialservices.v1.IModel,
+        protos.google.cloud.financialservices.v1.IGetModelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getModel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getModel(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.financialservices.v1.IModel,
-          protos.google.cloud.financialservices.v1.IGetModelRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getModel response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getModel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.financialservices.v1.IModel,
+        protos.google.cloud.financialservices.v1.IGetModelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getModel response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets an engine config.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the EngineConfig
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.financialservices.v1.EngineConfig|EngineConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.get_engine_config.js</caption>
-   * region_tag:financialservices_v1_generated_AML_GetEngineConfig_async
-   */
+/**
+ * Gets an engine config.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the EngineConfig
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.financialservices.v1.EngineConfig|EngineConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.get_engine_config.js</caption>
+ * region_tag:financialservices_v1_generated_AML_GetEngineConfig_async
+ */
   getEngineConfig(
-    request?: protos.google.cloud.financialservices.v1.IGetEngineConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IEngineConfig,
-      (
-        | protos.google.cloud.financialservices.v1.IGetEngineConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IGetEngineConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IEngineConfig,
+        protos.google.cloud.financialservices.v1.IGetEngineConfigRequest|undefined, {}|undefined
+      ]>;
   getEngineConfig(
-    request: protos.google.cloud.financialservices.v1.IGetEngineConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.financialservices.v1.IEngineConfig,
-      | protos.google.cloud.financialservices.v1.IGetEngineConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEngineConfig(
-    request: protos.google.cloud.financialservices.v1.IGetEngineConfigRequest,
-    callback: Callback<
-      protos.google.cloud.financialservices.v1.IEngineConfig,
-      | protos.google.cloud.financialservices.v1.IGetEngineConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEngineConfig(
-    request?: protos.google.cloud.financialservices.v1.IGetEngineConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.financialservices.v1.IGetEngineConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.financialservices.v1.IEngineConfig,
-          | protos.google.cloud.financialservices.v1.IGetEngineConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.financialservices.v1.IEngineConfig,
-      | protos.google.cloud.financialservices.v1.IGetEngineConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IEngineConfig,
-      (
-        | protos.google.cloud.financialservices.v1.IGetEngineConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.financialservices.v1.IGetEngineConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEngineConfig(
+      request: protos.google.cloud.financialservices.v1.IGetEngineConfigRequest,
+      callback: Callback<
+          protos.google.cloud.financialservices.v1.IEngineConfig,
+          protos.google.cloud.financialservices.v1.IGetEngineConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEngineConfig(
+      request?: protos.google.cloud.financialservices.v1.IGetEngineConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.financialservices.v1.IEngineConfig,
+          protos.google.cloud.financialservices.v1.IGetEngineConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.financialservices.v1.IEngineConfig,
+          protos.google.cloud.financialservices.v1.IGetEngineConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IEngineConfig,
+        protos.google.cloud.financialservices.v1.IGetEngineConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getEngineConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.financialservices.v1.IEngineConfig,
-          | protos.google.cloud.financialservices.v1.IGetEngineConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.financialservices.v1.IEngineConfig,
+        protos.google.cloud.financialservices.v1.IGetEngineConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEngineConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getEngineConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.financialservices.v1.IEngineConfig,
-          (
-            | protos.google.cloud.financialservices.v1.IGetEngineConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getEngineConfig response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getEngineConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.financialservices.v1.IEngineConfig,
+        protos.google.cloud.financialservices.v1.IGetEngineConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEngineConfig response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets a single EngineVersion.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the EngineVersion
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.financialservices.v1.EngineVersion|EngineVersion}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.get_engine_version.js</caption>
-   * region_tag:financialservices_v1_generated_AML_GetEngineVersion_async
-   */
+/**
+ * Gets a single EngineVersion.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the EngineVersion
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.financialservices.v1.EngineVersion|EngineVersion}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.get_engine_version.js</caption>
+ * region_tag:financialservices_v1_generated_AML_GetEngineVersion_async
+ */
   getEngineVersion(
-    request?: protos.google.cloud.financialservices.v1.IGetEngineVersionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IEngineVersion,
-      (
-        | protos.google.cloud.financialservices.v1.IGetEngineVersionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IGetEngineVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IEngineVersion,
+        protos.google.cloud.financialservices.v1.IGetEngineVersionRequest|undefined, {}|undefined
+      ]>;
   getEngineVersion(
-    request: protos.google.cloud.financialservices.v1.IGetEngineVersionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.financialservices.v1.IEngineVersion,
-      | protos.google.cloud.financialservices.v1.IGetEngineVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEngineVersion(
-    request: protos.google.cloud.financialservices.v1.IGetEngineVersionRequest,
-    callback: Callback<
-      protos.google.cloud.financialservices.v1.IEngineVersion,
-      | protos.google.cloud.financialservices.v1.IGetEngineVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEngineVersion(
-    request?: protos.google.cloud.financialservices.v1.IGetEngineVersionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.financialservices.v1.IGetEngineVersionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.financialservices.v1.IEngineVersion,
-          | protos.google.cloud.financialservices.v1.IGetEngineVersionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.financialservices.v1.IEngineVersion,
-      | protos.google.cloud.financialservices.v1.IGetEngineVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IEngineVersion,
-      (
-        | protos.google.cloud.financialservices.v1.IGetEngineVersionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.financialservices.v1.IGetEngineVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEngineVersion(
+      request: protos.google.cloud.financialservices.v1.IGetEngineVersionRequest,
+      callback: Callback<
+          protos.google.cloud.financialservices.v1.IEngineVersion,
+          protos.google.cloud.financialservices.v1.IGetEngineVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEngineVersion(
+      request?: protos.google.cloud.financialservices.v1.IGetEngineVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.financialservices.v1.IEngineVersion,
+          protos.google.cloud.financialservices.v1.IGetEngineVersionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.financialservices.v1.IEngineVersion,
+          protos.google.cloud.financialservices.v1.IGetEngineVersionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IEngineVersion,
+        protos.google.cloud.financialservices.v1.IGetEngineVersionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getEngineVersion request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.financialservices.v1.IEngineVersion,
-          | protos.google.cloud.financialservices.v1.IGetEngineVersionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.financialservices.v1.IEngineVersion,
+        protos.google.cloud.financialservices.v1.IGetEngineVersionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEngineVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getEngineVersion(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.financialservices.v1.IEngineVersion,
-          (
-            | protos.google.cloud.financialservices.v1.IGetEngineVersionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getEngineVersion response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getEngineVersion(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.financialservices.v1.IEngineVersion,
+        protos.google.cloud.financialservices.v1.IGetEngineVersionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEngineVersion response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets a PredictionResult.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the PredictionResult
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.financialservices.v1.PredictionResult|PredictionResult}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.get_prediction_result.js</caption>
-   * region_tag:financialservices_v1_generated_AML_GetPredictionResult_async
-   */
+/**
+ * Gets a PredictionResult.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the PredictionResult
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.financialservices.v1.PredictionResult|PredictionResult}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.get_prediction_result.js</caption>
+ * region_tag:financialservices_v1_generated_AML_GetPredictionResult_async
+ */
   getPredictionResult(
-    request?: protos.google.cloud.financialservices.v1.IGetPredictionResultRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IPredictionResult,
-      (
-        | protos.google.cloud.financialservices.v1.IGetPredictionResultRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IGetPredictionResultRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IPredictionResult,
+        protos.google.cloud.financialservices.v1.IGetPredictionResultRequest|undefined, {}|undefined
+      ]>;
   getPredictionResult(
-    request: protos.google.cloud.financialservices.v1.IGetPredictionResultRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.financialservices.v1.IPredictionResult,
-      | protos.google.cloud.financialservices.v1.IGetPredictionResultRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPredictionResult(
-    request: protos.google.cloud.financialservices.v1.IGetPredictionResultRequest,
-    callback: Callback<
-      protos.google.cloud.financialservices.v1.IPredictionResult,
-      | protos.google.cloud.financialservices.v1.IGetPredictionResultRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPredictionResult(
-    request?: protos.google.cloud.financialservices.v1.IGetPredictionResultRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.financialservices.v1.IGetPredictionResultRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.financialservices.v1.IPredictionResult,
-          | protos.google.cloud.financialservices.v1.IGetPredictionResultRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.financialservices.v1.IPredictionResult,
-      | protos.google.cloud.financialservices.v1.IGetPredictionResultRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IPredictionResult,
-      (
-        | protos.google.cloud.financialservices.v1.IGetPredictionResultRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.financialservices.v1.IGetPredictionResultRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPredictionResult(
+      request: protos.google.cloud.financialservices.v1.IGetPredictionResultRequest,
+      callback: Callback<
+          protos.google.cloud.financialservices.v1.IPredictionResult,
+          protos.google.cloud.financialservices.v1.IGetPredictionResultRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPredictionResult(
+      request?: protos.google.cloud.financialservices.v1.IGetPredictionResultRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.financialservices.v1.IPredictionResult,
+          protos.google.cloud.financialservices.v1.IGetPredictionResultRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.financialservices.v1.IPredictionResult,
+          protos.google.cloud.financialservices.v1.IGetPredictionResultRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IPredictionResult,
+        protos.google.cloud.financialservices.v1.IGetPredictionResultRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPredictionResult request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.financialservices.v1.IPredictionResult,
-          | protos.google.cloud.financialservices.v1.IGetPredictionResultRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.financialservices.v1.IPredictionResult,
+        protos.google.cloud.financialservices.v1.IGetPredictionResultRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPredictionResult response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPredictionResult(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.financialservices.v1.IPredictionResult,
-          (
-            | protos.google.cloud.financialservices.v1.IGetPredictionResultRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getPredictionResult response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getPredictionResult(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.financialservices.v1.IPredictionResult,
+        protos.google.cloud.financialservices.v1.IGetPredictionResultRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPredictionResult response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets a BacktestResult.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the BacktestResult
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.financialservices.v1.BacktestResult|BacktestResult}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.get_backtest_result.js</caption>
-   * region_tag:financialservices_v1_generated_AML_GetBacktestResult_async
-   */
+/**
+ * Gets a BacktestResult.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the BacktestResult
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.financialservices.v1.BacktestResult|BacktestResult}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.get_backtest_result.js</caption>
+ * region_tag:financialservices_v1_generated_AML_GetBacktestResult_async
+ */
   getBacktestResult(
-    request?: protos.google.cloud.financialservices.v1.IGetBacktestResultRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IBacktestResult,
-      (
-        | protos.google.cloud.financialservices.v1.IGetBacktestResultRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IGetBacktestResultRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IBacktestResult,
+        protos.google.cloud.financialservices.v1.IGetBacktestResultRequest|undefined, {}|undefined
+      ]>;
   getBacktestResult(
-    request: protos.google.cloud.financialservices.v1.IGetBacktestResultRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.financialservices.v1.IBacktestResult,
-      | protos.google.cloud.financialservices.v1.IGetBacktestResultRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getBacktestResult(
-    request: protos.google.cloud.financialservices.v1.IGetBacktestResultRequest,
-    callback: Callback<
-      protos.google.cloud.financialservices.v1.IBacktestResult,
-      | protos.google.cloud.financialservices.v1.IGetBacktestResultRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getBacktestResult(
-    request?: protos.google.cloud.financialservices.v1.IGetBacktestResultRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.financialservices.v1.IGetBacktestResultRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.financialservices.v1.IBacktestResult,
-          | protos.google.cloud.financialservices.v1.IGetBacktestResultRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.financialservices.v1.IBacktestResult,
-      | protos.google.cloud.financialservices.v1.IGetBacktestResultRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IBacktestResult,
-      (
-        | protos.google.cloud.financialservices.v1.IGetBacktestResultRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.financialservices.v1.IGetBacktestResultRequest|null|undefined,
+          {}|null|undefined>): void;
+  getBacktestResult(
+      request: protos.google.cloud.financialservices.v1.IGetBacktestResultRequest,
+      callback: Callback<
+          protos.google.cloud.financialservices.v1.IBacktestResult,
+          protos.google.cloud.financialservices.v1.IGetBacktestResultRequest|null|undefined,
+          {}|null|undefined>): void;
+  getBacktestResult(
+      request?: protos.google.cloud.financialservices.v1.IGetBacktestResultRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.financialservices.v1.IBacktestResult,
+          protos.google.cloud.financialservices.v1.IGetBacktestResultRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.financialservices.v1.IBacktestResult,
+          protos.google.cloud.financialservices.v1.IGetBacktestResultRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IBacktestResult,
+        protos.google.cloud.financialservices.v1.IGetBacktestResultRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getBacktestResult request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.financialservices.v1.IBacktestResult,
-          | protos.google.cloud.financialservices.v1.IGetBacktestResultRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.financialservices.v1.IBacktestResult,
+        protos.google.cloud.financialservices.v1.IGetBacktestResultRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getBacktestResult response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getBacktestResult(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.financialservices.v1.IBacktestResult,
-          (
-            | protos.google.cloud.financialservices.v1.IGetBacktestResultRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getBacktestResult response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getBacktestResult(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.financialservices.v1.IBacktestResult,
+        protos.google.cloud.financialservices.v1.IGetBacktestResultRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getBacktestResult response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
-   * Creates an instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the Instance is the location for that Instance.
-   *   Every location has exactly one instance.
-   * @param {string} request.instanceId
-   *   Required. The resource id of the instance.
-   * @param {google.cloud.financialservices.v1.Instance} request.instance
-   *   Required. The instance that will be created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.create_instance.js</caption>
-   * region_tag:financialservices_v1_generated_AML_CreateInstance_async
-   */
+/**
+ * Creates an instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the Instance is the location for that Instance.
+ *   Every location has exactly one instance.
+ * @param {string} request.instanceId
+ *   Required. The resource id of the instance.
+ * @param {google.cloud.financialservices.v1.Instance} request.instance
+ *   Required. The instance that will be created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.create_instance.js</caption>
+ * region_tag:financialservices_v1_generated_AML_CreateInstance_async
+ */
   createInstance(
-    request?: protos.google.cloud.financialservices.v1.ICreateInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IInstance,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.ICreateInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createInstance(
-    request: protos.google.cloud.financialservices.v1.ICreateInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IInstance,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.ICreateInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createInstance(
-    request: protos.google.cloud.financialservices.v1.ICreateInstanceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IInstance,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.ICreateInstanceRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createInstance(
-    request?: protos.google.cloud.financialservices.v1.ICreateInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IInstance,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IInstance,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IInstance,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.ICreateInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IInstance,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createInstance request %j', request);
-    return this.innerApiCalls
-      .createInstance(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IInstance,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createInstance response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createInstance(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createInstance response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createInstance()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.create_instance.js</caption>
-   * region_tag:financialservices_v1_generated_AML_CreateInstance_async
-   */
-  async checkCreateInstanceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.Instance,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createInstance()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.create_instance.js</caption>
+ * region_tag:financialservices_v1_generated_AML_CreateInstance_async
+ */
+  async checkCreateInstanceProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.Instance, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('createInstance long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createInstance,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.Instance,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createInstance, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.Instance, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single Instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Field mask is used to specify the fields to be overwritten in the
-   *   Instance resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.financialservices.v1.Instance} request.instance
-   *   Required. The new value of the instance fields that will be updated
-   *   according to the update_mask
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.update_instance.js</caption>
-   * region_tag:financialservices_v1_generated_AML_UpdateInstance_async
-   */
+/**
+ * Updates the parameters of a single Instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   Instance resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.financialservices.v1.Instance} request.instance
+ *   Required. The new value of the instance fields that will be updated
+ *   according to the update_mask
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.update_instance.js</caption>
+ * region_tag:financialservices_v1_generated_AML_UpdateInstance_async
+ */
   updateInstance(
-    request?: protos.google.cloud.financialservices.v1.IUpdateInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IInstance,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IUpdateInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateInstance(
-    request: protos.google.cloud.financialservices.v1.IUpdateInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IInstance,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IUpdateInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateInstance(
-    request: protos.google.cloud.financialservices.v1.IUpdateInstanceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IInstance,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IUpdateInstanceRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateInstance(
-    request?: protos.google.cloud.financialservices.v1.IUpdateInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IInstance,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IInstance,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IInstance,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IUpdateInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'instance.name': request.instance!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'instance.name': request.instance!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IInstance,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateInstance request %j', request);
-    return this.innerApiCalls
-      .updateInstance(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IInstance,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateInstance response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateInstance(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IInstance, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateInstance response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateInstance()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.update_instance.js</caption>
-   * region_tag:financialservices_v1_generated_AML_UpdateInstance_async
-   */
-  async checkUpdateInstanceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.Instance,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateInstance()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.update_instance.js</caption>
+ * region_tag:financialservices_v1_generated_AML_UpdateInstance_async
+ */
+  async checkUpdateInstanceProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.Instance, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('updateInstance long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateInstance,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.Instance,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateInstance, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.Instance, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Deletes an instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Instance.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.delete_instance.js</caption>
-   * region_tag:financialservices_v1_generated_AML_DeleteInstance_async
-   */
+/**
+ * Deletes an instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Instance.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.delete_instance.js</caption>
+ * region_tag:financialservices_v1_generated_AML_DeleteInstance_async
+ */
   deleteInstance(
-    request?: protos.google.cloud.financialservices.v1.IDeleteInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IDeleteInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteInstance(
-    request: protos.google.cloud.financialservices.v1.IDeleteInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IDeleteInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteInstance(
-    request: protos.google.cloud.financialservices.v1.IDeleteInstanceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IDeleteInstanceRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteInstance(
-    request?: protos.google.cloud.financialservices.v1.IDeleteInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IDeleteInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteInstance request %j', request);
-    return this.innerApiCalls
-      .deleteInstance(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteInstance response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteInstance(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteInstance response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteInstance()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.delete_instance.js</caption>
-   * region_tag:financialservices_v1_generated_AML_DeleteInstance_async
-   */
-  async checkDeleteInstanceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteInstance()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.delete_instance.js</caption>
+ * region_tag:financialservices_v1_generated_AML_DeleteInstance_async
+ */
+  async checkDeleteInstanceProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('deleteInstance long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteInstance,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteInstance, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Imports the list of registered parties. See
-   * [Create and manage
-   * instances](https://cloud.google.com/financial-services/anti-money-laundering/docs/create-and-manage-instances#import-registered-parties)
-   * for information on the input schema and response for this method.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The full path to the Instance resource in this API.
-   *   format: `projects/{project}/locations/{location}/instances/{instance}`
-   * @param {string[]} [request.partyTables]
-   *   Optional. List of BigQuery tables. Union of tables will be taken if there
-   *   is more than one table. VPC-SC restrictions apply. format:
-   *   `bq://{project}.{bqDatasetID}.{bqTableID}` Use of `datasets` is preferred
-   *   over the latter due to its simplicity and the reduced risk of errors
-   *   `party_tables` and `datasets` must not be provided at the
-   *   same time
-   * @param {google.cloud.financialservices.v1.ImportRegisteredPartiesRequest.UpdateMode} request.mode
-   *   Required. Mode of the request.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If the request will not register the parties, just determine what
-   *   would happen.
-   * @param {google.cloud.financialservices.v1.LineOfBusiness} request.lineOfBusiness
-   *   Required. LineOfBusiness for the specified registered parties.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.import_registered_parties.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ImportRegisteredParties_async
-   */
+/**
+ * Imports the list of registered parties. See
+ * [Create and manage
+ * instances](https://cloud.google.com/financial-services/anti-money-laundering/docs/create-and-manage-instances#import-registered-parties)
+ * for information on the input schema and response for this method.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The full path to the Instance resource in this API.
+ *   format: `projects/{project}/locations/{location}/instances/{instance}`
+ * @param {string[]} [request.partyTables]
+ *   Optional. List of BigQuery tables. Union of tables will be taken if there
+ *   is more than one table. VPC-SC restrictions apply. format:
+ *   `bq://{project}.{bqDatasetID}.{bqTableID}` Use of `datasets` is preferred
+ *   over the latter due to its simplicity and the reduced risk of errors
+ *   `party_tables` and `datasets` must not be provided at the
+ *   same time
+ * @param {google.cloud.financialservices.v1.ImportRegisteredPartiesRequest.UpdateMode} request.mode
+ *   Required. Mode of the request.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If the request will not register the parties, just determine what
+ *   would happen.
+ * @param {google.cloud.financialservices.v1.LineOfBusiness} request.lineOfBusiness
+ *   Required. LineOfBusiness for the specified registered parties.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.import_registered_parties.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ImportRegisteredParties_async
+ */
   importRegisteredParties(
-    request?: protos.google.cloud.financialservices.v1.IImportRegisteredPartiesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IImportRegisteredPartiesRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   importRegisteredParties(
-    request: protos.google.cloud.financialservices.v1.IImportRegisteredPartiesRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IImportRegisteredPartiesRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   importRegisteredParties(
-    request: protos.google.cloud.financialservices.v1.IImportRegisteredPartiesRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IImportRegisteredPartiesRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   importRegisteredParties(
-    request?: protos.google.cloud.financialservices.v1.IImportRegisteredPartiesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IImportRegisteredPartiesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('importRegisteredParties response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('importRegisteredParties request %j', request);
-    return this.innerApiCalls
-      .importRegisteredParties(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('importRegisteredParties response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.importRegisteredParties(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('importRegisteredParties response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `importRegisteredParties()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.import_registered_parties.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ImportRegisteredParties_async
-   */
-  async checkImportRegisteredPartiesProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.ImportRegisteredPartiesResponse,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `importRegisteredParties()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.import_registered_parties.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ImportRegisteredParties_async
+ */
+  async checkImportRegisteredPartiesProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.ImportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('importRegisteredParties long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.importRegisteredParties,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.ImportRegisteredPartiesResponse,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importRegisteredParties, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.ImportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Exports the list of registered parties. See
-   * [Create and manage
-   * instances](https://cloud.google.com/financial-services/anti-money-laundering/docs/create-and-manage-instances#export-registered-parties)
-   * for information on the output schema for this method.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The full path to the Instance resource in this API.
-   *   format: `projects/{project}/locations/{location}/instances/{instance}`
-   * @param {google.cloud.financialservices.v1.BigQueryDestination} request.dataset
-   *   Required. The location to output the RegisteredParties.
-   * @param {google.cloud.financialservices.v1.LineOfBusiness} request.lineOfBusiness
-   *   Required. LineOfBusiness to get RegisteredParties from.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.export_registered_parties.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ExportRegisteredParties_async
-   */
+/**
+ * Exports the list of registered parties. See
+ * [Create and manage
+ * instances](https://cloud.google.com/financial-services/anti-money-laundering/docs/create-and-manage-instances#export-registered-parties)
+ * for information on the output schema for this method.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The full path to the Instance resource in this API.
+ *   format: `projects/{project}/locations/{location}/instances/{instance}`
+ * @param {google.cloud.financialservices.v1.BigQueryDestination} request.dataset
+ *   Required. The location to output the RegisteredParties.
+ * @param {google.cloud.financialservices.v1.LineOfBusiness} request.lineOfBusiness
+ *   Required. LineOfBusiness to get RegisteredParties from.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.export_registered_parties.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ExportRegisteredParties_async
+ */
   exportRegisteredParties(
-    request?: protos.google.cloud.financialservices.v1.IExportRegisteredPartiesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IExportRegisteredPartiesRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   exportRegisteredParties(
-    request: protos.google.cloud.financialservices.v1.IExportRegisteredPartiesRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IExportRegisteredPartiesRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportRegisteredParties(
-    request: protos.google.cloud.financialservices.v1.IExportRegisteredPartiesRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IExportRegisteredPartiesRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportRegisteredParties(
-    request?: protos.google.cloud.financialservices.v1.IExportRegisteredPartiesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IExportRegisteredPartiesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportRegisteredParties response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportRegisteredParties request %j', request);
-    return this.innerApiCalls
-      .exportRegisteredParties(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('exportRegisteredParties response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.exportRegisteredParties(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('exportRegisteredParties response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `exportRegisteredParties()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.export_registered_parties.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ExportRegisteredParties_async
-   */
-  async checkExportRegisteredPartiesProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.ExportRegisteredPartiesResponse,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `exportRegisteredParties()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.export_registered_parties.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ExportRegisteredParties_async
+ */
+  async checkExportRegisteredPartiesProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.ExportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('exportRegisteredParties long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.exportRegisteredParties,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.ExportRegisteredPartiesResponse,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportRegisteredParties, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.ExportRegisteredPartiesResponse, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Creates a dataset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the Dataset is the Instance.
-   * @param {string} request.datasetId
-   *   Required. The resource id of the dataset
-   * @param {google.cloud.financialservices.v1.Dataset} request.dataset
-   *   Required. The dataset that will be created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.create_dataset.js</caption>
-   * region_tag:financialservices_v1_generated_AML_CreateDataset_async
-   */
+/**
+ * Creates a dataset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the Dataset is the Instance.
+ * @param {string} request.datasetId
+ *   Required. The resource id of the dataset
+ * @param {google.cloud.financialservices.v1.Dataset} request.dataset
+ *   Required. The dataset that will be created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.create_dataset.js</caption>
+ * region_tag:financialservices_v1_generated_AML_CreateDataset_async
+ */
   createDataset(
-    request?: protos.google.cloud.financialservices.v1.ICreateDatasetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IDataset,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.ICreateDatasetRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createDataset(
-    request: protos.google.cloud.financialservices.v1.ICreateDatasetRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IDataset,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.ICreateDatasetRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createDataset(
-    request: protos.google.cloud.financialservices.v1.ICreateDatasetRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IDataset,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.ICreateDatasetRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createDataset(
-    request?: protos.google.cloud.financialservices.v1.ICreateDatasetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IDataset,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IDataset,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IDataset,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.ICreateDatasetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IDataset,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createDataset response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createDataset request %j', request);
-    return this.innerApiCalls
-      .createDataset(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IDataset,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createDataset response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createDataset(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createDataset response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createDataset()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.create_dataset.js</caption>
-   * region_tag:financialservices_v1_generated_AML_CreateDataset_async
-   */
-  async checkCreateDatasetProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.Dataset,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createDataset()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.create_dataset.js</caption>
+ * region_tag:financialservices_v1_generated_AML_CreateDataset_async
+ */
+  async checkCreateDatasetProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.Dataset, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('createDataset long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createDataset,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.Dataset,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createDataset, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.Dataset, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single Dataset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Field mask is used to specify the fields to be overwritten in the
-   *   Dataset resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.financialservices.v1.Dataset} request.dataset
-   *   Required. The new value of the dataset fields that will be updated
-   *   according to the update_mask.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.update_dataset.js</caption>
-   * region_tag:financialservices_v1_generated_AML_UpdateDataset_async
-   */
+/**
+ * Updates the parameters of a single Dataset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   Dataset resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.financialservices.v1.Dataset} request.dataset
+ *   Required. The new value of the dataset fields that will be updated
+ *   according to the update_mask.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.update_dataset.js</caption>
+ * region_tag:financialservices_v1_generated_AML_UpdateDataset_async
+ */
   updateDataset(
-    request?: protos.google.cloud.financialservices.v1.IUpdateDatasetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IDataset,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IUpdateDatasetRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateDataset(
-    request: protos.google.cloud.financialservices.v1.IUpdateDatasetRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IDataset,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IUpdateDatasetRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateDataset(
-    request: protos.google.cloud.financialservices.v1.IUpdateDatasetRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IDataset,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IUpdateDatasetRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateDataset(
-    request?: protos.google.cloud.financialservices.v1.IUpdateDatasetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IDataset,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IDataset,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IDataset,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IUpdateDatasetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'dataset.name': request.dataset!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'dataset.name': request.dataset!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IDataset,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateDataset response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateDataset request %j', request);
-    return this.innerApiCalls
-      .updateDataset(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IDataset,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDataset response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateDataset(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IDataset, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateDataset response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateDataset()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.update_dataset.js</caption>
-   * region_tag:financialservices_v1_generated_AML_UpdateDataset_async
-   */
-  async checkUpdateDatasetProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.Dataset,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateDataset()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.update_dataset.js</caption>
+ * region_tag:financialservices_v1_generated_AML_UpdateDataset_async
+ */
+  async checkUpdateDatasetProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.Dataset, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('updateDataset long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateDataset,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.Dataset,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateDataset, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.Dataset, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a dataset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Dataset.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.delete_dataset.js</caption>
-   * region_tag:financialservices_v1_generated_AML_DeleteDataset_async
-   */
+/**
+ * Deletes a dataset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Dataset.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.delete_dataset.js</caption>
+ * region_tag:financialservices_v1_generated_AML_DeleteDataset_async
+ */
   deleteDataset(
-    request?: protos.google.cloud.financialservices.v1.IDeleteDatasetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IDeleteDatasetRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteDataset(
-    request: protos.google.cloud.financialservices.v1.IDeleteDatasetRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IDeleteDatasetRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteDataset(
-    request: protos.google.cloud.financialservices.v1.IDeleteDatasetRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IDeleteDatasetRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteDataset(
-    request?: protos.google.cloud.financialservices.v1.IDeleteDatasetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IDeleteDatasetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteDataset response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteDataset request %j', request);
-    return this.innerApiCalls
-      .deleteDataset(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDataset response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteDataset(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteDataset response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteDataset()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.delete_dataset.js</caption>
-   * region_tag:financialservices_v1_generated_AML_DeleteDataset_async
-   */
-  async checkDeleteDatasetProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteDataset()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.delete_dataset.js</caption>
+ * region_tag:financialservices_v1_generated_AML_DeleteDataset_async
+ */
+  async checkDeleteDatasetProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('deleteDataset long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteDataset,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteDataset, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Creates a model.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the Model is the Instance.
-   * @param {string} request.modelId
-   *   Required. The resource id of the Model
-   * @param {google.cloud.financialservices.v1.Model} request.model
-   *   Required. The Model that will be created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.create_model.js</caption>
-   * region_tag:financialservices_v1_generated_AML_CreateModel_async
-   */
+/**
+ * Creates a model.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the Model is the Instance.
+ * @param {string} request.modelId
+ *   Required. The resource id of the Model
+ * @param {google.cloud.financialservices.v1.Model} request.model
+ *   Required. The Model that will be created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.create_model.js</caption>
+ * region_tag:financialservices_v1_generated_AML_CreateModel_async
+ */
   createModel(
-    request?: protos.google.cloud.financialservices.v1.ICreateModelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IModel,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.ICreateModelRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createModel(
-    request: protos.google.cloud.financialservices.v1.ICreateModelRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IModel,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.ICreateModelRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createModel(
-    request: protos.google.cloud.financialservices.v1.ICreateModelRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IModel,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.ICreateModelRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createModel(
-    request?: protos.google.cloud.financialservices.v1.ICreateModelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IModel,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IModel,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IModel,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.ICreateModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IModel,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createModel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createModel request %j', request);
-    return this.innerApiCalls
-      .createModel(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IModel,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createModel response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createModel(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createModel response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createModel()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.create_model.js</caption>
-   * region_tag:financialservices_v1_generated_AML_CreateModel_async
-   */
-  async checkCreateModelProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.Model,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createModel()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.create_model.js</caption>
+ * region_tag:financialservices_v1_generated_AML_CreateModel_async
+ */
+  async checkCreateModelProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.Model, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('createModel long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createModel,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.Model,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createModel, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.Model, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single Model.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Field mask is used to specify the fields to be overwritten in the
-   *   Model resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.financialservices.v1.Model} request.model
-   *   Required. The new value of the Model fields that will be updated according
-   *   to the update_mask.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.update_model.js</caption>
-   * region_tag:financialservices_v1_generated_AML_UpdateModel_async
-   */
+/**
+ * Updates the parameters of a single Model.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   Model resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.financialservices.v1.Model} request.model
+ *   Required. The new value of the Model fields that will be updated according
+ *   to the update_mask.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.update_model.js</caption>
+ * region_tag:financialservices_v1_generated_AML_UpdateModel_async
+ */
   updateModel(
-    request?: protos.google.cloud.financialservices.v1.IUpdateModelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IModel,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IUpdateModelRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateModel(
-    request: protos.google.cloud.financialservices.v1.IUpdateModelRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IModel,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IUpdateModelRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateModel(
-    request: protos.google.cloud.financialservices.v1.IUpdateModelRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IModel,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IUpdateModelRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateModel(
-    request?: protos.google.cloud.financialservices.v1.IUpdateModelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IModel,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IModel,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IModel,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IUpdateModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'model.name': request.model!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model.name': request.model!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IModel,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateModel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateModel request %j', request);
-    return this.innerApiCalls
-      .updateModel(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IModel,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateModel response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateModel(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IModel, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateModel response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateModel()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.update_model.js</caption>
-   * region_tag:financialservices_v1_generated_AML_UpdateModel_async
-   */
-  async checkUpdateModelProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.Model,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateModel()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.update_model.js</caption>
+ * region_tag:financialservices_v1_generated_AML_UpdateModel_async
+ */
+  async checkUpdateModelProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.Model, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('updateModel long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateModel,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.Model,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateModel, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.Model, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Export governance information for a Model resource. For
-   * information on the exported fields, see
-   * [AML output data
-   * model](https://cloud.google.com/financial-services/anti-money-laundering/docs/reference/schemas/aml-output-data-model#model).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.model
-   *   Required. The resource name of the Model.
-   * @param {google.cloud.financialservices.v1.BigQueryDestination} request.structuredMetadataDestination
-   *   Required. BigQuery output where the metadata will be written.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.export_model_metadata.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ExportModelMetadata_async
-   */
+/**
+ * Export governance information for a Model resource. For
+ * information on the exported fields, see
+ * [AML output data
+ * model](https://cloud.google.com/financial-services/anti-money-laundering/docs/reference/schemas/aml-output-data-model#model).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.model
+ *   Required. The resource name of the Model.
+ * @param {google.cloud.financialservices.v1.BigQueryDestination} request.structuredMetadataDestination
+ *   Required. BigQuery output where the metadata will be written.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.export_model_metadata.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ExportModelMetadata_async
+ */
   exportModelMetadata(
-    request?: protos.google.cloud.financialservices.v1.IExportModelMetadataRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportModelMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IExportModelMetadataRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IExportModelMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   exportModelMetadata(
-    request: protos.google.cloud.financialservices.v1.IExportModelMetadataRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportModelMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IExportModelMetadataRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportModelMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportModelMetadata(
-    request: protos.google.cloud.financialservices.v1.IExportModelMetadataRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportModelMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IExportModelMetadataRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportModelMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportModelMetadata(
-    request?: protos.google.cloud.financialservices.v1.IExportModelMetadataRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IExportModelMetadataResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportModelMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportModelMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IExportModelMetadataRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportModelMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportModelMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IExportModelMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        model: request.model ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model': request.model ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IExportModelMetadataResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportModelMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportModelMetadata response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportModelMetadata request %j', request);
-    return this.innerApiCalls
-      .exportModelMetadata(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IExportModelMetadataResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('exportModelMetadata response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.exportModelMetadata(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IExportModelMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('exportModelMetadata response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `exportModelMetadata()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.export_model_metadata.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ExportModelMetadata_async
-   */
-  async checkExportModelMetadataProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.ExportModelMetadataResponse,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `exportModelMetadata()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.export_model_metadata.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ExportModelMetadata_async
+ */
+  async checkExportModelMetadataProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.ExportModelMetadataResponse, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('exportModelMetadata long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.exportModelMetadata,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.ExportModelMetadataResponse,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportModelMetadata, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.ExportModelMetadataResponse, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a model.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Model.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.delete_model.js</caption>
-   * region_tag:financialservices_v1_generated_AML_DeleteModel_async
-   */
+/**
+ * Deletes a model.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Model.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.delete_model.js</caption>
+ * region_tag:financialservices_v1_generated_AML_DeleteModel_async
+ */
   deleteModel(
-    request?: protos.google.cloud.financialservices.v1.IDeleteModelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IDeleteModelRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteModel(
-    request: protos.google.cloud.financialservices.v1.IDeleteModelRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IDeleteModelRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteModel(
-    request: protos.google.cloud.financialservices.v1.IDeleteModelRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IDeleteModelRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteModel(
-    request?: protos.google.cloud.financialservices.v1.IDeleteModelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IDeleteModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteModel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteModel request %j', request);
-    return this.innerApiCalls
-      .deleteModel(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteModel response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteModel(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteModel response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteModel()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.delete_model.js</caption>
-   * region_tag:financialservices_v1_generated_AML_DeleteModel_async
-   */
-  async checkDeleteModelProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteModel()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.delete_model.js</caption>
+ * region_tag:financialservices_v1_generated_AML_DeleteModel_async
+ */
+  async checkDeleteModelProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('deleteModel long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteModel,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteModel, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Creates an engine config.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the EngineConfig is the Instance.
-   * @param {string} request.engineConfigId
-   *   Required. The resource id of the EngineConfig
-   * @param {google.cloud.financialservices.v1.EngineConfig} request.engineConfig
-   *   Required. The EngineConfig that will be created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.create_engine_config.js</caption>
-   * region_tag:financialservices_v1_generated_AML_CreateEngineConfig_async
-   */
+/**
+ * Creates an engine config.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the EngineConfig is the Instance.
+ * @param {string} request.engineConfigId
+ *   Required. The resource id of the EngineConfig
+ * @param {google.cloud.financialservices.v1.EngineConfig} request.engineConfig
+ *   Required. The EngineConfig that will be created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.create_engine_config.js</caption>
+ * region_tag:financialservices_v1_generated_AML_CreateEngineConfig_async
+ */
   createEngineConfig(
-    request?: protos.google.cloud.financialservices.v1.ICreateEngineConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IEngineConfig,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.ICreateEngineConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createEngineConfig(
-    request: protos.google.cloud.financialservices.v1.ICreateEngineConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IEngineConfig,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.ICreateEngineConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createEngineConfig(
-    request: protos.google.cloud.financialservices.v1.ICreateEngineConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IEngineConfig,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.ICreateEngineConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createEngineConfig(
-    request?: protos.google.cloud.financialservices.v1.ICreateEngineConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IEngineConfig,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IEngineConfig,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IEngineConfig,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.ICreateEngineConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IEngineConfig,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createEngineConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createEngineConfig request %j', request);
-    return this.innerApiCalls
-      .createEngineConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IEngineConfig,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createEngineConfig response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createEngineConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createEngineConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createEngineConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.create_engine_config.js</caption>
-   * region_tag:financialservices_v1_generated_AML_CreateEngineConfig_async
-   */
-  async checkCreateEngineConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.EngineConfig,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createEngineConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.create_engine_config.js</caption>
+ * region_tag:financialservices_v1_generated_AML_CreateEngineConfig_async
+ */
+  async checkCreateEngineConfigProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.EngineConfig, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('createEngineConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createEngineConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.EngineConfig,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createEngineConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.EngineConfig, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single EngineConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Field mask is used to specify the fields to be overwritten in the
-   *   EngineConfig resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.financialservices.v1.EngineConfig} request.engineConfig
-   *   Required. The new value of the EngineConfig fields that will be updated
-   *   according to the update_mask.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.update_engine_config.js</caption>
-   * region_tag:financialservices_v1_generated_AML_UpdateEngineConfig_async
-   */
+/**
+ * Updates the parameters of a single EngineConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   EngineConfig resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.financialservices.v1.EngineConfig} request.engineConfig
+ *   Required. The new value of the EngineConfig fields that will be updated
+ *   according to the update_mask.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.update_engine_config.js</caption>
+ * region_tag:financialservices_v1_generated_AML_UpdateEngineConfig_async
+ */
   updateEngineConfig(
-    request?: protos.google.cloud.financialservices.v1.IUpdateEngineConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IEngineConfig,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IUpdateEngineConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateEngineConfig(
-    request: protos.google.cloud.financialservices.v1.IUpdateEngineConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IEngineConfig,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IUpdateEngineConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateEngineConfig(
-    request: protos.google.cloud.financialservices.v1.IUpdateEngineConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IEngineConfig,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IUpdateEngineConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateEngineConfig(
-    request?: protos.google.cloud.financialservices.v1.IUpdateEngineConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IEngineConfig,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IEngineConfig,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IEngineConfig,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IUpdateEngineConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'engine_config.name': request.engineConfig!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'engine_config.name': request.engineConfig!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IEngineConfig,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateEngineConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateEngineConfig request %j', request);
-    return this.innerApiCalls
-      .updateEngineConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IEngineConfig,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateEngineConfig response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateEngineConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IEngineConfig, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateEngineConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateEngineConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.update_engine_config.js</caption>
-   * region_tag:financialservices_v1_generated_AML_UpdateEngineConfig_async
-   */
-  async checkUpdateEngineConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.EngineConfig,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateEngineConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.update_engine_config.js</caption>
+ * region_tag:financialservices_v1_generated_AML_UpdateEngineConfig_async
+ */
+  async checkUpdateEngineConfigProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.EngineConfig, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('updateEngineConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateEngineConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.EngineConfig,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateEngineConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.EngineConfig, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Export governance information for an EngineConfig resource. For
-   * information on the exported fields, see
-   * [AML output data
-   * model](https://cloud.google.com/financial-services/anti-money-laundering/docs/reference/schemas/aml-output-data-model#engine-config).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.engineConfig
-   *   Required. The resource name of the EngineConfig.
-   * @param {google.cloud.financialservices.v1.BigQueryDestination} request.structuredMetadataDestination
-   *   Required. BigQuery output where the metadata will be written.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.export_engine_config_metadata.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ExportEngineConfigMetadata_async
-   */
+/**
+ * Export governance information for an EngineConfig resource. For
+ * information on the exported fields, see
+ * [AML output data
+ * model](https://cloud.google.com/financial-services/anti-money-laundering/docs/reference/schemas/aml-output-data-model#engine-config).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.engineConfig
+ *   Required. The resource name of the EngineConfig.
+ * @param {google.cloud.financialservices.v1.BigQueryDestination} request.structuredMetadataDestination
+ *   Required. BigQuery output where the metadata will be written.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.export_engine_config_metadata.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ExportEngineConfigMetadata_async
+ */
   exportEngineConfigMetadata(
-    request?: protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   exportEngineConfigMetadata(
-    request: protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportEngineConfigMetadata(
-    request: protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportEngineConfigMetadata(
-    request?: protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        engine_config: request.engineConfig ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'engine_config': request.engineConfig ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportEngineConfigMetadata response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportEngineConfigMetadata request %j', request);
-    return this.innerApiCalls
-      .exportEngineConfigMetadata(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('exportEngineConfigMetadata response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.exportEngineConfigMetadata(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('exportEngineConfigMetadata response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `exportEngineConfigMetadata()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.export_engine_config_metadata.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ExportEngineConfigMetadata_async
-   */
-  async checkExportEngineConfigMetadataProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.ExportEngineConfigMetadataResponse,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `exportEngineConfigMetadata()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.export_engine_config_metadata.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ExportEngineConfigMetadata_async
+ */
+  async checkExportEngineConfigMetadataProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.ExportEngineConfigMetadataResponse, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('exportEngineConfigMetadata long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.exportEngineConfigMetadata,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.ExportEngineConfigMetadataResponse,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportEngineConfigMetadata, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.ExportEngineConfigMetadataResponse, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Deletes an engine config.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the EngineConfig.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.delete_engine_config.js</caption>
-   * region_tag:financialservices_v1_generated_AML_DeleteEngineConfig_async
-   */
+/**
+ * Deletes an engine config.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the EngineConfig.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.delete_engine_config.js</caption>
+ * region_tag:financialservices_v1_generated_AML_DeleteEngineConfig_async
+ */
   deleteEngineConfig(
-    request?: protos.google.cloud.financialservices.v1.IDeleteEngineConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IDeleteEngineConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteEngineConfig(
-    request: protos.google.cloud.financialservices.v1.IDeleteEngineConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IDeleteEngineConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteEngineConfig(
-    request: protos.google.cloud.financialservices.v1.IDeleteEngineConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IDeleteEngineConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteEngineConfig(
-    request?: protos.google.cloud.financialservices.v1.IDeleteEngineConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IDeleteEngineConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteEngineConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteEngineConfig request %j', request);
-    return this.innerApiCalls
-      .deleteEngineConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteEngineConfig response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteEngineConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteEngineConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteEngineConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.delete_engine_config.js</caption>
-   * region_tag:financialservices_v1_generated_AML_DeleteEngineConfig_async
-   */
-  async checkDeleteEngineConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteEngineConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.delete_engine_config.js</caption>
+ * region_tag:financialservices_v1_generated_AML_DeleteEngineConfig_async
+ */
+  async checkDeleteEngineConfigProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('deleteEngineConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteEngineConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteEngineConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Create a PredictionResult.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the PredictionResult is the Instance.
-   * @param {string} request.predictionResultId
-   *   Required. The resource id of the PredictionResult
-   * @param {google.cloud.financialservices.v1.PredictionResult} request.predictionResult
-   *   Required. The PredictionResult that will be created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.create_prediction_result.js</caption>
-   * region_tag:financialservices_v1_generated_AML_CreatePredictionResult_async
-   */
+/**
+ * Create a PredictionResult.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the PredictionResult is the Instance.
+ * @param {string} request.predictionResultId
+ *   Required. The resource id of the PredictionResult
+ * @param {google.cloud.financialservices.v1.PredictionResult} request.predictionResult
+ *   Required. The PredictionResult that will be created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.create_prediction_result.js</caption>
+ * region_tag:financialservices_v1_generated_AML_CreatePredictionResult_async
+ */
   createPredictionResult(
-    request?: protos.google.cloud.financialservices.v1.ICreatePredictionResultRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IPredictionResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.ICreatePredictionResultRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createPredictionResult(
-    request: protos.google.cloud.financialservices.v1.ICreatePredictionResultRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IPredictionResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.ICreatePredictionResultRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createPredictionResult(
-    request: protos.google.cloud.financialservices.v1.ICreatePredictionResultRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IPredictionResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.ICreatePredictionResultRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createPredictionResult(
-    request?: protos.google.cloud.financialservices.v1.ICreatePredictionResultRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IPredictionResult,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IPredictionResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IPredictionResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.ICreatePredictionResultRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IPredictionResult,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createPredictionResult response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createPredictionResult request %j', request);
-    return this.innerApiCalls
-      .createPredictionResult(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IPredictionResult,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createPredictionResult response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createPredictionResult(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createPredictionResult response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createPredictionResult()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.create_prediction_result.js</caption>
-   * region_tag:financialservices_v1_generated_AML_CreatePredictionResult_async
-   */
-  async checkCreatePredictionResultProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.PredictionResult,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createPredictionResult()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.create_prediction_result.js</caption>
+ * region_tag:financialservices_v1_generated_AML_CreatePredictionResult_async
+ */
+  async checkCreatePredictionResultProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.PredictionResult, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('createPredictionResult long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createPredictionResult,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.PredictionResult,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createPredictionResult, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.PredictionResult, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single PredictionResult.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Field mask is used to specify the fields to be overwritten in the
-   *   PredictionResult resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.financialservices.v1.PredictionResult} request.predictionResult
-   *   Required. The new value of the PredictionResult fields that will be updated
-   *   according to the update_mask.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.update_prediction_result.js</caption>
-   * region_tag:financialservices_v1_generated_AML_UpdatePredictionResult_async
-   */
+/**
+ * Updates the parameters of a single PredictionResult.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   PredictionResult resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.financialservices.v1.PredictionResult} request.predictionResult
+ *   Required. The new value of the PredictionResult fields that will be updated
+ *   according to the update_mask.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.update_prediction_result.js</caption>
+ * region_tag:financialservices_v1_generated_AML_UpdatePredictionResult_async
+ */
   updatePredictionResult(
-    request?: protos.google.cloud.financialservices.v1.IUpdatePredictionResultRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IPredictionResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IUpdatePredictionResultRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updatePredictionResult(
-    request: protos.google.cloud.financialservices.v1.IUpdatePredictionResultRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IPredictionResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IUpdatePredictionResultRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updatePredictionResult(
-    request: protos.google.cloud.financialservices.v1.IUpdatePredictionResultRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IPredictionResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IUpdatePredictionResultRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updatePredictionResult(
-    request?: protos.google.cloud.financialservices.v1.IUpdatePredictionResultRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IPredictionResult,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IPredictionResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IPredictionResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IUpdatePredictionResultRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'prediction_result.name': request.predictionResult!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'prediction_result.name': request.predictionResult!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IPredictionResult,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updatePredictionResult response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updatePredictionResult request %j', request);
-    return this.innerApiCalls
-      .updatePredictionResult(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IPredictionResult,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updatePredictionResult response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updatePredictionResult(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IPredictionResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updatePredictionResult response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updatePredictionResult()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.update_prediction_result.js</caption>
-   * region_tag:financialservices_v1_generated_AML_UpdatePredictionResult_async
-   */
-  async checkUpdatePredictionResultProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.PredictionResult,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updatePredictionResult()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.update_prediction_result.js</caption>
+ * region_tag:financialservices_v1_generated_AML_UpdatePredictionResult_async
+ */
+  async checkUpdatePredictionResultProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.PredictionResult, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('updatePredictionResult long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updatePredictionResult,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.PredictionResult,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updatePredictionResult, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.PredictionResult, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Export governance information for a PredictionResult resource. For
-   * information on the exported fields, see
-   * [AML output data
-   * model](https://cloud.google.com/financial-services/anti-money-laundering/docs/reference/schemas/aml-output-data-model#prediction-results).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.predictionResult
-   *   Required. The resource name of the PredictionResult.
-   * @param {google.cloud.financialservices.v1.BigQueryDestination} request.structuredMetadataDestination
-   *   Required. BigQuery output where the metadata will be written.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.export_prediction_result_metadata.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ExportPredictionResultMetadata_async
-   */
+/**
+ * Export governance information for a PredictionResult resource. For
+ * information on the exported fields, see
+ * [AML output data
+ * model](https://cloud.google.com/financial-services/anti-money-laundering/docs/reference/schemas/aml-output-data-model#prediction-results).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.predictionResult
+ *   Required. The resource name of the PredictionResult.
+ * @param {google.cloud.financialservices.v1.BigQueryDestination} request.structuredMetadataDestination
+ *   Required. BigQuery output where the metadata will be written.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.export_prediction_result_metadata.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ExportPredictionResultMetadata_async
+ */
   exportPredictionResultMetadata(
-    request?: protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   exportPredictionResultMetadata(
-    request: protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportPredictionResultMetadata(
-    request: protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportPredictionResultMetadata(
-    request?: protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        prediction_result: request.predictionResult ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'prediction_result': request.predictionResult ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'exportPredictionResultMetadata response %j',
-            rawResponse
-          );
+          this._log.info('exportPredictionResultMetadata response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportPredictionResultMetadata request %j', request);
-    return this.innerApiCalls
-      .exportPredictionResultMetadata(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'exportPredictionResultMetadata response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.exportPredictionResultMetadata(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('exportPredictionResultMetadata response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `exportPredictionResultMetadata()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.export_prediction_result_metadata.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ExportPredictionResultMetadata_async
-   */
-  async checkExportPredictionResultMetadataProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.ExportPredictionResultMetadataResponse,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `exportPredictionResultMetadata()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.export_prediction_result_metadata.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ExportPredictionResultMetadata_async
+ */
+  async checkExportPredictionResultMetadataProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.ExportPredictionResultMetadataResponse, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('exportPredictionResultMetadata long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.exportPredictionResultMetadata,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.ExportPredictionResultMetadataResponse,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportPredictionResultMetadata, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.ExportPredictionResultMetadataResponse, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a PredictionResult.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the PredictionResult.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.delete_prediction_result.js</caption>
-   * region_tag:financialservices_v1_generated_AML_DeletePredictionResult_async
-   */
+/**
+ * Deletes a PredictionResult.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the PredictionResult.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.delete_prediction_result.js</caption>
+ * region_tag:financialservices_v1_generated_AML_DeletePredictionResult_async
+ */
   deletePredictionResult(
-    request?: protos.google.cloud.financialservices.v1.IDeletePredictionResultRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IDeletePredictionResultRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deletePredictionResult(
-    request: protos.google.cloud.financialservices.v1.IDeletePredictionResultRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IDeletePredictionResultRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deletePredictionResult(
-    request: protos.google.cloud.financialservices.v1.IDeletePredictionResultRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IDeletePredictionResultRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deletePredictionResult(
-    request?: protos.google.cloud.financialservices.v1.IDeletePredictionResultRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IDeletePredictionResultRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deletePredictionResult response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deletePredictionResult request %j', request);
-    return this.innerApiCalls
-      .deletePredictionResult(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deletePredictionResult response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deletePredictionResult(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deletePredictionResult response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deletePredictionResult()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.delete_prediction_result.js</caption>
-   * region_tag:financialservices_v1_generated_AML_DeletePredictionResult_async
-   */
-  async checkDeletePredictionResultProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deletePredictionResult()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.delete_prediction_result.js</caption>
+ * region_tag:financialservices_v1_generated_AML_DeletePredictionResult_async
+ */
+  async checkDeletePredictionResultProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('deletePredictionResult long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deletePredictionResult,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deletePredictionResult, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Create a BacktestResult.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the BacktestResult is the Instance.
-   * @param {string} request.backtestResultId
-   *   Required. The resource id of the BacktestResult
-   * @param {google.cloud.financialservices.v1.BacktestResult} request.backtestResult
-   *   Required. The BacktestResult that will be created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.create_backtest_result.js</caption>
-   * region_tag:financialservices_v1_generated_AML_CreateBacktestResult_async
-   */
+/**
+ * Create a BacktestResult.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the BacktestResult is the Instance.
+ * @param {string} request.backtestResultId
+ *   Required. The resource id of the BacktestResult
+ * @param {google.cloud.financialservices.v1.BacktestResult} request.backtestResult
+ *   Required. The BacktestResult that will be created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.create_backtest_result.js</caption>
+ * region_tag:financialservices_v1_generated_AML_CreateBacktestResult_async
+ */
   createBacktestResult(
-    request?: protos.google.cloud.financialservices.v1.ICreateBacktestResultRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IBacktestResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.ICreateBacktestResultRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createBacktestResult(
-    request: protos.google.cloud.financialservices.v1.ICreateBacktestResultRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IBacktestResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.ICreateBacktestResultRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createBacktestResult(
-    request: protos.google.cloud.financialservices.v1.ICreateBacktestResultRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IBacktestResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.ICreateBacktestResultRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createBacktestResult(
-    request?: protos.google.cloud.financialservices.v1.ICreateBacktestResultRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IBacktestResult,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IBacktestResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IBacktestResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.ICreateBacktestResultRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IBacktestResult,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createBacktestResult response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createBacktestResult request %j', request);
-    return this.innerApiCalls
-      .createBacktestResult(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IBacktestResult,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createBacktestResult response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createBacktestResult(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createBacktestResult response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createBacktestResult()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.create_backtest_result.js</caption>
-   * region_tag:financialservices_v1_generated_AML_CreateBacktestResult_async
-   */
-  async checkCreateBacktestResultProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.BacktestResult,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createBacktestResult()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.create_backtest_result.js</caption>
+ * region_tag:financialservices_v1_generated_AML_CreateBacktestResult_async
+ */
+  async checkCreateBacktestResultProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.BacktestResult, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('createBacktestResult long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createBacktestResult,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.BacktestResult,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createBacktestResult, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.BacktestResult, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single BacktestResult.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Field mask is used to specify the fields to be overwritten in the
-   *   BacktestResult resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.financialservices.v1.BacktestResult} request.backtestResult
-   *   Required. The new value of the BacktestResult fields that will be updated
-   *   according to the update_mask.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.update_backtest_result.js</caption>
-   * region_tag:financialservices_v1_generated_AML_UpdateBacktestResult_async
-   */
+/**
+ * Updates the parameters of a single BacktestResult.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   BacktestResult resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.financialservices.v1.BacktestResult} request.backtestResult
+ *   Required. The new value of the BacktestResult fields that will be updated
+ *   according to the update_mask.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.update_backtest_result.js</caption>
+ * region_tag:financialservices_v1_generated_AML_UpdateBacktestResult_async
+ */
   updateBacktestResult(
-    request?: protos.google.cloud.financialservices.v1.IUpdateBacktestResultRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IBacktestResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IUpdateBacktestResultRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateBacktestResult(
-    request: protos.google.cloud.financialservices.v1.IUpdateBacktestResultRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IBacktestResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IUpdateBacktestResultRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateBacktestResult(
-    request: protos.google.cloud.financialservices.v1.IUpdateBacktestResultRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IBacktestResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IUpdateBacktestResultRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateBacktestResult(
-    request?: protos.google.cloud.financialservices.v1.IUpdateBacktestResultRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IBacktestResult,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IBacktestResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IBacktestResult,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IUpdateBacktestResultRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'backtest_result.name': request.backtestResult!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'backtest_result.name': request.backtestResult!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IBacktestResult,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateBacktestResult response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateBacktestResult request %j', request);
-    return this.innerApiCalls
-      .updateBacktestResult(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IBacktestResult,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateBacktestResult response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateBacktestResult(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IBacktestResult, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateBacktestResult response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateBacktestResult()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.update_backtest_result.js</caption>
-   * region_tag:financialservices_v1_generated_AML_UpdateBacktestResult_async
-   */
-  async checkUpdateBacktestResultProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.BacktestResult,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateBacktestResult()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.update_backtest_result.js</caption>
+ * region_tag:financialservices_v1_generated_AML_UpdateBacktestResult_async
+ */
+  async checkUpdateBacktestResultProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.BacktestResult, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('updateBacktestResult long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateBacktestResult,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.BacktestResult,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateBacktestResult, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.BacktestResult, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Export governance information for a BacktestResult resource. For
-   * information on the exported fields, see
-   * [AML output data
-   * model](https://cloud.google.com/financial-services/anti-money-laundering/docs/reference/schemas/aml-output-data-model#backtest-results).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.backtestResult
-   *   Required. The resource name of the BacktestResult.
-   * @param {google.cloud.financialservices.v1.BigQueryDestination} request.structuredMetadataDestination
-   *   Required. BigQuery output where the metadata will be written.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.export_backtest_result_metadata.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ExportBacktestResultMetadata_async
-   */
+/**
+ * Export governance information for a BacktestResult resource. For
+ * information on the exported fields, see
+ * [AML output data
+ * model](https://cloud.google.com/financial-services/anti-money-laundering/docs/reference/schemas/aml-output-data-model#backtest-results).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.backtestResult
+ *   Required. The resource name of the BacktestResult.
+ * @param {google.cloud.financialservices.v1.BigQueryDestination} request.structuredMetadataDestination
+ *   Required. BigQuery output where the metadata will be written.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.export_backtest_result_metadata.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ExportBacktestResultMetadata_async
+ */
   exportBacktestResultMetadata(
-    request?: protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   exportBacktestResultMetadata(
-    request: protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportBacktestResultMetadata(
-    request: protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportBacktestResultMetadata(
-    request?: protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        backtest_result: request.backtestResult ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'backtest_result': request.backtestResult ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'exportBacktestResultMetadata response %j',
-            rawResponse
-          );
+          this._log.info('exportBacktestResultMetadata response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportBacktestResultMetadata request %j', request);
-    return this.innerApiCalls
-      .exportBacktestResultMetadata(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'exportBacktestResultMetadata response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.exportBacktestResultMetadata(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('exportBacktestResultMetadata response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `exportBacktestResultMetadata()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.export_backtest_result_metadata.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ExportBacktestResultMetadata_async
-   */
-  async checkExportBacktestResultMetadataProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.financialservices.v1.ExportBacktestResultMetadataResponse,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `exportBacktestResultMetadata()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.export_backtest_result_metadata.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ExportBacktestResultMetadata_async
+ */
+  async checkExportBacktestResultMetadataProgress(name: string): Promise<LROperation<protos.google.cloud.financialservices.v1.ExportBacktestResultMetadataResponse, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('exportBacktestResultMetadata long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.exportBacktestResultMetadata,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.financialservices.v1.ExportBacktestResultMetadataResponse,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportBacktestResultMetadata, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.financialservices.v1.ExportBacktestResultMetadataResponse, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a BacktestResult.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the BacktestResult.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.delete_backtest_result.js</caption>
-   * region_tag:financialservices_v1_generated_AML_DeleteBacktestResult_async
-   */
+/**
+ * Deletes a BacktestResult.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the BacktestResult.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.delete_backtest_result.js</caption>
+ * region_tag:financialservices_v1_generated_AML_DeleteBacktestResult_async
+ */
   deleteBacktestResult(
-    request?: protos.google.cloud.financialservices.v1.IDeleteBacktestResultRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IDeleteBacktestResultRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteBacktestResult(
-    request: protos.google.cloud.financialservices.v1.IDeleteBacktestResultRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IDeleteBacktestResultRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteBacktestResult(
-    request: protos.google.cloud.financialservices.v1.IDeleteBacktestResultRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.financialservices.v1.IDeleteBacktestResultRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteBacktestResult(
-    request?: protos.google.cloud.financialservices.v1.IDeleteBacktestResultRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.financialservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.financialservices.v1.IDeleteBacktestResultRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteBacktestResult response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteBacktestResult request %j', request);
-    return this.innerApiCalls
-      .deleteBacktestResult(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.financialservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteBacktestResult response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteBacktestResult(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.financialservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteBacktestResult response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteBacktestResult()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.delete_backtest_result.js</caption>
-   * region_tag:financialservices_v1_generated_AML_DeleteBacktestResult_async
-   */
-  async checkDeleteBacktestResultProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteBacktestResult()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.delete_backtest_result.js</caption>
+ * region_tag:financialservices_v1_generated_AML_DeleteBacktestResult_async
+ */
+  async checkDeleteBacktestResultProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.financialservices.v1.OperationMetadata>>{
     this._log.info('deleteBacktestResult long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteBacktestResult,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.financialservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteBacktestResult, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.financialservices.v1.OperationMetadata>;
   }
-  /**
-   * Lists instances.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the Instance is the location for that Instance.
-   *   Every location has exactly one instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListInstancesResponse. It should be copied here to retrieve the
-   *   next page of resources. This will be empty for the first instance of
-   *   ListInstancesRequest.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.financialservices.v1.Instance|Instance}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listInstancesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists instances.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the Instance is the location for that Instance.
+ *   Every location has exactly one instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListInstancesResponse. It should be copied here to retrieve the
+ *   next page of resources. This will be empty for the first instance of
+ *   ListInstancesRequest.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.financialservices.v1.Instance|Instance}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listInstancesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listInstances(
-    request?: protos.google.cloud.financialservices.v1.IListInstancesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IInstance[],
-      protos.google.cloud.financialservices.v1.IListInstancesRequest | null,
-      protos.google.cloud.financialservices.v1.IListInstancesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IListInstancesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IInstance[],
+        protos.google.cloud.financialservices.v1.IListInstancesRequest|null,
+        protos.google.cloud.financialservices.v1.IListInstancesResponse
+      ]>;
   listInstances(
-    request: protos.google.cloud.financialservices.v1.IListInstancesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListInstancesRequest,
-      | protos.google.cloud.financialservices.v1.IListInstancesResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IInstance
-    >
-  ): void;
-  listInstances(
-    request: protos.google.cloud.financialservices.v1.IListInstancesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListInstancesRequest,
-      | protos.google.cloud.financialservices.v1.IListInstancesResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IInstance
-    >
-  ): void;
-  listInstances(
-    request?: protos.google.cloud.financialservices.v1.IListInstancesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.financialservices.v1.IListInstancesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.financialservices.v1.IListInstancesRequest,
-          | protos.google.cloud.financialservices.v1.IListInstancesResponse
-          | null
-          | undefined,
-          protos.google.cloud.financialservices.v1.IInstance
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListInstancesRequest,
-      | protos.google.cloud.financialservices.v1.IListInstancesResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IInstance
-    >
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IInstance[],
-      protos.google.cloud.financialservices.v1.IListInstancesRequest | null,
-      protos.google.cloud.financialservices.v1.IListInstancesResponse,
-    ]
-  > | void {
+          protos.google.cloud.financialservices.v1.IListInstancesResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IInstance>): void;
+  listInstances(
+      request: protos.google.cloud.financialservices.v1.IListInstancesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListInstancesRequest,
+          protos.google.cloud.financialservices.v1.IListInstancesResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IInstance>): void;
+  listInstances(
+      request?: protos.google.cloud.financialservices.v1.IListInstancesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListInstancesRequest,
+          protos.google.cloud.financialservices.v1.IListInstancesResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IInstance>,
+      callback?: PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListInstancesRequest,
+          protos.google.cloud.financialservices.v1.IListInstancesResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IInstance>):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IInstance[],
+        protos.google.cloud.financialservices.v1.IListInstancesRequest|null,
+        protos.google.cloud.financialservices.v1.IListInstancesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.financialservices.v1.IListInstancesRequest,
-          | protos.google.cloud.financialservices.v1.IListInstancesResponse
-          | null
-          | undefined,
-          protos.google.cloud.financialservices.v1.IInstance
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.financialservices.v1.IListInstancesRequest,
+      protos.google.cloud.financialservices.v1.IListInstancesResponse|null|undefined,
+      protos.google.cloud.financialservices.v1.IInstance>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listInstances values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6249,66 +4233,63 @@ export class AMLClient {
     this._log.info('listInstances request %j', request);
     return this.innerApiCalls
       .listInstances(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.financialservices.v1.IInstance[],
-          protos.google.cloud.financialservices.v1.IListInstancesRequest | null,
-          protos.google.cloud.financialservices.v1.IListInstancesResponse,
-        ]) => {
-          this._log.info('listInstances values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.financialservices.v1.IInstance[],
+        protos.google.cloud.financialservices.v1.IListInstancesRequest|null,
+        protos.google.cloud.financialservices.v1.IListInstancesResponse
+      ]) => {
+        this._log.info('listInstances values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listInstances`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the Instance is the location for that Instance.
-   *   Every location has exactly one instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListInstancesResponse. It should be copied here to retrieve the
-   *   next page of resources. This will be empty for the first instance of
-   *   ListInstancesRequest.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.financialservices.v1.Instance|Instance} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listInstancesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listInstances`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the Instance is the location for that Instance.
+ *   Every location has exactly one instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListInstancesResponse. It should be copied here to retrieve the
+ *   next page of resources. This will be empty for the first instance of
+ *   ListInstancesRequest.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.financialservices.v1.Instance|Instance} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listInstancesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listInstancesStream(
-    request?: protos.google.cloud.financialservices.v1.IListInstancesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.financialservices.v1.IListInstancesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
@@ -6317,57 +4298,56 @@ export class AMLClient {
     );
   }
 
-  /**
-   * Equivalent to `listInstances`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the Instance is the location for that Instance.
-   *   Every location has exactly one instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListInstancesResponse. It should be copied here to retrieve the
-   *   next page of resources. This will be empty for the first instance of
-   *   ListInstancesRequest.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.financialservices.v1.Instance|Instance}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.list_instances.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ListInstances_async
-   */
+/**
+ * Equivalent to `listInstances`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the Instance is the location for that Instance.
+ *   Every location has exactly one instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListInstancesResponse. It should be copied here to retrieve the
+ *   next page of resources. This will be empty for the first instance of
+ *   ListInstancesRequest.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.financialservices.v1.Instance|Instance}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.list_instances.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ListInstances_async
+ */
   listInstancesAsync(
-    request?: protos.google.cloud.financialservices.v1.IListInstancesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.financialservices.v1.IInstance> {
+      request?: protos.google.cloud.financialservices.v1.IListInstancesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.financialservices.v1.IInstance>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
@@ -6375,121 +4355,96 @@ export class AMLClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.financialservices.v1.IInstance>;
   }
-  /**
-   * Lists datasets.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the Dataset is the Instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListDatasetResponse. It should be copied here to retrieve the
-   *   next page of resources. Empty will give the first page of
-   *   ListDatasetRequest, and the last page will return an empty page_token.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.financialservices.v1.Dataset|Dataset}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDatasetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists datasets.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the Dataset is the Instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListDatasetResponse. It should be copied here to retrieve the
+ *   next page of resources. Empty will give the first page of
+ *   ListDatasetRequest, and the last page will return an empty page_token.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.financialservices.v1.Dataset|Dataset}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDatasetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDatasets(
-    request?: protos.google.cloud.financialservices.v1.IListDatasetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IDataset[],
-      protos.google.cloud.financialservices.v1.IListDatasetsRequest | null,
-      protos.google.cloud.financialservices.v1.IListDatasetsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IListDatasetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IDataset[],
+        protos.google.cloud.financialservices.v1.IListDatasetsRequest|null,
+        protos.google.cloud.financialservices.v1.IListDatasetsResponse
+      ]>;
   listDatasets(
-    request: protos.google.cloud.financialservices.v1.IListDatasetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListDatasetsRequest,
-      | protos.google.cloud.financialservices.v1.IListDatasetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IDataset
-    >
-  ): void;
-  listDatasets(
-    request: protos.google.cloud.financialservices.v1.IListDatasetsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListDatasetsRequest,
-      | protos.google.cloud.financialservices.v1.IListDatasetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IDataset
-    >
-  ): void;
-  listDatasets(
-    request?: protos.google.cloud.financialservices.v1.IListDatasetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.financialservices.v1.IListDatasetsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.financialservices.v1.IListDatasetsRequest,
-          | protos.google.cloud.financialservices.v1.IListDatasetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.financialservices.v1.IDataset
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListDatasetsRequest,
-      | protos.google.cloud.financialservices.v1.IListDatasetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IDataset
-    >
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IDataset[],
-      protos.google.cloud.financialservices.v1.IListDatasetsRequest | null,
-      protos.google.cloud.financialservices.v1.IListDatasetsResponse,
-    ]
-  > | void {
+          protos.google.cloud.financialservices.v1.IListDatasetsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IDataset>): void;
+  listDatasets(
+      request: protos.google.cloud.financialservices.v1.IListDatasetsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListDatasetsRequest,
+          protos.google.cloud.financialservices.v1.IListDatasetsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IDataset>): void;
+  listDatasets(
+      request?: protos.google.cloud.financialservices.v1.IListDatasetsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListDatasetsRequest,
+          protos.google.cloud.financialservices.v1.IListDatasetsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IDataset>,
+      callback?: PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListDatasetsRequest,
+          protos.google.cloud.financialservices.v1.IListDatasetsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IDataset>):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IDataset[],
+        protos.google.cloud.financialservices.v1.IListDatasetsRequest|null,
+        protos.google.cloud.financialservices.v1.IListDatasetsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.financialservices.v1.IListDatasetsRequest,
-          | protos.google.cloud.financialservices.v1.IListDatasetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.financialservices.v1.IDataset
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.financialservices.v1.IListDatasetsRequest,
+      protos.google.cloud.financialservices.v1.IListDatasetsResponse|null|undefined,
+      protos.google.cloud.financialservices.v1.IDataset>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDatasets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6498,65 +4453,62 @@ export class AMLClient {
     this._log.info('listDatasets request %j', request);
     return this.innerApiCalls
       .listDatasets(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.financialservices.v1.IDataset[],
-          protos.google.cloud.financialservices.v1.IListDatasetsRequest | null,
-          protos.google.cloud.financialservices.v1.IListDatasetsResponse,
-        ]) => {
-          this._log.info('listDatasets values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.financialservices.v1.IDataset[],
+        protos.google.cloud.financialservices.v1.IListDatasetsRequest|null,
+        protos.google.cloud.financialservices.v1.IListDatasetsResponse
+      ]) => {
+        this._log.info('listDatasets values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDatasets`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the Dataset is the Instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListDatasetResponse. It should be copied here to retrieve the
-   *   next page of resources. Empty will give the first page of
-   *   ListDatasetRequest, and the last page will return an empty page_token.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.financialservices.v1.Dataset|Dataset} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDatasetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDatasets`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the Dataset is the Instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListDatasetResponse. It should be copied here to retrieve the
+ *   next page of resources. Empty will give the first page of
+ *   ListDatasetRequest, and the last page will return an empty page_token.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.financialservices.v1.Dataset|Dataset} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDatasetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDatasetsStream(
-    request?: protos.google.cloud.financialservices.v1.IListDatasetsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.financialservices.v1.IListDatasetsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDatasets stream %j', request);
     return this.descriptors.page.listDatasets.createStream(
       this.innerApiCalls.listDatasets as GaxCall,
@@ -6565,56 +4517,55 @@ export class AMLClient {
     );
   }
 
-  /**
-   * Equivalent to `listDatasets`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the Dataset is the Instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListDatasetResponse. It should be copied here to retrieve the
-   *   next page of resources. Empty will give the first page of
-   *   ListDatasetRequest, and the last page will return an empty page_token.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.financialservices.v1.Dataset|Dataset}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.list_datasets.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ListDatasets_async
-   */
+/**
+ * Equivalent to `listDatasets`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the Dataset is the Instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListDatasetResponse. It should be copied here to retrieve the
+ *   next page of resources. Empty will give the first page of
+ *   ListDatasetRequest, and the last page will return an empty page_token.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.financialservices.v1.Dataset|Dataset}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.list_datasets.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ListDatasets_async
+ */
   listDatasetsAsync(
-    request?: protos.google.cloud.financialservices.v1.IListDatasetsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.financialservices.v1.IDataset> {
+      request?: protos.google.cloud.financialservices.v1.IListDatasetsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.financialservices.v1.IDataset>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDatasets iterate %j', request);
     return this.descriptors.page.listDatasets.asyncIterate(
       this.innerApiCalls['listDatasets'] as GaxCall,
@@ -6622,121 +4573,96 @@ export class AMLClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.financialservices.v1.IDataset>;
   }
-  /**
-   * Lists models.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the Model is the Instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListModelsResponse. It should be copied here to retrieve the next
-   *   page of resources. Empty will give the first page of ListModelsRequest, and
-   *   the last page will return an empty page_token.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.financialservices.v1.Model|Model}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listModelsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists models.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the Model is the Instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListModelsResponse. It should be copied here to retrieve the next
+ *   page of resources. Empty will give the first page of ListModelsRequest, and
+ *   the last page will return an empty page_token.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.financialservices.v1.Model|Model}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listModelsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listModels(
-    request?: protos.google.cloud.financialservices.v1.IListModelsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IModel[],
-      protos.google.cloud.financialservices.v1.IListModelsRequest | null,
-      protos.google.cloud.financialservices.v1.IListModelsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IListModelsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IModel[],
+        protos.google.cloud.financialservices.v1.IListModelsRequest|null,
+        protos.google.cloud.financialservices.v1.IListModelsResponse
+      ]>;
   listModels(
-    request: protos.google.cloud.financialservices.v1.IListModelsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListModelsRequest,
-      | protos.google.cloud.financialservices.v1.IListModelsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IModel
-    >
-  ): void;
-  listModels(
-    request: protos.google.cloud.financialservices.v1.IListModelsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListModelsRequest,
-      | protos.google.cloud.financialservices.v1.IListModelsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IModel
-    >
-  ): void;
-  listModels(
-    request?: protos.google.cloud.financialservices.v1.IListModelsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.financialservices.v1.IListModelsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.financialservices.v1.IListModelsRequest,
-          | protos.google.cloud.financialservices.v1.IListModelsResponse
-          | null
-          | undefined,
-          protos.google.cloud.financialservices.v1.IModel
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListModelsRequest,
-      | protos.google.cloud.financialservices.v1.IListModelsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IModel
-    >
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IModel[],
-      protos.google.cloud.financialservices.v1.IListModelsRequest | null,
-      protos.google.cloud.financialservices.v1.IListModelsResponse,
-    ]
-  > | void {
+          protos.google.cloud.financialservices.v1.IListModelsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IModel>): void;
+  listModels(
+      request: protos.google.cloud.financialservices.v1.IListModelsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListModelsRequest,
+          protos.google.cloud.financialservices.v1.IListModelsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IModel>): void;
+  listModels(
+      request?: protos.google.cloud.financialservices.v1.IListModelsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListModelsRequest,
+          protos.google.cloud.financialservices.v1.IListModelsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IModel>,
+      callback?: PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListModelsRequest,
+          protos.google.cloud.financialservices.v1.IListModelsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IModel>):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IModel[],
+        protos.google.cloud.financialservices.v1.IListModelsRequest|null,
+        protos.google.cloud.financialservices.v1.IListModelsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.financialservices.v1.IListModelsRequest,
-          | protos.google.cloud.financialservices.v1.IListModelsResponse
-          | null
-          | undefined,
-          protos.google.cloud.financialservices.v1.IModel
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.financialservices.v1.IListModelsRequest,
+      protos.google.cloud.financialservices.v1.IListModelsResponse|null|undefined,
+      protos.google.cloud.financialservices.v1.IModel>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listModels values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6745,65 +4671,62 @@ export class AMLClient {
     this._log.info('listModels request %j', request);
     return this.innerApiCalls
       .listModels(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.financialservices.v1.IModel[],
-          protos.google.cloud.financialservices.v1.IListModelsRequest | null,
-          protos.google.cloud.financialservices.v1.IListModelsResponse,
-        ]) => {
-          this._log.info('listModels values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.financialservices.v1.IModel[],
+        protos.google.cloud.financialservices.v1.IListModelsRequest|null,
+        protos.google.cloud.financialservices.v1.IListModelsResponse
+      ]) => {
+        this._log.info('listModels values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listModels`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the Model is the Instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListModelsResponse. It should be copied here to retrieve the next
-   *   page of resources. Empty will give the first page of ListModelsRequest, and
-   *   the last page will return an empty page_token.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.financialservices.v1.Model|Model} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listModelsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listModels`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the Model is the Instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListModelsResponse. It should be copied here to retrieve the next
+ *   page of resources. Empty will give the first page of ListModelsRequest, and
+ *   the last page will return an empty page_token.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.financialservices.v1.Model|Model} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listModelsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listModelsStream(
-    request?: protos.google.cloud.financialservices.v1.IListModelsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.financialservices.v1.IListModelsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listModels stream %j', request);
     return this.descriptors.page.listModels.createStream(
       this.innerApiCalls.listModels as GaxCall,
@@ -6812,56 +4735,55 @@ export class AMLClient {
     );
   }
 
-  /**
-   * Equivalent to `listModels`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the Model is the Instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListModelsResponse. It should be copied here to retrieve the next
-   *   page of resources. Empty will give the first page of ListModelsRequest, and
-   *   the last page will return an empty page_token.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.financialservices.v1.Model|Model}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.list_models.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ListModels_async
-   */
+/**
+ * Equivalent to `listModels`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the Model is the Instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListModelsResponse. It should be copied here to retrieve the next
+ *   page of resources. Empty will give the first page of ListModelsRequest, and
+ *   the last page will return an empty page_token.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.financialservices.v1.Model|Model}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.list_models.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ListModels_async
+ */
   listModelsAsync(
-    request?: protos.google.cloud.financialservices.v1.IListModelsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.financialservices.v1.IModel> {
+      request?: protos.google.cloud.financialservices.v1.IListModelsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.financialservices.v1.IModel>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listModels iterate %j', request);
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
@@ -6869,122 +4791,97 @@ export class AMLClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.financialservices.v1.IModel>;
   }
-  /**
-   * Lists engine configs.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the EngineConfig is the Instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListEngineConfigsResponse. It should be copied here to retrieve
-   *   the next page of resources. Empty will give the first page of
-   *   ListEngineConfigsRequest, and the last page will return an empty
-   *   page_token.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.financialservices.v1.EngineConfig|EngineConfig}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEngineConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists engine configs.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the EngineConfig is the Instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListEngineConfigsResponse. It should be copied here to retrieve
+ *   the next page of resources. Empty will give the first page of
+ *   ListEngineConfigsRequest, and the last page will return an empty
+ *   page_token.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.financialservices.v1.EngineConfig|EngineConfig}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listEngineConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEngineConfigs(
-    request?: protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IEngineConfig[],
-      protos.google.cloud.financialservices.v1.IListEngineConfigsRequest | null,
-      protos.google.cloud.financialservices.v1.IListEngineConfigsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IEngineConfig[],
+        protos.google.cloud.financialservices.v1.IListEngineConfigsRequest|null,
+        protos.google.cloud.financialservices.v1.IListEngineConfigsResponse
+      ]>;
   listEngineConfigs(
-    request: protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
-      | protos.google.cloud.financialservices.v1.IListEngineConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IEngineConfig
-    >
-  ): void;
-  listEngineConfigs(
-    request: protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
-      | protos.google.cloud.financialservices.v1.IListEngineConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IEngineConfig
-    >
-  ): void;
-  listEngineConfigs(
-    request?: protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
-          | protos.google.cloud.financialservices.v1.IListEngineConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.financialservices.v1.IEngineConfig
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
-      | protos.google.cloud.financialservices.v1.IListEngineConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IEngineConfig
-    >
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IEngineConfig[],
-      protos.google.cloud.financialservices.v1.IListEngineConfigsRequest | null,
-      protos.google.cloud.financialservices.v1.IListEngineConfigsResponse,
-    ]
-  > | void {
+          protos.google.cloud.financialservices.v1.IListEngineConfigsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IEngineConfig>): void;
+  listEngineConfigs(
+      request: protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
+          protos.google.cloud.financialservices.v1.IListEngineConfigsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IEngineConfig>): void;
+  listEngineConfigs(
+      request?: protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
+          protos.google.cloud.financialservices.v1.IListEngineConfigsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IEngineConfig>,
+      callback?: PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
+          protos.google.cloud.financialservices.v1.IListEngineConfigsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IEngineConfig>):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IEngineConfig[],
+        protos.google.cloud.financialservices.v1.IListEngineConfigsRequest|null,
+        protos.google.cloud.financialservices.v1.IListEngineConfigsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
-          | protos.google.cloud.financialservices.v1.IListEngineConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.financialservices.v1.IEngineConfig
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
+      protos.google.cloud.financialservices.v1.IListEngineConfigsResponse|null|undefined,
+      protos.google.cloud.financialservices.v1.IEngineConfig>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEngineConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6993,66 +4890,63 @@ export class AMLClient {
     this._log.info('listEngineConfigs request %j', request);
     return this.innerApiCalls
       .listEngineConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.financialservices.v1.IEngineConfig[],
-          protos.google.cloud.financialservices.v1.IListEngineConfigsRequest | null,
-          protos.google.cloud.financialservices.v1.IListEngineConfigsResponse,
-        ]) => {
-          this._log.info('listEngineConfigs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.financialservices.v1.IEngineConfig[],
+        protos.google.cloud.financialservices.v1.IListEngineConfigsRequest|null,
+        protos.google.cloud.financialservices.v1.IListEngineConfigsResponse
+      ]) => {
+        this._log.info('listEngineConfigs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listEngineConfigs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the EngineConfig is the Instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListEngineConfigsResponse. It should be copied here to retrieve
-   *   the next page of resources. Empty will give the first page of
-   *   ListEngineConfigsRequest, and the last page will return an empty
-   *   page_token.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.financialservices.v1.EngineConfig|EngineConfig} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEngineConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listEngineConfigs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the EngineConfig is the Instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListEngineConfigsResponse. It should be copied here to retrieve
+ *   the next page of resources. Empty will give the first page of
+ *   ListEngineConfigsRequest, and the last page will return an empty
+ *   page_token.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.financialservices.v1.EngineConfig|EngineConfig} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listEngineConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEngineConfigsStream(
-    request?: protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEngineConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEngineConfigs stream %j', request);
     return this.descriptors.page.listEngineConfigs.createStream(
       this.innerApiCalls.listEngineConfigs as GaxCall,
@@ -7061,57 +4955,56 @@ export class AMLClient {
     );
   }
 
-  /**
-   * Equivalent to `listEngineConfigs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the EngineConfig is the Instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListEngineConfigsResponse. It should be copied here to retrieve
-   *   the next page of resources. Empty will give the first page of
-   *   ListEngineConfigsRequest, and the last page will return an empty
-   *   page_token.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.financialservices.v1.EngineConfig|EngineConfig}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.list_engine_configs.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ListEngineConfigs_async
-   */
+/**
+ * Equivalent to `listEngineConfigs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the EngineConfig is the Instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListEngineConfigsResponse. It should be copied here to retrieve
+ *   the next page of resources. Empty will give the first page of
+ *   ListEngineConfigsRequest, and the last page will return an empty
+ *   page_token.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.financialservices.v1.EngineConfig|EngineConfig}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.list_engine_configs.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ListEngineConfigs_async
+ */
   listEngineConfigsAsync(
-    request?: protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.financialservices.v1.IEngineConfig> {
+      request?: protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.financialservices.v1.IEngineConfig>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEngineConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEngineConfigs iterate %j', request);
     return this.descriptors.page.listEngineConfigs.asyncIterate(
       this.innerApiCalls['listEngineConfigs'] as GaxCall,
@@ -7119,124 +5012,99 @@ export class AMLClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.financialservices.v1.IEngineConfig>;
   }
-  /**
-   * Lists EngineVersions for given location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the EngineVersion is the Instance.
-   * @param {number} [request.pageSize]
-   *   Optional. The number of resources to be included in the response. The
-   *   response contains a next_page_token, which can be used to retrieve the next
-   *   page of resources.
-   * @param {string} [request.pageToken]
-   *   Optional. In case of paginated results, this is the token that was returned
-   *   in the previous ListEngineVersionsResponse. It should be copied here to
-   *   retrieve the next page of resources. Empty will give the first page of
-   *   ListEngineVersionsRequest, and the last page will return an empty
-   *   page_token.
-   * @param {string} [request.filter]
-   *   Optional. Specify a filter to narrow search results.
-   *   If empty or unset will default to "state!=DEPRECATED",
-   *   to view deprecated versions use "state:*" or any other filter.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.financialservices.v1.EngineVersion|EngineVersion}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEngineVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists EngineVersions for given location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the EngineVersion is the Instance.
+ * @param {number} [request.pageSize]
+ *   Optional. The number of resources to be included in the response. The
+ *   response contains a next_page_token, which can be used to retrieve the next
+ *   page of resources.
+ * @param {string} [request.pageToken]
+ *   Optional. In case of paginated results, this is the token that was returned
+ *   in the previous ListEngineVersionsResponse. It should be copied here to
+ *   retrieve the next page of resources. Empty will give the first page of
+ *   ListEngineVersionsRequest, and the last page will return an empty
+ *   page_token.
+ * @param {string} [request.filter]
+ *   Optional. Specify a filter to narrow search results.
+ *   If empty or unset will default to "state!=DEPRECATED",
+ *   to view deprecated versions use "state:*" or any other filter.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.financialservices.v1.EngineVersion|EngineVersion}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listEngineVersionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEngineVersions(
-    request?: protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IEngineVersion[],
-      protos.google.cloud.financialservices.v1.IListEngineVersionsRequest | null,
-      protos.google.cloud.financialservices.v1.IListEngineVersionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IEngineVersion[],
+        protos.google.cloud.financialservices.v1.IListEngineVersionsRequest|null,
+        protos.google.cloud.financialservices.v1.IListEngineVersionsResponse
+      ]>;
   listEngineVersions(
-    request: protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
-      | protos.google.cloud.financialservices.v1.IListEngineVersionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IEngineVersion
-    >
-  ): void;
-  listEngineVersions(
-    request: protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
-      | protos.google.cloud.financialservices.v1.IListEngineVersionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IEngineVersion
-    >
-  ): void;
-  listEngineVersions(
-    request?: protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
-          | protos.google.cloud.financialservices.v1.IListEngineVersionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.financialservices.v1.IEngineVersion
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
-      | protos.google.cloud.financialservices.v1.IListEngineVersionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IEngineVersion
-    >
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IEngineVersion[],
-      protos.google.cloud.financialservices.v1.IListEngineVersionsRequest | null,
-      protos.google.cloud.financialservices.v1.IListEngineVersionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.financialservices.v1.IListEngineVersionsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IEngineVersion>): void;
+  listEngineVersions(
+      request: protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
+          protos.google.cloud.financialservices.v1.IListEngineVersionsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IEngineVersion>): void;
+  listEngineVersions(
+      request?: protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
+          protos.google.cloud.financialservices.v1.IListEngineVersionsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IEngineVersion>,
+      callback?: PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
+          protos.google.cloud.financialservices.v1.IListEngineVersionsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IEngineVersion>):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IEngineVersion[],
+        protos.google.cloud.financialservices.v1.IListEngineVersionsRequest|null,
+        protos.google.cloud.financialservices.v1.IListEngineVersionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
-          | protos.google.cloud.financialservices.v1.IListEngineVersionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.financialservices.v1.IEngineVersion
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
+      protos.google.cloud.financialservices.v1.IListEngineVersionsResponse|null|undefined,
+      protos.google.cloud.financialservices.v1.IEngineVersion>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEngineVersions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7245,68 +5113,65 @@ export class AMLClient {
     this._log.info('listEngineVersions request %j', request);
     return this.innerApiCalls
       .listEngineVersions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.financialservices.v1.IEngineVersion[],
-          protos.google.cloud.financialservices.v1.IListEngineVersionsRequest | null,
-          protos.google.cloud.financialservices.v1.IListEngineVersionsResponse,
-        ]) => {
-          this._log.info('listEngineVersions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.financialservices.v1.IEngineVersion[],
+        protos.google.cloud.financialservices.v1.IListEngineVersionsRequest|null,
+        protos.google.cloud.financialservices.v1.IListEngineVersionsResponse
+      ]) => {
+        this._log.info('listEngineVersions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listEngineVersions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the EngineVersion is the Instance.
-   * @param {number} [request.pageSize]
-   *   Optional. The number of resources to be included in the response. The
-   *   response contains a next_page_token, which can be used to retrieve the next
-   *   page of resources.
-   * @param {string} [request.pageToken]
-   *   Optional. In case of paginated results, this is the token that was returned
-   *   in the previous ListEngineVersionsResponse. It should be copied here to
-   *   retrieve the next page of resources. Empty will give the first page of
-   *   ListEngineVersionsRequest, and the last page will return an empty
-   *   page_token.
-   * @param {string} [request.filter]
-   *   Optional. Specify a filter to narrow search results.
-   *   If empty or unset will default to "state!=DEPRECATED",
-   *   to view deprecated versions use "state:*" or any other filter.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.financialservices.v1.EngineVersion|EngineVersion} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEngineVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listEngineVersions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the EngineVersion is the Instance.
+ * @param {number} [request.pageSize]
+ *   Optional. The number of resources to be included in the response. The
+ *   response contains a next_page_token, which can be used to retrieve the next
+ *   page of resources.
+ * @param {string} [request.pageToken]
+ *   Optional. In case of paginated results, this is the token that was returned
+ *   in the previous ListEngineVersionsResponse. It should be copied here to
+ *   retrieve the next page of resources. Empty will give the first page of
+ *   ListEngineVersionsRequest, and the last page will return an empty
+ *   page_token.
+ * @param {string} [request.filter]
+ *   Optional. Specify a filter to narrow search results.
+ *   If empty or unset will default to "state!=DEPRECATED",
+ *   to view deprecated versions use "state:*" or any other filter.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.financialservices.v1.EngineVersion|EngineVersion} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listEngineVersionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEngineVersionsStream(
-    request?: protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEngineVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEngineVersions stream %j', request);
     return this.descriptors.page.listEngineVersions.createStream(
       this.innerApiCalls.listEngineVersions as GaxCall,
@@ -7315,59 +5180,58 @@ export class AMLClient {
     );
   }
 
-  /**
-   * Equivalent to `listEngineVersions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the EngineVersion is the Instance.
-   * @param {number} [request.pageSize]
-   *   Optional. The number of resources to be included in the response. The
-   *   response contains a next_page_token, which can be used to retrieve the next
-   *   page of resources.
-   * @param {string} [request.pageToken]
-   *   Optional. In case of paginated results, this is the token that was returned
-   *   in the previous ListEngineVersionsResponse. It should be copied here to
-   *   retrieve the next page of resources. Empty will give the first page of
-   *   ListEngineVersionsRequest, and the last page will return an empty
-   *   page_token.
-   * @param {string} [request.filter]
-   *   Optional. Specify a filter to narrow search results.
-   *   If empty or unset will default to "state!=DEPRECATED",
-   *   to view deprecated versions use "state:*" or any other filter.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.financialservices.v1.EngineVersion|EngineVersion}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.list_engine_versions.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ListEngineVersions_async
-   */
+/**
+ * Equivalent to `listEngineVersions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the EngineVersion is the Instance.
+ * @param {number} [request.pageSize]
+ *   Optional. The number of resources to be included in the response. The
+ *   response contains a next_page_token, which can be used to retrieve the next
+ *   page of resources.
+ * @param {string} [request.pageToken]
+ *   Optional. In case of paginated results, this is the token that was returned
+ *   in the previous ListEngineVersionsResponse. It should be copied here to
+ *   retrieve the next page of resources. Empty will give the first page of
+ *   ListEngineVersionsRequest, and the last page will return an empty
+ *   page_token.
+ * @param {string} [request.filter]
+ *   Optional. Specify a filter to narrow search results.
+ *   If empty or unset will default to "state!=DEPRECATED",
+ *   to view deprecated versions use "state:*" or any other filter.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.financialservices.v1.EngineVersion|EngineVersion}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.list_engine_versions.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ListEngineVersions_async
+ */
   listEngineVersionsAsync(
-    request?: protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.financialservices.v1.IEngineVersion> {
+      request?: protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.financialservices.v1.IEngineVersion>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEngineVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEngineVersions iterate %j', request);
     return this.descriptors.page.listEngineVersions.asyncIterate(
       this.innerApiCalls['listEngineVersions'] as GaxCall,
@@ -7375,122 +5239,97 @@ export class AMLClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.financialservices.v1.IEngineVersion>;
   }
-  /**
-   * List PredictionResults.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the PredictionResult is the Instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListPredictionResultsResponse. It should be copied here to
-   *   retrieve the next page of resources. Empty will give the first page of
-   *   ListPredictionResultsRequest, and the last page will return an empty
-   *   page_token.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.financialservices.v1.PredictionResult|PredictionResult}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPredictionResultsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List PredictionResults.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the PredictionResult is the Instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListPredictionResultsResponse. It should be copied here to
+ *   retrieve the next page of resources. Empty will give the first page of
+ *   ListPredictionResultsRequest, and the last page will return an empty
+ *   page_token.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.financialservices.v1.PredictionResult|PredictionResult}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPredictionResultsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPredictionResults(
-    request?: protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IPredictionResult[],
-      protos.google.cloud.financialservices.v1.IListPredictionResultsRequest | null,
-      protos.google.cloud.financialservices.v1.IListPredictionResultsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IPredictionResult[],
+        protos.google.cloud.financialservices.v1.IListPredictionResultsRequest|null,
+        protos.google.cloud.financialservices.v1.IListPredictionResultsResponse
+      ]>;
   listPredictionResults(
-    request: protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
-      | protos.google.cloud.financialservices.v1.IListPredictionResultsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IPredictionResult
-    >
-  ): void;
-  listPredictionResults(
-    request: protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
-      | protos.google.cloud.financialservices.v1.IListPredictionResultsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IPredictionResult
-    >
-  ): void;
-  listPredictionResults(
-    request?: protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
-          | protos.google.cloud.financialservices.v1.IListPredictionResultsResponse
-          | null
-          | undefined,
-          protos.google.cloud.financialservices.v1.IPredictionResult
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
-      | protos.google.cloud.financialservices.v1.IListPredictionResultsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IPredictionResult
-    >
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IPredictionResult[],
-      protos.google.cloud.financialservices.v1.IListPredictionResultsRequest | null,
-      protos.google.cloud.financialservices.v1.IListPredictionResultsResponse,
-    ]
-  > | void {
+          protos.google.cloud.financialservices.v1.IListPredictionResultsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IPredictionResult>): void;
+  listPredictionResults(
+      request: protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
+          protos.google.cloud.financialservices.v1.IListPredictionResultsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IPredictionResult>): void;
+  listPredictionResults(
+      request?: protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
+          protos.google.cloud.financialservices.v1.IListPredictionResultsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IPredictionResult>,
+      callback?: PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
+          protos.google.cloud.financialservices.v1.IListPredictionResultsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IPredictionResult>):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IPredictionResult[],
+        protos.google.cloud.financialservices.v1.IListPredictionResultsRequest|null,
+        protos.google.cloud.financialservices.v1.IListPredictionResultsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
-          | protos.google.cloud.financialservices.v1.IListPredictionResultsResponse
-          | null
-          | undefined,
-          protos.google.cloud.financialservices.v1.IPredictionResult
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
+      protos.google.cloud.financialservices.v1.IListPredictionResultsResponse|null|undefined,
+      protos.google.cloud.financialservices.v1.IPredictionResult>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPredictionResults values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7499,66 +5338,63 @@ export class AMLClient {
     this._log.info('listPredictionResults request %j', request);
     return this.innerApiCalls
       .listPredictionResults(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.financialservices.v1.IPredictionResult[],
-          protos.google.cloud.financialservices.v1.IListPredictionResultsRequest | null,
-          protos.google.cloud.financialservices.v1.IListPredictionResultsResponse,
-        ]) => {
-          this._log.info('listPredictionResults values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.financialservices.v1.IPredictionResult[],
+        protos.google.cloud.financialservices.v1.IListPredictionResultsRequest|null,
+        protos.google.cloud.financialservices.v1.IListPredictionResultsResponse
+      ]) => {
+        this._log.info('listPredictionResults values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listPredictionResults`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the PredictionResult is the Instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListPredictionResultsResponse. It should be copied here to
-   *   retrieve the next page of resources. Empty will give the first page of
-   *   ListPredictionResultsRequest, and the last page will return an empty
-   *   page_token.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.financialservices.v1.PredictionResult|PredictionResult} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPredictionResultsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listPredictionResults`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the PredictionResult is the Instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListPredictionResultsResponse. It should be copied here to
+ *   retrieve the next page of resources. Empty will give the first page of
+ *   ListPredictionResultsRequest, and the last page will return an empty
+ *   page_token.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.financialservices.v1.PredictionResult|PredictionResult} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPredictionResultsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPredictionResultsStream(
-    request?: protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPredictionResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPredictionResults stream %j', request);
     return this.descriptors.page.listPredictionResults.createStream(
       this.innerApiCalls.listPredictionResults as GaxCall,
@@ -7567,57 +5403,56 @@ export class AMLClient {
     );
   }
 
-  /**
-   * Equivalent to `listPredictionResults`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the PredictionResult is the Instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListPredictionResultsResponse. It should be copied here to
-   *   retrieve the next page of resources. Empty will give the first page of
-   *   ListPredictionResultsRequest, and the last page will return an empty
-   *   page_token.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.financialservices.v1.PredictionResult|PredictionResult}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.list_prediction_results.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ListPredictionResults_async
-   */
+/**
+ * Equivalent to `listPredictionResults`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the PredictionResult is the Instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListPredictionResultsResponse. It should be copied here to
+ *   retrieve the next page of resources. Empty will give the first page of
+ *   ListPredictionResultsRequest, and the last page will return an empty
+ *   page_token.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.financialservices.v1.PredictionResult|PredictionResult}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.list_prediction_results.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ListPredictionResults_async
+ */
   listPredictionResultsAsync(
-    request?: protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.financialservices.v1.IPredictionResult> {
+      request?: protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.financialservices.v1.IPredictionResult>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPredictionResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPredictionResults iterate %j', request);
     return this.descriptors.page.listPredictionResults.asyncIterate(
       this.innerApiCalls['listPredictionResults'] as GaxCall,
@@ -7625,122 +5460,97 @@ export class AMLClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.financialservices.v1.IPredictionResult>;
   }
-  /**
-   * List BacktestResults.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the BacktestResult is the Instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListBacktestResultsResponse. It should be copied here to
-   *   retrieve the next page of resources. Empty will give the first page of
-   *   ListBacktestResultsRequest, and the last page will return an empty
-   *   page_token.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.financialservices.v1.BacktestResult|BacktestResult}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listBacktestResultsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List BacktestResults.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the BacktestResult is the Instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListBacktestResultsResponse. It should be copied here to
+ *   retrieve the next page of resources. Empty will give the first page of
+ *   ListBacktestResultsRequest, and the last page will return an empty
+ *   page_token.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.financialservices.v1.BacktestResult|BacktestResult}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listBacktestResultsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listBacktestResults(
-    request?: protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IBacktestResult[],
-      protos.google.cloud.financialservices.v1.IListBacktestResultsRequest | null,
-      protos.google.cloud.financialservices.v1.IListBacktestResultsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IBacktestResult[],
+        protos.google.cloud.financialservices.v1.IListBacktestResultsRequest|null,
+        protos.google.cloud.financialservices.v1.IListBacktestResultsResponse
+      ]>;
   listBacktestResults(
-    request: protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
-      | protos.google.cloud.financialservices.v1.IListBacktestResultsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IBacktestResult
-    >
-  ): void;
-  listBacktestResults(
-    request: protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
-      | protos.google.cloud.financialservices.v1.IListBacktestResultsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IBacktestResult
-    >
-  ): void;
-  listBacktestResults(
-    request?: protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
-          | protos.google.cloud.financialservices.v1.IListBacktestResultsResponse
-          | null
-          | undefined,
-          protos.google.cloud.financialservices.v1.IBacktestResult
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
-      | protos.google.cloud.financialservices.v1.IListBacktestResultsResponse
-      | null
-      | undefined,
-      protos.google.cloud.financialservices.v1.IBacktestResult
-    >
-  ): Promise<
-    [
-      protos.google.cloud.financialservices.v1.IBacktestResult[],
-      protos.google.cloud.financialservices.v1.IListBacktestResultsRequest | null,
-      protos.google.cloud.financialservices.v1.IListBacktestResultsResponse,
-    ]
-  > | void {
+          protos.google.cloud.financialservices.v1.IListBacktestResultsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IBacktestResult>): void;
+  listBacktestResults(
+      request: protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
+          protos.google.cloud.financialservices.v1.IListBacktestResultsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IBacktestResult>): void;
+  listBacktestResults(
+      request?: protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
+          protos.google.cloud.financialservices.v1.IListBacktestResultsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IBacktestResult>,
+      callback?: PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
+          protos.google.cloud.financialservices.v1.IListBacktestResultsResponse|null|undefined,
+          protos.google.cloud.financialservices.v1.IBacktestResult>):
+      Promise<[
+        protos.google.cloud.financialservices.v1.IBacktestResult[],
+        protos.google.cloud.financialservices.v1.IListBacktestResultsRequest|null,
+        protos.google.cloud.financialservices.v1.IListBacktestResultsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
-          | protos.google.cloud.financialservices.v1.IListBacktestResultsResponse
-          | null
-          | undefined,
-          protos.google.cloud.financialservices.v1.IBacktestResult
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
+      protos.google.cloud.financialservices.v1.IListBacktestResultsResponse|null|undefined,
+      protos.google.cloud.financialservices.v1.IBacktestResult>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listBacktestResults values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7749,66 +5559,63 @@ export class AMLClient {
     this._log.info('listBacktestResults request %j', request);
     return this.innerApiCalls
       .listBacktestResults(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.financialservices.v1.IBacktestResult[],
-          protos.google.cloud.financialservices.v1.IListBacktestResultsRequest | null,
-          protos.google.cloud.financialservices.v1.IListBacktestResultsResponse,
-        ]) => {
-          this._log.info('listBacktestResults values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.financialservices.v1.IBacktestResult[],
+        protos.google.cloud.financialservices.v1.IListBacktestResultsRequest|null,
+        protos.google.cloud.financialservices.v1.IListBacktestResultsResponse
+      ]) => {
+        this._log.info('listBacktestResults values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listBacktestResults`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the BacktestResult is the Instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListBacktestResultsResponse. It should be copied here to
-   *   retrieve the next page of resources. Empty will give the first page of
-   *   ListBacktestResultsRequest, and the last page will return an empty
-   *   page_token.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.financialservices.v1.BacktestResult|BacktestResult} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listBacktestResultsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listBacktestResults`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the BacktestResult is the Instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListBacktestResultsResponse. It should be copied here to
+ *   retrieve the next page of resources. Empty will give the first page of
+ *   ListBacktestResultsRequest, and the last page will return an empty
+ *   page_token.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.financialservices.v1.BacktestResult|BacktestResult} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listBacktestResultsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listBacktestResultsStream(
-    request?: protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listBacktestResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listBacktestResults stream %j', request);
     return this.descriptors.page.listBacktestResults.createStream(
       this.innerApiCalls.listBacktestResults as GaxCall,
@@ -7817,57 +5624,56 @@ export class AMLClient {
     );
   }
 
-  /**
-   * Equivalent to `listBacktestResults`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the BacktestResult is the Instance.
-   * @param {number} request.pageSize
-   *   The number of resources to be included in the response. The response
-   *   contains a next_page_token, which can be used to retrieve the next page of
-   *   resources.
-   * @param {string} request.pageToken
-   *   In case of paginated results, this is the token that was returned in the
-   *   previous ListBacktestResultsResponse. It should be copied here to
-   *   retrieve the next page of resources. Empty will give the first page of
-   *   ListBacktestResultsRequest, and the last page will return an empty
-   *   page_token.
-   * @param {string} request.filter
-   *   Specify a filter to narrow search results.
-   * @param {string} request.orderBy
-   *   Specify a field to use for ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.financialservices.v1.BacktestResult|BacktestResult}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/a_m_l.list_backtest_results.js</caption>
-   * region_tag:financialservices_v1_generated_AML_ListBacktestResults_async
-   */
+/**
+ * Equivalent to `listBacktestResults`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the BacktestResult is the Instance.
+ * @param {number} request.pageSize
+ *   The number of resources to be included in the response. The response
+ *   contains a next_page_token, which can be used to retrieve the next page of
+ *   resources.
+ * @param {string} request.pageToken
+ *   In case of paginated results, this is the token that was returned in the
+ *   previous ListBacktestResultsResponse. It should be copied here to
+ *   retrieve the next page of resources. Empty will give the first page of
+ *   ListBacktestResultsRequest, and the last page will return an empty
+ *   page_token.
+ * @param {string} request.filter
+ *   Specify a filter to narrow search results.
+ * @param {string} request.orderBy
+ *   Specify a field to use for ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.financialservices.v1.BacktestResult|BacktestResult}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/a_m_l.list_backtest_results.js</caption>
+ * region_tag:financialservices_v1_generated_AML_ListBacktestResults_async
+ */
   listBacktestResultsAsync(
-    request?: protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.financialservices.v1.IBacktestResult> {
+      request?: protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.financialservices.v1.IBacktestResult>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listBacktestResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listBacktestResults iterate %j', request);
     return this.descriptors.page.listBacktestResults.asyncIterate(
       this.innerApiCalls['listBacktestResults'] as GaxCall,
@@ -7875,7 +5681,7 @@ export class AMLClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.financialservices.v1.IBacktestResult>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -7915,7 +5721,7 @@ export class AMLClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -7953,7 +5759,7 @@ export class AMLClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -7998,20 +5804,20 @@ export class AMLClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -8048,13 +5854,13 @@ export class AMLClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -8088,7 +5894,7 @@ export class AMLClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -8103,20 +5909,20 @@ export class AMLClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -8160,20 +5966,20 @@ export class AMLClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -8190,12 +5996,7 @@ export class AMLClient {
    * @param {string} backtest_result
    * @returns {string} Resource name string.
    */
-  backtestResultPath(
-    projectNum: string,
-    location: string,
-    instance: string,
-    backtestResult: string
-  ) {
+  backtestResultPath(projectNum:string,location:string,instance:string,backtestResult:string) {
     return this.pathTemplates.backtestResultPathTemplate.render({
       project_num: projectNum,
       location: location,
@@ -8212,9 +6013,7 @@ export class AMLClient {
    * @returns {string} A string representing the project_num.
    */
   matchProjectNumFromBacktestResultName(backtestResultName: string) {
-    return this.pathTemplates.backtestResultPathTemplate.match(
-      backtestResultName
-    ).project_num;
+    return this.pathTemplates.backtestResultPathTemplate.match(backtestResultName).project_num;
   }
 
   /**
@@ -8225,9 +6024,7 @@ export class AMLClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBacktestResultName(backtestResultName: string) {
-    return this.pathTemplates.backtestResultPathTemplate.match(
-      backtestResultName
-    ).location;
+    return this.pathTemplates.backtestResultPathTemplate.match(backtestResultName).location;
   }
 
   /**
@@ -8238,9 +6035,7 @@ export class AMLClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromBacktestResultName(backtestResultName: string) {
-    return this.pathTemplates.backtestResultPathTemplate.match(
-      backtestResultName
-    ).instance;
+    return this.pathTemplates.backtestResultPathTemplate.match(backtestResultName).instance;
   }
 
   /**
@@ -8251,9 +6046,7 @@ export class AMLClient {
    * @returns {string} A string representing the backtest_result.
    */
   matchBacktestResultFromBacktestResultName(backtestResultName: string) {
-    return this.pathTemplates.backtestResultPathTemplate.match(
-      backtestResultName
-    ).backtest_result;
+    return this.pathTemplates.backtestResultPathTemplate.match(backtestResultName).backtest_result;
   }
 
   /**
@@ -8265,12 +6058,7 @@ export class AMLClient {
    * @param {string} dataset
    * @returns {string} Resource name string.
    */
-  datasetPath(
-    projectNum: string,
-    location: string,
-    instance: string,
-    dataset: string
-  ) {
+  datasetPath(projectNum:string,location:string,instance:string,dataset:string) {
     return this.pathTemplates.datasetPathTemplate.render({
       project_num: projectNum,
       location: location,
@@ -8287,8 +6075,7 @@ export class AMLClient {
    * @returns {string} A string representing the project_num.
    */
   matchProjectNumFromDatasetName(datasetName: string) {
-    return this.pathTemplates.datasetPathTemplate.match(datasetName)
-      .project_num;
+    return this.pathTemplates.datasetPathTemplate.match(datasetName).project_num;
   }
 
   /**
@@ -8333,12 +6120,7 @@ export class AMLClient {
    * @param {string} engine_config
    * @returns {string} Resource name string.
    */
-  engineConfigPath(
-    projectNum: string,
-    location: string,
-    instance: string,
-    engineConfig: string
-  ) {
+  engineConfigPath(projectNum:string,location:string,instance:string,engineConfig:string) {
     return this.pathTemplates.engineConfigPathTemplate.render({
       project_num: projectNum,
       location: location,
@@ -8355,8 +6137,7 @@ export class AMLClient {
    * @returns {string} A string representing the project_num.
    */
   matchProjectNumFromEngineConfigName(engineConfigName: string) {
-    return this.pathTemplates.engineConfigPathTemplate.match(engineConfigName)
-      .project_num;
+    return this.pathTemplates.engineConfigPathTemplate.match(engineConfigName).project_num;
   }
 
   /**
@@ -8367,8 +6148,7 @@ export class AMLClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEngineConfigName(engineConfigName: string) {
-    return this.pathTemplates.engineConfigPathTemplate.match(engineConfigName)
-      .location;
+    return this.pathTemplates.engineConfigPathTemplate.match(engineConfigName).location;
   }
 
   /**
@@ -8379,8 +6159,7 @@ export class AMLClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromEngineConfigName(engineConfigName: string) {
-    return this.pathTemplates.engineConfigPathTemplate.match(engineConfigName)
-      .instance;
+    return this.pathTemplates.engineConfigPathTemplate.match(engineConfigName).instance;
   }
 
   /**
@@ -8391,8 +6170,7 @@ export class AMLClient {
    * @returns {string} A string representing the engine_config.
    */
   matchEngineConfigFromEngineConfigName(engineConfigName: string) {
-    return this.pathTemplates.engineConfigPathTemplate.match(engineConfigName)
-      .engine_config;
+    return this.pathTemplates.engineConfigPathTemplate.match(engineConfigName).engine_config;
   }
 
   /**
@@ -8404,12 +6182,7 @@ export class AMLClient {
    * @param {string} engine_version
    * @returns {string} Resource name string.
    */
-  engineVersionPath(
-    projectNum: string,
-    location: string,
-    instance: string,
-    engineVersion: string
-  ) {
+  engineVersionPath(projectNum:string,location:string,instance:string,engineVersion:string) {
     return this.pathTemplates.engineVersionPathTemplate.render({
       project_num: projectNum,
       location: location,
@@ -8426,8 +6199,7 @@ export class AMLClient {
    * @returns {string} A string representing the project_num.
    */
   matchProjectNumFromEngineVersionName(engineVersionName: string) {
-    return this.pathTemplates.engineVersionPathTemplate.match(engineVersionName)
-      .project_num;
+    return this.pathTemplates.engineVersionPathTemplate.match(engineVersionName).project_num;
   }
 
   /**
@@ -8438,8 +6210,7 @@ export class AMLClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEngineVersionName(engineVersionName: string) {
-    return this.pathTemplates.engineVersionPathTemplate.match(engineVersionName)
-      .location;
+    return this.pathTemplates.engineVersionPathTemplate.match(engineVersionName).location;
   }
 
   /**
@@ -8450,8 +6221,7 @@ export class AMLClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromEngineVersionName(engineVersionName: string) {
-    return this.pathTemplates.engineVersionPathTemplate.match(engineVersionName)
-      .instance;
+    return this.pathTemplates.engineVersionPathTemplate.match(engineVersionName).instance;
   }
 
   /**
@@ -8462,8 +6232,7 @@ export class AMLClient {
    * @returns {string} A string representing the engine_version.
    */
   matchEngineVersionFromEngineVersionName(engineVersionName: string) {
-    return this.pathTemplates.engineVersionPathTemplate.match(engineVersionName)
-      .engine_version;
+    return this.pathTemplates.engineVersionPathTemplate.match(engineVersionName).engine_version;
   }
 
   /**
@@ -8474,7 +6243,7 @@ export class AMLClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project: string, location: string, instance: string) {
+  instancePath(project:string,location:string,instance:string) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       location: location,
@@ -8524,12 +6293,7 @@ export class AMLClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(
-    projectNum: string,
-    location: string,
-    instance: string,
-    model: string
-  ) {
+  modelPath(projectNum:string,location:string,instance:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project_num: projectNum,
       location: location,
@@ -8591,12 +6355,7 @@ export class AMLClient {
    * @param {string} prediction_result
    * @returns {string} Resource name string.
    */
-  predictionResultPath(
-    projectNum: string,
-    location: string,
-    instance: string,
-    predictionResult: string
-  ) {
+  predictionResultPath(projectNum:string,location:string,instance:string,predictionResult:string) {
     return this.pathTemplates.predictionResultPathTemplate.render({
       project_num: projectNum,
       location: location,
@@ -8613,9 +6372,7 @@ export class AMLClient {
    * @returns {string} A string representing the project_num.
    */
   matchProjectNumFromPredictionResultName(predictionResultName: string) {
-    return this.pathTemplates.predictionResultPathTemplate.match(
-      predictionResultName
-    ).project_num;
+    return this.pathTemplates.predictionResultPathTemplate.match(predictionResultName).project_num;
   }
 
   /**
@@ -8626,9 +6383,7 @@ export class AMLClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPredictionResultName(predictionResultName: string) {
-    return this.pathTemplates.predictionResultPathTemplate.match(
-      predictionResultName
-    ).location;
+    return this.pathTemplates.predictionResultPathTemplate.match(predictionResultName).location;
   }
 
   /**
@@ -8639,9 +6394,7 @@ export class AMLClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromPredictionResultName(predictionResultName: string) {
-    return this.pathTemplates.predictionResultPathTemplate.match(
-      predictionResultName
-    ).instance;
+    return this.pathTemplates.predictionResultPathTemplate.match(predictionResultName).instance;
   }
 
   /**
@@ -8652,9 +6405,7 @@ export class AMLClient {
    * @returns {string} A string representing the prediction_result.
    */
   matchPredictionResultFromPredictionResultName(predictionResultName: string) {
-    return this.pathTemplates.predictionResultPathTemplate.match(
-      predictionResultName
-    ).prediction_result;
+    return this.pathTemplates.predictionResultPathTemplate.match(predictionResultName).prediction_result;
   }
 
   /**
@@ -8669,8 +6420,8 @@ export class AMLClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.locationsClient.close().catch(err => {throw err});
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

@@ -225,6 +225,9 @@ export class LivestreamServiceClient {
       clipPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/channels/{channel}/clips/{clip}'
       ),
+      dvrSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/channels/{channel}/dvrSessions/{dvr_session}'
+      ),
       eventPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/channels/{channel}/events/{event}'
       ),
@@ -265,6 +268,11 @@ export class LivestreamServiceClient {
         'pageToken',
         'nextPageToken',
         'clips'
+      ),
+      listDvrSessions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'dvrSessions'
       ),
       listAssets: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -374,6 +382,24 @@ export class LivestreamServiceClient {
     const deleteClipMetadata = protoFilesRoot.lookup(
       '.google.cloud.video.livestream.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const createDvrSessionResponse = protoFilesRoot.lookup(
+      '.google.cloud.video.livestream.v1.DvrSession'
+    ) as gax.protobuf.Type;
+    const createDvrSessionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.video.livestream.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteDvrSessionResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteDvrSessionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.video.livestream.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateDvrSessionResponse = protoFilesRoot.lookup(
+      '.google.cloud.video.livestream.v1.DvrSession'
+    ) as gax.protobuf.Type;
+    const updateDvrSessionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.video.livestream.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const createAssetResponse = protoFilesRoot.lookup(
       '.google.cloud.video.livestream.v1.Asset'
     ) as gax.protobuf.Type;
@@ -443,6 +469,21 @@ export class LivestreamServiceClient {
         this.operationsClient,
         deleteClipResponse.decode.bind(deleteClipResponse),
         deleteClipMetadata.decode.bind(deleteClipMetadata)
+      ),
+      createDvrSession: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createDvrSessionResponse.decode.bind(createDvrSessionResponse),
+        createDvrSessionMetadata.decode.bind(createDvrSessionMetadata)
+      ),
+      deleteDvrSession: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteDvrSessionResponse.decode.bind(deleteDvrSessionResponse),
+        deleteDvrSessionMetadata.decode.bind(deleteDvrSessionMetadata)
+      ),
+      updateDvrSession: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateDvrSessionResponse.decode.bind(updateDvrSessionResponse),
+        updateDvrSessionMetadata.decode.bind(updateDvrSessionMetadata)
       ),
       createAsset: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -532,6 +573,11 @@ export class LivestreamServiceClient {
       'getClip',
       'createClip',
       'deleteClip',
+      'createDvrSession',
+      'listDvrSessions',
+      'getDvrSession',
+      'deleteDvrSession',
+      'updateDvrSession',
       'createAsset',
       'deleteAsset',
       'getAsset',
@@ -1408,6 +1454,128 @@ export class LivestreamServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('getClip response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Returns the specified DVR session.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource, in the following form:
+   *   `projects/{project}/locations/{location}/channels/{channelId}/dvrSessions/{dvrSessionId}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.video.livestream.v1.DvrSession|DvrSession}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/livestream_service.get_dvr_session.js</caption>
+   * region_tag:livestream_v1_generated_LivestreamService_GetDvrSession_async
+   */
+  getDvrSession(
+    request?: protos.google.cloud.video.livestream.v1.IGetDvrSessionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.video.livestream.v1.IDvrSession,
+      protos.google.cloud.video.livestream.v1.IGetDvrSessionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getDvrSession(
+    request: protos.google.cloud.video.livestream.v1.IGetDvrSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.video.livestream.v1.IDvrSession,
+      | protos.google.cloud.video.livestream.v1.IGetDvrSessionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDvrSession(
+    request: protos.google.cloud.video.livestream.v1.IGetDvrSessionRequest,
+    callback: Callback<
+      protos.google.cloud.video.livestream.v1.IDvrSession,
+      | protos.google.cloud.video.livestream.v1.IGetDvrSessionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDvrSession(
+    request?: protos.google.cloud.video.livestream.v1.IGetDvrSessionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.video.livestream.v1.IDvrSession,
+          | protos.google.cloud.video.livestream.v1.IGetDvrSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.video.livestream.v1.IDvrSession,
+      | protos.google.cloud.video.livestream.v1.IGetDvrSessionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.video.livestream.v1.IDvrSession,
+      protos.google.cloud.video.livestream.v1.IGetDvrSessionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getDvrSession request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.livestream.v1.IDvrSession,
+          | protos.google.cloud.video.livestream.v1.IGetDvrSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDvrSession response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDvrSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.livestream.v1.IDvrSession,
+          (
+            | protos.google.cloud.video.livestream.v1.IGetDvrSessionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDvrSession response %j', response);
           return [response, options, rawResponse];
         }
       );
@@ -2988,6 +3156,7 @@ export class LivestreamServiceClient {
    *   Field mask is used to specify the fields to be overwritten in the Input
    *   resource by the update. You can only update the following fields:
    *
+   *   * [`tier`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.inputs#Tier)
    *   * [`preprocessingConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.inputs#PreprocessingConfig)
    *   * [`securityRules`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.inputs#SecurityRule)
    *
@@ -3368,7 +3537,7 @@ export class LivestreamServiceClient {
   }
   /**
    * Deletes the specified clip job resource. This method only deletes the clip
-   * job and does not delete the VOD clip stored in the GCS.
+   * job and does not delete the VOD clip stored in Cloud Storage.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3548,6 +3717,573 @@ export class LivestreamServiceClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
+      protos.google.cloud.video.livestream.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a DVR session with the provided unique ID in the specified channel.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, in the following form:
+   *   `projects/{project}/locations/{location}/channels/{channelId}`.
+   * @param {string} request.dvrSessionId
+   *   Required. Id of the requesting object in the following form:
+   *
+   *   1. 1 character minimum, 63 characters maximum
+   *   2. Only contains letters, digits, underscores, and hyphens
+   * @param {google.cloud.video.livestream.v1.DvrSession} request.dvrSession
+   *   Required. The resource being created
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/livestream_service.create_dvr_session.js</caption>
+   * region_tag:livestream_v1_generated_LivestreamService_CreateDvrSession_async
+   */
+  createDvrSession(
+    request?: protos.google.cloud.video.livestream.v1.ICreateDvrSessionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.video.livestream.v1.IDvrSession,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createDvrSession(
+    request: protos.google.cloud.video.livestream.v1.ICreateDvrSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.video.livestream.v1.IDvrSession,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createDvrSession(
+    request: protos.google.cloud.video.livestream.v1.ICreateDvrSessionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.video.livestream.v1.IDvrSession,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createDvrSession(
+    request?: protos.google.cloud.video.livestream.v1.ICreateDvrSessionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IDvrSession,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.video.livestream.v1.IDvrSession,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.video.livestream.v1.IDvrSession,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IDvrSession,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createDvrSession response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createDvrSession request %j', request);
+    return this.innerApiCalls
+      .createDvrSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IDvrSession,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDvrSession response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createDvrSession()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/livestream_service.create_dvr_session.js</caption>
+   * region_tag:livestream_v1_generated_LivestreamService_CreateDvrSession_async
+   */
+  async checkCreateDvrSessionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.video.livestream.v1.DvrSession,
+      protos.google.cloud.video.livestream.v1.OperationMetadata
+    >
+  > {
+    this._log.info('createDvrSession long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createDvrSession,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.video.livestream.v1.DvrSession,
+      protos.google.cloud.video.livestream.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes the specified DVR session.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the event resource, in the form of:
+   *   `projects/{project}/locations/{location}/channels/{channelId}/dvrSessions/{dvrSessionId}`.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported `(00000000-0000-0000-0000-000000000000)`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/livestream_service.delete_dvr_session.js</caption>
+   * region_tag:livestream_v1_generated_LivestreamService_DeleteDvrSession_async
+   */
+  deleteDvrSession(
+    request?: protos.google.cloud.video.livestream.v1.IDeleteDvrSessionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteDvrSession(
+    request: protos.google.cloud.video.livestream.v1.IDeleteDvrSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteDvrSession(
+    request: protos.google.cloud.video.livestream.v1.IDeleteDvrSessionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteDvrSession(
+    request?: protos.google.cloud.video.livestream.v1.IDeleteDvrSessionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDvrSession response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDvrSession request %j', request);
+    return this.innerApiCalls
+      .deleteDvrSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDvrSession response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteDvrSession()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/livestream_service.delete_dvr_session.js</caption>
+   * region_tag:livestream_v1_generated_LivestreamService_DeleteDvrSession_async
+   */
+  async checkDeleteDvrSessionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.video.livestream.v1.OperationMetadata
+    >
+  > {
+    this._log.info('deleteDvrSession long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteDvrSession,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.video.livestream.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Updates the specified DVR session.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   DvrSession resource by the update. You can only update the following
+   *   fields:
+   *
+   *   * `dvrWindows`
+   *
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   * @param {google.cloud.video.livestream.v1.DvrSession} request.dvrSession
+   *   Required. The DVR session resource to be updated.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported `(00000000-0000-0000-0000-000000000000)`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/livestream_service.update_dvr_session.js</caption>
+   * region_tag:livestream_v1_generated_LivestreamService_UpdateDvrSession_async
+   */
+  updateDvrSession(
+    request?: protos.google.cloud.video.livestream.v1.IUpdateDvrSessionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.video.livestream.v1.IDvrSession,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateDvrSession(
+    request: protos.google.cloud.video.livestream.v1.IUpdateDvrSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.video.livestream.v1.IDvrSession,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDvrSession(
+    request: protos.google.cloud.video.livestream.v1.IUpdateDvrSessionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.video.livestream.v1.IDvrSession,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDvrSession(
+    request?: protos.google.cloud.video.livestream.v1.IUpdateDvrSessionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IDvrSession,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.video.livestream.v1.IDvrSession,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.video.livestream.v1.IDvrSession,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'dvr_session.name': request.dvrSession!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IDvrSession,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateDvrSession response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateDvrSession request %j', request);
+    return this.innerApiCalls
+      .updateDvrSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IDvrSession,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDvrSession response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateDvrSession()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/livestream_service.update_dvr_session.js</caption>
+   * region_tag:livestream_v1_generated_LivestreamService_UpdateDvrSession_async
+   */
+  async checkUpdateDvrSessionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.video.livestream.v1.DvrSession,
+      protos.google.cloud.video.livestream.v1.OperationMetadata
+    >
+  > {
+    this._log.info('updateDvrSession long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateDvrSession,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.video.livestream.v1.DvrSession,
       protos.google.cloud.video.livestream.v1.OperationMetadata
     >;
   }
@@ -5103,6 +5839,241 @@ export class LivestreamServiceClient {
     ) as AsyncIterable<protos.google.cloud.video.livestream.v1.IClip>;
   }
   /**
+   * Returns a list of all DVR sessions in the specified channel.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListDvrSessionsRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.video.livestream.v1.DvrSession|DvrSession}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDvrSessionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDvrSessions(
+    request?: protos.google.cloud.video.livestream.v1.IListDvrSessionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.video.livestream.v1.IDvrSession[],
+      protos.google.cloud.video.livestream.v1.IListDvrSessionsRequest | null,
+      protos.google.cloud.video.livestream.v1.IListDvrSessionsResponse,
+    ]
+  >;
+  listDvrSessions(
+    request: protos.google.cloud.video.livestream.v1.IListDvrSessionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.video.livestream.v1.IListDvrSessionsRequest,
+      | protos.google.cloud.video.livestream.v1.IListDvrSessionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.video.livestream.v1.IDvrSession
+    >
+  ): void;
+  listDvrSessions(
+    request: protos.google.cloud.video.livestream.v1.IListDvrSessionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.video.livestream.v1.IListDvrSessionsRequest,
+      | protos.google.cloud.video.livestream.v1.IListDvrSessionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.video.livestream.v1.IDvrSession
+    >
+  ): void;
+  listDvrSessions(
+    request?: protos.google.cloud.video.livestream.v1.IListDvrSessionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.video.livestream.v1.IListDvrSessionsRequest,
+          | protos.google.cloud.video.livestream.v1.IListDvrSessionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.video.livestream.v1.IDvrSession
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.video.livestream.v1.IListDvrSessionsRequest,
+      | protos.google.cloud.video.livestream.v1.IListDvrSessionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.video.livestream.v1.IDvrSession
+    >
+  ): Promise<
+    [
+      protos.google.cloud.video.livestream.v1.IDvrSession[],
+      protos.google.cloud.video.livestream.v1.IListDvrSessionsRequest | null,
+      protos.google.cloud.video.livestream.v1.IListDvrSessionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.video.livestream.v1.IListDvrSessionsRequest,
+          | protos.google.cloud.video.livestream.v1.IListDvrSessionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.video.livestream.v1.IDvrSession
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDvrSessions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDvrSessions request %j', request);
+    return this.innerApiCalls
+      .listDvrSessions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.video.livestream.v1.IDvrSession[],
+          protos.google.cloud.video.livestream.v1.IListDvrSessionsRequest | null,
+          protos.google.cloud.video.livestream.v1.IListDvrSessionsResponse,
+        ]) => {
+          this._log.info('listDvrSessions values %j', response);
+          return [response, input, output];
+        }
+      );
+  }
+
+  /**
+   * Equivalent to `listDvrSessions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListDvrSessionsRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.video.livestream.v1.DvrSession|DvrSession} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDvrSessionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDvrSessionsStream(
+    request?: protos.google.cloud.video.livestream.v1.IListDvrSessionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listDvrSessions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDvrSessions stream %j', request);
+    return this.descriptors.page.listDvrSessions.createStream(
+      this.innerApiCalls.listDvrSessions as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listDvrSessions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListDvrSessionsRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.video.livestream.v1.DvrSession|DvrSession}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/livestream_service.list_dvr_sessions.js</caption>
+   * region_tag:livestream_v1_generated_LivestreamService_ListDvrSessions_async
+   */
+  listDvrSessionsAsync(
+    request?: protos.google.cloud.video.livestream.v1.IListDvrSessionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.video.livestream.v1.IDvrSession> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listDvrSessions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDvrSessions iterate %j', request);
+    return this.descriptors.page.listDvrSessions.asyncIterate(
+      this.innerApiCalls['listDvrSessions'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.video.livestream.v1.IDvrSession>;
+  }
+  /**
    * Returns a list of all assets in the specified region.
    *
    * @param {Object} request
@@ -5807,6 +6778,77 @@ export class LivestreamServiceClient {
   }
 
   /**
+   * Return a fully-qualified dvrSession resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} channel
+   * @param {string} dvr_session
+   * @returns {string} Resource name string.
+   */
+  dvrSessionPath(
+    project: string,
+    location: string,
+    channel: string,
+    dvrSession: string
+  ) {
+    return this.pathTemplates.dvrSessionPathTemplate.render({
+      project: project,
+      location: location,
+      channel: channel,
+      dvr_session: dvrSession,
+    });
+  }
+
+  /**
+   * Parse the project from DvrSession resource.
+   *
+   * @param {string} dvrSessionName
+   *   A fully-qualified path representing DvrSession resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDvrSessionName(dvrSessionName: string) {
+    return this.pathTemplates.dvrSessionPathTemplate.match(dvrSessionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from DvrSession resource.
+   *
+   * @param {string} dvrSessionName
+   *   A fully-qualified path representing DvrSession resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDvrSessionName(dvrSessionName: string) {
+    return this.pathTemplates.dvrSessionPathTemplate.match(dvrSessionName)
+      .location;
+  }
+
+  /**
+   * Parse the channel from DvrSession resource.
+   *
+   * @param {string} dvrSessionName
+   *   A fully-qualified path representing DvrSession resource.
+   * @returns {string} A string representing the channel.
+   */
+  matchChannelFromDvrSessionName(dvrSessionName: string) {
+    return this.pathTemplates.dvrSessionPathTemplate.match(dvrSessionName)
+      .channel;
+  }
+
+  /**
+   * Parse the dvr_session from DvrSession resource.
+   *
+   * @param {string} dvrSessionName
+   *   A fully-qualified path representing DvrSession resource.
+   * @returns {string} A string representing the dvr_session.
+   */
+  matchDvrSessionFromDvrSessionName(dvrSessionName: string) {
+    return this.pathTemplates.dvrSessionPathTemplate.match(dvrSessionName)
+      .dvr_session;
+  }
+
+  /**
    * Return a fully-qualified event resource name string.
    *
    * @param {string} project
@@ -6037,8 +7079,10 @@ export class LivestreamServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.locationsClient.close().catch(err => {
+          throw err;
+        });
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

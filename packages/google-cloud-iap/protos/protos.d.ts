@@ -2319,9 +2319,6 @@ export namespace google {
                     /** AllowedDomainsSettings domains. */
                     public domains: string[];
 
-                    /** AllowedDomainsSettings _enable. */
-                    public _enable?: "enable";
-
                     /**
                      * Creates a new AllowedDomainsSettings instance using the specified properties.
                      * @param [properties] Properties to set
@@ -2643,9 +2640,6 @@ export namespace google {
                     /** AccessDeniedPageSettings remediationTokenGenerationEnabled. */
                     public remediationTokenGenerationEnabled?: (google.protobuf.IBoolValue|null);
 
-                    /** AccessDeniedPageSettings _remediationTokenGenerationEnabled. */
-                    public _remediationTokenGenerationEnabled?: "remediationTokenGenerationEnabled";
-
                     /**
                      * Creates a new AccessDeniedPageSettings instance using the specified properties.
                      * @param [properties] Properties to set
@@ -2754,12 +2748,6 @@ export namespace google {
 
                     /** AttributePropagationSettings enable. */
                     public enable?: (boolean|null);
-
-                    /** AttributePropagationSettings _expression. */
-                    public _expression?: "expression";
-
-                    /** AttributePropagationSettings _enable. */
-                    public _enable?: "enable";
 
                     /**
                      * Creates a new AttributePropagationSettings instance using the specified properties.

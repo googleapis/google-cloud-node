@@ -278,9 +278,14 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
         throw err;
       });
       assert(client.cloudControlsPartnerCoreStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -292,9 +297,14 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
           }
         );
       assert.strictEqual(client.cloudControlsPartnerCoreStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -475,7 +485,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getWorkload(request), expectedError);
     });
   });
@@ -617,7 +629,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getCustomer(request), expectedError);
     });
   });
@@ -759,7 +773,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getEkmConnections(request), expectedError);
     });
   });
@@ -905,7 +921,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getPartnerPermissions(request),
         expectedError
@@ -1050,7 +1068,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPartner(request), expectedError);
     });
   });
@@ -1192,7 +1212,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createCustomer(request), expectedError);
     });
   });
@@ -1338,7 +1360,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       );
       request.customer.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateCustomer(request), expectedError);
     });
   });
@@ -1480,7 +1504,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteCustomer(request), expectedError);
     });
   });

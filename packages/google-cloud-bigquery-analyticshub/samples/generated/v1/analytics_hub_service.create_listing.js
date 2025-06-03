@@ -30,12 +30,12 @@ function main(parent, listingId, listing) {
    */
   /**
    *  Required. The parent resource path of the listing.
-   *  e.g. `projects/myproject/locations/US/dataExchanges/123`.
+   *  e.g. `projects/myproject/locations/us/dataExchanges/123`.
    */
   // const parent = 'abc123'
   /**
    *  Required. The ID of the listing to create.
-   *  Must contain only ASCII letters, numbers (0-9), underscores (_).
+   *  Must contain only Unicode letters, numbers (0-9), underscores (_).
    *  Max length: 100 bytes.
    */
   // const listingId = 'abc123'
