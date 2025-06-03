@@ -84,7 +84,7 @@ npm install @google-cloud/storagebatchoperations
  */
 // const orderBy = 'abc123'
 
-// Imports the Storagebatchoperations library
+// Imports the storage batch operations library
 const {StorageBatchOperationsClient} =
   require('@google-cloud/storagebatchoperations').v1;
 

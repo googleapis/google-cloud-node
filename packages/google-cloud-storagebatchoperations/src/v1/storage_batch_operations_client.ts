@@ -118,7 +118,7 @@ export class StorageBatchOperationsClient {
    */
   constructor(
     opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback,
+    gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this
@@ -129,7 +129,7 @@ export class StorageBatchOperationsClient {
       opts?.universe_domain !== opts?.universeDomain
     ) {
       throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.',
+        'Please set either universe_domain or universeDomain, but not both.'
       );
     }
     const universeDomainEnvVar =
@@ -191,7 +191,7 @@ export class StorageBatchOperationsClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts,
+      opts
     );
 
     // Determine the client header string.
@@ -217,13 +217,13 @@ export class StorageBatchOperationsClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       jobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/jobs/{job}',
+        'projects/{project}/locations/{location}/jobs/{job}'
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}',
+        'projects/{project}/locations/{location}'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}',
+        'projects/{project}'
       ),
     };
 
@@ -234,7 +234,7 @@ export class StorageBatchOperationsClient {
       listJobs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'jobs',
+        'jobs'
       ),
     };
 
@@ -280,17 +280,17 @@ export class StorageBatchOperationsClient {
       .lro(lroOptions)
       .operationsClient(opts);
     const createJobResponse = protoFilesRoot.lookup(
-      '.google.cloud.storagebatchoperations.v1.Job',
+      '.google.cloud.storagebatchoperations.v1.Job'
     ) as gax.protobuf.Type;
     const createJobMetadata = protoFilesRoot.lookup(
-      '.google.cloud.storagebatchoperations.v1.OperationMetadata',
+      '.google.cloud.storagebatchoperations.v1.OperationMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createJobResponse.decode.bind(createJobResponse),
-        createJobMetadata.decode.bind(createJobMetadata),
+        createJobMetadata.decode.bind(createJobMetadata)
       ),
     };
 
@@ -299,7 +299,7 @@ export class StorageBatchOperationsClient {
       'google.cloud.storagebatchoperations.v1.StorageBatchOperations',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')},
+      {'x-goog-api-client': clientHeader.join(' ')}
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -333,13 +333,13 @@ export class StorageBatchOperationsClient {
     this.storageBatchOperationsStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.storagebatchoperations.v1.StorageBatchOperations',
+            'google.cloud.storagebatchoperations.v1.StorageBatchOperations'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.storagebatchoperations.v1
             .StorageBatchOperations,
       this._opts,
-      this._providedCustomServicePath,
+      this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -363,7 +363,7 @@ export class StorageBatchOperationsClient {
           },
         (err: Error | null | undefined) => () => {
           throw err;
-        },
+        }
       );
 
       const descriptor =
@@ -374,7 +374,7 @@ export class StorageBatchOperationsClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -395,7 +395,7 @@ export class StorageBatchOperationsClient {
     ) {
       process.emitWarning(
         'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning',
+        'DeprecationWarning'
       );
     }
     return 'storagebatchoperations.googleapis.com';
@@ -413,7 +413,7 @@ export class StorageBatchOperationsClient {
     ) {
       process.emitWarning(
         'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning',
+        'DeprecationWarning'
       );
     }
     return 'storagebatchoperations.googleapis.com';
@@ -455,7 +455,7 @@ export class StorageBatchOperationsClient {
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
   getProjectId(
-    callback?: Callback<string, undefined, undefined>,
+    callback?: Callback<string, undefined, undefined>
   ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
@@ -486,7 +486,7 @@ export class StorageBatchOperationsClient {
    */
   getJob(
     request?: protos.google.cloud.storagebatchoperations.v1.IGetJobRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.storagebatchoperations.v1.IJob,
@@ -503,7 +503,7 @@ export class StorageBatchOperationsClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   getJob(
     request: protos.google.cloud.storagebatchoperations.v1.IGetJobRequest,
@@ -513,7 +513,7 @@ export class StorageBatchOperationsClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   getJob(
     request?: protos.google.cloud.storagebatchoperations.v1.IGetJobRequest,
@@ -532,7 +532,7 @@ export class StorageBatchOperationsClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       protos.google.cloud.storagebatchoperations.v1.IJob,
@@ -586,7 +586,7 @@ export class StorageBatchOperationsClient {
         ]) => {
           this._log.info('getJob response %j', response);
           return [response, options, rawResponse];
-        },
+        }
       );
   }
   /**
@@ -614,7 +614,7 @@ export class StorageBatchOperationsClient {
    */
   deleteJob(
     request?: protos.google.cloud.storagebatchoperations.v1.IDeleteJobRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -634,7 +634,7 @@ export class StorageBatchOperationsClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   deleteJob(
     request: protos.google.cloud.storagebatchoperations.v1.IDeleteJobRequest,
@@ -644,7 +644,7 @@ export class StorageBatchOperationsClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   deleteJob(
     request?: protos.google.cloud.storagebatchoperations.v1.IDeleteJobRequest,
@@ -663,7 +663,7 @@ export class StorageBatchOperationsClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -720,7 +720,7 @@ export class StorageBatchOperationsClient {
         ]) => {
           this._log.info('deleteJob response %j', response);
           return [response, options, rawResponse];
-        },
+        }
       );
   }
   /**
@@ -748,7 +748,7 @@ export class StorageBatchOperationsClient {
    */
   cancelJob(
     request?: protos.google.cloud.storagebatchoperations.v1.ICancelJobRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.storagebatchoperations.v1.ICancelJobResponse,
@@ -768,7 +768,7 @@ export class StorageBatchOperationsClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   cancelJob(
     request: protos.google.cloud.storagebatchoperations.v1.ICancelJobRequest,
@@ -778,7 +778,7 @@ export class StorageBatchOperationsClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   cancelJob(
     request?: protos.google.cloud.storagebatchoperations.v1.ICancelJobRequest,
@@ -797,7 +797,7 @@ export class StorageBatchOperationsClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       protos.google.cloud.storagebatchoperations.v1.ICancelJobResponse,
@@ -854,7 +854,7 @@ export class StorageBatchOperationsClient {
         ]) => {
           this._log.info('cancelJob response %j', response);
           return [response, options, rawResponse];
-        },
+        }
       );
   }
 
@@ -891,7 +891,7 @@ export class StorageBatchOperationsClient {
    */
   createJob(
     request?: protos.google.cloud.storagebatchoperations.v1.ICreateJobRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -912,7 +912,7 @@ export class StorageBatchOperationsClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   createJob(
     request: protos.google.cloud.storagebatchoperations.v1.ICreateJobRequest,
@@ -923,7 +923,7 @@ export class StorageBatchOperationsClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   createJob(
     request?: protos.google.cloud.storagebatchoperations.v1.ICreateJobRequest,
@@ -944,7 +944,7 @@ export class StorageBatchOperationsClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       LROperation<
@@ -1002,7 +1002,7 @@ export class StorageBatchOperationsClient {
         ]) => {
           this._log.info('createJob response %j', rawResponse);
           return [response, rawResponse, _];
-        },
+        }
       );
   }
   /**
@@ -1017,7 +1017,7 @@ export class StorageBatchOperationsClient {
    * region_tag:storagebatchoperations_v1_generated_StorageBatchOperations_CreateJob_async
    */
   async checkCreateJobProgress(
-    name: string,
+    name: string
   ): Promise<
     LROperation<
       protos.google.cloud.storagebatchoperations.v1.Job,
@@ -1027,13 +1027,13 @@ export class StorageBatchOperationsClient {
     this._log.info('createJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        {name}
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.createJob,
-      this._gaxModule.createDefaultBackoffSettings(),
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.storagebatchoperations.v1.Job,
@@ -1069,7 +1069,7 @@ export class StorageBatchOperationsClient {
    */
   listJobs(
     request?: protos.google.cloud.storagebatchoperations.v1.IListJobsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.storagebatchoperations.v1.IJob[],
@@ -1086,7 +1086,7 @@ export class StorageBatchOperationsClient {
       | null
       | undefined,
       protos.google.cloud.storagebatchoperations.v1.IJob
-    >,
+    >
   ): void;
   listJobs(
     request: protos.google.cloud.storagebatchoperations.v1.IListJobsRequest,
@@ -1096,7 +1096,7 @@ export class StorageBatchOperationsClient {
       | null
       | undefined,
       protos.google.cloud.storagebatchoperations.v1.IJob
-    >,
+    >
   ): void;
   listJobs(
     request?: protos.google.cloud.storagebatchoperations.v1.IListJobsRequest,
@@ -1115,7 +1115,7 @@ export class StorageBatchOperationsClient {
       | null
       | undefined,
       protos.google.cloud.storagebatchoperations.v1.IJob
-    >,
+    >
   ): Promise<
     [
       protos.google.cloud.storagebatchoperations.v1.IJob[],
@@ -1166,7 +1166,7 @@ export class StorageBatchOperationsClient {
         ]) => {
           this._log.info('listJobs values %j', response);
           return [response, input, output];
-        },
+        }
       );
   }
 
@@ -1197,7 +1197,7 @@ export class StorageBatchOperationsClient {
    */
   listJobsStream(
     request?: protos.google.cloud.storagebatchoperations.v1.IListJobsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1216,7 +1216,7 @@ export class StorageBatchOperationsClient {
     return this.descriptors.page.listJobs.createStream(
       this.innerApiCalls.listJobs as GaxCall,
       request,
-      callSettings,
+      callSettings
     );
   }
 
@@ -1250,7 +1250,7 @@ export class StorageBatchOperationsClient {
    */
   listJobsAsync(
     request?: protos.google.cloud.storagebatchoperations.v1.IListJobsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.storagebatchoperations.v1.IJob> {
     request = request || {};
     options = options || {};
@@ -1269,7 +1269,7 @@ export class StorageBatchOperationsClient {
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
       request as {},
-      callSettings,
+      callSettings
     ) as AsyncIterable<protos.google.cloud.storagebatchoperations.v1.IJob>;
   }
   /**
@@ -1307,7 +1307,7 @@ export class StorageBatchOperationsClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
@@ -1345,7 +1345,7 @@ export class StorageBatchOperationsClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -1393,7 +1393,7 @@ export class StorageBatchOperationsClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >,
+    >
   ): Promise<[protos.google.longrunning.Operation]> {
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
@@ -1443,7 +1443,7 @@ export class StorageBatchOperationsClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions,
+    options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1498,7 +1498,7 @@ export class StorageBatchOperationsClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >,
+    >
   ): Promise<protos.google.protobuf.Empty> {
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
@@ -1555,7 +1555,7 @@ export class StorageBatchOperationsClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >,
+    >
   ): Promise<protos.google.protobuf.Empty> {
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
