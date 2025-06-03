@@ -28,7 +28,7 @@ describe('📦 pack-n-play test', () => {
       sample: {
         description: 'TypeScript user can use the type definitions',
         ts: readFileSync(
-          './system-test/fixtures/sample/src/index.ts'
+          './system-test/fixtures/sample/src/index.ts',
         ).toString(),
       },
     };
@@ -42,7 +42,7 @@ describe('📦 pack-n-play test', () => {
       sample: {
         description: 'JavaScript user can use the library',
         ts: readFileSync(
-          './system-test/fixtures/sample/src/index.js'
+          './system-test/fixtures/sample/src/index.js',
         ).toString(),
       },
     };

@@ -35,7 +35,7 @@ import {
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
 const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
+  require('../protos/protos.json'),
 ).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -52,7 +52,7 @@ function generateSampleMessage<T extends object>(instance: T) {
     instance.constructor as typeof protobuf.Message
   ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
+    filledObject,
   ) as T;
 }
 
@@ -64,7 +64,7 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
 
 function stubSimpleCallWithCallback<ResponseType>(
   response?: ResponseType,
-  error?: Error
+  error?: Error,
 ) {
   return error
     ? sinon.stub().callsArgWith(2, error)
@@ -74,7 +74,7 @@ function stubSimpleCallWithCallback<ResponseType>(
 function stubLongRunningCall<ResponseType>(
   response?: ResponseType,
   callError?: Error,
-  lroError?: Error
+  lroError?: Error,
 ) {
   const innerStub = lroError
     ? sinon.stub().rejects(lroError)
@@ -90,7 +90,7 @@ function stubLongRunningCall<ResponseType>(
 function stubLongRunningCallWithCallback<ResponseType>(
   response?: ResponseType,
   callError?: Error,
-  lroError?: Error
+  lroError?: Error,
 ) {
   const innerStub = lroError
     ? sinon.stub().rejects(lroError)
@@ -105,7 +105,7 @@ function stubLongRunningCallWithCallback<ResponseType>(
 
 function stubPageStreamingCall<ResponseType>(
   responses?: ResponseType[],
-  error?: Error
+  error?: Error,
 ) {
   const pagingStub = sinon.stub();
   if (responses) {
@@ -143,7 +143,7 @@ function stubPageStreamingCall<ResponseType>(
 
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
-  error?: Error
+  error?: Error,
 ) {
   let counter = 0;
   const asyncIterable = {
@@ -191,7 +191,7 @@ describe('v1.StorageBatchOperationsClient', () => {
             .servicePath;
         assert.strictEqual(
           servicePath,
-          'storagebatchoperations.googleapis.com'
+          'storagebatchoperations.googleapis.com',
         );
         assert(stub.called);
         stub.restore();
@@ -204,7 +204,7 @@ describe('v1.StorageBatchOperationsClient', () => {
             .apiEndpoint;
         assert.strictEqual(
           apiEndpoint,
-          'storagebatchoperations.googleapis.com'
+          'storagebatchoperations.googleapis.com',
         );
         assert(stub.called);
         stub.restore();
@@ -254,7 +254,7 @@ describe('v1.StorageBatchOperationsClient', () => {
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
             servicePath,
-            'storagebatchoperations.configured.example.com'
+            'storagebatchoperations.configured.example.com',
           );
           if (saved) {
             process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
@@ -388,22 +388,22 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.GetJobRequest()
+        new protos.google.cloud.storagebatchoperations.v1.GetJobRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.GetJobRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.Job()
+        new protos.google.cloud.storagebatchoperations.v1.Job(),
       );
       client.innerApiCalls.getJob = stubSimpleCall(expectedResponse);
       const [response] = await client.getJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (client.innerApiCalls.getJob as SinonStub).getCall(
-        0
+        0,
       ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
@@ -420,16 +420,16 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.GetJobRequest()
+        new protos.google.cloud.storagebatchoperations.v1.GetJobRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.GetJobRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.Job()
+        new protos.google.cloud.storagebatchoperations.v1.Job(),
       );
       client.innerApiCalls.getJob =
         stubSimpleCallWithCallback(expectedResponse);
@@ -438,20 +438,20 @@ describe('v1.StorageBatchOperationsClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.storagebatchoperations.v1.IJob | null
+            result?: protos.google.cloud.storagebatchoperations.v1.IJob | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (client.innerApiCalls.getJob as SinonStub).getCall(
-        0
+        0,
       ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
@@ -468,11 +468,11 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.GetJobRequest()
+        new protos.google.cloud.storagebatchoperations.v1.GetJobRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.GetJobRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
@@ -480,7 +480,7 @@ describe('v1.StorageBatchOperationsClient', () => {
       client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getJob(request), expectedError);
       const actualRequest = (client.innerApiCalls.getJob as SinonStub).getCall(
-        0
+        0,
       ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
@@ -497,11 +497,11 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.GetJobRequest()
+        new protos.google.cloud.storagebatchoperations.v1.GetJobRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.GetJobRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -521,16 +521,16 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.DeleteJobRequest()
+        new protos.google.cloud.storagebatchoperations.v1.DeleteJobRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.DeleteJobRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteJob = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteJob(request);
@@ -553,16 +553,16 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.DeleteJobRequest()
+        new protos.google.cloud.storagebatchoperations.v1.DeleteJobRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.DeleteJobRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteJob =
         stubSimpleCallWithCallback(expectedResponse);
@@ -571,14 +571,14 @@ describe('v1.StorageBatchOperationsClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
+            result?: protos.google.protobuf.IEmpty | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -601,11 +601,11 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.DeleteJobRequest()
+        new protos.google.cloud.storagebatchoperations.v1.DeleteJobRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.DeleteJobRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
@@ -630,11 +630,11 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.DeleteJobRequest()
+        new protos.google.cloud.storagebatchoperations.v1.DeleteJobRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.DeleteJobRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -654,16 +654,16 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.CancelJobRequest()
+        new protos.google.cloud.storagebatchoperations.v1.CancelJobRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.CancelJobRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.CancelJobResponse()
+        new protos.google.cloud.storagebatchoperations.v1.CancelJobResponse(),
       );
       client.innerApiCalls.cancelJob = stubSimpleCall(expectedResponse);
       const [response] = await client.cancelJob(request);
@@ -686,16 +686,16 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.CancelJobRequest()
+        new protos.google.cloud.storagebatchoperations.v1.CancelJobRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.CancelJobRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.CancelJobResponse()
+        new protos.google.cloud.storagebatchoperations.v1.CancelJobResponse(),
       );
       client.innerApiCalls.cancelJob =
         stubSimpleCallWithCallback(expectedResponse);
@@ -704,14 +704,14 @@ describe('v1.StorageBatchOperationsClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.storagebatchoperations.v1.ICancelJobResponse | null
+            result?: protos.google.cloud.storagebatchoperations.v1.ICancelJobResponse | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -734,11 +734,11 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.CancelJobRequest()
+        new protos.google.cloud.storagebatchoperations.v1.CancelJobRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.CancelJobRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
@@ -763,11 +763,11 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.CancelJobRequest()
+        new protos.google.cloud.storagebatchoperations.v1.CancelJobRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.CancelJobRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -787,16 +787,16 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.CreateJobRequest()
+        new protos.google.cloud.storagebatchoperations.v1.CreateJobRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.CreateJobRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.createJob = stubLongRunningCall(expectedResponse);
       const [operation] = await client.createJob(request);
@@ -820,16 +820,16 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.CreateJobRequest()
+        new protos.google.cloud.storagebatchoperations.v1.CreateJobRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.CreateJobRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.createJob =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -841,14 +841,14 @@ describe('v1.StorageBatchOperationsClient', () => {
             result?: LROperation<
               protos.google.cloud.storagebatchoperations.v1.IJob,
               protos.google.cloud.storagebatchoperations.v1.IOperationMetadata
-            > | null
+            > | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const operation = (await promise) as LROperation<
@@ -875,18 +875,18 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.CreateJobRequest()
+        new protos.google.cloud.storagebatchoperations.v1.CreateJobRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.CreateJobRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createJob = stubLongRunningCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.createJob(request), expectedError);
       const actualRequest = (
@@ -907,11 +907,11 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.CreateJobRequest()
+        new protos.google.cloud.storagebatchoperations.v1.CreateJobRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.CreateJobRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -919,7 +919,7 @@ describe('v1.StorageBatchOperationsClient', () => {
       client.innerApiCalls.createJob = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError
+        expectedError,
       );
       const [operation] = await client.createJob(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -941,7 +941,7 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -949,7 +949,7 @@ describe('v1.StorageBatchOperationsClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateJobProgress(
-        expectedResponse.name
+        expectedResponse.name,
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -967,7 +967,7 @@ describe('v1.StorageBatchOperationsClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.checkCreateJobProgress(''), expectedError);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -983,23 +983,23 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.ListJobsRequest()
+        new protos.google.cloud.storagebatchoperations.v1.ListJobsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.ListJobsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.storagebatchoperations.v1.Job()
+          new protos.google.cloud.storagebatchoperations.v1.Job(),
         ),
         generateSampleMessage(
-          new protos.google.cloud.storagebatchoperations.v1.Job()
+          new protos.google.cloud.storagebatchoperations.v1.Job(),
         ),
         generateSampleMessage(
-          new protos.google.cloud.storagebatchoperations.v1.Job()
+          new protos.google.cloud.storagebatchoperations.v1.Job(),
         ),
       ];
       client.innerApiCalls.listJobs = stubSimpleCall(expectedResponse);
@@ -1023,23 +1023,23 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.ListJobsRequest()
+        new protos.google.cloud.storagebatchoperations.v1.ListJobsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.ListJobsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.storagebatchoperations.v1.Job()
+          new protos.google.cloud.storagebatchoperations.v1.Job(),
         ),
         generateSampleMessage(
-          new protos.google.cloud.storagebatchoperations.v1.Job()
+          new protos.google.cloud.storagebatchoperations.v1.Job(),
         ),
         generateSampleMessage(
-          new protos.google.cloud.storagebatchoperations.v1.Job()
+          new protos.google.cloud.storagebatchoperations.v1.Job(),
         ),
       ];
       client.innerApiCalls.listJobs =
@@ -1049,14 +1049,16 @@ describe('v1.StorageBatchOperationsClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.storagebatchoperations.v1.IJob[] | null
+            result?:
+              | protos.google.cloud.storagebatchoperations.v1.IJob[]
+              | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1079,11 +1081,11 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.ListJobsRequest()
+        new protos.google.cloud.storagebatchoperations.v1.ListJobsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.ListJobsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -1108,23 +1110,23 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.ListJobsRequest()
+        new protos.google.cloud.storagebatchoperations.v1.ListJobsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.ListJobsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.storagebatchoperations.v1.Job()
+          new protos.google.cloud.storagebatchoperations.v1.Job(),
         ),
         generateSampleMessage(
-          new protos.google.cloud.storagebatchoperations.v1.Job()
+          new protos.google.cloud.storagebatchoperations.v1.Job(),
         ),
         generateSampleMessage(
-          new protos.google.cloud.storagebatchoperations.v1.Job()
+          new protos.google.cloud.storagebatchoperations.v1.Job(),
         ),
       ];
       client.descriptors.page.listJobs.createStream =
@@ -1137,7 +1139,7 @@ describe('v1.StorageBatchOperationsClient', () => {
           'data',
           (response: protos.google.cloud.storagebatchoperations.v1.Job) => {
             responses.push(response);
-          }
+          },
         );
         stream.on('end', () => {
           resolve(responses);
@@ -1151,14 +1153,14 @@ describe('v1.StorageBatchOperationsClient', () => {
       assert(
         (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listJobs, request)
+          .calledWith(client.innerApiCalls.listJobs, request),
       );
       assert(
         (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -1170,18 +1172,18 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.ListJobsRequest()
+        new protos.google.cloud.storagebatchoperations.v1.ListJobsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.ListJobsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.createStream = stubPageStreamingCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const stream = client.listJobsStream(request);
       const promise = new Promise((resolve, reject) => {
@@ -1191,7 +1193,7 @@ describe('v1.StorageBatchOperationsClient', () => {
           'data',
           (response: protos.google.cloud.storagebatchoperations.v1.Job) => {
             responses.push(response);
-          }
+          },
         );
         stream.on('end', () => {
           resolve(responses);
@@ -1204,14 +1206,14 @@ describe('v1.StorageBatchOperationsClient', () => {
       assert(
         (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listJobs, request)
+          .calledWith(client.innerApiCalls.listJobs, request),
       );
       assert(
         (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -1223,23 +1225,23 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.ListJobsRequest()
+        new protos.google.cloud.storagebatchoperations.v1.ListJobsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.ListJobsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.storagebatchoperations.v1.Job()
+          new protos.google.cloud.storagebatchoperations.v1.Job(),
         ),
         generateSampleMessage(
-          new protos.google.cloud.storagebatchoperations.v1.Job()
+          new protos.google.cloud.storagebatchoperations.v1.Job(),
         ),
         generateSampleMessage(
-          new protos.google.cloud.storagebatchoperations.v1.Job()
+          new protos.google.cloud.storagebatchoperations.v1.Job(),
         ),
       ];
       client.descriptors.page.listJobs.asyncIterate =
@@ -1254,14 +1256,14 @@ describe('v1.StorageBatchOperationsClient', () => {
       assert.deepStrictEqual(
         (client.descriptors.page.listJobs.asyncIterate as SinonStub).getCall(0)
           .args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listJobs.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -1273,18 +1275,18 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.storagebatchoperations.v1.ListJobsRequest()
+        new protos.google.cloud.storagebatchoperations.v1.ListJobsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.storagebatchoperations.v1.ListJobsRequest',
-        ['parent']
+        ['parent'],
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const iterable = client.listJobsAsync(request);
       await assert.rejects(async () => {
@@ -1297,14 +1299,14 @@ describe('v1.StorageBatchOperationsClient', () => {
       assert.deepStrictEqual(
         (client.descriptors.page.listJobs.asyncIterate as SinonStub).getCall(0)
           .args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listJobs.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
   });
@@ -1317,7 +1319,7 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
+        new LocationProtos.google.cloud.location.GetLocationRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1329,7 +1331,7 @@ describe('v1.StorageBatchOperationsClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
+        new LocationProtos.google.cloud.location.Location(),
       );
       client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
       const response = await client.getLocation(request, expectedOptions);
@@ -1337,7 +1339,7 @@ describe('v1.StorageBatchOperationsClient', () => {
       assert(
         (client.locationsClient.getLocation as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
     it('invokes getLocation without error using callback', async () => {
@@ -1348,7 +1350,7 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
+        new LocationProtos.google.cloud.location.GetLocationRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1360,25 +1362,25 @@ describe('v1.StorageBatchOperationsClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
+        new LocationProtos.google.cloud.location.Location(),
       );
       client.locationsClient.getLocation = sinon
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getLocation(
+        void client.getLocation(
           request,
           expectedOptions,
           (
             err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
+            result?: LocationProtos.google.cloud.location.ILocation | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1393,7 +1395,7 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
+        new LocationProtos.google.cloud.location.GetLocationRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1407,16 +1409,16 @@ describe('v1.StorageBatchOperationsClient', () => {
       const expectedError = new Error('expected');
       client.locationsClient.getLocation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(
         client.getLocation(request, expectedOptions),
-        expectedError
+        expectedError,
       );
       assert(
         (client.locationsClient.getLocation as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
   });
@@ -1429,19 +1431,19 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
+        new LocationProtos.google.cloud.location.ListLocationsRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
       const expectedResponse = [
         generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
+          new LocationProtos.google.cloud.location.Location(),
         ),
         generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
+          new LocationProtos.google.cloud.location.Location(),
         ),
         generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
+          new LocationProtos.google.cloud.location.Location(),
         ),
       ];
       client.locationsClient.descriptors.page.listLocations.asyncIterate =
@@ -1457,7 +1459,7 @@ describe('v1.StorageBatchOperationsClient', () => {
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
       assert(
         (
@@ -1466,8 +1468,8 @@ describe('v1.StorageBatchOperationsClient', () => {
         )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+            expectedHeaderRequestParams,
+          ),
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -1478,7 +1480,7 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
+        new LocationProtos.google.cloud.location.ListLocationsRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1497,7 +1499,7 @@ describe('v1.StorageBatchOperationsClient', () => {
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
       assert(
         (
@@ -1506,8 +1508,8 @@ describe('v1.StorageBatchOperationsClient', () => {
         )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1520,10 +1522,10 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
+        new operationsProtos.google.longrunning.GetOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new operationsProtos.google.longrunning.Operation(),
       );
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const response = await client.getOperation(request);
@@ -1531,7 +1533,7 @@ describe('v1.StorageBatchOperationsClient', () => {
       assert(
         (client.operationsClient.getOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
     it('invokes getOperation without error using callback', async () => {
@@ -1541,10 +1543,10 @@ describe('v1.StorageBatchOperationsClient', () => {
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
+        new operationsProtos.google.longrunning.GetOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new operationsProtos.google.longrunning.Operation(),
       );
       client.operationsClient.getOperation = sinon
         .stub()
@@ -1556,14 +1558,14 @@ describe('v1.StorageBatchOperationsClient', () => {
             undefined,
             (
               err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
+              result?: operationsProtos.google.longrunning.Operation | null,
             ) => {
               if (err) {
                 reject(err);
               } else {
                 resolve(result);
               }
-            }
+            },
           )
           .catch(err => {
             throw err;
@@ -1580,12 +1582,12 @@ describe('v1.StorageBatchOperationsClient', () => {
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
+        new operationsProtos.google.longrunning.GetOperationRequest(),
       );
       const expectedError = new Error('expected');
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(async () => {
         await client.getOperation(request);
@@ -1593,7 +1595,7 @@ describe('v1.StorageBatchOperationsClient', () => {
       assert(
         (client.operationsClient.getOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
   });
@@ -1606,10 +1608,10 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.operationsClient.cancelOperation =
         stubSimpleCall(expectedResponse);
@@ -1618,7 +1620,7 @@ describe('v1.StorageBatchOperationsClient', () => {
       assert(
         (client.operationsClient.cancelOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
@@ -1628,10 +1630,10 @@ describe('v1.StorageBatchOperationsClient', () => {
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.operationsClient.cancelOperation = sinon
         .stub()
@@ -1643,14 +1645,14 @@ describe('v1.StorageBatchOperationsClient', () => {
             undefined,
             (
               err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
+              result?: protos.google.protobuf.Empty | null,
             ) => {
               if (err) {
                 reject(err);
               } else {
                 resolve(result);
               }
-            }
+            },
           )
           .catch(err => {
             throw err;
@@ -1667,12 +1669,12 @@ describe('v1.StorageBatchOperationsClient', () => {
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
       );
       const expectedError = new Error('expected');
       client.operationsClient.cancelOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(async () => {
         await client.cancelOperation(request);
@@ -1680,7 +1682,7 @@ describe('v1.StorageBatchOperationsClient', () => {
       assert(
         (client.operationsClient.cancelOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
   });
@@ -1693,10 +1695,10 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.operationsClient.deleteOperation =
         stubSimpleCall(expectedResponse);
@@ -1705,7 +1707,7 @@ describe('v1.StorageBatchOperationsClient', () => {
       assert(
         (client.operationsClient.deleteOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
@@ -1715,10 +1717,10 @@ describe('v1.StorageBatchOperationsClient', () => {
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.operationsClient.deleteOperation = sinon
         .stub()
@@ -1730,14 +1732,14 @@ describe('v1.StorageBatchOperationsClient', () => {
             undefined,
             (
               err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
+              result?: protos.google.protobuf.Empty | null,
             ) => {
               if (err) {
                 reject(err);
               } else {
                 resolve(result);
               }
-            }
+            },
           )
           .catch(err => {
             throw err;
@@ -1754,12 +1756,12 @@ describe('v1.StorageBatchOperationsClient', () => {
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
       );
       const expectedError = new Error('expected');
       client.operationsClient.deleteOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(async () => {
         await client.deleteOperation(request);
@@ -1767,7 +1769,7 @@ describe('v1.StorageBatchOperationsClient', () => {
       assert(
         (client.operationsClient.deleteOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
   });
@@ -1779,17 +1781,17 @@ describe('v1.StorageBatchOperationsClient', () => {
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
+        new operationsProtos.google.longrunning.ListOperationsRequest(),
       );
       const expectedResponse = [
         generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
         ),
         generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
         ),
         generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
         ),
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
@@ -1805,7 +1807,7 @@ describe('v1.StorageBatchOperationsClient', () => {
           client.operationsClient.descriptor.listOperations
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
     });
     it('uses async iteration with listOperations with error', async () => {
@@ -1816,7 +1818,7 @@ describe('v1.StorageBatchOperationsClient', () => {
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
+        new operationsProtos.google.longrunning.ListOperationsRequest(),
       );
       const expectedError = new Error('expected');
       client.operationsClient.descriptor.listOperations.asyncIterate =
@@ -1833,7 +1835,7 @@ describe('v1.StorageBatchOperationsClient', () => {
           client.operationsClient.descriptor.listOperations
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
     });
   });
@@ -1863,13 +1865,13 @@ describe('v1.StorageBatchOperationsClient', () => {
         const result = client.jobPath(
           'projectValue',
           'locationValue',
-          'jobValue'
+          'jobValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.jobPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -1879,7 +1881,7 @@ describe('v1.StorageBatchOperationsClient', () => {
         assert(
           (client.pathTemplates.jobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -1889,7 +1891,7 @@ describe('v1.StorageBatchOperationsClient', () => {
         assert(
           (client.pathTemplates.jobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -1899,7 +1901,7 @@ describe('v1.StorageBatchOperationsClient', () => {
         assert(
           (client.pathTemplates.jobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -1929,7 +1931,7 @@ describe('v1.StorageBatchOperationsClient', () => {
         assert(
           (client.pathTemplates.locationPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -1939,7 +1941,7 @@ describe('v1.StorageBatchOperationsClient', () => {
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -1949,7 +1951,7 @@ describe('v1.StorageBatchOperationsClient', () => {
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -1978,7 +1980,7 @@ describe('v1.StorageBatchOperationsClient', () => {
         assert(
           (client.pathTemplates.projectPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -1988,7 +1990,7 @@ describe('v1.StorageBatchOperationsClient', () => {
         assert(
           (client.pathTemplates.projectPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
