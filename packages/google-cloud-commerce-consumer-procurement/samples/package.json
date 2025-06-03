@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/procurement": "^0.6.1"
+    "@google-cloud/procurement": "^0.6.2"
   },
   "devDependencies": {
     "c8": "^9.0.0",
