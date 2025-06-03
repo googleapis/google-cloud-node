@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {ModelArmorClient} = require('@google-cloud/modelarmor').v1;
+const { ModelArmorClient } = require('@google-cloud/modelarmor').v1beta;
 const modelarmorClient = new ModelArmorClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
@@ -33,10 +33,7 @@ describe('Quickstart', () => {
   });
 
   it('should run quickstart', async () => {
-    const output = execSync(
-      `node ./quickstart.js projects/${projectId}/locations/us-central1 modelarmor.us-central1.rep.googleapis.com`,
-      {cwd}
-    );
+    const output = execSync(`node ./quickstart.js projects/${projectId}/locations/us-central1`, {cwd});
     assert(output !== null);
   });
 });
