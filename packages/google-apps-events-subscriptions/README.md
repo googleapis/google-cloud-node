@@ -103,7 +103,8 @@ npm install @google-cloud/subscriptions
 // const filter = 'abc123'
 
 // Imports the Subscriptions library
-const {SubscriptionsServiceClient} = require('@google-cloud/subscriptions').v1;
+const {SubscriptionsServiceClient} =
+  require('@google-cloud/subscriptions').v1;
 
 // Instantiates a client
 const subscriptionsClient = new SubscriptionsServiceClient();
@@ -117,7 +118,7 @@ async function callListSubscriptions() {
   // Run request
   const iterable = subscriptionsClient.listSubscriptionsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
