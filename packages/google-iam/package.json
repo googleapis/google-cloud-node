@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/iam",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Identity and Access Management client for Node.js",
   "repository": {
     "type": "git",
