@@ -254,9 +254,14 @@ describe('v1.EkmServiceClient', () => {
         throw err;
       });
       assert(client.ekmServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -265,9 +270,14 @@ describe('v1.EkmServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.ekmServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -430,7 +440,9 @@ describe('v1.EkmServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getEkmConnection(request), expectedError);
     });
   });
@@ -561,7 +573,9 @@ describe('v1.EkmServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createEkmConnection(request), expectedError);
     });
   });
@@ -696,7 +710,9 @@ describe('v1.EkmServiceClient', () => {
       );
       request.ekmConnection.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateEkmConnection(request), expectedError);
     });
   });
@@ -826,7 +842,9 @@ describe('v1.EkmServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getEkmConfig(request), expectedError);
     });
   });
@@ -960,7 +978,9 @@ describe('v1.EkmServiceClient', () => {
       );
       request.ekmConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateEkmConfig(request), expectedError);
     });
   });
@@ -1091,7 +1111,9 @@ describe('v1.EkmServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.verifyConnectivity(request), expectedError);
     });
   });
@@ -1453,20 +1475,24 @@ describe('v1.EkmServiceClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getIamPolicy(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.Policy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client
+          .getIamPolicy(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.Policy | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -1559,20 +1585,24 @@ describe('v1.EkmServiceClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.setIamPolicy(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.Policy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client
+          .setIamPolicy(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.Policy | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -1668,20 +1698,24 @@ describe('v1.EkmServiceClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.testIamPermissions(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client
+          .testIamPermissions(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);

@@ -16,10 +16,16 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AlloyDBAdminClient} from '@google-cloud/alloydb';
+import {
+  AlloyDBAdminClient,
+  AlloyDBCSQLAdminClient,
+} from '@google-cloud/alloydb';
 
 // check that the client class type name can be used
 function doStuffWithAlloyDBAdminClient(client: AlloyDBAdminClient) {
+  client.close();
+}
+function doStuffWithAlloyDBCSQLAdminClient(client: AlloyDBCSQLAdminClient) {
   client.close();
 }
 
@@ -27,6 +33,9 @@ function main() {
   // check that the client instance can be created
   const alloyDBAdminClient = new AlloyDBAdminClient();
   doStuffWithAlloyDBAdminClient(alloyDBAdminClient);
+  // check that the client instance can be created
+  const alloyDBCSQLAdminClient = new AlloyDBCSQLAdminClient();
+  doStuffWithAlloyDBCSQLAdminClient(alloyDBCSQLAdminClient);
 }
 
 main();

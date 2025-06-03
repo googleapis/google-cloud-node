@@ -25,5166 +25,4067 @@ import * as edgecontainerModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.EdgeContainerClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'edgecontainer.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          edgecontainerModule.v1.EdgeContainerClient.servicePath;
-        assert.strictEqual(servicePath, 'edgecontainer.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          edgecontainerModule.v1.EdgeContainerClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'edgecontainer.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'edgecontainer.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'edgecontainer.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new edgecontainerModule.v1.EdgeContainerClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'edgecontainer.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'edgecontainer.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new edgecontainerModule.v1.EdgeContainerClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'edgecontainer.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new edgecontainerModule.v1.EdgeContainerClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = edgecontainerModule.v1.EdgeContainerClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.edgeContainerStub, undefined);
-      await client.initialize();
-      assert(client.edgeContainerStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.edgeContainerStub);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.edgeContainerStub, undefined);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getCluster', () => {
-    it('invokes getCluster without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.Cluster()
-      );
-      client.innerApiCalls.getCluster = stubSimpleCall(expectedResponse);
-      const [response] = await client.getCluster(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCluster without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.Cluster()
-      );
-      client.innerApiCalls.getCluster =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.edgecontainer.v1.ICluster | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCluster with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getCluster = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCluster with closed client', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getCluster(request), expectedError);
-    });
-  });
-
-  describe('generateAccessToken', () => {
-    it('invokes generateAccessToken without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest',
-        ['cluster']
-      );
-      request.cluster = defaultValue1;
-      const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenResponse()
-      );
-      client.innerApiCalls.generateAccessToken =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.generateAccessToken(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.generateAccessToken as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateAccessToken as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateAccessToken without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest',
-        ['cluster']
-      );
-      request.cluster = defaultValue1;
-      const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenResponse()
-      );
-      client.innerApiCalls.generateAccessToken =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.generateAccessToken(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.generateAccessToken as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateAccessToken as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateAccessToken with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest',
-        ['cluster']
-      );
-      request.cluster = defaultValue1;
-      const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.generateAccessToken = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.generateAccessToken(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.generateAccessToken as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateAccessToken as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateAccessToken with closed client', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest',
-        ['cluster']
-      );
-      request.cluster = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.generateAccessToken(request), expectedError);
-    });
-  });
-
-  describe('generateOfflineCredential', () => {
-    it('invokes generateOfflineCredential without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest',
-        ['cluster']
-      );
-      request.cluster = defaultValue1;
-      const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse()
-      );
-      client.innerApiCalls.generateOfflineCredential =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.generateOfflineCredential(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.generateOfflineCredential as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateOfflineCredential as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateOfflineCredential without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest',
-        ['cluster']
-      );
-      request.cluster = defaultValue1;
-      const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse()
-      );
-      client.innerApiCalls.generateOfflineCredential =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.generateOfflineCredential(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.generateOfflineCredential as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateOfflineCredential as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateOfflineCredential with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest',
-        ['cluster']
-      );
-      request.cluster = defaultValue1;
-      const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.generateOfflineCredential = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.generateOfflineCredential(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.generateOfflineCredential as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateOfflineCredential as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateOfflineCredential with closed client', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest',
-        ['cluster']
-      );
-      request.cluster = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.generateOfflineCredential(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getNodePool', () => {
-    it('invokes getNodePool without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.NodePool()
-      );
-      client.innerApiCalls.getNodePool = stubSimpleCall(expectedResponse);
-      const [response] = await client.getNodePool(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNodePool without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.NodePool()
-      );
-      client.innerApiCalls.getNodePool =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getNodePool(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.edgecontainer.v1.INodePool | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNodePool with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getNodePool = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getNodePool(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNodePool with closed client', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getNodePool(request), expectedError);
-    });
-  });
-
-  describe('getMachine', () => {
-    it('invokes getMachine without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetMachineRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetMachineRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.Machine()
-      );
-      client.innerApiCalls.getMachine = stubSimpleCall(expectedResponse);
-      const [response] = await client.getMachine(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getMachine as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMachine as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMachine without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetMachineRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetMachineRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.Machine()
-      );
-      client.innerApiCalls.getMachine =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getMachine(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.edgecontainer.v1.IMachine | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getMachine as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMachine as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMachine with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetMachineRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetMachineRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getMachine = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getMachine(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getMachine as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMachine as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMachine with closed client', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetMachineRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetMachineRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getMachine(request), expectedError);
-    });
-  });
-
-  describe('getVpnConnection', () => {
-    it('invokes getVpnConnection without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetVpnConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetVpnConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.VpnConnection()
-      );
-      client.innerApiCalls.getVpnConnection = stubSimpleCall(expectedResponse);
-      const [response] = await client.getVpnConnection(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVpnConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVpnConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVpnConnection without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetVpnConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetVpnConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.VpnConnection()
-      );
-      client.innerApiCalls.getVpnConnection =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getVpnConnection(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.edgecontainer.v1.IVpnConnection | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVpnConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVpnConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVpnConnection with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetVpnConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetVpnConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getVpnConnection = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getVpnConnection(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getVpnConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVpnConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVpnConnection with closed client', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetVpnConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetVpnConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getVpnConnection(request), expectedError);
-    });
-  });
-
-  describe('getServerConfig', () => {
-    it('invokes getServerConfig without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetServerConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetServerConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ServerConfig()
-      );
-      client.innerApiCalls.getServerConfig = stubSimpleCall(expectedResponse);
-      const [response] = await client.getServerConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getServerConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getServerConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getServerConfig without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetServerConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetServerConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ServerConfig()
-      );
-      client.innerApiCalls.getServerConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getServerConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.edgecontainer.v1.IServerConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getServerConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getServerConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getServerConfig with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetServerConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetServerConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getServerConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getServerConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getServerConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getServerConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getServerConfig with closed client', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.GetServerConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.GetServerConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getServerConfig(request), expectedError);
-    });
-  });
-
-  describe('createCluster', () => {
-    it('invokes createCluster without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.CreateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.CreateClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createCluster =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createCluster(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCluster without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.CreateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.CreateClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createCluster =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.edgecontainer.v1.ICluster,
-              protos.google.cloud.edgecontainer.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.edgecontainer.v1.ICluster,
-        protos.google.cloud.edgecontainer.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCluster with call error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.CreateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.CreateClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createCluster = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCluster with LRO error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.CreateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.CreateClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createCluster = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createCluster(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateClusterProgress without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateClusterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateClusterProgress with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateClusterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateCluster', () => {
-    it('invokes updateCluster without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.UpdateClusterRequest()
-      );
-      request.cluster ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.UpdateClusterRequest',
-        ['cluster', 'name']
-      );
-      request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateCluster =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateCluster(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCluster without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.UpdateClusterRequest()
-      );
-      request.cluster ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.UpdateClusterRequest',
-        ['cluster', 'name']
-      );
-      request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateCluster =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.edgecontainer.v1.ICluster,
-              protos.google.cloud.edgecontainer.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.edgecontainer.v1.ICluster,
-        protos.google.cloud.edgecontainer.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCluster with call error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.UpdateClusterRequest()
-      );
-      request.cluster ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.UpdateClusterRequest',
-        ['cluster', 'name']
-      );
-      request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateCluster = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCluster with LRO error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.UpdateClusterRequest()
-      );
-      request.cluster ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.UpdateClusterRequest',
-        ['cluster', 'name']
-      );
-      request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateCluster = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateCluster(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateClusterProgress without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateClusterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateClusterProgress with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateClusterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('upgradeCluster', () => {
-    it('invokes upgradeCluster without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.UpgradeClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.UpgradeClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.upgradeCluster =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.upgradeCluster(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.upgradeCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.upgradeCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes upgradeCluster without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.UpgradeClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.UpgradeClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.upgradeCluster =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.upgradeCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.edgecontainer.v1.ICluster,
-              protos.google.cloud.edgecontainer.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.edgecontainer.v1.ICluster,
-        protos.google.cloud.edgecontainer.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.upgradeCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.upgradeCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes upgradeCluster with call error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.UpgradeClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.UpgradeClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.upgradeCluster = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.upgradeCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.upgradeCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.upgradeCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes upgradeCluster with LRO error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.UpgradeClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.UpgradeClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.upgradeCluster = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.upgradeCluster(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.upgradeCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.upgradeCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpgradeClusterProgress without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpgradeClusterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpgradeClusterProgress with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpgradeClusterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteCluster', () => {
-    it('invokes deleteCluster without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.DeleteClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.DeleteClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteCluster =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteCluster(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCluster without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.DeleteClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.DeleteClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteCluster =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.edgecontainer.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgecontainer.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCluster with call error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.DeleteClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.DeleteClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteCluster = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCluster with LRO error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.DeleteClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.DeleteClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteCluster = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteCluster(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteClusterProgress without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteClusterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteClusterProgress with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteClusterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createNodePool', () => {
-    it('invokes createNodePool without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.CreateNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.CreateNodePoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createNodePool =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createNodePool(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createNodePool without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.CreateNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.CreateNodePoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createNodePool =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createNodePool(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.edgecontainer.v1.INodePool,
-              protos.google.cloud.edgecontainer.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.edgecontainer.v1.INodePool,
-        protos.google.cloud.edgecontainer.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createNodePool with call error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.CreateNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.CreateNodePoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createNodePool = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createNodePool(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createNodePool with LRO error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.CreateNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.CreateNodePoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createNodePool = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createNodePool(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateNodePoolProgress without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateNodePoolProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateNodePoolProgress with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateNodePoolProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateNodePool', () => {
-    it('invokes updateNodePool without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.UpdateNodePoolRequest()
-      );
-      request.nodePool ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.UpdateNodePoolRequest',
-        ['nodePool', 'name']
-      );
-      request.nodePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `node_pool.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateNodePool =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateNodePool(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNodePool without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.UpdateNodePoolRequest()
-      );
-      request.nodePool ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.UpdateNodePoolRequest',
-        ['nodePool', 'name']
-      );
-      request.nodePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `node_pool.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateNodePool =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateNodePool(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.edgecontainer.v1.INodePool,
-              protos.google.cloud.edgecontainer.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.edgecontainer.v1.INodePool,
-        protos.google.cloud.edgecontainer.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNodePool with call error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.UpdateNodePoolRequest()
-      );
-      request.nodePool ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.UpdateNodePoolRequest',
-        ['nodePool', 'name']
-      );
-      request.nodePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `node_pool.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateNodePool = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateNodePool(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNodePool with LRO error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.UpdateNodePoolRequest()
-      );
-      request.nodePool ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.UpdateNodePoolRequest',
-        ['nodePool', 'name']
-      );
-      request.nodePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `node_pool.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateNodePool = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateNodePool(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateNodePoolProgress without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateNodePoolProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateNodePoolProgress with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateNodePoolProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteNodePool', () => {
-    it('invokes deleteNodePool without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.DeleteNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.DeleteNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteNodePool =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteNodePool(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteNodePool without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.DeleteNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.DeleteNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteNodePool =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteNodePool(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.edgecontainer.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgecontainer.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteNodePool with call error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.DeleteNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.DeleteNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteNodePool = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteNodePool(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteNodePool with LRO error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.DeleteNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.DeleteNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteNodePool = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteNodePool(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteNodePoolProgress without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteNodePoolProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteNodePoolProgress with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteNodePoolProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createVpnConnection', () => {
-    it('invokes createVpnConnection without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createVpnConnection =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createVpnConnection(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createVpnConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createVpnConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createVpnConnection without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createVpnConnection =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createVpnConnection(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.edgecontainer.v1.IVpnConnection,
-              protos.google.cloud.edgecontainer.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.edgecontainer.v1.IVpnConnection,
-        protos.google.cloud.edgecontainer.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createVpnConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createVpnConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createVpnConnection with call error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createVpnConnection = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createVpnConnection(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createVpnConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createVpnConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createVpnConnection with LRO error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createVpnConnection = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createVpnConnection(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createVpnConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createVpnConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateVpnConnectionProgress without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateVpnConnectionProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateVpnConnectionProgress with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateVpnConnectionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteVpnConnection', () => {
-    it('invokes deleteVpnConnection without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteVpnConnection =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteVpnConnection(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteVpnConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteVpnConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteVpnConnection without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteVpnConnection =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteVpnConnection(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.edgecontainer.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgecontainer.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteVpnConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteVpnConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteVpnConnection with call error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteVpnConnection = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteVpnConnection(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteVpnConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteVpnConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteVpnConnection with LRO error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteVpnConnection = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteVpnConnection(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteVpnConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteVpnConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteVpnConnectionProgress without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteVpnConnectionProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteVpnConnectionProgress with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteVpnConnectionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listClusters', () => {
-    it('invokes listClusters without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Cluster()
-        ),
-      ];
-      client.innerApiCalls.listClusters = stubSimpleCall(expectedResponse);
-      const [response] = await client.listClusters(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listClusters without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Cluster()
-        ),
-      ];
-      client.innerApiCalls.listClusters =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listClusters(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.edgecontainer.v1.ICluster[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listClusters with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listClusters = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listClusters(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listClustersStream without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Cluster()
-        ),
-      ];
-      client.descriptors.page.listClusters.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listClustersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.edgecontainer.v1.Cluster[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.edgecontainer.v1.Cluster) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listClusters.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listClusters, request)
-      );
-      assert(
-        (client.descriptors.page.listClusters.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listClustersStream with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listClusters.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listClustersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.edgecontainer.v1.Cluster[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.edgecontainer.v1.Cluster) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listClusters.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listClusters, request)
-      );
-      assert(
-        (client.descriptors.page.listClusters.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listClusters without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Cluster()
-        ),
-      ];
-      client.descriptors.page.listClusters.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.edgecontainer.v1.ICluster[] = [];
-      const iterable = client.listClustersAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listClusters.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listClusters.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listClusters with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listClusters.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listClustersAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.edgecontainer.v1.ICluster[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = edgecontainerModule.v1.EdgeContainerClient.servicePath;
+                assert.strictEqual(servicePath, 'edgecontainer.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = edgecontainerModule.v1.EdgeContainerClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'edgecontainer.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listClusters.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listClusters.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listNodePools', () => {
-    it('invokes listNodePools without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.NodePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.NodePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.NodePool()
-        ),
-      ];
-      client.innerApiCalls.listNodePools = stubSimpleCall(expectedResponse);
-      const [response] = await client.listNodePools(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listNodePools as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNodePools as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNodePools without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.NodePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.NodePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.NodePool()
-        ),
-      ];
-      client.innerApiCalls.listNodePools =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listNodePools(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.edgecontainer.v1.INodePool[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listNodePools as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNodePools as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNodePools with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listNodePools = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listNodePools(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listNodePools as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNodePools as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNodePoolsStream without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.NodePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.NodePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.NodePool()
-        ),
-      ];
-      client.descriptors.page.listNodePools.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listNodePoolsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.edgecontainer.v1.NodePool[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.edgecontainer.v1.NodePool) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'edgecontainer.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listNodePools.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listNodePools, request)
-      );
-      assert(
-        (client.descriptors.page.listNodePools.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listNodePoolsStream with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listNodePools.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listNodePoolsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.edgecontainer.v1.NodePool[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.edgecontainer.v1.NodePool) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'edgecontainer.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listNodePools.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listNodePools, request)
-      );
-      assert(
-        (client.descriptors.page.listNodePools.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listNodePools without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.NodePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.NodePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.NodePool()
-        ),
-      ];
-      client.descriptors.page.listNodePools.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.edgecontainer.v1.INodePool[] = [];
-      const iterable = client.listNodePoolsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listNodePools.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listNodePools.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new edgecontainerModule.v1.EdgeContainerClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'edgecontainer.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listNodePools with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listNodePools.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listNodePoolsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.edgecontainer.v1.INodePool[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new edgecontainerModule.v1.EdgeContainerClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'edgecontainer.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listNodePools.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listNodePools.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new edgecontainerModule.v1.EdgeContainerClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listMachines', () => {
-    it('invokes listMachines without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListMachinesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Machine()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Machine()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Machine()
-        ),
-      ];
-      client.innerApiCalls.listMachines = stubSimpleCall(expectedResponse);
-      const [response] = await client.listMachines(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listMachines as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMachines as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = edgecontainerModule.v1.EdgeContainerClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.edgeContainerStub, undefined);
+            await client.initialize();
+            assert(client.edgeContainerStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.edgeContainerStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.edgeContainerStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listMachines without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListMachinesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Machine()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Machine()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Machine()
-        ),
-      ];
-      client.innerApiCalls.listMachines =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listMachines(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.edgecontainer.v1.IMachine[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getCluster', () => {
+        it('invokes getCluster without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.Cluster()
+            );
+            client.innerApiCalls.getCluster = stubSimpleCall(expectedResponse);
+            const [response] = await client.getCluster(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCluster without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.Cluster()
+            );
+            client.innerApiCalls.getCluster = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getCluster(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.edgecontainer.v1.ICluster|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCluster with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getCluster = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCluster with closed client', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getCluster(request), expectedError);
+        });
+    });
+
+    describe('generateAccessToken', () => {
+        it('invokes generateAccessToken without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest', ['cluster']);
+            request.cluster = defaultValue1;
+            const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenResponse()
+            );
+            client.innerApiCalls.generateAccessToken = stubSimpleCall(expectedResponse);
+            const [response] = await client.generateAccessToken(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateAccessToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateAccessToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateAccessToken without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest', ['cluster']);
+            request.cluster = defaultValue1;
+            const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenResponse()
+            );
+            client.innerApiCalls.generateAccessToken = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.generateAccessToken(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateAccessToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateAccessToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateAccessToken with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest', ['cluster']);
+            request.cluster = defaultValue1;
+            const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.generateAccessToken = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.generateAccessToken(request), expectedError);
+            const actualRequest = (client.innerApiCalls.generateAccessToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateAccessToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateAccessToken with closed client', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest', ['cluster']);
+            request.cluster = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.generateAccessToken(request), expectedError);
+        });
+    });
+
+    describe('generateOfflineCredential', () => {
+        it('invokes generateOfflineCredential without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest', ['cluster']);
+            request.cluster = defaultValue1;
+            const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse()
+            );
+            client.innerApiCalls.generateOfflineCredential = stubSimpleCall(expectedResponse);
+            const [response] = await client.generateOfflineCredential(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateOfflineCredential as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateOfflineCredential as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateOfflineCredential without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest', ['cluster']);
+            request.cluster = defaultValue1;
+            const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse()
+            );
+            client.innerApiCalls.generateOfflineCredential = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.generateOfflineCredential(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateOfflineCredential as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateOfflineCredential as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateOfflineCredential with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest', ['cluster']);
+            request.cluster = defaultValue1;
+            const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.generateOfflineCredential = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.generateOfflineCredential(request), expectedError);
+            const actualRequest = (client.innerApiCalls.generateOfflineCredential as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateOfflineCredential as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateOfflineCredential with closed client', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest', ['cluster']);
+            request.cluster = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.generateOfflineCredential(request), expectedError);
+        });
+    });
+
+    describe('getNodePool', () => {
+        it('invokes getNodePool without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.NodePool()
+            );
+            client.innerApiCalls.getNodePool = stubSimpleCall(expectedResponse);
+            const [response] = await client.getNodePool(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNodePool without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.NodePool()
+            );
+            client.innerApiCalls.getNodePool = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getNodePool(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.edgecontainer.v1.INodePool|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNodePool with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getNodePool = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getNodePool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNodePool with closed client', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getNodePool(request), expectedError);
+        });
+    });
+
+    describe('getMachine', () => {
+        it('invokes getMachine without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetMachineRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetMachineRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.Machine()
+            );
+            client.innerApiCalls.getMachine = stubSimpleCall(expectedResponse);
+            const [response] = await client.getMachine(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMachine as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMachine as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMachine without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetMachineRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetMachineRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.Machine()
+            );
+            client.innerApiCalls.getMachine = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getMachine(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.edgecontainer.v1.IMachine|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMachine as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMachine as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMachine with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetMachineRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetMachineRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getMachine = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getMachine(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getMachine as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMachine as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMachine with closed client', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetMachineRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetMachineRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getMachine(request), expectedError);
+        });
+    });
+
+    describe('getVpnConnection', () => {
+        it('invokes getVpnConnection without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetVpnConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetVpnConnectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.VpnConnection()
+            );
+            client.innerApiCalls.getVpnConnection = stubSimpleCall(expectedResponse);
+            const [response] = await client.getVpnConnection(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVpnConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVpnConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVpnConnection without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetVpnConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetVpnConnectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.VpnConnection()
+            );
+            client.innerApiCalls.getVpnConnection = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getVpnConnection(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.edgecontainer.v1.IVpnConnection|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVpnConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVpnConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVpnConnection with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetVpnConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetVpnConnectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getVpnConnection = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getVpnConnection(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getVpnConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVpnConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVpnConnection with closed client', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetVpnConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetVpnConnectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getVpnConnection(request), expectedError);
+        });
+    });
+
+    describe('getServerConfig', () => {
+        it('invokes getServerConfig without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetServerConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetServerConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ServerConfig()
+            );
+            client.innerApiCalls.getServerConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getServerConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getServerConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getServerConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getServerConfig without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetServerConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetServerConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ServerConfig()
+            );
+            client.innerApiCalls.getServerConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getServerConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.edgecontainer.v1.IServerConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getServerConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getServerConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getServerConfig with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetServerConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetServerConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getServerConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getServerConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getServerConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getServerConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getServerConfig with closed client', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.GetServerConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.GetServerConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getServerConfig(request), expectedError);
+        });
+    });
+
+    describe('createCluster', () => {
+        it('invokes createCluster without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.CreateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.CreateClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCluster without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.CreateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.CreateClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCluster with call error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.CreateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.CreateClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCluster with LRO error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.CreateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.CreateClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateClusterProgress without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateClusterProgress with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateCluster', () => {
+        it('invokes updateCluster without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.UpdateClusterRequest()
+            );
+            request.cluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.UpdateClusterRequest', ['cluster', 'name']);
+            request.cluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCluster without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.UpdateClusterRequest()
+            );
+            request.cluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.UpdateClusterRequest', ['cluster', 'name']);
+            request.cluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCluster with call error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.UpdateClusterRequest()
+            );
+            request.cluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.UpdateClusterRequest', ['cluster', 'name']);
+            request.cluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCluster with LRO error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.UpdateClusterRequest()
+            );
+            request.cluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.UpdateClusterRequest', ['cluster', 'name']);
+            request.cluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateClusterProgress without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateClusterProgress with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('upgradeCluster', () => {
+        it('invokes upgradeCluster without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.UpgradeClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.UpgradeClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.upgradeCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.upgradeCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.upgradeCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.upgradeCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes upgradeCluster without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.UpgradeClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.UpgradeClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.upgradeCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.upgradeCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.upgradeCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.upgradeCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes upgradeCluster with call error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.UpgradeClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.UpgradeClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.upgradeCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.upgradeCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.upgradeCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.upgradeCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes upgradeCluster with LRO error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.UpgradeClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.UpgradeClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.upgradeCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.upgradeCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.upgradeCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.upgradeCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpgradeClusterProgress without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpgradeClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpgradeClusterProgress with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpgradeClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteCluster', () => {
+        it('invokes deleteCluster without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.DeleteClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.DeleteClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCluster without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.DeleteClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.DeleteClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCluster with call error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.DeleteClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.DeleteClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCluster with LRO error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.DeleteClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.DeleteClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteClusterProgress without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteClusterProgress with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createNodePool', () => {
+        it('invokes createNodePool without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.CreateNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.CreateNodePoolRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createNodePool = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createNodePool(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNodePool without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.CreateNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.CreateNodePoolRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createNodePool = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createNodePool(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNodePool with call error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.CreateNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.CreateNodePoolRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createNodePool = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createNodePool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNodePool with LRO error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.CreateNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.CreateNodePoolRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createNodePool = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createNodePool(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateNodePoolProgress without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateNodePoolProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateNodePoolProgress with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateNodePoolProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateNodePool', () => {
+        it('invokes updateNodePool without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.UpdateNodePoolRequest()
+            );
+            request.nodePool ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.UpdateNodePoolRequest', ['nodePool', 'name']);
+            request.nodePool.name = defaultValue1;
+            const expectedHeaderRequestParams = `node_pool.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateNodePool = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateNodePool(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNodePool without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.UpdateNodePoolRequest()
+            );
+            request.nodePool ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.UpdateNodePoolRequest', ['nodePool', 'name']);
+            request.nodePool.name = defaultValue1;
+            const expectedHeaderRequestParams = `node_pool.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateNodePool = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateNodePool(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNodePool with call error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.UpdateNodePoolRequest()
+            );
+            request.nodePool ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.UpdateNodePoolRequest', ['nodePool', 'name']);
+            request.nodePool.name = defaultValue1;
+            const expectedHeaderRequestParams = `node_pool.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateNodePool = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateNodePool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNodePool with LRO error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.UpdateNodePoolRequest()
+            );
+            request.nodePool ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.UpdateNodePoolRequest', ['nodePool', 'name']);
+            request.nodePool.name = defaultValue1;
+            const expectedHeaderRequestParams = `node_pool.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateNodePool = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateNodePool(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateNodePoolProgress without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateNodePoolProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateNodePoolProgress with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateNodePoolProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteNodePool', () => {
+        it('invokes deleteNodePool without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.DeleteNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.DeleteNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteNodePool = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteNodePool(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNodePool without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.DeleteNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.DeleteNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteNodePool = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteNodePool(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNodePool with call error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.DeleteNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.DeleteNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteNodePool = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteNodePool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNodePool with LRO error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.DeleteNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.DeleteNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteNodePool = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteNodePool(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteNodePoolProgress without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteNodePoolProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteNodePoolProgress with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteNodePoolProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createVpnConnection', () => {
+        it('invokes createVpnConnection without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createVpnConnection = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createVpnConnection(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createVpnConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createVpnConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createVpnConnection without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createVpnConnection = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createVpnConnection(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.edgecontainer.v1.IVpnConnection, protos.google.cloud.edgecontainer.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.edgecontainer.v1.IVpnConnection, protos.google.cloud.edgecontainer.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createVpnConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createVpnConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createVpnConnection with call error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createVpnConnection = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createVpnConnection(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createVpnConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createVpnConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createVpnConnection with LRO error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createVpnConnection = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createVpnConnection(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createVpnConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createVpnConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateVpnConnectionProgress without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateVpnConnectionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateVpnConnectionProgress with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateVpnConnectionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteVpnConnection', () => {
+        it('invokes deleteVpnConnection without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteVpnConnection = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteVpnConnection(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteVpnConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteVpnConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteVpnConnection without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteVpnConnection = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteVpnConnection(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteVpnConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteVpnConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteVpnConnection with call error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteVpnConnection = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteVpnConnection(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteVpnConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteVpnConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteVpnConnection with LRO error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteVpnConnection = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteVpnConnection(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteVpnConnection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteVpnConnection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteVpnConnectionProgress without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteVpnConnectionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteVpnConnectionProgress with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteVpnConnectionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listClusters', () => {
+        it('invokes listClusters without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Cluster()),
+            ];
+            client.innerApiCalls.listClusters = stubSimpleCall(expectedResponse);
+            const [response] = await client.listClusters(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listClusters without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Cluster()),
+            ];
+            client.innerApiCalls.listClusters = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listClusters(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.edgecontainer.v1.ICluster[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listClusters with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listClusters = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listClusters(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listClustersStream without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Cluster()),
+            ];
+            client.descriptors.page.listClusters.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listClustersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.edgecontainer.v1.Cluster[] = [];
+                stream.on('data', (response: protos.google.cloud.edgecontainer.v1.Cluster) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listClusters.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listClusters, request));
+            assert(
+                (client.descriptors.page.listClusters.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listClustersStream with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listClusters.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listClustersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.edgecontainer.v1.Cluster[] = [];
+                stream.on('data', (response: protos.google.cloud.edgecontainer.v1.Cluster) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listClusters.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listClusters, request));
+            assert(
+                (client.descriptors.page.listClusters.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listClusters without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Cluster()),
+            ];
+            client.descriptors.page.listClusters.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.edgecontainer.v1.ICluster[] = [];
+            const iterable = client.listClustersAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listMachines as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMachines as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMachines with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListMachinesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listMachines = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listMachines(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listMachines as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMachines as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMachinesStream without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListMachinesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Machine()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Machine()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Machine()
-        ),
-      ];
-      client.descriptors.page.listMachines.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listMachinesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.edgecontainer.v1.Machine[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.edgecontainer.v1.Machine) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listClusters with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listClusters.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listClustersAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.edgecontainer.v1.ICluster[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listMachines.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listMachines, request)
-      );
-      assert(
-        (client.descriptors.page.listMachines.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listMachinesStream with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListMachinesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listMachines.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listMachinesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.edgecontainer.v1.Machine[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.edgecontainer.v1.Machine) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listNodePools', () => {
+        it('invokes listNodePools without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.NodePool()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.NodePool()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.NodePool()),
+            ];
+            client.innerApiCalls.listNodePools = stubSimpleCall(expectedResponse);
+            const [response] = await client.listNodePools(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNodePools as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNodePools as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listNodePools without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.NodePool()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.NodePool()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.NodePool()),
+            ];
+            client.innerApiCalls.listNodePools = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listNodePools(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.edgecontainer.v1.INodePool[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNodePools as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNodePools as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listMachines.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listMachines, request)
-      );
-      assert(
-        (client.descriptors.page.listMachines.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listMachines without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListMachinesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Machine()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Machine()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.Machine()
-        ),
-      ];
-      client.descriptors.page.listMachines.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.edgecontainer.v1.IMachine[] = [];
-      const iterable = client.listMachinesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listMachines.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listMachines.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listNodePools with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listNodePools = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listNodePools(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listNodePools as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNodePools as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listMachines with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListMachinesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listMachines.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listMachinesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.edgecontainer.v1.IMachine[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listMachines.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listMachines.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listNodePoolsStream without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.NodePool()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.NodePool()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.NodePool()),
+            ];
+            client.descriptors.page.listNodePools.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listNodePoolsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.edgecontainer.v1.NodePool[] = [];
+                stream.on('data', (response: protos.google.cloud.edgecontainer.v1.NodePool) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listNodePools.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listNodePools, request));
+            assert(
+                (client.descriptors.page.listNodePools.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listVpnConnections', () => {
-    it('invokes listVpnConnections without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.VpnConnection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.VpnConnection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.VpnConnection()
-        ),
-      ];
-      client.innerApiCalls.listVpnConnections =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listVpnConnections(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listVpnConnections as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVpnConnections as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listNodePoolsStream with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listNodePools.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listNodePoolsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.edgecontainer.v1.NodePool[] = [];
+                stream.on('data', (response: protos.google.cloud.edgecontainer.v1.NodePool) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listNodePools.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listNodePools, request));
+            assert(
+                (client.descriptors.page.listNodePools.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listVpnConnections without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.VpnConnection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.VpnConnection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.VpnConnection()
-        ),
-      ];
-      client.innerApiCalls.listVpnConnections =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listVpnConnections(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.edgecontainer.v1.IVpnConnection[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listNodePools without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.NodePool()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.NodePool()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.NodePool()),
+            ];
+            client.descriptors.page.listNodePools.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.edgecontainer.v1.INodePool[] = [];
+            const iterable = client.listNodePoolsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listVpnConnections as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVpnConnections as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listVpnConnections with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listVpnConnections = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listVpnConnections(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listVpnConnections as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVpnConnections as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listVpnConnectionsStream without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.VpnConnection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.VpnConnection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.VpnConnection()
-        ),
-      ];
-      client.descriptors.page.listVpnConnections.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listVpnConnectionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.edgecontainer.v1.VpnConnection[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.edgecontainer.v1.VpnConnection) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listNodePools.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listNodePools.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listNodePools with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listNodePools.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listNodePoolsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.edgecontainer.v1.INodePool[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listNodePools.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listNodePools.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listVpnConnections.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listVpnConnections, request)
-      );
-      assert(
-        (client.descriptors.page.listVpnConnections.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listVpnConnectionsStream with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listVpnConnections.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listVpnConnectionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.edgecontainer.v1.VpnConnection[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.edgecontainer.v1.VpnConnection) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listMachines', () => {
+        it('invokes listMachines without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListMachinesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Machine()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Machine()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Machine()),
+            ];
+            client.innerApiCalls.listMachines = stubSimpleCall(expectedResponse);
+            const [response] = await client.listMachines(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMachines as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMachines as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listMachines without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListMachinesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Machine()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Machine()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Machine()),
+            ];
+            client.innerApiCalls.listMachines = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listMachines(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.edgecontainer.v1.IMachine[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMachines as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMachines as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listVpnConnections.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listVpnConnections, request)
-      );
-      assert(
-        (client.descriptors.page.listVpnConnections.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listVpnConnections without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.VpnConnection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.VpnConnection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.edgecontainer.v1.VpnConnection()
-        ),
-      ];
-      client.descriptors.page.listVpnConnections.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.edgecontainer.v1.IVpnConnection[] =
-        [];
-      const iterable = client.listVpnConnectionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listVpnConnections.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listVpnConnections.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listMachines with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListMachinesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listMachines = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listMachines(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listMachines as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMachines as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listVpnConnections with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listVpnConnections.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listVpnConnectionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.edgecontainer.v1.IVpnConnection[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listVpnConnections.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listVpnConnections.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('invokes listMachinesStream without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListMachinesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Machine()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Machine()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Machine()),
+            ];
+            client.descriptors.page.listMachines.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listMachinesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.edgecontainer.v1.Machine[] = [];
+                stream.on('data', (response: protos.google.cloud.edgecontainer.v1.Machine) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listMachines.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMachines, request));
+            assert(
+                (client.descriptors.page.listMachines.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listMachinesStream with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListMachinesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMachines.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listMachinesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.edgecontainer.v1.Machine[] = [];
+                stream.on('data', (response: protos.google.cloud.edgecontainer.v1.Machine) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listMachines.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMachines, request));
+            assert(
+                (client.descriptors.page.listMachines.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listMachines without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListMachinesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Machine()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Machine()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.Machine()),
+            ];
+            client.descriptors.page.listMachines.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.edgecontainer.v1.IMachine[] = [];
+            const iterable = client.listMachinesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMachines.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMachines.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listMachines with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListMachinesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMachines.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listMachinesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.edgecontainer.v1.IMachine[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMachines.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMachines.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getLocation with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+    describe('listVpnConnections', () => {
+        it('invokes listVpnConnections without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.VpnConnection()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.VpnConnection()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.VpnConnection()),
+            ];
+            client.innerApiCalls.listVpnConnections = stubSimpleCall(expectedResponse);
+            const [response] = await client.listVpnConnections(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listVpnConnections as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVpnConnections as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listVpnConnections without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.VpnConnection()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.VpnConnection()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.VpnConnection()),
+            ];
+            client.innerApiCalls.listVpnConnections = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listVpnConnections(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.edgecontainer.v1.IVpnConnection[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listVpnConnections as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVpnConnections as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listVpnConnections with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listVpnConnections = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listVpnConnections(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listVpnConnections as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVpnConnections as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listVpnConnectionsStream without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.VpnConnection()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.VpnConnection()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.VpnConnection()),
+            ];
+            client.descriptors.page.listVpnConnections.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listVpnConnectionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.edgecontainer.v1.VpnConnection[] = [];
+                stream.on('data', (response: protos.google.cloud.edgecontainer.v1.VpnConnection) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listVpnConnections.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listVpnConnections, request));
+            assert(
+                (client.descriptors.page.listVpnConnections.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listVpnConnectionsStream with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listVpnConnections.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listVpnConnectionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.edgecontainer.v1.VpnConnection[] = [];
+                stream.on('data', (response: protos.google.cloud.edgecontainer.v1.VpnConnection) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listVpnConnections.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listVpnConnections, request));
+            assert(
+                (client.descriptors.page.listVpnConnections.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listVpnConnections without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.VpnConnection()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.VpnConnection()),
+              generateSampleMessage(new protos.google.cloud.edgecontainer.v1.VpnConnection()),
+            ];
+            client.descriptors.page.listVpnConnections.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.edgecontainer.v1.IVpnConnection[] = [];
+            const iterable = client.listVpnConnectionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listVpnConnections.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listVpnConnections.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listVpnConnections with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listVpnConnections.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listVpnConnectionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.edgecontainer.v1.IVpnConnection[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listVpnConnections.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listVpnConnections.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getOperation with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes cancelOperation with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('cluster', async () => {
-      const fakePath = '/rendered/path/cluster';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        cluster: 'clusterValue',
-      };
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.clusterPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.clusterPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('clusterPath', () => {
-        const result = client.clusterPath(
-          'projectValue',
-          'locationValue',
-          'clusterValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.clusterPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromClusterName', () => {
-        const result = client.matchProjectFromClusterName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.clusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromClusterName', () => {
-        const result = client.matchLocationFromClusterName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.clusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchClusterFromClusterName', () => {
-        const result = client.matchClusterFromClusterName(fakePath);
-        assert.strictEqual(result, 'clusterValue');
-        assert(
-          (client.pathTemplates.clusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('cluster', async () => {
+            const fakePath = "/rendered/path/cluster";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                cluster: "clusterValue",
+            };
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.clusterPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.clusterPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('clusterPath', () => {
+                const result = client.clusterPath("projectValue", "locationValue", "clusterValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.clusterPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromClusterName', () => {
+                const result = client.matchProjectFromClusterName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.clusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromClusterName', () => {
+                const result = client.matchLocationFromClusterName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.clusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchClusterFromClusterName', () => {
+                const result = client.matchClusterFromClusterName(fakePath);
+                assert.strictEqual(result, "clusterValue");
+                assert((client.pathTemplates.clusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('machine', async () => {
+            const fakePath = "/rendered/path/machine";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                machine: "machineValue",
+            };
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.machinePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.machinePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('machinePath', () => {
+                const result = client.machinePath("projectValue", "locationValue", "machineValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.machinePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMachineName', () => {
+                const result = client.matchProjectFromMachineName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.machinePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMachineName', () => {
+                const result = client.matchLocationFromMachineName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.machinePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMachineFromMachineName', () => {
+                const result = client.matchMachineFromMachineName(fakePath);
+                assert.strictEqual(result, "machineValue");
+                assert((client.pathTemplates.machinePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('nodePool', async () => {
+            const fakePath = "/rendered/path/nodePool";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                cluster: "clusterValue",
+                node_pool: "nodePoolValue",
+            };
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.nodePoolPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.nodePoolPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('nodePoolPath', () => {
+                const result = client.nodePoolPath("projectValue", "locationValue", "clusterValue", "nodePoolValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.nodePoolPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromNodePoolName', () => {
+                const result = client.matchProjectFromNodePoolName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.nodePoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromNodePoolName', () => {
+                const result = client.matchLocationFromNodePoolName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.nodePoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchClusterFromNodePoolName', () => {
+                const result = client.matchClusterFromNodePoolName(fakePath);
+                assert.strictEqual(result, "clusterValue");
+                assert((client.pathTemplates.nodePoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNodePoolFromNodePoolName', () => {
+                const result = client.matchNodePoolFromNodePoolName(fakePath);
+                assert.strictEqual(result, "nodePoolValue");
+                assert((client.pathTemplates.nodePoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('vpnConnection', async () => {
+            const fakePath = "/rendered/path/vpnConnection";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                vpn_connection: "vpnConnectionValue",
+            };
+            const client = new edgecontainerModule.v1.EdgeContainerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.vpnConnectionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.vpnConnectionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('vpnConnectionPath', () => {
+                const result = client.vpnConnectionPath("projectValue", "locationValue", "vpnConnectionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.vpnConnectionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromVpnConnectionName', () => {
+                const result = client.matchProjectFromVpnConnectionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.vpnConnectionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromVpnConnectionName', () => {
+                const result = client.matchLocationFromVpnConnectionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.vpnConnectionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVpnConnectionFromVpnConnectionName', () => {
+                const result = client.matchVpnConnectionFromVpnConnectionName(fakePath);
+                assert.strictEqual(result, "vpnConnectionValue");
+                assert((client.pathTemplates.vpnConnectionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('machine', async () => {
-      const fakePath = '/rendered/path/machine';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        machine: 'machineValue',
-      };
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.machinePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.machinePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('machinePath', () => {
-        const result = client.machinePath(
-          'projectValue',
-          'locationValue',
-          'machineValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.machinePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromMachineName', () => {
-        const result = client.matchProjectFromMachineName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.machinePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromMachineName', () => {
-        const result = client.matchLocationFromMachineName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.machinePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchMachineFromMachineName', () => {
-        const result = client.matchMachineFromMachineName(fakePath);
-        assert.strictEqual(result, 'machineValue');
-        assert(
-          (client.pathTemplates.machinePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('nodePool', async () => {
-      const fakePath = '/rendered/path/nodePool';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        cluster: 'clusterValue',
-        node_pool: 'nodePoolValue',
-      };
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.nodePoolPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.nodePoolPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('nodePoolPath', () => {
-        const result = client.nodePoolPath(
-          'projectValue',
-          'locationValue',
-          'clusterValue',
-          'nodePoolValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.nodePoolPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromNodePoolName', () => {
-        const result = client.matchProjectFromNodePoolName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.nodePoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromNodePoolName', () => {
-        const result = client.matchLocationFromNodePoolName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.nodePoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchClusterFromNodePoolName', () => {
-        const result = client.matchClusterFromNodePoolName(fakePath);
-        assert.strictEqual(result, 'clusterValue');
-        assert(
-          (client.pathTemplates.nodePoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNodePoolFromNodePoolName', () => {
-        const result = client.matchNodePoolFromNodePoolName(fakePath);
-        assert.strictEqual(result, 'nodePoolValue');
-        assert(
-          (client.pathTemplates.nodePoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('vpnConnection', async () => {
-      const fakePath = '/rendered/path/vpnConnection';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        vpn_connection: 'vpnConnectionValue',
-      };
-      const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.vpnConnectionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.vpnConnectionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('vpnConnectionPath', () => {
-        const result = client.vpnConnectionPath(
-          'projectValue',
-          'locationValue',
-          'vpnConnectionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.vpnConnectionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromVpnConnectionName', () => {
-        const result = client.matchProjectFromVpnConnectionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.vpnConnectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromVpnConnectionName', () => {
-        const result = client.matchLocationFromVpnConnectionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.vpnConnectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchVpnConnectionFromVpnConnectionName', () => {
-        const result = client.matchVpnConnectionFromVpnConnectionName(fakePath);
-        assert.strictEqual(result, 'vpnConnectionValue');
-        assert(
-          (client.pathTemplates.vpnConnectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

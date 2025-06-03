@@ -18,18 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -114,41 +103,20 @@ export class DocumentsClient {
    *     const client = new DocumentsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DocumentsClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'dialogflow.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -174,7 +142,7 @@ export class DocumentsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -190,9 +158,13 @@ export class DocumentsClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -234,14 +206,12 @@ export class DocumentsClient {
       projectAgentEnvironmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/environments/{environment}'
       ),
-      projectAgentEnvironmentUserSessionContextPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}'
-        ),
-      projectAgentEnvironmentUserSessionEntityTypePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
-        ),
+      projectAgentEnvironmentUserSessionContextPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}'
+      ),
+      projectAgentEnvironmentUserSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
+      ),
       projectAgentFulfillmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/fulfillment'
       ),
@@ -251,10 +221,9 @@ export class DocumentsClient {
       projectAgentSessionContextPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/contexts/{context}'
       ),
-      projectAgentSessionEntityTypePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
-        ),
+      projectAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
+      ),
       projectAgentVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/versions/{version}'
       ),
@@ -270,58 +239,48 @@ export class DocumentsClient {
       projectConversationModelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/conversationModels/{conversation_model}'
       ),
-      projectConversationModelEvaluationPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/conversationModels/{conversation_model}/evaluations/{evaluation}'
-        ),
-      projectConversationParticipantPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/conversations/{conversation}/participants/{participant}'
-        ),
+      projectConversationModelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/conversationModels/{conversation_model}/evaluations/{evaluation}'
+      ),
+      projectConversationParticipantPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/conversations/{conversation}/participants/{participant}'
+      ),
       projectConversationProfilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/conversationProfiles/{conversation_profile}'
       ),
       projectKnowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/knowledgeBases/{knowledge_base}'
       ),
-      projectKnowledgeBaseDocumentPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}'
-        ),
+      projectKnowledgeBaseDocumentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}'
+      ),
       projectLocationAgentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agent'
       ),
-      projectLocationAgentEntityTypePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/agent/entityTypes/{entity_type}'
-        ),
-      projectLocationAgentEnvironmentPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/agent/environments/{environment}'
-        ),
-      projectLocationAgentEnvironmentUserSessionContextPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}'
-        ),
-      projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
-        ),
-      projectLocationAgentFulfillmentPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/agent/fulfillment'
-        ),
+      projectLocationAgentEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent/entityTypes/{entity_type}'
+      ),
+      projectLocationAgentEnvironmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent/environments/{environment}'
+      ),
+      projectLocationAgentEnvironmentUserSessionContextPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}'
+      ),
+      projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
+      ),
+      projectLocationAgentFulfillmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent/fulfillment'
+      ),
       projectLocationAgentIntentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agent/intents/{intent}'
       ),
-      projectLocationAgentSessionContextPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/agent/sessions/{session}/contexts/{context}'
-        ),
-      projectLocationAgentSessionEntityTypePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/agent/sessions/{session}/entityTypes/{entity_type}'
-        ),
+      projectLocationAgentSessionContextPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent/sessions/{session}/contexts/{context}'
+      ),
+      projectLocationAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent/sessions/{session}/entityTypes/{entity_type}'
+      ),
       projectLocationAgentVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agent/versions/{version}'
       ),
@@ -331,45 +290,35 @@ export class DocumentsClient {
       projectLocationConversationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/conversations/{conversation}'
       ),
-      projectLocationConversationMessagePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/conversations/{conversation}/messages/{message}'
-        ),
-      projectLocationConversationModelPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/conversationModels/{conversation_model}'
-        ),
-      projectLocationConversationModelEvaluationPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/conversationModels/{conversation_model}/evaluations/{evaluation}'
-        ),
-      projectLocationConversationParticipantPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}'
-        ),
-      projectLocationConversationProfilePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/conversationProfiles/{conversation_profile}'
-        ),
-      projectLocationKnowledgeBasePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}'
-        ),
-      projectLocationKnowledgeBaseDocumentPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}'
-        ),
+      projectLocationConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversations/{conversation}/messages/{message}'
+      ),
+      projectLocationConversationModelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversationModels/{conversation_model}'
+      ),
+      projectLocationConversationModelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversationModels/{conversation_model}/evaluations/{evaluation}'
+      ),
+      projectLocationConversationParticipantPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}'
+      ),
+      projectLocationConversationProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversationProfiles/{conversation_profile}'
+      ),
+      projectLocationKnowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}'
+      ),
+      projectLocationKnowledgeBaseDocumentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDocuments: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'documents'
-      ),
+      listDocuments:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'documents')
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -378,122 +327,72 @@ export class DocumentsClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v2/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v2/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v2/{name=projects/*/operations/*}:cancel',
-          additional_bindings: [
-            {post: '/v2/{name=projects/*/locations/*/operations/*}:cancel'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2/{name=projects/*/operations/*}',
-          additional_bindings: [
-            {get: '/v2/{name=projects/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v2/{name=projects/*}/operations',
-          additional_bindings: [
-            {get: '/v2/{name=projects/*/locations/*}/operations'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v2/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v2/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v2/{name=projects/*/operations/*}:cancel',additional_bindings: [{post: '/v2/{name=projects/*/locations/*/operations/*}:cancel',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v2/{name=projects/*/operations/*}',additional_bindings: [{get: '/v2/{name=projects/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v2/{name=projects/*}/operations',additional_bindings: [{get: '/v2/{name=projects/*/locations/*}/operations',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createDocumentResponse = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2.Document'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2.Document') as gax.protobuf.Type;
     const createDocumentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2.KnowledgeOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2.KnowledgeOperationMetadata') as gax.protobuf.Type;
     const importDocumentsResponse = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2.ImportDocumentsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2.ImportDocumentsResponse') as gax.protobuf.Type;
     const importDocumentsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2.KnowledgeOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2.KnowledgeOperationMetadata') as gax.protobuf.Type;
     const deleteDocumentResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteDocumentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2.KnowledgeOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2.KnowledgeOperationMetadata') as gax.protobuf.Type;
     const updateDocumentResponse = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2.Document'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2.Document') as gax.protobuf.Type;
     const updateDocumentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2.KnowledgeOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2.KnowledgeOperationMetadata') as gax.protobuf.Type;
     const reloadDocumentResponse = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2.Document'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2.Document') as gax.protobuf.Type;
     const reloadDocumentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2.KnowledgeOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2.KnowledgeOperationMetadata') as gax.protobuf.Type;
     const exportDocumentResponse = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2.Document'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2.Document') as gax.protobuf.Type;
     const exportDocumentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2.KnowledgeOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2.KnowledgeOperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createDocument: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createDocumentResponse.decode.bind(createDocumentResponse),
-        createDocumentMetadata.decode.bind(createDocumentMetadata)
-      ),
+        createDocumentMetadata.decode.bind(createDocumentMetadata)),
       importDocuments: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importDocumentsResponse.decode.bind(importDocumentsResponse),
-        importDocumentsMetadata.decode.bind(importDocumentsMetadata)
-      ),
+        importDocumentsMetadata.decode.bind(importDocumentsMetadata)),
       deleteDocument: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteDocumentResponse.decode.bind(deleteDocumentResponse),
-        deleteDocumentMetadata.decode.bind(deleteDocumentMetadata)
-      ),
+        deleteDocumentMetadata.decode.bind(deleteDocumentMetadata)),
       updateDocument: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateDocumentResponse.decode.bind(updateDocumentResponse),
-        updateDocumentMetadata.decode.bind(updateDocumentMetadata)
-      ),
+        updateDocumentMetadata.decode.bind(updateDocumentMetadata)),
       reloadDocument: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         reloadDocumentResponse.decode.bind(reloadDocumentResponse),
-        reloadDocumentMetadata.decode.bind(reloadDocumentMetadata)
-      ),
+        reloadDocumentMetadata.decode.bind(reloadDocumentMetadata)),
       exportDocument: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportDocumentResponse.decode.bind(exportDocumentResponse),
-        exportDocumentMetadata.decode.bind(exportDocumentMetadata)
-      ),
+        exportDocumentMetadata.decode.bind(exportDocumentMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.dialogflow.v2.Documents',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.dialogflow.v2.Documents', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -524,42 +423,28 @@ export class DocumentsClient {
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2.Documents.
     this.documentsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.dialogflow.v2.Documents'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.dialogflow.v2.Documents') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dialogflow.v2.Documents,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const documentsStubMethods = [
-      'listDocuments',
-      'getDocument',
-      'createDocument',
-      'importDocuments',
-      'deleteDocument',
-      'updateDocument',
-      'reloadDocument',
-      'exportDocument',
-    ];
+    const documentsStubMethods =
+        ['listDocuments', 'getDocument', 'createDocument', 'importDocuments', 'deleteDocument', 'updateDocument', 'reloadDocument', 'exportDocument'];
     for (const methodName of documentsStubMethods) {
       const callPromise = this.documentsStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -584,14 +469,8 @@ export class DocumentsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dialogflow.googleapis.com';
   }
@@ -602,14 +481,8 @@ export class DocumentsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dialogflow.googleapis.com';
   }
@@ -642,7 +515,7 @@ export class DocumentsClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/dialogflow',
+      'https://www.googleapis.com/auth/dialogflow'
     ];
   }
 
@@ -652,9 +525,8 @@ export class DocumentsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -665,1373 +537,952 @@ export class DocumentsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Retrieves the specified document.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the document to retrieve.
-   *   Format `projects/<Project ID>/locations/<Location
-   *   ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.Document|Document}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/documents.get_document.js</caption>
-   * region_tag:dialogflow_v2_generated_Documents_GetDocument_async
-   */
+/**
+ * Retrieves the specified document.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the document to retrieve.
+ *   Format `projects/<Project ID>/locations/<Location
+ *   ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.Document|Document}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/documents.get_document.js</caption>
+ * region_tag:dialogflow_v2_generated_Documents_GetDocument_async
+ */
   getDocument(
-    request?: protos.google.cloud.dialogflow.v2.IGetDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.v2.IDocument,
-      protos.google.cloud.dialogflow.v2.IGetDocumentRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dialogflow.v2.IGetDocumentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dialogflow.v2.IDocument,
+        protos.google.cloud.dialogflow.v2.IGetDocumentRequest|undefined, {}|undefined
+      ]>;
   getDocument(
-    request: protos.google.cloud.dialogflow.v2.IGetDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dialogflow.v2.IDocument,
-      protos.google.cloud.dialogflow.v2.IGetDocumentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDocument(
-    request: protos.google.cloud.dialogflow.v2.IGetDocumentRequest,
-    callback: Callback<
-      protos.google.cloud.dialogflow.v2.IDocument,
-      protos.google.cloud.dialogflow.v2.IGetDocumentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDocument(
-    request?: protos.google.cloud.dialogflow.v2.IGetDocumentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dialogflow.v2.IGetDocumentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dialogflow.v2.IDocument,
-          | protos.google.cloud.dialogflow.v2.IGetDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dialogflow.v2.IDocument,
-      protos.google.cloud.dialogflow.v2.IGetDocumentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.v2.IDocument,
-      protos.google.cloud.dialogflow.v2.IGetDocumentRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dialogflow.v2.IGetDocumentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDocument(
+      request: protos.google.cloud.dialogflow.v2.IGetDocumentRequest,
+      callback: Callback<
+          protos.google.cloud.dialogflow.v2.IDocument,
+          protos.google.cloud.dialogflow.v2.IGetDocumentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDocument(
+      request?: protos.google.cloud.dialogflow.v2.IGetDocumentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dialogflow.v2.IDocument,
+          protos.google.cloud.dialogflow.v2.IGetDocumentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dialogflow.v2.IDocument,
+          protos.google.cloud.dialogflow.v2.IGetDocumentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dialogflow.v2.IDocument,
+        protos.google.cloud.dialogflow.v2.IGetDocumentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDocument request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dialogflow.v2.IDocument,
-          | protos.google.cloud.dialogflow.v2.IGetDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dialogflow.v2.IDocument,
+        protos.google.cloud.dialogflow.v2.IGetDocumentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDocument(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dialogflow.v2.IDocument,
-          protos.google.cloud.dialogflow.v2.IGetDocumentRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getDocument response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getDocument(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dialogflow.v2.IDocument,
+        protos.google.cloud.dialogflow.v2.IGetDocumentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDocument response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
-   * Creates a new document.
-   *
-   * This method is a [long-running
-   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
-   * The returned `Operation` type has the following method-specific fields:
-   *
-   * - `metadata`:
-   * {@link protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
-   * - `response`: {@link protos.google.cloud.dialogflow.v2.Document|Document}
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The knowledge base to create a document for.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/knowledgeBases/<Knowledge Base ID>`.
-   * @param {google.cloud.dialogflow.v2.Document} request.document
-   *   Required. The document to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/documents.create_document.js</caption>
-   * region_tag:dialogflow_v2_generated_Documents_CreateDocument_async
-   */
+/**
+ * Creates a new document.
+ *
+ * This method is a [long-running
+ * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+ * The returned `Operation` type has the following method-specific fields:
+ *
+ * - `metadata`:
+ * {@link protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
+ * - `response`: {@link protos.google.cloud.dialogflow.v2.Document|Document}
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The knowledge base to create a document for.
+ *   Format: `projects/<Project ID>/locations/<Location
+ *   ID>/knowledgeBases/<Knowledge Base ID>`.
+ * @param {google.cloud.dialogflow.v2.Document} request.document
+ *   Required. The document to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/documents.create_document.js</caption>
+ * region_tag:dialogflow_v2_generated_Documents_CreateDocument_async
+ */
   createDocument(
-    request?: protos.google.cloud.dialogflow.v2.ICreateDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dialogflow.v2.ICreateDocumentRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createDocument(
-    request: protos.google.cloud.dialogflow.v2.ICreateDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dialogflow.v2.ICreateDocumentRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createDocument(
-    request: protos.google.cloud.dialogflow.v2.ICreateDocumentRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dialogflow.v2.ICreateDocumentRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createDocument(
-    request?: protos.google.cloud.dialogflow.v2.ICreateDocumentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dialogflow.v2.IDocument,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dialogflow.v2.ICreateDocumentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.dialogflow.v2.IDocument,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createDocument response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createDocument request %j', request);
-    return this.innerApiCalls
-      .createDocument(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.dialogflow.v2.IDocument,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createDocument response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createDocument(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createDocument response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createDocument()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/documents.create_document.js</caption>
-   * region_tag:dialogflow_v2_generated_Documents_CreateDocument_async
-   */
-  async checkCreateDocumentProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dialogflow.v2.Document,
-      protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createDocument()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/documents.create_document.js</caption>
+ * region_tag:dialogflow_v2_generated_Documents_CreateDocument_async
+ */
+  async checkCreateDocumentProgress(name: string): Promise<LROperation<protos.google.cloud.dialogflow.v2.Document, protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata>>{
     this._log.info('createDocument long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createDocument,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dialogflow.v2.Document,
-      protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createDocument, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dialogflow.v2.Document, protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata>;
   }
-  /**
-   * Creates documents by importing data from external sources.
-   * Dialogflow supports up to 350 documents in each request. If you try to
-   * import more, Dialogflow will return an error.
-   *
-   * This method is a [long-running
-   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
-   * The returned `Operation` type has the following method-specific fields:
-   *
-   * - `metadata`:
-   * {@link protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
-   * - `response`:
-   * {@link protos.google.cloud.dialogflow.v2.ImportDocumentsResponse|ImportDocumentsResponse}
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The knowledge base to import documents into.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/knowledgeBases/<Knowledge Base ID>`.
-   * @param {google.cloud.dialogflow.v2.GcsSources} [request.gcsSource]
-   *   Optional. The Google Cloud Storage location for the documents.
-   *   The path can include a wildcard.
-   *
-   *   These URIs may have the forms
-   *   `gs://<bucket-name>/<object-name>`.
-   *   `gs://<bucket-name>/<object-path>/*.<extension>`.
-   * @param {google.cloud.dialogflow.v2.ImportDocumentTemplate} request.documentTemplate
-   *   Required. Document template used for importing all the documents.
-   * @param {boolean} request.importGcsCustomMetadata
-   *   Whether to import custom metadata from Google Cloud Storage.
-   *   Only valid when the document source is Google Cloud Storage URI.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/documents.import_documents.js</caption>
-   * region_tag:dialogflow_v2_generated_Documents_ImportDocuments_async
-   */
+/**
+ * Creates documents by importing data from external sources.
+ * Dialogflow supports up to 350 documents in each request. If you try to
+ * import more, Dialogflow will return an error.
+ *
+ * This method is a [long-running
+ * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+ * The returned `Operation` type has the following method-specific fields:
+ *
+ * - `metadata`:
+ * {@link protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
+ * - `response`:
+ * {@link protos.google.cloud.dialogflow.v2.ImportDocumentsResponse|ImportDocumentsResponse}
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The knowledge base to import documents into.
+ *   Format: `projects/<Project ID>/locations/<Location
+ *   ID>/knowledgeBases/<Knowledge Base ID>`.
+ * @param {google.cloud.dialogflow.v2.GcsSources} [request.gcsSource]
+ *   Optional. The Google Cloud Storage location for the documents.
+ *   The path can include a wildcard.
+ *
+ *   These URIs may have the forms
+ *   `gs://<bucket-name>/<object-name>`.
+ *   `gs://<bucket-name>/<object-path>/*.<extension>`.
+ * @param {google.cloud.dialogflow.v2.ImportDocumentTemplate} request.documentTemplate
+ *   Required. Document template used for importing all the documents.
+ * @param {boolean} request.importGcsCustomMetadata
+ *   Whether to import custom metadata from Google Cloud Storage.
+ *   Only valid when the document source is Google Cloud Storage URI.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/documents.import_documents.js</caption>
+ * region_tag:dialogflow_v2_generated_Documents_ImportDocuments_async
+ */
   importDocuments(
-    request?: protos.google.cloud.dialogflow.v2.IImportDocumentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IImportDocumentsResponse,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dialogflow.v2.IImportDocumentsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dialogflow.v2.IImportDocumentsResponse, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   importDocuments(
-    request: protos.google.cloud.dialogflow.v2.IImportDocumentsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IImportDocumentsResponse,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dialogflow.v2.IImportDocumentsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IImportDocumentsResponse, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   importDocuments(
-    request: protos.google.cloud.dialogflow.v2.IImportDocumentsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IImportDocumentsResponse,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dialogflow.v2.IImportDocumentsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IImportDocumentsResponse, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   importDocuments(
-    request?: protos.google.cloud.dialogflow.v2.IImportDocumentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dialogflow.v2.IImportDocumentsResponse,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IImportDocumentsResponse,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IImportDocumentsResponse,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dialogflow.v2.IImportDocumentsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IImportDocumentsResponse, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IImportDocumentsResponse, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dialogflow.v2.IImportDocumentsResponse, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.dialogflow.v2.IImportDocumentsResponse,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IImportDocumentsResponse, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('importDocuments response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('importDocuments request %j', request);
-    return this.innerApiCalls
-      .importDocuments(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.dialogflow.v2.IImportDocumentsResponse,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('importDocuments response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.importDocuments(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dialogflow.v2.IImportDocumentsResponse, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('importDocuments response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `importDocuments()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/documents.import_documents.js</caption>
-   * region_tag:dialogflow_v2_generated_Documents_ImportDocuments_async
-   */
-  async checkImportDocumentsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dialogflow.v2.ImportDocumentsResponse,
-      protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `importDocuments()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/documents.import_documents.js</caption>
+ * region_tag:dialogflow_v2_generated_Documents_ImportDocuments_async
+ */
+  async checkImportDocumentsProgress(name: string): Promise<LROperation<protos.google.cloud.dialogflow.v2.ImportDocumentsResponse, protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata>>{
     this._log.info('importDocuments long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.importDocuments,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dialogflow.v2.ImportDocumentsResponse,
-      protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importDocuments, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dialogflow.v2.ImportDocumentsResponse, protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata>;
   }
-  /**
-   * Deletes the specified document.
-   *
-   * This method is a [long-running
-   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
-   * The returned `Operation` type has the following method-specific fields:
-   *
-   * - `metadata`:
-   * {@link protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
-   * - `response`: An [Empty
-   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the document to delete.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/documents.delete_document.js</caption>
-   * region_tag:dialogflow_v2_generated_Documents_DeleteDocument_async
-   */
+/**
+ * Deletes the specified document.
+ *
+ * This method is a [long-running
+ * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+ * The returned `Operation` type has the following method-specific fields:
+ *
+ * - `metadata`:
+ * {@link protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
+ * - `response`: An [Empty
+ *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the document to delete.
+ *   Format: `projects/<Project ID>/locations/<Location
+ *   ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/documents.delete_document.js</caption>
+ * region_tag:dialogflow_v2_generated_Documents_DeleteDocument_async
+ */
   deleteDocument(
-    request?: protos.google.cloud.dialogflow.v2.IDeleteDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dialogflow.v2.IDeleteDocumentRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteDocument(
-    request: protos.google.cloud.dialogflow.v2.IDeleteDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dialogflow.v2.IDeleteDocumentRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteDocument(
-    request: protos.google.cloud.dialogflow.v2.IDeleteDocumentRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dialogflow.v2.IDeleteDocumentRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteDocument(
-    request?: protos.google.cloud.dialogflow.v2.IDeleteDocumentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dialogflow.v2.IDeleteDocumentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteDocument response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteDocument request %j', request);
-    return this.innerApiCalls
-      .deleteDocument(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDocument response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteDocument(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteDocument response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteDocument()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/documents.delete_document.js</caption>
-   * region_tag:dialogflow_v2_generated_Documents_DeleteDocument_async
-   */
-  async checkDeleteDocumentProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteDocument()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/documents.delete_document.js</caption>
+ * region_tag:dialogflow_v2_generated_Documents_DeleteDocument_async
+ */
+  async checkDeleteDocumentProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata>>{
     this._log.info('deleteDocument long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteDocument,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteDocument, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata>;
   }
-  /**
-   * Updates the specified document.
-   *
-   * This method is a [long-running
-   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
-   * The returned `Operation` type has the following method-specific fields:
-   *
-   * - `metadata`:
-   * {@link protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
-   * - `response`: {@link protos.google.cloud.dialogflow.v2.Document|Document}
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dialogflow.v2.Document} request.document
-   *   Required. The document to update.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Not specified means `update all`.
-   *   Currently, only `display_name` can be updated, an InvalidArgument will be
-   *   returned for attempting to update other fields.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/documents.update_document.js</caption>
-   * region_tag:dialogflow_v2_generated_Documents_UpdateDocument_async
-   */
+/**
+ * Updates the specified document.
+ *
+ * This method is a [long-running
+ * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+ * The returned `Operation` type has the following method-specific fields:
+ *
+ * - `metadata`:
+ * {@link protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
+ * - `response`: {@link protos.google.cloud.dialogflow.v2.Document|Document}
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.dialogflow.v2.Document} request.document
+ *   Required. The document to update.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Not specified means `update all`.
+ *   Currently, only `display_name` can be updated, an InvalidArgument will be
+ *   returned for attempting to update other fields.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/documents.update_document.js</caption>
+ * region_tag:dialogflow_v2_generated_Documents_UpdateDocument_async
+ */
   updateDocument(
-    request?: protos.google.cloud.dialogflow.v2.IUpdateDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dialogflow.v2.IUpdateDocumentRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateDocument(
-    request: protos.google.cloud.dialogflow.v2.IUpdateDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dialogflow.v2.IUpdateDocumentRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateDocument(
-    request: protos.google.cloud.dialogflow.v2.IUpdateDocumentRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dialogflow.v2.IUpdateDocumentRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateDocument(
-    request?: protos.google.cloud.dialogflow.v2.IUpdateDocumentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dialogflow.v2.IDocument,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dialogflow.v2.IUpdateDocumentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'document.name': request.document!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'document.name': request.document!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.dialogflow.v2.IDocument,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateDocument response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateDocument request %j', request);
-    return this.innerApiCalls
-      .updateDocument(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.dialogflow.v2.IDocument,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDocument response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateDocument(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateDocument response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateDocument()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/documents.update_document.js</caption>
-   * region_tag:dialogflow_v2_generated_Documents_UpdateDocument_async
-   */
-  async checkUpdateDocumentProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dialogflow.v2.Document,
-      protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateDocument()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/documents.update_document.js</caption>
+ * region_tag:dialogflow_v2_generated_Documents_UpdateDocument_async
+ */
+  async checkUpdateDocumentProgress(name: string): Promise<LROperation<protos.google.cloud.dialogflow.v2.Document, protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata>>{
     this._log.info('updateDocument long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateDocument,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dialogflow.v2.Document,
-      protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateDocument, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dialogflow.v2.Document, protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata>;
   }
-  /**
-   * Reloads the specified document from its specified source, content_uri or
-   * content. The previously loaded content of the document will be deleted.
-   * Note: Even when the content of the document has not changed, there still
-   * may be side effects because of internal implementation changes.
-   *
-   * This method is a [long-running
-   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
-   * The returned `Operation` type has the following method-specific fields:
-   *
-   * - `metadata`:
-   * {@link protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
-   * - `response`: {@link protos.google.cloud.dialogflow.v2.Document|Document}
-   *
-   * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
-   * only use `projects.knowledgeBases.documents`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the document to reload.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`
-   * @param {string} [request.contentUri]
-   *   Optional. The path of gcs source file for reloading document content. For
-   *   now, only gcs uri is supported.
-   *
-   *   For documents stored in Google Cloud Storage, these URIs must have
-   *   the form `gs://<bucket-name>/<object-name>`.
-   * @param {boolean} [request.importGcsCustomMetadata]
-   *   Optional. Whether to import custom metadata from Google Cloud Storage.
-   *   Only valid when the document source is Google Cloud Storage URI.
-   * @param {boolean} [request.smartMessagingPartialUpdate]
-   *   Optional. When enabled, the reload request is to apply partial update to
-   *   the smart messaging allowlist.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/documents.reload_document.js</caption>
-   * region_tag:dialogflow_v2_generated_Documents_ReloadDocument_async
-   */
+/**
+ * Reloads the specified document from its specified source, content_uri or
+ * content. The previously loaded content of the document will be deleted.
+ * Note: Even when the content of the document has not changed, there still
+ * may be side effects because of internal implementation changes.
+ *
+ * This method is a [long-running
+ * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+ * The returned `Operation` type has the following method-specific fields:
+ *
+ * - `metadata`:
+ * {@link protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
+ * - `response`: {@link protos.google.cloud.dialogflow.v2.Document|Document}
+ *
+ * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
+ * only use `projects.knowledgeBases.documents`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the document to reload.
+ *   Format: `projects/<Project ID>/locations/<Location
+ *   ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`
+ * @param {string} [request.contentUri]
+ *   Optional. The path of gcs source file for reloading document content. For
+ *   now, only gcs uri is supported.
+ *
+ *   For documents stored in Google Cloud Storage, these URIs must have
+ *   the form `gs://<bucket-name>/<object-name>`.
+ * @param {boolean} [request.importGcsCustomMetadata]
+ *   Optional. Whether to import custom metadata from Google Cloud Storage.
+ *   Only valid when the document source is Google Cloud Storage URI.
+ * @param {boolean} [request.smartMessagingPartialUpdate]
+ *   Optional. When enabled, the reload request is to apply partial update to
+ *   the smart messaging allowlist.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/documents.reload_document.js</caption>
+ * region_tag:dialogflow_v2_generated_Documents_ReloadDocument_async
+ */
   reloadDocument(
-    request?: protos.google.cloud.dialogflow.v2.IReloadDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dialogflow.v2.IReloadDocumentRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   reloadDocument(
-    request: protos.google.cloud.dialogflow.v2.IReloadDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dialogflow.v2.IReloadDocumentRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   reloadDocument(
-    request: protos.google.cloud.dialogflow.v2.IReloadDocumentRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dialogflow.v2.IReloadDocumentRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   reloadDocument(
-    request?: protos.google.cloud.dialogflow.v2.IReloadDocumentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dialogflow.v2.IDocument,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dialogflow.v2.IReloadDocumentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.dialogflow.v2.IDocument,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('reloadDocument response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('reloadDocument request %j', request);
-    return this.innerApiCalls
-      .reloadDocument(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.dialogflow.v2.IDocument,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('reloadDocument response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.reloadDocument(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('reloadDocument response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `reloadDocument()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/documents.reload_document.js</caption>
-   * region_tag:dialogflow_v2_generated_Documents_ReloadDocument_async
-   */
-  async checkReloadDocumentProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dialogflow.v2.Document,
-      protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `reloadDocument()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/documents.reload_document.js</caption>
+ * region_tag:dialogflow_v2_generated_Documents_ReloadDocument_async
+ */
+  async checkReloadDocumentProgress(name: string): Promise<LROperation<protos.google.cloud.dialogflow.v2.Document, protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata>>{
     this._log.info('reloadDocument long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.reloadDocument,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dialogflow.v2.Document,
-      protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.reloadDocument, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dialogflow.v2.Document, protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata>;
   }
-  /**
-   * Exports a smart messaging candidate document into the specified
-   * destination.
-   *
-   * This method is a [long-running
-   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
-   * The returned `Operation` type has the following method-specific fields:
-   *
-   * - `metadata`:
-   * {@link protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
-   * - `response`: {@link protos.google.cloud.dialogflow.v2.Document|Document}
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the document to export.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`.
-   * @param {google.cloud.dialogflow.v2.GcsDestination} request.gcsDestination
-   *   Cloud Storage file path to export the document.
-   * @param {boolean} request.exportFullContent
-   *   When enabled, export the full content of the document including empirical
-   *   probability.
-   * @param {boolean} request.smartMessagingPartialUpdate
-   *   When enabled, export the smart messaging allowlist document for partial
-   *   update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/documents.export_document.js</caption>
-   * region_tag:dialogflow_v2_generated_Documents_ExportDocument_async
-   */
+/**
+ * Exports a smart messaging candidate document into the specified
+ * destination.
+ *
+ * This method is a [long-running
+ * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+ * The returned `Operation` type has the following method-specific fields:
+ *
+ * - `metadata`:
+ * {@link protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
+ * - `response`: {@link protos.google.cloud.dialogflow.v2.Document|Document}
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the document to export.
+ *   Format: `projects/<Project ID>/locations/<Location
+ *   ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`.
+ * @param {google.cloud.dialogflow.v2.GcsDestination} request.gcsDestination
+ *   Cloud Storage file path to export the document.
+ * @param {boolean} request.exportFullContent
+ *   When enabled, export the full content of the document including empirical
+ *   probability.
+ * @param {boolean} request.smartMessagingPartialUpdate
+ *   When enabled, export the smart messaging allowlist document for partial
+ *   update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/documents.export_document.js</caption>
+ * region_tag:dialogflow_v2_generated_Documents_ExportDocument_async
+ */
   exportDocument(
-    request?: protos.google.cloud.dialogflow.v2.IExportDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dialogflow.v2.IExportDocumentRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   exportDocument(
-    request: protos.google.cloud.dialogflow.v2.IExportDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dialogflow.v2.IExportDocumentRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportDocument(
-    request: protos.google.cloud.dialogflow.v2.IExportDocumentRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dialogflow.v2.IExportDocumentRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportDocument(
-    request?: protos.google.cloud.dialogflow.v2.IExportDocumentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dialogflow.v2.IDocument,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dialogflow.v2.IExportDocumentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.dialogflow.v2.IDocument,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportDocument response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportDocument request %j', request);
-    return this.innerApiCalls
-      .exportDocument(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.dialogflow.v2.IDocument,
-            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('exportDocument response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.exportDocument(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dialogflow.v2.IDocument, protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('exportDocument response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `exportDocument()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/documents.export_document.js</caption>
-   * region_tag:dialogflow_v2_generated_Documents_ExportDocument_async
-   */
-  async checkExportDocumentProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dialogflow.v2.Document,
-      protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `exportDocument()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/documents.export_document.js</caption>
+ * region_tag:dialogflow_v2_generated_Documents_ExportDocument_async
+ */
+  async checkExportDocumentProgress(name: string): Promise<LROperation<protos.google.cloud.dialogflow.v2.Document, protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata>>{
     this._log.info('exportDocument long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.exportDocument,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dialogflow.v2.Document,
-      protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportDocument, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dialogflow.v2.Document, protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata>;
   }
-  /**
-   * Returns the list of all documents of the knowledge base.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The knowledge base to list all documents for.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/knowledgeBases/<Knowledge Base ID>`.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return in a single page. By
-   *   default 10 and at most 100.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request.
-   * @param {string} request.filter
-   *   The filter expression used to filter documents returned by the list method.
-   *   The expression has the following syntax:
-   *
-   *     <field> <operator> <value> [AND <field> <operator> <value>] ...
-   *
-   *   The following fields and operators are supported:
-   *
-   *   * knowledge_types with has(:) operator
-   *   * display_name with has(:) operator
-   *   * state with equals(=) operator
-   *
-   *   Examples:
-   *
-   *   * "knowledge_types:FAQ" matches documents with FAQ knowledge type.
-   *   * "display_name:customer" matches documents whose display name contains
-   *     "customer".
-   *   * "state=ACTIVE" matches documents with ACTIVE state.
-   *   * "knowledge_types:FAQ AND state=ACTIVE" matches all active FAQ documents.
-   *
-   *   For more information about filtering, see
-   *   [API Filtering](https://aip.dev/160).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.v2.Document|Document}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDocumentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Returns the list of all documents of the knowledge base.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The knowledge base to list all documents for.
+ *   Format: `projects/<Project ID>/locations/<Location
+ *   ID>/knowledgeBases/<Knowledge Base ID>`.
+ * @param {number} request.pageSize
+ *   The maximum number of items to return in a single page. By
+ *   default 10 and at most 100.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request.
+ * @param {string} request.filter
+ *   The filter expression used to filter documents returned by the list method.
+ *   The expression has the following syntax:
+ *
+ *     <field> <operator> <value> [AND <field> <operator> <value>] ...
+ *
+ *   The following fields and operators are supported:
+ *
+ *   * knowledge_types with has(:) operator
+ *   * display_name with has(:) operator
+ *   * state with equals(=) operator
+ *
+ *   Examples:
+ *
+ *   * "knowledge_types:FAQ" matches documents with FAQ knowledge type.
+ *   * "display_name:customer" matches documents whose display name contains
+ *     "customer".
+ *   * "state=ACTIVE" matches documents with ACTIVE state.
+ *   * "knowledge_types:FAQ AND state=ACTIVE" matches all active FAQ documents.
+ *
+ *   For more information about filtering, see
+ *   [API Filtering](https://aip.dev/160).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.v2.Document|Document}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDocumentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDocuments(
-    request?: protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.v2.IDocument[],
-      protos.google.cloud.dialogflow.v2.IListDocumentsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListDocumentsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dialogflow.v2.IDocument[],
+        protos.google.cloud.dialogflow.v2.IListDocumentsRequest|null,
+        protos.google.cloud.dialogflow.v2.IListDocumentsResponse
+      ]>;
   listDocuments(
-    request: protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
-      | protos.google.cloud.dialogflow.v2.IListDocumentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.v2.IDocument
-    >
-  ): void;
-  listDocuments(
-    request: protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
-      | protos.google.cloud.dialogflow.v2.IListDocumentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.v2.IDocument
-    >
-  ): void;
-  listDocuments(
-    request?: protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
-          | protos.google.cloud.dialogflow.v2.IListDocumentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dialogflow.v2.IDocument
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
-      | protos.google.cloud.dialogflow.v2.IListDocumentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.v2.IDocument
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.v2.IDocument[],
-      protos.google.cloud.dialogflow.v2.IListDocumentsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListDocumentsResponse,
-    ]
-  > | void {
+          protos.google.cloud.dialogflow.v2.IListDocumentsResponse|null|undefined,
+          protos.google.cloud.dialogflow.v2.IDocument>): void;
+  listDocuments(
+      request: protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
+          protos.google.cloud.dialogflow.v2.IListDocumentsResponse|null|undefined,
+          protos.google.cloud.dialogflow.v2.IDocument>): void;
+  listDocuments(
+      request?: protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
+          protos.google.cloud.dialogflow.v2.IListDocumentsResponse|null|undefined,
+          protos.google.cloud.dialogflow.v2.IDocument>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
+          protos.google.cloud.dialogflow.v2.IListDocumentsResponse|null|undefined,
+          protos.google.cloud.dialogflow.v2.IDocument>):
+      Promise<[
+        protos.google.cloud.dialogflow.v2.IDocument[],
+        protos.google.cloud.dialogflow.v2.IListDocumentsRequest|null,
+        protos.google.cloud.dialogflow.v2.IListDocumentsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
-          | protos.google.cloud.dialogflow.v2.IListDocumentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dialogflow.v2.IDocument
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
+      protos.google.cloud.dialogflow.v2.IListDocumentsResponse|null|undefined,
+      protos.google.cloud.dialogflow.v2.IDocument>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDocuments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2040,81 +1491,78 @@ export class DocumentsClient {
     this._log.info('listDocuments request %j', request);
     return this.innerApiCalls
       .listDocuments(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dialogflow.v2.IDocument[],
-          protos.google.cloud.dialogflow.v2.IListDocumentsRequest | null,
-          protos.google.cloud.dialogflow.v2.IListDocumentsResponse,
-        ]) => {
-          this._log.info('listDocuments values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dialogflow.v2.IDocument[],
+        protos.google.cloud.dialogflow.v2.IListDocumentsRequest|null,
+        protos.google.cloud.dialogflow.v2.IListDocumentsResponse
+      ]) => {
+        this._log.info('listDocuments values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDocuments`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The knowledge base to list all documents for.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/knowledgeBases/<Knowledge Base ID>`.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return in a single page. By
-   *   default 10 and at most 100.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request.
-   * @param {string} request.filter
-   *   The filter expression used to filter documents returned by the list method.
-   *   The expression has the following syntax:
-   *
-   *     <field> <operator> <value> [AND <field> <operator> <value>] ...
-   *
-   *   The following fields and operators are supported:
-   *
-   *   * knowledge_types with has(:) operator
-   *   * display_name with has(:) operator
-   *   * state with equals(=) operator
-   *
-   *   Examples:
-   *
-   *   * "knowledge_types:FAQ" matches documents with FAQ knowledge type.
-   *   * "display_name:customer" matches documents whose display name contains
-   *     "customer".
-   *   * "state=ACTIVE" matches documents with ACTIVE state.
-   *   * "knowledge_types:FAQ AND state=ACTIVE" matches all active FAQ documents.
-   *
-   *   For more information about filtering, see
-   *   [API Filtering](https://aip.dev/160).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.v2.Document|Document} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDocumentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDocuments`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The knowledge base to list all documents for.
+ *   Format: `projects/<Project ID>/locations/<Location
+ *   ID>/knowledgeBases/<Knowledge Base ID>`.
+ * @param {number} request.pageSize
+ *   The maximum number of items to return in a single page. By
+ *   default 10 and at most 100.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request.
+ * @param {string} request.filter
+ *   The filter expression used to filter documents returned by the list method.
+ *   The expression has the following syntax:
+ *
+ *     <field> <operator> <value> [AND <field> <operator> <value>] ...
+ *
+ *   The following fields and operators are supported:
+ *
+ *   * knowledge_types with has(:) operator
+ *   * display_name with has(:) operator
+ *   * state with equals(=) operator
+ *
+ *   Examples:
+ *
+ *   * "knowledge_types:FAQ" matches documents with FAQ knowledge type.
+ *   * "display_name:customer" matches documents whose display name contains
+ *     "customer".
+ *   * "state=ACTIVE" matches documents with ACTIVE state.
+ *   * "knowledge_types:FAQ AND state=ACTIVE" matches all active FAQ documents.
+ *
+ *   For more information about filtering, see
+ *   [API Filtering](https://aip.dev/160).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.v2.Document|Document} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDocumentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDocumentsStream(
-    request?: protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDocuments stream %j', request);
     return this.descriptors.page.listDocuments.createStream(
       this.innerApiCalls.listDocuments as GaxCall,
@@ -2123,72 +1571,71 @@ export class DocumentsClient {
     );
   }
 
-  /**
-   * Equivalent to `listDocuments`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The knowledge base to list all documents for.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/knowledgeBases/<Knowledge Base ID>`.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return in a single page. By
-   *   default 10 and at most 100.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request.
-   * @param {string} request.filter
-   *   The filter expression used to filter documents returned by the list method.
-   *   The expression has the following syntax:
-   *
-   *     <field> <operator> <value> [AND <field> <operator> <value>] ...
-   *
-   *   The following fields and operators are supported:
-   *
-   *   * knowledge_types with has(:) operator
-   *   * display_name with has(:) operator
-   *   * state with equals(=) operator
-   *
-   *   Examples:
-   *
-   *   * "knowledge_types:FAQ" matches documents with FAQ knowledge type.
-   *   * "display_name:customer" matches documents whose display name contains
-   *     "customer".
-   *   * "state=ACTIVE" matches documents with ACTIVE state.
-   *   * "knowledge_types:FAQ AND state=ACTIVE" matches all active FAQ documents.
-   *
-   *   For more information about filtering, see
-   *   [API Filtering](https://aip.dev/160).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dialogflow.v2.Document|Document}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/documents.list_documents.js</caption>
-   * region_tag:dialogflow_v2_generated_Documents_ListDocuments_async
-   */
+/**
+ * Equivalent to `listDocuments`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The knowledge base to list all documents for.
+ *   Format: `projects/<Project ID>/locations/<Location
+ *   ID>/knowledgeBases/<Knowledge Base ID>`.
+ * @param {number} request.pageSize
+ *   The maximum number of items to return in a single page. By
+ *   default 10 and at most 100.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request.
+ * @param {string} request.filter
+ *   The filter expression used to filter documents returned by the list method.
+ *   The expression has the following syntax:
+ *
+ *     <field> <operator> <value> [AND <field> <operator> <value>] ...
+ *
+ *   The following fields and operators are supported:
+ *
+ *   * knowledge_types with has(:) operator
+ *   * display_name with has(:) operator
+ *   * state with equals(=) operator
+ *
+ *   Examples:
+ *
+ *   * "knowledge_types:FAQ" matches documents with FAQ knowledge type.
+ *   * "display_name:customer" matches documents whose display name contains
+ *     "customer".
+ *   * "state=ACTIVE" matches documents with ACTIVE state.
+ *   * "knowledge_types:FAQ AND state=ACTIVE" matches all active FAQ documents.
+ *
+ *   For more information about filtering, see
+ *   [API Filtering](https://aip.dev/160).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dialogflow.v2.Document|Document}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/documents.list_documents.js</caption>
+ * region_tag:dialogflow_v2_generated_Documents_ListDocuments_async
+ */
   listDocumentsAsync(
-    request?: protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dialogflow.v2.IDocument> {
+      request?: protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dialogflow.v2.IDocument>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDocuments iterate %j', request);
     return this.descriptors.page.listDocuments.asyncIterate(
       this.innerApiCalls['listDocuments'] as GaxCall,
@@ -2196,7 +1643,7 @@ export class DocumentsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.v2.IDocument>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -2236,7 +1683,7 @@ export class DocumentsClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -2274,7 +1721,7 @@ export class DocumentsClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2319,20 +1766,20 @@ export class DocumentsClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2369,13 +1816,13 @@ export class DocumentsClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2409,7 +1856,7 @@ export class DocumentsClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2424,20 +1871,20 @@ export class DocumentsClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2481,20 +1928,20 @@ export class DocumentsClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2510,11 +1957,7 @@ export class DocumentsClient {
    * @param {string} conversation_dataset
    * @returns {string} Resource name string.
    */
-  conversationDatasetPath(
-    project: string,
-    location: string,
-    conversationDataset: string
-  ) {
+  conversationDatasetPath(project:string,location:string,conversationDataset:string) {
     return this.pathTemplates.conversationDatasetPathTemplate.render({
       project: project,
       location: location,
@@ -2530,9 +1973,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConversationDatasetName(conversationDatasetName: string) {
-    return this.pathTemplates.conversationDatasetPathTemplate.match(
-      conversationDatasetName
-    ).project;
+    return this.pathTemplates.conversationDatasetPathTemplate.match(conversationDatasetName).project;
   }
 
   /**
@@ -2543,9 +1984,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConversationDatasetName(conversationDatasetName: string) {
-    return this.pathTemplates.conversationDatasetPathTemplate.match(
-      conversationDatasetName
-    ).location;
+    return this.pathTemplates.conversationDatasetPathTemplate.match(conversationDatasetName).location;
   }
 
   /**
@@ -2555,12 +1994,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing ConversationDataset resource.
    * @returns {string} A string representing the conversation_dataset.
    */
-  matchConversationDatasetFromConversationDatasetName(
-    conversationDatasetName: string
-  ) {
-    return this.pathTemplates.conversationDatasetPathTemplate.match(
-      conversationDatasetName
-    ).conversation_dataset;
+  matchConversationDatasetFromConversationDatasetName(conversationDatasetName: string) {
+    return this.pathTemplates.conversationDatasetPathTemplate.match(conversationDatasetName).conversation_dataset;
   }
 
   /**
@@ -2570,7 +2005,7 @@ export class DocumentsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  encryptionSpecPath(project: string, location: string) {
+  encryptionSpecPath(project:string,location:string) {
     return this.pathTemplates.encryptionSpecPathTemplate.render({
       project: project,
       location: location,
@@ -2585,9 +2020,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEncryptionSpecName(encryptionSpecName: string) {
-    return this.pathTemplates.encryptionSpecPathTemplate.match(
-      encryptionSpecName
-    ).project;
+    return this.pathTemplates.encryptionSpecPathTemplate.match(encryptionSpecName).project;
   }
 
   /**
@@ -2598,9 +2031,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEncryptionSpecName(encryptionSpecName: string) {
-    return this.pathTemplates.encryptionSpecPathTemplate.match(
-      encryptionSpecName
-    ).location;
+    return this.pathTemplates.encryptionSpecPathTemplate.match(encryptionSpecName).location;
   }
 
   /**
@@ -2611,7 +2042,7 @@ export class DocumentsClient {
    * @param {string} generator
    * @returns {string} Resource name string.
    */
-  generatorPath(project: string, location: string, generator: string) {
+  generatorPath(project:string,location:string,generator:string) {
     return this.pathTemplates.generatorPathTemplate.render({
       project: project,
       location: location,
@@ -2627,8 +2058,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName)
-      .project;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName).project;
   }
 
   /**
@@ -2639,8 +2069,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName)
-      .location;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName).location;
   }
 
   /**
@@ -2651,8 +2080,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the generator.
    */
   matchGeneratorFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName)
-      .generator;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName).generator;
   }
 
   /**
@@ -2661,7 +2089,7 @@ export class DocumentsClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2684,7 +2112,7 @@ export class DocumentsClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectAgentPath(project: string) {
+  projectAgentPath(project:string) {
     return this.pathTemplates.projectAgentPathTemplate.render({
       project: project,
     });
@@ -2698,8 +2126,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentName(projectAgentName: string) {
-    return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName)
-      .project;
+    return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName).project;
   }
 
   /**
@@ -2709,7 +2136,7 @@ export class DocumentsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectAgentEntityTypePath(project: string, entityType: string) {
+  projectAgentEntityTypePath(project:string,entityType:string) {
     return this.pathTemplates.projectAgentEntityTypePathTemplate.render({
       project: project,
       entity_type: entityType,
@@ -2723,12 +2150,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAgentEntityTypeName(
-    projectAgentEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectAgentEntityTypePathTemplate.match(
-      projectAgentEntityTypeName
-    ).project;
+  matchProjectFromProjectAgentEntityTypeName(projectAgentEntityTypeName: string) {
+    return this.pathTemplates.projectAgentEntityTypePathTemplate.match(projectAgentEntityTypeName).project;
   }
 
   /**
@@ -2738,12 +2161,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectAgentEntityTypeName(
-    projectAgentEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectAgentEntityTypePathTemplate.match(
-      projectAgentEntityTypeName
-    ).entity_type;
+  matchEntityTypeFromProjectAgentEntityTypeName(projectAgentEntityTypeName: string) {
+    return this.pathTemplates.projectAgentEntityTypePathTemplate.match(projectAgentEntityTypeName).entity_type;
   }
 
   /**
@@ -2753,7 +2172,7 @@ export class DocumentsClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  projectAgentEnvironmentPath(project: string, environment: string) {
+  projectAgentEnvironmentPath(project:string,environment:string) {
     return this.pathTemplates.projectAgentEnvironmentPathTemplate.render({
       project: project,
       environment: environment,
@@ -2767,12 +2186,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_environment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAgentEnvironmentName(
-    projectAgentEnvironmentName: string
-  ) {
-    return this.pathTemplates.projectAgentEnvironmentPathTemplate.match(
-      projectAgentEnvironmentName
-    ).project;
+  matchProjectFromProjectAgentEnvironmentName(projectAgentEnvironmentName: string) {
+    return this.pathTemplates.projectAgentEnvironmentPathTemplate.match(projectAgentEnvironmentName).project;
   }
 
   /**
@@ -2782,12 +2197,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_environment resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectAgentEnvironmentName(
-    projectAgentEnvironmentName: string
-  ) {
-    return this.pathTemplates.projectAgentEnvironmentPathTemplate.match(
-      projectAgentEnvironmentName
-    ).environment;
+  matchEnvironmentFromProjectAgentEnvironmentName(projectAgentEnvironmentName: string) {
+    return this.pathTemplates.projectAgentEnvironmentPathTemplate.match(projectAgentEnvironmentName).environment;
   }
 
   /**
@@ -2800,22 +2211,14 @@ export class DocumentsClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  projectAgentEnvironmentUserSessionContextPath(
-    project: string,
-    environment: string,
-    user: string,
-    session: string,
-    context: string
-  ) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.render(
-      {
-        project: project,
-        environment: environment,
-        user: user,
-        session: session,
-        context: context,
-      }
-    );
+  projectAgentEnvironmentUserSessionContextPath(project:string,environment:string,user:string,session:string,context:string) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.render({
+      project: project,
+      environment: environment,
+      user: user,
+      session: session,
+      context: context,
+    });
   }
 
   /**
@@ -2825,12 +2228,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_context resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAgentEnvironmentUserSessionContextName(
-    projectAgentEnvironmentUserSessionContextName: string
-  ) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
-      projectAgentEnvironmentUserSessionContextName
-    ).project;
+  matchProjectFromProjectAgentEnvironmentUserSessionContextName(projectAgentEnvironmentUserSessionContextName: string) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(projectAgentEnvironmentUserSessionContextName).project;
   }
 
   /**
@@ -2840,12 +2239,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_context resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectAgentEnvironmentUserSessionContextName(
-    projectAgentEnvironmentUserSessionContextName: string
-  ) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
-      projectAgentEnvironmentUserSessionContextName
-    ).environment;
+  matchEnvironmentFromProjectAgentEnvironmentUserSessionContextName(projectAgentEnvironmentUserSessionContextName: string) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(projectAgentEnvironmentUserSessionContextName).environment;
   }
 
   /**
@@ -2855,12 +2250,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_context resource.
    * @returns {string} A string representing the user.
    */
-  matchUserFromProjectAgentEnvironmentUserSessionContextName(
-    projectAgentEnvironmentUserSessionContextName: string
-  ) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
-      projectAgentEnvironmentUserSessionContextName
-    ).user;
+  matchUserFromProjectAgentEnvironmentUserSessionContextName(projectAgentEnvironmentUserSessionContextName: string) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(projectAgentEnvironmentUserSessionContextName).user;
   }
 
   /**
@@ -2870,12 +2261,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_context resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectAgentEnvironmentUserSessionContextName(
-    projectAgentEnvironmentUserSessionContextName: string
-  ) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
-      projectAgentEnvironmentUserSessionContextName
-    ).session;
+  matchSessionFromProjectAgentEnvironmentUserSessionContextName(projectAgentEnvironmentUserSessionContextName: string) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(projectAgentEnvironmentUserSessionContextName).session;
   }
 
   /**
@@ -2885,12 +2272,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_context resource.
    * @returns {string} A string representing the context.
    */
-  matchContextFromProjectAgentEnvironmentUserSessionContextName(
-    projectAgentEnvironmentUserSessionContextName: string
-  ) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
-      projectAgentEnvironmentUserSessionContextName
-    ).context;
+  matchContextFromProjectAgentEnvironmentUserSessionContextName(projectAgentEnvironmentUserSessionContextName: string) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(projectAgentEnvironmentUserSessionContextName).context;
   }
 
   /**
@@ -2903,22 +2286,14 @@ export class DocumentsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectAgentEnvironmentUserSessionEntityTypePath(
-    project: string,
-    environment: string,
-    user: string,
-    session: string,
-    entityType: string
-  ) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.render(
-      {
-        project: project,
-        environment: environment,
-        user: user,
-        session: session,
-        entity_type: entityType,
-      }
-    );
+  projectAgentEnvironmentUserSessionEntityTypePath(project:string,environment:string,user:string,session:string,entityType:string) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.render({
+      project: project,
+      environment: environment,
+      user: user,
+      session: session,
+      entity_type: entityType,
+    });
   }
 
   /**
@@ -2928,12 +2303,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAgentEnvironmentUserSessionEntityTypeName(
-    projectAgentEnvironmentUserSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
-      projectAgentEnvironmentUserSessionEntityTypeName
-    ).project;
+  matchProjectFromProjectAgentEnvironmentUserSessionEntityTypeName(projectAgentEnvironmentUserSessionEntityTypeName: string) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectAgentEnvironmentUserSessionEntityTypeName).project;
   }
 
   /**
@@ -2943,12 +2314,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectAgentEnvironmentUserSessionEntityTypeName(
-    projectAgentEnvironmentUserSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
-      projectAgentEnvironmentUserSessionEntityTypeName
-    ).environment;
+  matchEnvironmentFromProjectAgentEnvironmentUserSessionEntityTypeName(projectAgentEnvironmentUserSessionEntityTypeName: string) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectAgentEnvironmentUserSessionEntityTypeName).environment;
   }
 
   /**
@@ -2958,12 +2325,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the user.
    */
-  matchUserFromProjectAgentEnvironmentUserSessionEntityTypeName(
-    projectAgentEnvironmentUserSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
-      projectAgentEnvironmentUserSessionEntityTypeName
-    ).user;
+  matchUserFromProjectAgentEnvironmentUserSessionEntityTypeName(projectAgentEnvironmentUserSessionEntityTypeName: string) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectAgentEnvironmentUserSessionEntityTypeName).user;
   }
 
   /**
@@ -2973,12 +2336,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectAgentEnvironmentUserSessionEntityTypeName(
-    projectAgentEnvironmentUserSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
-      projectAgentEnvironmentUserSessionEntityTypeName
-    ).session;
+  matchSessionFromProjectAgentEnvironmentUserSessionEntityTypeName(projectAgentEnvironmentUserSessionEntityTypeName: string) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectAgentEnvironmentUserSessionEntityTypeName).session;
   }
 
   /**
@@ -2988,12 +2347,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectAgentEnvironmentUserSessionEntityTypeName(
-    projectAgentEnvironmentUserSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
-      projectAgentEnvironmentUserSessionEntityTypeName
-    ).entity_type;
+  matchEntityTypeFromProjectAgentEnvironmentUserSessionEntityTypeName(projectAgentEnvironmentUserSessionEntityTypeName: string) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectAgentEnvironmentUserSessionEntityTypeName).entity_type;
   }
 
   /**
@@ -3002,7 +2357,7 @@ export class DocumentsClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectAgentFulfillmentPath(project: string) {
+  projectAgentFulfillmentPath(project:string) {
     return this.pathTemplates.projectAgentFulfillmentPathTemplate.render({
       project: project,
     });
@@ -3015,12 +2370,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_fulfillment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAgentFulfillmentName(
-    projectAgentFulfillmentName: string
-  ) {
-    return this.pathTemplates.projectAgentFulfillmentPathTemplate.match(
-      projectAgentFulfillmentName
-    ).project;
+  matchProjectFromProjectAgentFulfillmentName(projectAgentFulfillmentName: string) {
+    return this.pathTemplates.projectAgentFulfillmentPathTemplate.match(projectAgentFulfillmentName).project;
   }
 
   /**
@@ -3030,7 +2381,7 @@ export class DocumentsClient {
    * @param {string} intent
    * @returns {string} Resource name string.
    */
-  projectAgentIntentPath(project: string, intent: string) {
+  projectAgentIntentPath(project:string,intent:string) {
     return this.pathTemplates.projectAgentIntentPathTemplate.render({
       project: project,
       intent: intent,
@@ -3045,9 +2396,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this.pathTemplates.projectAgentIntentPathTemplate.match(
-      projectAgentIntentName
-    ).project;
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(projectAgentIntentName).project;
   }
 
   /**
@@ -3058,9 +2407,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the intent.
    */
   matchIntentFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this.pathTemplates.projectAgentIntentPathTemplate.match(
-      projectAgentIntentName
-    ).intent;
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(projectAgentIntentName).intent;
   }
 
   /**
@@ -3071,11 +2418,7 @@ export class DocumentsClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  projectAgentSessionContextPath(
-    project: string,
-    session: string,
-    context: string
-  ) {
+  projectAgentSessionContextPath(project:string,session:string,context:string) {
     return this.pathTemplates.projectAgentSessionContextPathTemplate.render({
       project: project,
       session: session,
@@ -3090,12 +2433,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_session_context resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAgentSessionContextName(
-    projectAgentSessionContextName: string
-  ) {
-    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(
-      projectAgentSessionContextName
-    ).project;
+  matchProjectFromProjectAgentSessionContextName(projectAgentSessionContextName: string) {
+    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(projectAgentSessionContextName).project;
   }
 
   /**
@@ -3105,12 +2444,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_session_context resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectAgentSessionContextName(
-    projectAgentSessionContextName: string
-  ) {
-    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(
-      projectAgentSessionContextName
-    ).session;
+  matchSessionFromProjectAgentSessionContextName(projectAgentSessionContextName: string) {
+    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(projectAgentSessionContextName).session;
   }
 
   /**
@@ -3120,12 +2455,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_session_context resource.
    * @returns {string} A string representing the context.
    */
-  matchContextFromProjectAgentSessionContextName(
-    projectAgentSessionContextName: string
-  ) {
-    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(
-      projectAgentSessionContextName
-    ).context;
+  matchContextFromProjectAgentSessionContextName(projectAgentSessionContextName: string) {
+    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(projectAgentSessionContextName).context;
   }
 
   /**
@@ -3136,11 +2467,7 @@ export class DocumentsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectAgentSessionEntityTypePath(
-    project: string,
-    session: string,
-    entityType: string
-  ) {
+  projectAgentSessionEntityTypePath(project:string,session:string,entityType:string) {
     return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.render({
       project: project,
       session: session,
@@ -3155,12 +2482,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAgentSessionEntityTypeName(
-    projectAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(
-      projectAgentSessionEntityTypeName
-    ).project;
+  matchProjectFromProjectAgentSessionEntityTypeName(projectAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(projectAgentSessionEntityTypeName).project;
   }
 
   /**
@@ -3170,12 +2493,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectAgentSessionEntityTypeName(
-    projectAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(
-      projectAgentSessionEntityTypeName
-    ).session;
+  matchSessionFromProjectAgentSessionEntityTypeName(projectAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(projectAgentSessionEntityTypeName).session;
   }
 
   /**
@@ -3185,12 +2504,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_agent_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectAgentSessionEntityTypeName(
-    projectAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(
-      projectAgentSessionEntityTypeName
-    ).entity_type;
+  matchEntityTypeFromProjectAgentSessionEntityTypeName(projectAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(projectAgentSessionEntityTypeName).entity_type;
   }
 
   /**
@@ -3200,7 +2515,7 @@ export class DocumentsClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  projectAgentVersionPath(project: string, version: string) {
+  projectAgentVersionPath(project:string,version:string) {
     return this.pathTemplates.projectAgentVersionPathTemplate.render({
       project: project,
       version: version,
@@ -3215,9 +2530,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentVersionName(projectAgentVersionName: string) {
-    return this.pathTemplates.projectAgentVersionPathTemplate.match(
-      projectAgentVersionName
-    ).project;
+    return this.pathTemplates.projectAgentVersionPathTemplate.match(projectAgentVersionName).project;
   }
 
   /**
@@ -3228,9 +2541,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromProjectAgentVersionName(projectAgentVersionName: string) {
-    return this.pathTemplates.projectAgentVersionPathTemplate.match(
-      projectAgentVersionName
-    ).version;
+    return this.pathTemplates.projectAgentVersionPathTemplate.match(projectAgentVersionName).version;
   }
 
   /**
@@ -3240,7 +2551,7 @@ export class DocumentsClient {
    * @param {string} answer_record
    * @returns {string} Resource name string.
    */
-  projectAnswerRecordPath(project: string, answerRecord: string) {
+  projectAnswerRecordPath(project:string,answerRecord:string) {
     return this.pathTemplates.projectAnswerRecordPathTemplate.render({
       project: project,
       answer_record: answerRecord,
@@ -3255,9 +2566,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAnswerRecordName(projectAnswerRecordName: string) {
-    return this.pathTemplates.projectAnswerRecordPathTemplate.match(
-      projectAnswerRecordName
-    ).project;
+    return this.pathTemplates.projectAnswerRecordPathTemplate.match(projectAnswerRecordName).project;
   }
 
   /**
@@ -3267,12 +2576,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_answer_record resource.
    * @returns {string} A string representing the answer_record.
    */
-  matchAnswerRecordFromProjectAnswerRecordName(
-    projectAnswerRecordName: string
-  ) {
-    return this.pathTemplates.projectAnswerRecordPathTemplate.match(
-      projectAnswerRecordName
-    ).answer_record;
+  matchAnswerRecordFromProjectAnswerRecordName(projectAnswerRecordName: string) {
+    return this.pathTemplates.projectAnswerRecordPathTemplate.match(projectAnswerRecordName).answer_record;
   }
 
   /**
@@ -3282,7 +2587,7 @@ export class DocumentsClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  projectConversationPath(project: string, conversation: string) {
+  projectConversationPath(project:string,conversation:string) {
     return this.pathTemplates.projectConversationPathTemplate.render({
       project: project,
       conversation: conversation,
@@ -3297,9 +2602,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectConversationName(projectConversationName: string) {
-    return this.pathTemplates.projectConversationPathTemplate.match(
-      projectConversationName
-    ).project;
+    return this.pathTemplates.projectConversationPathTemplate.match(projectConversationName).project;
   }
 
   /**
@@ -3309,12 +2612,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_conversation resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectConversationName(
-    projectConversationName: string
-  ) {
-    return this.pathTemplates.projectConversationPathTemplate.match(
-      projectConversationName
-    ).conversation;
+  matchConversationFromProjectConversationName(projectConversationName: string) {
+    return this.pathTemplates.projectConversationPathTemplate.match(projectConversationName).conversation;
   }
 
   /**
@@ -3325,11 +2624,7 @@ export class DocumentsClient {
    * @param {string} message
    * @returns {string} Resource name string.
    */
-  projectConversationMessagePath(
-    project: string,
-    conversation: string,
-    message: string
-  ) {
+  projectConversationMessagePath(project:string,conversation:string,message:string) {
     return this.pathTemplates.projectConversationMessagePathTemplate.render({
       project: project,
       conversation: conversation,
@@ -3344,12 +2639,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_conversation_message resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectConversationMessageName(
-    projectConversationMessageName: string
-  ) {
-    return this.pathTemplates.projectConversationMessagePathTemplate.match(
-      projectConversationMessageName
-    ).project;
+  matchProjectFromProjectConversationMessageName(projectConversationMessageName: string) {
+    return this.pathTemplates.projectConversationMessagePathTemplate.match(projectConversationMessageName).project;
   }
 
   /**
@@ -3359,12 +2650,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_conversation_message resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectConversationMessageName(
-    projectConversationMessageName: string
-  ) {
-    return this.pathTemplates.projectConversationMessagePathTemplate.match(
-      projectConversationMessageName
-    ).conversation;
+  matchConversationFromProjectConversationMessageName(projectConversationMessageName: string) {
+    return this.pathTemplates.projectConversationMessagePathTemplate.match(projectConversationMessageName).conversation;
   }
 
   /**
@@ -3374,12 +2661,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_conversation_message resource.
    * @returns {string} A string representing the message.
    */
-  matchMessageFromProjectConversationMessageName(
-    projectConversationMessageName: string
-  ) {
-    return this.pathTemplates.projectConversationMessagePathTemplate.match(
-      projectConversationMessageName
-    ).message;
+  matchMessageFromProjectConversationMessageName(projectConversationMessageName: string) {
+    return this.pathTemplates.projectConversationMessagePathTemplate.match(projectConversationMessageName).message;
   }
 
   /**
@@ -3389,7 +2672,7 @@ export class DocumentsClient {
    * @param {string} conversation_model
    * @returns {string} Resource name string.
    */
-  projectConversationModelPath(project: string, conversationModel: string) {
+  projectConversationModelPath(project:string,conversationModel:string) {
     return this.pathTemplates.projectConversationModelPathTemplate.render({
       project: project,
       conversation_model: conversationModel,
@@ -3403,12 +2686,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_conversation_model resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectConversationModelName(
-    projectConversationModelName: string
-  ) {
-    return this.pathTemplates.projectConversationModelPathTemplate.match(
-      projectConversationModelName
-    ).project;
+  matchProjectFromProjectConversationModelName(projectConversationModelName: string) {
+    return this.pathTemplates.projectConversationModelPathTemplate.match(projectConversationModelName).project;
   }
 
   /**
@@ -3418,12 +2697,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_conversation_model resource.
    * @returns {string} A string representing the conversation_model.
    */
-  matchConversationModelFromProjectConversationModelName(
-    projectConversationModelName: string
-  ) {
-    return this.pathTemplates.projectConversationModelPathTemplate.match(
-      projectConversationModelName
-    ).conversation_model;
+  matchConversationModelFromProjectConversationModelName(projectConversationModelName: string) {
+    return this.pathTemplates.projectConversationModelPathTemplate.match(projectConversationModelName).conversation_model;
   }
 
   /**
@@ -3434,18 +2709,12 @@ export class DocumentsClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  projectConversationModelEvaluationPath(
-    project: string,
-    conversationModel: string,
-    evaluation: string
-  ) {
-    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.render(
-      {
-        project: project,
-        conversation_model: conversationModel,
-        evaluation: evaluation,
-      }
-    );
+  projectConversationModelEvaluationPath(project:string,conversationModel:string,evaluation:string) {
+    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.render({
+      project: project,
+      conversation_model: conversationModel,
+      evaluation: evaluation,
+    });
   }
 
   /**
@@ -3455,12 +2724,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_conversation_model_evaluation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectConversationModelEvaluationName(
-    projectConversationModelEvaluationName: string
-  ) {
-    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.match(
-      projectConversationModelEvaluationName
-    ).project;
+  matchProjectFromProjectConversationModelEvaluationName(projectConversationModelEvaluationName: string) {
+    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.match(projectConversationModelEvaluationName).project;
   }
 
   /**
@@ -3470,12 +2735,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_conversation_model_evaluation resource.
    * @returns {string} A string representing the conversation_model.
    */
-  matchConversationModelFromProjectConversationModelEvaluationName(
-    projectConversationModelEvaluationName: string
-  ) {
-    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.match(
-      projectConversationModelEvaluationName
-    ).conversation_model;
+  matchConversationModelFromProjectConversationModelEvaluationName(projectConversationModelEvaluationName: string) {
+    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.match(projectConversationModelEvaluationName).conversation_model;
   }
 
   /**
@@ -3485,12 +2746,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_conversation_model_evaluation resource.
    * @returns {string} A string representing the evaluation.
    */
-  matchEvaluationFromProjectConversationModelEvaluationName(
-    projectConversationModelEvaluationName: string
-  ) {
-    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.match(
-      projectConversationModelEvaluationName
-    ).evaluation;
+  matchEvaluationFromProjectConversationModelEvaluationName(projectConversationModelEvaluationName: string) {
+    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.match(projectConversationModelEvaluationName).evaluation;
   }
 
   /**
@@ -3501,18 +2758,12 @@ export class DocumentsClient {
    * @param {string} participant
    * @returns {string} Resource name string.
    */
-  projectConversationParticipantPath(
-    project: string,
-    conversation: string,
-    participant: string
-  ) {
-    return this.pathTemplates.projectConversationParticipantPathTemplate.render(
-      {
-        project: project,
-        conversation: conversation,
-        participant: participant,
-      }
-    );
+  projectConversationParticipantPath(project:string,conversation:string,participant:string) {
+    return this.pathTemplates.projectConversationParticipantPathTemplate.render({
+      project: project,
+      conversation: conversation,
+      participant: participant,
+    });
   }
 
   /**
@@ -3522,12 +2773,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_conversation_participant resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectConversationParticipantName(
-    projectConversationParticipantName: string
-  ) {
-    return this.pathTemplates.projectConversationParticipantPathTemplate.match(
-      projectConversationParticipantName
-    ).project;
+  matchProjectFromProjectConversationParticipantName(projectConversationParticipantName: string) {
+    return this.pathTemplates.projectConversationParticipantPathTemplate.match(projectConversationParticipantName).project;
   }
 
   /**
@@ -3537,12 +2784,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_conversation_participant resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectConversationParticipantName(
-    projectConversationParticipantName: string
-  ) {
-    return this.pathTemplates.projectConversationParticipantPathTemplate.match(
-      projectConversationParticipantName
-    ).conversation;
+  matchConversationFromProjectConversationParticipantName(projectConversationParticipantName: string) {
+    return this.pathTemplates.projectConversationParticipantPathTemplate.match(projectConversationParticipantName).conversation;
   }
 
   /**
@@ -3552,12 +2795,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_conversation_participant resource.
    * @returns {string} A string representing the participant.
    */
-  matchParticipantFromProjectConversationParticipantName(
-    projectConversationParticipantName: string
-  ) {
-    return this.pathTemplates.projectConversationParticipantPathTemplate.match(
-      projectConversationParticipantName
-    ).participant;
+  matchParticipantFromProjectConversationParticipantName(projectConversationParticipantName: string) {
+    return this.pathTemplates.projectConversationParticipantPathTemplate.match(projectConversationParticipantName).participant;
   }
 
   /**
@@ -3567,7 +2806,7 @@ export class DocumentsClient {
    * @param {string} conversation_profile
    * @returns {string} Resource name string.
    */
-  projectConversationProfilePath(project: string, conversationProfile: string) {
+  projectConversationProfilePath(project:string,conversationProfile:string) {
     return this.pathTemplates.projectConversationProfilePathTemplate.render({
       project: project,
       conversation_profile: conversationProfile,
@@ -3581,12 +2820,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_conversation_profile resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectConversationProfileName(
-    projectConversationProfileName: string
-  ) {
-    return this.pathTemplates.projectConversationProfilePathTemplate.match(
-      projectConversationProfileName
-    ).project;
+  matchProjectFromProjectConversationProfileName(projectConversationProfileName: string) {
+    return this.pathTemplates.projectConversationProfilePathTemplate.match(projectConversationProfileName).project;
   }
 
   /**
@@ -3596,12 +2831,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_conversation_profile resource.
    * @returns {string} A string representing the conversation_profile.
    */
-  matchConversationProfileFromProjectConversationProfileName(
-    projectConversationProfileName: string
-  ) {
-    return this.pathTemplates.projectConversationProfilePathTemplate.match(
-      projectConversationProfileName
-    ).conversation_profile;
+  matchConversationProfileFromProjectConversationProfileName(projectConversationProfileName: string) {
+    return this.pathTemplates.projectConversationProfilePathTemplate.match(projectConversationProfileName).conversation_profile;
   }
 
   /**
@@ -3611,7 +2842,7 @@ export class DocumentsClient {
    * @param {string} knowledge_base
    * @returns {string} Resource name string.
    */
-  projectKnowledgeBasePath(project: string, knowledgeBase: string) {
+  projectKnowledgeBasePath(project:string,knowledgeBase:string) {
     return this.pathTemplates.projectKnowledgeBasePathTemplate.render({
       project: project,
       knowledge_base: knowledgeBase,
@@ -3626,9 +2857,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectKnowledgeBaseName(projectKnowledgeBaseName: string) {
-    return this.pathTemplates.projectKnowledgeBasePathTemplate.match(
-      projectKnowledgeBaseName
-    ).project;
+    return this.pathTemplates.projectKnowledgeBasePathTemplate.match(projectKnowledgeBaseName).project;
   }
 
   /**
@@ -3638,12 +2867,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_knowledge_base resource.
    * @returns {string} A string representing the knowledge_base.
    */
-  matchKnowledgeBaseFromProjectKnowledgeBaseName(
-    projectKnowledgeBaseName: string
-  ) {
-    return this.pathTemplates.projectKnowledgeBasePathTemplate.match(
-      projectKnowledgeBaseName
-    ).knowledge_base;
+  matchKnowledgeBaseFromProjectKnowledgeBaseName(projectKnowledgeBaseName: string) {
+    return this.pathTemplates.projectKnowledgeBasePathTemplate.match(projectKnowledgeBaseName).knowledge_base;
   }
 
   /**
@@ -3654,11 +2879,7 @@ export class DocumentsClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  projectKnowledgeBaseDocumentPath(
-    project: string,
-    knowledgeBase: string,
-    document: string
-  ) {
+  projectKnowledgeBaseDocumentPath(project:string,knowledgeBase:string,document:string) {
     return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.render({
       project: project,
       knowledge_base: knowledgeBase,
@@ -3673,12 +2894,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_knowledge_base_document resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectKnowledgeBaseDocumentName(
-    projectKnowledgeBaseDocumentName: string
-  ) {
-    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(
-      projectKnowledgeBaseDocumentName
-    ).project;
+  matchProjectFromProjectKnowledgeBaseDocumentName(projectKnowledgeBaseDocumentName: string) {
+    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(projectKnowledgeBaseDocumentName).project;
   }
 
   /**
@@ -3688,12 +2905,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_knowledge_base_document resource.
    * @returns {string} A string representing the knowledge_base.
    */
-  matchKnowledgeBaseFromProjectKnowledgeBaseDocumentName(
-    projectKnowledgeBaseDocumentName: string
-  ) {
-    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(
-      projectKnowledgeBaseDocumentName
-    ).knowledge_base;
+  matchKnowledgeBaseFromProjectKnowledgeBaseDocumentName(projectKnowledgeBaseDocumentName: string) {
+    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(projectKnowledgeBaseDocumentName).knowledge_base;
   }
 
   /**
@@ -3703,12 +2916,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_knowledge_base_document resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectKnowledgeBaseDocumentName(
-    projectKnowledgeBaseDocumentName: string
-  ) {
-    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(
-      projectKnowledgeBaseDocumentName
-    ).document;
+  matchDocumentFromProjectKnowledgeBaseDocumentName(projectKnowledgeBaseDocumentName: string) {
+    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(projectKnowledgeBaseDocumentName).document;
   }
 
   /**
@@ -3718,7 +2927,7 @@ export class DocumentsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  projectLocationAgentPath(project: string, location: string) {
+  projectLocationAgentPath(project:string,location:string) {
     return this.pathTemplates.projectLocationAgentPathTemplate.render({
       project: project,
       location: location,
@@ -3733,9 +2942,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this.pathTemplates.projectLocationAgentPathTemplate.match(
-      projectLocationAgentName
-    ).project;
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(projectLocationAgentName).project;
   }
 
   /**
@@ -3746,9 +2953,7 @@ export class DocumentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this.pathTemplates.projectLocationAgentPathTemplate.match(
-      projectLocationAgentName
-    ).location;
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(projectLocationAgentName).location;
   }
 
   /**
@@ -3759,18 +2964,12 @@ export class DocumentsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectLocationAgentEntityTypePath(
-    project: string,
-    location: string,
-    entityType: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        entity_type: entityType,
-      }
-    );
+  projectLocationAgentEntityTypePath(project:string,location:string,entityType:string) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.render({
+      project: project,
+      location: location,
+      entity_type: entityType,
+    });
   }
 
   /**
@@ -3780,12 +2979,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentEntityTypeName(
-    projectLocationAgentEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(
-      projectLocationAgentEntityTypeName
-    ).project;
+  matchProjectFromProjectLocationAgentEntityTypeName(projectLocationAgentEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(projectLocationAgentEntityTypeName).project;
   }
 
   /**
@@ -3795,12 +2990,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_entity_type resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentEntityTypeName(
-    projectLocationAgentEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(
-      projectLocationAgentEntityTypeName
-    ).location;
+  matchLocationFromProjectLocationAgentEntityTypeName(projectLocationAgentEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(projectLocationAgentEntityTypeName).location;
   }
 
   /**
@@ -3810,12 +3001,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationAgentEntityTypeName(
-    projectLocationAgentEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(
-      projectLocationAgentEntityTypeName
-    ).entity_type;
+  matchEntityTypeFromProjectLocationAgentEntityTypeName(projectLocationAgentEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(projectLocationAgentEntityTypeName).entity_type;
   }
 
   /**
@@ -3826,18 +3013,12 @@ export class DocumentsClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  projectLocationAgentEnvironmentPath(
-    project: string,
-    location: string,
-    environment: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        environment: environment,
-      }
-    );
+  projectLocationAgentEnvironmentPath(project:string,location:string,environment:string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.render({
+      project: project,
+      location: location,
+      environment: environment,
+    });
   }
 
   /**
@@ -3847,12 +3028,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_environment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentEnvironmentName(
-    projectLocationAgentEnvironmentName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(
-      projectLocationAgentEnvironmentName
-    ).project;
+  matchProjectFromProjectLocationAgentEnvironmentName(projectLocationAgentEnvironmentName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(projectLocationAgentEnvironmentName).project;
   }
 
   /**
@@ -3862,12 +3039,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_environment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentEnvironmentName(
-    projectLocationAgentEnvironmentName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(
-      projectLocationAgentEnvironmentName
-    ).location;
+  matchLocationFromProjectLocationAgentEnvironmentName(projectLocationAgentEnvironmentName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(projectLocationAgentEnvironmentName).location;
   }
 
   /**
@@ -3877,12 +3050,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_environment resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectLocationAgentEnvironmentName(
-    projectLocationAgentEnvironmentName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(
-      projectLocationAgentEnvironmentName
-    ).environment;
+  matchEnvironmentFromProjectLocationAgentEnvironmentName(projectLocationAgentEnvironmentName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(projectLocationAgentEnvironmentName).environment;
   }
 
   /**
@@ -3896,24 +3065,15 @@ export class DocumentsClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  projectLocationAgentEnvironmentUserSessionContextPath(
-    project: string,
-    location: string,
-    environment: string,
-    user: string,
-    session: string,
-    context: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        environment: environment,
-        user: user,
-        session: session,
-        context: context,
-      }
-    );
+  projectLocationAgentEnvironmentUserSessionContextPath(project:string,location:string,environment:string,user:string,session:string,context:string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.render({
+      project: project,
+      location: location,
+      environment: environment,
+      user: user,
+      session: session,
+      context: context,
+    });
   }
 
   /**
@@ -3923,12 +3083,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentEnvironmentUserSessionContextName(
-    projectLocationAgentEnvironmentUserSessionContextName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
-      projectLocationAgentEnvironmentUserSessionContextName
-    ).project;
+  matchProjectFromProjectLocationAgentEnvironmentUserSessionContextName(projectLocationAgentEnvironmentUserSessionContextName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(projectLocationAgentEnvironmentUserSessionContextName).project;
   }
 
   /**
@@ -3938,12 +3094,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentEnvironmentUserSessionContextName(
-    projectLocationAgentEnvironmentUserSessionContextName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
-      projectLocationAgentEnvironmentUserSessionContextName
-    ).location;
+  matchLocationFromProjectLocationAgentEnvironmentUserSessionContextName(projectLocationAgentEnvironmentUserSessionContextName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(projectLocationAgentEnvironmentUserSessionContextName).location;
   }
 
   /**
@@ -3953,12 +3105,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectLocationAgentEnvironmentUserSessionContextName(
-    projectLocationAgentEnvironmentUserSessionContextName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
-      projectLocationAgentEnvironmentUserSessionContextName
-    ).environment;
+  matchEnvironmentFromProjectLocationAgentEnvironmentUserSessionContextName(projectLocationAgentEnvironmentUserSessionContextName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(projectLocationAgentEnvironmentUserSessionContextName).environment;
   }
 
   /**
@@ -3968,12 +3116,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
    * @returns {string} A string representing the user.
    */
-  matchUserFromProjectLocationAgentEnvironmentUserSessionContextName(
-    projectLocationAgentEnvironmentUserSessionContextName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
-      projectLocationAgentEnvironmentUserSessionContextName
-    ).user;
+  matchUserFromProjectLocationAgentEnvironmentUserSessionContextName(projectLocationAgentEnvironmentUserSessionContextName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(projectLocationAgentEnvironmentUserSessionContextName).user;
   }
 
   /**
@@ -3983,12 +3127,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentEnvironmentUserSessionContextName(
-    projectLocationAgentEnvironmentUserSessionContextName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
-      projectLocationAgentEnvironmentUserSessionContextName
-    ).session;
+  matchSessionFromProjectLocationAgentEnvironmentUserSessionContextName(projectLocationAgentEnvironmentUserSessionContextName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(projectLocationAgentEnvironmentUserSessionContextName).session;
   }
 
   /**
@@ -3998,12 +3138,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
    * @returns {string} A string representing the context.
    */
-  matchContextFromProjectLocationAgentEnvironmentUserSessionContextName(
-    projectLocationAgentEnvironmentUserSessionContextName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
-      projectLocationAgentEnvironmentUserSessionContextName
-    ).context;
+  matchContextFromProjectLocationAgentEnvironmentUserSessionContextName(projectLocationAgentEnvironmentUserSessionContextName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(projectLocationAgentEnvironmentUserSessionContextName).context;
   }
 
   /**
@@ -4017,24 +3153,15 @@ export class DocumentsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectLocationAgentEnvironmentUserSessionEntityTypePath(
-    project: string,
-    location: string,
-    environment: string,
-    user: string,
-    session: string,
-    entityType: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        environment: environment,
-        user: user,
-        session: session,
-        entity_type: entityType,
-      }
-    );
+  projectLocationAgentEnvironmentUserSessionEntityTypePath(project:string,location:string,environment:string,user:string,session:string,entityType:string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.render({
+      project: project,
+      location: location,
+      environment: environment,
+      user: user,
+      session: session,
+      entity_type: entityType,
+    });
   }
 
   /**
@@ -4044,12 +3171,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
-    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentUserSessionEntityTypeName
-    ).project;
+  matchProjectFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(projectLocationAgentEnvironmentUserSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentUserSessionEntityTypeName).project;
   }
 
   /**
@@ -4059,12 +3182,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
-    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentUserSessionEntityTypeName
-    ).location;
+  matchLocationFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(projectLocationAgentEnvironmentUserSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentUserSessionEntityTypeName).location;
   }
 
   /**
@@ -4074,12 +3193,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
-    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentUserSessionEntityTypeName
-    ).environment;
+  matchEnvironmentFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(projectLocationAgentEnvironmentUserSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentUserSessionEntityTypeName).environment;
   }
 
   /**
@@ -4089,12 +3204,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the user.
    */
-  matchUserFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
-    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentUserSessionEntityTypeName
-    ).user;
+  matchUserFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(projectLocationAgentEnvironmentUserSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentUserSessionEntityTypeName).user;
   }
 
   /**
@@ -4104,12 +3215,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
-    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentUserSessionEntityTypeName
-    ).session;
+  matchSessionFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(projectLocationAgentEnvironmentUserSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentUserSessionEntityTypeName).session;
   }
 
   /**
@@ -4119,12 +3226,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
-    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentUserSessionEntityTypeName
-    ).entity_type;
+  matchEntityTypeFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(projectLocationAgentEnvironmentUserSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentUserSessionEntityTypeName).entity_type;
   }
 
   /**
@@ -4134,13 +3237,11 @@ export class DocumentsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  projectLocationAgentFulfillmentPath(project: string, location: string) {
-    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.render(
-      {
-        project: project,
-        location: location,
-      }
-    );
+  projectLocationAgentFulfillmentPath(project:string,location:string) {
+    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.render({
+      project: project,
+      location: location,
+    });
   }
 
   /**
@@ -4150,12 +3251,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_fulfillment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentFulfillmentName(
-    projectLocationAgentFulfillmentName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.match(
-      projectLocationAgentFulfillmentName
-    ).project;
+  matchProjectFromProjectLocationAgentFulfillmentName(projectLocationAgentFulfillmentName: string) {
+    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.match(projectLocationAgentFulfillmentName).project;
   }
 
   /**
@@ -4165,12 +3262,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_fulfillment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentFulfillmentName(
-    projectLocationAgentFulfillmentName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.match(
-      projectLocationAgentFulfillmentName
-    ).location;
+  matchLocationFromProjectLocationAgentFulfillmentName(projectLocationAgentFulfillmentName: string) {
+    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.match(projectLocationAgentFulfillmentName).location;
   }
 
   /**
@@ -4181,11 +3274,7 @@ export class DocumentsClient {
    * @param {string} intent
    * @returns {string} Resource name string.
    */
-  projectLocationAgentIntentPath(
-    project: string,
-    location: string,
-    intent: string
-  ) {
+  projectLocationAgentIntentPath(project:string,location:string,intent:string) {
     return this.pathTemplates.projectLocationAgentIntentPathTemplate.render({
       project: project,
       location: location,
@@ -4200,12 +3289,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_intent resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentIntentName(
-    projectLocationAgentIntentName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
-      projectLocationAgentIntentName
-    ).project;
+  matchProjectFromProjectLocationAgentIntentName(projectLocationAgentIntentName: string) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(projectLocationAgentIntentName).project;
   }
 
   /**
@@ -4215,12 +3300,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_intent resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentIntentName(
-    projectLocationAgentIntentName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
-      projectLocationAgentIntentName
-    ).location;
+  matchLocationFromProjectLocationAgentIntentName(projectLocationAgentIntentName: string) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(projectLocationAgentIntentName).location;
   }
 
   /**
@@ -4230,12 +3311,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_intent resource.
    * @returns {string} A string representing the intent.
    */
-  matchIntentFromProjectLocationAgentIntentName(
-    projectLocationAgentIntentName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
-      projectLocationAgentIntentName
-    ).intent;
+  matchIntentFromProjectLocationAgentIntentName(projectLocationAgentIntentName: string) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(projectLocationAgentIntentName).intent;
   }
 
   /**
@@ -4247,20 +3324,13 @@ export class DocumentsClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  projectLocationAgentSessionContextPath(
-    project: string,
-    location: string,
-    session: string,
-    context: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        session: session,
-        context: context,
-      }
-    );
+  projectLocationAgentSessionContextPath(project:string,location:string,session:string,context:string) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.render({
+      project: project,
+      location: location,
+      session: session,
+      context: context,
+    });
   }
 
   /**
@@ -4270,12 +3340,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_session_context resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentSessionContextName(
-    projectLocationAgentSessionContextName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
-      projectLocationAgentSessionContextName
-    ).project;
+  matchProjectFromProjectLocationAgentSessionContextName(projectLocationAgentSessionContextName: string) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(projectLocationAgentSessionContextName).project;
   }
 
   /**
@@ -4285,12 +3351,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_session_context resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentSessionContextName(
-    projectLocationAgentSessionContextName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
-      projectLocationAgentSessionContextName
-    ).location;
+  matchLocationFromProjectLocationAgentSessionContextName(projectLocationAgentSessionContextName: string) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(projectLocationAgentSessionContextName).location;
   }
 
   /**
@@ -4300,12 +3362,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_session_context resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentSessionContextName(
-    projectLocationAgentSessionContextName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
-      projectLocationAgentSessionContextName
-    ).session;
+  matchSessionFromProjectLocationAgentSessionContextName(projectLocationAgentSessionContextName: string) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(projectLocationAgentSessionContextName).session;
   }
 
   /**
@@ -4315,12 +3373,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_session_context resource.
    * @returns {string} A string representing the context.
    */
-  matchContextFromProjectLocationAgentSessionContextName(
-    projectLocationAgentSessionContextName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
-      projectLocationAgentSessionContextName
-    ).context;
+  matchContextFromProjectLocationAgentSessionContextName(projectLocationAgentSessionContextName: string) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(projectLocationAgentSessionContextName).context;
   }
 
   /**
@@ -4332,20 +3386,13 @@ export class DocumentsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectLocationAgentSessionEntityTypePath(
-    project: string,
-    location: string,
-    session: string,
-    entityType: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        session: session,
-        entity_type: entityType,
-      }
-    );
+  projectLocationAgentSessionEntityTypePath(project:string,location:string,session:string,entityType:string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render({
+      project: project,
+      location: location,
+      session: session,
+      entity_type: entityType,
+    });
   }
 
   /**
@@ -4355,12 +3402,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentSessionEntityTypeName(
-    projectLocationAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
-      projectLocationAgentSessionEntityTypeName
-    ).project;
+  matchProjectFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).project;
   }
 
   /**
@@ -4370,12 +3413,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentSessionEntityTypeName(
-    projectLocationAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
-      projectLocationAgentSessionEntityTypeName
-    ).location;
+  matchLocationFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).location;
   }
 
   /**
@@ -4385,12 +3424,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentSessionEntityTypeName(
-    projectLocationAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
-      projectLocationAgentSessionEntityTypeName
-    ).session;
+  matchSessionFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).session;
   }
 
   /**
@@ -4400,12 +3435,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(
-    projectLocationAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
-      projectLocationAgentSessionEntityTypeName
-    ).entity_type;
+  matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).entity_type;
   }
 
   /**
@@ -4416,11 +3447,7 @@ export class DocumentsClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  projectLocationAgentVersionPath(
-    project: string,
-    location: string,
-    version: string
-  ) {
+  projectLocationAgentVersionPath(project:string,location:string,version:string) {
     return this.pathTemplates.projectLocationAgentVersionPathTemplate.render({
       project: project,
       location: location,
@@ -4435,12 +3462,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_version resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentVersionName(
-    projectLocationAgentVersionName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(
-      projectLocationAgentVersionName
-    ).project;
+  matchProjectFromProjectLocationAgentVersionName(projectLocationAgentVersionName: string) {
+    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(projectLocationAgentVersionName).project;
   }
 
   /**
@@ -4450,12 +3473,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_version resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentVersionName(
-    projectLocationAgentVersionName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(
-      projectLocationAgentVersionName
-    ).location;
+  matchLocationFromProjectLocationAgentVersionName(projectLocationAgentVersionName: string) {
+    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(projectLocationAgentVersionName).location;
   }
 
   /**
@@ -4465,12 +3484,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_version resource.
    * @returns {string} A string representing the version.
    */
-  matchVersionFromProjectLocationAgentVersionName(
-    projectLocationAgentVersionName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(
-      projectLocationAgentVersionName
-    ).version;
+  matchVersionFromProjectLocationAgentVersionName(projectLocationAgentVersionName: string) {
+    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(projectLocationAgentVersionName).version;
   }
 
   /**
@@ -4481,11 +3496,7 @@ export class DocumentsClient {
    * @param {string} answer_record
    * @returns {string} Resource name string.
    */
-  projectLocationAnswerRecordPath(
-    project: string,
-    location: string,
-    answerRecord: string
-  ) {
+  projectLocationAnswerRecordPath(project:string,location:string,answerRecord:string) {
     return this.pathTemplates.projectLocationAnswerRecordPathTemplate.render({
       project: project,
       location: location,
@@ -4500,12 +3511,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_answer_record resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAnswerRecordName(
-    projectLocationAnswerRecordName: string
-  ) {
-    return this.pathTemplates.projectLocationAnswerRecordPathTemplate.match(
-      projectLocationAnswerRecordName
-    ).project;
+  matchProjectFromProjectLocationAnswerRecordName(projectLocationAnswerRecordName: string) {
+    return this.pathTemplates.projectLocationAnswerRecordPathTemplate.match(projectLocationAnswerRecordName).project;
   }
 
   /**
@@ -4515,12 +3522,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_answer_record resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAnswerRecordName(
-    projectLocationAnswerRecordName: string
-  ) {
-    return this.pathTemplates.projectLocationAnswerRecordPathTemplate.match(
-      projectLocationAnswerRecordName
-    ).location;
+  matchLocationFromProjectLocationAnswerRecordName(projectLocationAnswerRecordName: string) {
+    return this.pathTemplates.projectLocationAnswerRecordPathTemplate.match(projectLocationAnswerRecordName).location;
   }
 
   /**
@@ -4530,12 +3533,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_answer_record resource.
    * @returns {string} A string representing the answer_record.
    */
-  matchAnswerRecordFromProjectLocationAnswerRecordName(
-    projectLocationAnswerRecordName: string
-  ) {
-    return this.pathTemplates.projectLocationAnswerRecordPathTemplate.match(
-      projectLocationAnswerRecordName
-    ).answer_record;
+  matchAnswerRecordFromProjectLocationAnswerRecordName(projectLocationAnswerRecordName: string) {
+    return this.pathTemplates.projectLocationAnswerRecordPathTemplate.match(projectLocationAnswerRecordName).answer_record;
   }
 
   /**
@@ -4546,11 +3545,7 @@ export class DocumentsClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  projectLocationConversationPath(
-    project: string,
-    location: string,
-    conversation: string
-  ) {
+  projectLocationConversationPath(project:string,location:string,conversation:string) {
     return this.pathTemplates.projectLocationConversationPathTemplate.render({
       project: project,
       location: location,
@@ -4565,12 +3560,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationConversationName(
-    projectLocationConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationPathTemplate.match(
-      projectLocationConversationName
-    ).project;
+  matchProjectFromProjectLocationConversationName(projectLocationConversationName: string) {
+    return this.pathTemplates.projectLocationConversationPathTemplate.match(projectLocationConversationName).project;
   }
 
   /**
@@ -4580,12 +3571,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationConversationName(
-    projectLocationConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationPathTemplate.match(
-      projectLocationConversationName
-    ).location;
+  matchLocationFromProjectLocationConversationName(projectLocationConversationName: string) {
+    return this.pathTemplates.projectLocationConversationPathTemplate.match(projectLocationConversationName).location;
   }
 
   /**
@@ -4595,12 +3582,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectLocationConversationName(
-    projectLocationConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationPathTemplate.match(
-      projectLocationConversationName
-    ).conversation;
+  matchConversationFromProjectLocationConversationName(projectLocationConversationName: string) {
+    return this.pathTemplates.projectLocationConversationPathTemplate.match(projectLocationConversationName).conversation;
   }
 
   /**
@@ -4612,20 +3595,13 @@ export class DocumentsClient {
    * @param {string} message
    * @returns {string} Resource name string.
    */
-  projectLocationConversationMessagePath(
-    project: string,
-    location: string,
-    conversation: string,
-    message: string
-  ) {
-    return this.pathTemplates.projectLocationConversationMessagePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        conversation: conversation,
-        message: message,
-      }
-    );
+  projectLocationConversationMessagePath(project:string,location:string,conversation:string,message:string) {
+    return this.pathTemplates.projectLocationConversationMessagePathTemplate.render({
+      project: project,
+      location: location,
+      conversation: conversation,
+      message: message,
+    });
   }
 
   /**
@@ -4635,12 +3611,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_message resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationConversationMessageName(
-    projectLocationConversationMessageName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(
-      projectLocationConversationMessageName
-    ).project;
+  matchProjectFromProjectLocationConversationMessageName(projectLocationConversationMessageName: string) {
+    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(projectLocationConversationMessageName).project;
   }
 
   /**
@@ -4650,12 +3622,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_message resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationConversationMessageName(
-    projectLocationConversationMessageName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(
-      projectLocationConversationMessageName
-    ).location;
+  matchLocationFromProjectLocationConversationMessageName(projectLocationConversationMessageName: string) {
+    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(projectLocationConversationMessageName).location;
   }
 
   /**
@@ -4665,12 +3633,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_message resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectLocationConversationMessageName(
-    projectLocationConversationMessageName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(
-      projectLocationConversationMessageName
-    ).conversation;
+  matchConversationFromProjectLocationConversationMessageName(projectLocationConversationMessageName: string) {
+    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(projectLocationConversationMessageName).conversation;
   }
 
   /**
@@ -4680,12 +3644,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_message resource.
    * @returns {string} A string representing the message.
    */
-  matchMessageFromProjectLocationConversationMessageName(
-    projectLocationConversationMessageName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(
-      projectLocationConversationMessageName
-    ).message;
+  matchMessageFromProjectLocationConversationMessageName(projectLocationConversationMessageName: string) {
+    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(projectLocationConversationMessageName).message;
   }
 
   /**
@@ -4696,18 +3656,12 @@ export class DocumentsClient {
    * @param {string} conversation_model
    * @returns {string} Resource name string.
    */
-  projectLocationConversationModelPath(
-    project: string,
-    location: string,
-    conversationModel: string
-  ) {
-    return this.pathTemplates.projectLocationConversationModelPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        conversation_model: conversationModel,
-      }
-    );
+  projectLocationConversationModelPath(project:string,location:string,conversationModel:string) {
+    return this.pathTemplates.projectLocationConversationModelPathTemplate.render({
+      project: project,
+      location: location,
+      conversation_model: conversationModel,
+    });
   }
 
   /**
@@ -4717,12 +3671,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_model resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationConversationModelName(
-    projectLocationConversationModelName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(
-      projectLocationConversationModelName
-    ).project;
+  matchProjectFromProjectLocationConversationModelName(projectLocationConversationModelName: string) {
+    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(projectLocationConversationModelName).project;
   }
 
   /**
@@ -4732,12 +3682,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_model resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationConversationModelName(
-    projectLocationConversationModelName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(
-      projectLocationConversationModelName
-    ).location;
+  matchLocationFromProjectLocationConversationModelName(projectLocationConversationModelName: string) {
+    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(projectLocationConversationModelName).location;
   }
 
   /**
@@ -4747,12 +3693,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_model resource.
    * @returns {string} A string representing the conversation_model.
    */
-  matchConversationModelFromProjectLocationConversationModelName(
-    projectLocationConversationModelName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(
-      projectLocationConversationModelName
-    ).conversation_model;
+  matchConversationModelFromProjectLocationConversationModelName(projectLocationConversationModelName: string) {
+    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(projectLocationConversationModelName).conversation_model;
   }
 
   /**
@@ -4764,20 +3706,13 @@ export class DocumentsClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  projectLocationConversationModelEvaluationPath(
-    project: string,
-    location: string,
-    conversationModel: string,
-    evaluation: string
-  ) {
-    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        conversation_model: conversationModel,
-        evaluation: evaluation,
-      }
-    );
+  projectLocationConversationModelEvaluationPath(project:string,location:string,conversationModel:string,evaluation:string) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.render({
+      project: project,
+      location: location,
+      conversation_model: conversationModel,
+      evaluation: evaluation,
+    });
   }
 
   /**
@@ -4787,12 +3722,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_model_evaluation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationConversationModelEvaluationName(
-    projectLocationConversationModelEvaluationName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(
-      projectLocationConversationModelEvaluationName
-    ).project;
+  matchProjectFromProjectLocationConversationModelEvaluationName(projectLocationConversationModelEvaluationName: string) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(projectLocationConversationModelEvaluationName).project;
   }
 
   /**
@@ -4802,12 +3733,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_model_evaluation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationConversationModelEvaluationName(
-    projectLocationConversationModelEvaluationName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(
-      projectLocationConversationModelEvaluationName
-    ).location;
+  matchLocationFromProjectLocationConversationModelEvaluationName(projectLocationConversationModelEvaluationName: string) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(projectLocationConversationModelEvaluationName).location;
   }
 
   /**
@@ -4817,12 +3744,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_model_evaluation resource.
    * @returns {string} A string representing the conversation_model.
    */
-  matchConversationModelFromProjectLocationConversationModelEvaluationName(
-    projectLocationConversationModelEvaluationName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(
-      projectLocationConversationModelEvaluationName
-    ).conversation_model;
+  matchConversationModelFromProjectLocationConversationModelEvaluationName(projectLocationConversationModelEvaluationName: string) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(projectLocationConversationModelEvaluationName).conversation_model;
   }
 
   /**
@@ -4832,12 +3755,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_model_evaluation resource.
    * @returns {string} A string representing the evaluation.
    */
-  matchEvaluationFromProjectLocationConversationModelEvaluationName(
-    projectLocationConversationModelEvaluationName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(
-      projectLocationConversationModelEvaluationName
-    ).evaluation;
+  matchEvaluationFromProjectLocationConversationModelEvaluationName(projectLocationConversationModelEvaluationName: string) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(projectLocationConversationModelEvaluationName).evaluation;
   }
 
   /**
@@ -4849,20 +3768,13 @@ export class DocumentsClient {
    * @param {string} participant
    * @returns {string} Resource name string.
    */
-  projectLocationConversationParticipantPath(
-    project: string,
-    location: string,
-    conversation: string,
-    participant: string
-  ) {
-    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        conversation: conversation,
-        participant: participant,
-      }
-    );
+  projectLocationConversationParticipantPath(project:string,location:string,conversation:string,participant:string) {
+    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.render({
+      project: project,
+      location: location,
+      conversation: conversation,
+      participant: participant,
+    });
   }
 
   /**
@@ -4872,12 +3784,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_participant resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationConversationParticipantName(
-    projectLocationConversationParticipantName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(
-      projectLocationConversationParticipantName
-    ).project;
+  matchProjectFromProjectLocationConversationParticipantName(projectLocationConversationParticipantName: string) {
+    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(projectLocationConversationParticipantName).project;
   }
 
   /**
@@ -4887,12 +3795,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_participant resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationConversationParticipantName(
-    projectLocationConversationParticipantName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(
-      projectLocationConversationParticipantName
-    ).location;
+  matchLocationFromProjectLocationConversationParticipantName(projectLocationConversationParticipantName: string) {
+    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(projectLocationConversationParticipantName).location;
   }
 
   /**
@@ -4902,12 +3806,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_participant resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectLocationConversationParticipantName(
-    projectLocationConversationParticipantName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(
-      projectLocationConversationParticipantName
-    ).conversation;
+  matchConversationFromProjectLocationConversationParticipantName(projectLocationConversationParticipantName: string) {
+    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(projectLocationConversationParticipantName).conversation;
   }
 
   /**
@@ -4917,12 +3817,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_participant resource.
    * @returns {string} A string representing the participant.
    */
-  matchParticipantFromProjectLocationConversationParticipantName(
-    projectLocationConversationParticipantName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(
-      projectLocationConversationParticipantName
-    ).participant;
+  matchParticipantFromProjectLocationConversationParticipantName(projectLocationConversationParticipantName: string) {
+    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(projectLocationConversationParticipantName).participant;
   }
 
   /**
@@ -4933,18 +3829,12 @@ export class DocumentsClient {
    * @param {string} conversation_profile
    * @returns {string} Resource name string.
    */
-  projectLocationConversationProfilePath(
-    project: string,
-    location: string,
-    conversationProfile: string
-  ) {
-    return this.pathTemplates.projectLocationConversationProfilePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        conversation_profile: conversationProfile,
-      }
-    );
+  projectLocationConversationProfilePath(project:string,location:string,conversationProfile:string) {
+    return this.pathTemplates.projectLocationConversationProfilePathTemplate.render({
+      project: project,
+      location: location,
+      conversation_profile: conversationProfile,
+    });
   }
 
   /**
@@ -4954,12 +3844,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_profile resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationConversationProfileName(
-    projectLocationConversationProfileName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationProfilePathTemplate.match(
-      projectLocationConversationProfileName
-    ).project;
+  matchProjectFromProjectLocationConversationProfileName(projectLocationConversationProfileName: string) {
+    return this.pathTemplates.projectLocationConversationProfilePathTemplate.match(projectLocationConversationProfileName).project;
   }
 
   /**
@@ -4969,12 +3855,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationConversationProfileName(
-    projectLocationConversationProfileName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationProfilePathTemplate.match(
-      projectLocationConversationProfileName
-    ).location;
+  matchLocationFromProjectLocationConversationProfileName(projectLocationConversationProfileName: string) {
+    return this.pathTemplates.projectLocationConversationProfilePathTemplate.match(projectLocationConversationProfileName).location;
   }
 
   /**
@@ -4984,12 +3866,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_conversation_profile resource.
    * @returns {string} A string representing the conversation_profile.
    */
-  matchConversationProfileFromProjectLocationConversationProfileName(
-    projectLocationConversationProfileName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationProfilePathTemplate.match(
-      projectLocationConversationProfileName
-    ).conversation_profile;
+  matchConversationProfileFromProjectLocationConversationProfileName(projectLocationConversationProfileName: string) {
+    return this.pathTemplates.projectLocationConversationProfilePathTemplate.match(projectLocationConversationProfileName).conversation_profile;
   }
 
   /**
@@ -5000,11 +3878,7 @@ export class DocumentsClient {
    * @param {string} knowledge_base
    * @returns {string} Resource name string.
    */
-  projectLocationKnowledgeBasePath(
-    project: string,
-    location: string,
-    knowledgeBase: string
-  ) {
+  projectLocationKnowledgeBasePath(project:string,location:string,knowledgeBase:string) {
     return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.render({
       project: project,
       location: location,
@@ -5019,12 +3893,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_knowledge_base resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationKnowledgeBaseName(
-    projectLocationKnowledgeBaseName: string
-  ) {
-    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(
-      projectLocationKnowledgeBaseName
-    ).project;
+  matchProjectFromProjectLocationKnowledgeBaseName(projectLocationKnowledgeBaseName: string) {
+    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(projectLocationKnowledgeBaseName).project;
   }
 
   /**
@@ -5034,12 +3904,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_knowledge_base resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationKnowledgeBaseName(
-    projectLocationKnowledgeBaseName: string
-  ) {
-    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(
-      projectLocationKnowledgeBaseName
-    ).location;
+  matchLocationFromProjectLocationKnowledgeBaseName(projectLocationKnowledgeBaseName: string) {
+    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(projectLocationKnowledgeBaseName).location;
   }
 
   /**
@@ -5049,12 +3915,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_knowledge_base resource.
    * @returns {string} A string representing the knowledge_base.
    */
-  matchKnowledgeBaseFromProjectLocationKnowledgeBaseName(
-    projectLocationKnowledgeBaseName: string
-  ) {
-    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(
-      projectLocationKnowledgeBaseName
-    ).knowledge_base;
+  matchKnowledgeBaseFromProjectLocationKnowledgeBaseName(projectLocationKnowledgeBaseName: string) {
+    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(projectLocationKnowledgeBaseName).knowledge_base;
   }
 
   /**
@@ -5066,20 +3928,13 @@ export class DocumentsClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  projectLocationKnowledgeBaseDocumentPath(
-    project: string,
-    location: string,
-    knowledgeBase: string,
-    document: string
-  ) {
-    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        knowledge_base: knowledgeBase,
-        document: document,
-      }
-    );
+  projectLocationKnowledgeBaseDocumentPath(project:string,location:string,knowledgeBase:string,document:string) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.render({
+      project: project,
+      location: location,
+      knowledge_base: knowledgeBase,
+      document: document,
+    });
   }
 
   /**
@@ -5089,12 +3944,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_knowledge_base_document resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationKnowledgeBaseDocumentName(
-    projectLocationKnowledgeBaseDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
-      projectLocationKnowledgeBaseDocumentName
-    ).project;
+  matchProjectFromProjectLocationKnowledgeBaseDocumentName(projectLocationKnowledgeBaseDocumentName: string) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(projectLocationKnowledgeBaseDocumentName).project;
   }
 
   /**
@@ -5104,12 +3955,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_knowledge_base_document resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationKnowledgeBaseDocumentName(
-    projectLocationKnowledgeBaseDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
-      projectLocationKnowledgeBaseDocumentName
-    ).location;
+  matchLocationFromProjectLocationKnowledgeBaseDocumentName(projectLocationKnowledgeBaseDocumentName: string) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(projectLocationKnowledgeBaseDocumentName).location;
   }
 
   /**
@@ -5119,12 +3966,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_knowledge_base_document resource.
    * @returns {string} A string representing the knowledge_base.
    */
-  matchKnowledgeBaseFromProjectLocationKnowledgeBaseDocumentName(
-    projectLocationKnowledgeBaseDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
-      projectLocationKnowledgeBaseDocumentName
-    ).knowledge_base;
+  matchKnowledgeBaseFromProjectLocationKnowledgeBaseDocumentName(projectLocationKnowledgeBaseDocumentName: string) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(projectLocationKnowledgeBaseDocumentName).knowledge_base;
   }
 
   /**
@@ -5134,12 +3977,8 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_knowledge_base_document resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectLocationKnowledgeBaseDocumentName(
-    projectLocationKnowledgeBaseDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
-      projectLocationKnowledgeBaseDocumentName
-    ).document;
+  matchDocumentFromProjectLocationKnowledgeBaseDocumentName(projectLocationKnowledgeBaseDocumentName: string) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(projectLocationKnowledgeBaseDocumentName).document;
   }
 
   /**
@@ -5154,8 +3993,8 @@ export class DocumentsClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.locationsClient.close().catch(err => {throw err});
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

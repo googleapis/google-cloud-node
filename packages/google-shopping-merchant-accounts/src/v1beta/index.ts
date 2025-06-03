@@ -24,7 +24,10 @@ export {AutomaticImprovementsServiceClient} from './automatic_improvements_servi
 export {BusinessIdentityServiceClient} from './business_identity_service_client';
 export {BusinessInfoServiceClient} from './business_info_service_client';
 export {EmailPreferencesServiceClient} from './email_preferences_service_client';
+export {GbpAccountsServiceClient} from './gbp_accounts_service_client';
 export {HomepageServiceClient} from './homepage_service_client';
+export {LfpProvidersServiceClient} from './lfp_providers_service_client';
+export {OmnichannelSettingsServiceClient} from './omnichannel_settings_service_client';
 export {OnlineReturnPolicyServiceClient} from './online_return_policy_service_client';
 export {ProgramsServiceClient} from './programs_service_client';
 export {RegionsServiceClient} from './regions_service_client';

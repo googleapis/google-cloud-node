@@ -40,7 +40,7 @@ import * as gapicConfig from './case_attachment_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  A service to manage file attachment for Google Cloud support cases.
+ *  A service to manage file attachments for Google Cloud support cases.
  * @class
  * @memberof v2
  */
@@ -400,17 +400,21 @@ export class CaseAttachmentServiceClient {
   // -------------------
 
   /**
-   * Retrieve all attachments associated with a support case.
+   * List all the attachments associated with a support case.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of Case object for which attachments should be
-   *   listed.
+   *   Required. The name of the case for which attachments should be listed.
    * @param {number} request.pageSize
-   *   The maximum number of attachments fetched with each request. If not
-   *   provided, the default is 10. The maximum page size that will be returned is
-   *   100.
+   *   The maximum number of attachments fetched with each request.
+   *
+   *   If not provided, the default is 10. The maximum page size that will be
+   *   returned is 100.
+   *
+   *   The size of each page can be smaller than the requested page size and can
+   *   include zero. For example, you could request 100 attachments on one page,
+   *   receive 0, and then on the next page, receive 90.
    * @param {string} request.pageToken
    *   A token identifying the page of results to return. If unspecified, the
    *   first page is retrieved.
@@ -534,12 +538,16 @@ export class CaseAttachmentServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of Case object for which attachments should be
-   *   listed.
+   *   Required. The name of the case for which attachments should be listed.
    * @param {number} request.pageSize
-   *   The maximum number of attachments fetched with each request. If not
-   *   provided, the default is 10. The maximum page size that will be returned is
-   *   100.
+   *   The maximum number of attachments fetched with each request.
+   *
+   *   If not provided, the default is 10. The maximum page size that will be
+   *   returned is 100.
+   *
+   *   The size of each page can be smaller than the requested page size and can
+   *   include zero. For example, you could request 100 attachments on one page,
+   *   receive 0, and then on the next page, receive 90.
    * @param {string} request.pageToken
    *   A token identifying the page of results to return. If unspecified, the
    *   first page is retrieved.
@@ -586,12 +594,16 @@ export class CaseAttachmentServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of Case object for which attachments should be
-   *   listed.
+   *   Required. The name of the case for which attachments should be listed.
    * @param {number} request.pageSize
-   *   The maximum number of attachments fetched with each request. If not
-   *   provided, the default is 10. The maximum page size that will be returned is
-   *   100.
+   *   The maximum number of attachments fetched with each request.
+   *
+   *   If not provided, the default is 10. The maximum page size that will be
+   *   returned is 100.
+   *
+   *   The size of each page can be smaller than the requested page size and can
+   *   include zero. For example, you could request 100 attachments on one page,
+   *   receive 0, and then on the next page, receive 90.
    * @param {string} request.pageToken
    *   A token identifying the page of results to return. If unspecified, the
    *   first page is retrieved.

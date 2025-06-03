@@ -198,9 +198,14 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         throw err;
       });
       assert(client.snapshotsV1Beta3Stub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -209,9 +214,14 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.snapshotsV1Beta3Stub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -414,7 +424,9 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       );
       request.snapshotId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSnapshot(request), expectedError);
     });
   });
@@ -584,7 +596,9 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       );
       request.snapshotId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteSnapshot(request), expectedError);
     });
   });
@@ -754,7 +768,9 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       );
       request.jobId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listSnapshots(request), expectedError);
     });
   });

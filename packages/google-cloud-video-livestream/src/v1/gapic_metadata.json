@@ -40,6 +40,11 @@
                 "getClip"
               ]
             },
+            "GetDvrSession": {
+              "methods": [
+                "getDvrSession"
+              ]
+            },
             "GetAsset": {
               "methods": [
                 "getAsset"
@@ -100,6 +105,21 @@
                 "deleteClip"
               ]
             },
+            "CreateDvrSession": {
+              "methods": [
+                "createDvrSession"
+              ]
+            },
+            "DeleteDvrSession": {
+              "methods": [
+                "deleteDvrSession"
+              ]
+            },
+            "UpdateDvrSession": {
+              "methods": [
+                "updateDvrSession"
+              ]
+            },
             "CreateAsset": {
               "methods": [
                 "createAsset"
@@ -141,6 +161,13 @@
                 "listClips",
                 "listClipsStream",
                 "listClipsAsync"
+              ]
+            },
+            "ListDvrSessions": {
+              "methods": [
+                "listDvrSessions",
+                "listDvrSessionsStream",
+                "listDvrSessionsAsync"
               ]
             },
             "ListAssets": {
@@ -185,6 +212,11 @@
                 "getClip"
               ]
             },
+            "GetDvrSession": {
+              "methods": [
+                "getDvrSession"
+              ]
+            },
             "GetAsset": {
               "methods": [
                 "getAsset"
@@ -245,6 +277,21 @@
                 "deleteClip"
               ]
             },
+            "CreateDvrSession": {
+              "methods": [
+                "createDvrSession"
+              ]
+            },
+            "DeleteDvrSession": {
+              "methods": [
+                "deleteDvrSession"
+              ]
+            },
+            "UpdateDvrSession": {
+              "methods": [
+                "updateDvrSession"
+              ]
+            },
             "CreateAsset": {
               "methods": [
                 "createAsset"
@@ -286,6 +333,13 @@
                 "listClips",
                 "listClipsStream",
                 "listClipsAsync"
+              ]
+            },
+            "ListDvrSessions": {
+              "methods": [
+                "listDvrSessions",
+                "listDvrSessionsStream",
+                "listDvrSessionsAsync"
               ]
             },
             "ListAssets": {

@@ -256,9 +256,14 @@ describe('v2beta.SpacesServiceClient', () => {
         throw err;
       });
       assert(client.spacesServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -267,9 +272,14 @@ describe('v2beta.SpacesServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.spacesServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -385,7 +395,9 @@ describe('v2beta.SpacesServiceClient', () => {
         new protos.google.apps.meet.v2beta.CreateSpaceRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createSpace(request), expectedError);
     });
   });
@@ -512,7 +524,9 @@ describe('v2beta.SpacesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSpace(request), expectedError);
     });
   });
@@ -646,7 +660,9 @@ describe('v2beta.SpacesServiceClient', () => {
       );
       request.space.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateSpace(request), expectedError);
     });
   });
@@ -780,7 +796,9 @@ describe('v2beta.SpacesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.connectActiveConference(request),
         expectedError
@@ -914,7 +932,9 @@ describe('v2beta.SpacesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.endActiveConference(request), expectedError);
     });
   });
@@ -1044,7 +1064,9 @@ describe('v2beta.SpacesServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createMember(request), expectedError);
     });
   });
@@ -1171,7 +1193,9 @@ describe('v2beta.SpacesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getMember(request), expectedError);
     });
   });
@@ -1301,7 +1325,9 @@ describe('v2beta.SpacesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteMember(request), expectedError);
     });
   });
