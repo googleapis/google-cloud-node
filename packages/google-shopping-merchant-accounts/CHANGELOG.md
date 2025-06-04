@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v2.1.0...accounts-v2.2.0) (2025-06-03)
+
+
+### Features
+
+* [merchantapi] A new method_signature `parent,online_return_policy` is added to method `CreateOnlineReturnPolicy` in service `OnlineReturnPolicyService` ([#6367](https://github.com/googleapis/google-cloud-node/issues/6367)) ([6d7aab5](https://github.com/googleapis/google-cloud-node/commit/6d7aab56caabb08b8ff2ee68f599d6c63112622e))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v2.0.0...accounts-v2.1.0) (2025-03-19)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.8.0...edgenetwork-v0.9.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([b3bd921](https://github.com/googleapis/google-cloud-node/commit/b3bd921a30b15a632d8e8495b91723d314c23c71))
+
 ## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.7.1...edgenetwork-v0.8.0) (2025-05-09)
 
 

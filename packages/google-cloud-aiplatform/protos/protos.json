@@ -37,6 +37,8 @@
                         "NVIDIA_L4": 11,
                         "NVIDIA_H100_80GB": 13,
                         "NVIDIA_H100_MEGA_80GB": 14,
+                        "NVIDIA_H200_141GB": 15,
+                        "NVIDIA_B200": 16,
                         "TPU_V2": 6,
                         "TPU_V3": 7,
                         "TPU_V4_POD": 10,
@@ -2814,7 +2816,9 @@
                             "functionCall",
                             "functionResponse",
                             "executableCode",
-                            "codeExecutionResult"
+                            "codeExecutionResult",
+                            "thought",
+                            "thoughtSignature"
                           ]
                         },
                         "metadata": {
@@ -2869,6 +2873,20 @@
                         "codeExecutionResult": {
                           "type": "CodeExecutionResult",
                           "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "thought": {
+                          "type": "bool",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "thoughtSignature": {
+                          "type": "bytes",
+                          "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2993,6 +3011,11 @@
                             "responseSchema"
                           ]
                         },
+                        "_responseJsonSchema": {
+                          "oneof": [
+                            "responseJsonSchema"
+                          ]
+                        },
                         "_routingConfig": {
                           "oneof": [
                             "routingConfig"
@@ -3103,6 +3126,14 @@
                             "proto3_optional": true
                           }
                         },
+                        "responseJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
                         "routingConfig": {
                           "type": "RoutingConfig",
                           "id": 17,
@@ -3190,6 +3221,11 @@
                         },
                         "ThinkingConfig": {
                           "oneofs": {
+                            "_includeThoughts": {
+                              "oneof": [
+                                "includeThoughts"
+                              ]
+                            },
                             "_thinkingBudget": {
                               "oneof": [
                                 "thinkingBudget"
@@ -3197,6 +3233,14 @@
                             }
                           },
                           "fields": {
+                            "includeThoughts": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
                             "thinkingBudget": {
                               "type": "int32",
                               "id": 3,
@@ -3971,6 +4015,28 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "additionalProperties": {
+                          "type": "google.protobuf.Value",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ref": {
+                          "type": "string",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "defs": {
+                          "keyType": "string",
+                          "type": "Schema",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4018,6 +4084,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "urlContext": {
+                          "type": "UrlContext",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -4028,6 +4101,9 @@
                           "fields": {}
                         }
                       }
+                    },
+                    "UrlContext": {
+                      "fields": {}
                     },
                     "FunctionDeclaration": {
                       "fields": {
@@ -4052,9 +4128,23 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "parametersJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "response": {
                           "type": "Schema",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "responseJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -4264,6 +4354,42 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxResults": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dataStoreSpecs": {
+                          "rule": "repeated",
+                          "type": "DataStoreSpec",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "DataStoreSpec": {
+                          "fields": {
+                            "dataStore": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }
@@ -4594,7 +4720,41 @@
                       },
                       "nested": {
                         "RagManagedDb": {
-                          "fields": {}
+                          "oneofs": {
+                            "retrievalStrategy": {
+                              "oneof": [
+                                "knn",
+                                "ann"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "knn": {
+                              "type": "KNN",
+                              "id": 1
+                            },
+                            "ann": {
+                              "type": "ANN",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "KNN": {
+                              "fields": {}
+                            },
+                            "ANN": {
+                              "fields": {
+                                "treeDepth": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "leafCount": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
                         },
                         "Pinecone": {
                           "fields": {
@@ -4929,7 +5089,8 @@
                       "oneofs": {
                         "parser": {
                           "oneof": [
-                            "layoutParser"
+                            "layoutParser",
+                            "llmParser"
                           ]
                         }
                       },
@@ -4937,6 +5098,10 @@
                         "layoutParser": {
                           "type": "LayoutParser",
                           "id": 4
+                        },
+                        "llmParser": {
+                          "type": "LlmParser",
+                          "id": 5
                         }
                       },
                       "nested": {
@@ -4949,6 +5114,22 @@
                             "maxParsingRequestsPerMin": {
                               "type": "int32",
                               "id": 2
+                            }
+                          }
+                        },
+                        "LlmParser": {
+                          "fields": {
+                            "modelName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "maxParsingRequestsPerMin": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "customParsingPrompt": {
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         }
@@ -5046,6 +5227,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "rebuildAnnIndex": {
+                          "type": "bool",
+                          "id": 19
                         }
                       }
                     },
@@ -5256,6 +5441,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pscInterfaceConfig": {
+                          "type": "PscInterfaceConfig",
+                          "id": 21,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5474,6 +5666,75 @@
                             "STANDARD": 3,
                             "SPOT": 4,
                             "FLEX_START": 6
+                          }
+                        }
+                      }
+                    },
+                    "PSCAutomationConfig": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PrivateServiceConnectConfig": {
+                      "fields": {
+                        "enablePrivateServiceConnect": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "projectAllowlist": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "serviceAttachment": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "PscAutomatedEndpoints": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "matchAddress": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PscInterfaceConfig": {
+                      "fields": {
+                        "networkAttachment": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/NetworkAttachment"
                           }
                         }
                       }
@@ -7880,6 +8141,10 @@
                           "type": "string",
                           "id": 28
                         },
+                        "checkpointId": {
+                          "type": "string",
+                          "id": 29
+                        },
                         "speculativeDecodingSpec": {
                           "type": "SpeculativeDecodingSpec",
                           "id": 30,
@@ -8023,63 +8288,6 @@
                               "id": 1
                             }
                           }
-                        }
-                      }
-                    },
-                    "PSCAutomationConfig": {
-                      "fields": {
-                        "projectId": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "network": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "PrivateServiceConnectConfig": {
-                      "fields": {
-                        "enablePrivateServiceConnect": {
-                          "type": "bool",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "projectAllowlist": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        },
-                        "serviceAttachment": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "PscAutomatedEndpoints": {
-                      "fields": {
-                        "projectId": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "network": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "matchAddress": {
-                          "type": "string",
-                          "id": 3
                         }
                       }
                     },
@@ -17003,6 +17211,14 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
                           }
+                        },
+                        "checkpoints": {
+                          "rule": "repeated",
+                          "type": "TunedModelCheckpoint",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -17170,12 +17386,26 @@
                         },
                         "totalTruncatedExampleCount": {
                           "type": "int64",
-                          "id": 10
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "truncatedExampleIndices": {
                           "rule": "repeated",
                           "type": "int64",
-                          "id": 11
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "droppedExampleReasons": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -17223,9 +17453,11 @@
                           "values": {
                             "ADAPTER_SIZE_UNSPECIFIED": 0,
                             "ADAPTER_SIZE_ONE": 1,
+                            "ADAPTER_SIZE_TWO": 6,
                             "ADAPTER_SIZE_FOUR": 2,
                             "ADAPTER_SIZE_EIGHT": 3,
-                            "ADAPTER_SIZE_SIXTEEN": 4
+                            "ADAPTER_SIZE_SIXTEEN": 4,
+                            "ADAPTER_SIZE_THIRTY_TWO": 5
                           }
                         }
                       }
@@ -17249,6 +17481,13 @@
                         "hyperParameters": {
                           "type": "SupervisedHyperParameters",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "exportLastCheckpointOnly": {
+                          "type": "bool",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -17286,6 +17525,26 @@
                           "options": {
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/PipelineJob"
                           }
+                        }
+                      }
+                    },
+                    "TunedModelCheckpoint": {
+                      "fields": {
+                        "checkpointId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "epoch": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "step": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "endpoint": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -22924,6 +23183,13 @@
                             "candidatesTokenCount": {
                               "type": "int32",
                               "id": 2
+                            },
+                            "thoughtsTokenCount": {
+                              "type": "int32",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "totalTokenCount": {
                               "type": "int32",
@@ -28711,6 +28977,13 @@
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
                         },
+                        "pscInterfaceConfig": {
+                          "type": "PscInterfaceConfig",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 12,
@@ -29367,6 +29640,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 25
+                        },
+                        "pscInterfaceConfig": {
+                          "type": "PscInterfaceConfig",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "templateUri": {
                           "type": "string",
@@ -36408,6 +36688,8 @@
                         "NVIDIA_L4": 11,
                         "NVIDIA_H100_80GB": 13,
                         "NVIDIA_H100_MEGA_80GB": 14,
+                        "NVIDIA_H200_141GB": 15,
+                        "NVIDIA_B200": 16,
                         "TPU_V2": 6,
                         "TPU_V3": 7,
                         "TPU_V4_POD": 10,
@@ -39689,6 +39971,11 @@
                       }
                     },
                     "HarmCategory": {
+                      "valuesOptions": {
+                        "HARM_CATEGORY_CIVIC_INTEGRITY": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "HARM_CATEGORY_UNSPECIFIED": 0,
                         "HARM_CATEGORY_HATE_SPEECH": 1,
@@ -39807,7 +40094,14 @@
                           "type": "bool",
                           "id": 10,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "thoughtSignature": {
+                          "type": "bytes",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -39964,6 +40258,11 @@
                             "responseSchema"
                           ]
                         },
+                        "_responseJsonSchema": {
+                          "oneof": [
+                            "responseJsonSchema"
+                          ]
+                        },
                         "_routingConfig": {
                           "oneof": [
                             "routingConfig"
@@ -40084,6 +40383,14 @@
                         "responseSchema": {
                           "type": "Schema",
                           "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "responseJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 28,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -40215,6 +40522,11 @@
                         },
                         "ThinkingConfig": {
                           "oneofs": {
+                            "_includeThoughts": {
+                              "oneof": [
+                                "includeThoughts"
+                              ]
+                            },
                             "_thinkingBudget": {
                               "oneof": [
                                 "thinkingBudget"
@@ -40222,6 +40534,14 @@
                             }
                           },
                           "fields": {
+                            "includeThoughts": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
                             "thinkingBudget": {
                               "type": "int32",
                               "id": 3,
@@ -41034,6 +41354,28 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "additionalProperties": {
+                          "type": "google.protobuf.Value",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ref": {
+                          "type": "string",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "defs": {
+                          "keyType": "string",
+                          "type": "Schema",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -41081,6 +41423,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "urlContext": {
+                          "type": "UrlContext",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -41091,6 +41440,9 @@
                           "fields": {}
                         }
                       }
+                    },
+                    "UrlContext": {
+                      "fields": {}
                     },
                     "ToolUseExample": {
                       "oneofs": {
@@ -41181,9 +41533,23 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "parametersJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "response": {
                           "type": "Schema",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "responseJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -41378,6 +41744,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "storeContext": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -41417,6 +41790,42 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxResults": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dataStoreSpecs": {
+                          "rule": "repeated",
+                          "type": "DataStoreSpec",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "DataStoreSpec": {
+                          "fields": {
+                            "dataStore": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }
@@ -41862,7 +42271,41 @@
                       },
                       "nested": {
                         "RagManagedDb": {
-                          "fields": {}
+                          "oneofs": {
+                            "retrievalStrategy": {
+                              "oneof": [
+                                "knn",
+                                "ann"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "knn": {
+                              "type": "KNN",
+                              "id": 1
+                            },
+                            "ann": {
+                              "type": "ANN",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "KNN": {
+                              "fields": {}
+                            },
+                            "ANN": {
+                              "fields": {
+                                "treeDepth": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "leafCount": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
                         },
                         "Weaviate": {
                           "fields": {
@@ -42062,6 +42505,61 @@
                           "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "corpusTypeConfig": {
+                          "type": "CorpusTypeConfig",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CorpusTypeConfig": {
+                          "oneofs": {
+                            "corpusTypeConfig": {
+                              "oneof": [
+                                "documentCorpus",
+                                "memoryCorpus"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "documentCorpus": {
+                              "type": "DocumentCorpus",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "memoryCorpus": {
+                              "type": "MemoryCorpus",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "DocumentCorpus": {
+                              "fields": {}
+                            },
+                            "MemoryCorpus": {
+                              "fields": {
+                                "llmParser": {
+                                  "type": "RagFileParsingConfig.LlmParser",
+                                  "id": 1
+                                }
+                              }
+                            }
                           }
                         }
                       }
@@ -42464,6 +42962,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "rebuildAnnIndex": {
+                          "type": "bool",
+                          "id": 19
                         }
                       }
                     },
@@ -45837,6 +46339,10 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 28
+                        },
+                        "checkpointId": {
+                          "type": "string",
+                          "id": 29
                         }
                       },
                       "nested": {
@@ -58717,6 +59223,14 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
                           }
+                        },
+                        "checkpoints": {
+                          "rule": "repeated",
+                          "type": "TunedModelCheckpoint",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -58884,12 +59398,26 @@
                         },
                         "totalTruncatedExampleCount": {
                           "type": "int64",
-                          "id": 10
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "truncatedExampleIndices": {
                           "rule": "repeated",
                           "type": "int64",
-                          "id": 11
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "droppedExampleReasons": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -59113,9 +59641,11 @@
                           "values": {
                             "ADAPTER_SIZE_UNSPECIFIED": 0,
                             "ADAPTER_SIZE_ONE": 1,
+                            "ADAPTER_SIZE_TWO": 6,
                             "ADAPTER_SIZE_FOUR": 2,
                             "ADAPTER_SIZE_EIGHT": 3,
-                            "ADAPTER_SIZE_SIXTEEN": 4
+                            "ADAPTER_SIZE_SIXTEEN": 4,
+                            "ADAPTER_SIZE_THIRTY_TWO": 5
                           }
                         }
                       }
@@ -59139,6 +59669,13 @@
                         "hyperParameters": {
                           "type": "SupervisedHyperParameters",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "exportLastCheckpointOnly": {
+                          "type": "bool",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -59299,6 +59836,26 @@
                           "options": {
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/PipelineJob"
                           }
+                        }
+                      }
+                    },
+                    "TunedModelCheckpoint": {
+                      "fields": {
+                        "checkpointId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "epoch": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "step": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "endpoint": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -61251,6 +61808,30 @@
                             }
                           ]
                         },
+                        "ImportIndex": {
+                          "requestType": "ImportIndexRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/indexes/*}:import",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Index",
+                            "(google.longrunning.operation_info).metadata_type": "ImportIndexOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/indexes/*}:import",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Index",
+                                "metadata_type": "ImportIndexOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ListIndexes": {
                           "requestType": "ListIndexesRequest",
                           "responseType": "ListIndexesResponse",
@@ -61468,6 +62049,183 @@
                         }
                       }
                     },
+                    "ImportIndexRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Index"
+                          }
+                        },
+                        "isCompleteOverwrite": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "config": {
+                          "type": "ConnectorConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ConnectorConfig": {
+                          "oneofs": {
+                            "source": {
+                              "oneof": [
+                                "bigQuerySourceConfig"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "bigQuerySourceConfig": {
+                              "type": "BigQuerySourceConfig",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "DatapointFieldMapping": {
+                              "fields": {
+                                "idColumn": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "embeddingColumn": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "restricts": {
+                                  "rule": "repeated",
+                                  "type": "Restrict",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "numericRestricts": {
+                                  "rule": "repeated",
+                                  "type": "NumericRestrict",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "metadataColumns": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "Restrict": {
+                                  "fields": {
+                                    "namespace": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "allowColumn": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "denyColumn": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                },
+                                "NumericRestrict": {
+                                  "fields": {
+                                    "namespace": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "valueColumn": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "valueType": {
+                                      "type": "ValueType",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    }
+                                  },
+                                  "nested": {
+                                    "ValueType": {
+                                      "values": {
+                                        "VALUE_TYPE_UNSPECIFIED": 0,
+                                        "INT": 1,
+                                        "FLOAT": 2,
+                                        "DOUBLE": 3
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "BigQuerySourceConfig": {
+                              "fields": {
+                                "tablePath": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "datapointFieldMapping": {
+                                  "type": "DatapointFieldMapping",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ImportIndexOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
                     "DeleteIndexRequest": {
                       "fields": {
                         "name": {
@@ -61583,7 +62341,9 @@
                                 "INVALID_SPARSE_DIMENSIONS": 14,
                                 "INVALID_TOKEN_VALUE": 15,
                                 "INVALID_SPARSE_EMBEDDING": 16,
-                                "INVALID_EMBEDDING": 17
+                                "INVALID_EMBEDDING": 17,
+                                "INVALID_EMBEDDING_METADATA": 18,
+                                "EMBEDDING_METADATA_EXCEEDS_SIZE_LIMIT": 19
                               }
                             }
                           }
@@ -66507,6 +67267,14 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "systemLabels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         }
@@ -67391,6 +68159,10 @@
                         "modelMonitoringSchema": {
                           "type": "ModelMonitoringSchema",
                           "id": 9
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 5
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
@@ -74435,6 +75207,13 @@
                             "candidatesTokenCount": {
                               "type": "int32",
                               "id": 2
+                            },
+                            "thoughtsTokenCount": {
+                              "type": "int32",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "totalTokenCount": {
                               "type": "int32",

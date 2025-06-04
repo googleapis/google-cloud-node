@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/areainsights-v0.3.0...areainsights-v0.4.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6291](https://github.com/googleapis/google-cloud-node/issues/6291)) ([b7052e7](https://github.com/googleapis/google-cloud-node/commit/b7052e7df5bc607a577ed9b122ab50f43112b676))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/areainsights-v0.2.1...areainsights-v0.3.0) (2025-05-09)
 
 

@@ -4988,7 +4988,8 @@
                             "pubSubNotification",
                             "publishToChronicle",
                             "publishToScc",
-                            "tagResources"
+                            "tagResources",
+                            "publishToDataplexCatalog"
                           ]
                         }
                       },
@@ -5012,6 +5013,10 @@
                         "tagResources": {
                           "type": "TagResources",
                           "id": 8
+                        },
+                        "publishToDataplexCatalog": {
+                          "type": "PublishToDataplexCatalog",
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -5071,6 +5076,14 @@
                         },
                         "PublishToSecurityCommandCenter": {
                           "fields": {}
+                        },
+                        "PublishToDataplexCatalog": {
+                          "fields": {
+                            "lowerDataRiskToLow": {
+                              "type": "bool",
+                              "id": 1
+                            }
+                          }
                         },
                         "TagResources": {
                           "fields": {
@@ -5161,6 +5174,14 @@
                         "resourceVisibility": {
                           "type": "ResourceVisibility",
                           "id": 8
+                        },
+                        "fullResourceName": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "dataSourceType": {
+                          "type": "DataSourceType",
+                          "id": 10
                         }
                       }
                     },
@@ -9086,6 +9107,10 @@
                         "tableId": {
                           "type": "string",
                           "id": 2
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
