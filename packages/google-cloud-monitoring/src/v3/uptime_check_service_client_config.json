@@ -6,6 +6,9 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -31,12 +34,12 @@
       "methods": {
         "ListUptimeCheckConfigs": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "GetUptimeCheckConfig": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "CreateUptimeCheckConfig": {
@@ -51,12 +54,12 @@
         },
         "DeleteUptimeCheckConfig": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "ListUptimeCheckIps": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         }
       }

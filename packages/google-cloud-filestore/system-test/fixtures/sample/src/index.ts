@@ -19,9 +19,7 @@
 import {CloudFilestoreManagerClient} from '@google-cloud/filestore';
 
 // check that the client class type name can be used
-function doStuffWithCloudFilestoreManagerClient(
-  client: CloudFilestoreManagerClient
-) {
+function doStuffWithCloudFilestoreManagerClient(client: CloudFilestoreManagerClient) {
   client.close();
 }
 

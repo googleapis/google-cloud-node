@@ -278,9 +278,14 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         throw err;
       });
       assert(client.recaptchaEnterpriseServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -292,9 +297,14 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
           }
         );
       assert.strictEqual(client.recaptchaEnterpriseServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -475,7 +485,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createAssessment(request), expectedError);
     });
   });
@@ -618,7 +630,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.annotateAssessment(request), expectedError);
     });
   });
@@ -757,7 +771,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createKey(request), expectedError);
     });
   });
@@ -903,7 +919,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.key = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.retrieveLegacySecretKey(request),
         expectedError
@@ -1045,7 +1063,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getKey(request), expectedError);
     });
   });
@@ -1188,7 +1208,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.key.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateKey(request), expectedError);
     });
   });
@@ -1327,7 +1349,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteKey(request), expectedError);
     });
   });
@@ -1469,7 +1493,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.migrateKey(request), expectedError);
     });
   });
@@ -1611,7 +1637,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.addIpOverride(request), expectedError);
     });
   });
@@ -1753,7 +1781,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.removeIpOverride(request), expectedError);
     });
   });
@@ -1895,7 +1925,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getMetrics(request), expectedError);
     });
   });
@@ -2038,7 +2070,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createFirewallPolicy(request), expectedError);
     });
   });
@@ -2180,7 +2214,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getFirewallPolicy(request), expectedError);
     });
   });
@@ -2327,7 +2363,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.firewallPolicy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateFirewallPolicy(request), expectedError);
     });
   });
@@ -2470,7 +2508,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteFirewallPolicy(request), expectedError);
     });
   });
@@ -2616,7 +2656,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.reorderFirewallPolicies(request),
         expectedError

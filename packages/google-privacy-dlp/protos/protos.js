@@ -50054,6 +50054,7 @@
                          * @property {google.privacy.dlp.v2.DataProfileAction.IPublishToChronicle|null} [publishToChronicle] DataProfileAction publishToChronicle
                          * @property {google.privacy.dlp.v2.DataProfileAction.IPublishToSecurityCommandCenter|null} [publishToScc] DataProfileAction publishToScc
                          * @property {google.privacy.dlp.v2.DataProfileAction.ITagResources|null} [tagResources] DataProfileAction tagResources
+                         * @property {google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog|null} [publishToDataplexCatalog] DataProfileAction publishToDataplexCatalog
                          */
     
                         /**
@@ -50111,17 +50112,25 @@
                          */
                         DataProfileAction.prototype.tagResources = null;
     
+                        /**
+                         * DataProfileAction publishToDataplexCatalog.
+                         * @member {google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog|null|undefined} publishToDataplexCatalog
+                         * @memberof google.privacy.dlp.v2.DataProfileAction
+                         * @instance
+                         */
+                        DataProfileAction.prototype.publishToDataplexCatalog = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * DataProfileAction action.
-                         * @member {"exportData"|"pubSubNotification"|"publishToChronicle"|"publishToScc"|"tagResources"|undefined} action
+                         * @member {"exportData"|"pubSubNotification"|"publishToChronicle"|"publishToScc"|"tagResources"|"publishToDataplexCatalog"|undefined} action
                          * @memberof google.privacy.dlp.v2.DataProfileAction
                          * @instance
                          */
                         Object.defineProperty(DataProfileAction.prototype, "action", {
-                            get: $util.oneOfGetter($oneOfFields = ["exportData", "pubSubNotification", "publishToChronicle", "publishToScc", "tagResources"]),
+                            get: $util.oneOfGetter($oneOfFields = ["exportData", "pubSubNotification", "publishToChronicle", "publishToScc", "tagResources", "publishToDataplexCatalog"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -50159,6 +50168,8 @@
                                 $root.google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter.encode(message.publishToScc, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.tagResources != null && Object.hasOwnProperty.call(message, "tagResources"))
                                 $root.google.privacy.dlp.v2.DataProfileAction.TagResources.encode(message.tagResources, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.publishToDataplexCatalog != null && Object.hasOwnProperty.call(message, "publishToDataplexCatalog"))
+                                $root.google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog.encode(message.publishToDataplexCatalog, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -50211,6 +50222,10 @@
                                     }
                                 case 8: {
                                         message.tagResources = $root.google.privacy.dlp.v2.DataProfileAction.TagResources.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.publishToDataplexCatalog = $root.google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -50297,6 +50312,16 @@
                                         return "tagResources." + error;
                                 }
                             }
+                            if (message.publishToDataplexCatalog != null && message.hasOwnProperty("publishToDataplexCatalog")) {
+                                if (properties.action === 1)
+                                    return "action: multiple values";
+                                properties.action = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog.verify(message.publishToDataplexCatalog);
+                                    if (error)
+                                        return "publishToDataplexCatalog." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -50336,6 +50361,11 @@
                                 if (typeof object.tagResources !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.DataProfileAction.tagResources: object expected");
                                 message.tagResources = $root.google.privacy.dlp.v2.DataProfileAction.TagResources.fromObject(object.tagResources);
+                            }
+                            if (object.publishToDataplexCatalog != null) {
+                                if (typeof object.publishToDataplexCatalog !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.DataProfileAction.publishToDataplexCatalog: object expected");
+                                message.publishToDataplexCatalog = $root.google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog.fromObject(object.publishToDataplexCatalog);
                             }
                             return message;
                         };
@@ -50377,6 +50407,11 @@
                                 object.tagResources = $root.google.privacy.dlp.v2.DataProfileAction.TagResources.toObject(message.tagResources, options);
                                 if (options.oneofs)
                                     object.action = "tagResources";
+                            }
+                            if (message.publishToDataplexCatalog != null && message.hasOwnProperty("publishToDataplexCatalog")) {
+                                object.publishToDataplexCatalog = $root.google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog.toObject(message.publishToDataplexCatalog, options);
+                                if (options.oneofs)
+                                    object.action = "publishToDataplexCatalog";
                             }
                             return object;
                         };
@@ -51373,6 +51408,209 @@
                             return PublishToSecurityCommandCenter;
                         })();
     
+                        DataProfileAction.PublishToDataplexCatalog = (function() {
+    
+                            /**
+                             * Properties of a PublishToDataplexCatalog.
+                             * @memberof google.privacy.dlp.v2.DataProfileAction
+                             * @interface IPublishToDataplexCatalog
+                             * @property {boolean|null} [lowerDataRiskToLow] PublishToDataplexCatalog lowerDataRiskToLow
+                             */
+    
+                            /**
+                             * Constructs a new PublishToDataplexCatalog.
+                             * @memberof google.privacy.dlp.v2.DataProfileAction
+                             * @classdesc Represents a PublishToDataplexCatalog.
+                             * @implements IPublishToDataplexCatalog
+                             * @constructor
+                             * @param {google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog=} [properties] Properties to set
+                             */
+                            function PublishToDataplexCatalog(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PublishToDataplexCatalog lowerDataRiskToLow.
+                             * @member {boolean} lowerDataRiskToLow
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @instance
+                             */
+                            PublishToDataplexCatalog.prototype.lowerDataRiskToLow = false;
+    
+                            /**
+                             * Creates a new PublishToDataplexCatalog instance using the specified properties.
+                             * @function create
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog=} [properties] Properties to set
+                             * @returns {google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog} PublishToDataplexCatalog instance
+                             */
+                            PublishToDataplexCatalog.create = function create(properties) {
+                                return new PublishToDataplexCatalog(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PublishToDataplexCatalog message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog} message PublishToDataplexCatalog message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PublishToDataplexCatalog.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.lowerDataRiskToLow != null && Object.hasOwnProperty.call(message, "lowerDataRiskToLow"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.lowerDataRiskToLow);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PublishToDataplexCatalog message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog} message PublishToDataplexCatalog message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PublishToDataplexCatalog.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PublishToDataplexCatalog message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog} PublishToDataplexCatalog
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PublishToDataplexCatalog.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.lowerDataRiskToLow = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PublishToDataplexCatalog message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog} PublishToDataplexCatalog
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PublishToDataplexCatalog.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PublishToDataplexCatalog message.
+                             * @function verify
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PublishToDataplexCatalog.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.lowerDataRiskToLow != null && message.hasOwnProperty("lowerDataRiskToLow"))
+                                    if (typeof message.lowerDataRiskToLow !== "boolean")
+                                        return "lowerDataRiskToLow: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PublishToDataplexCatalog message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog} PublishToDataplexCatalog
+                             */
+                            PublishToDataplexCatalog.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog)
+                                    return object;
+                                var message = new $root.google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog();
+                                if (object.lowerDataRiskToLow != null)
+                                    message.lowerDataRiskToLow = Boolean(object.lowerDataRiskToLow);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PublishToDataplexCatalog message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog} message PublishToDataplexCatalog
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PublishToDataplexCatalog.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.lowerDataRiskToLow = false;
+                                if (message.lowerDataRiskToLow != null && message.hasOwnProperty("lowerDataRiskToLow"))
+                                    object.lowerDataRiskToLow = message.lowerDataRiskToLow;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PublishToDataplexCatalog to JSON.
+                             * @function toJSON
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PublishToDataplexCatalog.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PublishToDataplexCatalog
+                             * @function getTypeUrl
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PublishToDataplexCatalog.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog";
+                            };
+    
+                            return PublishToDataplexCatalog;
+                        })();
+    
                         DataProfileAction.TagResources = (function() {
     
                             /**
@@ -52187,6 +52425,8 @@
                          * @property {google.protobuf.ITimestamp|null} [timestamp] DataProfileFinding timestamp
                          * @property {google.privacy.dlp.v2.IDataProfileFindingLocation|null} [location] DataProfileFinding location
                          * @property {google.privacy.dlp.v2.ResourceVisibility|null} [resourceVisibility] DataProfileFinding resourceVisibility
+                         * @property {string|null} [fullResourceName] DataProfileFinding fullResourceName
+                         * @property {google.privacy.dlp.v2.IDataSourceType|null} [dataSourceType] DataProfileFinding dataSourceType
                          */
     
                         /**
@@ -52269,6 +52509,22 @@
                         DataProfileFinding.prototype.resourceVisibility = 0;
     
                         /**
+                         * DataProfileFinding fullResourceName.
+                         * @member {string} fullResourceName
+                         * @memberof google.privacy.dlp.v2.DataProfileFinding
+                         * @instance
+                         */
+                        DataProfileFinding.prototype.fullResourceName = "";
+    
+                        /**
+                         * DataProfileFinding dataSourceType.
+                         * @member {google.privacy.dlp.v2.IDataSourceType|null|undefined} dataSourceType
+                         * @memberof google.privacy.dlp.v2.DataProfileFinding
+                         * @instance
+                         */
+                        DataProfileFinding.prototype.dataSourceType = null;
+    
+                        /**
                          * Creates a new DataProfileFinding instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.DataProfileFinding
@@ -52308,6 +52564,10 @@
                                 $root.google.privacy.dlp.v2.DataProfileFindingLocation.encode(message.location, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.resourceVisibility != null && Object.hasOwnProperty.call(message, "resourceVisibility"))
                                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.resourceVisibility);
+                            if (message.fullResourceName != null && Object.hasOwnProperty.call(message, "fullResourceName"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.fullResourceName);
+                            if (message.dataSourceType != null && Object.hasOwnProperty.call(message, "dataSourceType"))
+                                $root.google.privacy.dlp.v2.DataSourceType.encode(message.dataSourceType, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -52372,6 +52632,14 @@
                                     }
                                 case 8: {
                                         message.resourceVisibility = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.fullResourceName = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.dataSourceType = $root.google.privacy.dlp.v2.DataSourceType.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -52448,6 +52716,14 @@
                                 case 20:
                                     break;
                                 }
+                            if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
+                                if (!$util.isString(message.fullResourceName))
+                                    return "fullResourceName: string expected";
+                            if (message.dataSourceType != null && message.hasOwnProperty("dataSourceType")) {
+                                var error = $root.google.privacy.dlp.v2.DataSourceType.verify(message.dataSourceType);
+                                if (error)
+                                    return "dataSourceType." + error;
+                            }
                             return null;
                         };
     
@@ -52513,6 +52789,13 @@
                                 message.resourceVisibility = 20;
                                 break;
                             }
+                            if (object.fullResourceName != null)
+                                message.fullResourceName = String(object.fullResourceName);
+                            if (object.dataSourceType != null) {
+                                if (typeof object.dataSourceType !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.DataProfileFinding.dataSourceType: object expected");
+                                message.dataSourceType = $root.google.privacy.dlp.v2.DataSourceType.fromObject(object.dataSourceType);
+                            }
                             return message;
                         };
     
@@ -52538,6 +52821,8 @@
                                 object.timestamp = null;
                                 object.location = null;
                                 object.resourceVisibility = options.enums === String ? "RESOURCE_VISIBILITY_UNSPECIFIED" : 0;
+                                object.fullResourceName = "";
+                                object.dataSourceType = null;
                             }
                             if (message.quote != null && message.hasOwnProperty("quote"))
                                 object.quote = message.quote;
@@ -52555,6 +52840,10 @@
                                 object.location = $root.google.privacy.dlp.v2.DataProfileFindingLocation.toObject(message.location, options);
                             if (message.resourceVisibility != null && message.hasOwnProperty("resourceVisibility"))
                                 object.resourceVisibility = options.enums === String ? $root.google.privacy.dlp.v2.ResourceVisibility[message.resourceVisibility] === undefined ? message.resourceVisibility : $root.google.privacy.dlp.v2.ResourceVisibility[message.resourceVisibility] : message.resourceVisibility;
+                            if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
+                                object.fullResourceName = message.fullResourceName;
+                            if (message.dataSourceType != null && message.hasOwnProperty("dataSourceType"))
+                                object.dataSourceType = $root.google.privacy.dlp.v2.DataSourceType.toObject(message.dataSourceType, options);
                             return object;
                         };
     
@@ -102389,6 +102678,7 @@
                          * @interface ITableReference
                          * @property {string|null} [datasetId] TableReference datasetId
                          * @property {string|null} [tableId] TableReference tableId
+                         * @property {string|null} [projectId] TableReference projectId
                          */
     
                         /**
@@ -102423,6 +102713,14 @@
                         TableReference.prototype.tableId = "";
     
                         /**
+                         * TableReference projectId.
+                         * @member {string} projectId
+                         * @memberof google.privacy.dlp.v2.TableReference
+                         * @instance
+                         */
+                        TableReference.prototype.projectId = "";
+    
+                        /**
                          * Creates a new TableReference instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.TableReference
@@ -102450,6 +102748,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.datasetId);
                             if (message.tableId != null && Object.hasOwnProperty.call(message, "tableId"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.tableId);
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.projectId);
                             return writer;
                         };
     
@@ -102490,6 +102790,10 @@
                                     }
                                 case 2: {
                                         message.tableId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.projectId = reader.string();
                                         break;
                                     }
                                 default:
@@ -102533,6 +102837,9 @@
                             if (message.tableId != null && message.hasOwnProperty("tableId"))
                                 if (!$util.isString(message.tableId))
                                     return "tableId: string expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
                             return null;
                         };
     
@@ -102552,6 +102859,8 @@
                                 message.datasetId = String(object.datasetId);
                             if (object.tableId != null)
                                 message.tableId = String(object.tableId);
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
                             return message;
                         };
     
@@ -102571,11 +102880,14 @@
                             if (options.defaults) {
                                 object.datasetId = "";
                                 object.tableId = "";
+                                object.projectId = "";
                             }
                             if (message.datasetId != null && message.hasOwnProperty("datasetId"))
                                 object.datasetId = message.datasetId;
                             if (message.tableId != null && message.hasOwnProperty("tableId"))
                                 object.tableId = message.tableId;
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
                             return object;
                         };
     

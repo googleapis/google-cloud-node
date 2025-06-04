@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -7,14 +10,15 @@
             "v3": {
               "options": {
                 "csharp_namespace": "Google.Cloud.Monitoring.V3",
-                "go_package": "google.golang.org/genproto/googleapis/monitoring/v3;monitoring",
+                "go_package": "cloud.google.com/go/monitoring/apiv3/v2/monitoringpb;monitoringpb",
                 "java_multiple_files": true,
                 "java_outer_classname": "UptimeServiceProto",
                 "java_package": "com.google.monitoring.v3",
                 "php_namespace": "Google\\Cloud\\Monitoring\\V3",
                 "ruby_package": "Google::Cloud::Monitoring::V3",
-                "(google.api.resource_definition).type": "monitoring.googleapis.com/TimeSeries",
-                "(google.api.resource_definition).pattern": "folders/{folder}/timeSeries/{time_series}",
+                "objc_class_prefix": "GMON",
+                "(google.api.resource_definition).type": "cloudfunctions.googleapis.com/Function",
+                "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/functions/{function}",
                 "(google.api.resource_definition).history": "ORIGINALLY_SINGLE_PATTERN"
               },
               "nested": {
@@ -26,7 +30,10 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "IDENTIFIER"
+                      }
                     },
                     "displayName": {
                       "type": "string",
@@ -70,6 +77,17 @@
                     "mutationRecord": {
                       "type": "MutationRecord",
                       "id": 11
+                    },
+                    "alertStrategy": {
+                      "type": "AlertStrategy",
+                      "id": 21
+                    },
+                    "severity": {
+                      "type": "Severity",
+                      "id": 22,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   },
                   "nested": {
@@ -82,6 +100,35 @@
                         "mimeType": {
                           "type": "string",
                           "id": 2
+                        },
+                        "subject": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "links": {
+                          "rule": "repeated",
+                          "type": "Link",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Link": {
+                          "fields": {
+                            "displayName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "url": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     },
@@ -95,7 +142,10 @@
                           "oneof": [
                             "conditionThreshold",
                             "conditionAbsent",
-                            "conditionMonitoringQueryLanguage"
+                            "conditionMatchedLog",
+                            "conditionMonitoringQueryLanguage",
+                            "conditionPrometheusQueryLanguage",
+                            "conditionSql"
                           ]
                         }
                       },
@@ -116,9 +166,21 @@
                           "type": "MetricAbsence",
                           "id": 2
                         },
+                        "conditionMatchedLog": {
+                          "type": "LogMatch",
+                          "id": 20
+                        },
                         "conditionMonitoringQueryLanguage": {
                           "type": "MonitoringQueryLanguageCondition",
                           "id": 19
+                        },
+                        "conditionPrometheusQueryLanguage": {
+                          "type": "PrometheusQueryLanguageCondition",
+                          "id": 21
+                        },
+                        "conditionSql": {
+                          "type": "SqlCondition",
+                          "id": 22
                         }
                       },
                       "nested": {
@@ -140,6 +202,14 @@
                               "type": "double",
                               "id": 2
                             }
+                          }
+                        },
+                        "EvaluationMissingData": {
+                          "values": {
+                            "EVALUATION_MISSING_DATA_UNSPECIFIED": 0,
+                            "EVALUATION_MISSING_DATA_INACTIVE": 1,
+                            "EVALUATION_MISSING_DATA_ACTIVE": 2,
+                            "EVALUATION_MISSING_DATA_NO_OP": 3
                           }
                         },
                         "MetricThreshold": {
@@ -165,6 +235,10 @@
                               "type": "Aggregation",
                               "id": 10
                             },
+                            "forecastOptions": {
+                              "type": "ForecastOptions",
+                              "id": 12
+                            },
                             "comparison": {
                               "type": "ComparisonType",
                               "id": 4
@@ -180,6 +254,23 @@
                             "trigger": {
                               "type": "Trigger",
                               "id": 7
+                            },
+                            "evaluationMissingData": {
+                              "type": "EvaluationMissingData",
+                              "id": 11
+                            }
+                          },
+                          "nested": {
+                            "ForecastOptions": {
+                              "fields": {
+                                "forecastHorizon": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -207,6 +298,22 @@
                             }
                           }
                         },
+                        "LogMatch": {
+                          "fields": {
+                            "filter": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "labelExtractors": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
                         "MonitoringQueryLanguageCondition": {
                           "fields": {
                             "query": {
@@ -220,6 +327,196 @@
                             "trigger": {
                               "type": "Trigger",
                               "id": 3
+                            },
+                            "evaluationMissingData": {
+                              "type": "EvaluationMissingData",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "PrometheusQueryLanguageCondition": {
+                          "fields": {
+                            "query": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "duration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "evaluationInterval": {
+                              "type": "google.protobuf.Duration",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "ruleGroup": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "alertRule": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "disableMetricValidation": {
+                              "type": "bool",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "SqlCondition": {
+                          "oneofs": {
+                            "schedule": {
+                              "oneof": [
+                                "minutes",
+                                "hourly",
+                                "daily"
+                              ]
+                            },
+                            "evaluate": {
+                              "oneof": [
+                                "rowCountTest",
+                                "booleanTest"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "query": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "minutes": {
+                              "type": "Minutes",
+                              "id": 2
+                            },
+                            "hourly": {
+                              "type": "Hourly",
+                              "id": 3
+                            },
+                            "daily": {
+                              "type": "Daily",
+                              "id": 4
+                            },
+                            "rowCountTest": {
+                              "type": "RowCountTest",
+                              "id": 5
+                            },
+                            "booleanTest": {
+                              "type": "BooleanTest",
+                              "id": 6
+                            }
+                          },
+                          "nested": {
+                            "Minutes": {
+                              "fields": {
+                                "periodicity": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "Hourly": {
+                              "oneofs": {
+                                "_minuteOffset": {
+                                  "oneof": [
+                                    "minuteOffset"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "periodicity": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "minuteOffset": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
+                            "Daily": {
+                              "fields": {
+                                "periodicity": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "executionTime": {
+                                  "type": "google.type.TimeOfDay",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "RowCountTest": {
+                              "fields": {
+                                "comparison": {
+                                  "type": "ComparisonType",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "threshold": {
+                                  "type": "int64",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "BooleanTest": {
+                              "fields": {
+                                "column": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
                             }
                           }
                         }
@@ -231,6 +528,66 @@
                         "AND": 1,
                         "OR": 2,
                         "AND_WITH_MATCHING_RESOURCE": 3
+                      }
+                    },
+                    "AlertStrategy": {
+                      "fields": {
+                        "notificationRateLimit": {
+                          "type": "NotificationRateLimit",
+                          "id": 1
+                        },
+                        "notificationPrompts": {
+                          "rule": "repeated",
+                          "type": "NotificationPrompt",
+                          "id": 2
+                        },
+                        "autoClose": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3
+                        },
+                        "notificationChannelStrategy": {
+                          "rule": "repeated",
+                          "type": "NotificationChannelStrategy",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "NotificationRateLimit": {
+                          "fields": {
+                            "period": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "NotificationPrompt": {
+                          "values": {
+                            "NOTIFICATION_PROMPT_UNSPECIFIED": 0,
+                            "OPENED": 1,
+                            "CLOSED": 3
+                          }
+                        },
+                        "NotificationChannelStrategy": {
+                          "fields": {
+                            "notificationChannelNames": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "renotifyInterval": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Severity": {
+                      "values": {
+                        "SEVERITY_UNSPECIFIED": 0,
+                        "CRITICAL": 1,
+                        "ERROR": 2,
+                        "WARNING": 3
                       }
                     }
                   }
@@ -524,19 +881,31 @@
                     },
                     "filter": {
                       "type": "string",
-                      "id": 5
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "orderBy": {
                       "type": "string",
-                      "id": 6
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "pageSize": {
                       "type": "int32",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "pageToken": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -561,7 +930,10 @@
                   "fields": {
                     "updateMask": {
                       "type": "google.protobuf.FieldMask",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "alertPolicy": {
                       "type": "AlertPolicy",
@@ -957,6 +1329,10 @@
                     "unit": {
                       "type": "string",
                       "id": 8
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 9
                     }
                   }
                 },
@@ -1262,6 +1638,26 @@
                           "(google.api.method_signature)": "name,time_series"
                         }
                       ]
+                    },
+                    "CreateServiceTimeSeries": {
+                      "requestType": "CreateTimeSeriesRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).post": "/v3/{name=projects/*}/timeSeries:createService",
+                        "(google.api.http).body": "*",
+                        "(google.api.method_signature)": "name,time_series"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3/{name=projects/*}/timeSeries:createService",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name,time_series"
+                        }
+                      ]
                     }
                   }
                 },
@@ -1326,15 +1722,31 @@
                     },
                     "filter": {
                       "type": "string",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "pageSize": {
                       "type": "int32",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "pageToken": {
                       "type": "string",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "activeOnly": {
+                      "type": "bool",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -1547,14 +1959,23 @@
                   }
                 },
                 "QueryTimeSeriesRequest": {
+                  "options": {
+                    "deprecated": true
+                  },
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "query": {
                       "type": "string",
-                      "id": 7
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "pageSize": {
                       "type": "int32",
@@ -1567,6 +1988,9 @@
                   }
                 },
                 "QueryTimeSeriesResponse": {
+                  "options": {
+                    "deprecated": true
+                  },
                   "fields": {
                     "timeSeriesDescriptor": {
                       "type": "TimeSeriesDescriptor",
@@ -1654,7 +2078,10 @@
                     },
                     "name": {
                       "type": "string",
-                      "id": 6
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "IDENTIFIER"
+                      }
                     },
                     "displayName": {
                       "type": "string",
@@ -1976,19 +2403,31 @@
                     },
                     "filter": {
                       "type": "string",
-                      "id": 6
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "orderBy": {
                       "type": "string",
-                      "id": 7
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "pageSize": {
                       "type": "int32",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "pageToken": {
                       "type": "string",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -2025,7 +2464,10 @@
                   "fields": {
                     "updateMask": {
                       "type": "google.protobuf.FieldMask",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "notificationChannel": {
                       "type": "NotificationChannel",
@@ -2121,10 +2563,14 @@
                       "requestType": "QueryTimeSeriesRequest",
                       "responseType": "QueryTimeSeriesResponse",
                       "options": {
+                        "deprecated": true,
                         "(google.api.http).post": "/v3/{name=projects/*}/timeSeries:query",
                         "(google.api.http).body": "*"
                       },
                       "parsedOptions": [
+                        {
+                          "deprecated": true
+                        },
                         {
                           "(google.api.http)": {
                             "post": "/v3/{name=projects/*}/timeSeries:query",
@@ -2148,14 +2594,21 @@
                         "cloudEndpoints",
                         "clusterIstio",
                         "meshIstio",
-                        "istioCanonicalService"
+                        "istioCanonicalService",
+                        "cloudRun",
+                        "gkeNamespace",
+                        "gkeWorkload",
+                        "gkeService"
                       ]
                     }
                   },
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "IDENTIFIER"
+                      }
                     },
                     "displayName": {
                       "type": "string",
@@ -2185,9 +2638,34 @@
                       "type": "IstioCanonicalService",
                       "id": 11
                     },
+                    "cloudRun": {
+                      "type": "CloudRun",
+                      "id": 12
+                    },
+                    "gkeNamespace": {
+                      "type": "GkeNamespace",
+                      "id": 15
+                    },
+                    "gkeWorkload": {
+                      "type": "GkeWorkload",
+                      "id": 16
+                    },
+                    "gkeService": {
+                      "type": "GkeService",
+                      "id": 17
+                    },
+                    "basicService": {
+                      "type": "BasicService",
+                      "id": 19
+                    },
                     "telemetry": {
                       "type": "Telemetry",
                       "id": 13
+                    },
+                    "userLabels": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 14
                     }
                   },
                   "nested": {
@@ -2262,6 +2740,112 @@
                         }
                       }
                     },
+                    "CloudRun": {
+                      "fields": {
+                        "serviceName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GkeNamespace": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "clusterName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "namespaceName": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GkeWorkload": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "clusterName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "namespaceName": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "topLevelControllerType": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "topLevelControllerName": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "GkeService": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "clusterName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "namespaceName": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "serviceName": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "BasicService": {
+                      "fields": {
+                        "serviceType": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "serviceLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Telemetry": {
                       "fields": {
                         "resourceName": {
@@ -2289,7 +2873,10 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "IDENTIFIER"
+                      }
                     },
                     "displayName": {
                       "type": "string",
@@ -2310,6 +2897,11 @@
                     "calendarPeriod": {
                       "type": "google.type.CalendarPeriod",
                       "id": 6
+                    },
+                    "userLabels": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 12
                     }
                   },
                   "nested": {
@@ -2929,21 +3521,245 @@
                     }
                   }
                 },
+                "Snooze": {
+                  "options": {
+                    "(google.api.resource).type": "monitoring.googleapis.com/Snooze",
+                    "(google.api.resource).pattern": "projects/{project}/snoozes/{snooze}"
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "IDENTIFIER"
+                      }
+                    },
+                    "criteria": {
+                      "type": "Criteria",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "interval": {
+                      "type": "TimeInterval",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "displayName": {
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "Criteria": {
+                      "fields": {
+                        "policies": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "monitoring.googleapis.com/AlertPolicy"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    }
+                  }
+                },
+                "SnoozeService": {
+                  "options": {
+                    "(google.api.default_host)": "monitoring.googleapis.com",
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/monitoring,https://www.googleapis.com/auth/monitoring.read"
+                  },
+                  "methods": {
+                    "CreateSnooze": {
+                      "requestType": "CreateSnoozeRequest",
+                      "responseType": "Snooze",
+                      "options": {
+                        "(google.api.http).post": "/v3/{parent=projects/*}/snoozes",
+                        "(google.api.http).body": "snooze",
+                        "(google.api.method_signature)": "parent,snooze"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3/{parent=projects/*}/snoozes",
+                            "body": "snooze"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent,snooze"
+                        }
+                      ]
+                    },
+                    "ListSnoozes": {
+                      "requestType": "ListSnoozesRequest",
+                      "responseType": "ListSnoozesResponse",
+                      "options": {
+                        "(google.api.http).get": "/v3/{parent=projects/*}/snoozes",
+                        "(google.api.method_signature)": "parent"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{parent=projects/*}/snoozes"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent"
+                        }
+                      ]
+                    },
+                    "GetSnooze": {
+                      "requestType": "GetSnoozeRequest",
+                      "responseType": "Snooze",
+                      "options": {
+                        "(google.api.http).get": "/v3/{name=projects/*/snoozes/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*/snoozes/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "UpdateSnooze": {
+                      "requestType": "UpdateSnoozeRequest",
+                      "responseType": "Snooze",
+                      "options": {
+                        "(google.api.http).patch": "/v3/{snooze.name=projects/*/snoozes/*}",
+                        "(google.api.http).body": "snooze",
+                        "(google.api.method_signature)": "snooze,update_mask"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v3/{snooze.name=projects/*/snoozes/*}",
+                            "body": "snooze"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "snooze,update_mask"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "CreateSnoozeRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/Snooze"
+                      }
+                    },
+                    "snooze": {
+                      "type": "Snooze",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "ListSnoozesRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/Snooze"
+                      }
+                    },
+                    "filter": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "ListSnoozesResponse": {
+                  "fields": {
+                    "snoozes": {
+                      "rule": "repeated",
+                      "type": "Snooze",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "GetSnoozeRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/Snooze"
+                      }
+                    }
+                  }
+                },
+                "UpdateSnoozeRequest": {
+                  "fields": {
+                    "snooze": {
+                      "type": "Snooze",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
                 "SpanContext": {
                   "fields": {
                     "spanName": {
                       "type": "string",
                       "id": 1
                     }
-                  }
-                },
-                "UptimeCheckRegion": {
-                  "values": {
-                    "REGION_UNSPECIFIED": 0,
-                    "USA": 1,
-                    "EUROPE": 2,
-                    "SOUTH_AMERICA": 3,
-                    "ASIA_PACIFIC": 4
                   }
                 },
                 "InternalChecker": {
@@ -2986,6 +3802,42 @@
                     }
                   }
                 },
+                "SyntheticMonitorTarget": {
+                  "oneofs": {
+                    "target": {
+                      "oneof": [
+                        "cloudFunctionV2"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "cloudFunctionV2": {
+                      "type": "CloudFunctionV2Target",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "CloudFunctionV2Target": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudfunctions.googleapis.com/Function"
+                          }
+                        },
+                        "cloudRunRevision": {
+                          "type": "google.api.MonitoredResource",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
                 "UptimeCheckConfig": {
                   "options": {
                     "(google.api.resource).type": "monitoring.googleapis.com/UptimeCheckConfig",
@@ -2995,7 +3847,8 @@
                     "resource": {
                       "oneof": [
                         "monitoredResource",
-                        "resourceGroup"
+                        "resourceGroup",
+                        "syntheticMonitor"
                       ]
                     },
                     "checkRequestType": {
@@ -3008,7 +3861,10 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "IDENTIFIER"
+                      }
                     },
                     "displayName": {
                       "type": "string",
@@ -3021,6 +3877,10 @@
                     "resourceGroup": {
                       "type": "ResourceGroup",
                       "id": 4
+                    },
+                    "syntheticMonitor": {
+                      "type": "SyntheticMonitorTarget",
+                      "id": 21
                     },
                     "httpCheck": {
                       "type": "HttpCheck",
@@ -3043,6 +3903,10 @@
                       "type": "ContentMatcher",
                       "id": 9
                     },
+                    "checkerType": {
+                      "type": "CheckerType",
+                      "id": 17
+                    },
                     "selectedRegions": {
                       "rule": "repeated",
                       "type": "UptimeCheckRegion",
@@ -3062,6 +3926,11 @@
                       "options": {
                         "deprecated": true
                       }
+                    },
+                    "userLabels": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 20
                     }
                   },
                   "nested": {
@@ -3077,7 +3946,22 @@
                         }
                       }
                     },
+                    "PingConfig": {
+                      "fields": {
+                        "pingsCount": {
+                          "type": "int32",
+                          "id": 1
+                        }
+                      }
+                    },
                     "HttpCheck": {
+                      "oneofs": {
+                        "authMethod": {
+                          "oneof": [
+                            "serviceAgentAuthentication"
+                          ]
+                        }
+                      },
                       "fields": {
                         "requestMethod": {
                           "type": "RequestMethod",
@@ -3112,6 +3996,10 @@
                           "type": "ContentType",
                           "id": 9
                         },
+                        "customContentType": {
+                          "type": "string",
+                          "id": 13
+                        },
                         "validateSsl": {
                           "type": "bool",
                           "id": 7
@@ -3119,9 +4007,29 @@
                         "body": {
                           "type": "bytes",
                           "id": 10
+                        },
+                        "acceptedResponseStatusCodes": {
+                          "rule": "repeated",
+                          "type": "ResponseStatusCode",
+                          "id": 11
+                        },
+                        "pingConfig": {
+                          "type": "PingConfig",
+                          "id": 12
+                        },
+                        "serviceAgentAuthentication": {
+                          "type": "ServiceAgentAuthentication",
+                          "id": 14
                         }
                       },
                       "nested": {
+                        "RequestMethod": {
+                          "values": {
+                            "METHOD_UNSPECIFIED": 0,
+                            "GET": 1,
+                            "POST": 2
+                          }
+                        },
                         "BasicAuthentication": {
                           "fields": {
                             "username": {
@@ -3134,17 +4042,60 @@
                             }
                           }
                         },
-                        "RequestMethod": {
-                          "values": {
-                            "METHOD_UNSPECIFIED": 0,
-                            "GET": 1,
-                            "POST": 2
-                          }
-                        },
                         "ContentType": {
                           "values": {
                             "TYPE_UNSPECIFIED": 0,
-                            "URL_ENCODED": 1
+                            "URL_ENCODED": 1,
+                            "USER_PROVIDED": 2
+                          }
+                        },
+                        "ResponseStatusCode": {
+                          "oneofs": {
+                            "statusCode": {
+                              "oneof": [
+                                "statusValue",
+                                "statusClass"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "statusValue": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "statusClass": {
+                              "type": "StatusClass",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "StatusClass": {
+                              "values": {
+                                "STATUS_CLASS_UNSPECIFIED": 0,
+                                "STATUS_CLASS_1XX": 100,
+                                "STATUS_CLASS_2XX": 200,
+                                "STATUS_CLASS_3XX": 300,
+                                "STATUS_CLASS_4XX": 400,
+                                "STATUS_CLASS_5XX": 500,
+                                "STATUS_CLASS_ANY": 1000
+                              }
+                            }
+                          }
+                        },
+                        "ServiceAgentAuthentication": {
+                          "fields": {
+                            "type": {
+                              "type": "ServiceAgentAuthenticationType",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "ServiceAgentAuthenticationType": {
+                              "values": {
+                                "SERVICE_AGENT_AUTHENTICATION_TYPE_UNSPECIFIED": 0,
+                                "OIDC_TOKEN": 1
+                              }
+                            }
                           }
                         }
                       }
@@ -3154,10 +4105,21 @@
                         "port": {
                           "type": "int32",
                           "id": 1
+                        },
+                        "pingConfig": {
+                          "type": "PingConfig",
+                          "id": 2
                         }
                       }
                     },
                     "ContentMatcher": {
+                      "oneofs": {
+                        "additionalMatcherInfo": {
+                          "oneof": [
+                            "jsonPathMatcher"
+                          ]
+                        }
+                      },
                       "fields": {
                         "content": {
                           "type": "string",
@@ -3166,6 +4128,10 @@
                         "matcher": {
                           "type": "ContentMatcherOption",
                           "id": 2
+                        },
+                        "jsonPathMatcher": {
+                          "type": "JsonPathMatcher",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -3175,9 +4141,39 @@
                             "CONTAINS_STRING": 1,
                             "NOT_CONTAINS_STRING": 2,
                             "MATCHES_REGEX": 3,
-                            "NOT_MATCHES_REGEX": 4
+                            "NOT_MATCHES_REGEX": 4,
+                            "MATCHES_JSON_PATH": 5,
+                            "NOT_MATCHES_JSON_PATH": 6
+                          }
+                        },
+                        "JsonPathMatcher": {
+                          "fields": {
+                            "jsonPath": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "jsonMatcher": {
+                              "type": "JsonPathMatcherOption",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "JsonPathMatcherOption": {
+                              "values": {
+                                "JSON_PATH_MATCHER_OPTION_UNSPECIFIED": 0,
+                                "EXACT_MATCH": 1,
+                                "REGEX_MATCH": 2
+                              }
+                            }
                           }
                         }
+                      }
+                    },
+                    "CheckerType": {
+                      "values": {
+                        "CHECKER_TYPE_UNSPECIFIED": 0,
+                        "STATIC_IP_CHECKERS": 1,
+                        "VPC_CHECKERS": 3
                       }
                     }
                   }
@@ -3196,6 +4192,18 @@
                       "type": "string",
                       "id": 3
                     }
+                  }
+                },
+                "UptimeCheckRegion": {
+                  "values": {
+                    "REGION_UNSPECIFIED": 0,
+                    "USA": 1,
+                    "EUROPE": 2,
+                    "SOUTH_AMERICA": 3,
+                    "ASIA_PACIFIC": 4,
+                    "USA_OREGON": 5,
+                    "USA_IOWA": 6,
+                    "USA_VIRGINIA": 7
                   }
                 },
                 "GroupResourceType": {
@@ -3331,6 +4339,10 @@
                         "(google.api.resource_reference).child_type": "monitoring.googleapis.com/UptimeCheckConfig"
                       }
                     },
+                    "filter": {
+                      "type": "string",
+                      "id": 2
+                    },
                     "pageSize": {
                       "type": "int32",
                       "id": 3
@@ -3447,9 +4459,9 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api/metric;metric",
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "MetricProto",
+            "java_outer_classname": "FieldInfoProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -3459,10 +4471,7 @@
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
               "id": 1052,
-              "extend": "google.protobuf.FieldOptions",
-              "options": {
-                "packed": false
-              }
+              "extend": "google.protobuf.FieldOptions"
             },
             "FieldBehavior": {
               "values": {
@@ -3790,11 +4799,6 @@
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
             },
-            "apiVersion": {
-              "type": "string",
-              "id": 525000001,
-              "extend": "google.protobuf.ServiceOptions"
-            },
             "CommonLanguageSettings": {
               "fields": {
                 "referenceDocsUri": {
@@ -3903,10 +4907,6 @@
                 "protoReferenceDocumentationUri": {
                   "type": "string",
                   "id": 110
-                },
-                "restReferenceDocumentationUri": {
-                  "type": "string",
-                  "id": 111
                 }
               }
             },
@@ -4260,6 +5260,30 @@
                   "id": 2
                 }
               }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
+              }
             }
           }
         },
@@ -4275,7 +5299,6 @@
           },
           "nested": {
             "FileDescriptorSet": {
-              "edition": "proto2",
               "fields": {
                 "file": {
                   "rule": "repeated",
@@ -4285,7 +5308,6 @@
               }
             },
             "Edition": {
-              "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
                 "EDITION_PROTO2": 998,
@@ -4301,7 +5323,6 @@
               }
             },
             "FileDescriptorProto": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -4319,12 +5340,18 @@
                 "publicDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 10
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
                 },
                 "weakDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 11
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -4365,7 +5392,6 @@
               }
             },
             "DescriptorProto": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -4448,7 +5474,6 @@
               }
             },
             "ExtensionRangeOptions": {
-              "edition": "proto2",
               "fields": {
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -4522,7 +5547,6 @@
               }
             },
             "FieldDescriptorProto": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -4602,7 +5626,6 @@
               }
             },
             "OneofDescriptorProto": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -4615,7 +5638,6 @@
               }
             },
             "EnumDescriptorProto": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -4657,7 +5679,6 @@
               }
             },
             "EnumValueDescriptorProto": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -4674,7 +5695,6 @@
               }
             },
             "ServiceDescriptorProto": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -4692,7 +5712,6 @@
               }
             },
             "MethodDescriptorProto": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -4727,7 +5746,6 @@
               }
             },
             "FileOptions": {
-              "edition": "proto2",
               "fields": {
                 "javaPackage": {
                   "type": "string",
@@ -4869,7 +5887,6 @@
               }
             },
             "MessageOptions": {
-              "edition": "proto2",
               "fields": {
                 "messageSetWireFormat": {
                   "type": "bool",
@@ -4943,7 +5960,6 @@
               ]
             },
             "FieldOptions": {
-              "edition": "proto2",
               "fields": {
                 "ctype": {
                   "type": "CType",
@@ -5005,7 +6021,10 @@
                 "targets": {
                   "rule": "repeated",
                   "type": "OptionTargetType",
-                  "id": 19
+                  "id": 19,
+                  "options": {
+                    "packed": false
+                  }
                 },
                 "editionDefaults": {
                   "rule": "repeated",
@@ -5089,7 +6108,6 @@
               }
             },
             "OneofOptions": {
-              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -5109,7 +6127,6 @@
               ]
             },
             "EnumOptions": {
-              "edition": "proto2",
               "fields": {
                 "allowAlias": {
                   "type": "bool",
@@ -5153,7 +6170,6 @@
               ]
             },
             "EnumValueOptions": {
-              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -5187,7 +6203,6 @@
               ]
             },
             "ServiceOptions": {
-              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -5214,7 +6229,6 @@
               ]
             },
             "MethodOptions": {
-              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -5257,7 +6271,6 @@
               }
             },
             "UninterpretedOption": {
-              "edition": "proto2",
               "fields": {
                 "name": {
                   "rule": "repeated",
@@ -5307,7 +6320,6 @@
               }
             },
             "FeatureSet": {
-              "edition": "proto2",
               "fields": {
                 "fieldPresence": {
                   "type": "FieldPresence",
@@ -5380,20 +6392,8 @@
                   1001
                 ],
                 [
-                  1002,
-                  1002
-                ],
-                [
-                  9990,
-                  9990
-                ],
-                [
                   9995,
                   9999
-                ],
-                [
-                  10000,
-                  10000
                 ]
               ],
               "reserved": [
@@ -5449,7 +6449,6 @@
               }
             },
             "FeatureSetDefaults": {
-              "edition": "proto2",
               "fields": {
                 "defaults": {
                   "rule": "repeated",
@@ -5481,7 +6480,6 @@
               }
             },
             "SourceCodeInfo": {
-              "edition": "proto2",
               "fields": {
                 "location": {
                   "rule": "repeated",
@@ -5495,18 +6493,12 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1,
-                      "options": {
-                        "packed": true
-                      }
+                      "id": 1
                     },
                     "span": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 2,
-                      "options": {
-                        "packed": true
-                      }
+                      "id": 2
                     },
                     "leadingComments": {
                       "type": "string",
@@ -5526,7 +6518,6 @@
               }
             },
             "GeneratedCodeInfo": {
-              "edition": "proto2",
               "fields": {
                 "annotation": {
                   "rule": "repeated",
@@ -5540,10 +6531,7 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1,
-                      "options": {
-                        "packed": true
-                      }
+                      "id": 1
                     },
                     "sourceFile": {
                       "type": "string",
@@ -5790,6 +6778,7 @@
         },
         "type": {
           "options": {
+            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/type/calendarperiod;calendarperiod",
             "java_multiple_files": true,
             "java_outer_classname": "CalendarPeriodProto",
@@ -5797,6 +6786,26 @@
             "objc_class_prefix": "GTP"
           },
           "nested": {
+            "TimeOfDay": {
+              "fields": {
+                "hours": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "minutes": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "seconds": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 4
+                }
+              }
+            },
             "CalendarPeriod": {
               "values": {
                 "CALENDAR_PERIOD_UNSPECIFIED": 0,

@@ -1413,7 +1413,7 @@ export class AssetServiceClient {
    * @param {string} request.destinationParent
    *   Required. Name of the Google Cloud folder or organization to reparent the
    *   target resource. The analysis will be performed against hypothetically
-   *   moving the resource to this specified desitination parent. This can only be
+   *   moving the resource to this specified destination parent. This can only be
    *   a folder number (such as "folders/123") or an organization number (such as
    *   "organizations/123").
    * @param {google.cloud.asset.v1.AnalyzeMoveRequest.AnalysisView} request.view
@@ -6210,7 +6210,7 @@ export class AssetServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.operationsClient.close();
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();
