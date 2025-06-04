@@ -118,13 +118,14 @@ async function callListEvents() {
   // Construct request
   const request = {
     parent,
+    pageSize,
   };
 
   // Run request
-  const iterable = servicehealthClient.listEventsAsync(request);
-  for await (const response of iterable) {
-    console.log(response);
-  }
+  const response = await servicehealthClient.listEvents(request, {
+    autopaginate: false,
+  });
+  console.log(response);
 }
 
 callListEvents();
