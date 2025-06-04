@@ -18,12 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -104,36 +99,17 @@ export class RegionOperationsClient {
    *     const client = new RegionOperationsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof RegionOperationsClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'compute.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
@@ -142,9 +118,7 @@ export class RegionOperationsClient {
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -167,7 +141,7 @@ export class RegionOperationsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set defaultServicePath on the auth object.
     this.auth.defaultServicePath = this._servicePath;
@@ -178,7 +152,10 @@ export class RegionOperationsClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -197,11 +174,8 @@ export class RegionOperationsClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.compute.v1small.RegionOperations',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.compute.v1small.RegionOperations', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -232,35 +206,31 @@ export class RegionOperationsClient {
     // Put together the "service stub" for
     // google.cloud.compute.v1small.RegionOperations.
     this.regionOperationsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.compute.v1small.RegionOperations'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.compute.v1small.RegionOperations') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1small.RegionOperations,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const regionOperationsStubMethods = ['get', 'wait'];
+    const regionOperationsStubMethods =
+        ['get', 'wait'];
     for (const methodName of regionOperationsStubMethods) {
       const callPromise = this.regionOperationsStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -280,14 +250,8 @@ export class RegionOperationsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'compute.googleapis.com';
   }
@@ -298,14 +262,8 @@ export class RegionOperationsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'compute.googleapis.com';
   }
@@ -339,7 +297,7 @@ export class RegionOperationsClient {
     return [
       'https://www.googleapis.com/auth/compute.readonly',
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform'
     ];
   }
 
@@ -349,9 +307,8 @@ export class RegionOperationsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -362,276 +319,199 @@ export class RegionOperationsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Retrieves the specified region-specific Operations resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.operation
-   *   Name of the Operations resource to return.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1small.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1small/region_operations.get.js</caption>
-   * region_tag:compute_v1small_generated_RegionOperations_Get_async
-   */
+/**
+ * Retrieves the specified region-specific Operations resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.operation
+ *   Name of the Operations resource to return.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1small.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1small/region_operations.get.js</caption>
+ * region_tag:compute_v1small_generated_RegionOperations_Get_async
+ */
   get(
-    request?: protos.google.cloud.compute.v1small.IGetRegionOperationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1small.IOperation,
-      (
-        | protos.google.cloud.compute.v1small.IGetRegionOperationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1small.IGetRegionOperationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1small.IOperation,
+        protos.google.cloud.compute.v1small.IGetRegionOperationRequest|undefined, {}|undefined
+      ]>;
   get(
-    request: protos.google.cloud.compute.v1small.IGetRegionOperationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1small.IOperation,
-      | protos.google.cloud.compute.v1small.IGetRegionOperationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  get(
-    request: protos.google.cloud.compute.v1small.IGetRegionOperationRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1small.IOperation,
-      | protos.google.cloud.compute.v1small.IGetRegionOperationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  get(
-    request?: protos.google.cloud.compute.v1small.IGetRegionOperationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1small.IGetRegionOperationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1small.IOperation,
-          | protos.google.cloud.compute.v1small.IGetRegionOperationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1small.IOperation,
-      | protos.google.cloud.compute.v1small.IGetRegionOperationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1small.IOperation,
-      (
-        | protos.google.cloud.compute.v1small.IGetRegionOperationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1small.IGetRegionOperationRequest|null|undefined,
+          {}|null|undefined>): void;
+  get(
+      request: protos.google.cloud.compute.v1small.IGetRegionOperationRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1small.IOperation,
+          protos.google.cloud.compute.v1small.IGetRegionOperationRequest|null|undefined,
+          {}|null|undefined>): void;
+  get(
+      request?: protos.google.cloud.compute.v1small.IGetRegionOperationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1small.IOperation,
+          protos.google.cloud.compute.v1small.IGetRegionOperationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1small.IOperation,
+          protos.google.cloud.compute.v1small.IGetRegionOperationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1small.IOperation,
+        protos.google.cloud.compute.v1small.IGetRegionOperationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        region: request.region ?? '',
-        operation: request.operation ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'region': request.region ?? '',
+      'operation': request.operation ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('get request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1small.IOperation,
-          | protos.google.cloud.compute.v1small.IGetRegionOperationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1small.IOperation,
+        protos.google.cloud.compute.v1small.IGetRegionOperationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .get(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1small.IOperation,
-          (
-            | protos.google.cloud.compute.v1small.IGetRegionOperationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('get response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.get(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1small.IOperation,
+        protos.google.cloud.compute.v1small.IGetRegionOperationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('get response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Waits for the specified Operation resource to return as `DONE` or for the request to approach the 2 minute deadline, and retrieves the specified Operation resource. This method differs from the `GET` method in that it waits for no more than the default deadline (2 minutes) and then returns the current state of the operation, which might be `DONE` or still in progress.
-   *
-   * This method is called on a best-effort basis. Specifically:
-   * - In uncommon cases, when the server is overloaded, the request might return before the default deadline is reached, or might return after zero seconds.
-   * - If the default deadline is reached, there is no guarantee that the operation is actually done when the method returns. Be prepared to retry if the operation is not `DONE`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.operation
-   *   Name of the Operations resource to return.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1small.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1small/region_operations.wait.js</caption>
-   * region_tag:compute_v1small_generated_RegionOperations_Wait_async
-   */
+/**
+ * Waits for the specified Operation resource to return as `DONE` or for the request to approach the 2 minute deadline, and retrieves the specified Operation resource. This method differs from the `GET` method in that it waits for no more than the default deadline (2 minutes) and then returns the current state of the operation, which might be `DONE` or still in progress.
+ *
+ * This method is called on a best-effort basis. Specifically:
+ * - In uncommon cases, when the server is overloaded, the request might return before the default deadline is reached, or might return after zero seconds.
+ * - If the default deadline is reached, there is no guarantee that the operation is actually done when the method returns. Be prepared to retry if the operation is not `DONE`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.operation
+ *   Name of the Operations resource to return.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1small.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1small/region_operations.wait.js</caption>
+ * region_tag:compute_v1small_generated_RegionOperations_Wait_async
+ */
   wait(
-    request?: protos.google.cloud.compute.v1small.IWaitRegionOperationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1small.IOperation,
-      (
-        | protos.google.cloud.compute.v1small.IWaitRegionOperationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1small.IWaitRegionOperationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1small.IOperation,
+        protos.google.cloud.compute.v1small.IWaitRegionOperationRequest|undefined, {}|undefined
+      ]>;
   wait(
-    request: protos.google.cloud.compute.v1small.IWaitRegionOperationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1small.IOperation,
-      | protos.google.cloud.compute.v1small.IWaitRegionOperationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  wait(
-    request: protos.google.cloud.compute.v1small.IWaitRegionOperationRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1small.IOperation,
-      | protos.google.cloud.compute.v1small.IWaitRegionOperationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  wait(
-    request?: protos.google.cloud.compute.v1small.IWaitRegionOperationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1small.IWaitRegionOperationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1small.IOperation,
-          | protos.google.cloud.compute.v1small.IWaitRegionOperationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1small.IOperation,
-      | protos.google.cloud.compute.v1small.IWaitRegionOperationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1small.IOperation,
-      (
-        | protos.google.cloud.compute.v1small.IWaitRegionOperationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1small.IWaitRegionOperationRequest|null|undefined,
+          {}|null|undefined>): void;
+  wait(
+      request: protos.google.cloud.compute.v1small.IWaitRegionOperationRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1small.IOperation,
+          protos.google.cloud.compute.v1small.IWaitRegionOperationRequest|null|undefined,
+          {}|null|undefined>): void;
+  wait(
+      request?: protos.google.cloud.compute.v1small.IWaitRegionOperationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1small.IOperation,
+          protos.google.cloud.compute.v1small.IWaitRegionOperationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1small.IOperation,
+          protos.google.cloud.compute.v1small.IWaitRegionOperationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1small.IOperation,
+        protos.google.cloud.compute.v1small.IWaitRegionOperationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        region: request.region ?? '',
-        operation: request.operation ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'region': request.region ?? '',
+      'operation': request.operation ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('wait request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1small.IOperation,
-          | protos.google.cloud.compute.v1small.IWaitRegionOperationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1small.IOperation,
+        protos.google.cloud.compute.v1small.IWaitRegionOperationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('wait response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .wait(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1small.IOperation,
-          (
-            | protos.google.cloud.compute.v1small.IWaitRegionOperationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('wait response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.wait(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1small.IOperation,
+        protos.google.cloud.compute.v1small.IWaitRegionOperationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('wait response %j', response);
+        return [response, options, rawResponse];
+      });
   }
+
 
   /**
    * Terminate the gRPC channel and close the client.
