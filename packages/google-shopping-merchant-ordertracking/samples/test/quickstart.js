@@ -19,7 +19,7 @@
 // const cp = require('child_process');
 // const {describe, it, before} = require('mocha');
 // const {OrderTrackingSignalsServiceClient} =
-//   require('@google-cloud/ordertracking').v1beta;
+//   require('@google-shopping/ordertracking').v1beta;
 // const merchantapiClient = new OrderTrackingSignalsServiceClient();
 
 // const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
