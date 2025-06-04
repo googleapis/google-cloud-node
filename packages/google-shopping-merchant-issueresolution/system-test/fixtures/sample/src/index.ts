@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {IssueResolutionServiceClient} from '@google-cloud/issueresolution';
+import {IssueResolutionServiceClient} from '@google-shopping/issueresolution';
 
 // check that the client class type name can be used
 function doStuffWithIssueResolutionServiceClient(

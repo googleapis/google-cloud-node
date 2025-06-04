@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const issueresolution = require('@google-cloud/issueresolution');
+const issueresolution = require('@google-shopping/issueresolution');
 
 function main() {
   const issueResolutionServiceClient =

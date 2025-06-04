@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.shopping.merchant.issueresolution.v1beta",
-  "libraryPackage": "@google-cloud/issueresolution",
+  "libraryPackage": "@google-shopping/issueresolution",
   "services": {
     "IssueResolutionService": {
       "clients": {

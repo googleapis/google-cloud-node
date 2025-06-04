@@ -19,7 +19,7 @@ const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
 const {IssueResolutionServiceClient} =
-  require('@google-cloud/issueresolution').v1beta;
+  require('@google-shopping/issueresolution').v1beta;
 const merchantapiClient = new IssueResolutionServiceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
