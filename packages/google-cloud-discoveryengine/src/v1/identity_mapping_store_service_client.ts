@@ -37,19 +37,18 @@ import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/engine_service_client_config.json`.
+ * `src/v1/identity_mapping_store_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './engine_service_client_config.json';
+import * as gapicConfig from './identity_mapping_store_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}
- *  configuration.
+ *  Service for managing Identity Mapping Stores.
  * @class
  * @memberof v1
  */
-export class EngineServiceClient {
+export class IdentityMappingStoreServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -73,10 +72,10 @@ export class EngineServiceClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  engineServiceStub?: Promise<{[name: string]: Function}>;
+  identityMappingStoreServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of EngineServiceClient.
+   * Construct an instance of IdentityMappingStoreServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -111,7 +110,7 @@ export class EngineServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new EngineServiceClient({fallback: true}, gax);
+   *     const client = new IdentityMappingStoreServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -119,7 +118,8 @@ export class EngineServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof EngineServiceClient;
+    const staticMembers = this
+      .constructor as typeof IdentityMappingStoreServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -213,14 +213,14 @@ export class EngineServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      collectionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}'
-      ),
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
       ),
       identityMappingStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/identityMappingStores/{identity_mapping_store}'
+      ),
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
@@ -368,10 +368,15 @@ export class EngineServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listEngines: new this._gaxModule.PageDescriptor(
+      listIdentityMappings: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'engines'
+        'identityMappingEntries'
+      ),
+      listIdentityMappingStores: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'identityMappingStores'
       ),
     };
 
@@ -500,35 +505,56 @@ export class EngineServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const createEngineResponse = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.Engine'
-    ) as gax.protobuf.Type;
-    const createEngineMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.CreateEngineMetadata'
-    ) as gax.protobuf.Type;
-    const deleteEngineResponse = protoFilesRoot.lookup(
+    const deleteIdentityMappingStoreResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
-    const deleteEngineMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.DeleteEngineMetadata'
+    const deleteIdentityMappingStoreMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.DeleteIdentityMappingStoreMetadata'
+    ) as gax.protobuf.Type;
+    const importIdentityMappingsResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.ImportIdentityMappingsResponse'
+    ) as gax.protobuf.Type;
+    const importIdentityMappingsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.IdentityMappingEntryOperationMetadata'
+    ) as gax.protobuf.Type;
+    const purgeIdentityMappingsResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const purgeIdentityMappingsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.IdentityMappingEntryOperationMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      createEngine: new this._gaxModule.LongrunningDescriptor(
+      deleteIdentityMappingStore: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createEngineResponse.decode.bind(createEngineResponse),
-        createEngineMetadata.decode.bind(createEngineMetadata)
+        deleteIdentityMappingStoreResponse.decode.bind(
+          deleteIdentityMappingStoreResponse
+        ),
+        deleteIdentityMappingStoreMetadata.decode.bind(
+          deleteIdentityMappingStoreMetadata
+        )
       ),
-      deleteEngine: new this._gaxModule.LongrunningDescriptor(
+      importIdentityMappings: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteEngineResponse.decode.bind(deleteEngineResponse),
-        deleteEngineMetadata.decode.bind(deleteEngineMetadata)
+        importIdentityMappingsResponse.decode.bind(
+          importIdentityMappingsResponse
+        ),
+        importIdentityMappingsMetadata.decode.bind(
+          importIdentityMappingsMetadata
+        )
+      ),
+      purgeIdentityMappings: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        purgeIdentityMappingsResponse.decode.bind(
+          purgeIdentityMappingsResponse
+        ),
+        purgeIdentityMappingsMetadata.decode.bind(purgeIdentityMappingsMetadata)
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1.EngineService',
+      'google.cloud.discoveryengine.v1.IdentityMappingStoreService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -556,34 +582,37 @@ export class EngineServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.engineServiceStub) {
-      return this.engineServiceStub;
+    if (this.identityMappingStoreServiceStub) {
+      return this.identityMappingStoreServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.discoveryengine.v1.EngineService.
-    this.engineServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.discoveryengine.v1.IdentityMappingStoreService.
+    this.identityMappingStoreServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1.EngineService'
+            'google.cloud.discoveryengine.v1.IdentityMappingStoreService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.discoveryengine.v1.EngineService,
+          (this._protos as any).google.cloud.discoveryengine.v1
+            .IdentityMappingStoreService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const engineServiceStubMethods = [
-      'createEngine',
-      'deleteEngine',
-      'updateEngine',
-      'getEngine',
-      'listEngines',
+    const identityMappingStoreServiceStubMethods = [
+      'createIdentityMappingStore',
+      'getIdentityMappingStore',
+      'deleteIdentityMappingStore',
+      'importIdentityMappings',
+      'purgeIdentityMappings',
+      'listIdentityMappings',
+      'listIdentityMappingStores',
     ];
-    for (const methodName of engineServiceStubMethods) {
-      const callPromise = this.engineServiceStub.then(
+    for (const methodName of identityMappingStoreServiceStubMethods) {
+      const callPromise = this.identityMappingStoreServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -611,7 +640,7 @@ export class EngineServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.engineServiceStub;
+    return this.identityMappingStoreServiceStub;
   }
 
   /**
@@ -699,87 +728,95 @@ export class EngineServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Updates an {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}
+   * Creates a new Identity Mapping Store.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.cloud.discoveryengine.v1.Engine} request.engine
-   *   Required. The {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} to update.
+   * @param {string} request.cmekConfigName
+   *   Resource name of the CmekConfig to use for protecting this Identity
+   *   Mapping Store.
+   * @param {boolean} request.disableCmek
+   *   Identity Mapping Store without CMEK protections. If a default CmekConfig
+   *   is set for the project, setting this field will override the default
+   *   CmekConfig as well.
+   * @param {string} request.parent
+   *   Required. The parent collection resource name, such as
+   *   `projects/{project}/locations/{location}`.
+   * @param {string} request.identityMappingStoreId
+   *   Required. The ID of the Identity Mapping Store to create.
    *
-   *   If the caller does not have permission to update the
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}, regardless of whether or
-   *   not it exists, a PERMISSION_DENIED error is returned.
-   *
-   *   If the {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} to update does not
-   *   exist, a NOT_FOUND error is returned.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Indicates which fields in the provided
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} to update.
-   *
-   *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
-   *   is returned.
+   *   The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *   (_), and hyphens (-). The maximum length is 63 characters.
+   * @param {google.cloud.discoveryengine.v1.IdentityMappingStore} request.identityMappingStore
+   *   Required. The Identity Mapping Store to create.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.IdentityMappingStore|IdentityMappingStore}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.update_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_UpdateEngine_async
+   * @example <caption>include:samples/generated/v1/identity_mapping_store_service.create_identity_mapping_store.js</caption>
+   * region_tag:discoveryengine_v1_generated_IdentityMappingStoreService_CreateIdentityMappingStore_async
    */
-  updateEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest,
+  createIdentityMappingStore(
+    request?: protos.google.cloud.discoveryengine.v1.ICreateIdentityMappingStoreRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest | undefined,
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
+      (
+        | protos.google.cloud.discoveryengine.v1.ICreateIdentityMappingStoreRequest
+        | undefined
+      ),
       {} | undefined,
     ]
   >;
-  updateEngine(
-    request: protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest,
+  createIdentityMappingStore(
+    request: protos.google.cloud.discoveryengine.v1.ICreateIdentityMappingStoreRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
+      | protos.google.cloud.discoveryengine.v1.ICreateIdentityMappingStoreRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  updateEngine(
-    request: protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest,
+  createIdentityMappingStore(
+    request: protos.google.cloud.discoveryengine.v1.ICreateIdentityMappingStoreRequest,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
+      | protos.google.cloud.discoveryengine.v1.ICreateIdentityMappingStoreRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  updateEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest,
+  createIdentityMappingStore(
+    request?: protos.google.cloud.discoveryengine.v1.ICreateIdentityMappingStoreRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.discoveryengine.v1.IEngine,
-          | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
+          protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
+          | protos.google.cloud.discoveryengine.v1.ICreateIdentityMappingStoreRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
+      | protos.google.cloud.discoveryengine.v1.ICreateIdentityMappingStoreRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest | undefined,
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
+      (
+        | protos.google.cloud.discoveryengine.v1.ICreateIdentityMappingStoreRequest
+        | undefined
+      ),
       {} | undefined,
     ]
   > | void {
@@ -796,113 +833,119 @@ export class EngineServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'engine.name': request.engine!.name ?? '',
+        parent: request.parent ?? '',
       });
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateEngine request %j', request);
+    this._log.info('createIdentityMappingStore request %j', request);
     const wrappedCallback:
       | Callback<
-          protos.google.cloud.discoveryengine.v1.IEngine,
-          | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
+          protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
+          | protos.google.cloud.discoveryengine.v1.ICreateIdentityMappingStoreRequest
           | null
           | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateEngine response %j', response);
+          this._log.info('createIdentityMappingStore response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
     return this.innerApiCalls
-      .updateEngine(request, options, wrappedCallback)
+      .createIdentityMappingStore(request, options, wrappedCallback)
       ?.then(
         ([response, options, rawResponse]: [
-          protos.google.cloud.discoveryengine.v1.IEngine,
+          protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
           (
-            | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
+            | protos.google.cloud.discoveryengine.v1.ICreateIdentityMappingStoreRequest
             | undefined
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateEngine response %j', response);
+          this._log.info('createIdentityMappingStore response %j', response);
           return [response, options, rawResponse];
         }
       );
   }
   /**
-   * Gets a {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
+   * Gets the Identity Mapping Store.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Full resource name of
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}, such as
-   *   `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
+   *   Required. The name of the Identity Mapping Store to get.
+   *   Format:
+   *   `projects/{project}/locations/{location}/identityMappingStores/{identityMappingStore}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.IdentityMappingStore|IdentityMappingStore}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.get_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_GetEngine_async
+   * @example <caption>include:samples/generated/v1/identity_mapping_store_service.get_identity_mapping_store.js</caption>
+   * region_tag:discoveryengine_v1_generated_IdentityMappingStoreService_GetIdentityMappingStore_async
    */
-  getEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IGetEngineRequest,
+  getIdentityMappingStore(
+    request?: protos.google.cloud.discoveryengine.v1.IGetIdentityMappingStoreRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      protos.google.cloud.discoveryengine.v1.IGetEngineRequest | undefined,
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
+      (
+        | protos.google.cloud.discoveryengine.v1.IGetIdentityMappingStoreRequest
+        | undefined
+      ),
       {} | undefined,
     ]
   >;
-  getEngine(
-    request: protos.google.cloud.discoveryengine.v1.IGetEngineRequest,
+  getIdentityMappingStore(
+    request: protos.google.cloud.discoveryengine.v1.IGetIdentityMappingStoreRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IGetEngineRequest
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
+      | protos.google.cloud.discoveryengine.v1.IGetIdentityMappingStoreRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getEngine(
-    request: protos.google.cloud.discoveryengine.v1.IGetEngineRequest,
+  getIdentityMappingStore(
+    request: protos.google.cloud.discoveryengine.v1.IGetIdentityMappingStoreRequest,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IGetEngineRequest
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
+      | protos.google.cloud.discoveryengine.v1.IGetIdentityMappingStoreRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IGetEngineRequest,
+  getIdentityMappingStore(
+    request?: protos.google.cloud.discoveryengine.v1.IGetIdentityMappingStoreRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.discoveryengine.v1.IEngine,
-          | protos.google.cloud.discoveryengine.v1.IGetEngineRequest
+          protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
+          | protos.google.cloud.discoveryengine.v1.IGetIdentityMappingStoreRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IGetEngineRequest
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
+      | protos.google.cloud.discoveryengine.v1.IGetIdentityMappingStoreRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      protos.google.cloud.discoveryengine.v1.IGetEngineRequest | undefined,
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
+      (
+        | protos.google.cloud.discoveryengine.v1.IGetIdentityMappingStoreRequest
+        | undefined
+      ),
       {} | undefined,
     ]
   > | void {
@@ -924,232 +967,47 @@ export class EngineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEngine request %j', request);
+    this._log.info('getIdentityMappingStore request %j', request);
     const wrappedCallback:
       | Callback<
-          protos.google.cloud.discoveryengine.v1.IEngine,
-          | protos.google.cloud.discoveryengine.v1.IGetEngineRequest
+          protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
+          | protos.google.cloud.discoveryengine.v1.IGetIdentityMappingStoreRequest
           | null
           | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEngine response %j', response);
+          this._log.info('getIdentityMappingStore response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
     return this.innerApiCalls
-      .getEngine(request, options, wrappedCallback)
+      .getIdentityMappingStore(request, options, wrappedCallback)
       ?.then(
         ([response, options, rawResponse]: [
-          protos.google.cloud.discoveryengine.v1.IEngine,
-          protos.google.cloud.discoveryengine.v1.IGetEngineRequest | undefined,
+          protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
+          (
+            | protos.google.cloud.discoveryengine.v1.IGetIdentityMappingStoreRequest
+            | undefined
+          ),
           {} | undefined,
         ]) => {
-          this._log.info('getEngine response %j', response);
+          this._log.info('getIdentityMappingStore response %j', response);
           return [response, options, rawResponse];
         }
       );
   }
 
   /**
-   * Creates a {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection}`.
-   * @param {google.cloud.discoveryengine.v1.Engine} request.engine
-   *   Required. The {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} to create.
-   * @param {string} request.engineId
-   *   Required. The ID to use for the
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}, which will become the
-   *   final component of the {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}'s
-   *   resource name.
-   *
-   *   This field must conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
-   *   standard with a length limit of 63 characters. Otherwise, an
-   *   INVALID_ARGUMENT error is returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.create_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_CreateEngine_async
-   */
-  createEngine(
-    request?: protos.google.cloud.discoveryengine.v1.ICreateEngineRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.IEngine,
-        protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
-  createEngine(
-    request: protos.google.cloud.discoveryengine.v1.ICreateEngineRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.IEngine,
-        protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createEngine(
-    request: protos.google.cloud.discoveryengine.v1.ICreateEngineRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.IEngine,
-        protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createEngine(
-    request?: protos.google.cloud.discoveryengine.v1.ICreateEngineRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.discoveryengine.v1.IEngine,
-            protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.IEngine,
-        protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.IEngine,
-        protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.discoveryengine.v1.IEngine,
-            protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, rawResponse, _) => {
-          this._log.info('createEngine response %j', rawResponse);
-          callback!(error, response, rawResponse, _); // We verified callback above.
-        }
-      : undefined;
-    this._log.info('createEngine request %j', request);
-    return this.innerApiCalls
-      .createEngine(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.discoveryengine.v1.IEngine,
-            protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createEngine response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
-  }
-  /**
-   * Check the status of the long running operation returned by `createEngine()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.create_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_CreateEngine_async
-   */
-  async checkCreateEngineProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.discoveryengine.v1.Engine,
-      protos.google.cloud.discoveryengine.v1.CreateEngineMetadata
-    >
-  > {
-    this._log.info('createEngine long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createEngine,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.discoveryengine.v1.Engine,
-      protos.google.cloud.discoveryengine.v1.CreateEngineMetadata
-    >;
-  }
-  /**
-   * Deletes a {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
+   * Deletes the Identity Mapping Store.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Full resource name of
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}, such as
-   *   `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
-   *
-   *   If the caller does not have permission to delete the
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}, regardless of whether or
-   *   not it exists, a PERMISSION_DENIED error is returned.
-   *
-   *   If the {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} to delete does not
-   *   exist, a NOT_FOUND error is returned.
+   *   Required. The name of the Identity Mapping Store to delete.
+   *   Format:
+   *   `projects/{project}/locations/{location}/identityMappingStores/{identityMappingStore}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1158,53 +1016,53 @@ export class EngineServiceClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.delete_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_DeleteEngine_async
+   * @example <caption>include:samples/generated/v1/identity_mapping_store_service.delete_identity_mapping_store.js</caption>
+   * region_tag:discoveryengine_v1_generated_IdentityMappingStoreService_DeleteIdentityMappingStore_async
    */
-  deleteEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IDeleteEngineRequest,
+  deleteIdentityMappingStore(
+    request?: protos.google.cloud.discoveryengine.v1.IDeleteIdentityMappingStoreRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
+        protos.google.cloud.discoveryengine.v1.IDeleteIdentityMappingStoreMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  deleteEngine(
-    request: protos.google.cloud.discoveryengine.v1.IDeleteEngineRequest,
+  deleteIdentityMappingStore(
+    request: protos.google.cloud.discoveryengine.v1.IDeleteIdentityMappingStoreRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
+        protos.google.cloud.discoveryengine.v1.IDeleteIdentityMappingStoreMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteEngine(
-    request: protos.google.cloud.discoveryengine.v1.IDeleteEngineRequest,
+  deleteIdentityMappingStore(
+    request: protos.google.cloud.discoveryengine.v1.IDeleteIdentityMappingStoreRequest,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
+        protos.google.cloud.discoveryengine.v1.IDeleteIdentityMappingStoreMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IDeleteEngineRequest,
+  deleteIdentityMappingStore(
+    request?: protos.google.cloud.discoveryengine.v1.IDeleteIdentityMappingStoreRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
+            protos.google.cloud.discoveryengine.v1.IDeleteIdentityMappingStoreMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -1212,7 +1070,7 @@ export class EngineServiceClient {
     callback?: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
+        protos.google.cloud.discoveryengine.v1.IDeleteIdentityMappingStoreMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1221,7 +1079,7 @@ export class EngineServiceClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
+        protos.google.cloud.discoveryengine.v1.IDeleteIdentityMappingStoreMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -1249,54 +1107,54 @@ export class EngineServiceClient {
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
+            protos.google.cloud.discoveryengine.v1.IDeleteIdentityMappingStoreMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteEngine response %j', rawResponse);
+          this._log.info('deleteIdentityMappingStore response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteEngine request %j', request);
+    this._log.info('deleteIdentityMappingStore request %j', request);
     return this.innerApiCalls
-      .deleteEngine(request, options, wrappedCallback)
+      .deleteIdentityMappingStore(request, options, wrappedCallback)
       ?.then(
         ([response, rawResponse, _]: [
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
+            protos.google.cloud.discoveryengine.v1.IDeleteIdentityMappingStoreMetadata
           >,
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteEngine response %j', rawResponse);
+          this._log.info('deleteIdentityMappingStore response %j', rawResponse);
           return [response, rawResponse, _];
         }
       );
   }
   /**
-   * Check the status of the long running operation returned by `deleteEngine()`.
+   * Check the status of the long running operation returned by `deleteIdentityMappingStore()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.delete_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_DeleteEngine_async
+   * @example <caption>include:samples/generated/v1/identity_mapping_store_service.delete_identity_mapping_store.js</caption>
+   * region_tag:discoveryengine_v1_generated_IdentityMappingStoreService_DeleteIdentityMappingStore_async
    */
-  async checkDeleteEngineProgress(
+  async checkDeleteIdentityMappingStoreProgress(
     name: string
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.discoveryengine.v1.DeleteEngineMetadata
+      protos.google.cloud.discoveryengine.v1.DeleteIdentityMappingStoreMetadata
     >
   > {
-    this._log.info('deleteEngine long-running');
+    this._log.info('deleteIdentityMappingStore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1304,96 +1162,100 @@ export class EngineServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.deleteEngine,
+      this.descriptors.longrunning.deleteIdentityMappingStore,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.discoveryengine.v1.DeleteEngineMetadata
+      protos.google.cloud.discoveryengine.v1.DeleteIdentityMappingStoreMetadata
     >;
   }
   /**
-   * Lists all the {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s associated
-   * with the project.
+   * Imports a list of Identity Mapping Entries to an Identity Mapping Store.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection_id}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Not supported.
-   * @param {string} [request.pageToken]
-   *   Optional. Not supported.
-   * @param {string} [request.filter]
-   *   Optional. Filter by solution type. For example:
-   *   solution_type=SOLUTION_TYPE_SEARCH
+   * @param {google.cloud.discoveryengine.v1.ImportIdentityMappingsRequest.InlineSource} request.inlineSource
+   *   The inline source to import identity mapping entries from.
+   * @param {string} request.identityMappingStore
+   *   Required. The name of the Identity Mapping Store to import Identity Mapping
+   *   Entries to. Format:
+   *   `projects/{project}/locations/{location}/identityMappingStores/{identityMappingStore}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEnginesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/identity_mapping_store_service.import_identity_mappings.js</caption>
+   * region_tag:discoveryengine_v1_generated_IdentityMappingStoreService_ImportIdentityMappings_async
    */
-  listEngines(
-    request?: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
+  importIdentityMappings(
+    request?: protos.google.cloud.discoveryengine.v1.IImportIdentityMappingsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.IEngine[],
-      protos.google.cloud.discoveryengine.v1.IListEnginesRequest | null,
-      protos.google.cloud.discoveryengine.v1.IListEnginesResponse,
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IImportIdentityMappingsResponse,
+        protos.google.cloud.discoveryengine.v1.IIdentityMappingEntryOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
     ]
   >;
-  listEngines(
-    request: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
+  importIdentityMappings(
+    request: protos.google.cloud.discoveryengine.v1.IImportIdentityMappingsRequest,
     options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-      | protos.google.cloud.discoveryengine.v1.IListEnginesResponse
-      | null
-      | undefined,
-      protos.google.cloud.discoveryengine.v1.IEngine
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IImportIdentityMappingsResponse,
+        protos.google.cloud.discoveryengine.v1.IIdentityMappingEntryOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
-  listEngines(
-    request: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-      | protos.google.cloud.discoveryengine.v1.IListEnginesResponse
-      | null
-      | undefined,
-      protos.google.cloud.discoveryengine.v1.IEngine
+  importIdentityMappings(
+    request: protos.google.cloud.discoveryengine.v1.IImportIdentityMappingsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IImportIdentityMappingsResponse,
+        protos.google.cloud.discoveryengine.v1.IIdentityMappingEntryOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
-  listEngines(
-    request?: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
+  importIdentityMappings(
+    request?: protos.google.cloud.discoveryengine.v1.IImportIdentityMappingsRequest,
     optionsOrCallback?:
       | CallOptions
-      | PaginationCallback<
-          protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-          | protos.google.cloud.discoveryengine.v1.IListEnginesResponse
-          | null
-          | undefined,
-          protos.google.cloud.discoveryengine.v1.IEngine
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IImportIdentityMappingsResponse,
+            protos.google.cloud.discoveryengine.v1.IIdentityMappingEntryOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
-    callback?: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-      | protos.google.cloud.discoveryengine.v1.IListEnginesResponse
-      | null
-      | undefined,
-      protos.google.cloud.discoveryengine.v1.IEngine
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IImportIdentityMappingsResponse,
+        protos.google.cloud.discoveryengine.v1.IIdentityMappingEntryOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.IEngine[],
-      protos.google.cloud.discoveryengine.v1.IListEnginesRequest | null,
-      protos.google.cloud.discoveryengine.v1.IListEnginesResponse,
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IImportIdentityMappingsResponse,
+        protos.google.cloud.discoveryengine.v1.IIdentityMappingEntryOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1409,67 +1271,690 @@ export class EngineServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
+        identity_mapping_store: request.identityMappingStore ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IImportIdentityMappingsResponse,
+            protos.google.cloud.discoveryengine.v1.IIdentityMappingEntryOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importIdentityMappings response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importIdentityMappings request %j', request);
+    return this.innerApiCalls
+      .importIdentityMappings(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IImportIdentityMappingsResponse,
+            protos.google.cloud.discoveryengine.v1.IIdentityMappingEntryOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importIdentityMappings response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `importIdentityMappings()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/identity_mapping_store_service.import_identity_mappings.js</caption>
+   * region_tag:discoveryengine_v1_generated_IdentityMappingStoreService_ImportIdentityMappings_async
+   */
+  async checkImportIdentityMappingsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1.ImportIdentityMappingsResponse,
+      protos.google.cloud.discoveryengine.v1.IdentityMappingEntryOperationMetadata
+    >
+  > {
+    this._log.info('importIdentityMappings long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importIdentityMappings,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1.ImportIdentityMappingsResponse,
+      protos.google.cloud.discoveryengine.v1.IdentityMappingEntryOperationMetadata
+    >;
+  }
+  /**
+   * Purges specified or all Identity Mapping Entries from an Identity Mapping
+   * Store.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.discoveryengine.v1.PurgeIdentityMappingsRequest.InlineSource} request.inlineSource
+   *   The inline source to purge identity mapping entries from.
+   * @param {string} request.identityMappingStore
+   *   Required. The name of the Identity Mapping Store to purge Identity Mapping
+   *   Entries from. Format:
+   *   `projects/{project}/locations/{location}/identityMappingStores/{identityMappingStore}`
+   * @param {string} request.filter
+   *   Filter matching identity mappings to purge.
+   *   The eligible field for filtering is:
+   *   * `update_time`: in ISO 8601 "zulu" format.
+   *   * `external_id`
+   *
+   *   Examples:
+   *
+   *   * Deleting all identity mappings updated in a time range:
+   *     `update_time > "2012-04-23T18:25:43.511Z" AND update_time <
+   *     "2012-04-23T18:30:43.511Z"`
+   *   * Deleting all identity mappings for a given external_id:
+   *   `external_id = "id1"`
+   *   * Deleting all identity mappings inside an identity mapping store:
+   *     `*`
+   *
+   *   The filtering fields are assumed to have an implicit AND.
+   *   Should not be used with source. An error will be thrown, if both are
+   *   provided.
+   * @param {boolean} request.force
+   *   Actually performs the purge. If `force` is set to false, return the
+   *   expected purge count without deleting any identity mappings. This field is
+   *   only supported for purge with filter. For input source this field is
+   *   ignored and data will be purged regardless of the value of this field.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/identity_mapping_store_service.purge_identity_mappings.js</caption>
+   * region_tag:discoveryengine_v1_generated_IdentityMappingStoreService_PurgeIdentityMappings_async
+   */
+  purgeIdentityMappings(
+    request?: protos.google.cloud.discoveryengine.v1.IPurgeIdentityMappingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IIdentityMappingEntryOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  purgeIdentityMappings(
+    request: protos.google.cloud.discoveryengine.v1.IPurgeIdentityMappingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IIdentityMappingEntryOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeIdentityMappings(
+    request: protos.google.cloud.discoveryengine.v1.IPurgeIdentityMappingsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IIdentityMappingEntryOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeIdentityMappings(
+    request?: protos.google.cloud.discoveryengine.v1.IPurgeIdentityMappingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1.IIdentityMappingEntryOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IIdentityMappingEntryOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IIdentityMappingEntryOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        identity_mapping_store: request.identityMappingStore ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1.IIdentityMappingEntryOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('purgeIdentityMappings response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('purgeIdentityMappings request %j', request);
+    return this.innerApiCalls
+      .purgeIdentityMappings(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1.IIdentityMappingEntryOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('purgeIdentityMappings response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `purgeIdentityMappings()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/identity_mapping_store_service.purge_identity_mappings.js</caption>
+   * region_tag:discoveryengine_v1_generated_IdentityMappingStoreService_PurgeIdentityMappings_async
+   */
+  async checkPurgeIdentityMappingsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.discoveryengine.v1.IdentityMappingEntryOperationMetadata
+    >
+  > {
+    this._log.info('purgeIdentityMappings long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.purgeIdentityMappings,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.discoveryengine.v1.IdentityMappingEntryOperationMetadata
+    >;
+  }
+  /**
+   * Lists Identity Mappings in an Identity Mapping Store.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.identityMappingStore
+   *   Required. The name of the Identity Mapping Store to list Identity Mapping
+   *   Entries in. Format:
+   *   `projects/{project}/locations/{location}/identityMappingStores/{identityMappingStore}`
+   * @param {number} request.pageSize
+   *   Maximum number of IdentityMappings to return. If unspecified, defaults
+   *   to 2000. The maximum allowed value is 10000. Values above 10000 will be
+   *   coerced to 10000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListIdentityMappings` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListIdentityMappings` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1.IdentityMappingEntry|IdentityMappingEntry}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listIdentityMappingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listIdentityMappings(
+    request?: protos.google.cloud.discoveryengine.v1.IListIdentityMappingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingEntry[],
+      protos.google.cloud.discoveryengine.v1.IListIdentityMappingsRequest | null,
+      protos.google.cloud.discoveryengine.v1.IListIdentityMappingsResponse,
+    ]
+  >;
+  listIdentityMappings(
+    request: protos.google.cloud.discoveryengine.v1.IListIdentityMappingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IListIdentityMappingsRequest,
+      | protos.google.cloud.discoveryengine.v1.IListIdentityMappingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingEntry
+    >
+  ): void;
+  listIdentityMappings(
+    request: protos.google.cloud.discoveryengine.v1.IListIdentityMappingsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IListIdentityMappingsRequest,
+      | protos.google.cloud.discoveryengine.v1.IListIdentityMappingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingEntry
+    >
+  ): void;
+  listIdentityMappings(
+    request?: protos.google.cloud.discoveryengine.v1.IListIdentityMappingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1.IListIdentityMappingsRequest,
+          | protos.google.cloud.discoveryengine.v1.IListIdentityMappingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1.IIdentityMappingEntry
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IListIdentityMappingsRequest,
+      | protos.google.cloud.discoveryengine.v1.IListIdentityMappingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingEntry
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingEntry[],
+      protos.google.cloud.discoveryengine.v1.IListIdentityMappingsRequest | null,
+      protos.google.cloud.discoveryengine.v1.IListIdentityMappingsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        identity_mapping_store: request.identityMappingStore ?? '',
       });
     this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
       | PaginationCallback<
-          protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-          | protos.google.cloud.discoveryengine.v1.IListEnginesResponse
+          protos.google.cloud.discoveryengine.v1.IListIdentityMappingsRequest,
+          | protos.google.cloud.discoveryengine.v1.IListIdentityMappingsResponse
           | null
           | undefined,
-          protos.google.cloud.discoveryengine.v1.IEngine
+          protos.google.cloud.discoveryengine.v1.IIdentityMappingEntry
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEngines values %j', values);
+          this._log.info('listIdentityMappings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEngines request %j', request);
+    this._log.info('listIdentityMappings request %j', request);
     return this.innerApiCalls
-      .listEngines(request, options, wrappedCallback)
+      .listIdentityMappings(request, options, wrappedCallback)
       ?.then(
         ([response, input, output]: [
-          protos.google.cloud.discoveryengine.v1.IEngine[],
-          protos.google.cloud.discoveryengine.v1.IListEnginesRequest | null,
-          protos.google.cloud.discoveryengine.v1.IListEnginesResponse,
+          protos.google.cloud.discoveryengine.v1.IIdentityMappingEntry[],
+          protos.google.cloud.discoveryengine.v1.IListIdentityMappingsRequest | null,
+          protos.google.cloud.discoveryengine.v1.IListIdentityMappingsResponse,
         ]) => {
-          this._log.info('listEngines values %j', response);
+          this._log.info('listIdentityMappings values %j', response);
           return [response, input, output];
         }
       );
   }
 
   /**
-   * Equivalent to `listEngines`, but returns a NodeJS Stream object.
+   * Equivalent to `listIdentityMappings`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection_id}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Not supported.
-   * @param {string} [request.pageToken]
-   *   Optional. Not supported.
-   * @param {string} [request.filter]
-   *   Optional. Filter by solution type. For example:
-   *   solution_type=SOLUTION_TYPE_SEARCH
+   * @param {string} request.identityMappingStore
+   *   Required. The name of the Identity Mapping Store to list Identity Mapping
+   *   Entries in. Format:
+   *   `projects/{project}/locations/{location}/identityMappingStores/{identityMappingStore}`
+   * @param {number} request.pageSize
+   *   Maximum number of IdentityMappings to return. If unspecified, defaults
+   *   to 2000. The maximum allowed value is 10000. Values above 10000 will be
+   *   coerced to 10000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListIdentityMappings` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListIdentityMappings` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1.IdentityMappingEntry|IdentityMappingEntry} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEnginesAsync()`
+   *   We recommend using `listIdentityMappingsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listEnginesStream(
-    request?: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
+  listIdentityMappingsStream(
+    request?: protos.google.cloud.discoveryengine.v1.IListIdentityMappingsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        identity_mapping_store: request.identityMappingStore ?? '',
+      });
+    const defaultCallSettings = this._defaults['listIdentityMappings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listIdentityMappings stream %j', request);
+    return this.descriptors.page.listIdentityMappings.createStream(
+      this.innerApiCalls.listIdentityMappings as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listIdentityMappings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.identityMappingStore
+   *   Required. The name of the Identity Mapping Store to list Identity Mapping
+   *   Entries in. Format:
+   *   `projects/{project}/locations/{location}/identityMappingStores/{identityMappingStore}`
+   * @param {number} request.pageSize
+   *   Maximum number of IdentityMappings to return. If unspecified, defaults
+   *   to 2000. The maximum allowed value is 10000. Values above 10000 will be
+   *   coerced to 10000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListIdentityMappings` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListIdentityMappings` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.discoveryengine.v1.IdentityMappingEntry|IdentityMappingEntry}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/identity_mapping_store_service.list_identity_mappings.js</caption>
+   * region_tag:discoveryengine_v1_generated_IdentityMappingStoreService_ListIdentityMappings_async
+   */
+  listIdentityMappingsAsync(
+    request?: protos.google.cloud.discoveryengine.v1.IListIdentityMappingsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.discoveryengine.v1.IIdentityMappingEntry> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        identity_mapping_store: request.identityMappingStore ?? '',
+      });
+    const defaultCallSettings = this._defaults['listIdentityMappings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listIdentityMappings iterate %j', request);
+    return this.descriptors.page.listIdentityMappings.asyncIterate(
+      this.innerApiCalls['listIdentityMappings'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1.IIdentityMappingEntry>;
+  }
+  /**
+   * Lists all Identity Mapping Stores.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the Identity Mapping Stores to list.
+   *   Format:
+   *   `projects/{project}/locations/{location}`.
+   * @param {number} request.pageSize
+   *   Maximum number of IdentityMappingStores to return. If unspecified, defaults
+   *   to 100. The maximum allowed value is 1000. Values above 1000 will be
+   *   coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListIdentityMappingStores` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListIdentityMappingStores` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1.IdentityMappingStore|IdentityMappingStore}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listIdentityMappingStoresAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listIdentityMappingStores(
+    request?: protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingStore[],
+      protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresRequest | null,
+      protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresResponse,
+    ]
+  >;
+  listIdentityMappingStores(
+    request: protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresRequest,
+      | protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingStore
+    >
+  ): void;
+  listIdentityMappingStores(
+    request: protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresRequest,
+      | protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingStore
+    >
+  ): void;
+  listIdentityMappingStores(
+    request?: protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresRequest,
+          | protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1.IIdentityMappingStore
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresRequest,
+      | protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingStore
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IIdentityMappingStore[],
+      protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresRequest | null,
+      protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresRequest,
+          | protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1.IIdentityMappingStore
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listIdentityMappingStores values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listIdentityMappingStores request %j', request);
+    return this.innerApiCalls
+      .listIdentityMappingStores(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1.IIdentityMappingStore[],
+          protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresRequest | null,
+          protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresResponse,
+        ]) => {
+          this._log.info('listIdentityMappingStores values %j', response);
+          return [response, input, output];
+        }
+      );
+  }
+
+  /**
+   * Equivalent to `listIdentityMappingStores`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the Identity Mapping Stores to list.
+   *   Format:
+   *   `projects/{project}/locations/{location}`.
+   * @param {number} request.pageSize
+   *   Maximum number of IdentityMappingStores to return. If unspecified, defaults
+   *   to 100. The maximum allowed value is 1000. Values above 1000 will be
+   *   coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListIdentityMappingStores` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListIdentityMappingStores` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1.IdentityMappingStore|IdentityMappingStore} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listIdentityMappingStoresAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listIdentityMappingStoresStream(
+    request?: protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -1480,51 +1965,56 @@ export class EngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listEngines'];
+    const defaultCallSettings = this._defaults['listIdentityMappingStores'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEngines stream %j', request);
-    return this.descriptors.page.listEngines.createStream(
-      this.innerApiCalls.listEngines as GaxCall,
+    this._log.info('listIdentityMappingStores stream %j', request);
+    return this.descriptors.page.listIdentityMappingStores.createStream(
+      this.innerApiCalls.listIdentityMappingStores as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listEngines`, but returns an iterable object.
+   * Equivalent to `listIdentityMappingStores`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection_id}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Not supported.
-   * @param {string} [request.pageToken]
-   *   Optional. Not supported.
-   * @param {string} [request.filter]
-   *   Optional. Filter by solution type. For example:
-   *   solution_type=SOLUTION_TYPE_SEARCH
+   *   Required. The parent of the Identity Mapping Stores to list.
+   *   Format:
+   *   `projects/{project}/locations/{location}`.
+   * @param {number} request.pageSize
+   *   Maximum number of IdentityMappingStores to return. If unspecified, defaults
+   *   to 100. The maximum allowed value is 1000. Values above 1000 will be
+   *   coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListIdentityMappingStores` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListIdentityMappingStores` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.discoveryengine.v1.IdentityMappingStore|IdentityMappingStore}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.list_engines.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_ListEngines_async
+   * @example <caption>include:samples/generated/v1/identity_mapping_store_service.list_identity_mapping_stores.js</caption>
+   * region_tag:discoveryengine_v1_generated_IdentityMappingStoreService_ListIdentityMappingStores_async
    */
-  listEnginesAsync(
-    request?: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
+  listIdentityMappingStoresAsync(
+    request?: protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.discoveryengine.v1.IEngine> {
+  ): AsyncIterable<protos.google.cloud.discoveryengine.v1.IIdentityMappingStore> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1533,17 +2023,17 @@ export class EngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listEngines'];
+    const defaultCallSettings = this._defaults['listIdentityMappingStores'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEngines iterate %j', request);
-    return this.descriptors.page.listEngines.asyncIterate(
-      this.innerApiCalls['listEngines'] as GaxCall,
+    this._log.info('listIdentityMappingStores iterate %j', request);
+    return this.descriptors.page.listIdentityMappingStores.asyncIterate(
+      this.innerApiCalls['listIdentityMappingStores'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1.IEngine>;
+    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1.IIdentityMappingStore>;
   }
   /**
    * Gets information about a location.
@@ -1852,58 +2342,6 @@ export class EngineServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified collection resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} collection
-   * @returns {string} Resource name string.
-   */
-  collectionPath(project: string, location: string, collection: string) {
-    return this.pathTemplates.collectionPathTemplate.render({
-      project: project,
-      location: location,
-      collection: collection,
-    });
-  }
-
-  /**
-   * Parse the project from Collection resource.
-   *
-   * @param {string} collectionName
-   *   A fully-qualified path representing Collection resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName)
-      .project;
-  }
-
-  /**
-   * Parse the location from Collection resource.
-   *
-   * @param {string} collectionName
-   *   A fully-qualified path representing Collection resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName)
-      .location;
-  }
-
-  /**
-   * Parse the collection from Collection resource.
-   *
-   * @param {string} collectionName
-   *   A fully-qualified path representing Collection resource.
-   * @returns {string} A string representing the collection.
-   */
-  matchCollectionFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName)
-      .collection;
-  }
-
-  /**
    * Return a fully-qualified engine resource name string.
    *
    * @param {string} project
@@ -2029,6 +2467,42 @@ export class EngineServiceClient {
     return this.pathTemplates.identityMappingStorePathTemplate.match(
       identityMappingStoreName
     ).identity_mapping_store;
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**
@@ -5369,8 +5843,8 @@ export class EngineServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.engineServiceStub && !this._terminated) {
-      return this.engineServiceStub.then(stub => {
+    if (this.identityMappingStoreServiceStub && !this._terminated) {
+      return this.identityMappingStoreServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
