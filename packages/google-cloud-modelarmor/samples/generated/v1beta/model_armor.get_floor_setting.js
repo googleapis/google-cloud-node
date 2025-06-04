@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START parallelstore_v1beta_generated_Parallelstore_DeleteInstance_async]
+  // [START modelarmor_v1beta_generated_ModelArmor_GetFloorSetting_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,44 +29,30 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the resource
+   *  Required. The name of the floor setting to get, example
+   *  projects/123/floorsetting.
    */
   // const name = 'abc123'
-  /**
-   *  Optional. An optional request ID to identify requests. Specify a unique
-   *  request ID so that if you must retry your request, the server will know to
-   *  ignore the request if it has already been completed. The server will
-   *  guarantee that for at least 60 minutes after the first request.
-   *  For example, consider a situation where you make an initial request and
-   *  the request times out. If you make the request again with the same request
-   *  ID, the server can check if original operation with the same request ID
-   *  was received, and if so, will ignore the second request. This prevents
-   *  clients from accidentally creating duplicate commitments.
-   *  The request ID must be a valid UUID with the exception that zero UUID is
-   *  not supported (00000000-0000-0000-0000-000000000000).
-   */
-  // const requestId = 'abc123'
 
-  // Imports the Parallelstore library
-  const {ParallelstoreClient} = require('@google-cloud/parallelstore').v1beta;
+  // Imports the Modelarmor library
+  const {ModelArmorClient} = require('@google-cloud/modelarmor').v1beta;
 
   // Instantiates a client
-  const parallelstoreClient = new ParallelstoreClient();
+  const modelarmorClient = new ModelArmorClient();
 
-  async function callDeleteInstance() {
+  async function callGetFloorSetting() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await parallelstoreClient.deleteInstance(request);
-    const [response] = await operation.promise();
+    const response = await modelarmorClient.getFloorSetting(request);
     console.log(response);
   }
 
-  callDeleteInstance();
-  // [END parallelstore_v1beta_generated_Parallelstore_DeleteInstance_async]
+  callGetFloorSetting();
+  // [END modelarmor_v1beta_generated_ModelArmor_GetFloorSetting_async]
 }
 
 process.on('unhandledRejection', err => {
