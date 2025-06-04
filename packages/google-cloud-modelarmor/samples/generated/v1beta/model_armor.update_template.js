@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, instanceId, instance) {
-  // [START parallelstore_v1beta_generated_Parallelstore_CreateInstance_async]
+function main(updateMask, template) {
+  // [START modelarmor_v1beta_generated_ModelArmor_UpdateTemplate_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,24 @@ function main(parent, instanceId, instance) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The instance's project and location, in the format
-   *  `projects/{project}/locations/{location}`.
-   *  Locations map to Google Cloud zones; for example, `us-west1-b`.
+   *  Required. Field mask is used to specify the fields to be overwritten in the
+   *  Template resource by the update.
+   *  The fields specified in the update_mask are relative to the resource, not
+   *  the full request. A field will be overwritten if it is in the mask. If the
+   *  user does not provide a mask then all fields will be overwritten.
    */
-  // const parent = 'abc123'
+  // const updateMask = {}
   /**
-   *  Required. The name of the Parallelstore instance.
-   *  * Must contain only lowercase letters, numbers, and hyphens.
-   *  * Must start with a letter.
-   *  * Must be between 1-63 characters.
-   *  * Must end with a number or a letter.
-   *  * Must be unique within the customer project / location
+   *  Required. The resource being updated
    */
-  // const instanceId = 'abc123'
-  /**
-   *  Required. The instance to create.
-   */
-  // const instance = {}
+  // const template = {}
   /**
    *  Optional. An optional request ID to identify requests. Specify a unique
    *  request ID so that if you must retry your request, the server will know to
-   *  ignore the request if it has already been completed. The server will
-   *  guarantee that for at least 60 minutes since the first request.
-   *  For example, consider a situation where you make an initial request and
-   *  the request times out. If you make the request again with the same request
+   *  ignore the request if it has already been completed. The server stores the
+   *  request ID for 60 minutes after the first request.
+   *  For example, consider a situation where you make an initial request and the
+   *  request times out. If you make the request again with the same request
    *  ID, the server can check if original operation with the same request ID
    *  was received, and if so, will ignore the second request. This prevents
    *  clients from accidentally creating duplicate commitments.
@@ -62,28 +55,26 @@ function main(parent, instanceId, instance) {
    */
   // const requestId = 'abc123'
 
-  // Imports the Parallelstore library
-  const {ParallelstoreClient} = require('@google-cloud/parallelstore').v1beta;
+  // Imports the Modelarmor library
+  const {ModelArmorClient} = require('@google-cloud/modelarmor').v1beta;
 
   // Instantiates a client
-  const parallelstoreClient = new ParallelstoreClient();
+  const modelarmorClient = new ModelArmorClient();
 
-  async function callCreateInstance() {
+  async function callUpdateTemplate() {
     // Construct request
     const request = {
-      parent,
-      instanceId,
-      instance,
+      updateMask,
+      template,
     };
 
     // Run request
-    const [operation] = await parallelstoreClient.createInstance(request);
-    const [response] = await operation.promise();
+    const response = await modelarmorClient.updateTemplate(request);
     console.log(response);
   }
 
-  callCreateInstance();
-  // [END parallelstore_v1beta_generated_Parallelstore_CreateInstance_async]
+  callUpdateTemplate();
+  // [END modelarmor_v1beta_generated_ModelArmor_UpdateTemplate_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, instanceId, instance) {
-  // [START parallelstore_v1beta_generated_Parallelstore_CreateInstance_async]
+function main(name) {
+  // [START modelarmor_v1beta_generated_ModelArmor_DeleteTemplate_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,16 @@ function main(parent, instanceId, instance) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The instance's project and location, in the format
-   *  `projects/{project}/locations/{location}`.
-   *  Locations map to Google Cloud zones; for example, `us-west1-b`.
+   *  Required. Name of the resource
    */
-  // const parent = 'abc123'
-  /**
-   *  Required. The name of the Parallelstore instance.
-   *  * Must contain only lowercase letters, numbers, and hyphens.
-   *  * Must start with a letter.
-   *  * Must be between 1-63 characters.
-   *  * Must end with a number or a letter.
-   *  * Must be unique within the customer project / location
-   */
-  // const instanceId = 'abc123'
-  /**
-   *  Required. The instance to create.
-   */
-  // const instance = {}
+  // const name = 'abc123'
   /**
    *  Optional. An optional request ID to identify requests. Specify a unique
    *  request ID so that if you must retry your request, the server will know to
-   *  ignore the request if it has already been completed. The server will
-   *  guarantee that for at least 60 minutes since the first request.
-   *  For example, consider a situation where you make an initial request and
-   *  the request times out. If you make the request again with the same request
+   *  ignore the request if it has already been completed. The server stores the
+   *  request ID for 60 minutes after the first request.
+   *  For example, consider a situation where you make an initial request and the
+   *  request times out. If you make the request again with the same request
    *  ID, the server can check if original operation with the same request ID
    *  was received, and if so, will ignore the second request. This prevents
    *  clients from accidentally creating duplicate commitments.
@@ -62,28 +47,25 @@ function main(parent, instanceId, instance) {
    */
   // const requestId = 'abc123'
 
-  // Imports the Parallelstore library
-  const {ParallelstoreClient} = require('@google-cloud/parallelstore').v1beta;
+  // Imports the Modelarmor library
+  const {ModelArmorClient} = require('@google-cloud/modelarmor').v1beta;
 
   // Instantiates a client
-  const parallelstoreClient = new ParallelstoreClient();
+  const modelarmorClient = new ModelArmorClient();
 
-  async function callCreateInstance() {
+  async function callDeleteTemplate() {
     // Construct request
     const request = {
-      parent,
-      instanceId,
-      instance,
+      name,
     };
 
     // Run request
-    const [operation] = await parallelstoreClient.createInstance(request);
-    const [response] = await operation.promise();
+    const response = await modelarmorClient.deleteTemplate(request);
     console.log(response);
   }
 
-  callCreateInstance();
-  // [END parallelstore_v1beta_generated_Parallelstore_CreateInstance_async]
+  callDeleteTemplate();
+  // [END modelarmor_v1beta_generated_ModelArmor_DeleteTemplate_async]
 }
 
 process.on('unhandledRejection', err => {
