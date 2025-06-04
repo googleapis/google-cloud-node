@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.1.0...dlp-v6.2.0) (2025-06-03)
+
+
+### Features
+
+* [dlp] add Dataplex Catalog action for discovery configs ([#6381](https://github.com/googleapis/google-cloud-node/issues/6381)) ([0a4221e](https://github.com/googleapis/google-cloud-node/commit/0a4221eb6787f427f82b835b6bd27c7fd5363b41))
+* Add a project ID to table reference so that org parents can create single table discovery configs. ([0a4221e](https://github.com/googleapis/google-cloud-node/commit/0a4221eb6787f427f82b835b6bd27c7fd5363b41))
+* New fields for data profile finding. ([0a4221e](https://github.com/googleapis/google-cloud-node/commit/0a4221eb6787f427f82b835b6bd27c7fd5363b41))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.0.1...dlp-v6.1.0) (2025-03-21)
 
 

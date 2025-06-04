@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/org-policy-v4.1.0...org-policy-v4.2.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6302](https://github.com/googleapis/google-cloud-node/issues/6302)) ([abc35be](https://github.com/googleapis/google-cloud-node/commit/abc35be4817709467e6c6b2a12ac4e749ffed72d))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/org-policy-v4.0.1...org-policy-v4.1.0) (2025-05-09)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/parametermanager-v0.3.0...parametermanager-v0.4.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6302](https://github.com/googleapis/google-cloud-node/issues/6302)) ([abc35be](https://github.com/googleapis/google-cloud-node/commit/abc35be4817709467e6c6b2a12ac4e749ffed72d))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/parametermanager-v0.2.0...parametermanager-v0.3.0) (2025-03-21)
 
 

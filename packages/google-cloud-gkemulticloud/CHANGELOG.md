@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v2.0.1...gkemulticloud-v2.1.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([b3bd921](https://github.com/googleapis/google-cloud-node/commit/b3bd921a30b15a632d8e8495b91723d314c23c71))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v2.0.0...gkemulticloud-v2.0.1) (2025-03-21)
 
 

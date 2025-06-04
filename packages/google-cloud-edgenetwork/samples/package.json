@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/edgenetwork": "^0.8.0"
+    "@google-cloud/edgenetwork": "^0.9.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",

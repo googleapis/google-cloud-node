@@ -33,25 +33,7 @@ type TagKeysClient = v3.TagKeysClient;
 const TagValuesClient = v3.TagValuesClient;
 type TagValuesClient = v3.TagValuesClient;
 
-export {
-  v3,
-  FoldersClient,
-  OrganizationsClient,
-  ProjectsClient,
-  TagBindingsClient,
-  TagHoldsClient,
-  TagKeysClient,
-  TagValuesClient,
-};
-export default {
-  v3,
-  FoldersClient,
-  OrganizationsClient,
-  ProjectsClient,
-  TagBindingsClient,
-  TagHoldsClient,
-  TagKeysClient,
-  TagValuesClient,
-};
+export {v3, FoldersClient, OrganizationsClient, ProjectsClient, TagBindingsClient, TagHoldsClient, TagKeysClient, TagValuesClient};
+export default {v3, FoldersClient, OrganizationsClient, ProjectsClient, TagBindingsClient, TagHoldsClient, TagKeysClient, TagValuesClient};
 import * as protos from '../protos/protos';
 export {protos};
