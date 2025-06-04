@@ -834,9 +834,6 @@ export namespace google {
                 /** LinuxNodeConfig hugepages. */
                 public hugepages?: (google.container.v1.LinuxNodeConfig.IHugepagesConfig|null);
 
-                /** LinuxNodeConfig _hugepages. */
-                public _hugepages?: "hugepages";
-
                 /**
                  * Creates a new LinuxNodeConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -948,12 +945,6 @@ export namespace google {
 
                     /** HugepagesConfig hugepageSize1g. */
                     public hugepageSize1g?: (number|null);
-
-                    /** HugepagesConfig _hugepageSize2m. */
-                    public _hugepageSize2m?: "hugepageSize2m";
-
-                    /** HugepagesConfig _hugepageSize1g. */
-                    public _hugepageSize1g?: "hugepageSize1g";
 
                     /**
                      * Creates a new HugepagesConfig instance using the specified properties.
@@ -1237,9 +1228,6 @@ export namespace google {
 
                 /** NodeKubeletConfig allowedUnsafeSysctls. */
                 public allowedUnsafeSysctls: string[];
-
-                /** NodeKubeletConfig _insecureKubeletReadonlyPortEnabled. */
-                public _insecureKubeletReadonlyPortEnabled?: "insecureKubeletReadonlyPortEnabled";
 
                 /**
                  * Creates a new NodeKubeletConfig instance using the specified properties.
@@ -1796,18 +1784,6 @@ export namespace google {
                 /** NodeConfig flexStart. */
                 public flexStart?: (boolean|null);
 
-                /** NodeConfig _fastSocket. */
-                public _fastSocket?: "fastSocket";
-
-                /** NodeConfig _secondaryBootDiskUpdateStrategy. */
-                public _secondaryBootDiskUpdateStrategy?: "secondaryBootDiskUpdateStrategy";
-
-                /** NodeConfig _localSsdEncryptionMode. */
-                public _localSsdEncryptionMode?: "localSsdEncryptionMode";
-
-                /** NodeConfig _flexStart. */
-                public _flexStart?: "flexStart";
-
                 /**
                  * Creates a new NodeConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -1933,15 +1909,6 @@ export namespace google {
 
                 /** AdvancedMachineFeatures performanceMonitoringUnit. */
                 public performanceMonitoringUnit?: (google.container.v1.AdvancedMachineFeatures.PerformanceMonitoringUnit|keyof typeof google.container.v1.AdvancedMachineFeatures.PerformanceMonitoringUnit|null);
-
-                /** AdvancedMachineFeatures _threadsPerCore. */
-                public _threadsPerCore?: "threadsPerCore";
-
-                /** AdvancedMachineFeatures _enableNestedVirtualization. */
-                public _enableNestedVirtualization?: "enableNestedVirtualization";
-
-                /** AdvancedMachineFeatures _performanceMonitoringUnit. */
-                public _performanceMonitoringUnit?: "performanceMonitoringUnit";
 
                 /**
                  * Creates a new AdvancedMachineFeatures instance using the specified properties.
@@ -2099,12 +2066,6 @@ export namespace google {
                 /** NodeNetworkConfig podIpv4RangeUtilization. */
                 public podIpv4RangeUtilization: number;
 
-                /** NodeNetworkConfig _enablePrivateNodes. */
-                public _enablePrivateNodes?: "enablePrivateNodes";
-
-                /** NodeNetworkConfig _networkPerformanceConfig. */
-                public _networkPerformanceConfig?: "networkPerformanceConfig";
-
                 /**
                  * Creates a new NodeNetworkConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -2203,9 +2164,6 @@ export namespace google {
 
                     /** NetworkPerformanceConfig totalEgressBandwidthTier. */
                     public totalEgressBandwidthTier?: (google.container.v1.NodeNetworkConfig.NetworkPerformanceConfig.Tier|keyof typeof google.container.v1.NodeNetworkConfig.NetworkPerformanceConfig.Tier|null);
-
-                    /** NetworkPerformanceConfig _totalEgressBandwidthTier. */
-                    public _totalEgressBandwidthTier?: "totalEgressBandwidthTier";
 
                     /**
                      * Creates a new NetworkPerformanceConfig instance using the specified properties.
@@ -2428,9 +2386,6 @@ export namespace google {
 
                 /** AdditionalPodNetworkConfig maxPodsPerNode. */
                 public maxPodsPerNode?: (google.container.v1.IMaxPodsConstraint|null);
-
-                /** AdditionalPodNetworkConfig _maxPodsPerNode. */
-                public _maxPodsPerNode?: "maxPodsPerNode";
 
                 /**
                  * Creates a new AdditionalPodNetworkConfig instance using the specified properties.
@@ -6339,12 +6294,6 @@ export namespace google {
                 /** MasterAuthorizedNetworksConfig privateEndpointEnforcementEnabled. */
                 public privateEndpointEnforcementEnabled?: (boolean|null);
 
-                /** MasterAuthorizedNetworksConfig _gcpPublicCidrsAccessEnabled. */
-                public _gcpPublicCidrsAccessEnabled?: "gcpPublicCidrsAccessEnabled";
-
-                /** MasterAuthorizedNetworksConfig _privateEndpointEnforcementEnabled. */
-                public _privateEndpointEnforcementEnabled?: "privateEndpointEnforcementEnabled";
-
                 /**
                  * Creates a new MasterAuthorizedNetworksConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -7634,21 +7583,6 @@ export namespace google {
                 /** Cluster anonymousAuthenticationConfig. */
                 public anonymousAuthenticationConfig?: (google.container.v1.IAnonymousAuthenticationConfig|null);
 
-                /** Cluster _nodePoolDefaults. */
-                public _nodePoolDefaults?: "nodePoolDefaults";
-
-                /** Cluster _satisfiesPzs. */
-                public _satisfiesPzs?: "satisfiesPzs";
-
-                /** Cluster _satisfiesPzi. */
-                public _satisfiesPzi?: "satisfiesPzi";
-
-                /** Cluster _userManagedKeysConfig. */
-                public _userManagedKeysConfig?: "userManagedKeysConfig";
-
-                /** Cluster _rbacBindingConfig. */
-                public _rbacBindingConfig?: "rbacBindingConfig";
-
                 /**
                  * Creates a new Cluster instance using the specified properties.
                  * @param [properties] Properties to set
@@ -7765,12 +7699,6 @@ export namespace google {
 
                 /** RBACBindingConfig enableInsecureBindingSystemAuthenticated. */
                 public enableInsecureBindingSystemAuthenticated?: (boolean|null);
-
-                /** RBACBindingConfig _enableInsecureBindingSystemUnauthenticated. */
-                public _enableInsecureBindingSystemUnauthenticated?: "enableInsecureBindingSystemUnauthenticated";
-
-                /** RBACBindingConfig _enableInsecureBindingSystemAuthenticated. */
-                public _enableInsecureBindingSystemAuthenticated?: "enableInsecureBindingSystemAuthenticated";
 
                 /**
                  * Creates a new RBACBindingConfig instance using the specified properties.
@@ -8105,9 +8033,6 @@ export namespace google {
                 /** CompliancePostureConfig complianceStandards. */
                 public complianceStandards: google.container.v1.CompliancePostureConfig.IComplianceStandard[];
 
-                /** CompliancePostureConfig _mode. */
-                public _mode?: "mode";
-
                 /**
                  * Creates a new CompliancePostureConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -8213,9 +8138,6 @@ export namespace google {
 
                     /** ComplianceStandard standard. */
                     public standard?: (string|null);
-
-                    /** ComplianceStandard _standard. */
-                    public _standard?: "standard";
 
                     /**
                      * Creates a new ComplianceStandard instance using the specified properties.
@@ -8417,12 +8339,6 @@ export namespace google {
 
                 /** SecurityPostureConfig vulnerabilityMode. */
                 public vulnerabilityMode?: (google.container.v1.SecurityPostureConfig.VulnerabilityMode|keyof typeof google.container.v1.SecurityPostureConfig.VulnerabilityMode|null);
-
-                /** SecurityPostureConfig _mode. */
-                public _mode?: "mode";
-
-                /** SecurityPostureConfig _vulnerabilityMode. */
-                public _vulnerabilityMode?: "vulnerabilityMode";
 
                 /**
                  * Creates a new SecurityPostureConfig instance using the specified properties.
@@ -9262,36 +9178,6 @@ export namespace google {
 
                 /** ClusterUpdate desiredAnonymousAuthenticationConfig. */
                 public desiredAnonymousAuthenticationConfig?: (google.container.v1.IAnonymousAuthenticationConfig|null);
-
-                /** ClusterUpdate _desiredEnablePrivateEndpoint. */
-                public _desiredEnablePrivateEndpoint?: "desiredEnablePrivateEndpoint";
-
-                /** ClusterUpdate _desiredDefaultEnablePrivateNodes. */
-                public _desiredDefaultEnablePrivateNodes?: "desiredDefaultEnablePrivateNodes";
-
-                /** ClusterUpdate _desiredEnableFqdnNetworkPolicy. */
-                public _desiredEnableFqdnNetworkPolicy?: "desiredEnableFqdnNetworkPolicy";
-
-                /** ClusterUpdate _desiredEnableMultiNetworking. */
-                public _desiredEnableMultiNetworking?: "desiredEnableMultiNetworking";
-
-                /** ClusterUpdate _desiredInTransitEncryptionConfig. */
-                public _desiredInTransitEncryptionConfig?: "desiredInTransitEncryptionConfig";
-
-                /** ClusterUpdate _desiredEnableCiliumClusterwideNetworkPolicy. */
-                public _desiredEnableCiliumClusterwideNetworkPolicy?: "desiredEnableCiliumClusterwideNetworkPolicy";
-
-                /** ClusterUpdate _desiredSecretManagerConfig. */
-                public _desiredSecretManagerConfig?: "desiredSecretManagerConfig";
-
-                /** ClusterUpdate _desiredCompliancePostureConfig. */
-                public _desiredCompliancePostureConfig?: "desiredCompliancePostureConfig";
-
-                /** ClusterUpdate _desiredRbacBindingConfig. */
-                public _desiredRbacBindingConfig?: "desiredRbacBindingConfig";
-
-                /** ClusterUpdate _desiredDisableL4LbFirewallReconciliation. */
-                public _desiredDisableL4LbFirewallReconciliation?: "desiredDisableL4LbFirewallReconciliation";
 
                 /**
                  * Creates a new ClusterUpdate instance using the specified properties.
@@ -10693,9 +10579,6 @@ export namespace google {
 
                 /** UpdateNodePoolRequest flexStart. */
                 public flexStart?: (boolean|null);
-
-                /** UpdateNodePoolRequest _flexStart. */
-                public _flexStart?: "flexStart";
 
                 /**
                  * Creates a new UpdateNodePoolRequest instance using the specified properties.
@@ -13274,9 +13157,6 @@ export namespace google {
                 /** BlueGreenSettings rolloutPolicy. */
                 public rolloutPolicy?: "standardRolloutPolicy";
 
-                /** BlueGreenSettings _nodePoolSoakDuration. */
-                public _nodePoolSoakDuration?: "nodePoolSoakDuration";
-
                 /**
                  * Creates a new BlueGreenSettings instance using the specified properties.
                  * @param [properties] Properties to set
@@ -13390,9 +13270,6 @@ export namespace google {
 
                     /** StandardRolloutPolicy updateBatchSize. */
                     public updateBatchSize?: ("batchPercentage"|"batchNodeCount");
-
-                    /** StandardRolloutPolicy _batchSoakDuration. */
-                    public _batchSoakDuration?: "batchSoakDuration";
 
                     /**
                      * Creates a new StandardRolloutPolicy instance using the specified properties.
@@ -13728,12 +13605,6 @@ export namespace google {
 
                     /** UpgradeSettings blueGreenSettings. */
                     public blueGreenSettings?: (google.container.v1.IBlueGreenSettings|null);
-
-                    /** UpgradeSettings _strategy. */
-                    public _strategy?: "strategy";
-
-                    /** UpgradeSettings _blueGreenSettings. */
-                    public _blueGreenSettings?: "blueGreenSettings";
 
                     /**
                      * Creates a new UpgradeSettings instance using the specified properties.
@@ -16016,9 +15887,6 @@ export namespace google {
                 /** AutoprovisioningNodePoolDefaults insecureKubeletReadonlyPortEnabled. */
                 public insecureKubeletReadonlyPortEnabled?: (boolean|null);
 
-                /** AutoprovisioningNodePoolDefaults _insecureKubeletReadonlyPortEnabled. */
-                public _insecureKubeletReadonlyPortEnabled?: "insecureKubeletReadonlyPortEnabled";
-
                 /**
                  * Creates a new AutoprovisioningNodePoolDefaults instance using the specified properties.
                  * @param [properties] Properties to set
@@ -16876,12 +16744,6 @@ export namespace google {
                 /** AcceleratorConfig gpuDriverInstallationConfig. */
                 public gpuDriverInstallationConfig?: (google.container.v1.IGPUDriverInstallationConfig|null);
 
-                /** AcceleratorConfig _gpuSharingConfig. */
-                public _gpuSharingConfig?: "gpuSharingConfig";
-
-                /** AcceleratorConfig _gpuDriverInstallationConfig. */
-                public _gpuDriverInstallationConfig?: "gpuDriverInstallationConfig";
-
                 /**
                  * Creates a new AcceleratorConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -16984,9 +16846,6 @@ export namespace google {
 
                 /** GPUSharingConfig gpuSharingStrategy. */
                 public gpuSharingStrategy?: (google.container.v1.GPUSharingConfig.GPUSharingStrategy|keyof typeof google.container.v1.GPUSharingConfig.GPUSharingStrategy|null);
-
-                /** GPUSharingConfig _gpuSharingStrategy. */
-                public _gpuSharingStrategy?: "gpuSharingStrategy";
 
                 /**
                  * Creates a new GPUSharingConfig instance using the specified properties.
@@ -17094,9 +16953,6 @@ export namespace google {
 
                 /** GPUDriverInstallationConfig gpuDriverVersion. */
                 public gpuDriverVersion?: (google.container.v1.GPUDriverInstallationConfig.GPUDriverVersion|keyof typeof google.container.v1.GPUDriverInstallationConfig.GPUDriverVersion|null);
-
-                /** GPUDriverInstallationConfig _gpuDriverVersion. */
-                public _gpuDriverVersion?: "gpuDriverVersion";
 
                 /**
                  * Creates a new GPUDriverInstallationConfig instance using the specified properties.
@@ -17775,21 +17631,6 @@ export namespace google {
                 /** NetworkConfig disableL4LbFirewallReconciliation. */
                 public disableL4LbFirewallReconciliation?: (boolean|null);
 
-                /** NetworkConfig _enableFqdnNetworkPolicy. */
-                public _enableFqdnNetworkPolicy?: "enableFqdnNetworkPolicy";
-
-                /** NetworkConfig _inTransitEncryptionConfig. */
-                public _inTransitEncryptionConfig?: "inTransitEncryptionConfig";
-
-                /** NetworkConfig _enableCiliumClusterwideNetworkPolicy. */
-                public _enableCiliumClusterwideNetworkPolicy?: "enableCiliumClusterwideNetworkPolicy";
-
-                /** NetworkConfig _defaultEnablePrivateNodes. */
-                public _defaultEnablePrivateNodes?: "defaultEnablePrivateNodes";
-
-                /** NetworkConfig _disableL4LbFirewallReconciliation. */
-                public _disableL4LbFirewallReconciliation?: "disableL4LbFirewallReconciliation";
-
                 /**
                  * Creates a new NetworkConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -17888,9 +17729,6 @@ export namespace google {
 
                     /** ClusterNetworkPerformanceConfig totalEgressBandwidthTier. */
                     public totalEgressBandwidthTier?: (google.container.v1.NetworkConfig.ClusterNetworkPerformanceConfig.Tier|keyof typeof google.container.v1.NetworkConfig.ClusterNetworkPerformanceConfig.Tier|null);
-
-                    /** ClusterNetworkPerformanceConfig _totalEgressBandwidthTier. */
-                    public _totalEgressBandwidthTier?: "totalEgressBandwidthTier";
 
                     /**
                      * Creates a new ClusterNetworkPerformanceConfig instance using the specified properties.
@@ -20056,9 +19894,6 @@ export namespace google {
                 /** DatabaseEncryption lastOperationErrors. */
                 public lastOperationErrors: google.container.v1.DatabaseEncryption.IOperationError[];
 
-                /** DatabaseEncryption _currentState. */
-                public _currentState?: "currentState";
-
                 /**
                  * Creates a new DatabaseEncryption instance using the specified properties.
                  * @param [properties] Properties to set
@@ -22174,12 +22009,6 @@ export namespace google {
                 /** UpgradeInfoEvent eventType. */
                 public eventType: (google.container.v1.UpgradeInfoEvent.EventType|keyof typeof google.container.v1.UpgradeInfoEvent.EventType);
 
-                /** UpgradeInfoEvent _standardSupportEndTime. */
-                public _standardSupportEndTime?: "standardSupportEndTime";
-
-                /** UpgradeInfoEvent _extendedSupportEndTime. */
-                public _extendedSupportEndTime?: "extendedSupportEndTime";
-
                 /**
                  * Creates a new UpgradeInfoEvent instance using the specified properties.
                  * @param [properties] Properties to set
@@ -22677,12 +22506,6 @@ export namespace google {
 
                 /** WorkloadPolicyConfig autopilotCompatibilityAuditingEnabled. */
                 public autopilotCompatibilityAuditingEnabled?: (boolean|null);
-
-                /** WorkloadPolicyConfig _allowNetAdmin. */
-                public _allowNetAdmin?: "allowNetAdmin";
-
-                /** WorkloadPolicyConfig _autopilotCompatibilityAuditingEnabled. */
-                public _autopilotCompatibilityAuditingEnabled?: "autopilotCompatibilityAuditingEnabled";
 
                 /**
                  * Creates a new WorkloadPolicyConfig instance using the specified properties.
@@ -23208,9 +23031,6 @@ export namespace google {
 
                 /** AdvancedDatapathObservabilityConfig enableRelay. */
                 public enableRelay?: (boolean|null);
-
-                /** AdvancedDatapathObservabilityConfig _enableRelay. */
-                public _enableRelay?: "enableRelay";
 
                 /**
                  * Creates a new AdvancedDatapathObservabilityConfig instance using the specified properties.
@@ -23964,9 +23784,6 @@ export namespace google {
                 /** PodAutoscaling hpaProfile. */
                 public hpaProfile?: (google.container.v1.PodAutoscaling.HPAProfile|keyof typeof google.container.v1.PodAutoscaling.HPAProfile|null);
 
-                /** PodAutoscaling _hpaProfile. */
-                public _hpaProfile?: "hpaProfile";
-
                 /**
                  * Creates a new PodAutoscaling instance using the specified properties.
                  * @param [properties] Properties to set
@@ -24301,9 +24118,6 @@ export namespace google {
                     /** DNSEndpointConfig allowExternalTraffic. */
                     public allowExternalTraffic?: (boolean|null);
 
-                    /** DNSEndpointConfig _allowExternalTraffic. */
-                    public _allowExternalTraffic?: "allowExternalTraffic";
-
                     /**
                      * Creates a new DNSEndpointConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -24436,15 +24250,6 @@ export namespace google {
 
                     /** IPEndpointsConfig privateEndpointSubnetwork. */
                     public privateEndpointSubnetwork: string;
-
-                    /** IPEndpointsConfig _enabled. */
-                    public _enabled?: "enabled";
-
-                    /** IPEndpointsConfig _enablePublicEndpoint. */
-                    public _enablePublicEndpoint?: "enablePublicEndpoint";
-
-                    /** IPEndpointsConfig _globalAccess. */
-                    public _globalAccess?: "globalAccess";
 
                     /**
                      * Creates a new IPEndpointsConfig instance using the specified properties.
@@ -24961,9 +24766,6 @@ export namespace google {
                 /** SecretManagerConfig enabled. */
                 public enabled?: (boolean|null);
 
-                /** SecretManagerConfig _enabled. */
-                public _enabled?: "enabled";
-
                 /**
                  * Creates a new SecretManagerConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -25410,18 +25212,6 @@ export namespace google {
                 /** ClusterUpgradeInfo endOfExtendedSupportTimestamp. */
                 public endOfExtendedSupportTimestamp?: (string|null);
 
-                /** ClusterUpgradeInfo _minorTargetVersion. */
-                public _minorTargetVersion?: "minorTargetVersion";
-
-                /** ClusterUpgradeInfo _patchTargetVersion. */
-                public _patchTargetVersion?: "patchTargetVersion";
-
-                /** ClusterUpgradeInfo _endOfStandardSupportTimestamp. */
-                public _endOfStandardSupportTimestamp?: "endOfStandardSupportTimestamp";
-
-                /** ClusterUpgradeInfo _endOfExtendedSupportTimestamp. */
-                public _endOfExtendedSupportTimestamp?: "endOfExtendedSupportTimestamp";
-
                 /**
                  * Creates a new ClusterUpgradeInfo instance using the specified properties.
                  * @param [properties] Properties to set
@@ -25570,12 +25360,6 @@ export namespace google {
 
                 /** UpgradeDetails startType. */
                 public startType: (google.container.v1.UpgradeDetails.StartType|keyof typeof google.container.v1.UpgradeDetails.StartType);
-
-                /** UpgradeDetails _startTime. */
-                public _startTime?: "startTime";
-
-                /** UpgradeDetails _endTime. */
-                public _endTime?: "endTime";
 
                 /**
                  * Creates a new UpgradeDetails instance using the specified properties.
@@ -25831,18 +25615,6 @@ export namespace google {
 
                 /** NodePoolUpgradeInfo endOfExtendedSupportTimestamp. */
                 public endOfExtendedSupportTimestamp?: (string|null);
-
-                /** NodePoolUpgradeInfo _minorTargetVersion. */
-                public _minorTargetVersion?: "minorTargetVersion";
-
-                /** NodePoolUpgradeInfo _patchTargetVersion. */
-                public _patchTargetVersion?: "patchTargetVersion";
-
-                /** NodePoolUpgradeInfo _endOfStandardSupportTimestamp. */
-                public _endOfStandardSupportTimestamp?: "endOfStandardSupportTimestamp";
-
-                /** NodePoolUpgradeInfo _endOfExtendedSupportTimestamp. */
-                public _endOfExtendedSupportTimestamp?: "endOfExtendedSupportTimestamp";
 
                 /**
                  * Creates a new NodePoolUpgradeInfo instance using the specified properties.
@@ -26778,9 +26550,6 @@ export namespace google {
                 /** LinuxNodeConfig hugepages. */
                 public hugepages?: (google.container.v1beta1.LinuxNodeConfig.IHugepagesConfig|null);
 
-                /** LinuxNodeConfig _hugepages. */
-                public _hugepages?: "hugepages";
-
                 /**
                  * Creates a new LinuxNodeConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -26892,12 +26661,6 @@ export namespace google {
 
                     /** HugepagesConfig hugepageSize1g. */
                     public hugepageSize1g?: (number|null);
-
-                    /** HugepagesConfig _hugepageSize2m. */
-                    public _hugepageSize2m?: "hugepageSize2m";
-
-                    /** HugepagesConfig _hugepageSize1g. */
-                    public _hugepageSize1g?: "hugepageSize1g";
 
                     /**
                      * Creates a new HugepagesConfig instance using the specified properties.
@@ -27181,9 +26944,6 @@ export namespace google {
 
                 /** NodeKubeletConfig allowedUnsafeSysctls. */
                 public allowedUnsafeSysctls: string[];
-
-                /** NodeKubeletConfig _insecureKubeletReadonlyPortEnabled. */
-                public _insecureKubeletReadonlyPortEnabled?: "insecureKubeletReadonlyPortEnabled";
 
                 /**
                  * Creates a new NodeKubeletConfig instance using the specified properties.
@@ -27752,18 +27512,6 @@ export namespace google {
                 /** NodeConfig flexStart. */
                 public flexStart?: (boolean|null);
 
-                /** NodeConfig _fastSocket. */
-                public _fastSocket?: "fastSocket";
-
-                /** NodeConfig _secondaryBootDiskUpdateStrategy. */
-                public _secondaryBootDiskUpdateStrategy?: "secondaryBootDiskUpdateStrategy";
-
-                /** NodeConfig _localSsdEncryptionMode. */
-                public _localSsdEncryptionMode?: "localSsdEncryptionMode";
-
-                /** NodeConfig _flexStart. */
-                public _flexStart?: "flexStart";
-
                 /**
                  * Creates a new NodeConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -27889,15 +27637,6 @@ export namespace google {
 
                 /** AdvancedMachineFeatures performanceMonitoringUnit. */
                 public performanceMonitoringUnit?: (google.container.v1beta1.AdvancedMachineFeatures.PerformanceMonitoringUnit|keyof typeof google.container.v1beta1.AdvancedMachineFeatures.PerformanceMonitoringUnit|null);
-
-                /** AdvancedMachineFeatures _threadsPerCore. */
-                public _threadsPerCore?: "threadsPerCore";
-
-                /** AdvancedMachineFeatures _enableNestedVirtualization. */
-                public _enableNestedVirtualization?: "enableNestedVirtualization";
-
-                /** AdvancedMachineFeatures _performanceMonitoringUnit. */
-                public _performanceMonitoringUnit?: "performanceMonitoringUnit";
 
                 /**
                  * Creates a new AdvancedMachineFeatures instance using the specified properties.
@@ -28055,12 +27794,6 @@ export namespace google {
                 /** NodeNetworkConfig podIpv4RangeUtilization. */
                 public podIpv4RangeUtilization: number;
 
-                /** NodeNetworkConfig _enablePrivateNodes. */
-                public _enablePrivateNodes?: "enablePrivateNodes";
-
-                /** NodeNetworkConfig _networkPerformanceConfig. */
-                public _networkPerformanceConfig?: "networkPerformanceConfig";
-
                 /**
                  * Creates a new NodeNetworkConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -28165,12 +27898,6 @@ export namespace google {
 
                     /** NetworkPerformanceConfig externalIpEgressBandwidthTier. */
                     public externalIpEgressBandwidthTier?: (google.container.v1beta1.NodeNetworkConfig.NetworkPerformanceConfig.Tier|keyof typeof google.container.v1beta1.NodeNetworkConfig.NetworkPerformanceConfig.Tier|null);
-
-                    /** NetworkPerformanceConfig _totalEgressBandwidthTier. */
-                    public _totalEgressBandwidthTier?: "totalEgressBandwidthTier";
-
-                    /** NetworkPerformanceConfig _externalIpEgressBandwidthTier. */
-                    public _externalIpEgressBandwidthTier?: "externalIpEgressBandwidthTier";
 
                     /**
                      * Creates a new NetworkPerformanceConfig instance using the specified properties.
@@ -28393,9 +28120,6 @@ export namespace google {
 
                 /** AdditionalPodNetworkConfig maxPodsPerNode. */
                 public maxPodsPerNode?: (google.container.v1beta1.IMaxPodsConstraint|null);
-
-                /** AdditionalPodNetworkConfig _maxPodsPerNode. */
-                public _maxPodsPerNode?: "maxPodsPerNode";
 
                 /**
                  * Creates a new AdditionalPodNetworkConfig instance using the specified properties.
@@ -29860,9 +29584,6 @@ export namespace google {
                 /** HostMaintenancePolicy opportunisticMaintenanceStrategy. */
                 public opportunisticMaintenanceStrategy?: (google.container.v1beta1.HostMaintenancePolicy.IOpportunisticMaintenanceStrategy|null);
 
-                /** HostMaintenancePolicy _maintenanceInterval. */
-                public _maintenanceInterval?: "maintenanceInterval";
-
                 /** HostMaintenancePolicy maintenanceStrategy. */
                 public maintenanceStrategy?: "opportunisticMaintenanceStrategy";
 
@@ -29983,15 +29704,6 @@ export namespace google {
 
                     /** OpportunisticMaintenanceStrategy minNodesPerPool. */
                     public minNodesPerPool?: (number|Long|string|null);
-
-                    /** OpportunisticMaintenanceStrategy _nodeIdleTimeWindow. */
-                    public _nodeIdleTimeWindow?: "nodeIdleTimeWindow";
-
-                    /** OpportunisticMaintenanceStrategy _maintenanceAvailabilityWindow. */
-                    public _maintenanceAvailabilityWindow?: "maintenanceAvailabilityWindow";
-
-                    /** OpportunisticMaintenanceStrategy _minNodesPerPool. */
-                    public _minNodesPerPool?: "minNodesPerPool";
 
                     /**
                      * Creates a new OpportunisticMaintenanceStrategy instance using the specified properties.
@@ -32962,12 +32674,6 @@ export namespace google {
                 /** MasterAuthorizedNetworksConfig privateEndpointEnforcementEnabled. */
                 public privateEndpointEnforcementEnabled?: (boolean|null);
 
-                /** MasterAuthorizedNetworksConfig _gcpPublicCidrsAccessEnabled. */
-                public _gcpPublicCidrsAccessEnabled?: "gcpPublicCidrsAccessEnabled";
-
-                /** MasterAuthorizedNetworksConfig _privateEndpointEnforcementEnabled. */
-                public _privateEndpointEnforcementEnabled?: "privateEndpointEnforcementEnabled";
-
                 /**
                  * Creates a new MasterAuthorizedNetworksConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -33830,9 +33536,6 @@ export namespace google {
 
                     /** PolicyBinding name. */
                     public name?: (string|null);
-
-                    /** PolicyBinding _name. */
-                    public _name?: "name";
 
                     /**
                      * Creates a new PolicyBinding instance using the specified properties.
@@ -34750,24 +34453,6 @@ export namespace google {
                 /** Cluster anonymousAuthenticationConfig. */
                 public anonymousAuthenticationConfig?: (google.container.v1beta1.IAnonymousAuthenticationConfig|null);
 
-                /** Cluster _nodePoolDefaults. */
-                public _nodePoolDefaults?: "nodePoolDefaults";
-
-                /** Cluster _protectConfig. */
-                public _protectConfig?: "protectConfig";
-
-                /** Cluster _satisfiesPzs. */
-                public _satisfiesPzs?: "satisfiesPzs";
-
-                /** Cluster _satisfiesPzi. */
-                public _satisfiesPzi?: "satisfiesPzi";
-
-                /** Cluster _userManagedKeysConfig. */
-                public _userManagedKeysConfig?: "userManagedKeysConfig";
-
-                /** Cluster _rbacBindingConfig. */
-                public _rbacBindingConfig?: "rbacBindingConfig";
-
                 /**
                  * Creates a new Cluster instance using the specified properties.
                  * @param [properties] Properties to set
@@ -34884,12 +34569,6 @@ export namespace google {
 
                 /** RBACBindingConfig enableInsecureBindingSystemAuthenticated. */
                 public enableInsecureBindingSystemAuthenticated?: (boolean|null);
-
-                /** RBACBindingConfig _enableInsecureBindingSystemUnauthenticated. */
-                public _enableInsecureBindingSystemUnauthenticated?: "enableInsecureBindingSystemUnauthenticated";
-
-                /** RBACBindingConfig _enableInsecureBindingSystemAuthenticated. */
-                public _enableInsecureBindingSystemAuthenticated?: "enableInsecureBindingSystemAuthenticated";
 
                 /**
                  * Creates a new RBACBindingConfig instance using the specified properties.
@@ -35224,9 +34903,6 @@ export namespace google {
                 /** CompliancePostureConfig complianceStandards. */
                 public complianceStandards: google.container.v1beta1.CompliancePostureConfig.IComplianceStandard[];
 
-                /** CompliancePostureConfig _mode. */
-                public _mode?: "mode";
-
                 /**
                  * Creates a new CompliancePostureConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -35332,9 +35008,6 @@ export namespace google {
 
                     /** ComplianceStandard standard. */
                     public standard?: (string|null);
-
-                    /** ComplianceStandard _standard. */
-                    public _standard?: "standard";
 
                     /**
                      * Creates a new ComplianceStandard instance using the specified properties.
@@ -35531,9 +35204,6 @@ export namespace google {
                 /** WorkloadConfig auditMode. */
                 public auditMode?: (google.container.v1beta1.WorkloadConfig.Mode|keyof typeof google.container.v1beta1.WorkloadConfig.Mode|null);
 
-                /** WorkloadConfig _auditMode. */
-                public _auditMode?: "auditMode";
-
                 /**
                  * Creates a new WorkloadConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -35649,12 +35319,6 @@ export namespace google {
                 /** ProtectConfig workloadVulnerabilityMode. */
                 public workloadVulnerabilityMode?: (google.container.v1beta1.ProtectConfig.WorkloadVulnerabilityMode|keyof typeof google.container.v1beta1.ProtectConfig.WorkloadVulnerabilityMode|null);
 
-                /** ProtectConfig _workloadConfig. */
-                public _workloadConfig?: "workloadConfig";
-
-                /** ProtectConfig _workloadVulnerabilityMode. */
-                public _workloadVulnerabilityMode?: "workloadVulnerabilityMode";
-
                 /**
                  * Creates a new ProtectConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -35767,12 +35431,6 @@ export namespace google {
 
                 /** SecurityPostureConfig vulnerabilityMode. */
                 public vulnerabilityMode?: (google.container.v1beta1.SecurityPostureConfig.VulnerabilityMode|keyof typeof google.container.v1beta1.SecurityPostureConfig.VulnerabilityMode|null);
-
-                /** SecurityPostureConfig _mode. */
-                public _mode?: "mode";
-
-                /** SecurityPostureConfig _vulnerabilityMode. */
-                public _vulnerabilityMode?: "vulnerabilityMode";
 
                 /**
                  * Creates a new SecurityPostureConfig instance using the specified properties.
@@ -36672,39 +36330,6 @@ export namespace google {
 
                 /** ClusterUpdate desiredAnonymousAuthenticationConfig. */
                 public desiredAnonymousAuthenticationConfig?: (google.container.v1beta1.IAnonymousAuthenticationConfig|null);
-
-                /** ClusterUpdate _desiredEnablePrivateEndpoint. */
-                public _desiredEnablePrivateEndpoint?: "desiredEnablePrivateEndpoint";
-
-                /** ClusterUpdate _desiredDefaultEnablePrivateNodes. */
-                public _desiredDefaultEnablePrivateNodes?: "desiredDefaultEnablePrivateNodes";
-
-                /** ClusterUpdate _desiredProtectConfig. */
-                public _desiredProtectConfig?: "desiredProtectConfig";
-
-                /** ClusterUpdate _desiredEnableFqdnNetworkPolicy. */
-                public _desiredEnableFqdnNetworkPolicy?: "desiredEnableFqdnNetworkPolicy";
-
-                /** ClusterUpdate _desiredEnableMultiNetworking. */
-                public _desiredEnableMultiNetworking?: "desiredEnableMultiNetworking";
-
-                /** ClusterUpdate _desiredInTransitEncryptionConfig. */
-                public _desiredInTransitEncryptionConfig?: "desiredInTransitEncryptionConfig";
-
-                /** ClusterUpdate _desiredEnableCiliumClusterwideNetworkPolicy. */
-                public _desiredEnableCiliumClusterwideNetworkPolicy?: "desiredEnableCiliumClusterwideNetworkPolicy";
-
-                /** ClusterUpdate _desiredSecretManagerConfig. */
-                public _desiredSecretManagerConfig?: "desiredSecretManagerConfig";
-
-                /** ClusterUpdate _desiredCompliancePostureConfig. */
-                public _desiredCompliancePostureConfig?: "desiredCompliancePostureConfig";
-
-                /** ClusterUpdate _desiredRbacBindingConfig. */
-                public _desiredRbacBindingConfig?: "desiredRbacBindingConfig";
-
-                /** ClusterUpdate _desiredDisableL4LbFirewallReconciliation. */
-                public _desiredDisableL4LbFirewallReconciliation?: "desiredDisableL4LbFirewallReconciliation";
 
                 /**
                  * Creates a new ClusterUpdate instance using the specified properties.
@@ -38106,9 +37731,6 @@ export namespace google {
 
                 /** UpdateNodePoolRequest flexStart. */
                 public flexStart?: (boolean|null);
-
-                /** UpdateNodePoolRequest _flexStart. */
-                public _flexStart?: "flexStart";
 
                 /**
                  * Creates a new UpdateNodePoolRequest instance using the specified properties.
@@ -41123,9 +40745,6 @@ export namespace google {
                 /** BlueGreenSettings rolloutPolicy. */
                 public rolloutPolicy?: ("standardRolloutPolicy"|"autoscaledRolloutPolicy");
 
-                /** BlueGreenSettings _nodePoolSoakDuration. */
-                public _nodePoolSoakDuration?: "nodePoolSoakDuration";
-
                 /**
                  * Creates a new BlueGreenSettings instance using the specified properties.
                  * @param [properties] Properties to set
@@ -41239,9 +40858,6 @@ export namespace google {
 
                     /** StandardRolloutPolicy updateBatchSize. */
                     public updateBatchSize?: ("batchPercentage"|"batchNodeCount");
-
-                    /** StandardRolloutPolicy _batchSoakDuration. */
-                    public _batchSoakDuration?: "batchSoakDuration";
 
                     /**
                      * Creates a new StandardRolloutPolicy instance using the specified properties.
@@ -41668,12 +41284,6 @@ export namespace google {
 
                     /** UpgradeSettings blueGreenSettings. */
                     public blueGreenSettings?: (google.container.v1beta1.IBlueGreenSettings|null);
-
-                    /** UpgradeSettings _strategy. */
-                    public _strategy?: "strategy";
-
-                    /** UpgradeSettings _blueGreenSettings. */
-                    public _blueGreenSettings?: "blueGreenSettings";
 
                     /**
                      * Creates a new UpgradeSettings instance using the specified properties.
@@ -43854,9 +43464,6 @@ export namespace google {
                 /** AutoprovisioningNodePoolDefaults insecureKubeletReadonlyPortEnabled. */
                 public insecureKubeletReadonlyPortEnabled?: (boolean|null);
 
-                /** AutoprovisioningNodePoolDefaults _insecureKubeletReadonlyPortEnabled. */
-                public _insecureKubeletReadonlyPortEnabled?: "insecureKubeletReadonlyPortEnabled";
-
                 /**
                  * Creates a new AutoprovisioningNodePoolDefaults instance using the specified properties.
                  * @param [properties] Properties to set
@@ -44720,12 +44327,6 @@ export namespace google {
                 /** AcceleratorConfig gpuDriverInstallationConfig. */
                 public gpuDriverInstallationConfig?: (google.container.v1beta1.IGPUDriverInstallationConfig|null);
 
-                /** AcceleratorConfig _gpuSharingConfig. */
-                public _gpuSharingConfig?: "gpuSharingConfig";
-
-                /** AcceleratorConfig _gpuDriverInstallationConfig. */
-                public _gpuDriverInstallationConfig?: "gpuDriverInstallationConfig";
-
                 /**
                  * Creates a new AcceleratorConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -44828,9 +44429,6 @@ export namespace google {
 
                 /** GPUSharingConfig gpuSharingStrategy. */
                 public gpuSharingStrategy?: (google.container.v1beta1.GPUSharingConfig.GPUSharingStrategy|keyof typeof google.container.v1beta1.GPUSharingConfig.GPUSharingStrategy|null);
-
-                /** GPUSharingConfig _gpuSharingStrategy. */
-                public _gpuSharingStrategy?: "gpuSharingStrategy";
 
                 /**
                  * Creates a new GPUSharingConfig instance using the specified properties.
@@ -44938,9 +44536,6 @@ export namespace google {
 
                 /** GPUDriverInstallationConfig gpuDriverVersion. */
                 public gpuDriverVersion?: (google.container.v1beta1.GPUDriverInstallationConfig.GPUDriverVersion|keyof typeof google.container.v1beta1.GPUDriverInstallationConfig.GPUDriverVersion|null);
-
-                /** GPUDriverInstallationConfig _gpuDriverVersion. */
-                public _gpuDriverVersion?: "gpuDriverVersion";
 
                 /**
                  * Creates a new GPUDriverInstallationConfig instance using the specified properties.
@@ -46162,21 +45757,6 @@ export namespace google {
                 /** NetworkConfig disableL4LbFirewallReconciliation. */
                 public disableL4LbFirewallReconciliation?: (boolean|null);
 
-                /** NetworkConfig _enableFqdnNetworkPolicy. */
-                public _enableFqdnNetworkPolicy?: "enableFqdnNetworkPolicy";
-
-                /** NetworkConfig _inTransitEncryptionConfig. */
-                public _inTransitEncryptionConfig?: "inTransitEncryptionConfig";
-
-                /** NetworkConfig _enableCiliumClusterwideNetworkPolicy. */
-                public _enableCiliumClusterwideNetworkPolicy?: "enableCiliumClusterwideNetworkPolicy";
-
-                /** NetworkConfig _defaultEnablePrivateNodes. */
-                public _defaultEnablePrivateNodes?: "defaultEnablePrivateNodes";
-
-                /** NetworkConfig _disableL4LbFirewallReconciliation. */
-                public _disableL4LbFirewallReconciliation?: "disableL4LbFirewallReconciliation";
-
                 /**
                  * Creates a new NetworkConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -46275,9 +45855,6 @@ export namespace google {
 
                     /** ClusterNetworkPerformanceConfig totalEgressBandwidthTier. */
                     public totalEgressBandwidthTier?: (google.container.v1beta1.NetworkConfig.ClusterNetworkPerformanceConfig.Tier|keyof typeof google.container.v1beta1.NetworkConfig.ClusterNetworkPerformanceConfig.Tier|null);
-
-                    /** ClusterNetworkPerformanceConfig _totalEgressBandwidthTier. */
-                    public _totalEgressBandwidthTier?: "totalEgressBandwidthTier";
 
                     /**
                      * Creates a new ClusterNetworkPerformanceConfig instance using the specified properties.
@@ -48092,9 +47669,6 @@ export namespace google {
 
                 /** DatabaseEncryption lastOperationErrors. */
                 public lastOperationErrors: google.container.v1beta1.DatabaseEncryption.IOperationError[];
-
-                /** DatabaseEncryption _currentState. */
-                public _currentState?: "currentState";
 
                 /**
                  * Creates a new DatabaseEncryption instance using the specified properties.
@@ -50462,12 +50036,6 @@ export namespace google {
                 /** WorkloadPolicyConfig autopilotCompatibilityAuditingEnabled. */
                 public autopilotCompatibilityAuditingEnabled?: (boolean|null);
 
-                /** WorkloadPolicyConfig _allowNetAdmin. */
-                public _allowNetAdmin?: "allowNetAdmin";
-
-                /** WorkloadPolicyConfig _autopilotCompatibilityAuditingEnabled. */
-                public _autopilotCompatibilityAuditingEnabled?: "autopilotCompatibilityAuditingEnabled";
-
                 /**
                  * Creates a new WorkloadPolicyConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -51193,12 +50761,6 @@ export namespace google {
 
                 /** UpgradeInfoEvent eventType. */
                 public eventType: (google.container.v1beta1.UpgradeInfoEvent.EventType|keyof typeof google.container.v1beta1.UpgradeInfoEvent.EventType);
-
-                /** UpgradeInfoEvent _standardSupportEndTime. */
-                public _standardSupportEndTime?: "standardSupportEndTime";
-
-                /** UpgradeInfoEvent _extendedSupportEndTime. */
-                public _extendedSupportEndTime?: "extendedSupportEndTime";
 
                 /**
                  * Creates a new UpgradeInfoEvent instance using the specified properties.
@@ -52127,9 +51689,6 @@ export namespace google {
                 /** AdvancedDatapathObservabilityConfig enableRelay. */
                 public enableRelay?: (boolean|null);
 
-                /** AdvancedDatapathObservabilityConfig _enableRelay. */
-                public _enableRelay?: "enableRelay";
-
                 /**
                  * Creates a new AdvancedDatapathObservabilityConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -52666,9 +52225,6 @@ export namespace google {
                 /** PodAutoscaling hpaProfile. */
                 public hpaProfile?: (google.container.v1beta1.PodAutoscaling.HPAProfile|keyof typeof google.container.v1beta1.PodAutoscaling.HPAProfile|null);
 
-                /** PodAutoscaling _hpaProfile. */
-                public _hpaProfile?: "hpaProfile";
-
                 /**
                  * Creates a new PodAutoscaling instance using the specified properties.
                  * @param [properties] Properties to set
@@ -53003,9 +52559,6 @@ export namespace google {
                     /** DNSEndpointConfig allowExternalTraffic. */
                     public allowExternalTraffic?: (boolean|null);
 
-                    /** DNSEndpointConfig _allowExternalTraffic. */
-                    public _allowExternalTraffic?: "allowExternalTraffic";
-
                     /**
                      * Creates a new DNSEndpointConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -53138,15 +52691,6 @@ export namespace google {
 
                     /** IPEndpointsConfig privateEndpointSubnetwork. */
                     public privateEndpointSubnetwork: string;
-
-                    /** IPEndpointsConfig _enabled. */
-                    public _enabled?: "enabled";
-
-                    /** IPEndpointsConfig _enablePublicEndpoint. */
-                    public _enablePublicEndpoint?: "enablePublicEndpoint";
-
-                    /** IPEndpointsConfig _globalAccess. */
-                    public _globalAccess?: "globalAccess";
 
                     /**
                      * Creates a new IPEndpointsConfig instance using the specified properties.
@@ -53462,12 +53006,6 @@ export namespace google {
                 /** SecretManagerConfig rotationConfig. */
                 public rotationConfig?: (google.container.v1beta1.SecretManagerConfig.IRotationConfig|null);
 
-                /** SecretManagerConfig _enabled. */
-                public _enabled?: "enabled";
-
-                /** SecretManagerConfig _rotationConfig. */
-                public _rotationConfig?: "rotationConfig";
-
                 /**
                  * Creates a new SecretManagerConfig instance using the specified properties.
                  * @param [properties] Properties to set
@@ -53572,12 +53110,6 @@ export namespace google {
 
                     /** RotationConfig rotationInterval. */
                     public rotationInterval?: (google.protobuf.IDuration|null);
-
-                    /** RotationConfig _enabled. */
-                    public _enabled?: "enabled";
-
-                    /** RotationConfig _rotationInterval. */
-                    public _rotationInterval?: "rotationInterval";
 
                     /**
                      * Creates a new RotationConfig instance using the specified properties.
@@ -54026,18 +53558,6 @@ export namespace google {
                 /** ClusterUpgradeInfo endOfExtendedSupportTimestamp. */
                 public endOfExtendedSupportTimestamp?: (string|null);
 
-                /** ClusterUpgradeInfo _minorTargetVersion. */
-                public _minorTargetVersion?: "minorTargetVersion";
-
-                /** ClusterUpgradeInfo _patchTargetVersion. */
-                public _patchTargetVersion?: "patchTargetVersion";
-
-                /** ClusterUpgradeInfo _endOfStandardSupportTimestamp. */
-                public _endOfStandardSupportTimestamp?: "endOfStandardSupportTimestamp";
-
-                /** ClusterUpgradeInfo _endOfExtendedSupportTimestamp. */
-                public _endOfExtendedSupportTimestamp?: "endOfExtendedSupportTimestamp";
-
                 /**
                  * Creates a new ClusterUpgradeInfo instance using the specified properties.
                  * @param [properties] Properties to set
@@ -54186,12 +53706,6 @@ export namespace google {
 
                 /** UpgradeDetails startType. */
                 public startType: (google.container.v1beta1.UpgradeDetails.StartType|keyof typeof google.container.v1beta1.UpgradeDetails.StartType);
-
-                /** UpgradeDetails _startTime. */
-                public _startTime?: "startTime";
-
-                /** UpgradeDetails _endTime. */
-                public _endTime?: "endTime";
 
                 /**
                  * Creates a new UpgradeDetails instance using the specified properties.
@@ -54447,18 +53961,6 @@ export namespace google {
 
                 /** NodePoolUpgradeInfo endOfExtendedSupportTimestamp. */
                 public endOfExtendedSupportTimestamp?: (string|null);
-
-                /** NodePoolUpgradeInfo _minorTargetVersion. */
-                public _minorTargetVersion?: "minorTargetVersion";
-
-                /** NodePoolUpgradeInfo _patchTargetVersion. */
-                public _patchTargetVersion?: "patchTargetVersion";
-
-                /** NodePoolUpgradeInfo _endOfStandardSupportTimestamp. */
-                public _endOfStandardSupportTimestamp?: "endOfStandardSupportTimestamp";
-
-                /** NodePoolUpgradeInfo _endOfExtendedSupportTimestamp. */
-                public _endOfExtendedSupportTimestamp?: "endOfExtendedSupportTimestamp";
 
                 /**
                  * Creates a new NodePoolUpgradeInfo instance using the specified properties.
@@ -55215,6 +54717,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -55255,6 +54760,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -59473,6 +58981,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -59721,7 +59232,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -59752,7 +59263,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -61858,7 +61369,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -61871,7 +61382,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.
@@ -61958,7 +61469,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -61974,7 +61485,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
