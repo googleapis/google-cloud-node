@@ -288,9 +288,14 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         throw err;
       });
       assert(client.entitySignalsMappingServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -302,9 +307,14 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
           }
         );
       assert.strictEqual(client.entitySignalsMappingServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -489,7 +499,9 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getEntitySignalsMapping(request),
         expectedError
@@ -638,7 +650,9 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createEntitySignalsMapping(request),
         expectedError
@@ -791,7 +805,9 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
       );
       request.entitySignalsMapping.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateEntitySignalsMapping(request),
         expectedError
@@ -940,7 +956,9 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.batchCreateEntitySignalsMappings(request),
         expectedError
@@ -1089,7 +1107,9 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.batchUpdateEntitySignalsMappings(request),
         expectedError

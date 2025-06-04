@@ -18,16 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -111,41 +102,20 @@ export class AzureClustersClient {
    *     const client = new AzureClustersClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AzureClustersClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'gkemulticloud.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -168,7 +138,7 @@ export class AzureClustersClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +152,10 @@ export class AzureClustersClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -242,21 +215,12 @@ export class AzureClustersClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAzureClients: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'azureClients'
-      ),
-      listAzureClusters: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'azureClusters'
-      ),
-      listAzureNodePools: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'azureNodePools'
-      ),
+      listAzureClients:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'azureClients'),
+      listAzureClusters:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'azureClusters'),
+      listAzureNodePools:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'azureNodePools')
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -265,132 +229,85 @@ export class AzureClustersClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createAzureClientResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.AzureClient'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.AzureClient') as gax.protobuf.Type;
     const createAzureClientMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteAzureClientResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteAzureClientMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
     const createAzureClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.AzureCluster'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.AzureCluster') as gax.protobuf.Type;
     const createAzureClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
     const updateAzureClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.AzureCluster'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.AzureCluster') as gax.protobuf.Type;
     const updateAzureClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteAzureClusterResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteAzureClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
     const createAzureNodePoolResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.AzureNodePool'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.AzureNodePool') as gax.protobuf.Type;
     const createAzureNodePoolMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
     const updateAzureNodePoolResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.AzureNodePool'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.AzureNodePool') as gax.protobuf.Type;
     const updateAzureNodePoolMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteAzureNodePoolResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteAzureNodePoolMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createAzureClient: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAzureClientResponse.decode.bind(createAzureClientResponse),
-        createAzureClientMetadata.decode.bind(createAzureClientMetadata)
-      ),
+        createAzureClientMetadata.decode.bind(createAzureClientMetadata)),
       deleteAzureClient: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteAzureClientResponse.decode.bind(deleteAzureClientResponse),
-        deleteAzureClientMetadata.decode.bind(deleteAzureClientMetadata)
-      ),
+        deleteAzureClientMetadata.decode.bind(deleteAzureClientMetadata)),
       createAzureCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAzureClusterResponse.decode.bind(createAzureClusterResponse),
-        createAzureClusterMetadata.decode.bind(createAzureClusterMetadata)
-      ),
+        createAzureClusterMetadata.decode.bind(createAzureClusterMetadata)),
       updateAzureCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateAzureClusterResponse.decode.bind(updateAzureClusterResponse),
-        updateAzureClusterMetadata.decode.bind(updateAzureClusterMetadata)
-      ),
+        updateAzureClusterMetadata.decode.bind(updateAzureClusterMetadata)),
       deleteAzureCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteAzureClusterResponse.decode.bind(deleteAzureClusterResponse),
-        deleteAzureClusterMetadata.decode.bind(deleteAzureClusterMetadata)
-      ),
+        deleteAzureClusterMetadata.decode.bind(deleteAzureClusterMetadata)),
       createAzureNodePool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAzureNodePoolResponse.decode.bind(createAzureNodePoolResponse),
-        createAzureNodePoolMetadata.decode.bind(createAzureNodePoolMetadata)
-      ),
+        createAzureNodePoolMetadata.decode.bind(createAzureNodePoolMetadata)),
       updateAzureNodePool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateAzureNodePoolResponse.decode.bind(updateAzureNodePoolResponse),
-        updateAzureNodePoolMetadata.decode.bind(updateAzureNodePoolMetadata)
-      ),
+        updateAzureNodePoolMetadata.decode.bind(updateAzureNodePoolMetadata)),
       deleteAzureNodePool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteAzureNodePoolResponse.decode.bind(deleteAzureNodePoolResponse),
-        deleteAzureNodePoolMetadata.decode.bind(deleteAzureNodePoolMetadata)
-      ),
+        deleteAzureNodePoolMetadata.decode.bind(deleteAzureNodePoolMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.gkemulticloud.v1.AzureClusters',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.gkemulticloud.v1.AzureClusters', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -421,53 +338,28 @@ export class AzureClustersClient {
     // Put together the "service stub" for
     // google.cloud.gkemulticloud.v1.AzureClusters.
     this.azureClustersStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.gkemulticloud.v1.AzureClusters'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.gkemulticloud.v1.AzureClusters') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.gkemulticloud.v1.AzureClusters,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const azureClustersStubMethods = [
-      'createAzureClient',
-      'getAzureClient',
-      'listAzureClients',
-      'deleteAzureClient',
-      'createAzureCluster',
-      'updateAzureCluster',
-      'getAzureCluster',
-      'listAzureClusters',
-      'deleteAzureCluster',
-      'generateAzureClusterAgentToken',
-      'generateAzureAccessToken',
-      'createAzureNodePool',
-      'updateAzureNodePool',
-      'getAzureNodePool',
-      'listAzureNodePools',
-      'deleteAzureNodePool',
-      'getAzureOpenIdConfig',
-      'getAzureJsonWebKeys',
-      'getAzureServerConfig',
-    ];
+    const azureClustersStubMethods =
+        ['createAzureClient', 'getAzureClient', 'listAzureClients', 'deleteAzureClient', 'createAzureCluster', 'updateAzureCluster', 'getAzureCluster', 'listAzureClusters', 'deleteAzureCluster', 'generateAzureClusterAgentToken', 'generateAzureAccessToken', 'createAzureNodePool', 'updateAzureNodePool', 'getAzureNodePool', 'listAzureNodePools', 'deleteAzureNodePool', 'getAzureOpenIdConfig', 'getAzureJsonWebKeys', 'getAzureServerConfig'];
     for (const methodName of azureClustersStubMethods) {
       const callPromise = this.azureClustersStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -492,14 +384,8 @@ export class AzureClustersClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'gkemulticloud.googleapis.com';
   }
@@ -510,14 +396,8 @@ export class AzureClustersClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'gkemulticloud.googleapis.com';
   }
@@ -548,7 +428,9 @@ export class AzureClustersClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -557,9 +439,8 @@ export class AzureClustersClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -570,2782 +451,1961 @@ export class AzureClustersClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Describes a specific
-   * {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource to
-   *   describe.
-   *
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} names are
-   *   formatted as
-   *   `projects/<project-id>/locations/<region>/azureClients/<client-id>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud resource names.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_client.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureClient_async
-   */
+/**
+ * Describes a specific
+ * {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource to
+ *   describe.
+ *
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} names are
+ *   formatted as
+ *   `projects/<project-id>/locations/<region>/azureClients/<client-id>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud resource names.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_client.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureClient_async
+ */
   getAzureClient(
-    request?: protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureClient,
-      protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureClient,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest|undefined, {}|undefined
+      ]>;
   getAzureClient(
-    request: protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureClient,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAzureClient(
-    request: protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest,
-    callback: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureClient,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAzureClient(
-    request?: protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gkemulticloud.v1.IAzureClient,
-          | protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureClient,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureClient,
-      protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAzureClient(
+      request: protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest,
+      callback: Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureClient,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAzureClient(
+      request?: protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureClient,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureClient,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureClient,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAzureClient request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gkemulticloud.v1.IAzureClient,
-          | protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gkemulticloud.v1.IAzureClient,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAzureClient response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAzureClient(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gkemulticloud.v1.IAzureClient,
-          (
-            | protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getAzureClient response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getAzureClient(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gkemulticloud.v1.IAzureClient,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAzureClient response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Describes a specific
-   * {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource to
-   *   describe.
-   *
-   *   `AzureCluster` names are formatted as
-   *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud Platform resource names.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_cluster.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureCluster_async
-   */
+/**
+ * Describes a specific
+ * {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource to
+ *   describe.
+ *
+ *   `AzureCluster` names are formatted as
+ *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud Platform resource names.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_cluster.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureCluster_async
+ */
   getAzureCluster(
-    request?: protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-      protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureCluster,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest|undefined, {}|undefined
+      ]>;
   getAzureCluster(
-    request: protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAzureCluster(
-    request: protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest,
-    callback: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAzureCluster(
-    request?: protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-          | protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-      protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAzureCluster(
+      request: protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest,
+      callback: Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureCluster,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAzureCluster(
+      request?: protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureCluster,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureCluster,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureCluster,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAzureCluster request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-          | protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gkemulticloud.v1.IAzureCluster,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAzureCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAzureCluster(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-          (
-            | protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getAzureCluster response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getAzureCluster(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gkemulticloud.v1.IAzureCluster,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAzureCluster response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Generates an access token for a cluster agent.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.azureCluster
-   *   Required.
-   * @param {string} request.subjectToken
-   *   Required.
-   * @param {string} request.subjectTokenType
-   *   Required.
-   * @param {string} request.version
-   *   Required.
-   * @param {string} [request.nodePoolId]
-   *   Optional.
-   * @param {string} [request.grantType]
-   *   Optional.
-   * @param {string} [request.audience]
-   *   Optional.
-   * @param {string} [request.scope]
-   *   Optional.
-   * @param {string} [request.requestedTokenType]
-   *   Optional.
-   * @param {string} [request.options]
-   *   Optional.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.GenerateAzureClusterAgentTokenResponse|GenerateAzureClusterAgentTokenResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.generate_azure_cluster_agent_token.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_GenerateAzureClusterAgentToken_async
-   */
+/**
+ * Generates an access token for a cluster agent.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.azureCluster
+ *   Required.
+ * @param {string} request.subjectToken
+ *   Required.
+ * @param {string} request.subjectTokenType
+ *   Required.
+ * @param {string} request.version
+ *   Required.
+ * @param {string} [request.nodePoolId]
+ *   Optional.
+ * @param {string} [request.grantType]
+ *   Optional.
+ * @param {string} [request.audience]
+ *   Optional.
+ * @param {string} [request.scope]
+ *   Optional.
+ * @param {string} [request.requestedTokenType]
+ *   Optional.
+ * @param {string} [request.options]
+ *   Optional.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.GenerateAzureClusterAgentTokenResponse|GenerateAzureClusterAgentTokenResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.generate_azure_cluster_agent_token.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_GenerateAzureClusterAgentToken_async
+ */
   generateAzureClusterAgentToken(
-    request?: protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
-      (
-        | protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
+        protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest|undefined, {}|undefined
+      ]>;
   generateAzureClusterAgentToken(
-    request: protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
-      | protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateAzureClusterAgentToken(
-    request: protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest,
-    callback: Callback<
-      protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
-      | protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateAzureClusterAgentToken(
-    request?: protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
-          | protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
-      | protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
-      (
-        | protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateAzureClusterAgentToken(
+      request: protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest,
+      callback: Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateAzureClusterAgentToken(
+      request?: protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
+        protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        azure_cluster: request.azureCluster ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'azure_cluster': request.azureCluster ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('generateAzureClusterAgentToken request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
-          | protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
+        protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'generateAzureClusterAgentToken response %j',
-            response
-          );
+          this._log.info('generateAzureClusterAgentToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .generateAzureClusterAgentToken(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
-          (
-            | protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'generateAzureClusterAgentToken response %j',
-            response
-          );
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.generateAzureClusterAgentToken(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
+        protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('generateAzureClusterAgentToken response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Generates a short-lived access token to authenticate to a given
-   * {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.azureCluster
-   *   Required. The name of the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource to
-   *   authenticate to.
-   *
-   *   `AzureCluster` names are formatted as
-   *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud resource names.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenResponse|GenerateAzureAccessTokenResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.generate_azure_access_token.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_GenerateAzureAccessToken_async
-   */
+/**
+ * Generates a short-lived access token to authenticate to a given
+ * {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.azureCluster
+ *   Required. The name of the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource to
+ *   authenticate to.
+ *
+ *   `AzureCluster` names are formatted as
+ *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud resource names.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenResponse|GenerateAzureAccessTokenResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.generate_azure_access_token.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_GenerateAzureAccessToken_async
+ */
   generateAzureAccessToken(
-    request?: protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
-      (
-        | protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
+        protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest|undefined, {}|undefined
+      ]>;
   generateAzureAccessToken(
-    request: protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
-      | protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateAzureAccessToken(
-    request: protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest,
-    callback: Callback<
-      protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
-      | protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateAzureAccessToken(
-    request?: protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
-          | protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
-      | protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
-      (
-        | protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateAzureAccessToken(
+      request: protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest,
+      callback: Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateAzureAccessToken(
+      request?: protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
+        protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        azure_cluster: request.azureCluster ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'azure_cluster': request.azureCluster ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('generateAzureAccessToken request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
-          | protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
+        protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('generateAzureAccessToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .generateAzureAccessToken(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
-          (
-            | protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('generateAzureAccessToken response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.generateAzureAccessToken(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
+        protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('generateAzureAccessToken response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Describes a specific
-   * {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource to
-   *   describe.
-   *
-   *   `AzureNodePool` names are formatted as
-   *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>/azureNodePools/<node-pool-id>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud resource names.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_node_pool.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureNodePool_async
-   */
+/**
+ * Describes a specific
+ * {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource to
+ *   describe.
+ *
+ *   `AzureNodePool` names are formatted as
+ *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>/azureNodePools/<node-pool-id>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud resource names.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_node_pool.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureNodePool_async
+ */
   getAzureNodePool(
-    request?: protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-      protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest|undefined, {}|undefined
+      ]>;
   getAzureNodePool(
-    request: protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAzureNodePool(
-    request: protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest,
-    callback: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAzureNodePool(
-    request?: protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-          | protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-      protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAzureNodePool(
+      request: protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest,
+      callback: Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAzureNodePool(
+      request?: protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAzureNodePool request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-          | protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAzureNodePool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAzureNodePool(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-          (
-            | protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getAzureNodePool response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getAzureNodePool(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAzureNodePool response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets the OIDC discovery document for the cluster.
-   * See the
-   * [OpenID Connect Discovery 1.0
-   * specification](https://openid.net/specs/openid-connect-discovery-1_0.html)
-   * for details.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.azureCluster
-   *   Required. The AzureCluster, which owns the OIDC discovery document.
-   *   Format:
-   *   projects/<project-id>/locations/<region>/azureClusters/<cluster-id>
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureOpenIdConfig|AzureOpenIdConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_open_id_config.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureOpenIdConfig_async
-   */
+/**
+ * Gets the OIDC discovery document for the cluster.
+ * See the
+ * [OpenID Connect Discovery 1.0
+ * specification](https://openid.net/specs/openid-connect-discovery-1_0.html)
+ * for details.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.azureCluster
+ *   Required. The AzureCluster, which owns the OIDC discovery document.
+ *   Format:
+ *   projects/<project-id>/locations/<region>/azureClusters/<cluster-id>
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureOpenIdConfig|AzureOpenIdConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_open_id_config.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureOpenIdConfig_async
+ */
   getAzureOpenIdConfig(
-    request?: protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
-      (
-        | protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest|undefined, {}|undefined
+      ]>;
   getAzureOpenIdConfig(
-    request: protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAzureOpenIdConfig(
-    request: protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest,
-    callback: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAzureOpenIdConfig(
-    request?: protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
-          | protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
-      (
-        | protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAzureOpenIdConfig(
+      request: protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest,
+      callback: Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAzureOpenIdConfig(
+      request?: protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        azure_cluster: request.azureCluster ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'azure_cluster': request.azureCluster ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAzureOpenIdConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
-          | protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAzureOpenIdConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAzureOpenIdConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
-          (
-            | protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getAzureOpenIdConfig response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getAzureOpenIdConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAzureOpenIdConfig response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets the public component of the cluster signing keys in
-   * JSON Web Key format.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.azureCluster
-   *   Required. The AzureCluster, which owns the JsonWebKeys.
-   *   Format:
-   *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureJsonWebKeys|AzureJsonWebKeys}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_json_web_keys.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureJsonWebKeys_async
-   */
+/**
+ * Gets the public component of the cluster signing keys in
+ * JSON Web Key format.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.azureCluster
+ *   Required. The AzureCluster, which owns the JsonWebKeys.
+ *   Format:
+ *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureJsonWebKeys|AzureJsonWebKeys}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_json_web_keys.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureJsonWebKeys_async
+ */
   getAzureJsonWebKeys(
-    request?: protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
-      (
-        | protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest|undefined, {}|undefined
+      ]>;
   getAzureJsonWebKeys(
-    request: protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAzureJsonWebKeys(
-    request: protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest,
-    callback: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAzureJsonWebKeys(
-    request?: protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
-          | protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
-      (
-        | protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAzureJsonWebKeys(
+      request: protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest,
+      callback: Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAzureJsonWebKeys(
+      request?: protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        azure_cluster: request.azureCluster ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'azure_cluster': request.azureCluster ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAzureJsonWebKeys request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
-          | protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAzureJsonWebKeys response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAzureJsonWebKeys(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
-          (
-            | protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getAzureJsonWebKeys response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getAzureJsonWebKeys(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAzureJsonWebKeys response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Returns information, such as supported Azure regions and Kubernetes
-   * versions, on a given Google Cloud location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureServerConfig|AzureServerConfig}
-   *   resource to describe.
-   *
-   *   `AzureServerConfig` names are formatted as
-   *   `projects/<project-id>/locations/<region>/azureServerConfig`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud resource names.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureServerConfig|AzureServerConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_server_config.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureServerConfig_async
-   */
+/**
+ * Returns information, such as supported Azure regions and Kubernetes
+ * versions, on a given Google Cloud location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureServerConfig|AzureServerConfig}
+ *   resource to describe.
+ *
+ *   `AzureServerConfig` names are formatted as
+ *   `projects/<project-id>/locations/<region>/azureServerConfig`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud resource names.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureServerConfig|AzureServerConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_server_config.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureServerConfig_async
+ */
   getAzureServerConfig(
-    request?: protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
-      (
-        | protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest|undefined, {}|undefined
+      ]>;
   getAzureServerConfig(
-    request: protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAzureServerConfig(
-    request: protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest,
-    callback: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAzureServerConfig(
-    request?: protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
-          | protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
-      | protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
-      (
-        | protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAzureServerConfig(
+      request: protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest,
+      callback: Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAzureServerConfig(
+      request?: protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
+          protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAzureServerConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
-          | protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAzureServerConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAzureServerConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
-          (
-            | protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getAzureServerConfig response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getAzureServerConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
+        protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAzureServerConfig response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
-   * Creates a new {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}
-   * resource on a given Google Cloud project and region.
-   *
-   * `AzureClient` resources hold client authentication
-   * information needed by the Anthos Multicloud API to manage Azure resources
-   * on your Azure subscription on your behalf.
-   *
-   * If successful, the response contains a newly created
-   * {@link protos.google.longrunning.Operation|Operation} resource that can be
-   * described to track the status of the operation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent location where this
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource will be
-   *   created.
-   *
-   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud resource names.
-   * @param {google.cloud.gkemulticloud.v1.AzureClient} request.azureClient
-   *   Required. The specification of the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} to create.
-   * @param {string} request.azureClientId
-   *   Required. A client provided ID the resource. Must be unique within the
-   *   parent resource.
-   *
-   *   The provided ID will be part of the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource name
-   *   formatted as
-   *   `projects/<project-id>/locations/<region>/azureClients/<client-id>`.
-   *
-   *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
-   * @param {boolean} request.validateOnly
-   *   If set, only validate the request, but do not actually create the client.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_client.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureClient_async
-   */
+/**
+ * Creates a new {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}
+ * resource on a given Google Cloud project and region.
+ *
+ * `AzureClient` resources hold client authentication
+ * information needed by the Anthos Multicloud API to manage Azure resources
+ * on your Azure subscription on your behalf.
+ *
+ * If successful, the response contains a newly created
+ * {@link protos.google.longrunning.Operation|Operation} resource that can be
+ * described to track the status of the operation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent location where this
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource will be
+ *   created.
+ *
+ *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud resource names.
+ * @param {google.cloud.gkemulticloud.v1.AzureClient} request.azureClient
+ *   Required. The specification of the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} to create.
+ * @param {string} request.azureClientId
+ *   Required. A client provided ID the resource. Must be unique within the
+ *   parent resource.
+ *
+ *   The provided ID will be part of the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource name
+ *   formatted as
+ *   `projects/<project-id>/locations/<region>/azureClients/<client-id>`.
+ *
+ *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
+ * @param {boolean} request.validateOnly
+ *   If set, only validate the request, but do not actually create the client.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_client.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureClient_async
+ */
   createAzureClient(
-    request?: protos.google.cloud.gkemulticloud.v1.ICreateAzureClientRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureClient,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.ICreateAzureClientRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gkemulticloud.v1.IAzureClient, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createAzureClient(
-    request: protos.google.cloud.gkemulticloud.v1.ICreateAzureClientRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureClient,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gkemulticloud.v1.ICreateAzureClientRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureClient, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAzureClient(
-    request: protos.google.cloud.gkemulticloud.v1.ICreateAzureClientRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureClient,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gkemulticloud.v1.ICreateAzureClientRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureClient, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAzureClient(
-    request?: protos.google.cloud.gkemulticloud.v1.ICreateAzureClientRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gkemulticloud.v1.IAzureClient,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureClient,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureClient,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gkemulticloud.v1.ICreateAzureClientRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureClient, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureClient, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gkemulticloud.v1.IAzureClient, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gkemulticloud.v1.IAzureClient,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureClient, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createAzureClient response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createAzureClient request %j', request);
-    return this.innerApiCalls
-      .createAzureClient(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gkemulticloud.v1.IAzureClient,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createAzureClient response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createAzureClient(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gkemulticloud.v1.IAzureClient, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createAzureClient response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createAzureClient()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_client.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureClient_async
-   */
-  async checkCreateAzureClientProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gkemulticloud.v1.AzureClient,
-      protos.google.cloud.gkemulticloud.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createAzureClient()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_client.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureClient_async
+ */
+  async checkCreateAzureClientProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AzureClient, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
     this._log.info('createAzureClient long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createAzureClient,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gkemulticloud.v1.AzureClient,
-      protos.google.cloud.gkemulticloud.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAzureClient, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gkemulticloud.v1.AzureClient, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a specific {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}
-   * resource.
-   *
-   * If the client is used by one or more clusters, deletion will
-   * fail and a `FAILED_PRECONDITION` error will be returned.
-   *
-   * If successful, the response contains a newly created
-   * {@link protos.google.longrunning.Operation|Operation} resource that can be
-   * described to track the status of the operation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} to delete.
-   *
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} names are
-   *   formatted as
-   *   `projects/<project-id>/locations/<region>/azureClients/<client-id>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud resource names.
-   * @param {boolean} request.allowMissing
-   *   If set to true, and the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource is not
-   *   found, the request will succeed but no action will be taken on the server
-   *   and a completed {@link protos.google.longrunning.Operation|Operation} will be returned.
-   *
-   *   Useful for idempotent deletion.
-   * @param {boolean} request.validateOnly
-   *   If set, only validate the request, but do not actually delete the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_client.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureClient_async
-   */
+/**
+ * Deletes a specific {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}
+ * resource.
+ *
+ * If the client is used by one or more clusters, deletion will
+ * fail and a `FAILED_PRECONDITION` error will be returned.
+ *
+ * If successful, the response contains a newly created
+ * {@link protos.google.longrunning.Operation|Operation} resource that can be
+ * described to track the status of the operation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} to delete.
+ *
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} names are
+ *   formatted as
+ *   `projects/<project-id>/locations/<region>/azureClients/<client-id>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud resource names.
+ * @param {boolean} request.allowMissing
+ *   If set to true, and the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource is not
+ *   found, the request will succeed but no action will be taken on the server
+ *   and a completed {@link protos.google.longrunning.Operation|Operation} will be returned.
+ *
+ *   Useful for idempotent deletion.
+ * @param {boolean} request.validateOnly
+ *   If set, only validate the request, but do not actually delete the resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_client.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureClient_async
+ */
   deleteAzureClient(
-    request?: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClientRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClientRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteAzureClient(
-    request: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClientRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClientRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteAzureClient(
-    request: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClientRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClientRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteAzureClient(
-    request?: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClientRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClientRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteAzureClient response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteAzureClient request %j', request);
-    return this.innerApiCalls
-      .deleteAzureClient(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteAzureClient response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteAzureClient(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteAzureClient response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteAzureClient()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_client.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureClient_async
-   */
-  async checkDeleteAzureClientProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.gkemulticloud.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteAzureClient()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_client.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureClient_async
+ */
+  async checkDeleteAzureClientProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
     this._log.info('deleteAzureClient long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteAzureClient,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.gkemulticloud.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAzureClient, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
-   * resource on a given Google Cloud Platform project and region.
-   *
-   * If successful, the response contains a newly created
-   * {@link protos.google.longrunning.Operation|Operation} resource that can be
-   * described to track the status of the operation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent location where this
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource will be
-   *   created.
-   *
-   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud resource names.
-   * @param {google.cloud.gkemulticloud.v1.AzureCluster} request.azureCluster
-   *   Required. The specification of the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} to create.
-   * @param {string} request.azureClusterId
-   *   Required. A client provided ID the resource. Must be unique within the
-   *   parent resource.
-   *
-   *   The provided ID will be part of the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource name
-   *   formatted as
-   *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
-   *
-   *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
-   * @param {boolean} request.validateOnly
-   *   If set, only validate the request, but do not actually create the cluster.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_cluster.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureCluster_async
-   */
+/**
+ * Creates a new {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
+ * resource on a given Google Cloud Platform project and region.
+ *
+ * If successful, the response contains a newly created
+ * {@link protos.google.longrunning.Operation|Operation} resource that can be
+ * described to track the status of the operation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent location where this
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource will be
+ *   created.
+ *
+ *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud resource names.
+ * @param {google.cloud.gkemulticloud.v1.AzureCluster} request.azureCluster
+ *   Required. The specification of the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} to create.
+ * @param {string} request.azureClusterId
+ *   Required. A client provided ID the resource. Must be unique within the
+ *   parent resource.
+ *
+ *   The provided ID will be part of the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource name
+ *   formatted as
+ *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
+ *
+ *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
+ * @param {boolean} request.validateOnly
+ *   If set, only validate the request, but do not actually create the cluster.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_cluster.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureCluster_async
+ */
   createAzureCluster(
-    request?: protos.google.cloud.gkemulticloud.v1.ICreateAzureClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.ICreateAzureClusterRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createAzureCluster(
-    request: protos.google.cloud.gkemulticloud.v1.ICreateAzureClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gkemulticloud.v1.ICreateAzureClusterRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAzureCluster(
-    request: protos.google.cloud.gkemulticloud.v1.ICreateAzureClusterRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gkemulticloud.v1.ICreateAzureClusterRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAzureCluster(
-    request?: protos.google.cloud.gkemulticloud.v1.ICreateAzureClusterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gkemulticloud.v1.ICreateAzureClusterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createAzureCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createAzureCluster request %j', request);
-    return this.innerApiCalls
-      .createAzureCluster(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createAzureCluster response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createAzureCluster(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createAzureCluster response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createAzureCluster()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_cluster.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureCluster_async
-   */
-  async checkCreateAzureClusterProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gkemulticloud.v1.AzureCluster,
-      protos.google.cloud.gkemulticloud.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createAzureCluster()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_cluster.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureCluster_async
+ */
+  async checkCreateAzureClusterProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AzureCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
     this._log.info('createAzureCluster long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createAzureCluster,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gkemulticloud.v1.AzureCluster,
-      protos.google.cloud.gkemulticloud.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAzureCluster, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gkemulticloud.v1.AzureCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
   }
-  /**
-   * Updates an {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.gkemulticloud.v1.AzureCluster} request.azureCluster
-   *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
-   *   resource to update.
-   * @param {boolean} request.validateOnly
-   *   If set, only validate the request, but do not actually update the cluster.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update. At least one path must be supplied in
-   *   this field. The elements of the repeated paths field can only include these
-   *   fields from {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}:
-   *
-   *    *   `description`.
-   *    *   `azureClient`.
-   *    *   `control_plane.version`.
-   *    *   `control_plane.vm_size`.
-   *    *   `annotations`.
-   *    *   `authorization.admin_users`.
-   *    *   `authorization.admin_groups`.
-   *    *   `control_plane.root_volume.size_gib`.
-   *    *   `azure_services_authentication`.
-   *    *   `azure_services_authentication.tenant_id`.
-   *    *   `azure_services_authentication.application_id`.
-   *    *   `control_plane.proxy_config`.
-   *    *   `control_plane.proxy_config.resource_group_id`.
-   *    *   `control_plane.proxy_config.secret_id`.
-   *    *   `control_plane.ssh_config.authorized_key`.
-   *    *   `logging_config.component_config.enable_components`
-   *    *   `monitoring_config.managed_prometheus_config.enabled`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.update_azure_cluster.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_UpdateAzureCluster_async
-   */
+/**
+ * Updates an {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.gkemulticloud.v1.AzureCluster} request.azureCluster
+ *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
+ *   resource to update.
+ * @param {boolean} request.validateOnly
+ *   If set, only validate the request, but do not actually update the cluster.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Mask of fields to update. At least one path must be supplied in
+ *   this field. The elements of the repeated paths field can only include these
+ *   fields from {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}:
+ *
+ *    *   `description`.
+ *    *   `azureClient`.
+ *    *   `control_plane.version`.
+ *    *   `control_plane.vm_size`.
+ *    *   `annotations`.
+ *    *   `authorization.admin_users`.
+ *    *   `authorization.admin_groups`.
+ *    *   `control_plane.root_volume.size_gib`.
+ *    *   `azure_services_authentication`.
+ *    *   `azure_services_authentication.tenant_id`.
+ *    *   `azure_services_authentication.application_id`.
+ *    *   `control_plane.proxy_config`.
+ *    *   `control_plane.proxy_config.resource_group_id`.
+ *    *   `control_plane.proxy_config.secret_id`.
+ *    *   `control_plane.ssh_config.authorized_key`.
+ *    *   `logging_config.component_config.enable_components`
+ *    *   `monitoring_config.managed_prometheus_config.enabled`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.update_azure_cluster.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_UpdateAzureCluster_async
+ */
   updateAzureCluster(
-    request?: protos.google.cloud.gkemulticloud.v1.IUpdateAzureClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.IUpdateAzureClusterRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateAzureCluster(
-    request: protos.google.cloud.gkemulticloud.v1.IUpdateAzureClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gkemulticloud.v1.IUpdateAzureClusterRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateAzureCluster(
-    request: protos.google.cloud.gkemulticloud.v1.IUpdateAzureClusterRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gkemulticloud.v1.IUpdateAzureClusterRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateAzureCluster(
-    request?: protos.google.cloud.gkemulticloud.v1.IUpdateAzureClusterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gkemulticloud.v1.IUpdateAzureClusterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'azure_cluster.name': request.azureCluster!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'azure_cluster.name': request.azureCluster!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateAzureCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateAzureCluster request %j', request);
-    return this.innerApiCalls
-      .updateAzureCluster(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gkemulticloud.v1.IAzureCluster,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateAzureCluster response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateAzureCluster(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateAzureCluster response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateAzureCluster()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.update_azure_cluster.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_UpdateAzureCluster_async
-   */
-  async checkUpdateAzureClusterProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gkemulticloud.v1.AzureCluster,
-      protos.google.cloud.gkemulticloud.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateAzureCluster()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.update_azure_cluster.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_UpdateAzureCluster_async
+ */
+  async checkUpdateAzureClusterProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AzureCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
     this._log.info('updateAzureCluster long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateAzureCluster,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gkemulticloud.v1.AzureCluster,
-      protos.google.cloud.gkemulticloud.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAzureCluster, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gkemulticloud.v1.AzureCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a specific
-   * {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource.
-   *
-   * Fails if the cluster has one or more associated
-   * {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resources.
-   *
-   * If successful, the response contains a newly created
-   * {@link protos.google.longrunning.Operation|Operation} resource that can be
-   * described to track the status of the operation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} to delete.
-   *
-   *   `AzureCluster` names are formatted as
-   *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud Platform resource names.
-   * @param {boolean} request.allowMissing
-   *   If set to true, and the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource is not
-   *   found, the request will succeed but no action will be taken on the server
-   *   and a completed {@link protos.google.longrunning.Operation|Operation} will be returned.
-   *
-   *   Useful for idempotent deletion.
-   * @param {boolean} request.validateOnly
-   *   If set, only validate the request, but do not actually delete the resource.
-   * @param {string} request.etag
-   *   The current etag of the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
-   *
-   *   Allows clients to perform deletions through optimistic concurrency control.
-   *
-   *   If the provided etag does not match the current etag of the cluster,
-   *   the request will fail and an ABORTED error will be returned.
-   * @param {boolean} [request.ignoreErrors]
-   *   Optional. If set to true, the deletion of
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource will
-   *   succeed even if errors occur during deleting in cluster resources. Using
-   *   this parameter may result in orphaned resources in the cluster.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_cluster.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureCluster_async
-   */
+/**
+ * Deletes a specific
+ * {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource.
+ *
+ * Fails if the cluster has one or more associated
+ * {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resources.
+ *
+ * If successful, the response contains a newly created
+ * {@link protos.google.longrunning.Operation|Operation} resource that can be
+ * described to track the status of the operation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} to delete.
+ *
+ *   `AzureCluster` names are formatted as
+ *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud Platform resource names.
+ * @param {boolean} request.allowMissing
+ *   If set to true, and the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource is not
+ *   found, the request will succeed but no action will be taken on the server
+ *   and a completed {@link protos.google.longrunning.Operation|Operation} will be returned.
+ *
+ *   Useful for idempotent deletion.
+ * @param {boolean} request.validateOnly
+ *   If set, only validate the request, but do not actually delete the resource.
+ * @param {string} request.etag
+ *   The current etag of the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
+ *
+ *   Allows clients to perform deletions through optimistic concurrency control.
+ *
+ *   If the provided etag does not match the current etag of the cluster,
+ *   the request will fail and an ABORTED error will be returned.
+ * @param {boolean} [request.ignoreErrors]
+ *   Optional. If set to true, the deletion of
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource will
+ *   succeed even if errors occur during deleting in cluster resources. Using
+ *   this parameter may result in orphaned resources in the cluster.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_cluster.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureCluster_async
+ */
   deleteAzureCluster(
-    request?: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClusterRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteAzureCluster(
-    request: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClusterRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteAzureCluster(
-    request: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClusterRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClusterRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteAzureCluster(
-    request?: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClusterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClusterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteAzureCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteAzureCluster request %j', request);
-    return this.innerApiCalls
-      .deleteAzureCluster(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteAzureCluster response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteAzureCluster(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteAzureCluster response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteAzureCluster()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_cluster.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureCluster_async
-   */
-  async checkDeleteAzureClusterProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.gkemulticloud.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteAzureCluster()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_cluster.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureCluster_async
+ */
+  async checkDeleteAzureClusterProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
     this._log.info('deleteAzureCluster long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteAzureCluster,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.gkemulticloud.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAzureCluster, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool},
-   * attached to a given
-   * {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
-   *
-   * If successful, the response contains a newly created
-   * {@link protos.google.longrunning.Operation|Operation} resource that can be
-   * described to track the status of the operation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
-   *   resource where this node pool will be created.
-   *
-   *   `AzureCluster` names are formatted as
-   *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud resource names.
-   * @param {google.cloud.gkemulticloud.v1.AzureNodePool} request.azureNodePool
-   *   Required. The specification of the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} to create.
-   * @param {string} request.azureNodePoolId
-   *   Required. A client provided ID the resource. Must be unique within the
-   *   parent resource.
-   *
-   *   The provided ID will be part of the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource name
-   *   formatted as
-   *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>/azureNodePools/<node-pool-id>`.
-   *
-   *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
-   * @param {boolean} request.validateOnly
-   *   If set, only validate the request, but do not actually create the node
-   *   pool.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_node_pool.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureNodePool_async
-   */
+/**
+ * Creates a new {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool},
+ * attached to a given
+ * {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
+ *
+ * If successful, the response contains a newly created
+ * {@link protos.google.longrunning.Operation|Operation} resource that can be
+ * described to track the status of the operation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
+ *   resource where this node pool will be created.
+ *
+ *   `AzureCluster` names are formatted as
+ *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud resource names.
+ * @param {google.cloud.gkemulticloud.v1.AzureNodePool} request.azureNodePool
+ *   Required. The specification of the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} to create.
+ * @param {string} request.azureNodePoolId
+ *   Required. A client provided ID the resource. Must be unique within the
+ *   parent resource.
+ *
+ *   The provided ID will be part of the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource name
+ *   formatted as
+ *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>/azureNodePools/<node-pool-id>`.
+ *
+ *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
+ * @param {boolean} request.validateOnly
+ *   If set, only validate the request, but do not actually create the node
+ *   pool.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_node_pool.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureNodePool_async
+ */
   createAzureNodePool(
-    request?: protos.google.cloud.gkemulticloud.v1.ICreateAzureNodePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.ICreateAzureNodePoolRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createAzureNodePool(
-    request: protos.google.cloud.gkemulticloud.v1.ICreateAzureNodePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gkemulticloud.v1.ICreateAzureNodePoolRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAzureNodePool(
-    request: protos.google.cloud.gkemulticloud.v1.ICreateAzureNodePoolRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gkemulticloud.v1.ICreateAzureNodePoolRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAzureNodePool(
-    request?: protos.google.cloud.gkemulticloud.v1.ICreateAzureNodePoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gkemulticloud.v1.ICreateAzureNodePoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createAzureNodePool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createAzureNodePool request %j', request);
-    return this.innerApiCalls
-      .createAzureNodePool(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createAzureNodePool response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createAzureNodePool(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createAzureNodePool response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createAzureNodePool()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_node_pool.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureNodePool_async
-   */
-  async checkCreateAzureNodePoolProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gkemulticloud.v1.AzureNodePool,
-      protos.google.cloud.gkemulticloud.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createAzureNodePool()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_node_pool.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureNodePool_async
+ */
+  async checkCreateAzureNodePoolProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AzureNodePool, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
     this._log.info('createAzureNodePool long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createAzureNodePool,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gkemulticloud.v1.AzureNodePool,
-      protos.google.cloud.gkemulticloud.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAzureNodePool, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gkemulticloud.v1.AzureNodePool, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
   }
-  /**
-   * Updates an {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.gkemulticloud.v1.AzureNodePool} request.azureNodePool
-   *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}
-   *   resource to update.
-   * @param {boolean} request.validateOnly
-   *   If set, only validate the request, but don't actually update the node pool.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update. At least one path must be supplied in
-   *   this field. The elements of the repeated paths field can only include these
-   *   fields from {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}:
-   *
-   *    *.  `annotations`.
-   *    *   `version`.
-   *    *   `autoscaling.min_node_count`.
-   *    *   `autoscaling.max_node_count`.
-   *    *   `config.ssh_config.authorized_key`.
-   *    *   `management.auto_repair`.
-   *    *   `management`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.update_azure_node_pool.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_UpdateAzureNodePool_async
-   */
+/**
+ * Updates an {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.gkemulticloud.v1.AzureNodePool} request.azureNodePool
+ *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}
+ *   resource to update.
+ * @param {boolean} request.validateOnly
+ *   If set, only validate the request, but don't actually update the node pool.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Mask of fields to update. At least one path must be supplied in
+ *   this field. The elements of the repeated paths field can only include these
+ *   fields from {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}:
+ *
+ *    *.  `annotations`.
+ *    *   `version`.
+ *    *   `autoscaling.min_node_count`.
+ *    *   `autoscaling.max_node_count`.
+ *    *   `config.ssh_config.authorized_key`.
+ *    *   `management.auto_repair`.
+ *    *   `management`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.update_azure_node_pool.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_UpdateAzureNodePool_async
+ */
   updateAzureNodePool(
-    request?: protos.google.cloud.gkemulticloud.v1.IUpdateAzureNodePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.IUpdateAzureNodePoolRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateAzureNodePool(
-    request: protos.google.cloud.gkemulticloud.v1.IUpdateAzureNodePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gkemulticloud.v1.IUpdateAzureNodePoolRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateAzureNodePool(
-    request: protos.google.cloud.gkemulticloud.v1.IUpdateAzureNodePoolRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gkemulticloud.v1.IUpdateAzureNodePoolRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateAzureNodePool(
-    request?: protos.google.cloud.gkemulticloud.v1.IUpdateAzureNodePoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gkemulticloud.v1.IUpdateAzureNodePoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'azure_node_pool.name': request.azureNodePool!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'azure_node_pool.name': request.azureNodePool!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateAzureNodePool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateAzureNodePool request %j', request);
-    return this.innerApiCalls
-      .updateAzureNodePool(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateAzureNodePool response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateAzureNodePool(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateAzureNodePool response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateAzureNodePool()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.update_azure_node_pool.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_UpdateAzureNodePool_async
-   */
-  async checkUpdateAzureNodePoolProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gkemulticloud.v1.AzureNodePool,
-      protos.google.cloud.gkemulticloud.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateAzureNodePool()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.update_azure_node_pool.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_UpdateAzureNodePool_async
+ */
+  async checkUpdateAzureNodePoolProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AzureNodePool, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
     this._log.info('updateAzureNodePool long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateAzureNodePool,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gkemulticloud.v1.AzureNodePool,
-      protos.google.cloud.gkemulticloud.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAzureNodePool, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gkemulticloud.v1.AzureNodePool, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a specific
-   * {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource.
-   *
-   * If successful, the response contains a newly created
-   * {@link protos.google.longrunning.Operation|Operation} resource that can be
-   * described to track the status of the operation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} to delete.
-   *
-   *   `AzureNodePool` names are formatted as
-   *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>/azureNodePools/<node-pool-id>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud resource names.
-   * @param {boolean} request.validateOnly
-   *   If set, only validate the request, but do not actually delete the node
-   *   pool.
-   * @param {boolean} request.allowMissing
-   *   If set to true, and the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource is
-   *   not found, the request will succeed but no action will be taken on the
-   *   server and a completed {@link protos.google.longrunning.Operation|Operation} will be
-   *   returned.
-   *
-   *   Useful for idempotent deletion.
-   * @param {string} request.etag
-   *   The current ETag of the
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}.
-   *
-   *   Allows clients to perform deletions through optimistic concurrency control.
-   *
-   *   If the provided ETag does not match the current etag of the node pool,
-   *   the request will fail and an ABORTED error will be returned.
-   * @param {boolean} [request.ignoreErrors]
-   *   Optional. If set to true, the deletion of
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource will
-   *   succeed even if errors occur during deleting in node pool resources. Using
-   *   this parameter may result in orphaned resources in the node pool.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_node_pool.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureNodePool_async
-   */
+/**
+ * Deletes a specific
+ * {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource.
+ *
+ * If successful, the response contains a newly created
+ * {@link protos.google.longrunning.Operation|Operation} resource that can be
+ * described to track the status of the operation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} to delete.
+ *
+ *   `AzureNodePool` names are formatted as
+ *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>/azureNodePools/<node-pool-id>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud resource names.
+ * @param {boolean} request.validateOnly
+ *   If set, only validate the request, but do not actually delete the node
+ *   pool.
+ * @param {boolean} request.allowMissing
+ *   If set to true, and the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource is
+ *   not found, the request will succeed but no action will be taken on the
+ *   server and a completed {@link protos.google.longrunning.Operation|Operation} will be
+ *   returned.
+ *
+ *   Useful for idempotent deletion.
+ * @param {string} request.etag
+ *   The current ETag of the
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}.
+ *
+ *   Allows clients to perform deletions through optimistic concurrency control.
+ *
+ *   If the provided ETag does not match the current etag of the node pool,
+ *   the request will fail and an ABORTED error will be returned.
+ * @param {boolean} [request.ignoreErrors]
+ *   Optional. If set to true, the deletion of
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource will
+ *   succeed even if errors occur during deleting in node pool resources. Using
+ *   this parameter may result in orphaned resources in the node pool.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_node_pool.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureNodePool_async
+ */
   deleteAzureNodePool(
-    request?: protos.google.cloud.gkemulticloud.v1.IDeleteAzureNodePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.IDeleteAzureNodePoolRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteAzureNodePool(
-    request: protos.google.cloud.gkemulticloud.v1.IDeleteAzureNodePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gkemulticloud.v1.IDeleteAzureNodePoolRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteAzureNodePool(
-    request: protos.google.cloud.gkemulticloud.v1.IDeleteAzureNodePoolRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gkemulticloud.v1.IDeleteAzureNodePoolRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteAzureNodePool(
-    request?: protos.google.cloud.gkemulticloud.v1.IDeleteAzureNodePoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gkemulticloud.v1.IDeleteAzureNodePoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteAzureNodePool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteAzureNodePool request %j', request);
-    return this.innerApiCalls
-      .deleteAzureNodePool(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteAzureNodePool response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteAzureNodePool(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteAzureNodePool response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteAzureNodePool()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_node_pool.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureNodePool_async
-   */
-  async checkDeleteAzureNodePoolProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.gkemulticloud.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteAzureNodePool()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_node_pool.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureNodePool_async
+ */
+  async checkDeleteAzureNodePoolProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
     this._log.info('deleteAzureNodePool long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteAzureNodePool,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.gkemulticloud.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAzureNodePool, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
   }
-  /**
-   * Lists all {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}
-   * resources on a given Google Cloud project and region.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent location which owns this collection of
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resources.
-   *
-   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud Platform resource names.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   *
-   *   If not specified, a default value of 50 will be used by the service.
-   *   Regardless of the pageSize value, the response can include a partial list
-   *   and a caller should only rely on response's
-   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClientsResponse.next_page_token|nextPageToken}
-   *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The `nextPageToken` value returned from a previous
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClients|azureClients.list}
-   *   request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAzureClientsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}
+ * resources on a given Google Cloud project and region.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent location which owns this collection of
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resources.
+ *
+ *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud Platform resource names.
+ * @param {number} request.pageSize
+ *   The maximum number of items to return.
+ *
+ *   If not specified, a default value of 50 will be used by the service.
+ *   Regardless of the pageSize value, the response can include a partial list
+ *   and a caller should only rely on response's
+ *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClientsResponse.next_page_token|nextPageToken}
+ *   to determine if there are more instances left to be queried.
+ * @param {string} request.pageToken
+ *   The `nextPageToken` value returned from a previous
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClients|azureClients.list}
+ *   request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAzureClientsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAzureClients(
-    request?: protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureClient[],
-      protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureClient[],
+        protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest|null,
+        protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse
+      ]>;
   listAzureClients(
-    request: protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
-      | protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse
-      | null
-      | undefined,
-      protos.google.cloud.gkemulticloud.v1.IAzureClient
-    >
-  ): void;
-  listAzureClients(
-    request: protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
-      | protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse
-      | null
-      | undefined,
-      protos.google.cloud.gkemulticloud.v1.IAzureClient
-    >
-  ): void;
-  listAzureClients(
-    request?: protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
-          | protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse
-          | null
-          | undefined,
-          protos.google.cloud.gkemulticloud.v1.IAzureClient
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
-      | protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse
-      | null
-      | undefined,
-      protos.google.cloud.gkemulticloud.v1.IAzureClient
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureClient[],
-      protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse,
-    ]
-  > | void {
+          protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse|null|undefined,
+          protos.google.cloud.gkemulticloud.v1.IAzureClient>): void;
+  listAzureClients(
+      request: protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
+          protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse|null|undefined,
+          protos.google.cloud.gkemulticloud.v1.IAzureClient>): void;
+  listAzureClients(
+      request?: protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
+          protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse|null|undefined,
+          protos.google.cloud.gkemulticloud.v1.IAzureClient>,
+      callback?: PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
+          protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse|null|undefined,
+          protos.google.cloud.gkemulticloud.v1.IAzureClient>):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureClient[],
+        protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest|null,
+        protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
-          | protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse
-          | null
-          | undefined,
-          protos.google.cloud.gkemulticloud.v1.IAzureClient
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
+      protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse|null|undefined,
+      protos.google.cloud.gkemulticloud.v1.IAzureClient>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAzureClients values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3354,70 +2414,67 @@ export class AzureClustersClient {
     this._log.info('listAzureClients request %j', request);
     return this.innerApiCalls
       .listAzureClients(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.gkemulticloud.v1.IAzureClient[],
-          protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest | null,
-          protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse,
-        ]) => {
-          this._log.info('listAzureClients values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.gkemulticloud.v1.IAzureClient[],
+        protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest|null,
+        protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse
+      ]) => {
+        this._log.info('listAzureClients values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAzureClients`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent location which owns this collection of
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resources.
-   *
-   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud Platform resource names.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   *
-   *   If not specified, a default value of 50 will be used by the service.
-   *   Regardless of the pageSize value, the response can include a partial list
-   *   and a caller should only rely on response's
-   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClientsResponse.next_page_token|nextPageToken}
-   *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The `nextPageToken` value returned from a previous
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClients|azureClients.list}
-   *   request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAzureClientsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAzureClients`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent location which owns this collection of
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resources.
+ *
+ *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud Platform resource names.
+ * @param {number} request.pageSize
+ *   The maximum number of items to return.
+ *
+ *   If not specified, a default value of 50 will be used by the service.
+ *   Regardless of the pageSize value, the response can include a partial list
+ *   and a caller should only rely on response's
+ *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClientsResponse.next_page_token|nextPageToken}
+ *   to determine if there are more instances left to be queried.
+ * @param {string} request.pageToken
+ *   The `nextPageToken` value returned from a previous
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClients|azureClients.list}
+ *   request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAzureClientsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAzureClientsStream(
-    request?: protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAzureClients'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAzureClients stream %j', request);
     return this.descriptors.page.listAzureClients.createStream(
       this.innerApiCalls.listAzureClients as GaxCall,
@@ -3426,61 +2483,60 @@ export class AzureClustersClient {
     );
   }
 
-  /**
-   * Equivalent to `listAzureClients`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent location which owns this collection of
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resources.
-   *
-   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud Platform resource names.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   *
-   *   If not specified, a default value of 50 will be used by the service.
-   *   Regardless of the pageSize value, the response can include a partial list
-   *   and a caller should only rely on response's
-   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClientsResponse.next_page_token|nextPageToken}
-   *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The `nextPageToken` value returned from a previous
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClients|azureClients.list}
-   *   request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.list_azure_clients.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_ListAzureClients_async
-   */
+/**
+ * Equivalent to `listAzureClients`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent location which owns this collection of
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resources.
+ *
+ *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud Platform resource names.
+ * @param {number} request.pageSize
+ *   The maximum number of items to return.
+ *
+ *   If not specified, a default value of 50 will be used by the service.
+ *   Regardless of the pageSize value, the response can include a partial list
+ *   and a caller should only rely on response's
+ *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClientsResponse.next_page_token|nextPageToken}
+ *   to determine if there are more instances left to be queried.
+ * @param {string} request.pageToken
+ *   The `nextPageToken` value returned from a previous
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClients|azureClients.list}
+ *   request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.list_azure_clients.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_ListAzureClients_async
+ */
   listAzureClientsAsync(
-    request?: protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAzureClient> {
+      request?: protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAzureClient>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAzureClients'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAzureClients iterate %j', request);
     return this.descriptors.page.listAzureClients.asyncIterate(
       this.innerApiCalls['listAzureClients'] as GaxCall,
@@ -3488,127 +2544,102 @@ export class AzureClustersClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAzureClient>;
   }
-  /**
-   * Lists all {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
-   * resources on a given Google Cloud project and region.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent location which owns this collection of
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resources.
-   *
-   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud Platform resource names.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   *
-   *   If not specified, a default value of 50 will be used by the service.
-   *   Regardless of the pageSize value, the response can include a partial list
-   *   and a caller should only rely on response's
-   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClustersResponse.next_page_token|nextPageToken}
-   *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The `nextPageToken` value returned from a previous
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClusters|azureClusters.list}
-   *   request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAzureClustersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
+ * resources on a given Google Cloud project and region.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent location which owns this collection of
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resources.
+ *
+ *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud Platform resource names.
+ * @param {number} request.pageSize
+ *   The maximum number of items to return.
+ *
+ *   If not specified, a default value of 50 will be used by the service.
+ *   Regardless of the pageSize value, the response can include a partial list
+ *   and a caller should only rely on response's
+ *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClustersResponse.next_page_token|nextPageToken}
+ *   to determine if there are more instances left to be queried.
+ * @param {string} request.pageToken
+ *   The `nextPageToken` value returned from a previous
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClusters|azureClusters.list}
+ *   request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAzureClustersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAzureClusters(
-    request?: protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureCluster[],
-      protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureCluster[],
+        protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest|null,
+        protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse
+      ]>;
   listAzureClusters(
-    request: protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
-      | protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse
-      | null
-      | undefined,
-      protos.google.cloud.gkemulticloud.v1.IAzureCluster
-    >
-  ): void;
-  listAzureClusters(
-    request: protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
-      | protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse
-      | null
-      | undefined,
-      protos.google.cloud.gkemulticloud.v1.IAzureCluster
-    >
-  ): void;
-  listAzureClusters(
-    request?: protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
-          | protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse
-          | null
-          | undefined,
-          protos.google.cloud.gkemulticloud.v1.IAzureCluster
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
-      | protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse
-      | null
-      | undefined,
-      protos.google.cloud.gkemulticloud.v1.IAzureCluster
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureCluster[],
-      protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse,
-    ]
-  > | void {
+          protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse|null|undefined,
+          protos.google.cloud.gkemulticloud.v1.IAzureCluster>): void;
+  listAzureClusters(
+      request: protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
+          protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse|null|undefined,
+          protos.google.cloud.gkemulticloud.v1.IAzureCluster>): void;
+  listAzureClusters(
+      request?: protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
+          protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse|null|undefined,
+          protos.google.cloud.gkemulticloud.v1.IAzureCluster>,
+      callback?: PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
+          protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse|null|undefined,
+          protos.google.cloud.gkemulticloud.v1.IAzureCluster>):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureCluster[],
+        protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest|null,
+        protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
-          | protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse
-          | null
-          | undefined,
-          protos.google.cloud.gkemulticloud.v1.IAzureCluster
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
+      protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse|null|undefined,
+      protos.google.cloud.gkemulticloud.v1.IAzureCluster>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAzureClusters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3617,70 +2648,67 @@ export class AzureClustersClient {
     this._log.info('listAzureClusters request %j', request);
     return this.innerApiCalls
       .listAzureClusters(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.gkemulticloud.v1.IAzureCluster[],
-          protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest | null,
-          protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse,
-        ]) => {
-          this._log.info('listAzureClusters values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.gkemulticloud.v1.IAzureCluster[],
+        protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest|null,
+        protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse
+      ]) => {
+        this._log.info('listAzureClusters values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAzureClusters`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent location which owns this collection of
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resources.
-   *
-   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud Platform resource names.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   *
-   *   If not specified, a default value of 50 will be used by the service.
-   *   Regardless of the pageSize value, the response can include a partial list
-   *   and a caller should only rely on response's
-   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClustersResponse.next_page_token|nextPageToken}
-   *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The `nextPageToken` value returned from a previous
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClusters|azureClusters.list}
-   *   request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAzureClustersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAzureClusters`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent location which owns this collection of
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resources.
+ *
+ *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud Platform resource names.
+ * @param {number} request.pageSize
+ *   The maximum number of items to return.
+ *
+ *   If not specified, a default value of 50 will be used by the service.
+ *   Regardless of the pageSize value, the response can include a partial list
+ *   and a caller should only rely on response's
+ *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClustersResponse.next_page_token|nextPageToken}
+ *   to determine if there are more instances left to be queried.
+ * @param {string} request.pageToken
+ *   The `nextPageToken` value returned from a previous
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClusters|azureClusters.list}
+ *   request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAzureClustersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAzureClustersStream(
-    request?: protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAzureClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAzureClusters stream %j', request);
     return this.descriptors.page.listAzureClusters.createStream(
       this.innerApiCalls.listAzureClusters as GaxCall,
@@ -3689,61 +2717,60 @@ export class AzureClustersClient {
     );
   }
 
-  /**
-   * Equivalent to `listAzureClusters`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent location which owns this collection of
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resources.
-   *
-   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud Platform resource names.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   *
-   *   If not specified, a default value of 50 will be used by the service.
-   *   Regardless of the pageSize value, the response can include a partial list
-   *   and a caller should only rely on response's
-   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClustersResponse.next_page_token|nextPageToken}
-   *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The `nextPageToken` value returned from a previous
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClusters|azureClusters.list}
-   *   request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.list_azure_clusters.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_ListAzureClusters_async
-   */
+/**
+ * Equivalent to `listAzureClusters`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent location which owns this collection of
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resources.
+ *
+ *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud Platform resource names.
+ * @param {number} request.pageSize
+ *   The maximum number of items to return.
+ *
+ *   If not specified, a default value of 50 will be used by the service.
+ *   Regardless of the pageSize value, the response can include a partial list
+ *   and a caller should only rely on response's
+ *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClustersResponse.next_page_token|nextPageToken}
+ *   to determine if there are more instances left to be queried.
+ * @param {string} request.pageToken
+ *   The `nextPageToken` value returned from a previous
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClusters|azureClusters.list}
+ *   request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.list_azure_clusters.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_ListAzureClusters_async
+ */
   listAzureClustersAsync(
-    request?: protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAzureCluster> {
+      request?: protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAzureCluster>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAzureClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAzureClusters iterate %j', request);
     return this.descriptors.page.listAzureClusters.asyncIterate(
       this.innerApiCalls['listAzureClusters'] as GaxCall,
@@ -3751,129 +2778,104 @@ export class AzureClustersClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAzureCluster>;
   }
-  /**
-   * Lists all {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}
-   * resources on a given
-   * {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent `AzureCluster` which owns this collection of
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resources.
-   *
-   *   `AzureCluster` names are formatted as
-   *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud resource names.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   *
-   *   If not specified, a default value of 50 will be used by the service.
-   *   Regardless of the pageSize value, the response can include a partial list
-   *   and a caller should only rely on response's
-   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsResponse.next_page_token|nextPageToken}
-   *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The `nextPageToken` value returned from a previous
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureNodePools|azureNodePools.list}
-   *   request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAzureNodePoolsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}
+ * resources on a given
+ * {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent `AzureCluster` which owns this collection of
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resources.
+ *
+ *   `AzureCluster` names are formatted as
+ *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud resource names.
+ * @param {number} request.pageSize
+ *   The maximum number of items to return.
+ *
+ *   If not specified, a default value of 50 will be used by the service.
+ *   Regardless of the pageSize value, the response can include a partial list
+ *   and a caller should only rely on response's
+ *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsResponse.next_page_token|nextPageToken}
+ *   to determine if there are more instances left to be queried.
+ * @param {string} request.pageToken
+ *   The `nextPageToken` value returned from a previous
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureNodePools|azureNodePools.list}
+ *   request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAzureNodePoolsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAzureNodePools(
-    request?: protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureNodePool[],
-      protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureNodePool[],
+        protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest|null,
+        protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse
+      ]>;
   listAzureNodePools(
-    request: protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
-      | protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse
-      | null
-      | undefined,
-      protos.google.cloud.gkemulticloud.v1.IAzureNodePool
-    >
-  ): void;
-  listAzureNodePools(
-    request: protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
-      | protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse
-      | null
-      | undefined,
-      protos.google.cloud.gkemulticloud.v1.IAzureNodePool
-    >
-  ): void;
-  listAzureNodePools(
-    request?: protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
-          | protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse
-          | null
-          | undefined,
-          protos.google.cloud.gkemulticloud.v1.IAzureNodePool
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
-      | protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse
-      | null
-      | undefined,
-      protos.google.cloud.gkemulticloud.v1.IAzureNodePool
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gkemulticloud.v1.IAzureNodePool[],
-      protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse,
-    ]
-  > | void {
+          protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse|null|undefined,
+          protos.google.cloud.gkemulticloud.v1.IAzureNodePool>): void;
+  listAzureNodePools(
+      request: protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
+          protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse|null|undefined,
+          protos.google.cloud.gkemulticloud.v1.IAzureNodePool>): void;
+  listAzureNodePools(
+      request?: protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
+          protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse|null|undefined,
+          protos.google.cloud.gkemulticloud.v1.IAzureNodePool>,
+      callback?: PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
+          protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse|null|undefined,
+          protos.google.cloud.gkemulticloud.v1.IAzureNodePool>):
+      Promise<[
+        protos.google.cloud.gkemulticloud.v1.IAzureNodePool[],
+        protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest|null,
+        protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
-          | protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse
-          | null
-          | undefined,
-          protos.google.cloud.gkemulticloud.v1.IAzureNodePool
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
+      protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse|null|undefined,
+      protos.google.cloud.gkemulticloud.v1.IAzureNodePool>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAzureNodePools values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3882,71 +2884,68 @@ export class AzureClustersClient {
     this._log.info('listAzureNodePools request %j', request);
     return this.innerApiCalls
       .listAzureNodePools(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.gkemulticloud.v1.IAzureNodePool[],
-          protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest | null,
-          protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse,
-        ]) => {
-          this._log.info('listAzureNodePools values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.gkemulticloud.v1.IAzureNodePool[],
+        protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest|null,
+        protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse
+      ]) => {
+        this._log.info('listAzureNodePools values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAzureNodePools`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent `AzureCluster` which owns this collection of
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resources.
-   *
-   *   `AzureCluster` names are formatted as
-   *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud resource names.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   *
-   *   If not specified, a default value of 50 will be used by the service.
-   *   Regardless of the pageSize value, the response can include a partial list
-   *   and a caller should only rely on response's
-   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsResponse.next_page_token|nextPageToken}
-   *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The `nextPageToken` value returned from a previous
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureNodePools|azureNodePools.list}
-   *   request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAzureNodePoolsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAzureNodePools`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent `AzureCluster` which owns this collection of
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resources.
+ *
+ *   `AzureCluster` names are formatted as
+ *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud resource names.
+ * @param {number} request.pageSize
+ *   The maximum number of items to return.
+ *
+ *   If not specified, a default value of 50 will be used by the service.
+ *   Regardless of the pageSize value, the response can include a partial list
+ *   and a caller should only rely on response's
+ *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsResponse.next_page_token|nextPageToken}
+ *   to determine if there are more instances left to be queried.
+ * @param {string} request.pageToken
+ *   The `nextPageToken` value returned from a previous
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureNodePools|azureNodePools.list}
+ *   request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAzureNodePoolsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAzureNodePoolsStream(
-    request?: protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAzureNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAzureNodePools stream %j', request);
     return this.descriptors.page.listAzureNodePools.createStream(
       this.innerApiCalls.listAzureNodePools as GaxCall,
@@ -3955,62 +2954,61 @@ export class AzureClustersClient {
     );
   }
 
-  /**
-   * Equivalent to `listAzureNodePools`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent `AzureCluster` which owns this collection of
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resources.
-   *
-   *   `AzureCluster` names are formatted as
-   *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
-   *
-   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on Google Cloud resource names.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   *
-   *   If not specified, a default value of 50 will be used by the service.
-   *   Regardless of the pageSize value, the response can include a partial list
-   *   and a caller should only rely on response's
-   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsResponse.next_page_token|nextPageToken}
-   *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The `nextPageToken` value returned from a previous
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureNodePools|azureNodePools.list}
-   *   request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/azure_clusters.list_azure_node_pools.js</caption>
-   * region_tag:gkemulticloud_v1_generated_AzureClusters_ListAzureNodePools_async
-   */
+/**
+ * Equivalent to `listAzureNodePools`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent `AzureCluster` which owns this collection of
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resources.
+ *
+ *   `AzureCluster` names are formatted as
+ *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
+ *
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+ *   for more details on Google Cloud resource names.
+ * @param {number} request.pageSize
+ *   The maximum number of items to return.
+ *
+ *   If not specified, a default value of 50 will be used by the service.
+ *   Regardless of the pageSize value, the response can include a partial list
+ *   and a caller should only rely on response's
+ *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsResponse.next_page_token|nextPageToken}
+ *   to determine if there are more instances left to be queried.
+ * @param {string} request.pageToken
+ *   The `nextPageToken` value returned from a previous
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureNodePools|azureNodePools.list}
+ *   request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/azure_clusters.list_azure_node_pools.js</caption>
+ * region_tag:gkemulticloud_v1_generated_AzureClusters_ListAzureNodePools_async
+ */
   listAzureNodePoolsAsync(
-    request?: protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAzureNodePool> {
+      request?: protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAzureNodePool>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAzureNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAzureNodePools iterate %j', request);
     return this.descriptors.page.listAzureNodePools.asyncIterate(
       this.innerApiCalls['listAzureNodePools'] as GaxCall,
@@ -4018,7 +3016,7 @@ export class AzureClustersClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAzureNodePool>;
   }
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -4063,20 +3061,20 @@ export class AzureClustersClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -4113,13 +3111,13 @@ export class AzureClustersClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -4153,7 +3151,7 @@ export class AzureClustersClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -4168,20 +3166,20 @@ export class AzureClustersClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -4225,20 +3223,20 @@ export class AzureClustersClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -4254,11 +3252,7 @@ export class AzureClustersClient {
    * @param {string} attached_cluster
    * @returns {string} Resource name string.
    */
-  attachedClusterPath(
-    project: string,
-    location: string,
-    attachedCluster: string
-  ) {
+  attachedClusterPath(project:string,location:string,attachedCluster:string) {
     return this.pathTemplates.attachedClusterPathTemplate.render({
       project: project,
       location: location,
@@ -4274,9 +3268,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttachedClusterName(attachedClusterName: string) {
-    return this.pathTemplates.attachedClusterPathTemplate.match(
-      attachedClusterName
-    ).project;
+    return this.pathTemplates.attachedClusterPathTemplate.match(attachedClusterName).project;
   }
 
   /**
@@ -4287,9 +3279,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttachedClusterName(attachedClusterName: string) {
-    return this.pathTemplates.attachedClusterPathTemplate.match(
-      attachedClusterName
-    ).location;
+    return this.pathTemplates.attachedClusterPathTemplate.match(attachedClusterName).location;
   }
 
   /**
@@ -4300,9 +3290,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the attached_cluster.
    */
   matchAttachedClusterFromAttachedClusterName(attachedClusterName: string) {
-    return this.pathTemplates.attachedClusterPathTemplate.match(
-      attachedClusterName
-    ).attached_cluster;
+    return this.pathTemplates.attachedClusterPathTemplate.match(attachedClusterName).attached_cluster;
   }
 
   /**
@@ -4312,7 +3300,7 @@ export class AzureClustersClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  attachedServerConfigPath(project: string, location: string) {
+  attachedServerConfigPath(project:string,location:string) {
     return this.pathTemplates.attachedServerConfigPathTemplate.render({
       project: project,
       location: location,
@@ -4327,9 +3315,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttachedServerConfigName(attachedServerConfigName: string) {
-    return this.pathTemplates.attachedServerConfigPathTemplate.match(
-      attachedServerConfigName
-    ).project;
+    return this.pathTemplates.attachedServerConfigPathTemplate.match(attachedServerConfigName).project;
   }
 
   /**
@@ -4340,9 +3326,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttachedServerConfigName(attachedServerConfigName: string) {
-    return this.pathTemplates.attachedServerConfigPathTemplate.match(
-      attachedServerConfigName
-    ).location;
+    return this.pathTemplates.attachedServerConfigPathTemplate.match(attachedServerConfigName).location;
   }
 
   /**
@@ -4353,7 +3337,7 @@ export class AzureClustersClient {
    * @param {string} aws_cluster
    * @returns {string} Resource name string.
    */
-  awsClusterPath(project: string, location: string, awsCluster: string) {
+  awsClusterPath(project:string,location:string,awsCluster:string) {
     return this.pathTemplates.awsClusterPathTemplate.render({
       project: project,
       location: location,
@@ -4369,8 +3353,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAwsClusterName(awsClusterName: string) {
-    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName)
-      .project;
+    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName).project;
   }
 
   /**
@@ -4381,8 +3364,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAwsClusterName(awsClusterName: string) {
-    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName)
-      .location;
+    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName).location;
   }
 
   /**
@@ -4393,8 +3375,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the aws_cluster.
    */
   matchAwsClusterFromAwsClusterName(awsClusterName: string) {
-    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName)
-      .aws_cluster;
+    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName).aws_cluster;
   }
 
   /**
@@ -4406,12 +3387,7 @@ export class AzureClustersClient {
    * @param {string} aws_node_pool
    * @returns {string} Resource name string.
    */
-  awsNodePoolPath(
-    project: string,
-    location: string,
-    awsCluster: string,
-    awsNodePool: string
-  ) {
+  awsNodePoolPath(project:string,location:string,awsCluster:string,awsNodePool:string) {
     return this.pathTemplates.awsNodePoolPathTemplate.render({
       project: project,
       location: location,
@@ -4428,8 +3404,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAwsNodePoolName(awsNodePoolName: string) {
-    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName)
-      .project;
+    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName).project;
   }
 
   /**
@@ -4440,8 +3415,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAwsNodePoolName(awsNodePoolName: string) {
-    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName)
-      .location;
+    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName).location;
   }
 
   /**
@@ -4452,8 +3426,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the aws_cluster.
    */
   matchAwsClusterFromAwsNodePoolName(awsNodePoolName: string) {
-    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName)
-      .aws_cluster;
+    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName).aws_cluster;
   }
 
   /**
@@ -4464,8 +3437,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the aws_node_pool.
    */
   matchAwsNodePoolFromAwsNodePoolName(awsNodePoolName: string) {
-    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName)
-      .aws_node_pool;
+    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName).aws_node_pool;
   }
 
   /**
@@ -4475,7 +3447,7 @@ export class AzureClustersClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  awsServerConfigPath(project: string, location: string) {
+  awsServerConfigPath(project:string,location:string) {
     return this.pathTemplates.awsServerConfigPathTemplate.render({
       project: project,
       location: location,
@@ -4490,9 +3462,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAwsServerConfigName(awsServerConfigName: string) {
-    return this.pathTemplates.awsServerConfigPathTemplate.match(
-      awsServerConfigName
-    ).project;
+    return this.pathTemplates.awsServerConfigPathTemplate.match(awsServerConfigName).project;
   }
 
   /**
@@ -4503,9 +3473,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAwsServerConfigName(awsServerConfigName: string) {
-    return this.pathTemplates.awsServerConfigPathTemplate.match(
-      awsServerConfigName
-    ).location;
+    return this.pathTemplates.awsServerConfigPathTemplate.match(awsServerConfigName).location;
   }
 
   /**
@@ -4516,7 +3484,7 @@ export class AzureClustersClient {
    * @param {string} azure_client
    * @returns {string} Resource name string.
    */
-  azureClientPath(project: string, location: string, azureClient: string) {
+  azureClientPath(project:string,location:string,azureClient:string) {
     return this.pathTemplates.azureClientPathTemplate.render({
       project: project,
       location: location,
@@ -4532,8 +3500,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAzureClientName(azureClientName: string) {
-    return this.pathTemplates.azureClientPathTemplate.match(azureClientName)
-      .project;
+    return this.pathTemplates.azureClientPathTemplate.match(azureClientName).project;
   }
 
   /**
@@ -4544,8 +3511,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAzureClientName(azureClientName: string) {
-    return this.pathTemplates.azureClientPathTemplate.match(azureClientName)
-      .location;
+    return this.pathTemplates.azureClientPathTemplate.match(azureClientName).location;
   }
 
   /**
@@ -4556,8 +3522,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the azure_client.
    */
   matchAzureClientFromAzureClientName(azureClientName: string) {
-    return this.pathTemplates.azureClientPathTemplate.match(azureClientName)
-      .azure_client;
+    return this.pathTemplates.azureClientPathTemplate.match(azureClientName).azure_client;
   }
 
   /**
@@ -4568,7 +3533,7 @@ export class AzureClustersClient {
    * @param {string} azure_cluster
    * @returns {string} Resource name string.
    */
-  azureClusterPath(project: string, location: string, azureCluster: string) {
+  azureClusterPath(project:string,location:string,azureCluster:string) {
     return this.pathTemplates.azureClusterPathTemplate.render({
       project: project,
       location: location,
@@ -4584,8 +3549,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAzureClusterName(azureClusterName: string) {
-    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName)
-      .project;
+    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName).project;
   }
 
   /**
@@ -4596,8 +3560,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAzureClusterName(azureClusterName: string) {
-    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName)
-      .location;
+    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName).location;
   }
 
   /**
@@ -4608,8 +3571,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the azure_cluster.
    */
   matchAzureClusterFromAzureClusterName(azureClusterName: string) {
-    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName)
-      .azure_cluster;
+    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName).azure_cluster;
   }
 
   /**
@@ -4621,12 +3583,7 @@ export class AzureClustersClient {
    * @param {string} azure_node_pool
    * @returns {string} Resource name string.
    */
-  azureNodePoolPath(
-    project: string,
-    location: string,
-    azureCluster: string,
-    azureNodePool: string
-  ) {
+  azureNodePoolPath(project:string,location:string,azureCluster:string,azureNodePool:string) {
     return this.pathTemplates.azureNodePoolPathTemplate.render({
       project: project,
       location: location,
@@ -4643,8 +3600,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAzureNodePoolName(azureNodePoolName: string) {
-    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName)
-      .project;
+    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName).project;
   }
 
   /**
@@ -4655,8 +3611,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAzureNodePoolName(azureNodePoolName: string) {
-    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName)
-      .location;
+    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName).location;
   }
 
   /**
@@ -4667,8 +3622,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the azure_cluster.
    */
   matchAzureClusterFromAzureNodePoolName(azureNodePoolName: string) {
-    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName)
-      .azure_cluster;
+    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName).azure_cluster;
   }
 
   /**
@@ -4679,8 +3633,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the azure_node_pool.
    */
   matchAzureNodePoolFromAzureNodePoolName(azureNodePoolName: string) {
-    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName)
-      .azure_node_pool;
+    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName).azure_node_pool;
   }
 
   /**
@@ -4690,7 +3643,7 @@ export class AzureClustersClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  azureServerConfigPath(project: string, location: string) {
+  azureServerConfigPath(project:string,location:string) {
     return this.pathTemplates.azureServerConfigPathTemplate.render({
       project: project,
       location: location,
@@ -4705,9 +3658,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAzureServerConfigName(azureServerConfigName: string) {
-    return this.pathTemplates.azureServerConfigPathTemplate.match(
-      azureServerConfigName
-    ).project;
+    return this.pathTemplates.azureServerConfigPathTemplate.match(azureServerConfigName).project;
   }
 
   /**
@@ -4718,9 +3669,7 @@ export class AzureClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAzureServerConfigName(azureServerConfigName: string) {
-    return this.pathTemplates.azureServerConfigPathTemplate.match(
-      azureServerConfigName
-    ).location;
+    return this.pathTemplates.azureServerConfigPathTemplate.match(azureServerConfigName).location;
   }
 
   /**
@@ -4730,7 +3679,7 @@ export class AzureClustersClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -4765,7 +3714,7 @@ export class AzureClustersClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -4794,7 +3743,7 @@ export class AzureClustersClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.operationsClient.close();
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

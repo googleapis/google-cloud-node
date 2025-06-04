@@ -45,7 +45,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Parallelstore.create_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.create_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.create_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.create_instance.js,samples/README.md)
 
@@ -62,7 +62,7 @@ __Usage:__
 
 ### Parallelstore.delete_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.delete_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.delete_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.delete_instance.js,samples/README.md)
 
@@ -79,7 +79,7 @@ __Usage:__
 
 ### Parallelstore.export_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.export_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.export_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.export_data.js,samples/README.md)
 
@@ -96,7 +96,7 @@ __Usage:__
 
 ### Parallelstore.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.get_instance.js,samples/README.md)
 
@@ -113,7 +113,7 @@ __Usage:__
 
 ### Parallelstore.import_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.import_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.import_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.import_data.js,samples/README.md)
 
@@ -130,7 +130,7 @@ __Usage:__
 
 ### Parallelstore.list_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.list_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.list_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.list_instances.js,samples/README.md)
 
@@ -147,7 +147,7 @@ __Usage:__
 
 ### Parallelstore.update_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.update_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.update_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/generated/v1/parallelstore.update_instance.js,samples/README.md)
 
@@ -164,7 +164,7 @@ __Usage:__
 
 ### Parallelstore.create_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.create_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.create_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.create_instance.js,samples/README.md)
 
@@ -181,7 +181,7 @@ __Usage:__
 
 ### Parallelstore.delete_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.delete_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.delete_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.delete_instance.js,samples/README.md)
 
@@ -198,7 +198,7 @@ __Usage:__
 
 ### Parallelstore.export_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.export_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.export_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.export_data.js,samples/README.md)
 
@@ -215,7 +215,7 @@ __Usage:__
 
 ### Parallelstore.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.get_instance.js,samples/README.md)
 
@@ -232,7 +232,7 @@ __Usage:__
 
 ### Parallelstore.import_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.import_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.import_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.import_data.js,samples/README.md)
 
@@ -249,7 +249,7 @@ __Usage:__
 
 ### Parallelstore.list_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.list_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.list_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.list_instances.js,samples/README.md)
 
@@ -266,7 +266,7 @@ __Usage:__
 
 ### Parallelstore.update_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.update_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.update_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.update_instance.js,samples/README.md)
 
@@ -283,7 +283,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-parallelstore/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/quickstart.js,samples/README.md)
 

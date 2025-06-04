@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.8.1...networkservices-v0.9.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6301](https://github.com/googleapis/google-cloud-node/issues/6301)) ([42754a7](https://github.com/googleapis/google-cloud-node/commit/42754a72b34a01d201341428b4a358ff781b0612))
+
 ## [0.8.1](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.8.0...networkservices-v0.8.1) (2025-03-21)
 
 

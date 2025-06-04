@@ -29,1853 +29,1414 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.EssentialContactsServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'essentialcontacts.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          essentialcontactsserviceModule.v1.EssentialContactsServiceClient
-            .servicePath;
-        assert.strictEqual(servicePath, 'essentialcontacts.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          essentialcontactsserviceModule.v1.EssentialContactsServiceClient
-            .apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'essentialcontacts.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          universeDomain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'essentialcontacts.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          universe_domain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'essentialcontacts.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new essentialcontactsserviceModule.v1.EssentialContactsServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'essentialcontacts.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'essentialcontacts.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new essentialcontactsserviceModule.v1.EssentialContactsServiceClient(
-              {universeDomain: 'configured.example.com'}
+        it('has universeDomain', () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = essentialcontactsserviceModule.v1.EssentialContactsServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'essentialcontacts.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = essentialcontactsserviceModule.v1.EssentialContactsServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'essentialcontacts.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'essentialcontacts.example.com');
+        });
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'essentialcontacts.example.com');
+        });
+
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'essentialcontacts.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'essentialcontacts.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = essentialcontactsserviceModule.v1.EssentialContactsServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.essentialContactsServiceStub, undefined);
+            await client.initialize();
+            assert(client.essentialContactsServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.essentialContactsServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.essentialContactsServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
+    });
+
+    describe('createContact', () => {
+        it('invokes createContact without error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
             );
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'essentialcontacts.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.CreateContactRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.Contact()
+            );
+            client.innerApiCalls.createContact = stubSimpleCall(expectedResponse);
+            const [response] = await client.createContact(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createContact as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createContact as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
+
+        it('invokes createContact without error using callback', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.CreateContactRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.Contact()
+            );
+            client.innerApiCalls.createContact = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createContact(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.essentialcontacts.v1.IContact|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createContact as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createContact as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
+
+        it('invokes createContact with error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.CreateContactRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createContact = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createContact(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createContact as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createContact as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createContact with closed client', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.CreateContactRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createContact(request), expectedError);
+        });
     });
 
-    it('has port', () => {
-      const port =
-        essentialcontactsserviceModule.v1.EssentialContactsServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
+    describe('updateContact', () => {
+        it('invokes updateContact without error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
+            );
+            request.contact ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.UpdateContactRequest', ['contact', 'name']);
+            request.contact.name = defaultValue1;
+            const expectedHeaderRequestParams = `contact.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.Contact()
+            );
+            client.innerApiCalls.updateContact = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateContact(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateContact as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateContact as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateContact without error using callback', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
+            );
+            request.contact ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.UpdateContactRequest', ['contact', 'name']);
+            request.contact.name = defaultValue1;
+            const expectedHeaderRequestParams = `contact.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.Contact()
+            );
+            client.innerApiCalls.updateContact = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateContact(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.essentialcontacts.v1.IContact|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateContact as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateContact as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateContact with error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
+            );
+            request.contact ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.UpdateContactRequest', ['contact', 'name']);
+            request.contact.name = defaultValue1;
+            const expectedHeaderRequestParams = `contact.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateContact = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateContact(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateContact as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateContact as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateContact with closed client', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
+            );
+            request.contact ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.UpdateContactRequest', ['contact', 'name']);
+            request.contact.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateContact(request), expectedError);
+        });
     });
 
-    it('should create a client with no option', () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient();
-      assert(client);
+    describe('getContact', () => {
+        it('invokes getContact without error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.GetContactRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.Contact()
+            );
+            client.innerApiCalls.getContact = stubSimpleCall(expectedResponse);
+            const [response] = await client.getContact(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getContact as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getContact as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getContact without error using callback', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.GetContactRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.Contact()
+            );
+            client.innerApiCalls.getContact = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getContact(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.essentialcontacts.v1.IContact|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getContact as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getContact as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getContact with error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.GetContactRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getContact = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getContact(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getContact as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getContact as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getContact with closed client', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.GetContactRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getContact(request), expectedError);
+        });
     });
 
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          fallback: true,
+    describe('deleteContact', () => {
+        it('invokes deleteContact without error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.DeleteContactRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteContact = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteContact(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteContact as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteContact as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      assert(client);
+
+        it('invokes deleteContact without error using callback', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.DeleteContactRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteContact = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteContact(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteContact as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteContact as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteContact with error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.DeleteContactRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteContact = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteContact(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteContact as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteContact as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteContact with closed client', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.DeleteContactRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteContact(request), expectedError);
+        });
     });
 
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('sendTestMessage', () => {
+        it('invokes sendTestMessage without error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.SendTestMessageRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.sendTestMessage = stubSimpleCall(expectedResponse);
+            const [response] = await client.sendTestMessage(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.sendTestMessage as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.sendTestMessage as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      assert.strictEqual(client.essentialContactsServiceStub, undefined);
-      await client.initialize();
-      assert(client.essentialContactsServiceStub);
+
+        it('invokes sendTestMessage without error using callback', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.SendTestMessageRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.sendTestMessage = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.sendTestMessage(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.sendTestMessage as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.sendTestMessage as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes sendTestMessage with error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.SendTestMessageRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.sendTestMessage = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.sendTestMessage(request), expectedError);
+            const actualRequest = (client.innerApiCalls.sendTestMessage as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.sendTestMessage as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes sendTestMessage with closed client', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.SendTestMessageRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.sendTestMessage(request), expectedError);
+        });
     });
 
-    it('has close method for the initialized client', done => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listContacts', () => {
+        it('invokes listContacts without error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.ListContactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+            ];
+            client.innerApiCalls.listContacts = stubSimpleCall(expectedResponse);
+            const [response] = await client.listContacts(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listContacts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listContacts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.essentialContactsServiceStub);
-      client.close().then(() => {
-        done();
-      });
-    });
 
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listContacts without error using callback', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.ListContactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+            ];
+            client.innerApiCalls.listContacts = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listContacts(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.essentialcontacts.v1.IContact[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listContacts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listContacts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      assert.strictEqual(client.essentialContactsServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
-    });
 
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listContacts with error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.ListContactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listContacts = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listContacts(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listContacts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listContacts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
 
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listContactsStream without error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.ListContactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+            ];
+            client.descriptors.page.listContacts.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listContactsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.essentialcontacts.v1.Contact[] = [];
+                stream.on('data', (response: protos.google.cloud.essentialcontacts.v1.Contact) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listContacts.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listContacts, request));
+            assert(
+                (client.descriptors.page.listContacts.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
 
-  describe('createContact', () => {
-    it('invokes createContact without error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listContactsStream with error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.ListContactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listContacts.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listContactsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.essentialcontacts.v1.Contact[] = [];
+                stream.on('data', (response: protos.google.cloud.essentialcontacts.v1.Contact) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listContacts.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listContacts, request));
+            assert(
+                (client.descriptors.page.listContacts.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.CreateContactRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.Contact()
-      );
-      client.innerApiCalls.createContact = stubSimpleCall(expectedResponse);
-      const [response] = await client.createContact(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createContact as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createContact as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes createContact without error using callback', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.CreateContactRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.Contact()
-      );
-      client.innerApiCalls.createContact =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createContact(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.essentialcontacts.v1.IContact | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listContacts without error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.ListContactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+            ];
+            client.descriptors.page.listContacts.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.essentialcontacts.v1.IContact[] = [];
+            const iterable = client.listContactsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createContact as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createContact as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listContacts.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listContacts.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listContacts with error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.ListContactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listContacts.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listContactsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.essentialcontacts.v1.IContact[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listContacts.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listContacts.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes createContact with error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('computeContacts', () => {
+        it('invokes computeContacts without error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.ComputeContactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+            ];
+            client.innerApiCalls.computeContacts = stubSimpleCall(expectedResponse);
+            const [response] = await client.computeContacts(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.computeContacts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.computeContacts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.CreateContactRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createContact = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createContact(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createContact as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createContact as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes createContact with closed client', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes computeContacts without error using callback', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.ComputeContactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+            ];
+            client.innerApiCalls.computeContacts = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.computeContacts(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.essentialcontacts.v1.IContact[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.computeContacts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.computeContacts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.CreateContactRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.createContact(request), expectedError);
-    });
-  });
 
-  describe('updateContact', () => {
-    it('invokes updateContact without error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes computeContacts with error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.ComputeContactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.computeContacts = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.computeContacts(request), expectedError);
+            const actualRequest = (client.innerApiCalls.computeContacts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.computeContacts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
-      );
-      request.contact ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.UpdateContactRequest',
-        ['contact', 'name']
-      );
-      request.contact.name = defaultValue1;
-      const expectedHeaderRequestParams = `contact.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.Contact()
-      );
-      client.innerApiCalls.updateContact = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateContact(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateContact as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateContact as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes updateContact without error using callback', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes computeContactsStream without error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.ComputeContactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+            ];
+            client.descriptors.page.computeContacts.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.computeContactsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.essentialcontacts.v1.Contact[] = [];
+                stream.on('data', (response: protos.google.cloud.essentialcontacts.v1.Contact) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.computeContacts.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.computeContacts, request));
+            assert(
+                (client.descriptors.page.computeContacts.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
-      );
-      request.contact ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.UpdateContactRequest',
-        ['contact', 'name']
-      );
-      request.contact.name = defaultValue1;
-      const expectedHeaderRequestParams = `contact.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.Contact()
-      );
-      client.innerApiCalls.updateContact =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateContact(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.essentialcontacts.v1.IContact | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+        it('invokes computeContactsStream with error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.ComputeContactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.computeContacts.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.computeContactsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.essentialcontacts.v1.Contact[] = [];
+                stream.on('data', (response: protos.google.cloud.essentialcontacts.v1.Contact) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.computeContacts.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.computeContacts, request));
+            assert(
+                (client.descriptors.page.computeContacts.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with computeContacts without error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.ComputeContactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+              generateSampleMessage(new protos.google.cloud.essentialcontacts.v1.Contact()),
+            ];
+            client.descriptors.page.computeContacts.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.essentialcontacts.v1.IContact[] = [];
+            const iterable = client.computeContactsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateContact as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateContact as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.computeContacts.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.computeContacts.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with computeContacts with error', async () => {
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.essentialcontacts.v1.ComputeContactsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.computeContacts.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.computeContactsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.essentialcontacts.v1.IContact[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.computeContacts.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.computeContacts.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes updateContact with error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('Path templates', () => {
+
+        describe('folderContact', async () => {
+            const fakePath = "/rendered/path/folderContact";
+            const expectedParameters = {
+                folder: "folderValue",
+                contact: "contactValue",
+            };
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderContactPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderContactPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderContactPath', () => {
+                const result = client.folderContactPath("folderValue", "contactValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderContactPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderContactName', () => {
+                const result = client.matchFolderFromFolderContactName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderContactPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContactFromFolderContactName', () => {
+                const result = client.matchContactFromFolderContactName(fakePath);
+                assert.strictEqual(result, "contactValue");
+                assert((client.pathTemplates.folderContactPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
-      );
-      request.contact ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.UpdateContactRequest',
-        ['contact', 'name']
-      );
-      request.contact.name = defaultValue1;
-      const expectedHeaderRequestParams = `contact.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateContact = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateContact(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateContact as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateContact as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+
+        describe('organizationContact', async () => {
+            const fakePath = "/rendered/path/organizationContact";
+            const expectedParameters = {
+                organization: "organizationValue",
+                contact: "contactValue",
+            };
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationContactPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationContactPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationContactPath', () => {
+                const result = client.organizationContactPath("organizationValue", "contactValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationContactPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationContactName', () => {
+                const result = client.matchOrganizationFromOrganizationContactName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationContactPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContactFromOrganizationContactName', () => {
+                const result = client.matchContactFromOrganizationContactName(fakePath);
+                assert.strictEqual(result, "contactValue");
+                assert((client.pathTemplates.organizationContactPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectContact', async () => {
+            const fakePath = "/rendered/path/projectContact";
+            const expectedParameters = {
+                project: "projectValue",
+                contact: "contactValue",
+            };
+            const client = new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectContactPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectContactPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectContactPath', () => {
+                const result = client.projectContactPath("projectValue", "contactValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectContactPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectContactName', () => {
+                const result = client.matchProjectFromProjectContactName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectContactPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContactFromProjectContactName', () => {
+                const result = client.matchContactFromProjectContactName(fakePath);
+                assert.strictEqual(result, "contactValue");
+                assert((client.pathTemplates.projectContactPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    it('invokes updateContact with closed client', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
-      );
-      request.contact ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.UpdateContactRequest',
-        ['contact', 'name']
-      );
-      request.contact.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.updateContact(request), expectedError);
-    });
-  });
-
-  describe('getContact', () => {
-    it('invokes getContact without error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.GetContactRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.Contact()
-      );
-      client.innerApiCalls.getContact = stubSimpleCall(expectedResponse);
-      const [response] = await client.getContact(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getContact as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getContact as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getContact without error using callback', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.GetContactRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.Contact()
-      );
-      client.innerApiCalls.getContact =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getContact(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.essentialcontacts.v1.IContact | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getContact as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getContact as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getContact with error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.GetContactRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getContact = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getContact(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getContact as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getContact as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getContact with closed client', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.GetContactRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getContact(request), expectedError);
-    });
-  });
-
-  describe('deleteContact', () => {
-    it('invokes deleteContact without error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.DeleteContactRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteContact = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteContact(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteContact as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteContact as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteContact without error using callback', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.DeleteContactRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteContact =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteContact(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteContact as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteContact as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteContact with error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.DeleteContactRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteContact = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteContact(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteContact as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteContact as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteContact with closed client', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.DeleteContactRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.deleteContact(request), expectedError);
-    });
-  });
-
-  describe('sendTestMessage', () => {
-    it('invokes sendTestMessage without error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.SendTestMessageRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.sendTestMessage = stubSimpleCall(expectedResponse);
-      const [response] = await client.sendTestMessage(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.sendTestMessage as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.sendTestMessage as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes sendTestMessage without error using callback', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.SendTestMessageRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.sendTestMessage =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.sendTestMessage(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.sendTestMessage as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.sendTestMessage as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes sendTestMessage with error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.SendTestMessageRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.sendTestMessage = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.sendTestMessage(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.sendTestMessage as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.sendTestMessage as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes sendTestMessage with closed client', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.SendTestMessageRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.sendTestMessage(request), expectedError);
-    });
-  });
-
-  describe('listContacts', () => {
-    it('invokes listContacts without error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.ListContactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-      ];
-      client.innerApiCalls.listContacts = stubSimpleCall(expectedResponse);
-      const [response] = await client.listContacts(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listContacts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listContacts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listContacts without error using callback', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.ListContactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-      ];
-      client.innerApiCalls.listContacts =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listContacts(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.essentialcontacts.v1.IContact[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listContacts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listContacts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listContacts with error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.ListContactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listContacts = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listContacts(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listContacts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listContacts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listContactsStream without error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.ListContactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-      ];
-      client.descriptors.page.listContacts.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listContactsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.essentialcontacts.v1.Contact[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.essentialcontacts.v1.Contact) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listContacts.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listContacts, request)
-      );
-      assert(
-        (client.descriptors.page.listContacts.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listContactsStream with error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.ListContactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listContacts.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listContactsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.essentialcontacts.v1.Contact[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.essentialcontacts.v1.Contact) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listContacts.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listContacts, request)
-      );
-      assert(
-        (client.descriptors.page.listContacts.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listContacts without error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.ListContactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-      ];
-      client.descriptors.page.listContacts.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.essentialcontacts.v1.IContact[] = [];
-      const iterable = client.listContactsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listContacts.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listContacts.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listContacts with error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.ListContactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listContacts.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listContactsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.essentialcontacts.v1.IContact[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listContacts.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listContacts.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('computeContacts', () => {
-    it('invokes computeContacts without error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.ComputeContactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-      ];
-      client.innerApiCalls.computeContacts = stubSimpleCall(expectedResponse);
-      const [response] = await client.computeContacts(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.computeContacts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.computeContacts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes computeContacts without error using callback', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.ComputeContactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-      ];
-      client.innerApiCalls.computeContacts =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.computeContacts(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.essentialcontacts.v1.IContact[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.computeContacts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.computeContacts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes computeContacts with error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.ComputeContactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.computeContacts = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.computeContacts(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.computeContacts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.computeContacts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes computeContactsStream without error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.ComputeContactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-      ];
-      client.descriptors.page.computeContacts.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.computeContactsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.essentialcontacts.v1.Contact[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.essentialcontacts.v1.Contact) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.computeContacts.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.computeContacts, request)
-      );
-      assert(
-        (client.descriptors.page.computeContacts.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes computeContactsStream with error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.ComputeContactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.computeContacts.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.computeContactsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.essentialcontacts.v1.Contact[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.essentialcontacts.v1.Contact) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.computeContacts.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.computeContacts, request)
-      );
-      assert(
-        (client.descriptors.page.computeContacts.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with computeContacts without error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.ComputeContactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.essentialcontacts.v1.Contact()
-        ),
-      ];
-      client.descriptors.page.computeContacts.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.essentialcontacts.v1.IContact[] = [];
-      const iterable = client.computeContactsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.computeContacts.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.computeContacts.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with computeContacts with error', async () => {
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.essentialcontacts.v1.ComputeContactsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.computeContacts.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.computeContactsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.essentialcontacts.v1.IContact[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.computeContacts.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.computeContacts.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('folderContact', async () => {
-      const fakePath = '/rendered/path/folderContact';
-      const expectedParameters = {
-        folder: 'folderValue',
-        contact: 'contactValue',
-      };
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.folderContactPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderContactPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderContactPath', () => {
-        const result = client.folderContactPath('folderValue', 'contactValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.folderContactPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderContactName', () => {
-        const result = client.matchFolderFromFolderContactName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (client.pathTemplates.folderContactPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchContactFromFolderContactName', () => {
-        const result = client.matchContactFromFolderContactName(fakePath);
-        assert.strictEqual(result, 'contactValue');
-        assert(
-          (client.pathTemplates.folderContactPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationContact', async () => {
-      const fakePath = '/rendered/path/organizationContact';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        contact: 'contactValue',
-      };
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.organizationContactPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationContactPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('organizationContactPath', () => {
-        const result = client.organizationContactPath(
-          'organizationValue',
-          'contactValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationContactPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationContactName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationContactName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationContactPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchContactFromOrganizationContactName', () => {
-        const result = client.matchContactFromOrganizationContactName(fakePath);
-        assert.strictEqual(result, 'contactValue');
-        assert(
-          (
-            client.pathTemplates.organizationContactPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectContact', async () => {
-      const fakePath = '/rendered/path/projectContact';
-      const expectedParameters = {
-        project: 'projectValue',
-        contact: 'contactValue',
-      };
-      const client =
-        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.projectContactPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectContactPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectContactPath', () => {
-        const result = client.projectContactPath(
-          'projectValue',
-          'contactValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectContactPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectContactName', () => {
-        const result = client.matchProjectFromProjectContactName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectContactPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchContactFromProjectContactName', () => {
-        const result = client.matchContactFromProjectContactName(fakePath);
-        assert.strictEqual(result, 'contactValue');
-        assert(
-          (client.pathTemplates.projectContactPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

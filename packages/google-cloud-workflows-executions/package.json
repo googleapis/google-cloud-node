@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/workflows",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "description": "Workflows client for Node.js",
   "repository": {
     "type": "git",

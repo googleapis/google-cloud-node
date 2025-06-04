@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/netapp": "^0.11.0"
+    "@google-cloud/netapp": "^0.12.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",
