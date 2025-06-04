@@ -21,9 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as documentserviceModule from '../src';
-
-import {PassThrough} from 'stream';
+import * as cmekconfigserviceModule from '../src';
 
 import {
   protobuf,
@@ -103,44 +101,6 @@ function stubLongRunningCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-    }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
-    }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
-}
-
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -164,16 +124,16 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta.DocumentServiceClient', () => {
+describe('v1.CmekConfigServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient();
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient();
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -185,7 +145,7 @@ describe('v1beta.DocumentServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          documentserviceModule.v1beta.DocumentServiceClient.servicePath;
+          cmekconfigserviceModule.v1.CmekConfigServiceClient.servicePath;
         assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -194,14 +154,14 @@ describe('v1beta.DocumentServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          documentserviceModule.v1beta.DocumentServiceClient.apiEndpoint;
+          cmekconfigserviceModule.v1.CmekConfigServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         universeDomain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -209,7 +169,7 @@ describe('v1beta.DocumentServiceClient', () => {
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         universe_domain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -222,7 +182,7 @@ describe('v1beta.DocumentServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new documentserviceModule.v1beta.DocumentServiceClient();
+            new cmekconfigserviceModule.v1.CmekConfigServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'discoveryengine.example.com');
           if (saved) {
@@ -235,7 +195,7 @@ describe('v1beta.DocumentServiceClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new documentserviceModule.v1beta.DocumentServiceClient(
+          const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient(
             {universeDomain: 'configured.example.com'}
           );
           const servicePath = client.apiEndpoint;
@@ -253,7 +213,7 @@ describe('v1beta.DocumentServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new documentserviceModule.v1beta.DocumentServiceClient({
+        new cmekconfigserviceModule.v1.CmekConfigServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -261,42 +221,42 @@ describe('v1beta.DocumentServiceClient', () => {
     });
 
     it('has port', () => {
-      const port = documentserviceModule.v1beta.DocumentServiceClient.port;
+      const port = cmekconfigserviceModule.v1.CmekConfigServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient();
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.documentServiceStub, undefined);
+      assert.strictEqual(client.cmekConfigServiceStub, undefined);
       await client.initialize();
-      assert(client.documentServiceStub);
+      assert(client.cmekConfigServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize().catch(err => {
         throw err;
       });
-      assert(client.documentServiceStub);
+      assert(client.cmekConfigServiceStub);
       client
         .close()
         .then(() => {
@@ -308,11 +268,11 @@ describe('v1beta.DocumentServiceClient', () => {
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.documentServiceStub, undefined);
+      assert.strictEqual(client.cmekConfigServiceStub, undefined);
       client
         .close()
         .then(() => {
@@ -325,7 +285,7 @@ describe('v1beta.DocumentServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -337,7 +297,7 @@ describe('v1beta.DocumentServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -358,64 +318,64 @@ describe('v1beta.DocumentServiceClient', () => {
     });
   });
 
-  describe('getDocument', () => {
-    it('invokes getDocument without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+  describe('getCmekConfig', () => {
+    it('invokes getCmekConfig without error', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.GetDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.GetCmekConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.GetDocumentRequest',
+        '.google.cloud.discoveryengine.v1.GetCmekConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.Document()
+        new protos.google.cloud.discoveryengine.v1.CmekConfig()
       );
-      client.innerApiCalls.getDocument = stubSimpleCall(expectedResponse);
-      const [response] = await client.getDocument(request);
+      client.innerApiCalls.getCmekConfig = stubSimpleCall(expectedResponse);
+      const [response] = await client.getCmekConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getDocument as SinonStub
+        client.innerApiCalls.getCmekConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getDocument as SinonStub
+        client.innerApiCalls.getCmekConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getDocument without error using callback', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+    it('invokes getCmekConfig without error using callback', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.GetDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.GetCmekConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.GetDocumentRequest',
+        '.google.cloud.discoveryengine.v1.GetCmekConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.Document()
+        new protos.google.cloud.discoveryengine.v1.CmekConfig()
       );
-      client.innerApiCalls.getDocument =
+      client.innerApiCalls.getCmekConfig =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getDocument(
+        client.getCmekConfig(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1beta.IDocument | null
+            result?: protos.google.cloud.discoveryengine.v1.ICmekConfig | null
           ) => {
             if (err) {
               reject(err);
@@ -428,57 +388,57 @@ describe('v1beta.DocumentServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getDocument as SinonStub
+        client.innerApiCalls.getCmekConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getDocument as SinonStub
+        client.innerApiCalls.getCmekConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getDocument with error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+    it('invokes getCmekConfig with error', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.GetDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.GetCmekConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.GetDocumentRequest',
+        '.google.cloud.discoveryengine.v1.GetCmekConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getDocument = stubSimpleCall(
+      client.innerApiCalls.getCmekConfig = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.getDocument(request), expectedError);
+      await assert.rejects(client.getCmekConfig(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.getDocument as SinonStub
+        client.innerApiCalls.getCmekConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getDocument as SinonStub
+        client.innerApiCalls.getCmekConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getDocument with closed client', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+    it('invokes getCmekConfig with closed client', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.GetDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.GetCmekConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.GetDocumentRequest',
+        '.google.cloud.discoveryengine.v1.GetCmekConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -486,68 +446,68 @@ describe('v1beta.DocumentServiceClient', () => {
       client.close().catch(err => {
         throw err;
       });
-      await assert.rejects(client.getDocument(request), expectedError);
+      await assert.rejects(client.getCmekConfig(request), expectedError);
     });
   });
 
-  describe('createDocument', () => {
-    it('invokes createDocument without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+  describe('listCmekConfigs', () => {
+    it('invokes listCmekConfigs without error', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CreateDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.ListCmekConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.CreateDocumentRequest',
+        '.google.cloud.discoveryengine.v1.ListCmekConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.Document()
+        new protos.google.cloud.discoveryengine.v1.ListCmekConfigsResponse()
       );
-      client.innerApiCalls.createDocument = stubSimpleCall(expectedResponse);
-      const [response] = await client.createDocument(request);
+      client.innerApiCalls.listCmekConfigs = stubSimpleCall(expectedResponse);
+      const [response] = await client.listCmekConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createDocument as SinonStub
+        client.innerApiCalls.listCmekConfigs as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createDocument as SinonStub
+        client.innerApiCalls.listCmekConfigs as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createDocument without error using callback', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+    it('invokes listCmekConfigs without error using callback', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CreateDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.ListCmekConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.CreateDocumentRequest',
+        '.google.cloud.discoveryengine.v1.ListCmekConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.Document()
+        new protos.google.cloud.discoveryengine.v1.ListCmekConfigsResponse()
       );
-      client.innerApiCalls.createDocument =
+      client.innerApiCalls.listCmekConfigs =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.createDocument(
+        client.listCmekConfigs(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1beta.IDocument | null
+            result?: protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -560,57 +520,57 @@ describe('v1beta.DocumentServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createDocument as SinonStub
+        client.innerApiCalls.listCmekConfigs as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createDocument as SinonStub
+        client.innerApiCalls.listCmekConfigs as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createDocument with error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+    it('invokes listCmekConfigs with error', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CreateDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.ListCmekConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.CreateDocumentRequest',
+        '.google.cloud.discoveryengine.v1.ListCmekConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.createDocument = stubSimpleCall(
+      client.innerApiCalls.listCmekConfigs = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.createDocument(request), expectedError);
+      await assert.rejects(client.listCmekConfigs(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.createDocument as SinonStub
+        client.innerApiCalls.listCmekConfigs as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createDocument as SinonStub
+        client.innerApiCalls.listCmekConfigs as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createDocument with closed client', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+    it('invokes listCmekConfigs with closed client', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CreateDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.ListCmekConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.CreateDocumentRequest',
+        '.google.cloud.discoveryengine.v1.ListCmekConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -618,479 +578,74 @@ describe('v1beta.DocumentServiceClient', () => {
       client.close().catch(err => {
         throw err;
       });
-      await assert.rejects(client.createDocument(request), expectedError);
+      await assert.rejects(client.listCmekConfigs(request), expectedError);
     });
   });
 
-  describe('updateDocument', () => {
-    it('invokes updateDocument without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+  describe('updateCmekConfig', () => {
+    it('invokes updateCmekConfig without error', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.UpdateDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.UpdateCmekConfigRequest()
       );
-      request.document ??= {};
+      request.config ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.UpdateDocumentRequest',
-        ['document', 'name']
+        '.google.cloud.discoveryengine.v1.UpdateCmekConfigRequest',
+        ['config', 'name']
       );
-      request.document.name = defaultValue1;
-      const expectedHeaderRequestParams = `document.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.Document()
-      );
-      client.innerApiCalls.updateDocument = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateDocument(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDocument without error using callback', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.UpdateDocumentRequest()
-      );
-      request.document ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.UpdateDocumentRequest',
-        ['document', 'name']
-      );
-      request.document.name = defaultValue1;
-      const expectedHeaderRequestParams = `document.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.Document()
-      );
-      client.innerApiCalls.updateDocument =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateDocument(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1beta.IDocument | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDocument with error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.UpdateDocumentRequest()
-      );
-      request.document ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.UpdateDocumentRequest',
-        ['document', 'name']
-      );
-      request.document.name = defaultValue1;
-      const expectedHeaderRequestParams = `document.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateDocument = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateDocument(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDocument with closed client', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.UpdateDocumentRequest()
-      );
-      request.document ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.UpdateDocumentRequest',
-        ['document', 'name']
-      );
-      request.document.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateDocument(request), expectedError);
-    });
-  });
-
-  describe('deleteDocument', () => {
-    it('invokes deleteDocument without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.DeleteDocumentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.DeleteDocumentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteDocument = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteDocument(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteDocument as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDocument as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDocument without error using callback', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.DeleteDocumentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.DeleteDocumentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteDocument =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteDocument(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteDocument as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDocument as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDocument with error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.DeleteDocumentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.DeleteDocumentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteDocument = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteDocument(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteDocument as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDocument as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDocument with closed client', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.DeleteDocumentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.DeleteDocumentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteDocument(request), expectedError);
-    });
-  });
-
-  describe('batchGetDocumentsMetadata', () => {
-    it('invokes batchGetDocumentsMetadata without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.BatchGetDocumentsMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.BatchGetDocumentsMetadataRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.BatchGetDocumentsMetadataResponse()
-      );
-      client.innerApiCalls.batchGetDocumentsMetadata =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.batchGetDocumentsMetadata(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchGetDocumentsMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchGetDocumentsMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchGetDocumentsMetadata without error using callback', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.BatchGetDocumentsMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.BatchGetDocumentsMetadataRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.BatchGetDocumentsMetadataResponse()
-      );
-      client.innerApiCalls.batchGetDocumentsMetadata =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.batchGetDocumentsMetadata(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchGetDocumentsMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchGetDocumentsMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchGetDocumentsMetadata with error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.BatchGetDocumentsMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.BatchGetDocumentsMetadataRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.batchGetDocumentsMetadata = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.batchGetDocumentsMetadata(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.batchGetDocumentsMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchGetDocumentsMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchGetDocumentsMetadata with closed client', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.BatchGetDocumentsMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.BatchGetDocumentsMetadataRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.batchGetDocumentsMetadata(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('importDocuments', () => {
-    it('invokes importDocuments without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ImportDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ImportDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      request.config.name = defaultValue1;
+      const expectedHeaderRequestParams = `config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importDocuments =
+      client.innerApiCalls.updateCmekConfig =
         stubLongRunningCall(expectedResponse);
-      const [operation] = await client.importDocuments(request);
+      const [operation] = await client.updateCmekConfig(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.importDocuments as SinonStub
+        client.innerApiCalls.updateCmekConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importDocuments as SinonStub
+        client.innerApiCalls.updateCmekConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importDocuments without error using callback', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+    it('invokes updateCmekConfig without error using callback', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ImportDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.UpdateCmekConfigRequest()
       );
+      request.config ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ImportDocumentsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1.UpdateCmekConfigRequest',
+        ['config', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      request.config.name = defaultValue1;
+      const expectedHeaderRequestParams = `config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importDocuments =
+      client.innerApiCalls.updateCmekConfig =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.importDocuments(
+        client.updateCmekConfig(
           request,
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.discoveryengine.v1beta.IImportDocumentsResponse,
-              protos.google.cloud.discoveryengine.v1beta.IImportDocumentsMetadata
+              protos.google.cloud.discoveryengine.v1.ICmekConfig,
+              protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
             > | null
           ) => {
             if (err) {
@@ -1102,87 +657,89 @@ describe('v1beta.DocumentServiceClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportDocumentsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportDocumentsMetadata
+        protos.google.cloud.discoveryengine.v1.ICmekConfig,
+        protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.importDocuments as SinonStub
+        client.innerApiCalls.updateCmekConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importDocuments as SinonStub
+        client.innerApiCalls.updateCmekConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importDocuments with call error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+    it('invokes updateCmekConfig with call error', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ImportDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.UpdateCmekConfigRequest()
       );
+      request.config ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ImportDocumentsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1.UpdateCmekConfigRequest',
+        ['config', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      request.config.name = defaultValue1;
+      const expectedHeaderRequestParams = `config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.importDocuments = stubLongRunningCall(
+      client.innerApiCalls.updateCmekConfig = stubLongRunningCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.importDocuments(request), expectedError);
+      await assert.rejects(client.updateCmekConfig(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.importDocuments as SinonStub
+        client.innerApiCalls.updateCmekConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importDocuments as SinonStub
+        client.innerApiCalls.updateCmekConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importDocuments with LRO error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+    it('invokes updateCmekConfig with LRO error', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ImportDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.UpdateCmekConfigRequest()
       );
+      request.config ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ImportDocumentsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1.UpdateCmekConfigRequest',
+        ['config', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      request.config.name = defaultValue1;
+      const expectedHeaderRequestParams = `config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.importDocuments = stubLongRunningCall(
+      client.innerApiCalls.updateCmekConfig = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.importDocuments(request);
+      const [operation] = await client.updateCmekConfig(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.importDocuments as SinonStub
+        client.innerApiCalls.updateCmekConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importDocuments as SinonStub
+        client.innerApiCalls.updateCmekConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkImportDocumentsProgress without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+    it('invokes checkUpdateCmekConfigProgress without error', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1195,7 +752,7 @@ describe('v1beta.DocumentServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkImportDocumentsProgress(
+      const decodedOperation = await client.checkUpdateCmekConfigProgress(
         expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -1203,8 +760,8 @@ describe('v1beta.DocumentServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkImportDocumentsProgress with error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+    it('invokes checkUpdateCmekConfigProgress with error', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1216,75 +773,75 @@ describe('v1beta.DocumentServiceClient', () => {
         expectedError
       );
       await assert.rejects(
-        client.checkImportDocumentsProgress(''),
+        client.checkUpdateCmekConfigProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('purgeDocuments', () => {
-    it('invokes purgeDocuments without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+  describe('deleteCmekConfig', () => {
+    it('invokes deleteCmekConfig without error', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.DeleteCmekConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1.DeleteCmekConfigRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.purgeDocuments =
+      client.innerApiCalls.deleteCmekConfig =
         stubLongRunningCall(expectedResponse);
-      const [operation] = await client.purgeDocuments(request);
+      const [operation] = await client.deleteCmekConfig(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.purgeDocuments as SinonStub
+        client.innerApiCalls.deleteCmekConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.purgeDocuments as SinonStub
+        client.innerApiCalls.deleteCmekConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes purgeDocuments without error using callback', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+    it('invokes deleteCmekConfig without error using callback', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.DeleteCmekConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1.DeleteCmekConfigRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.purgeDocuments =
+      client.innerApiCalls.deleteCmekConfig =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.purgeDocuments(
+        client.deleteCmekConfig(
           request,
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse,
-              protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
             > | null
           ) => {
             if (err) {
@@ -1296,87 +853,87 @@ describe('v1beta.DocumentServiceClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.purgeDocuments as SinonStub
+        client.innerApiCalls.deleteCmekConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.purgeDocuments as SinonStub
+        client.innerApiCalls.deleteCmekConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes purgeDocuments with call error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+    it('invokes deleteCmekConfig with call error', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.DeleteCmekConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1.DeleteCmekConfigRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.purgeDocuments = stubLongRunningCall(
+      client.innerApiCalls.deleteCmekConfig = stubLongRunningCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.purgeDocuments(request), expectedError);
+      await assert.rejects(client.deleteCmekConfig(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.purgeDocuments as SinonStub
+        client.innerApiCalls.deleteCmekConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.purgeDocuments as SinonStub
+        client.innerApiCalls.deleteCmekConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes purgeDocuments with LRO error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+    it('invokes deleteCmekConfig with LRO error', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.DeleteCmekConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1.DeleteCmekConfigRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.purgeDocuments = stubLongRunningCall(
+      client.innerApiCalls.deleteCmekConfig = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.purgeDocuments(request);
+      const [operation] = await client.deleteCmekConfig(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.purgeDocuments as SinonStub
+        client.innerApiCalls.deleteCmekConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.purgeDocuments as SinonStub
+        client.innerApiCalls.deleteCmekConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkPurgeDocumentsProgress without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+    it('invokes checkDeleteCmekConfigProgress without error', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1389,7 +946,7 @@ describe('v1beta.DocumentServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkPurgeDocumentsProgress(
+      const decodedOperation = await client.checkDeleteCmekConfigProgress(
         expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -1397,8 +954,8 @@ describe('v1beta.DocumentServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkPurgeDocumentsProgress with error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+    it('invokes checkDeleteCmekConfigProgress with error', async () => {
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1410,346 +967,15 @@ describe('v1beta.DocumentServiceClient', () => {
         expectedError
       );
       await assert.rejects(
-        client.checkPurgeDocumentsProgress(''),
+        client.checkDeleteCmekConfigProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listDocuments', () => {
-    it('invokes listDocuments without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ListDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ListDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Document()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Document()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Document()
-        ),
-      ];
-      client.innerApiCalls.listDocuments = stubSimpleCall(expectedResponse);
-      const [response] = await client.listDocuments(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDocuments without error using callback', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ListDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ListDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Document()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Document()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Document()
-        ),
-      ];
-      client.innerApiCalls.listDocuments =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listDocuments(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.discoveryengine.v1beta.IDocument[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDocuments with error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ListDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ListDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listDocuments = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listDocuments(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDocumentsStream without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ListDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ListDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Document()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Document()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Document()
-        ),
-      ];
-      client.descriptors.page.listDocuments.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listDocumentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1beta.Document[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.discoveryengine.v1beta.Document) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listDocuments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDocuments, request)
-      );
-      assert(
-        (client.descriptors.page.listDocuments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listDocumentsStream with error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ListDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ListDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDocuments.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listDocumentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1beta.Document[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.discoveryengine.v1beta.Document) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listDocuments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDocuments, request)
-      );
-      assert(
-        (client.descriptors.page.listDocuments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listDocuments without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ListDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ListDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Document()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Document()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Document()
-        ),
-      ];
-      client.descriptors.page.listDocuments.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.discoveryengine.v1beta.IDocument[] =
-        [];
-      const iterable = client.listDocumentsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDocuments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDocuments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listDocuments with error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ListDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ListDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDocuments.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listDocumentsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.discoveryengine.v1beta.IDocument[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDocuments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDocuments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1779,7 +1005,7 @@ describe('v1beta.DocumentServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1823,7 +1049,7 @@ describe('v1beta.DocumentServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1858,7 +1084,7 @@ describe('v1beta.DocumentServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1906,7 +1132,7 @@ describe('v1beta.DocumentServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1947,7 +1173,7 @@ describe('v1beta.DocumentServiceClient', () => {
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1968,7 +1194,7 @@ describe('v1beta.DocumentServiceClient', () => {
       );
     });
     it('invokes getOperation without error using callback', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2006,7 +1232,7 @@ describe('v1beta.DocumentServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
     it('invokes getOperation with error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2030,7 +1256,7 @@ describe('v1beta.DocumentServiceClient', () => {
   });
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2052,7 +1278,7 @@ describe('v1beta.DocumentServiceClient', () => {
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2090,7 +1316,7 @@ describe('v1beta.DocumentServiceClient', () => {
       assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
     });
     it('invokes cancelOperation with error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2114,7 +1340,7 @@ describe('v1beta.DocumentServiceClient', () => {
   });
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2136,7 +1362,7 @@ describe('v1beta.DocumentServiceClient', () => {
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2174,7 +1400,7 @@ describe('v1beta.DocumentServiceClient', () => {
       assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
     });
     it('invokes deleteOperation with error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2198,7 +1424,7 @@ describe('v1beta.DocumentServiceClient', () => {
   });
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2233,7 +1459,7 @@ describe('v1beta.DocumentServiceClient', () => {
       );
     });
     it('uses async iteration with listOperations with error', async () => {
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2262,6 +1488,189 @@ describe('v1beta.DocumentServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('cryptoKeyVersions', async () => {
+      const fakePath = '/rendered/path/cryptoKeyVersions';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        key_ring: 'keyRingValue',
+        crypto_key: 'cryptoKeyValue',
+        crypto_key_version: 'cryptoKeyVersionValue',
+      };
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.cryptoKeyVersionsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cryptoKeyVersionsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cryptoKeyVersionsPath', () => {
+        const result = client.cryptoKeyVersionsPath(
+          'projectValue',
+          'locationValue',
+          'keyRingValue',
+          'cryptoKeyValue',
+          'cryptoKeyVersionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.cryptoKeyVersionsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCryptoKeyVersionsName', () => {
+        const result = client.matchProjectFromCryptoKeyVersionsName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.cryptoKeyVersionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCryptoKeyVersionsName', () => {
+        const result = client.matchLocationFromCryptoKeyVersionsName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.cryptoKeyVersionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKeyRingFromCryptoKeyVersionsName', () => {
+        const result = client.matchKeyRingFromCryptoKeyVersionsName(fakePath);
+        assert.strictEqual(result, 'keyRingValue');
+        assert(
+          (
+            client.pathTemplates.cryptoKeyVersionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCryptoKeyFromCryptoKeyVersionsName', () => {
+        const result = client.matchCryptoKeyFromCryptoKeyVersionsName(fakePath);
+        assert.strictEqual(result, 'cryptoKeyValue');
+        assert(
+          (
+            client.pathTemplates.cryptoKeyVersionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCryptoKeyVersionFromCryptoKeyVersionsName', () => {
+        const result =
+          client.matchCryptoKeyVersionFromCryptoKeyVersionsName(fakePath);
+        assert.strictEqual(result, 'cryptoKeyVersionValue');
+        assert(
+          (
+            client.pathTemplates.cryptoKeyVersionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('cryptoKeys', async () => {
+      const fakePath = '/rendered/path/cryptoKeys';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        key_ring: 'keyRingValue',
+        crypto_key: 'cryptoKeyValue',
+      };
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.cryptoKeysPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cryptoKeysPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cryptoKeysPath', () => {
+        const result = client.cryptoKeysPath(
+          'projectValue',
+          'locationValue',
+          'keyRingValue',
+          'cryptoKeyValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.cryptoKeysPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCryptoKeysName', () => {
+        const result = client.matchProjectFromCryptoKeysName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.cryptoKeysPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCryptoKeysName', () => {
+        const result = client.matchLocationFromCryptoKeysName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.cryptoKeysPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKeyRingFromCryptoKeysName', () => {
+        const result = client.matchKeyRingFromCryptoKeysName(fakePath);
+        assert.strictEqual(result, 'keyRingValue');
+        assert(
+          (client.pathTemplates.cryptoKeysPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCryptoKeyFromCryptoKeysName', () => {
+        const result = client.matchCryptoKeyFromCryptoKeysName(fakePath);
+        assert.strictEqual(result, 'cryptoKeyValue');
+        assert(
+          (client.pathTemplates.cryptoKeysPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('engine', async () => {
       const fakePath = '/rendered/path/engine';
       const expectedParameters = {
@@ -2270,7 +1679,7 @@ describe('v1beta.DocumentServiceClient', () => {
         collection: 'collectionValue',
         engine: 'engineValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2338,129 +1747,130 @@ describe('v1beta.DocumentServiceClient', () => {
       });
     });
 
-    describe('evaluation', async () => {
-      const fakePath = '/rendered/path/evaluation';
+    describe('identityMappingStore', async () => {
+      const fakePath = '/rendered/path/identityMappingStore';
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        evaluation: 'evaluationValue',
+        identity_mapping_store: 'identityMappingStoreValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
-      client.pathTemplates.evaluationPathTemplate.render = sinon
+      client.pathTemplates.identityMappingStorePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.evaluationPathTemplate.match = sinon
+      client.pathTemplates.identityMappingStorePathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('evaluationPath', () => {
-        const result = client.evaluationPath(
+      it('identityMappingStorePath', () => {
+        const result = client.identityMappingStorePath(
           'projectValue',
           'locationValue',
-          'evaluationValue'
+          'identityMappingStoreValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.evaluationPathTemplate.render as SinonStub)
+          (
+            client.pathTemplates.identityMappingStorePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchProjectFromEvaluationName', () => {
-        const result = client.matchProjectFromEvaluationName(fakePath);
+      it('matchProjectFromIdentityMappingStoreName', () => {
+        const result =
+          client.matchProjectFromIdentityMappingStoreName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.evaluationPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.identityMappingStorePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchLocationFromEvaluationName', () => {
-        const result = client.matchLocationFromEvaluationName(fakePath);
+      it('matchLocationFromIdentityMappingStoreName', () => {
+        const result =
+          client.matchLocationFromIdentityMappingStoreName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.evaluationPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.identityMappingStorePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchEvaluationFromEvaluationName', () => {
-        const result = client.matchEvaluationFromEvaluationName(fakePath);
-        assert.strictEqual(result, 'evaluationValue');
+      it('matchIdentityMappingStoreFromIdentityMappingStoreName', () => {
+        const result =
+          client.matchIdentityMappingStoreFromIdentityMappingStoreName(
+            fakePath
+          );
+        assert.strictEqual(result, 'identityMappingStoreValue');
         assert(
-          (client.pathTemplates.evaluationPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.identityMappingStorePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
     });
 
-    describe('groundingConfig', async () => {
-      const fakePath = '/rendered/path/groundingConfig';
+    describe('location', async () => {
+      const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        grounding_config: 'groundingConfigValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
-      client.pathTemplates.groundingConfigPathTemplate.render = sinon
+      client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.groundingConfigPathTemplate.match = sinon
+      client.pathTemplates.locationPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('groundingConfigPath', () => {
-        const result = client.groundingConfigPath(
-          'projectValue',
-          'locationValue',
-          'groundingConfigValue'
-        );
+      it('locationPath', () => {
+        const result = client.locationPath('projectValue', 'locationValue');
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.groundingConfigPathTemplate.render as SinonStub)
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchProjectFromGroundingConfigName', () => {
-        const result = client.matchProjectFromGroundingConfigName(fakePath);
+      it('matchProjectFromLocationName', () => {
+        const result = client.matchProjectFromLocationName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchLocationFromGroundingConfigName', () => {
-        const result = client.matchLocationFromGroundingConfigName(fakePath);
+      it('matchLocationFromLocationName', () => {
+        const result = client.matchLocationFromLocationName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchGroundingConfigFromGroundingConfigName', () => {
-        const result =
-          client.matchGroundingConfigFromGroundingConfigName(fakePath);
-        assert.strictEqual(result, 'groundingConfigValue');
-        assert(
-          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2472,7 +1882,7 @@ describe('v1beta.DocumentServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2505,6 +1915,148 @@ describe('v1beta.DocumentServiceClient', () => {
       });
     });
 
+    describe('projectLocationCmekConfig', async () => {
+      const fakePath = '/rendered/path/projectLocationCmekConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationCmekConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationCmekConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationCmekConfigPath', () => {
+        const result = client.projectLocationCmekConfigPath(
+          'projectValue',
+          'locationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCmekConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCmekConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCmekConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCmekConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationCmekConfig', async () => {
+      const fakePath = '/rendered/path/projectLocationCmekConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        cmek_config: 'cmekConfigValue',
+      };
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationCmekConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationCmekConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationCmekConfigPath', () => {
+        const result = client.projectLocationCmekConfigPath(
+          'projectValue',
+          'locationValue',
+          'cmekConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCmekConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCmekConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCmekConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCmekConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCmekConfigFromProjectLocationCmekConfigName', () => {
+        const result =
+          client.matchCmekConfigFromProjectLocationCmekConfigName(fakePath);
+        assert.strictEqual(result, 'cmekConfigValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationCollectionDataStore', async () => {
       const fakePath = '/rendered/path/projectLocationCollectionDataStore';
       const expectedParameters = {
@@ -2513,7 +2065,7 @@ describe('v1beta.DocumentServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2606,132 +2158,6 @@ describe('v1beta.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreBranch', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreBranch';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        branch: 'branchValue',
-      };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreBranchPath', () => {
-        const result = client.projectLocationCollectionDataStoreBranchPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'dataStoreValue',
-          'branchValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreBranchName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreBranchName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreBranchName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreBranchName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreBranchName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreBranchName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreBranchName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreBranchName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBranchFromProjectLocationCollectionDataStoreBranchName', () => {
-        const result =
-          client.matchBranchFromProjectLocationCollectionDataStoreBranchName(
-            fakePath
-          );
-        assert.strictEqual(result, 'branchValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('projectLocationCollectionDataStoreBranchDocument', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreBranchDocument';
@@ -2743,7 +2169,7 @@ describe('v1beta.DocumentServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2890,7 +2316,7 @@ describe('v1beta.DocumentServiceClient', () => {
         document: 'documentValue',
         chunk: 'chunkValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3053,7 +2479,7 @@ describe('v1beta.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         control: 'controlValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3179,7 +2605,7 @@ describe('v1beta.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3306,7 +2732,7 @@ describe('v1beta.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         custom_tuning_model: 'customTuningModelValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3432,7 +2858,7 @@ describe('v1beta.DocumentServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3541,7 +2967,7 @@ describe('v1beta.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3667,7 +3093,7 @@ describe('v1beta.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         serving_config: 'servingConfigValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3794,7 +3220,7 @@ describe('v1beta.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         session: 'sessionValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3921,7 +3347,7 @@ describe('v1beta.DocumentServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4065,7 +3491,7 @@ describe('v1beta.DocumentServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4174,7 +3600,7 @@ describe('v1beta.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         sitemap: 'sitemapValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4301,7 +3727,7 @@ describe('v1beta.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         target_site: 'targetSiteValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4427,7 +3853,7 @@ describe('v1beta.DocumentServiceClient', () => {
         engine: 'engineValue',
         control: 'controlValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4553,7 +3979,7 @@ describe('v1beta.DocumentServiceClient', () => {
         engine: 'engineValue',
         conversation: 'conversationValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4679,7 +4105,7 @@ describe('v1beta.DocumentServiceClient', () => {
         engine: 'engineValue',
         serving_config: 'servingConfigValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4804,7 +4230,7 @@ describe('v1beta.DocumentServiceClient', () => {
         engine: 'engineValue',
         session: 'sessionValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4931,7 +4357,7 @@ describe('v1beta.DocumentServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5072,7 +4498,7 @@ describe('v1beta.DocumentServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5144,99 +4570,6 @@ describe('v1beta.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreBranch', async () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreBranch';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        branch: 'branchValue',
-      };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationDataStoreBranchPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreBranchPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreBranchPath', () => {
-        const result = client.projectLocationDataStoreBranchPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'branchValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreBranchName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreBranchName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreBranchName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreBranchName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreBranchName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreBranchName(fakePath);
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBranchFromProjectLocationDataStoreBranchName', () => {
-        const result =
-          client.matchBranchFromProjectLocationDataStoreBranchName(fakePath);
-        assert.strictEqual(result, 'branchValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('projectLocationDataStoreBranchDocument', async () => {
       const fakePath = '/rendered/path/projectLocationDataStoreBranchDocument';
       const expectedParameters = {
@@ -5246,7 +4579,7 @@ describe('v1beta.DocumentServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5373,7 +4706,7 @@ describe('v1beta.DocumentServiceClient', () => {
         document: 'documentValue',
         chunk: 'chunkValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5515,7 +4848,7 @@ describe('v1beta.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         control: 'controlValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5610,7 +4943,7 @@ describe('v1beta.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5717,7 +5050,7 @@ describe('v1beta.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         custom_tuning_model: 'customTuningModelValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5823,7 +5156,7 @@ describe('v1beta.DocumentServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5912,7 +5245,7 @@ describe('v1beta.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -6005,7 +5338,7 @@ describe('v1beta.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         serving_config: 'servingConfigValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -6111,7 +5444,7 @@ describe('v1beta.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         session: 'sessionValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -6207,7 +5540,7 @@ describe('v1beta.DocumentServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -6331,7 +5664,7 @@ describe('v1beta.DocumentServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -6420,7 +5753,7 @@ describe('v1beta.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         sitemap: 'sitemapValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -6528,7 +5861,7 @@ describe('v1beta.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         target_site: 'targetSiteValue',
       };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+      const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -6621,147 +5954,6 @@ describe('v1beta.DocumentServiceClient', () => {
               .projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate
               .match as SinonStub
           )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('sampleQuery', async () => {
-      const fakePath = '/rendered/path/sampleQuery';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        sample_query_set: 'sampleQuerySetValue',
-        sample_query: 'sampleQueryValue',
-      };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.sampleQueryPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.sampleQueryPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('sampleQueryPath', () => {
-        const result = client.sampleQueryPath(
-          'projectValue',
-          'locationValue',
-          'sampleQuerySetValue',
-          'sampleQueryValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.sampleQueryPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromSampleQueryName', () => {
-        const result = client.matchProjectFromSampleQueryName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.sampleQueryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromSampleQueryName', () => {
-        const result = client.matchLocationFromSampleQueryName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.sampleQueryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSampleQuerySetFromSampleQueryName', () => {
-        const result = client.matchSampleQuerySetFromSampleQueryName(fakePath);
-        assert.strictEqual(result, 'sampleQuerySetValue');
-        assert(
-          (client.pathTemplates.sampleQueryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSampleQueryFromSampleQueryName', () => {
-        const result = client.matchSampleQueryFromSampleQueryName(fakePath);
-        assert.strictEqual(result, 'sampleQueryValue');
-        assert(
-          (client.pathTemplates.sampleQueryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('sampleQuerySet', async () => {
-      const fakePath = '/rendered/path/sampleQuerySet';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        sample_query_set: 'sampleQuerySetValue',
-      };
-      const client = new documentserviceModule.v1beta.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.sampleQuerySetPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.sampleQuerySetPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('sampleQuerySetPath', () => {
-        const result = client.sampleQuerySetPath(
-          'projectValue',
-          'locationValue',
-          'sampleQuerySetValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.sampleQuerySetPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromSampleQuerySetName', () => {
-        const result = client.matchProjectFromSampleQuerySetName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.sampleQuerySetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromSampleQuerySetName', () => {
-        const result = client.matchLocationFromSampleQuerySetName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.sampleQuerySetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSampleQuerySetFromSampleQuerySetName', () => {
-        const result =
-          client.matchSampleQuerySetFromSampleQuerySetName(fakePath);
-        assert.strictEqual(result, 'sampleQuerySetValue');
-        assert(
-          (client.pathTemplates.sampleQuerySetPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

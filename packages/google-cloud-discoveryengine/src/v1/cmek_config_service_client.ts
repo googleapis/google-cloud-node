@@ -25,31 +25,28 @@ import type {
   ClientOptions,
   GrpcClientOptions,
   LROperation,
-  PaginationCallback,
-  GaxCall,
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import {Transform} from 'stream';
+
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/engine_service_client_config.json`.
+ * `src/v1/cmek_config_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './engine_service_client_config.json';
+import * as gapicConfig from './cmek_config_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}
- *  configuration.
+ *  Service for managing CMEK related tasks
  * @class
  * @memberof v1
  */
-export class EngineServiceClient {
+export class CmekConfigServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -73,10 +70,10 @@ export class EngineServiceClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  engineServiceStub?: Promise<{[name: string]: Function}>;
+  cmekConfigServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of EngineServiceClient.
+   * Construct an instance of CmekConfigServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -111,7 +108,7 @@ export class EngineServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new EngineServiceClient({fallback: true}, gax);
+   *     const client = new CmekConfigServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -119,7 +116,7 @@ export class EngineServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof EngineServiceClient;
+    const staticMembers = this.constructor as typeof CmekConfigServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -213,14 +210,20 @@ export class EngineServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      collectionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}'
+      cryptoKeyVersionsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}'
+      ),
+      cryptoKeysPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
       ),
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
       ),
       identityMappingStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/identityMappingStores/{identity_mapping_store}'
+      ),
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
@@ -364,17 +367,6 @@ export class EngineServiceClient {
         ),
     };
 
-    // Some of the methods on this service return "paged" results,
-    // (e.g. 50 results at a time, with tokens to get subsequent
-    // pages). Denote the keys used for pagination and results.
-    this.descriptors.page = {
-      listEngines: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'engines'
-      ),
-    };
-
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
@@ -500,35 +492,35 @@ export class EngineServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const createEngineResponse = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.Engine'
+    const updateCmekConfigResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.CmekConfig'
     ) as gax.protobuf.Type;
-    const createEngineMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.CreateEngineMetadata'
+    const updateCmekConfigMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.UpdateCmekConfigMetadata'
     ) as gax.protobuf.Type;
-    const deleteEngineResponse = protoFilesRoot.lookup(
+    const deleteCmekConfigResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
-    const deleteEngineMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.DeleteEngineMetadata'
+    const deleteCmekConfigMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.DeleteCmekConfigMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      createEngine: new this._gaxModule.LongrunningDescriptor(
+      updateCmekConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createEngineResponse.decode.bind(createEngineResponse),
-        createEngineMetadata.decode.bind(createEngineMetadata)
+        updateCmekConfigResponse.decode.bind(updateCmekConfigResponse),
+        updateCmekConfigMetadata.decode.bind(updateCmekConfigMetadata)
       ),
-      deleteEngine: new this._gaxModule.LongrunningDescriptor(
+      deleteCmekConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteEngineResponse.decode.bind(deleteEngineResponse),
-        deleteEngineMetadata.decode.bind(deleteEngineMetadata)
+        deleteCmekConfigResponse.decode.bind(deleteCmekConfigResponse),
+        deleteCmekConfigMetadata.decode.bind(deleteCmekConfigMetadata)
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1.EngineService',
+      'google.cloud.discoveryengine.v1.CmekConfigService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -556,34 +548,34 @@ export class EngineServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.engineServiceStub) {
-      return this.engineServiceStub;
+    if (this.cmekConfigServiceStub) {
+      return this.cmekConfigServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.discoveryengine.v1.EngineService.
-    this.engineServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.discoveryengine.v1.CmekConfigService.
+    this.cmekConfigServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1.EngineService'
+            'google.cloud.discoveryengine.v1.CmekConfigService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.discoveryengine.v1.EngineService,
+          (this._protos as any).google.cloud.discoveryengine.v1
+            .CmekConfigService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const engineServiceStubMethods = [
-      'createEngine',
-      'deleteEngine',
-      'updateEngine',
-      'getEngine',
-      'listEngines',
+    const cmekConfigServiceStubMethods = [
+      'updateCmekConfig',
+      'getCmekConfig',
+      'listCmekConfigs',
+      'deleteCmekConfig',
     ];
-    for (const methodName of engineServiceStubMethods) {
-      const callPromise = this.engineServiceStub.then(
+    for (const methodName of cmekConfigServiceStubMethods) {
+      const callPromise = this.cmekConfigServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -597,10 +589,7 @@ export class EngineServiceClient {
         }
       );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        this.descriptors.longrunning[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.longrunning[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -611,7 +600,7 @@ export class EngineServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.engineServiceStub;
+    return this.cmekConfigServiceStub;
   }
 
   /**
@@ -699,87 +688,81 @@ export class EngineServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Updates an {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}
+   * Gets the {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.cloud.discoveryengine.v1.Engine} request.engine
-   *   Required. The {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} to update.
+   * @param {string} request.name
+   *   Required. Resource name of
+   *   {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}, such as
+   *   `projects/* /locations/* /cmekConfig` or
+   *   `projects/* /locations/* /cmekConfigs/*`.
    *
-   *   If the caller does not have permission to update the
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}, regardless of whether or
-   *   not it exists, a PERMISSION_DENIED error is returned.
-   *
-   *   If the {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} to update does not
-   *   exist, a NOT_FOUND error is returned.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Indicates which fields in the provided
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} to update.
-   *
-   *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
-   *   is returned.
+   *   If the caller does not have permission to access the
+   *   {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}, regardless of
+   *   whether or not it exists, a PERMISSION_DENIED error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.update_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_UpdateEngine_async
+   * @example <caption>include:samples/generated/v1/cmek_config_service.get_cmek_config.js</caption>
+   * region_tag:discoveryengine_v1_generated_CmekConfigService_GetCmekConfig_async
    */
-  updateEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest,
+  getCmekConfig(
+    request?: protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest | undefined,
+      protos.google.cloud.discoveryengine.v1.ICmekConfig,
+      protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest | undefined,
       {} | undefined,
     ]
   >;
-  updateEngine(
-    request: protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest,
+  getCmekConfig(
+    request: protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
+      protos.google.cloud.discoveryengine.v1.ICmekConfig,
+      | protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  updateEngine(
-    request: protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest,
+  getCmekConfig(
+    request: protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
+      protos.google.cloud.discoveryengine.v1.ICmekConfig,
+      | protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  updateEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest,
+  getCmekConfig(
+    request?: protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.discoveryengine.v1.IEngine,
-          | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
+          protos.google.cloud.discoveryengine.v1.ICmekConfig,
+          | protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
+      protos.google.cloud.discoveryengine.v1.ICmekConfig,
+      | protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest | undefined,
+      protos.google.cloud.discoveryengine.v1.ICmekConfig,
+      protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest | undefined,
       {} | undefined,
     ]
   > | void {
@@ -796,604 +779,125 @@ export class EngineServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'engine.name': request.engine!.name ?? '',
+        name: request.name ?? '',
       });
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateEngine request %j', request);
+    this._log.info('getCmekConfig request %j', request);
     const wrappedCallback:
       | Callback<
-          protos.google.cloud.discoveryengine.v1.IEngine,
-          | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
+          protos.google.cloud.discoveryengine.v1.ICmekConfig,
+          | protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest
           | null
           | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateEngine response %j', response);
+          this._log.info('getCmekConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
     return this.innerApiCalls
-      .updateEngine(request, options, wrappedCallback)
+      .getCmekConfig(request, options, wrappedCallback)
       ?.then(
         ([response, options, rawResponse]: [
-          protos.google.cloud.discoveryengine.v1.IEngine,
+          protos.google.cloud.discoveryengine.v1.ICmekConfig,
           (
-            | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
+            | protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest
             | undefined
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateEngine response %j', response);
+          this._log.info('getCmekConfig response %j', response);
           return [response, options, rawResponse];
         }
       );
   }
   /**
-   * Gets a {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Full resource name of
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}, such as
-   *   `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.get_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_GetEngine_async
-   */
-  getEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IGetEngineRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      protos.google.cloud.discoveryengine.v1.IGetEngineRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  getEngine(
-    request: protos.google.cloud.discoveryengine.v1.IGetEngineRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IGetEngineRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEngine(
-    request: protos.google.cloud.discoveryengine.v1.IGetEngineRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IGetEngineRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IGetEngineRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.discoveryengine.v1.IEngine,
-          | protos.google.cloud.discoveryengine.v1.IGetEngineRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IGetEngineRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      protos.google.cloud.discoveryengine.v1.IGetEngineRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('getEngine request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.discoveryengine.v1.IEngine,
-          | protos.google.cloud.discoveryengine.v1.IGetEngineRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('getEngine response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .getEngine(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.discoveryengine.v1.IEngine,
-          protos.google.cloud.discoveryengine.v1.IGetEngineRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getEngine response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-
-  /**
-   * Creates a {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection}`.
-   * @param {google.cloud.discoveryengine.v1.Engine} request.engine
-   *   Required. The {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} to create.
-   * @param {string} request.engineId
-   *   Required. The ID to use for the
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}, which will become the
-   *   final component of the {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}'s
-   *   resource name.
-   *
-   *   This field must conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
-   *   standard with a length limit of 63 characters. Otherwise, an
-   *   INVALID_ARGUMENT error is returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.create_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_CreateEngine_async
-   */
-  createEngine(
-    request?: protos.google.cloud.discoveryengine.v1.ICreateEngineRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.IEngine,
-        protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
-  createEngine(
-    request: protos.google.cloud.discoveryengine.v1.ICreateEngineRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.IEngine,
-        protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createEngine(
-    request: protos.google.cloud.discoveryengine.v1.ICreateEngineRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.IEngine,
-        protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createEngine(
-    request?: protos.google.cloud.discoveryengine.v1.ICreateEngineRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.discoveryengine.v1.IEngine,
-            protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.IEngine,
-        protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.IEngine,
-        protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.discoveryengine.v1.IEngine,
-            protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, rawResponse, _) => {
-          this._log.info('createEngine response %j', rawResponse);
-          callback!(error, response, rawResponse, _); // We verified callback above.
-        }
-      : undefined;
-    this._log.info('createEngine request %j', request);
-    return this.innerApiCalls
-      .createEngine(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.discoveryengine.v1.IEngine,
-            protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createEngine response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
-  }
-  /**
-   * Check the status of the long running operation returned by `createEngine()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.create_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_CreateEngine_async
-   */
-  async checkCreateEngineProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.discoveryengine.v1.Engine,
-      protos.google.cloud.discoveryengine.v1.CreateEngineMetadata
-    >
-  > {
-    this._log.info('createEngine long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createEngine,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.discoveryengine.v1.Engine,
-      protos.google.cloud.discoveryengine.v1.CreateEngineMetadata
-    >;
-  }
-  /**
-   * Deletes a {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Full resource name of
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}, such as
-   *   `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
-   *
-   *   If the caller does not have permission to delete the
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}, regardless of whether or
-   *   not it exists, a PERMISSION_DENIED error is returned.
-   *
-   *   If the {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} to delete does not
-   *   exist, a NOT_FOUND error is returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.delete_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_DeleteEngine_async
-   */
-  deleteEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IDeleteEngineRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
-  deleteEngine(
-    request: protos.google.cloud.discoveryengine.v1.IDeleteEngineRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteEngine(
-    request: protos.google.cloud.discoveryengine.v1.IDeleteEngineRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IDeleteEngineRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, rawResponse, _) => {
-          this._log.info('deleteEngine response %j', rawResponse);
-          callback!(error, response, rawResponse, _); // We verified callback above.
-        }
-      : undefined;
-    this._log.info('deleteEngine request %j', request);
-    return this.innerApiCalls
-      .deleteEngine(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteEngine response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
-  }
-  /**
-   * Check the status of the long running operation returned by `deleteEngine()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.delete_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_DeleteEngine_async
-   */
-  async checkDeleteEngineProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.discoveryengine.v1.DeleteEngineMetadata
-    >
-  > {
-    this._log.info('deleteEngine long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteEngine,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.discoveryengine.v1.DeleteEngineMetadata
-    >;
-  }
-  /**
-   * Lists all the {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s associated
+   * Lists all the {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}s
    * with the project.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection_id}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Not supported.
-   * @param {string} [request.pageToken]
-   *   Optional. Not supported.
-   * @param {string} [request.filter]
-   *   Optional. Filter by solution type. For example:
-   *   solution_type=SOLUTION_TYPE_SEARCH
+   *   Required. The parent location resource name, such as
+   *   `projects/{project}/locations/{location}`.
+   *
+   *   If the caller does not have permission to list
+   *   {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}s under this
+   *   location, regardless of whether or not a CmekConfig exists, a
+   *   PERMISSION_DENIED error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEnginesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.ListCmekConfigsResponse|ListCmekConfigsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cmek_config_service.list_cmek_configs.js</caption>
+   * region_tag:discoveryengine_v1_generated_CmekConfigService_ListCmekConfigs_async
    */
-  listEngines(
-    request?: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
+  listCmekConfigs(
+    request?: protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.IEngine[],
-      protos.google.cloud.discoveryengine.v1.IListEnginesRequest | null,
-      protos.google.cloud.discoveryengine.v1.IListEnginesResponse,
+      protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest
+        | undefined
+      ),
+      {} | undefined,
     ]
   >;
-  listEngines(
-    request: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
+  listCmekConfigs(
+    request: protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest,
     options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-      | protos.google.cloud.discoveryengine.v1.IListEnginesResponse
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
+      | protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1.IEngine
+      {} | null | undefined
     >
   ): void;
-  listEngines(
-    request: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-      | protos.google.cloud.discoveryengine.v1.IListEnginesResponse
+  listCmekConfigs(
+    request: protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
+      | protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1.IEngine
+      {} | null | undefined
     >
   ): void;
-  listEngines(
-    request?: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
+  listCmekConfigs(
+    request?: protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest,
     optionsOrCallback?:
       | CallOptions
-      | PaginationCallback<
-          protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-          | protos.google.cloud.discoveryengine.v1.IListEnginesResponse
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
+          | protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest
           | null
           | undefined,
-          protos.google.cloud.discoveryengine.v1.IEngine
+          {} | null | undefined
         >,
-    callback?: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-      | protos.google.cloud.discoveryengine.v1.IListEnginesResponse
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
+      | protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1.IEngine
+      {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.IEngine[],
-      protos.google.cloud.discoveryengine.v1.IListEnginesRequest | null,
-      protos.google.cloud.discoveryengine.v1.IListEnginesResponse,
+      protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest
+        | undefined
+      ),
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1414,136 +918,383 @@ export class EngineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
+    this._log.info('listCmekConfigs request %j', request);
     const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-          | protos.google.cloud.discoveryengine.v1.IListEnginesResponse
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
+          | protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest
           | null
           | undefined,
-          protos.google.cloud.discoveryengine.v1.IEngine
+          {} | null | undefined
         >
       | undefined = callback
-      ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEngines values %j', values);
-          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listCmekConfigs response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEngines request %j', request);
     return this.innerApiCalls
-      .listEngines(request, options, wrappedCallback)
+      .listCmekConfigs(request, options, wrappedCallback)
       ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.discoveryengine.v1.IEngine[],
-          protos.google.cloud.discoveryengine.v1.IListEnginesRequest | null,
-          protos.google.cloud.discoveryengine.v1.IListEnginesResponse,
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
+          (
+            | protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest
+            | undefined
+          ),
+          {} | undefined,
         ]) => {
-          this._log.info('listEngines values %j', response);
-          return [response, input, output];
+          this._log.info('listCmekConfigs response %j', response);
+          return [response, options, rawResponse];
         }
       );
   }
 
   /**
-   * Equivalent to `listEngines`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection_id}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Not supported.
-   * @param {string} [request.pageToken]
-   *   Optional. Not supported.
-   * @param {string} [request.filter]
-   *   Optional. Filter by solution type. For example:
-   *   solution_type=SOLUTION_TYPE_SEARCH
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEnginesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
-  listEnginesStream(
-    request?: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-    options?: CallOptions
-  ): Transform {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings = this._defaults['listEngines'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('listEngines stream %j', request);
-    return this.descriptors.page.listEngines.createStream(
-      this.innerApiCalls.listEngines as GaxCall,
-      request,
-      callSettings
-    );
-  }
-
-  /**
-   * Equivalent to `listEngines`, but returns an iterable object.
+   * Provisions a CMEK key for use in a location of a customer's project.
+   * This method will also conduct location validation on the provided
+   * cmekConfig to make sure the key is valid and can be used in the
+   * selected location.
    *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection_id}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Not supported.
-   * @param {string} [request.pageToken]
-   *   Optional. Not supported.
-   * @param {string} [request.filter]
-   *   Optional. Filter by solution type. For example:
-   *   solution_type=SOLUTION_TYPE_SEARCH
+   * @param {google.cloud.discoveryengine.v1.CmekConfig} request.config
+   *   Required. The CmekConfig resource.
+   * @param {boolean} request.setDefault
+   *   Set the following CmekConfig as the default to be used for child
+   *   resources if one is not specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.list_engines.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_ListEngines_async
+   * @example <caption>include:samples/generated/v1/cmek_config_service.update_cmek_config.js</caption>
+   * region_tag:discoveryengine_v1_generated_CmekConfigService_UpdateCmekConfig_async
    */
-  listEnginesAsync(
-    request?: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
+  updateCmekConfig(
+    request?: protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.discoveryengine.v1.IEngine> {
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.ICmekConfig,
+        protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateCmekConfig(
+    request: protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.ICmekConfig,
+        protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCmekConfig(
+    request: protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.ICmekConfig,
+        protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCmekConfig(
+    request?: protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.ICmekConfig,
+            protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.ICmekConfig,
+        protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.ICmekConfig,
+        protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
+        'config.name': request.config!.name ?? '',
       });
-    const defaultCallSettings = this._defaults['listEngines'];
-    const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEngines iterate %j', request);
-    return this.descriptors.page.listEngines.asyncIterate(
-      this.innerApiCalls['listEngines'] as GaxCall,
-      request as {},
-      callSettings
-    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1.IEngine>;
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.ICmekConfig,
+            protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateCmekConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateCmekConfig request %j', request);
+    return this.innerApiCalls
+      .updateCmekConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.ICmekConfig,
+            protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCmekConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateCmekConfig()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cmek_config_service.update_cmek_config.js</caption>
+   * region_tag:discoveryengine_v1_generated_CmekConfigService_UpdateCmekConfig_async
+   */
+  async checkUpdateCmekConfigProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1.CmekConfig,
+      protos.google.cloud.discoveryengine.v1.UpdateCmekConfigMetadata
+    >
+  > {
+    this._log.info('updateCmekConfig long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateCmekConfig,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1.CmekConfig,
+      protos.google.cloud.discoveryengine.v1.UpdateCmekConfigMetadata
+    >;
+  }
+  /**
+   * De-provisions a CmekConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig} to delete, such as
+   *   `projects/{project}/locations/{location}/cmekConfigs/{cmek_config}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cmek_config_service.delete_cmek_config.js</caption>
+   * region_tag:discoveryengine_v1_generated_CmekConfigService_DeleteCmekConfig_async
+   */
+  deleteCmekConfig(
+    request?: protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteCmekConfig(
+    request: protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCmekConfig(
+    request: protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCmekConfig(
+    request?: protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteCmekConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCmekConfig request %j', request);
+    return this.innerApiCalls
+      .deleteCmekConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCmekConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteCmekConfig()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cmek_config_service.delete_cmek_config.js</caption>
+   * region_tag:discoveryengine_v1_generated_CmekConfigService_DeleteCmekConfig_async
+   */
+  async checkDeleteCmekConfigProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.discoveryengine.v1.DeleteCmekConfigMetadata
+    >
+  > {
+    this._log.info('deleteCmekConfig long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteCmekConfig,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.discoveryengine.v1.DeleteCmekConfigMetadata
+    >;
   }
   /**
    * Gets information about a location.
@@ -1852,55 +1603,167 @@ export class EngineServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified collection resource name string.
+   * Return a fully-qualified cryptoKeyVersions resource name string.
    *
    * @param {string} project
    * @param {string} location
-   * @param {string} collection
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @param {string} crypto_key_version
    * @returns {string} Resource name string.
    */
-  collectionPath(project: string, location: string, collection: string) {
-    return this.pathTemplates.collectionPathTemplate.render({
+  cryptoKeyVersionsPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string,
+    cryptoKeyVersion: string
+  ) {
+    return this.pathTemplates.cryptoKeyVersionsPathTemplate.render({
       project: project,
       location: location,
-      collection: collection,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+      crypto_key_version: cryptoKeyVersion,
     });
   }
 
   /**
-   * Parse the project from Collection resource.
+   * Parse the project from CryptoKeyVersions resource.
    *
-   * @param {string} collectionName
-   *   A fully-qualified path representing Collection resource.
+   * @param {string} cryptoKeyVersionsName
+   *   A fully-qualified path representing CryptoKeyVersions resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+  matchProjectFromCryptoKeyVersionsName(cryptoKeyVersionsName: string) {
+    return this.pathTemplates.cryptoKeyVersionsPathTemplate.match(
+      cryptoKeyVersionsName
+    ).project;
+  }
+
+  /**
+   * Parse the location from CryptoKeyVersions resource.
+   *
+   * @param {string} cryptoKeyVersionsName
+   *   A fully-qualified path representing CryptoKeyVersions resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyVersionsName(cryptoKeyVersionsName: string) {
+    return this.pathTemplates.cryptoKeyVersionsPathTemplate.match(
+      cryptoKeyVersionsName
+    ).location;
+  }
+
+  /**
+   * Parse the key_ring from CryptoKeyVersions resource.
+   *
+   * @param {string} cryptoKeyVersionsName
+   *   A fully-qualified path representing CryptoKeyVersions resource.
+   * @returns {string} A string representing the key_ring.
+   */
+  matchKeyRingFromCryptoKeyVersionsName(cryptoKeyVersionsName: string) {
+    return this.pathTemplates.cryptoKeyVersionsPathTemplate.match(
+      cryptoKeyVersionsName
+    ).key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from CryptoKeyVersions resource.
+   *
+   * @param {string} cryptoKeyVersionsName
+   *   A fully-qualified path representing CryptoKeyVersions resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeyVersionsName(cryptoKeyVersionsName: string) {
+    return this.pathTemplates.cryptoKeyVersionsPathTemplate.match(
+      cryptoKeyVersionsName
+    ).crypto_key;
+  }
+
+  /**
+   * Parse the crypto_key_version from CryptoKeyVersions resource.
+   *
+   * @param {string} cryptoKeyVersionsName
+   *   A fully-qualified path representing CryptoKeyVersions resource.
+   * @returns {string} A string representing the crypto_key_version.
+   */
+  matchCryptoKeyVersionFromCryptoKeyVersionsName(
+    cryptoKeyVersionsName: string
+  ) {
+    return this.pathTemplates.cryptoKeyVersionsPathTemplate.match(
+      cryptoKeyVersionsName
+    ).crypto_key_version;
+  }
+
+  /**
+   * Return a fully-qualified cryptoKeys resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @returns {string} Resource name string.
+   */
+  cryptoKeysPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string
+  ) {
+    return this.pathTemplates.cryptoKeysPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKeys resource.
+   *
+   * @param {string} cryptoKeysName
+   *   A fully-qualified path representing CryptoKeys resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeysName(cryptoKeysName: string) {
+    return this.pathTemplates.cryptoKeysPathTemplate.match(cryptoKeysName)
       .project;
   }
 
   /**
-   * Parse the location from Collection resource.
+   * Parse the location from CryptoKeys resource.
    *
-   * @param {string} collectionName
-   *   A fully-qualified path representing Collection resource.
+   * @param {string} cryptoKeysName
+   *   A fully-qualified path representing CryptoKeys resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+  matchLocationFromCryptoKeysName(cryptoKeysName: string) {
+    return this.pathTemplates.cryptoKeysPathTemplate.match(cryptoKeysName)
       .location;
   }
 
   /**
-   * Parse the collection from Collection resource.
+   * Parse the key_ring from CryptoKeys resource.
    *
-   * @param {string} collectionName
-   *   A fully-qualified path representing Collection resource.
-   * @returns {string} A string representing the collection.
+   * @param {string} cryptoKeysName
+   *   A fully-qualified path representing CryptoKeys resource.
+   * @returns {string} A string representing the key_ring.
    */
-  matchCollectionFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName)
-      .collection;
+  matchKeyRingFromCryptoKeysName(cryptoKeysName: string) {
+    return this.pathTemplates.cryptoKeysPathTemplate.match(cryptoKeysName)
+      .key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from CryptoKeys resource.
+   *
+   * @param {string} cryptoKeysName
+   *   A fully-qualified path representing CryptoKeys resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeysName(cryptoKeysName: string) {
+    return this.pathTemplates.cryptoKeysPathTemplate.match(cryptoKeysName)
+      .crypto_key;
   }
 
   /**
@@ -2029,6 +1892,42 @@ export class EngineServiceClient {
     return this.pathTemplates.identityMappingStorePathTemplate.match(
       identityMappingStoreName
     ).identity_mapping_store;
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**
@@ -5369,8 +5268,8 @@ export class EngineServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.engineServiceStub && !this._terminated) {
-      return this.engineServiceStub.then(stub => {
+    if (this.cmekConfigServiceStub && !this._terminated) {
+      return this.cmekConfigServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

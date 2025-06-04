@@ -37,19 +37,18 @@ import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/engine_service_client_config.json`.
+ * `src/v1/user_license_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './engine_service_client_config.json';
+import * as gapicConfig from './user_license_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}
- *  configuration.
+ *  Service for managing User Licenses.
  * @class
  * @memberof v1
  */
-export class EngineServiceClient {
+export class UserLicenseServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -73,10 +72,10 @@ export class EngineServiceClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  engineServiceStub?: Promise<{[name: string]: Function}>;
+  userLicenseServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of EngineServiceClient.
+   * Construct an instance of UserLicenseServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -111,7 +110,7 @@ export class EngineServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new EngineServiceClient({fallback: true}, gax);
+   *     const client = new UserLicenseServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -119,7 +118,7 @@ export class EngineServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof EngineServiceClient;
+    const staticMembers = this.constructor as typeof UserLicenseServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -213,9 +212,6 @@ export class EngineServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      collectionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}'
-      ),
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
       ),
@@ -362,16 +358,19 @@ export class EngineServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
         ),
+      userStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/userStores/{user_store}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listEngines: new this._gaxModule.PageDescriptor(
+      listUserLicenses: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'engines'
+        'userLicenses'
       ),
     };
 
@@ -500,35 +499,28 @@ export class EngineServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const createEngineResponse = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.Engine'
+    const batchUpdateUserLicensesResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.BatchUpdateUserLicensesResponse'
     ) as gax.protobuf.Type;
-    const createEngineMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.CreateEngineMetadata'
-    ) as gax.protobuf.Type;
-    const deleteEngineResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
-    const deleteEngineMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.DeleteEngineMetadata'
+    const batchUpdateUserLicensesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.BatchUpdateUserLicensesMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      createEngine: new this._gaxModule.LongrunningDescriptor(
+      batchUpdateUserLicenses: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createEngineResponse.decode.bind(createEngineResponse),
-        createEngineMetadata.decode.bind(createEngineMetadata)
-      ),
-      deleteEngine: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        deleteEngineResponse.decode.bind(deleteEngineResponse),
-        deleteEngineMetadata.decode.bind(deleteEngineMetadata)
+        batchUpdateUserLicensesResponse.decode.bind(
+          batchUpdateUserLicensesResponse
+        ),
+        batchUpdateUserLicensesMetadata.decode.bind(
+          batchUpdateUserLicensesMetadata
+        )
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1.EngineService',
+      'google.cloud.discoveryengine.v1.UserLicenseService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -556,34 +548,32 @@ export class EngineServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.engineServiceStub) {
-      return this.engineServiceStub;
+    if (this.userLicenseServiceStub) {
+      return this.userLicenseServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.discoveryengine.v1.EngineService.
-    this.engineServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.discoveryengine.v1.UserLicenseService.
+    this.userLicenseServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1.EngineService'
+            'google.cloud.discoveryengine.v1.UserLicenseService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.discoveryengine.v1.EngineService,
+          (this._protos as any).google.cloud.discoveryengine.v1
+            .UserLicenseService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const engineServiceStubMethods = [
-      'createEngine',
-      'deleteEngine',
-      'updateEngine',
-      'getEngine',
-      'listEngines',
+    const userLicenseServiceStubMethods = [
+      'listUserLicenses',
+      'batchUpdateUserLicenses',
     ];
-    for (const methodName of engineServiceStubMethods) {
-      const callPromise = this.engineServiceStub.then(
+    for (const methodName of userLicenseServiceStubMethods) {
+      const callPromise = this.userLicenseServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -611,7 +601,7 @@ export class EngineServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.engineServiceStub;
+    return this.userLicenseServiceStub;
   }
 
   /**
@@ -698,280 +688,22 @@ export class EngineServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Updates an {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.discoveryengine.v1.Engine} request.engine
-   *   Required. The {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} to update.
-   *
-   *   If the caller does not have permission to update the
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}, regardless of whether or
-   *   not it exists, a PERMISSION_DENIED error is returned.
-   *
-   *   If the {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} to update does not
-   *   exist, a NOT_FOUND error is returned.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Indicates which fields in the provided
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} to update.
-   *
-   *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
-   *   is returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.update_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_UpdateEngine_async
-   */
-  updateEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  updateEngine(
-    request: protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEngine(
-    request: protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.discoveryengine.v1.IEngine,
-          | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'engine.name': request.engine!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('updateEngine request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.discoveryengine.v1.IEngine,
-          | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('updateEngine response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .updateEngine(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.discoveryengine.v1.IEngine,
-          (
-            | protos.google.cloud.discoveryengine.v1.IUpdateEngineRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateEngine response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Gets a {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Full resource name of
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}, such as
-   *   `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.get_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_GetEngine_async
-   */
-  getEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IGetEngineRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      protos.google.cloud.discoveryengine.v1.IGetEngineRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  getEngine(
-    request: protos.google.cloud.discoveryengine.v1.IGetEngineRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IGetEngineRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEngine(
-    request: protos.google.cloud.discoveryengine.v1.IGetEngineRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IGetEngineRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IGetEngineRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.discoveryengine.v1.IEngine,
-          | protos.google.cloud.discoveryengine.v1.IGetEngineRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      | protos.google.cloud.discoveryengine.v1.IGetEngineRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1.IEngine,
-      protos.google.cloud.discoveryengine.v1.IGetEngineRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('getEngine request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.discoveryengine.v1.IEngine,
-          | protos.google.cloud.discoveryengine.v1.IGetEngineRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('getEngine response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .getEngine(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.discoveryengine.v1.IEngine,
-          protos.google.cloud.discoveryengine.v1.IGetEngineRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getEngine response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
 
   /**
-   * Creates a {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
+   * Updates the User License.
+   * This method is used for batch assign/unassign licenses to users.
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {google.cloud.discoveryengine.v1.BatchUpdateUserLicensesRequest.InlineSource} request.inlineSource
+   *   The inline source for the input content for document embeddings.
    * @param {string} request.parent
-   *   Required. The parent resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection}`.
-   * @param {google.cloud.discoveryengine.v1.Engine} request.engine
-   *   Required. The {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} to create.
-   * @param {string} request.engineId
-   *   Required. The ID to use for the
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}, which will become the
-   *   final component of the {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}'s
-   *   resource name.
-   *
-   *   This field must conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
-   *   standard with a length limit of 63 characters. Otherwise, an
-   *   INVALID_ARGUMENT error is returned.
+   *   Required. The parent {@link protos.|UserStore} resource name, format:
+   *   `projects/{project}/locations/{location}/userStores/{user_store_id}`.
+   * @param {boolean} [request.deleteUnassignedUserLicenses]
+   *   Optional. If true, if user licenses removed associated license config, the
+   *   user license will be deleted. By default which is false, the user license
+   *   will be updated to unassigned state.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -980,61 +712,61 @@ export class EngineServiceClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.create_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_CreateEngine_async
+   * @example <caption>include:samples/generated/v1/user_license_service.batch_update_user_licenses.js</caption>
+   * region_tag:discoveryengine_v1_generated_UserLicenseService_BatchUpdateUserLicenses_async
    */
-  createEngine(
-    request?: protos.google.cloud.discoveryengine.v1.ICreateEngineRequest,
+  batchUpdateUserLicenses(
+    request?: protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.discoveryengine.v1.IEngine,
-        protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
+        protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesResponse,
+        protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  createEngine(
-    request: protos.google.cloud.discoveryengine.v1.ICreateEngineRequest,
+  batchUpdateUserLicenses(
+    request: protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1.IEngine,
-        protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
+        protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesResponse,
+        protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createEngine(
-    request: protos.google.cloud.discoveryengine.v1.ICreateEngineRequest,
+  batchUpdateUserLicenses(
+    request: protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1.IEngine,
-        protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
+        protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesResponse,
+        protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createEngine(
-    request?: protos.google.cloud.discoveryengine.v1.ICreateEngineRequest,
+  batchUpdateUserLicenses(
+    request?: protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.discoveryengine.v1.IEngine,
-            protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
+            protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesResponse,
+            protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1.IEngine,
-        protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
+        protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesResponse,
+        protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1042,8 +774,8 @@ export class EngineServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.discoveryengine.v1.IEngine,
-        protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
+        protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesResponse,
+        protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -1070,55 +802,55 @@ export class EngineServiceClient {
     const wrappedCallback:
       | Callback<
           LROperation<
-            protos.google.cloud.discoveryengine.v1.IEngine,
-            protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
+            protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesResponse,
+            protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createEngine response %j', rawResponse);
+          this._log.info('batchUpdateUserLicenses response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createEngine request %j', request);
+    this._log.info('batchUpdateUserLicenses request %j', request);
     return this.innerApiCalls
-      .createEngine(request, options, wrappedCallback)
+      .batchUpdateUserLicenses(request, options, wrappedCallback)
       ?.then(
         ([response, rawResponse, _]: [
           LROperation<
-            protos.google.cloud.discoveryengine.v1.IEngine,
-            protos.google.cloud.discoveryengine.v1.ICreateEngineMetadata
+            protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesResponse,
+            protos.google.cloud.discoveryengine.v1.IBatchUpdateUserLicensesMetadata
           >,
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createEngine response %j', rawResponse);
+          this._log.info('batchUpdateUserLicenses response %j', rawResponse);
           return [response, rawResponse, _];
         }
       );
   }
   /**
-   * Check the status of the long running operation returned by `createEngine()`.
+   * Check the status of the long running operation returned by `batchUpdateUserLicenses()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.create_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_CreateEngine_async
+   * @example <caption>include:samples/generated/v1/user_license_service.batch_update_user_licenses.js</caption>
+   * region_tag:discoveryengine_v1_generated_UserLicenseService_BatchUpdateUserLicenses_async
    */
-  async checkCreateEngineProgress(
+  async checkBatchUpdateUserLicensesProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.discoveryengine.v1.Engine,
-      protos.google.cloud.discoveryengine.v1.CreateEngineMetadata
+      protos.google.cloud.discoveryengine.v1.BatchUpdateUserLicensesResponse,
+      protos.google.cloud.discoveryengine.v1.BatchUpdateUserLicensesMetadata
     >
   > {
-    this._log.info('createEngine long-running');
+    this._log.info('batchUpdateUserLicenses long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1126,274 +858,115 @@ export class EngineServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.createEngine,
+      this.descriptors.longrunning.batchUpdateUserLicenses,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.discoveryengine.v1.Engine,
-      protos.google.cloud.discoveryengine.v1.CreateEngineMetadata
+      protos.google.cloud.discoveryengine.v1.BatchUpdateUserLicensesResponse,
+      protos.google.cloud.discoveryengine.v1.BatchUpdateUserLicensesMetadata
     >;
   }
   /**
-   * Deletes a {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Full resource name of
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}, such as
-   *   `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
-   *
-   *   If the caller does not have permission to delete the
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}, regardless of whether or
-   *   not it exists, a PERMISSION_DENIED error is returned.
-   *
-   *   If the {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} to delete does not
-   *   exist, a NOT_FOUND error is returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.delete_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_DeleteEngine_async
-   */
-  deleteEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IDeleteEngineRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
-  deleteEngine(
-    request: protos.google.cloud.discoveryengine.v1.IDeleteEngineRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteEngine(
-    request: protos.google.cloud.discoveryengine.v1.IDeleteEngineRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteEngine(
-    request?: protos.google.cloud.discoveryengine.v1.IDeleteEngineRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, rawResponse, _) => {
-          this._log.info('deleteEngine response %j', rawResponse);
-          callback!(error, response, rawResponse, _); // We verified callback above.
-        }
-      : undefined;
-    this._log.info('deleteEngine request %j', request);
-    return this.innerApiCalls
-      .deleteEngine(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.discoveryengine.v1.IDeleteEngineMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteEngine response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
-  }
-  /**
-   * Check the status of the long running operation returned by `deleteEngine()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.delete_engine.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_DeleteEngine_async
-   */
-  async checkDeleteEngineProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.discoveryengine.v1.DeleteEngineMetadata
-    >
-  > {
-    this._log.info('deleteEngine long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteEngine,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.discoveryengine.v1.DeleteEngineMetadata
-    >;
-  }
-  /**
-   * Lists all the {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s associated
-   * with the project.
+   * Lists the User Licenses.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection_id}`.
+   *   Required. The parent {@link protos.|UserStore} resource name, format:
+   *   `projects/{project}/locations/{location}/userStores/{user_store_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Not supported.
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, defaults to 10. The maximum value is 50; values
+   *   above 50 will be coerced to 50.
+   *
+   *   If this field is negative, an INVALID_ARGUMENT error is returned.
    * @param {string} [request.pageToken]
-   *   Optional. Not supported.
+   *   Optional. A page token, received from a previous `ListUserLicenses` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListUserLicenses`
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter by solution type. For example:
-   *   solution_type=SOLUTION_TYPE_SEARCH
+   *   Optional. Filter for the list request.
+   *
+   *   Supported fields:
+   *
+   *   * `license_assignment_state`
+   *
+   *   Examples:
+   *
+   *   * `license_assignment_state = ASSIGNED` to list assigned user licenses.
+   *   * `license_assignment_state = NO_LICENSE` to list not licensed users.
+   *   * `license_assignment_state = NO_LICENSE_ATTEMPTED_LOGIN` to list users
+   *   who attempted login but no license assigned.
+   *   * `license_assignment_state != NO_LICENSE_ATTEMPTED_LOGIN` to filter
+   *   out users who attempted login but no license assigned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
+   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1.UserLicense|UserLicense}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listEnginesAsync()`
+   *   We recommend using `listUserLicensesAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listEngines(
-    request?: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
+  listUserLicenses(
+    request?: protos.google.cloud.discoveryengine.v1.IListUserLicensesRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.IEngine[],
-      protos.google.cloud.discoveryengine.v1.IListEnginesRequest | null,
-      protos.google.cloud.discoveryengine.v1.IListEnginesResponse,
+      protos.google.cloud.discoveryengine.v1.IUserLicense[],
+      protos.google.cloud.discoveryengine.v1.IListUserLicensesRequest | null,
+      protos.google.cloud.discoveryengine.v1.IListUserLicensesResponse,
     ]
   >;
-  listEngines(
-    request: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
+  listUserLicenses(
+    request: protos.google.cloud.discoveryengine.v1.IListUserLicensesRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-      | protos.google.cloud.discoveryengine.v1.IListEnginesResponse
+      protos.google.cloud.discoveryengine.v1.IListUserLicensesRequest,
+      | protos.google.cloud.discoveryengine.v1.IListUserLicensesResponse
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1.IEngine
+      protos.google.cloud.discoveryengine.v1.IUserLicense
     >
   ): void;
-  listEngines(
-    request: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
+  listUserLicenses(
+    request: protos.google.cloud.discoveryengine.v1.IListUserLicensesRequest,
     callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-      | protos.google.cloud.discoveryengine.v1.IListEnginesResponse
+      protos.google.cloud.discoveryengine.v1.IListUserLicensesRequest,
+      | protos.google.cloud.discoveryengine.v1.IListUserLicensesResponse
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1.IEngine
+      protos.google.cloud.discoveryengine.v1.IUserLicense
     >
   ): void;
-  listEngines(
-    request?: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
+  listUserLicenses(
+    request?: protos.google.cloud.discoveryengine.v1.IListUserLicensesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-          | protos.google.cloud.discoveryengine.v1.IListEnginesResponse
+          protos.google.cloud.discoveryengine.v1.IListUserLicensesRequest,
+          | protos.google.cloud.discoveryengine.v1.IListUserLicensesResponse
           | null
           | undefined,
-          protos.google.cloud.discoveryengine.v1.IEngine
+          protos.google.cloud.discoveryengine.v1.IUserLicense
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-      | protos.google.cloud.discoveryengine.v1.IListEnginesResponse
+      protos.google.cloud.discoveryengine.v1.IListUserLicensesRequest,
+      | protos.google.cloud.discoveryengine.v1.IListUserLicensesResponse
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1.IEngine
+      protos.google.cloud.discoveryengine.v1.IUserLicense
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.IEngine[],
-      protos.google.cloud.discoveryengine.v1.IListEnginesRequest | null,
-      protos.google.cloud.discoveryengine.v1.IListEnginesResponse,
+      protos.google.cloud.discoveryengine.v1.IUserLicense[],
+      protos.google.cloud.discoveryengine.v1.IListUserLicensesRequest | null,
+      protos.google.cloud.discoveryengine.v1.IListUserLicensesResponse,
     ]
   > | void {
     request = request || {};
@@ -1416,60 +989,80 @@ export class EngineServiceClient {
     });
     const wrappedCallback:
       | PaginationCallback<
-          protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
-          | protos.google.cloud.discoveryengine.v1.IListEnginesResponse
+          protos.google.cloud.discoveryengine.v1.IListUserLicensesRequest,
+          | protos.google.cloud.discoveryengine.v1.IListUserLicensesResponse
           | null
           | undefined,
-          protos.google.cloud.discoveryengine.v1.IEngine
+          protos.google.cloud.discoveryengine.v1.IUserLicense
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEngines values %j', values);
+          this._log.info('listUserLicenses values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEngines request %j', request);
+    this._log.info('listUserLicenses request %j', request);
     return this.innerApiCalls
-      .listEngines(request, options, wrappedCallback)
+      .listUserLicenses(request, options, wrappedCallback)
       ?.then(
         ([response, input, output]: [
-          protos.google.cloud.discoveryengine.v1.IEngine[],
-          protos.google.cloud.discoveryengine.v1.IListEnginesRequest | null,
-          protos.google.cloud.discoveryengine.v1.IListEnginesResponse,
+          protos.google.cloud.discoveryengine.v1.IUserLicense[],
+          protos.google.cloud.discoveryengine.v1.IListUserLicensesRequest | null,
+          protos.google.cloud.discoveryengine.v1.IListUserLicensesResponse,
         ]) => {
-          this._log.info('listEngines values %j', response);
+          this._log.info('listUserLicenses values %j', response);
           return [response, input, output];
         }
       );
   }
 
   /**
-   * Equivalent to `listEngines`, but returns a NodeJS Stream object.
+   * Equivalent to `listUserLicenses`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection_id}`.
+   *   Required. The parent {@link protos.|UserStore} resource name, format:
+   *   `projects/{project}/locations/{location}/userStores/{user_store_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Not supported.
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, defaults to 10. The maximum value is 50; values
+   *   above 50 will be coerced to 50.
+   *
+   *   If this field is negative, an INVALID_ARGUMENT error is returned.
    * @param {string} [request.pageToken]
-   *   Optional. Not supported.
+   *   Optional. A page token, received from a previous `ListUserLicenses` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListUserLicenses`
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter by solution type. For example:
-   *   solution_type=SOLUTION_TYPE_SEARCH
+   *   Optional. Filter for the list request.
+   *
+   *   Supported fields:
+   *
+   *   * `license_assignment_state`
+   *
+   *   Examples:
+   *
+   *   * `license_assignment_state = ASSIGNED` to list assigned user licenses.
+   *   * `license_assignment_state = NO_LICENSE` to list not licensed users.
+   *   * `license_assignment_state = NO_LICENSE_ATTEMPTED_LOGIN` to list users
+   *   who attempted login but no license assigned.
+   *   * `license_assignment_state != NO_LICENSE_ATTEMPTED_LOGIN` to filter
+   *   out users who attempted login but no license assigned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1.UserLicense|UserLicense} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEnginesAsync()`
+   *   We recommend using `listUserLicensesAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listEnginesStream(
-    request?: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
+  listUserLicensesStream(
+    request?: protos.google.cloud.discoveryengine.v1.IListUserLicensesRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -1480,51 +1073,71 @@ export class EngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listEngines'];
+    const defaultCallSettings = this._defaults['listUserLicenses'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEngines stream %j', request);
-    return this.descriptors.page.listEngines.createStream(
-      this.innerApiCalls.listEngines as GaxCall,
+    this._log.info('listUserLicenses stream %j', request);
+    return this.descriptors.page.listUserLicenses.createStream(
+      this.innerApiCalls.listUserLicenses as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listEngines`, but returns an iterable object.
+   * Equivalent to `listUserLicenses`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection_id}`.
+   *   Required. The parent {@link protos.|UserStore} resource name, format:
+   *   `projects/{project}/locations/{location}/userStores/{user_store_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Not supported.
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, defaults to 10. The maximum value is 50; values
+   *   above 50 will be coerced to 50.
+   *
+   *   If this field is negative, an INVALID_ARGUMENT error is returned.
    * @param {string} [request.pageToken]
-   *   Optional. Not supported.
+   *   Optional. A page token, received from a previous `ListUserLicenses` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListUserLicenses`
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter by solution type. For example:
-   *   solution_type=SOLUTION_TYPE_SEARCH
+   *   Optional. Filter for the list request.
+   *
+   *   Supported fields:
+   *
+   *   * `license_assignment_state`
+   *
+   *   Examples:
+   *
+   *   * `license_assignment_state = ASSIGNED` to list assigned user licenses.
+   *   * `license_assignment_state = NO_LICENSE` to list not licensed users.
+   *   * `license_assignment_state = NO_LICENSE_ATTEMPTED_LOGIN` to list users
+   *   who attempted login but no license assigned.
+   *   * `license_assignment_state != NO_LICENSE_ATTEMPTED_LOGIN` to filter
+   *   out users who attempted login but no license assigned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.discoveryengine.v1.UserLicense|UserLicense}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/engine_service.list_engines.js</caption>
-   * region_tag:discoveryengine_v1_generated_EngineService_ListEngines_async
+   * @example <caption>include:samples/generated/v1/user_license_service.list_user_licenses.js</caption>
+   * region_tag:discoveryengine_v1_generated_UserLicenseService_ListUserLicenses_async
    */
-  listEnginesAsync(
-    request?: protos.google.cloud.discoveryengine.v1.IListEnginesRequest,
+  listUserLicensesAsync(
+    request?: protos.google.cloud.discoveryengine.v1.IListUserLicensesRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.discoveryengine.v1.IEngine> {
+  ): AsyncIterable<protos.google.cloud.discoveryengine.v1.IUserLicense> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1533,17 +1146,17 @@ export class EngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listEngines'];
+    const defaultCallSettings = this._defaults['listUserLicenses'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEngines iterate %j', request);
-    return this.descriptors.page.listEngines.asyncIterate(
-      this.innerApiCalls['listEngines'] as GaxCall,
+    this._log.info('listUserLicenses iterate %j', request);
+    return this.descriptors.page.listUserLicenses.asyncIterate(
+      this.innerApiCalls['listUserLicenses'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1.IEngine>;
+    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1.IUserLicense>;
   }
   /**
    * Gets information about a location.
@@ -1850,58 +1463,6 @@ export class EngineServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
-
-  /**
-   * Return a fully-qualified collection resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} collection
-   * @returns {string} Resource name string.
-   */
-  collectionPath(project: string, location: string, collection: string) {
-    return this.pathTemplates.collectionPathTemplate.render({
-      project: project,
-      location: location,
-      collection: collection,
-    });
-  }
-
-  /**
-   * Parse the project from Collection resource.
-   *
-   * @param {string} collectionName
-   *   A fully-qualified path representing Collection resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName)
-      .project;
-  }
-
-  /**
-   * Parse the location from Collection resource.
-   *
-   * @param {string} collectionName
-   *   A fully-qualified path representing Collection resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName)
-      .location;
-  }
-
-  /**
-   * Parse the collection from Collection resource.
-   *
-   * @param {string} collectionName
-   *   A fully-qualified path representing Collection resource.
-   * @returns {string} A string representing the collection.
-   */
-  matchCollectionFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName)
-      .collection;
-  }
 
   /**
    * Return a fully-qualified engine resource name string.
@@ -5363,14 +4924,66 @@ export class EngineServiceClient {
   }
 
   /**
+   * Return a fully-qualified userStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} user_store
+   * @returns {string} Resource name string.
+   */
+  userStorePath(project: string, location: string, userStore: string) {
+    return this.pathTemplates.userStorePathTemplate.render({
+      project: project,
+      location: location,
+      user_store: userStore,
+    });
+  }
+
+  /**
+   * Parse the project from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .project;
+  }
+
+  /**
+   * Parse the location from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .location;
+  }
+
+  /**
+   * Parse the user_store from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the user_store.
+   */
+  matchUserStoreFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .user_store;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.engineServiceStub && !this._terminated) {
-      return this.engineServiceStub.then(stub => {
+    if (this.userLicenseServiceStub && !this._terminated) {
+      return this.userLicenseServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

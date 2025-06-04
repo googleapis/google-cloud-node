@@ -12,6 +12,10 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Cmek_config_service.delete_cmek_config](#cmek_config_service.delete_cmek_config)
+  * [Cmek_config_service.get_cmek_config](#cmek_config_service.get_cmek_config)
+  * [Cmek_config_service.list_cmek_configs](#cmek_config_service.list_cmek_configs)
+  * [Cmek_config_service.update_cmek_config](#cmek_config_service.update_cmek_config)
   * [Completion_service.complete_query](#completion_service.complete_query)
   * [Completion_service.import_completion_suggestions](#completion_service.import_completion_suggestions)
   * [Completion_service.import_suggestion_deny_list_entries](#completion_service.import_suggestion_deny_list_entries)
@@ -57,6 +61,13 @@
   * [Grounded_generation_service.check_grounding](#grounded_generation_service.check_grounding)
   * [Grounded_generation_service.generate_grounded_content](#grounded_generation_service.generate_grounded_content)
   * [Grounded_generation_service.stream_generate_grounded_content](#grounded_generation_service.stream_generate_grounded_content)
+  * [Identity_mapping_store_service.create_identity_mapping_store](#identity_mapping_store_service.create_identity_mapping_store)
+  * [Identity_mapping_store_service.delete_identity_mapping_store](#identity_mapping_store_service.delete_identity_mapping_store)
+  * [Identity_mapping_store_service.get_identity_mapping_store](#identity_mapping_store_service.get_identity_mapping_store)
+  * [Identity_mapping_store_service.import_identity_mappings](#identity_mapping_store_service.import_identity_mappings)
+  * [Identity_mapping_store_service.list_identity_mapping_stores](#identity_mapping_store_service.list_identity_mapping_stores)
+  * [Identity_mapping_store_service.list_identity_mappings](#identity_mapping_store_service.list_identity_mappings)
+  * [Identity_mapping_store_service.purge_identity_mappings](#identity_mapping_store_service.purge_identity_mappings)
   * [Project_service.provision_project](#project_service.provision_project)
   * [Rank_service.rank](#rank_service.rank)
   * [Recommendation_service.recommend](#recommendation_service.recommend)
@@ -89,6 +100,8 @@
   * [User_event_service.import_user_events](#user_event_service.import_user_events)
   * [User_event_service.purge_user_events](#user_event_service.purge_user_events)
   * [User_event_service.write_user_event](#user_event_service.write_user_event)
+  * [User_license_service.batch_update_user_licenses](#user_license_service.batch_update_user_licenses)
+  * [User_license_service.list_user_licenses](#user_license_service.list_user_licenses)
   * [Acl_config_service.get_acl_config](#acl_config_service.get_acl_config)
   * [Acl_config_service.update_acl_config](#acl_config_service.update_acl_config)
   * [Chunk_service.get_chunk](#chunk_service.get_chunk)
@@ -302,6 +315,74 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Cmek_config_service.delete_cmek_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/cmek_config_service.delete_cmek_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/cmek_config_service.delete_cmek_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/cmek_config_service.delete_cmek_config.js`
+
+
+-----
+
+
+
+
+### Cmek_config_service.get_cmek_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/cmek_config_service.get_cmek_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/cmek_config_service.get_cmek_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/cmek_config_service.get_cmek_config.js`
+
+
+-----
+
+
+
+
+### Cmek_config_service.list_cmek_configs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/cmek_config_service.list_cmek_configs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/cmek_config_service.list_cmek_configs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/cmek_config_service.list_cmek_configs.js`
+
+
+-----
+
+
+
+
+### Cmek_config_service.update_cmek_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/cmek_config_service.update_cmek_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/cmek_config_service.update_cmek_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/cmek_config_service.update_cmek_config.js`
+
+
+-----
+
 
 
 
@@ -1070,6 +1151,125 @@ __Usage:__
 
 
 
+### Identity_mapping_store_service.create_identity_mapping_store
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.create_identity_mapping_store.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.create_identity_mapping_store.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.create_identity_mapping_store.js`
+
+
+-----
+
+
+
+
+### Identity_mapping_store_service.delete_identity_mapping_store
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.delete_identity_mapping_store.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.delete_identity_mapping_store.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.delete_identity_mapping_store.js`
+
+
+-----
+
+
+
+
+### Identity_mapping_store_service.get_identity_mapping_store
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.get_identity_mapping_store.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.get_identity_mapping_store.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.get_identity_mapping_store.js`
+
+
+-----
+
+
+
+
+### Identity_mapping_store_service.import_identity_mappings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.import_identity_mappings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.import_identity_mappings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.import_identity_mappings.js`
+
+
+-----
+
+
+
+
+### Identity_mapping_store_service.list_identity_mapping_stores
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.list_identity_mapping_stores.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.list_identity_mapping_stores.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.list_identity_mapping_stores.js`
+
+
+-----
+
+
+
+
+### Identity_mapping_store_service.list_identity_mappings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.list_identity_mappings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.list_identity_mappings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.list_identity_mappings.js`
+
+
+-----
+
+
+
+
+### Identity_mapping_store_service.purge_identity_mappings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.purge_identity_mappings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.purge_identity_mappings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/identity_mapping_store_service.purge_identity_mappings.js`
+
+
+-----
+
+
+
+
 ### Project_service.provision_project
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/project_service.provision_project.js).
@@ -1607,6 +1807,40 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.write_user_event.js`
+
+
+-----
+
+
+
+
+### User_license_service.batch_update_user_licenses
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/user_license_service.batch_update_user_licenses.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/user_license_service.batch_update_user_licenses.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/user_license_service.batch_update_user_licenses.js`
+
+
+-----
+
+
+
+
+### User_license_service.list_user_licenses
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/user_license_service.list_user_licenses.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/user_license_service.list_user_licenses.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/user_license_service.list_user_licenses.js`
 
 
 -----
