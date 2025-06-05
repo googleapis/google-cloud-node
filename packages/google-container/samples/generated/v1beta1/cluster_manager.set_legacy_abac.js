@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, zone, clusterId, enabled) {
+function main(enabled) {
   // [START container_v1beta1_generated_ClusterManager_SetLegacyAbac_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -47,9 +47,6 @@ function main(projectId, zone, clusterId, enabled) {
   async function callSetLegacyAbac() {
     // Construct request
     const request = {
-      projectId,
-      zone,
-      clusterId,
       enabled,
     };
 

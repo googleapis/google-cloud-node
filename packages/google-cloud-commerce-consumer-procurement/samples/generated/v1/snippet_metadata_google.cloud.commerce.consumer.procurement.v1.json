@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-procurement",
-        "version": "0.6.1",
+        "version": "0.6.2",
         "language": "TYPESCRIPT",
         "apis": [
             {

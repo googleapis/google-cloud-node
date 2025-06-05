@@ -3904,7 +3904,9 @@ export class CloudTasksClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
+        this.locationsClient.close().catch(err => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

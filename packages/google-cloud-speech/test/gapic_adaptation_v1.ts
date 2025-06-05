@@ -254,9 +254,14 @@ describe('v1.AdaptationClient', () => {
         throw err;
       });
       assert(client.adaptationStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -265,9 +270,14 @@ describe('v1.AdaptationClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.adaptationStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -430,7 +440,9 @@ describe('v1.AdaptationClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createPhraseSet(request), expectedError);
     });
   });
@@ -560,7 +572,9 @@ describe('v1.AdaptationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPhraseSet(request), expectedError);
     });
   });
@@ -694,7 +708,9 @@ describe('v1.AdaptationClient', () => {
       );
       request.phraseSet.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updatePhraseSet(request), expectedError);
     });
   });
@@ -824,7 +840,9 @@ describe('v1.AdaptationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deletePhraseSet(request), expectedError);
     });
   });
@@ -954,7 +972,9 @@ describe('v1.AdaptationClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createCustomClass(request), expectedError);
     });
   });
@@ -1084,7 +1104,9 @@ describe('v1.AdaptationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getCustomClass(request), expectedError);
     });
   });
@@ -1218,7 +1240,9 @@ describe('v1.AdaptationClient', () => {
       );
       request.customClass.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateCustomClass(request), expectedError);
     });
   });
@@ -1348,7 +1372,9 @@ describe('v1.AdaptationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteCustomClass(request), expectedError);
     });
   });

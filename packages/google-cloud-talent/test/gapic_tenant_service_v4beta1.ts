@@ -256,9 +256,14 @@ describe('v4beta1.TenantServiceClient', () => {
         throw err;
       });
       assert(client.tenantServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -267,9 +272,14 @@ describe('v4beta1.TenantServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.tenantServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -432,7 +442,9 @@ describe('v4beta1.TenantServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createTenant(request), expectedError);
     });
   });
@@ -559,7 +571,9 @@ describe('v4beta1.TenantServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getTenant(request), expectedError);
     });
   });
@@ -693,7 +707,9 @@ describe('v4beta1.TenantServiceClient', () => {
       );
       request.tenant.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateTenant(request), expectedError);
     });
   });
@@ -823,7 +839,9 @@ describe('v4beta1.TenantServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteTenant(request), expectedError);
     });
   });

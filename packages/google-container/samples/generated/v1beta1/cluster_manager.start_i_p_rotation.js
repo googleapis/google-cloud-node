@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, zone, clusterId) {
+function main() {
   // [START container_v1beta1_generated_ClusterManager_StartIPRotation_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -47,9 +47,6 @@ function main(projectId, zone, clusterId) {
   async function callStartIPRotation() {
     // Construct request
     const request = {
-      projectId,
-      zone,
-      clusterId,
     };
 
     // Run request

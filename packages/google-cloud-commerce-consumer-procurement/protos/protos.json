@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -51,14 +54,14 @@
                                   "requestType": "UpdateLicensePoolRequest",
                                   "responseType": "LicensePool",
                                   "options": {
-                                    "(google.api.http).patch": "/v1/{license_pool.name=billingAccounts/*/orders/*/licensePool/*}",
+                                    "(google.api.http).patch": "/v1/{license_pool.name=billingAccounts/*/orders/*/licensePool}",
                                     "(google.api.http).body": "license_pool",
                                     "(google.api.method_signature)": "license_pool,update_mask"
                                   },
                                   "parsedOptions": [
                                     {
                                       "(google.api.http)": {
-                                        "patch": "/v1/{license_pool.name=billingAccounts/*/orders/*/licensePool/*}",
+                                        "patch": "/v1/{license_pool.name=billingAccounts/*/orders/*/licensePool}",
                                         "body": "license_pool"
                                       }
                                     },

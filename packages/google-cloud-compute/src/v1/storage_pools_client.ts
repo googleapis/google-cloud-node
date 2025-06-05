@@ -18,15 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -107,36 +99,17 @@ export class StoragePoolsClient {
    *     const client = new StoragePoolsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof StoragePoolsClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'compute.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
@@ -145,9 +118,7 @@ export class StoragePoolsClient {
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -170,7 +141,7 @@ export class StoragePoolsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set defaultServicePath on the auth object.
     this.auth.defaultServicePath = this._servicePath;
@@ -181,7 +152,10 @@ export class StoragePoolsClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -202,30 +176,18 @@ export class StoragePoolsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      aggregatedList: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'items'
-      ),
-      list: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'items'
-      ),
-      listDisks: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'items'
-      ),
+      aggregatedList:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'items'),
+      list:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'items'),
+      listDisks:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'items')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.compute.v1.StoragePools',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.compute.v1.StoragePools', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -256,46 +218,32 @@ export class StoragePoolsClient {
     // Put together the "service stub" for
     // google.cloud.compute.v1.StoragePools.
     this.storagePoolsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.compute.v1.StoragePools'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.compute.v1.StoragePools') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1.StoragePools,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const storagePoolsStubMethods = [
-      'aggregatedList',
-      'delete',
-      'get',
-      'getIamPolicy',
-      'insert',
-      'list',
-      'listDisks',
-      'setIamPolicy',
-      'testIamPermissions',
-      'update',
-    ];
+    const storagePoolsStubMethods =
+        ['aggregatedList', 'delete', 'get', 'getIamPolicy', 'insert', 'list', 'listDisks', 'setIamPolicy', 'testIamPermissions', 'update'];
     for (const methodName of storagePoolsStubMethods) {
       const callPromise = this.storagePoolsStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -315,14 +263,8 @@ export class StoragePoolsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'compute.googleapis.com';
   }
@@ -333,14 +275,8 @@ export class StoragePoolsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'compute.googleapis.com';
   }
@@ -373,7 +309,7 @@ export class StoragePoolsClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform'
     ];
   }
 
@@ -383,9 +319,8 @@ export class StoragePoolsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -396,1120 +331,840 @@ export class StoragePoolsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Deletes the specified storage pool. Deleting a storagePool removes its data permanently and is irreversible. However, deleting a storagePool does not delete any snapshots previously made from the storagePool. You must separately delete snapshots.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.storagePool
-   *   Name of the storage pool to delete.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/storage_pools.delete.js</caption>
-   * region_tag:compute_v1_generated_StoragePools_Delete_async
-   */
+/**
+ * Deletes the specified storage pool. Deleting a storagePool removes its data permanently and is irreversible. However, deleting a storagePool does not delete any snapshots previously made from the storagePool. You must separately delete snapshots.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.storagePool
+ *   Name of the storage pool to delete.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/storage_pools.delete.js</caption>
+ * region_tag:compute_v1_generated_StoragePools_Delete_async
+ */
   delete(
-    request?: protos.google.cloud.compute.v1.IDeleteStoragePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IDeleteStoragePoolRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteStoragePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  delete(
-    request: protos.google.cloud.compute.v1.IDeleteStoragePoolRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  delete(
-    request?: protos.google.cloud.compute.v1.IDeleteStoragePoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IDeleteStoragePoolRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDeleteStoragePoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IDeleteStoragePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  delete(
+      request: protos.google.cloud.compute.v1.IDeleteStoragePoolRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteStoragePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  delete(
+      request?: protos.google.cloud.compute.v1.IDeleteStoragePoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteStoragePoolRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteStoragePoolRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        storage_pool: request.storagePool ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'storage_pool': request.storagePool ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('delete request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDeleteStoragePoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IDeleteStoragePoolRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('delete response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .delete(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.delete(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Returns a specified storage pool. Gets a list of available storage pools by making a list() request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.storagePool
-   *   Name of the storage pool to return.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.StoragePool|StoragePool}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_pools.get.js</caption>
-   * region_tag:compute_v1_generated_StoragePools_Get_async
-   */
+/**
+ * Returns a specified storage pool. Gets a list of available storage pools by making a list() request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.storagePool
+ *   Name of the storage pool to return.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.StoragePool|StoragePool}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_pools.get.js</caption>
+ * region_tag:compute_v1_generated_StoragePools_Get_async
+ */
   get(
-    request?: protos.google.cloud.compute.v1.IGetStoragePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IStoragePool,
-      protos.google.cloud.compute.v1.IGetStoragePoolRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IGetStoragePoolRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IStoragePool,
+        protos.google.cloud.compute.v1.IGetStoragePoolRequest|undefined, {}|undefined
+      ]>;
   get(
-    request: protos.google.cloud.compute.v1.IGetStoragePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IStoragePool,
-      protos.google.cloud.compute.v1.IGetStoragePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  get(
-    request: protos.google.cloud.compute.v1.IGetStoragePoolRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IStoragePool,
-      protos.google.cloud.compute.v1.IGetStoragePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  get(
-    request?: protos.google.cloud.compute.v1.IGetStoragePoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IGetStoragePoolRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IStoragePool,
-          | protos.google.cloud.compute.v1.IGetStoragePoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IStoragePool,
-      protos.google.cloud.compute.v1.IGetStoragePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IStoragePool,
-      protos.google.cloud.compute.v1.IGetStoragePoolRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IGetStoragePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  get(
+      request: protos.google.cloud.compute.v1.IGetStoragePoolRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IStoragePool,
+          protos.google.cloud.compute.v1.IGetStoragePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  get(
+      request?: protos.google.cloud.compute.v1.IGetStoragePoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IStoragePool,
+          protos.google.cloud.compute.v1.IGetStoragePoolRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IStoragePool,
+          protos.google.cloud.compute.v1.IGetStoragePoolRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IStoragePool,
+        protos.google.cloud.compute.v1.IGetStoragePoolRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        storage_pool: request.storagePool ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'storage_pool': request.storagePool ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('get request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1.IStoragePool,
-          | protos.google.cloud.compute.v1.IGetStoragePoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.IStoragePool,
+        protos.google.cloud.compute.v1.IGetStoragePoolRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .get(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1.IStoragePool,
-          protos.google.cloud.compute.v1.IGetStoragePoolRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('get response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.get(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.IStoragePool,
+        protos.google.cloud.compute.v1.IGetStoragePoolRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('get response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.optionsRequestedPolicyVersion
-   *   Requested IAM Policy version.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_pools.get_iam_policy.js</caption>
-   * region_tag:compute_v1_generated_StoragePools_GetIamPolicy_async
-   */
+/**
+ * Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} request.optionsRequestedPolicyVersion
+ *   Requested IAM Policy version.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.resource
+ *   Name or id of the resource for this request.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_pools.get_iam_policy.js</caption>
+ * region_tag:compute_v1_generated_StoragePools_GetIamPolicy_async
+ */
   getIamPolicy(
-    request?: protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPolicy,
-      (
-        | protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest|undefined, {}|undefined
+      ]>;
   getIamPolicy(
-    request: protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request: protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request?: protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IPolicy,
-          | protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPolicy,
-      (
-        | protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request?: protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1.IPolicy,
-          | protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1.IPolicy,
-          (
-            | protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getIamPolicy response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Creates a storage pool in the specified project using the data in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {google.cloud.compute.v1.StoragePool} request.storagePoolResource
-   *   The body resource for this request
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/storage_pools.insert.js</caption>
-   * region_tag:compute_v1_generated_StoragePools_Insert_async
-   */
+/**
+ * Creates a storage pool in the specified project using the data in the request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {google.cloud.compute.v1.StoragePool} request.storagePoolResource
+ *   The body resource for this request
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/storage_pools.insert.js</caption>
+ * region_tag:compute_v1_generated_StoragePools_Insert_async
+ */
   insert(
-    request?: protos.google.cloud.compute.v1.IInsertStoragePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IInsertStoragePoolRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   insert(
-    request: protos.google.cloud.compute.v1.IInsertStoragePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insert(
-    request: protos.google.cloud.compute.v1.IInsertStoragePoolRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insert(
-    request?: protos.google.cloud.compute.v1.IInsertStoragePoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IInsertStoragePoolRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IInsertStoragePoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IInsertStoragePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  insert(
+      request: protos.google.cloud.compute.v1.IInsertStoragePoolRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertStoragePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  insert(
+      request?: protos.google.cloud.compute.v1.IInsertStoragePoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertStoragePoolRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertStoragePoolRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('insert request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IInsertStoragePoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IInsertStoragePoolRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('insert response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .insert(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.insert(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Sets the access control policy on the specified resource. Replaces any existing policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {google.cloud.compute.v1.ZoneSetPolicyRequest} request.zoneSetPolicyRequestResource
-   *   The body resource for this request
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_pools.set_iam_policy.js</caption>
-   * region_tag:compute_v1_generated_StoragePools_SetIamPolicy_async
-   */
+/**
+ * Sets the access control policy on the specified resource. Replaces any existing policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.resource
+ *   Name or id of the resource for this request.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {google.cloud.compute.v1.ZoneSetPolicyRequest} request.zoneSetPolicyRequestResource
+ *   The body resource for this request
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_pools.set_iam_policy.js</caption>
+ * region_tag:compute_v1_generated_StoragePools_SetIamPolicy_async
+ */
   setIamPolicy(
-    request?: protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPolicy,
-      (
-        | protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest|undefined, {}|undefined
+      ]>;
   setIamPolicy(
-    request: protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request?: protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IPolicy,
-          | protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPolicy,
-      (
-        | protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request?: protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1.IPolicy,
-          | protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1.IPolicy,
-          (
-            | protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('setIamPolicy response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Returns permissions that a caller has on the specified resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
-   *   The body resource for this request
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.TestPermissionsResponse|TestPermissionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_pools.test_iam_permissions.js</caption>
-   * region_tag:compute_v1_generated_StoragePools_TestIamPermissions_async
-   */
+/**
+ * Returns permissions that a caller has on the specified resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.resource
+ *   Name or id of the resource for this request.
+ * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
+ *   The body resource for this request
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.TestPermissionsResponse|TestPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_pools.test_iam_permissions.js</caption>
+ * region_tag:compute_v1_generated_StoragePools_TestIamPermissions_async
+ */
   testIamPermissions(
-    request?: protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      (
-        | protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest|undefined, {}|undefined
+      ]>;
   testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      | protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      | protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request?: protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.ITestPermissionsResponse,
-          | protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      | protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      (
-        | protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1.ITestPermissionsResponse,
-          | protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .testIamPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1.ITestPermissionsResponse,
-          (
-            | protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('testIamPermissions response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Updates the specified storagePool with the data included in the request. The update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: pool_provisioned_capacity_gb, pool_provisioned_iops and pool_provisioned_throughput.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.storagePool
-   *   The storagePool name for this request.
-   * @param {google.cloud.compute.v1.StoragePool} request.storagePoolResource
-   *   The body resource for this request
-   * @param {string} request.updateMask
-   *   update_mask indicates fields to be updated as part of this request.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/storage_pools.update.js</caption>
-   * region_tag:compute_v1_generated_StoragePools_Update_async
-   */
+/**
+ * Updates the specified storagePool with the data included in the request. The update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: pool_provisioned_capacity_gb, pool_provisioned_iops and pool_provisioned_throughput.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.storagePool
+ *   The storagePool name for this request.
+ * @param {google.cloud.compute.v1.StoragePool} request.storagePoolResource
+ *   The body resource for this request
+ * @param {string} request.updateMask
+ *   update_mask indicates fields to be updated as part of this request.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/storage_pools.update.js</caption>
+ * region_tag:compute_v1_generated_StoragePools_Update_async
+ */
   update(
-    request?: protos.google.cloud.compute.v1.IUpdateStoragePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IUpdateStoragePoolRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   update(
-    request: protos.google.cloud.compute.v1.IUpdateStoragePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  update(
-    request: protos.google.cloud.compute.v1.IUpdateStoragePoolRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  update(
-    request?: protos.google.cloud.compute.v1.IUpdateStoragePoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IUpdateStoragePoolRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IUpdateStoragePoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateStoragePoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IUpdateStoragePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  update(
+      request: protos.google.cloud.compute.v1.IUpdateStoragePoolRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateStoragePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  update(
+      request?: protos.google.cloud.compute.v1.IUpdateStoragePoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateStoragePoolRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateStoragePoolRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        storage_pool: request.storagePool ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'storage_pool': request.storagePool ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('update request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IUpdateStoragePoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IUpdateStoragePoolRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('update response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .update(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.update(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
 
-  /**
-   * Retrieves an aggregated list of storage pools. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {boolean} request.includeAllScopes
-   *   Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {number} request.serviceProjectNumber
-   *   The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   as tuple [string, {@link protos.google.cloud.compute.v1.StoragePoolsScopedList|StoragePoolsScopedList}]. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_pools.aggregated_list.js</caption>
-   * region_tag:compute_v1_generated_StoragePools_AggregatedList_async
-   */
+
+/**
+ * Retrieves an aggregated list of storage pools. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {boolean} request.includeAllScopes
+ *   Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {number} request.serviceProjectNumber
+ *   The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   as tuple [string, {@link protos.google.cloud.compute.v1.StoragePoolsScopedList|StoragePoolsScopedList}]. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_pools.aggregated_list.js</caption>
+ * region_tag:compute_v1_generated_StoragePools_AggregatedList_async
+ */
   aggregatedListAsync(
-    request?: protos.google.cloud.compute.v1.IAggregatedListStoragePoolsRequest,
-    options?: CallOptions
-  ): AsyncIterable<
-    [string, protos.google.cloud.compute.v1.IStoragePoolsScopedList]
-  > {
+      request?: protos.google.cloud.compute.v1.IAggregatedListStoragePoolsRequest,
+      options?: CallOptions):
+    AsyncIterable<[string, protos.google.cloud.compute.v1.IStoragePoolsScopedList]>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+    });
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('aggregatedList iterate %j', request);
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<
-      [string, protos.google.cloud.compute.v1.IStoragePoolsScopedList]
-    >;
+    ) as AsyncIterable<[string, protos.google.cloud.compute.v1.IStoragePoolsScopedList]>;
   }
-  /**
-   * Retrieves a list of storage pools contained within the specified zone.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.StoragePool|StoragePool}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Retrieves a list of storage pools contained within the specified zone.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.StoragePool|StoragePool}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   list(
-    request?: protos.google.cloud.compute.v1.IListStoragePoolsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IStoragePool[],
-      protos.google.cloud.compute.v1.IListStoragePoolsRequest | null,
-      protos.google.cloud.compute.v1.IStoragePoolList,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IListStoragePoolsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IStoragePool[],
+        protos.google.cloud.compute.v1.IListStoragePoolsRequest|null,
+        protos.google.cloud.compute.v1.IStoragePoolList
+      ]>;
   list(
-    request: protos.google.cloud.compute.v1.IListStoragePoolsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListStoragePoolsRequest,
-      protos.google.cloud.compute.v1.IStoragePoolList | null | undefined,
-      protos.google.cloud.compute.v1.IStoragePool
-    >
-  ): void;
-  list(
-    request: protos.google.cloud.compute.v1.IListStoragePoolsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListStoragePoolsRequest,
-      protos.google.cloud.compute.v1.IStoragePoolList | null | undefined,
-      protos.google.cloud.compute.v1.IStoragePool
-    >
-  ): void;
-  list(
-    request?: protos.google.cloud.compute.v1.IListStoragePoolsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.compute.v1.IListStoragePoolsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.compute.v1.IListStoragePoolsRequest,
-          protos.google.cloud.compute.v1.IStoragePoolList | null | undefined,
-          protos.google.cloud.compute.v1.IStoragePool
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.compute.v1.IListStoragePoolsRequest,
-      protos.google.cloud.compute.v1.IStoragePoolList | null | undefined,
-      protos.google.cloud.compute.v1.IStoragePool
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IStoragePool[],
-      protos.google.cloud.compute.v1.IListStoragePoolsRequest | null,
-      protos.google.cloud.compute.v1.IStoragePoolList,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IStoragePoolList|null|undefined,
+          protos.google.cloud.compute.v1.IStoragePool>): void;
+  list(
+      request: protos.google.cloud.compute.v1.IListStoragePoolsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.compute.v1.IListStoragePoolsRequest,
+          protos.google.cloud.compute.v1.IStoragePoolList|null|undefined,
+          protos.google.cloud.compute.v1.IStoragePool>): void;
+  list(
+      request?: protos.google.cloud.compute.v1.IListStoragePoolsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.compute.v1.IListStoragePoolsRequest,
+          protos.google.cloud.compute.v1.IStoragePoolList|null|undefined,
+          protos.google.cloud.compute.v1.IStoragePool>,
+      callback?: PaginationCallback<
+          protos.google.cloud.compute.v1.IListStoragePoolsRequest,
+          protos.google.cloud.compute.v1.IStoragePoolList|null|undefined,
+          protos.google.cloud.compute.v1.IStoragePool>):
+      Promise<[
+        protos.google.cloud.compute.v1.IStoragePool[],
+        protos.google.cloud.compute.v1.IListStoragePoolsRequest|null,
+        protos.google.cloud.compute.v1.IStoragePoolList
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.compute.v1.IListStoragePoolsRequest,
-          protos.google.cloud.compute.v1.IStoragePoolList | null | undefined,
-          protos.google.cloud.compute.v1.IStoragePool
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.compute.v1.IListStoragePoolsRequest,
+      protos.google.cloud.compute.v1.IStoragePoolList|null|undefined,
+      protos.google.cloud.compute.v1.IStoragePool>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('list values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1518,65 +1173,62 @@ export class StoragePoolsClient {
     this._log.info('list request %j', request);
     return this.innerApiCalls
       .list(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.compute.v1.IStoragePool[],
-          protos.google.cloud.compute.v1.IListStoragePoolsRequest | null,
-          protos.google.cloud.compute.v1.IStoragePoolList,
-        ]) => {
-          this._log.info('list values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.compute.v1.IStoragePool[],
+        protos.google.cloud.compute.v1.IListStoragePoolsRequest|null,
+        protos.google.cloud.compute.v1.IStoragePoolList
+      ]) => {
+        this._log.info('list values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `list`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.StoragePool|StoragePool} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `list`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.StoragePool|StoragePool} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listStream(
-    request?: protos.google.cloud.compute.v1.IListStoragePoolsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.compute.v1.IListStoragePoolsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+    });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -1585,56 +1237,55 @@ export class StoragePoolsClient {
     );
   }
 
-  /**
-   * Equivalent to `list`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.compute.v1.StoragePool|StoragePool}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_pools.list.js</caption>
-   * region_tag:compute_v1_generated_StoragePools_List_async
-   */
+/**
+ * Equivalent to `list`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.compute.v1.StoragePool|StoragePool}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_pools.list.js</caption>
+ * region_tag:compute_v1_generated_StoragePools_List_async
+ */
   listAsync(
-    request?: protos.google.cloud.compute.v1.IListStoragePoolsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.compute.v1.IStoragePool> {
+      request?: protos.google.cloud.compute.v1.IListStoragePoolsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.compute.v1.IStoragePool>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+    });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
@@ -1642,118 +1293,99 @@ export class StoragePoolsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.compute.v1.IStoragePool>;
   }
-  /**
-   * Lists the disks in a specified storage pool.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {string} request.storagePool
-   *   Name of the storage pool to list disks of.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.StoragePoolDisk|StoragePoolDisk}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDisksAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the disks in a specified storage pool.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {string} request.storagePool
+ *   Name of the storage pool to list disks of.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.StoragePoolDisk|StoragePoolDisk}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDisksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDisks(
-    request?: protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IStoragePoolDisk[],
-      protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest | null,
-      protos.google.cloud.compute.v1.IStoragePoolListDisks,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IStoragePoolDisk[],
+        protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest|null,
+        protos.google.cloud.compute.v1.IStoragePoolListDisks
+      ]>;
   listDisks(
-    request: protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
-      protos.google.cloud.compute.v1.IStoragePoolListDisks | null | undefined,
-      protos.google.cloud.compute.v1.IStoragePoolDisk
-    >
-  ): void;
-  listDisks(
-    request: protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
-      protos.google.cloud.compute.v1.IStoragePoolListDisks | null | undefined,
-      protos.google.cloud.compute.v1.IStoragePoolDisk
-    >
-  ): void;
-  listDisks(
-    request?: protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
-          | protos.google.cloud.compute.v1.IStoragePoolListDisks
-          | null
-          | undefined,
-          protos.google.cloud.compute.v1.IStoragePoolDisk
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
-      protos.google.cloud.compute.v1.IStoragePoolListDisks | null | undefined,
-      protos.google.cloud.compute.v1.IStoragePoolDisk
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IStoragePoolDisk[],
-      protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest | null,
-      protos.google.cloud.compute.v1.IStoragePoolListDisks,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IStoragePoolListDisks|null|undefined,
+          protos.google.cloud.compute.v1.IStoragePoolDisk>): void;
+  listDisks(
+      request: protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
+          protos.google.cloud.compute.v1.IStoragePoolListDisks|null|undefined,
+          protos.google.cloud.compute.v1.IStoragePoolDisk>): void;
+  listDisks(
+      request?: protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
+          protos.google.cloud.compute.v1.IStoragePoolListDisks|null|undefined,
+          protos.google.cloud.compute.v1.IStoragePoolDisk>,
+      callback?: PaginationCallback<
+          protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
+          protos.google.cloud.compute.v1.IStoragePoolListDisks|null|undefined,
+          protos.google.cloud.compute.v1.IStoragePoolDisk>):
+      Promise<[
+        protos.google.cloud.compute.v1.IStoragePoolDisk[],
+        protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest|null,
+        protos.google.cloud.compute.v1.IStoragePoolListDisks
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        storage_pool: request.storagePool ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'storage_pool': request.storagePool ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
-          | protos.google.cloud.compute.v1.IStoragePoolListDisks
-          | null
-          | undefined,
-          protos.google.cloud.compute.v1.IStoragePoolDisk
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
+      protos.google.cloud.compute.v1.IStoragePoolListDisks|null|undefined,
+      protos.google.cloud.compute.v1.IStoragePoolDisk>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDisks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1762,68 +1394,65 @@ export class StoragePoolsClient {
     this._log.info('listDisks request %j', request);
     return this.innerApiCalls
       .listDisks(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.compute.v1.IStoragePoolDisk[],
-          protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest | null,
-          protos.google.cloud.compute.v1.IStoragePoolListDisks,
-        ]) => {
-          this._log.info('listDisks values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.compute.v1.IStoragePoolDisk[],
+        protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest|null,
+        protos.google.cloud.compute.v1.IStoragePoolListDisks
+      ]) => {
+        this._log.info('listDisks values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDisks`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {string} request.storagePool
-   *   Name of the storage pool to list disks of.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.StoragePoolDisk|StoragePoolDisk} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDisksAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDisks`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {string} request.storagePool
+ *   Name of the storage pool to list disks of.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.StoragePoolDisk|StoragePoolDisk} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDisksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDisksStream(
-    request?: protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        storage_pool: request.storagePool ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'storage_pool': request.storagePool ?? '',
+    });
     const defaultCallSettings = this._defaults['listDisks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDisks stream %j', request);
     return this.descriptors.page.listDisks.createStream(
       this.innerApiCalls.listDisks as GaxCall,
@@ -1832,59 +1461,58 @@ export class StoragePoolsClient {
     );
   }
 
-  /**
-   * Equivalent to `listDisks`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {string} request.storagePool
-   *   Name of the storage pool to list disks of.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.compute.v1.StoragePoolDisk|StoragePoolDisk}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_pools.list_disks.js</caption>
-   * region_tag:compute_v1_generated_StoragePools_ListDisks_async
-   */
+/**
+ * Equivalent to `listDisks`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {string} request.storagePool
+ *   Name of the storage pool to list disks of.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.compute.v1.StoragePoolDisk|StoragePoolDisk}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_pools.list_disks.js</caption>
+ * region_tag:compute_v1_generated_StoragePools_ListDisks_async
+ */
   listDisksAsync(
-    request?: protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.compute.v1.IStoragePoolDisk> {
+      request?: protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.compute.v1.IStoragePoolDisk>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        storage_pool: request.storagePool ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'storage_pool': request.storagePool ?? '',
+    });
     const defaultCallSettings = this._defaults['listDisks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDisks iterate %j', request);
     return this.descriptors.page.listDisks.asyncIterate(
       this.innerApiCalls['listDisks'] as GaxCall,

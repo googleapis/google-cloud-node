@@ -284,9 +284,14 @@ describe('v1.SecurityCenterManagementClient', () => {
         throw err;
       });
       assert(client.securityCenterManagementStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -296,9 +301,14 @@ describe('v1.SecurityCenterManagementClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.securityCenterManagementStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -476,7 +486,9 @@ describe('v1.SecurityCenterManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getEffectiveSecurityHealthAnalyticsCustomModule(request),
         expectedError
@@ -616,7 +628,9 @@ describe('v1.SecurityCenterManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getSecurityHealthAnalyticsCustomModule(request),
         expectedError
@@ -762,7 +776,9 @@ describe('v1.SecurityCenterManagementClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createSecurityHealthAnalyticsCustomModule(request),
         expectedError
@@ -912,7 +928,9 @@ describe('v1.SecurityCenterManagementClient', () => {
       );
       request.securityHealthAnalyticsCustomModule.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateSecurityHealthAnalyticsCustomModule(request),
         expectedError
@@ -1058,7 +1076,9 @@ describe('v1.SecurityCenterManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteSecurityHealthAnalyticsCustomModule(request),
         expectedError
@@ -1204,7 +1224,9 @@ describe('v1.SecurityCenterManagementClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.simulateSecurityHealthAnalyticsCustomModule(request),
         expectedError
@@ -1350,7 +1372,9 @@ describe('v1.SecurityCenterManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getEffectiveEventThreatDetectionCustomModule(request),
         expectedError
@@ -1492,7 +1516,9 @@ describe('v1.SecurityCenterManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getEventThreatDetectionCustomModule(request),
         expectedError
@@ -1632,7 +1658,9 @@ describe('v1.SecurityCenterManagementClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createEventThreatDetectionCustomModule(request),
         expectedError
@@ -1776,7 +1804,9 @@ describe('v1.SecurityCenterManagementClient', () => {
       );
       request.eventThreatDetectionCustomModule.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateEventThreatDetectionCustomModule(request),
         expectedError
@@ -1916,7 +1946,9 @@ describe('v1.SecurityCenterManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteEventThreatDetectionCustomModule(request),
         expectedError
@@ -2062,7 +2094,9 @@ describe('v1.SecurityCenterManagementClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.validateEventThreatDetectionCustomModule(request),
         expectedError
@@ -2203,7 +2237,9 @@ describe('v1.SecurityCenterManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getSecurityCenterService(request),
         expectedError
@@ -2348,7 +2384,9 @@ describe('v1.SecurityCenterManagementClient', () => {
       );
       request.securityCenterService.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateSecurityCenterService(request),
         expectedError
