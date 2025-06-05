@@ -19,7 +19,7 @@
     "@google-cloud/storage": "^7.0.0",
     "chalk": "^5.0.0",
     "fs.promises": "^0.1.2",
-    "google-proto-files": "^4.0.0",
+    "google-proto-files": "^5.0.0",
     "node-record-lpcm16": "^1.0.1",
     "proto3-json-serializer": "^3.0.0",
     "protobufjs": "^7.0.0",
