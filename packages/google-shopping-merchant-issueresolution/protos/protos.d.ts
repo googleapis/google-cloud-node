@@ -374,12 +374,6 @@ export namespace google {
                         /** RenderIssuesRequestPayload userInputActionOption. */
                         public userInputActionOption?: (google.shopping.merchant.issueresolution.v1beta.UserInputActionRenderingOption|keyof typeof google.shopping.merchant.issueresolution.v1beta.UserInputActionRenderingOption|null);
 
-                        /** RenderIssuesRequestPayload _contentOption. */
-                        public _contentOption?: "contentOption";
-
-                        /** RenderIssuesRequestPayload _userInputActionOption. */
-                        public _userInputActionOption?: "userInputActionOption";
-
                         /**
                          * Creates a new RenderIssuesRequestPayload instance using the specified properties.
                          * @param [properties] Properties to set
@@ -1278,12 +1272,6 @@ export namespace google {
                             /** Reason action. */
                             public action?: (google.shopping.merchant.issueresolution.v1beta.IAction|null);
 
-                            /** Reason _detail. */
-                            public _detail?: "detail";
-
-                            /** Reason _action. */
-                            public _action?: "action";
-
                             /**
                              * Creates a new Reason instance using the specified properties.
                              * @param [properties] Properties to set
@@ -1393,12 +1381,6 @@ export namespace google {
 
                         /** BuiltInSimpleAction additionalContent. */
                         public additionalContent?: (google.shopping.merchant.issueresolution.v1beta.BuiltInSimpleAction.IAdditionalContent|null);
-
-                        /** BuiltInSimpleAction _attributeCode. */
-                        public _attributeCode?: "attributeCode";
-
-                        /** BuiltInSimpleAction _additionalContent. */
-                        public _additionalContent?: "additionalContent";
 
                         /**
                          * Creates a new BuiltInSimpleAction instance using the specified properties.
@@ -1756,12 +1738,6 @@ export namespace google {
                         /** ActionFlow dialogButtonLabel. */
                         public dialogButtonLabel: string;
 
-                        /** ActionFlow _dialogMessage. */
-                        public _dialogMessage?: "dialogMessage";
-
-                        /** ActionFlow _dialogCallout. */
-                        public _dialogCallout?: "dialogCallout";
-
                         /**
                          * Creates a new ActionFlow instance using the specified properties.
                          * @param [properties] Properties to set
@@ -2009,15 +1985,6 @@ export namespace google {
                             /** TextInput ariaLabel. */
                             public ariaLabel?: (string|null);
 
-                            /** TextInput _additionalInfo. */
-                            public _additionalInfo?: "additionalInfo";
-
-                            /** TextInput _formatInfo. */
-                            public _formatInfo?: "formatInfo";
-
-                            /** TextInput _ariaLabel. */
-                            public _ariaLabel?: "ariaLabel";
-
                             /**
                              * Creates a new TextInput instance using the specified properties.
                              * @param [properties] Properties to set
@@ -2235,9 +2202,6 @@ export namespace google {
 
                                 /** ChoiceInputOption additionalInput. */
                                 public additionalInput?: (google.shopping.merchant.issueresolution.v1beta.IInputField|null);
-
-                                /** ChoiceInputOption _additionalInput. */
-                                public _additionalInput?: "additionalInput";
 
                                 /**
                                  * Creates a new ChoiceInputOption instance using the specified properties.
@@ -4247,6 +4211,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -4287,6 +4254,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -8505,6 +8475,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -8753,7 +8726,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -8784,7 +8757,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
