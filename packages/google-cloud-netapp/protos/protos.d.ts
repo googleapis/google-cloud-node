@@ -938,6 +938,15 @@ export namespace google {
 
                     /** Backup satisfiesPzi */
                     satisfiesPzi?: (boolean|null);
+
+                    /** Backup volumeRegion */
+                    volumeRegion?: (string|null);
+
+                    /** Backup backupRegion */
+                    backupRegion?: (string|null);
+
+                    /** Backup enforcedRetentionEndTime */
+                    enforcedRetentionEndTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a Backup. */
@@ -984,6 +993,15 @@ export namespace google {
 
                     /** Backup satisfiesPzi. */
                     public satisfiesPzi: boolean;
+
+                    /** Backup volumeRegion. */
+                    public volumeRegion: string;
+
+                    /** Backup backupRegion. */
+                    public backupRegion: string;
+
+                    /** Backup enforcedRetentionEndTime. */
+                    public enforcedRetentionEndTime?: (google.protobuf.ITimestamp|null);
 
                     /** Backup _sourceSnapshot. */
                     public _sourceSnapshot?: "sourceSnapshot";
@@ -2558,6 +2576,24 @@ export namespace google {
 
                     /** BackupVault labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** BackupVault backupVaultType */
+                    backupVaultType?: (google.cloud.netapp.v1.BackupVault.BackupVaultType|keyof typeof google.cloud.netapp.v1.BackupVault.BackupVaultType|null);
+
+                    /** BackupVault sourceRegion */
+                    sourceRegion?: (string|null);
+
+                    /** BackupVault backupRegion */
+                    backupRegion?: (string|null);
+
+                    /** BackupVault sourceBackupVault */
+                    sourceBackupVault?: (string|null);
+
+                    /** BackupVault destinationBackupVault */
+                    destinationBackupVault?: (string|null);
+
+                    /** BackupVault backupRetentionPolicy */
+                    backupRetentionPolicy?: (google.cloud.netapp.v1.BackupVault.IBackupRetentionPolicy|null);
                 }
 
                 /** Represents a BackupVault. */
@@ -2583,6 +2619,24 @@ export namespace google {
 
                     /** BackupVault labels. */
                     public labels: { [k: string]: string };
+
+                    /** BackupVault backupVaultType. */
+                    public backupVaultType: (google.cloud.netapp.v1.BackupVault.BackupVaultType|keyof typeof google.cloud.netapp.v1.BackupVault.BackupVaultType);
+
+                    /** BackupVault sourceRegion. */
+                    public sourceRegion: string;
+
+                    /** BackupVault backupRegion. */
+                    public backupRegion: string;
+
+                    /** BackupVault sourceBackupVault. */
+                    public sourceBackupVault: string;
+
+                    /** BackupVault destinationBackupVault. */
+                    public destinationBackupVault: string;
+
+                    /** BackupVault backupRetentionPolicy. */
+                    public backupRetentionPolicy?: (google.cloud.netapp.v1.BackupVault.IBackupRetentionPolicy|null);
 
                     /**
                      * Creates a new BackupVault instance using the specified properties.
@@ -2664,6 +2718,127 @@ export namespace google {
 
                 namespace BackupVault {
 
+                    /** Properties of a BackupRetentionPolicy. */
+                    interface IBackupRetentionPolicy {
+
+                        /** BackupRetentionPolicy backupMinimumEnforcedRetentionDays */
+                        backupMinimumEnforcedRetentionDays?: (number|null);
+
+                        /** BackupRetentionPolicy dailyBackupImmutable */
+                        dailyBackupImmutable?: (boolean|null);
+
+                        /** BackupRetentionPolicy weeklyBackupImmutable */
+                        weeklyBackupImmutable?: (boolean|null);
+
+                        /** BackupRetentionPolicy monthlyBackupImmutable */
+                        monthlyBackupImmutable?: (boolean|null);
+
+                        /** BackupRetentionPolicy manualBackupImmutable */
+                        manualBackupImmutable?: (boolean|null);
+                    }
+
+                    /** Represents a BackupRetentionPolicy. */
+                    class BackupRetentionPolicy implements IBackupRetentionPolicy {
+
+                        /**
+                         * Constructs a new BackupRetentionPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.netapp.v1.BackupVault.IBackupRetentionPolicy);
+
+                        /** BackupRetentionPolicy backupMinimumEnforcedRetentionDays. */
+                        public backupMinimumEnforcedRetentionDays: number;
+
+                        /** BackupRetentionPolicy dailyBackupImmutable. */
+                        public dailyBackupImmutable: boolean;
+
+                        /** BackupRetentionPolicy weeklyBackupImmutable. */
+                        public weeklyBackupImmutable: boolean;
+
+                        /** BackupRetentionPolicy monthlyBackupImmutable. */
+                        public monthlyBackupImmutable: boolean;
+
+                        /** BackupRetentionPolicy manualBackupImmutable. */
+                        public manualBackupImmutable: boolean;
+
+                        /**
+                         * Creates a new BackupRetentionPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BackupRetentionPolicy instance
+                         */
+                        public static create(properties?: google.cloud.netapp.v1.BackupVault.IBackupRetentionPolicy): google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy;
+
+                        /**
+                         * Encodes the specified BackupRetentionPolicy message. Does not implicitly {@link google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy.verify|verify} messages.
+                         * @param message BackupRetentionPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.netapp.v1.BackupVault.IBackupRetentionPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BackupRetentionPolicy message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy.verify|verify} messages.
+                         * @param message BackupRetentionPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.netapp.v1.BackupVault.IBackupRetentionPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BackupRetentionPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BackupRetentionPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy;
+
+                        /**
+                         * Decodes a BackupRetentionPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BackupRetentionPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy;
+
+                        /**
+                         * Verifies a BackupRetentionPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BackupRetentionPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BackupRetentionPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy;
+
+                        /**
+                         * Creates a plain object from a BackupRetentionPolicy message. Also converts values to other types if specified.
+                         * @param message BackupRetentionPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BackupRetentionPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BackupRetentionPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** State enum. */
                     enum State {
                         STATE_UNSPECIFIED = 0,
@@ -2672,6 +2847,13 @@ export namespace google {
                         DELETING = 3,
                         ERROR = 4,
                         UPDATING = 5
+                    }
+
+                    /** BackupVaultType enum. */
+                    enum BackupVaultType {
+                        BACKUP_VAULT_TYPE_UNSPECIFIED = 0,
+                        IN_REGION = 1,
+                        CROSS_REGION = 2
                     }
                 }
 
@@ -12811,6 +12993,15 @@ export namespace google {
 
                     /** StoragePool satisfiesPzi */
                     satisfiesPzi?: (boolean|null);
+
+                    /** StoragePool customPerformanceEnabled */
+                    customPerformanceEnabled?: (boolean|null);
+
+                    /** StoragePool totalThroughputMibps */
+                    totalThroughputMibps?: (number|Long|string|null);
+
+                    /** StoragePool totalIops */
+                    totalIops?: (number|Long|string|null);
                 }
 
                 /** Represents a StoragePool. */
@@ -12887,6 +13078,15 @@ export namespace google {
 
                     /** StoragePool satisfiesPzi. */
                     public satisfiesPzi: boolean;
+
+                    /** StoragePool customPerformanceEnabled. */
+                    public customPerformanceEnabled: boolean;
+
+                    /** StoragePool totalThroughputMibps. */
+                    public totalThroughputMibps: (number|Long|string);
+
+                    /** StoragePool totalIops. */
+                    public totalIops: (number|Long|string);
 
                     /** StoragePool _globalAccessAllowed. */
                     public _globalAccessAllowed?: "globalAccessAllowed";

@@ -30,23 +30,7 @@ type JobServiceClient = v4.JobServiceClient;
 const TenantServiceClient = v4.TenantServiceClient;
 type TenantServiceClient = v4.TenantServiceClient;
 
-export {
-  v4,
-  v4beta1,
-  CompanyServiceClient,
-  CompletionClient,
-  EventServiceClient,
-  JobServiceClient,
-  TenantServiceClient,
-};
-export default {
-  v4,
-  v4beta1,
-  CompanyServiceClient,
-  CompletionClient,
-  EventServiceClient,
-  JobServiceClient,
-  TenantServiceClient,
-};
+export {v4, v4beta1, CompanyServiceClient, CompletionClient, EventServiceClient, JobServiceClient, TenantServiceClient};
+export default {v4, v4beta1, CompanyServiceClient, CompletionClient, EventServiceClient, JobServiceClient, TenantServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

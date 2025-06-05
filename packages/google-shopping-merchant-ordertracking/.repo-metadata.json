@@ -1,0 +1,17 @@
+{
+  "name": "merchantapi",
+  "name_pretty": "Merchant API",
+  "product_documentation": "https://developers.google.com/merchant/api",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/merchantapi/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-shopping/ordertracking",
+  "api_id": "merchantapi.googleapis.com",
+  "default_version": "v1beta",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "merchantapi"
+}
+

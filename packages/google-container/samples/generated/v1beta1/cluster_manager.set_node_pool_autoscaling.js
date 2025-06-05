@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, zone, clusterId, nodePoolId, autoscaling) {
+function main(autoscaling) {
   // [START container_v1beta1_generated_ClusterManager_SetNodePoolAutoscaling_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -48,10 +48,6 @@ function main(projectId, zone, clusterId, nodePoolId, autoscaling) {
   async function callSetNodePoolAutoscaling() {
     // Construct request
     const request = {
-      projectId,
-      zone,
-      clusterId,
-      nodePoolId,
       autoscaling,
     };
 

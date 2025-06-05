@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, zone, operationId) {
+function main() {
   // [START container_v1beta1_generated_ClusterManager_CancelOperation_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -43,9 +43,6 @@ function main(projectId, zone, operationId) {
   async function callCancelOperation() {
     // Construct request
     const request = {
-      projectId,
-      zone,
-      operationId,
     };
 
     // Run request

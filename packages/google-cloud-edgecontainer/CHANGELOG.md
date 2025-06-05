@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/edgecontainer-v0.6.1...edgecontainer-v0.7.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([b3bd921](https://github.com/googleapis/google-cloud-node/commit/b3bd921a30b15a632d8e8495b91723d314c23c71))
+
 ## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/edgecontainer-v0.6.0...edgecontainer-v0.6.1) (2025-03-21)
 
 

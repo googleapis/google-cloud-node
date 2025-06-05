@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/os-config",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "Osconfig client for Node.js",
   "repository": {
     "type": "git",

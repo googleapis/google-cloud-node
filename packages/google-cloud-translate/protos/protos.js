@@ -1661,23 +1661,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * AdaptiveMtTranslateRequest _referenceSentenceConfig.
-                         * @member {"referenceSentenceConfig"|undefined} _referenceSentenceConfig
-                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(AdaptiveMtTranslateRequest.prototype, "_referenceSentenceConfig", {
                             get: $util.oneOfGetter($oneOfFields = ["referenceSentenceConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * AdaptiveMtTranslateRequest _glossaryConfig.
-                         * @member {"glossaryConfig"|undefined} _glossaryConfig
-                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(AdaptiveMtTranslateRequest.prototype, "_glossaryConfig", {
                             get: $util.oneOfGetter($oneOfFields = ["glossaryConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
