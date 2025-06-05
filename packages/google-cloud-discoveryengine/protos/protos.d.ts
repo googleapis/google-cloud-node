@@ -123,9 +123,6 @@ export namespace google {
                     /** Answer safetyRatings. */
                     public safetyRatings: google.cloud.discoveryengine.v1.ISafetyRating[];
 
-                    /** Answer _groundingScore. */
-                    public _groundingScore?: "groundingScore";
-
                     /**
                      * Creates a new Answer instance using the specified properties.
                      * @param [properties] Properties to set
@@ -454,12 +451,6 @@ export namespace google {
 
                         /** GroundingSupport sources. */
                         public sources: google.cloud.discoveryengine.v1.Answer.ICitationSource[];
-
-                        /** GroundingSupport _groundingScore. */
-                        public _groundingScore?: "groundingScore";
-
-                        /** GroundingSupport _groundingCheckRequired. */
-                        public _groundingCheckRequired?: "groundingCheckRequired";
 
                         /**
                          * Creates a new GroundingSupport instance using the specified properties.
@@ -807,9 +798,6 @@ export namespace google {
                                 /** ChunkContent relevanceScore. */
                                 public relevanceScore?: (number|null);
 
-                                /** ChunkContent _relevanceScore. */
-                                public _relevanceScore?: "relevanceScore";
-
                                 /**
                                  * Creates a new ChunkContent instance using the specified properties.
                                  * @param [properties] Properties to set
@@ -925,9 +913,6 @@ export namespace google {
 
                             /** ChunkInfo documentMetadata. */
                             public documentMetadata?: (google.cloud.discoveryengine.v1.Answer.Reference.ChunkInfo.IDocumentMetadata|null);
-
-                            /** ChunkInfo _relevanceScore. */
-                            public _relevanceScore?: "relevanceScore";
 
                             /**
                              * Creates a new ChunkInfo instance using the specified properties.
@@ -1931,9 +1916,6 @@ export namespace google {
                                         /** ChunkInfo relevanceScore. */
                                         public relevanceScore?: (number|null);
 
-                                        /** ChunkInfo _relevanceScore. */
-                                        public _relevanceScore?: "relevanceScore";
-
                                         /**
                                          * Creates a new ChunkInfo instance using the specified properties.
                                          * @param [properties] Properties to set
@@ -2502,9 +2484,6 @@ export namespace google {
 
                     /** Chunk annotationMetadata. */
                     public annotationMetadata: google.cloud.discoveryengine.v1.Chunk.IAnnotationMetadata[];
-
-                    /** Chunk _relevanceScore. */
-                    public _relevanceScore?: "relevanceScore";
 
                     /**
                      * Creates a new Chunk instance using the specified properties.
@@ -9903,9 +9882,6 @@ export namespace google {
                     /** SearchInfo offset. */
                     public offset?: (number|null);
 
-                    /** SearchInfo _offset. */
-                    public _offset?: "offset";
-
                     /**
                      * Creates a new SearchInfo instance using the specified properties.
                      * @param [properties] Properties to set
@@ -10136,18 +10112,6 @@ export namespace google {
                     /** TransactionInfo discountValue. */
                     public discountValue?: (number|null);
 
-                    /** TransactionInfo _value. */
-                    public _value?: "value";
-
-                    /** TransactionInfo _tax. */
-                    public _tax?: "tax";
-
-                    /** TransactionInfo _cost. */
-                    public _cost?: "cost";
-
-                    /** TransactionInfo _discountValue. */
-                    public _discountValue?: "discountValue";
-
                     /**
                      * Creates a new TransactionInfo instance using the specified properties.
                      * @param [properties] Properties to set
@@ -10284,12 +10248,6 @@ export namespace google {
                     /** DocumentInfo documentDescriptor. */
                     public documentDescriptor?: ("id"|"name"|"uri");
 
-                    /** DocumentInfo _quantity. */
-                    public _quantity?: "quantity";
-
-                    /** DocumentInfo _conversionValue. */
-                    public _conversionValue?: "conversionValue";
-
                     /**
                      * Creates a new DocumentInfo instance using the specified properties.
                      * @param [properties] Properties to set
@@ -10411,12 +10369,6 @@ export namespace google {
                     /** PanelInfo documents. */
                     public documents: google.cloud.discoveryengine.v1.IDocumentInfo[];
 
-                    /** PanelInfo _panelPosition. */
-                    public _panelPosition?: "panelPosition";
-
-                    /** PanelInfo _totalPanels. */
-                    public _totalPanels?: "totalPanels";
-
                     /**
                      * Creates a new PanelInfo instance using the specified properties.
                      * @param [properties] Properties to set
@@ -10519,9 +10471,6 @@ export namespace google {
 
                     /** MediaInfo mediaProgressPercentage. */
                     public mediaProgressPercentage?: (number|null);
-
-                    /** MediaInfo _mediaProgressPercentage. */
-                    public _mediaProgressPercentage?: "mediaProgressPercentage";
 
                     /**
                      * Creates a new MediaInfo instance using the specified properties.
@@ -17146,9 +17095,6 @@ export namespace google {
                         /** SessionSpec searchResultPersistenceCount. */
                         public searchResultPersistenceCount?: (number|null);
 
-                        /** SessionSpec _searchResultPersistenceCount. */
-                        public _searchResultPersistenceCount?: "searchResultPersistenceCount";
-
                         /**
                          * Creates a new SessionSpec instance using the specified properties.
                          * @param [properties] Properties to set
@@ -20767,9 +20713,6 @@ export namespace google {
 
                         /** AnswerGenerationSpec ignoreJailBreakingQuery. */
                         public ignoreJailBreakingQuery: boolean;
-
-                        /** AnswerGenerationSpec _ignoreLowRelevantContent. */
-                        public _ignoreLowRelevantContent?: "ignoreLowRelevantContent";
 
                         /**
                          * Creates a new AnswerGenerationSpec instance using the specified properties.
@@ -24702,12 +24645,6 @@ export namespace google {
 
                     /** AdvancedSiteSearchConfig disableAutomaticRefresh. */
                     public disableAutomaticRefresh?: (boolean|null);
-
-                    /** AdvancedSiteSearchConfig _disableInitialIndex. */
-                    public _disableInitialIndex?: "disableInitialIndex";
-
-                    /** AdvancedSiteSearchConfig _disableAutomaticRefresh. */
-                    public _disableAutomaticRefresh?: "disableAutomaticRefresh";
 
                     /**
                      * Creates a new AdvancedSiteSearchConfig instance using the specified properties.
@@ -31014,27 +30951,6 @@ export namespace google {
                         /** GenerationSpec maxOutputTokens. */
                         public maxOutputTokens?: (number|null);
 
-                        /** GenerationSpec _temperature. */
-                        public _temperature?: "temperature";
-
-                        /** GenerationSpec _topP. */
-                        public _topP?: "topP";
-
-                        /** GenerationSpec _topK. */
-                        public _topK?: "topK";
-
-                        /** GenerationSpec _frequencyPenalty. */
-                        public _frequencyPenalty?: "frequencyPenalty";
-
-                        /** GenerationSpec _seed. */
-                        public _seed?: "seed";
-
-                        /** GenerationSpec _presencePenalty. */
-                        public _presencePenalty?: "presencePenalty";
-
-                        /** GenerationSpec _maxOutputTokens. */
-                        public _maxOutputTokens?: "maxOutputTokens";
-
                         /**
                          * Creates a new GenerationSpec instance using the specified properties.
                          * @param [properties] Properties to set
@@ -31236,9 +31152,6 @@ export namespace google {
 
                             /** DynamicRetrievalPredictor threshold. */
                             public threshold?: (number|null);
-
-                            /** DynamicRetrievalPredictor _threshold. */
-                            public _threshold?: "threshold";
 
                             /**
                              * Creates a new DynamicRetrievalPredictor instance using the specified properties.
@@ -32089,9 +32002,6 @@ export namespace google {
                         /** Candidate groundingMetadata. */
                         public groundingMetadata?: (google.cloud.discoveryengine.v1.GenerateGroundedContentResponse.Candidate.IGroundingMetadata|null);
 
-                        /** Candidate _groundingScore. */
-                        public _groundingScore?: "groundingScore";
-
                         /**
                          * Creates a new Candidate instance using the specified properties.
                          * @param [properties] Properties to set
@@ -32538,9 +32448,6 @@ export namespace google {
                                 /** DynamicRetrievalPredictorMetadata prediction. */
                                 public prediction?: (number|null);
 
-                                /** DynamicRetrievalPredictorMetadata _prediction. */
-                                public _prediction?: "prediction";
-
                                 /**
                                  * Creates a new DynamicRetrievalPredictorMetadata instance using the specified properties.
                                  * @param [properties] Properties to set
@@ -32761,9 +32668,6 @@ export namespace google {
 
                                 /** GroundingSupport supportScore. */
                                 public supportScore?: (number|null);
-
-                                /** GroundingSupport _supportScore. */
-                                public _supportScore?: "supportScore";
 
                                 /**
                                  * Creates a new GroundingSupport instance using the specified properties.
@@ -33195,12 +33099,6 @@ export namespace google {
                     /** CheckGroundingSpec enableClaimLevelScore. */
                     public enableClaimLevelScore?: (boolean|null);
 
-                    /** CheckGroundingSpec _citationThreshold. */
-                    public _citationThreshold?: "citationThreshold";
-
-                    /** CheckGroundingSpec _enableClaimLevelScore. */
-                    public _enableClaimLevelScore?: "enableClaimLevelScore";
-
                     /**
                      * Creates a new CheckGroundingSpec instance using the specified properties.
                      * @param [properties] Properties to set
@@ -33437,9 +33335,6 @@ export namespace google {
                     /** CheckGroundingResponse claims. */
                     public claims: google.cloud.discoveryengine.v1.CheckGroundingResponse.IClaim[];
 
-                    /** CheckGroundingResponse _supportScore. */
-                    public _supportScore?: "supportScore";
-
                     /**
                      * Creates a new CheckGroundingResponse instance using the specified properties.
                      * @param [properties] Properties to set
@@ -33665,18 +33560,6 @@ export namespace google {
 
                         /** Claim score. */
                         public score?: (number|null);
-
-                        /** Claim _startPos. */
-                        public _startPos?: "startPos";
-
-                        /** Claim _endPos. */
-                        public _endPos?: "endPos";
-
-                        /** Claim _groundingCheckRequired. */
-                        public _groundingCheckRequired?: "groundingCheckRequired";
-
-                        /** Claim _score. */
-                        public _score?: "score";
 
                         /**
                          * Creates a new Claim instance using the specified properties.
@@ -35045,9 +34928,6 @@ export namespace google {
 
                     /** PurgeIdentityMappingsRequest source. */
                     public source?: "inlineSource";
-
-                    /** PurgeIdentityMappingsRequest _force. */
-                    public _force?: "force";
 
                     /**
                      * Creates a new PurgeIdentityMappingsRequest instance using the specified properties.
@@ -44603,9 +44483,6 @@ export namespace google {
                     /** WriteUserEventRequest writeAsync. */
                     public writeAsync: boolean;
 
-                    /** WriteUserEventRequest _userEvent. */
-                    public _userEvent?: "userEvent";
-
                     /**
                      * Creates a new WriteUserEventRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -44720,12 +44597,6 @@ export namespace google {
 
                     /** CollectUserEventRequest ets. */
                     public ets?: (number|Long|string|null);
-
-                    /** CollectUserEventRequest _uri. */
-                    public _uri?: "uri";
-
-                    /** CollectUserEventRequest _ets. */
-                    public _ets?: "ets";
 
                     /**
                      * Creates a new CollectUserEventRequest instance using the specified properties.
@@ -47750,9 +47621,6 @@ export namespace google {
                                 /** ChunkContent relevanceScore. */
                                 public relevanceScore?: (number|null);
 
-                                /** ChunkContent _relevanceScore. */
-                                public _relevanceScore?: "relevanceScore";
-
                                 /**
                                  * Creates a new ChunkContent instance using the specified properties.
                                  * @param [properties] Properties to set
@@ -47868,9 +47736,6 @@ export namespace google {
 
                             /** ChunkInfo documentMetadata. */
                             public documentMetadata?: (google.cloud.discoveryengine.v1alpha.Answer.Reference.ChunkInfo.IDocumentMetadata|null);
-
-                            /** ChunkInfo _relevanceScore. */
-                            public _relevanceScore?: "relevanceScore";
 
                             /**
                              * Creates a new ChunkInfo instance using the specified properties.
@@ -48862,9 +48727,6 @@ export namespace google {
                                         /** ChunkInfo relevanceScore. */
                                         public relevanceScore?: (number|null);
 
-                                        /** ChunkInfo _relevanceScore. */
-                                        public _relevanceScore?: "relevanceScore";
-
                                         /**
                                          * Creates a new ChunkInfo instance using the specified properties.
                                          * @param [properties] Properties to set
@@ -49250,9 +49112,6 @@ export namespace google {
 
                     /** Chunk chunkMetadata. */
                     public chunkMetadata?: (google.cloud.discoveryengine.v1alpha.Chunk.IChunkMetadata|null);
-
-                    /** Chunk _relevanceScore. */
-                    public _relevanceScore?: "relevanceScore";
 
                     /**
                      * Creates a new Chunk instance using the specified properties.
@@ -55355,9 +55214,6 @@ export namespace google {
                             /** Target score. */
                             public score?: (number|null);
 
-                            /** Target _score. */
-                            public _score?: "score";
-
                             /**
                              * Creates a new Target instance using the specified properties.
                              * @param [properties] Properties to set
@@ -55795,9 +55651,6 @@ export namespace google {
                     /** SearchInfo offset. */
                     public offset?: (number|null);
 
-                    /** SearchInfo _offset. */
-                    public _offset?: "offset";
-
                     /**
                      * Creates a new SearchInfo instance using the specified properties.
                      * @param [properties] Properties to set
@@ -56028,18 +55881,6 @@ export namespace google {
                     /** TransactionInfo discountValue. */
                     public discountValue?: (number|null);
 
-                    /** TransactionInfo _value. */
-                    public _value?: "value";
-
-                    /** TransactionInfo _tax. */
-                    public _tax?: "tax";
-
-                    /** TransactionInfo _cost. */
-                    public _cost?: "cost";
-
-                    /** TransactionInfo _discountValue. */
-                    public _discountValue?: "discountValue";
-
                     /**
                      * Creates a new TransactionInfo instance using the specified properties.
                      * @param [properties] Properties to set
@@ -56170,9 +56011,6 @@ export namespace google {
                     /** DocumentInfo documentDescriptor. */
                     public documentDescriptor?: ("id"|"name"|"uri");
 
-                    /** DocumentInfo _quantity. */
-                    public _quantity?: "quantity";
-
                     /**
                      * Creates a new DocumentInfo instance using the specified properties.
                      * @param [properties] Properties to set
@@ -56288,12 +56126,6 @@ export namespace google {
                     /** PanelInfo totalPanels. */
                     public totalPanels?: (number|null);
 
-                    /** PanelInfo _panelPosition. */
-                    public _panelPosition?: "panelPosition";
-
-                    /** PanelInfo _totalPanels. */
-                    public _totalPanels?: "totalPanels";
-
                     /**
                      * Creates a new PanelInfo instance using the specified properties.
                      * @param [properties] Properties to set
@@ -56396,9 +56228,6 @@ export namespace google {
 
                     /** MediaInfo mediaProgressPercentage. */
                     public mediaProgressPercentage?: (number|null);
-
-                    /** MediaInfo _mediaProgressPercentage. */
-                    public _mediaProgressPercentage?: "mediaProgressPercentage";
 
                     /**
                      * Creates a new MediaInfo instance using the specified properties.
@@ -62961,9 +62790,6 @@ export namespace google {
                         /** SessionSpec searchResultPersistenceCount. */
                         public searchResultPersistenceCount?: (number|null);
 
-                        /** SessionSpec _searchResultPersistenceCount. */
-                        public _searchResultPersistenceCount?: "searchResultPersistenceCount";
-
                         /**
                          * Creates a new SessionSpec instance using the specified properties.
                          * @param [properties] Properties to set
@@ -67551,9 +67377,6 @@ export namespace google {
 
                         /** AnswerGenerationSpec ignoreLowRelevantContent. */
                         public ignoreLowRelevantContent?: (boolean|null);
-
-                        /** AnswerGenerationSpec _ignoreLowRelevantContent. */
-                        public _ignoreLowRelevantContent?: "ignoreLowRelevantContent";
 
                         /**
                          * Creates a new AnswerGenerationSpec instance using the specified properties.
@@ -79661,9 +79484,6 @@ export namespace google {
                     /** CheckGroundingSpec citationThreshold. */
                     public citationThreshold?: (number|null);
 
-                    /** CheckGroundingSpec _citationThreshold. */
-                    public _citationThreshold?: "citationThreshold";
-
                     /**
                      * Creates a new CheckGroundingSpec instance using the specified properties.
                      * @param [properties] Properties to set
@@ -79894,9 +79714,6 @@ export namespace google {
                     /** CheckGroundingResponse claims. */
                     public claims: google.cloud.discoveryengine.v1alpha.CheckGroundingResponse.IClaim[];
 
-                    /** CheckGroundingResponse _supportScore. */
-                    public _supportScore?: "supportScore";
-
                     /**
                      * Creates a new CheckGroundingResponse instance using the specified properties.
                      * @param [properties] Properties to set
@@ -80019,15 +79836,6 @@ export namespace google {
 
                         /** Claim groundingCheckRequired. */
                         public groundingCheckRequired?: (boolean|null);
-
-                        /** Claim _startPos. */
-                        public _startPos?: "startPos";
-
-                        /** Claim _endPos. */
-                        public _endPos?: "endPos";
-
-                        /** Claim _groundingCheckRequired. */
-                        public _groundingCheckRequired?: "groundingCheckRequired";
 
                         /**
                          * Creates a new Claim instance using the specified properties.
@@ -90742,9 +90550,6 @@ export namespace google {
                     /** WriteUserEventRequest writeAsync. */
                     public writeAsync: boolean;
 
-                    /** WriteUserEventRequest _userEvent. */
-                    public _userEvent?: "userEvent";
-
                     /**
                      * Creates a new WriteUserEventRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -90859,12 +90664,6 @@ export namespace google {
 
                     /** CollectUserEventRequest ets. */
                     public ets?: (number|Long|string|null);
-
-                    /** CollectUserEventRequest _uri. */
-                    public _uri?: "uri";
-
-                    /** CollectUserEventRequest _ets. */
-                    public _ets?: "ets";
 
                     /**
                      * Creates a new CollectUserEventRequest instance using the specified properties.
@@ -91581,9 +91380,6 @@ export namespace google {
                                 /** ChunkContent relevanceScore. */
                                 public relevanceScore?: (number|null);
 
-                                /** ChunkContent _relevanceScore. */
-                                public _relevanceScore?: "relevanceScore";
-
                                 /**
                                  * Creates a new ChunkContent instance using the specified properties.
                                  * @param [properties] Properties to set
@@ -91699,9 +91495,6 @@ export namespace google {
 
                             /** ChunkInfo documentMetadata. */
                             public documentMetadata?: (google.cloud.discoveryengine.v1beta.Answer.Reference.ChunkInfo.IDocumentMetadata|null);
-
-                            /** ChunkInfo _relevanceScore. */
-                            public _relevanceScore?: "relevanceScore";
 
                             /**
                              * Creates a new ChunkInfo instance using the specified properties.
@@ -92693,9 +92486,6 @@ export namespace google {
                                         /** ChunkInfo relevanceScore. */
                                         public relevanceScore?: (number|null);
 
-                                        /** ChunkInfo _relevanceScore. */
-                                        public _relevanceScore?: "relevanceScore";
-
                                         /**
                                          * Creates a new ChunkInfo instance using the specified properties.
                                          * @param [properties] Properties to set
@@ -93084,9 +92874,6 @@ export namespace google {
 
                     /** Chunk chunkMetadata. */
                     public chunkMetadata?: (google.cloud.discoveryengine.v1beta.Chunk.IChunkMetadata|null);
-
-                    /** Chunk _relevanceScore. */
-                    public _relevanceScore?: "relevanceScore";
 
                     /**
                      * Creates a new Chunk instance using the specified properties.
@@ -100019,9 +99806,6 @@ export namespace google {
                             /** Target score. */
                             public score?: (number|null);
 
-                            /** Target _score. */
-                            public _score?: "score";
-
                             /**
                              * Creates a new Target instance using the specified properties.
                              * @param [properties] Properties to set
@@ -100465,9 +100249,6 @@ export namespace google {
                     /** SearchInfo offset. */
                     public offset?: (number|null);
 
-                    /** SearchInfo _offset. */
-                    public _offset?: "offset";
-
                     /**
                      * Creates a new SearchInfo instance using the specified properties.
                      * @param [properties] Properties to set
@@ -100698,18 +100479,6 @@ export namespace google {
                     /** TransactionInfo discountValue. */
                     public discountValue?: (number|null);
 
-                    /** TransactionInfo _value. */
-                    public _value?: "value";
-
-                    /** TransactionInfo _tax. */
-                    public _tax?: "tax";
-
-                    /** TransactionInfo _cost. */
-                    public _cost?: "cost";
-
-                    /** TransactionInfo _discountValue. */
-                    public _discountValue?: "discountValue";
-
                     /**
                      * Creates a new TransactionInfo instance using the specified properties.
                      * @param [properties] Properties to set
@@ -100840,9 +100609,6 @@ export namespace google {
                     /** DocumentInfo documentDescriptor. */
                     public documentDescriptor?: ("id"|"name"|"uri");
 
-                    /** DocumentInfo _quantity. */
-                    public _quantity?: "quantity";
-
                     /**
                      * Creates a new DocumentInfo instance using the specified properties.
                      * @param [properties] Properties to set
@@ -100964,12 +100730,6 @@ export namespace google {
                     /** PanelInfo documents. */
                     public documents: google.cloud.discoveryengine.v1beta.IDocumentInfo[];
 
-                    /** PanelInfo _panelPosition. */
-                    public _panelPosition?: "panelPosition";
-
-                    /** PanelInfo _totalPanels. */
-                    public _totalPanels?: "totalPanels";
-
                     /**
                      * Creates a new PanelInfo instance using the specified properties.
                      * @param [properties] Properties to set
@@ -101072,9 +100832,6 @@ export namespace google {
 
                     /** MediaInfo mediaProgressPercentage. */
                     public mediaProgressPercentage?: (number|null);
-
-                    /** MediaInfo _mediaProgressPercentage. */
-                    public _mediaProgressPercentage?: "mediaProgressPercentage";
 
                     /**
                      * Creates a new MediaInfo instance using the specified properties.
@@ -107682,9 +107439,6 @@ export namespace google {
                         /** SessionSpec searchResultPersistenceCount. */
                         public searchResultPersistenceCount?: (number|null);
 
-                        /** SessionSpec _searchResultPersistenceCount. */
-                        public _searchResultPersistenceCount?: "searchResultPersistenceCount";
-
                         /**
                          * Creates a new SessionSpec instance using the specified properties.
                          * @param [properties] Properties to set
@@ -112505,9 +112259,6 @@ export namespace google {
 
                         /** AnswerGenerationSpec ignoreJailBreakingQuery. */
                         public ignoreJailBreakingQuery: boolean;
-
-                        /** AnswerGenerationSpec _ignoreLowRelevantContent. */
-                        public _ignoreLowRelevantContent?: "ignoreLowRelevantContent";
 
                         /**
                          * Creates a new AnswerGenerationSpec instance using the specified properties.
@@ -123860,24 +123611,6 @@ export namespace google {
                         /** GenerationSpec maxOutputTokens. */
                         public maxOutputTokens?: (number|null);
 
-                        /** GenerationSpec _temperature. */
-                        public _temperature?: "temperature";
-
-                        /** GenerationSpec _topP. */
-                        public _topP?: "topP";
-
-                        /** GenerationSpec _topK. */
-                        public _topK?: "topK";
-
-                        /** GenerationSpec _frequencyPenalty. */
-                        public _frequencyPenalty?: "frequencyPenalty";
-
-                        /** GenerationSpec _presencePenalty. */
-                        public _presencePenalty?: "presencePenalty";
-
-                        /** GenerationSpec _maxOutputTokens. */
-                        public _maxOutputTokens?: "maxOutputTokens";
-
                         /**
                          * Creates a new GenerationSpec instance using the specified properties.
                          * @param [properties] Properties to set
@@ -124079,9 +123812,6 @@ export namespace google {
 
                             /** DynamicRetrievalPredictor threshold. */
                             public threshold?: (number|null);
-
-                            /** DynamicRetrievalPredictor _threshold. */
-                            public _threshold?: "threshold";
 
                             /**
                              * Creates a new DynamicRetrievalPredictor instance using the specified properties.
@@ -124835,9 +124565,6 @@ export namespace google {
                         /** Candidate groundingMetadata. */
                         public groundingMetadata?: (google.cloud.discoveryengine.v1beta.GenerateGroundedContentResponse.Candidate.IGroundingMetadata|null);
 
-                        /** Candidate _groundingScore. */
-                        public _groundingScore?: "groundingScore";
-
                         /**
                          * Creates a new Candidate instance using the specified properties.
                          * @param [properties] Properties to set
@@ -125278,9 +125005,6 @@ export namespace google {
                                 /** DynamicRetrievalPredictorMetadata prediction. */
                                 public prediction?: (number|null);
 
-                                /** DynamicRetrievalPredictorMetadata _prediction. */
-                                public _prediction?: "prediction";
-
                                 /**
                                  * Creates a new DynamicRetrievalPredictorMetadata instance using the specified properties.
                                  * @param [properties] Properties to set
@@ -125502,9 +125226,6 @@ export namespace google {
                                 /** GroundingSupport supportScore. */
                                 public supportScore?: (number|null);
 
-                                /** GroundingSupport _supportScore. */
-                                public _supportScore?: "supportScore";
-
                                 /**
                                  * Creates a new GroundingSupport instance using the specified properties.
                                  * @param [properties] Properties to set
@@ -125604,9 +125325,6 @@ export namespace google {
 
                     /** CheckGroundingSpec citationThreshold. */
                     public citationThreshold?: (number|null);
-
-                    /** CheckGroundingSpec _citationThreshold. */
-                    public _citationThreshold?: "citationThreshold";
 
                     /**
                      * Creates a new CheckGroundingSpec instance using the specified properties.
@@ -125844,9 +125562,6 @@ export namespace google {
                     /** CheckGroundingResponse claims. */
                     public claims: google.cloud.discoveryengine.v1beta.CheckGroundingResponse.IClaim[];
 
-                    /** CheckGroundingResponse _supportScore. */
-                    public _supportScore?: "supportScore";
-
                     /**
                      * Creates a new CheckGroundingResponse instance using the specified properties.
                      * @param [properties] Properties to set
@@ -126066,15 +125781,6 @@ export namespace google {
 
                         /** Claim groundingCheckRequired. */
                         public groundingCheckRequired?: (boolean|null);
-
-                        /** Claim _startPos. */
-                        public _startPos?: "startPos";
-
-                        /** Claim _endPos. */
-                        public _endPos?: "endPos";
-
-                        /** Claim _groundingCheckRequired. */
-                        public _groundingCheckRequired?: "groundingCheckRequired";
 
                         /**
                          * Creates a new Claim instance using the specified properties.
@@ -137183,9 +136889,6 @@ export namespace google {
                     /** WriteUserEventRequest writeAsync. */
                     public writeAsync: boolean;
 
-                    /** WriteUserEventRequest _userEvent. */
-                    public _userEvent?: "userEvent";
-
                     /**
                      * Creates a new WriteUserEventRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -137300,12 +137003,6 @@ export namespace google {
 
                     /** CollectUserEventRequest ets. */
                     public ets?: (number|Long|string|null);
-
-                    /** CollectUserEventRequest _uri. */
-                    public _uri?: "uri";
-
-                    /** CollectUserEventRequest _ets. */
-                    public _ets?: "ets";
 
                     /**
                      * Creates a new CollectUserEventRequest instance using the specified properties.

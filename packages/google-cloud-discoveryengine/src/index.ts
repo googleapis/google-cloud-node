@@ -59,53 +59,7 @@ type UserEventServiceClient = v1.UserEventServiceClient;
 const UserLicenseServiceClient = v1.UserLicenseServiceClient;
 type UserLicenseServiceClient = v1.UserLicenseServiceClient;
 
-export {
-  v1,
-  v1alpha,
-  v1beta,
-  CmekConfigServiceClient,
-  CompletionServiceClient,
-  ControlServiceClient,
-  ConversationalSearchServiceClient,
-  DataStoreServiceClient,
-  DocumentServiceClient,
-  EngineServiceClient,
-  GroundedGenerationServiceClient,
-  IdentityMappingStoreServiceClient,
-  ProjectServiceClient,
-  RankServiceClient,
-  RecommendationServiceClient,
-  SchemaServiceClient,
-  SearchServiceClient,
-  SearchTuningServiceClient,
-  ServingConfigServiceClient,
-  SiteSearchEngineServiceClient,
-  UserEventServiceClient,
-  UserLicenseServiceClient,
-};
-export default {
-  v1,
-  v1alpha,
-  v1beta,
-  CmekConfigServiceClient,
-  CompletionServiceClient,
-  ControlServiceClient,
-  ConversationalSearchServiceClient,
-  DataStoreServiceClient,
-  DocumentServiceClient,
-  EngineServiceClient,
-  GroundedGenerationServiceClient,
-  IdentityMappingStoreServiceClient,
-  ProjectServiceClient,
-  RankServiceClient,
-  RecommendationServiceClient,
-  SchemaServiceClient,
-  SearchServiceClient,
-  SearchTuningServiceClient,
-  ServingConfigServiceClient,
-  SiteSearchEngineServiceClient,
-  UserEventServiceClient,
-  UserLicenseServiceClient,
-};
+export {v1, v1alpha, v1beta, CmekConfigServiceClient, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, DataStoreServiceClient, DocumentServiceClient, EngineServiceClient, GroundedGenerationServiceClient, IdentityMappingStoreServiceClient, ProjectServiceClient, RankServiceClient, RecommendationServiceClient, SchemaServiceClient, SearchServiceClient, SearchTuningServiceClient, ServingConfigServiceClient, SiteSearchEngineServiceClient, UserEventServiceClient, UserLicenseServiceClient};
+export default {v1, v1alpha, v1beta, CmekConfigServiceClient, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, DataStoreServiceClient, DocumentServiceClient, EngineServiceClient, GroundedGenerationServiceClient, IdentityMappingStoreServiceClient, ProjectServiceClient, RankServiceClient, RecommendationServiceClient, SchemaServiceClient, SearchServiceClient, SearchTuningServiceClient, ServingConfigServiceClient, SiteSearchEngineServiceClient, UserEventServiceClient, UserLicenseServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
