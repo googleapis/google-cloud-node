@@ -12861,6 +12861,9 @@ export namespace google {
 
                     /** Candidate groundingMetadata */
                     groundingMetadata?: (google.cloud.aiplatform.v1.IGroundingMetadata|null);
+
+                    /** Candidate urlContextMetadata */
+                    urlContextMetadata?: (google.cloud.aiplatform.v1.IUrlContextMetadata|null);
                 }
 
                 /** Represents a Candidate. */
@@ -12901,6 +12904,9 @@ export namespace google {
 
                     /** Candidate groundingMetadata. */
                     public groundingMetadata?: (google.cloud.aiplatform.v1.IGroundingMetadata|null);
+
+                    /** Candidate urlContextMetadata. */
+                    public urlContextMetadata?: (google.cloud.aiplatform.v1.IUrlContextMetadata|null);
 
                     /**
                      * Creates a new Candidate instance using the specified properties.
@@ -12994,6 +13000,216 @@ export namespace google {
                         PROHIBITED_CONTENT = 7,
                         SPII = 8,
                         MALFORMED_FUNCTION_CALL = 9
+                    }
+                }
+
+                /** Properties of an UrlContextMetadata. */
+                interface IUrlContextMetadata {
+
+                    /** UrlContextMetadata urlMetadata */
+                    urlMetadata?: (google.cloud.aiplatform.v1.IUrlMetadata[]|null);
+                }
+
+                /** Represents an UrlContextMetadata. */
+                class UrlContextMetadata implements IUrlContextMetadata {
+
+                    /**
+                     * Constructs a new UrlContextMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IUrlContextMetadata);
+
+                    /** UrlContextMetadata urlMetadata. */
+                    public urlMetadata: google.cloud.aiplatform.v1.IUrlMetadata[];
+
+                    /**
+                     * Creates a new UrlContextMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UrlContextMetadata instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IUrlContextMetadata): google.cloud.aiplatform.v1.UrlContextMetadata;
+
+                    /**
+                     * Encodes the specified UrlContextMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1.UrlContextMetadata.verify|verify} messages.
+                     * @param message UrlContextMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IUrlContextMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UrlContextMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.UrlContextMetadata.verify|verify} messages.
+                     * @param message UrlContextMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IUrlContextMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UrlContextMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UrlContextMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.UrlContextMetadata;
+
+                    /**
+                     * Decodes an UrlContextMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UrlContextMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.UrlContextMetadata;
+
+                    /**
+                     * Verifies an UrlContextMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UrlContextMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UrlContextMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.UrlContextMetadata;
+
+                    /**
+                     * Creates a plain object from an UrlContextMetadata message. Also converts values to other types if specified.
+                     * @param message UrlContextMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.UrlContextMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UrlContextMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UrlContextMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UrlMetadata. */
+                interface IUrlMetadata {
+
+                    /** UrlMetadata retrievedUrl */
+                    retrievedUrl?: (string|null);
+
+                    /** UrlMetadata urlRetrievalStatus */
+                    urlRetrievalStatus?: (google.cloud.aiplatform.v1.UrlMetadata.UrlRetrievalStatus|keyof typeof google.cloud.aiplatform.v1.UrlMetadata.UrlRetrievalStatus|null);
+                }
+
+                /** Represents an UrlMetadata. */
+                class UrlMetadata implements IUrlMetadata {
+
+                    /**
+                     * Constructs a new UrlMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IUrlMetadata);
+
+                    /** UrlMetadata retrievedUrl. */
+                    public retrievedUrl: string;
+
+                    /** UrlMetadata urlRetrievalStatus. */
+                    public urlRetrievalStatus: (google.cloud.aiplatform.v1.UrlMetadata.UrlRetrievalStatus|keyof typeof google.cloud.aiplatform.v1.UrlMetadata.UrlRetrievalStatus);
+
+                    /**
+                     * Creates a new UrlMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UrlMetadata instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IUrlMetadata): google.cloud.aiplatform.v1.UrlMetadata;
+
+                    /**
+                     * Encodes the specified UrlMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1.UrlMetadata.verify|verify} messages.
+                     * @param message UrlMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IUrlMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UrlMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.UrlMetadata.verify|verify} messages.
+                     * @param message UrlMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IUrlMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UrlMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UrlMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.UrlMetadata;
+
+                    /**
+                     * Decodes an UrlMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UrlMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.UrlMetadata;
+
+                    /**
+                     * Verifies an UrlMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UrlMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UrlMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.UrlMetadata;
+
+                    /**
+                     * Creates a plain object from an UrlMetadata message. Also converts values to other types if specified.
+                     * @param message UrlMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.UrlMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UrlMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UrlMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace UrlMetadata {
+
+                    /** UrlRetrievalStatus enum. */
+                    enum UrlRetrievalStatus {
+                        URL_RETRIEVAL_STATUS_UNSPECIFIED = 0,
+                        URL_RETRIEVAL_STATUS_SUCCESS = 1,
+                        URL_RETRIEVAL_STATUS_ERROR = 2
                     }
                 }
 
