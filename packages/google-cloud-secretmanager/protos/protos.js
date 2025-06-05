@@ -85,6 +85,7 @@
                          * @property {Object.<string,string>|null} [annotations] Secret annotations
                          * @property {google.protobuf.IDuration|null} [versionDestroyTtl] Secret versionDestroyTtl
                          * @property {google.cloud.secretmanager.v1.ICustomerManagedEncryption|null} [customerManagedEncryption] Secret customerManagedEncryption
+                         * @property {Object.<string,string>|null} [tags] Secret tags
                          */
     
                         /**
@@ -100,6 +101,7 @@
                             this.topics = [];
                             this.versionAliases = {};
                             this.annotations = {};
+                            this.tags = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -210,6 +212,14 @@
                          */
                         Secret.prototype.customerManagedEncryption = null;
     
+                        /**
+                         * Secret tags.
+                         * @member {Object.<string,string>} tags
+                         * @memberof google.cloud.secretmanager.v1.Secret
+                         * @instance
+                         */
+                        Secret.prototype.tags = $util.emptyObject;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -278,6 +288,9 @@
                                 $root.google.protobuf.Duration.encode(message.versionDestroyTtl, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             if (message.customerManagedEncryption != null && Object.hasOwnProperty.call(message, "customerManagedEncryption"))
                                 $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.encode(message.customerManagedEncryption, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.tags != null && Object.hasOwnProperty.call(message, "tags"))
+                                for (var keys = Object.keys(message.tags), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 16, wireType 2 =*/130).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.tags[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -425,6 +438,29 @@
                                         message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 16: {
+                                        if (message.tags === $util.emptyObject)
+                                            message.tags = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.tags[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -543,6 +579,14 @@
                                 if (error)
                                     return "customerManagedEncryption." + error;
                             }
+                            if (message.tags != null && message.hasOwnProperty("tags")) {
+                                if (!$util.isObject(message.tags))
+                                    return "tags: object expected";
+                                var key = Object.keys(message.tags);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.tags[key[i]]))
+                                        return "tags: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -635,6 +679,13 @@
                                     throw TypeError(".google.cloud.secretmanager.v1.Secret.customerManagedEncryption: object expected");
                                 message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.fromObject(object.customerManagedEncryption);
                             }
+                            if (object.tags) {
+                                if (typeof object.tags !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.Secret.tags: object expected");
+                                message.tags = {};
+                                for (var keys = Object.keys(object.tags), i = 0; i < keys.length; ++i)
+                                    message.tags[keys[i]] = String(object.tags[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -657,6 +708,7 @@
                                 object.labels = {};
                                 object.versionAliases = {};
                                 object.annotations = {};
+                                object.tags = {};
                             }
                             if (options.defaults) {
                                 object.name = "";
@@ -715,6 +767,11 @@
                                 object.versionDestroyTtl = $root.google.protobuf.Duration.toObject(message.versionDestroyTtl, options);
                             if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption"))
                                 object.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.toObject(message.customerManagedEncryption, options);
+                            if (message.tags && (keys2 = Object.keys(message.tags)).length) {
+                                object.tags = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.tags[keys2[j]] = message.tags[keys2[j]];
+                            }
                             return object;
                         };
     
