@@ -29,102 +29,74 @@ import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.SubnetworksClient', () => {
@@ -132,2452 +104,1928 @@ describe('v1.SubnetworksClient', () => {
   beforeEach(() => {
     googleAuth = {
       getClient: sinon.stub().resolves({
-        getRequestHeaders: sinon
-          .stub()
-          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
-      }),
+        getRequestHeaders: sinon.stub().resolves({Authorization: 'Bearer SOME_TOKEN'}),
+      })
     } as unknown as GoogleAuth;
   });
   afterEach(() => {
     sinon.restore();
   });
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new subnetworksModule.v1.SubnetworksClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new subnetworksModule.v1.SubnetworksClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = subnetworksModule.v1.SubnetworksClient.servicePath;
-        assert.strictEqual(servicePath, 'compute.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = subnetworksModule.v1.SubnetworksClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'compute.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'compute.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new subnetworksModule.v1.SubnetworksClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'compute.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new subnetworksModule.v1.SubnetworksClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new subnetworksModule.v1.SubnetworksClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'compute.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new subnetworksModule.v1.SubnetworksClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new subnetworksModule.v1.SubnetworksClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = subnetworksModule.v1.SubnetworksClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = subnetworksModule.v1.SubnetworksClient.servicePath;
+                assert.strictEqual(servicePath, 'compute.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new subnetworksModule.v1.SubnetworksClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.subnetworksStub, undefined);
-      await client.initialize();
-      assert(client.subnetworksStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.subnetworksStub);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.subnetworksStub, undefined);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('delete', () => {
-    it('invokes delete without error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&subnetwork=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
-      const [response] = await client.delete(request);
-      assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.delete as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes delete without error using callback', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&subnetwork=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.delete =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.delete(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.delete as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes delete with error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&subnetwork=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.delete(request), expectedError);
-      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.delete as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes delete with closed client', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.delete(request), expectedError);
-    });
-  });
-
-  describe('expandIpCidrRange', () => {
-    it('invokes expandIpCidrRange without error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&subnetwork=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.expandIpCidrRange = stubSimpleCall(expectedResponse);
-      const [response] = await client.expandIpCidrRange(request);
-      assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.expandIpCidrRange as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.expandIpCidrRange as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes expandIpCidrRange without error using callback', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&subnetwork=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.expandIpCidrRange =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.expandIpCidrRange(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.expandIpCidrRange as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.expandIpCidrRange as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes expandIpCidrRange with error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&subnetwork=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.expandIpCidrRange = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.expandIpCidrRange(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.expandIpCidrRange as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.expandIpCidrRange as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes expandIpCidrRange with closed client', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.expandIpCidrRange(request), expectedError);
-    });
-  });
-
-  describe('get', () => {
-    it('invokes get without error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&subnetwork=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Subnetwork()
-      );
-      client.innerApiCalls.get = stubSimpleCall(expectedResponse);
-      const [response] = await client.get(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
-        .args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.get as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes get without error using callback', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&subnetwork=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Subnetwork()
-      );
-      client.innerApiCalls.get = stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.get(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.ISubnetwork | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
-        .args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.get as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes get with error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&subnetwork=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.get(request), expectedError);
-      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
-        .args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.get as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes get with closed client', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.get(request), expectedError);
-    });
-  });
-
-  describe('getIamPolicy', () => {
-    it('invokes getIamPolicy without error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
-        ['resource']
-      );
-      request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Policy()
-      );
-      client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.getIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy without error using callback', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
-        ['resource']
-      );
-      request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Policy()
-      );
-      client.innerApiCalls.getIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy with error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
-        ['resource']
-      );
-      request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy with closed client', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
-        ['resource']
-      );
-      request.resource = defaultValue3;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('insert', () => {
-    it('invokes insert without error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.InsertSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.InsertSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
-      const [response] = await client.insert(request);
-      assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.insert as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes insert without error using callback', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.InsertSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.InsertSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.insert =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.insert(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.insert as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes insert with error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.InsertSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.InsertSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.insert(request), expectedError);
-      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.insert as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes insert with closed client', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.InsertSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.InsertSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.insert(request), expectedError);
-    });
-  });
-
-  describe('patch', () => {
-    it('invokes patch without error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.PatchSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.PatchSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.PatchSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&subnetwork=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
-      const [response] = await client.patch(request);
-      assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      const actualRequest = (client.innerApiCalls.patch as SinonStub).getCall(0)
-        .args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.patch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes patch without error using callback', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.PatchSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.PatchSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.PatchSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&subnetwork=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.patch = stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.patch(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.patch as SinonStub).getCall(0)
-        .args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.patch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes patch with error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.PatchSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.PatchSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.PatchSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&subnetwork=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.patch(request), expectedError);
-      const actualRequest = (client.innerApiCalls.patch as SinonStub).getCall(0)
-        .args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.patch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes patch with closed client', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.PatchSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.PatchSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.PatchSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.patch(request), expectedError);
-    });
-  });
-
-  describe('setIamPolicy', () => {
-    it('invokes setIamPolicy without error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
-        ['resource']
-      );
-      request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Policy()
-      );
-      client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.setIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy without error using callback', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
-        ['resource']
-      );
-      request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Policy()
-      );
-      client.innerApiCalls.setIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy with error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
-        ['resource']
-      );
-      request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy with closed client', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
-        ['resource']
-      );
-      request.resource = defaultValue3;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.setIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('setPrivateIpGoogleAccess', () => {
-    it('invokes setPrivateIpGoogleAccess without error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&subnetwork=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.setPrivateIpGoogleAccess =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.setPrivateIpGoogleAccess(request);
-      assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setPrivateIpGoogleAccess as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setPrivateIpGoogleAccess as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setPrivateIpGoogleAccess without error using callback', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&subnetwork=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.setPrivateIpGoogleAccess =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setPrivateIpGoogleAccess(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setPrivateIpGoogleAccess as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setPrivateIpGoogleAccess as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setPrivateIpGoogleAccess with error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&subnetwork=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setPrivateIpGoogleAccess = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.setPrivateIpGoogleAccess(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.setPrivateIpGoogleAccess as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setPrivateIpGoogleAccess as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setPrivateIpGoogleAccess with closed client', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
-        ['subnetwork']
-      );
-      request.subnetwork = defaultValue3;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.setPrivateIpGoogleAccess(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('testIamPermissions', () => {
-    it('invokes testIamPermissions without error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
-        ['resource']
-      );
-      request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.TestPermissionsResponse()
-      );
-      client.innerApiCalls.testIamPermissions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.testIamPermissions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions without error using callback', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
-        ['resource']
-      );
-      request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.TestPermissionsResponse()
-      );
-      client.innerApiCalls.testIamPermissions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.testIamPermissions(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.ITestPermissionsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
-        ['resource']
-      );
-      request.resource = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&resource=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with closed client', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
-        ['resource']
-      );
-      request.resource = defaultValue3;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-    });
-  });
-
-  describe('aggregatedList', () => {
-    it('uses async iteration with aggregatedList without error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.AggregatedListSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.AggregatedListSubnetworksRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        [
-          'tuple_key_1',
-          generateSampleMessage(
-            new protos.google.cloud.compute.v1.SubnetworksScopedList()
-          ),
-        ],
-        [
-          'tuple_key_2',
-          generateSampleMessage(
-            new protos.google.cloud.compute.v1.SubnetworksScopedList()
-          ),
-        ],
-        [
-          'tuple_key_3',
-          generateSampleMessage(
-            new protos.google.cloud.compute.v1.SubnetworksScopedList()
-          ),
-        ],
-      ];
-      client.descriptors.page.aggregatedList.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: Array<
-        [string, protos.google.cloud.compute.v1.ISubnetworksScopedList]
-      > = [];
-      const iterable = client.aggregatedListAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with aggregatedList with error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.AggregatedListSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.AggregatedListSubnetworksRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.aggregatedList.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.aggregatedListAsync(request);
-      await assert.rejects(async () => {
-        const responses: Array<
-          [string, protos.google.cloud.compute.v1.ISubnetworksScopedList]
-        > = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = subnetworksModule.v1.SubnetworksClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('list', () => {
-    it('invokes list without error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListSubnetworksRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListSubnetworksRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
-      ];
-      client.innerApiCalls.list = stubSimpleCall(expectedResponse);
-      const [response] = await client.list(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
-        .args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.list as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes list without error using callback', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListSubnetworksRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListSubnetworksRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
-      ];
-      client.innerApiCalls.list = stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.list(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.ISubnetwork[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
-        .args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.list as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes list with error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListSubnetworksRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListSubnetworksRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.list(request), expectedError);
-      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
-        .args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.list as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listStream without error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListSubnetworksRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListSubnetworksRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
-      ];
-      client.descriptors.page.list.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.compute.v1.Subnetwork[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.compute.v1.Subnetwork) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'compute.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.list.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.list, request)
-      );
-      assert(
-        (client.descriptors.page.list.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listStream with error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListSubnetworksRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListSubnetworksRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.list.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.compute.v1.Subnetwork[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.compute.v1.Subnetwork) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'compute.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.list.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.list, request)
-      );
-      assert(
-        (client.descriptors.page.list.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with list without error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListSubnetworksRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListSubnetworksRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
-      ];
-      client.descriptors.page.list.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.compute.v1.ISubnetwork[] = [];
-      const iterable = client.listAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.list.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new subnetworksModule.v1.SubnetworksClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'compute.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with list with error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListSubnetworksRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListSubnetworksRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.compute.v1.ISubnetwork[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new subnetworksModule.v1.SubnetworksClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'compute.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.list.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new subnetworksModule.v1.SubnetworksClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listUsable', () => {
-    it('invokes listUsable without error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListUsableSubnetworksRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.UsableSubnetwork()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.UsableSubnetwork()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.UsableSubnetwork()
-        ),
-      ];
-      client.innerApiCalls.listUsable = stubSimpleCall(expectedResponse);
-      const [response] = await client.listUsable(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listUsable as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listUsable as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = subnetworksModule.v1.SubnetworksClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new subnetworksModule.v1.SubnetworksClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.subnetworksStub, undefined);
+            await client.initialize();
+            assert(client.subnetworksStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.subnetworksStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.subnetworksStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listUsable without error using callback', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListUsableSubnetworksRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.UsableSubnetwork()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.UsableSubnetwork()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.UsableSubnetwork()
-        ),
-      ];
-      client.innerApiCalls.listUsable =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listUsable(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IUsableSubnetwork[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('delete', () => {
+        it('invokes delete without error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.DeleteSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.DeleteSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.DeleteSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&subnetwork=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
+            const [response] = await client.delete(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.delete as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.delete as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes delete without error using callback', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.DeleteSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.DeleteSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.DeleteSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&subnetwork=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.delete = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.delete(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.delete as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.delete as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes delete with error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.DeleteSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.DeleteSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.DeleteSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&subnetwork=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.delete(request), expectedError);
+            const actualRequest = (client.innerApiCalls.delete as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.delete as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes delete with closed client', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.DeleteSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.DeleteSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.DeleteSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.delete(request), expectedError);
+        });
+    });
+
+    describe('expandIpCidrRange', () => {
+        it('invokes expandIpCidrRange without error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&subnetwork=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.expandIpCidrRange = stubSimpleCall(expectedResponse);
+            const [response] = await client.expandIpCidrRange(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.expandIpCidrRange as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.expandIpCidrRange as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes expandIpCidrRange without error using callback', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&subnetwork=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.expandIpCidrRange = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.expandIpCidrRange(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.expandIpCidrRange as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.expandIpCidrRange as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes expandIpCidrRange with error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&subnetwork=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.expandIpCidrRange = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.expandIpCidrRange(request), expectedError);
+            const actualRequest = (client.innerApiCalls.expandIpCidrRange as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.expandIpCidrRange as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes expandIpCidrRange with closed client', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.expandIpCidrRange(request), expectedError);
+        });
+    });
+
+    describe('get', () => {
+        it('invokes get without error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.GetSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&subnetwork=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Subnetwork()
+            );
+            client.innerApiCalls.get = stubSimpleCall(expectedResponse);
+            const [response] = await client.get(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.get as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.get as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes get without error using callback', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.GetSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&subnetwork=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Subnetwork()
+            );
+            client.innerApiCalls.get = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.get(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1.ISubnetwork|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.get as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.get as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes get with error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.GetSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&subnetwork=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.get(request), expectedError);
+            const actualRequest = (client.innerApiCalls.get as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.get as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes get with closed client', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.GetSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.get(request), expectedError);
+        });
+    });
+
+    describe('getIamPolicy', () => {
+        it('invokes getIamPolicy without error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetIamPolicySubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetIamPolicySubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetIamPolicySubnetworkRequest', ['resource']);
+            request.resource = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&resource=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Policy()
+            );
+            client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.getIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy without error using callback', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetIamPolicySubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetIamPolicySubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetIamPolicySubnetworkRequest', ['resource']);
+            request.resource = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&resource=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Policy()
+            );
+            client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy with error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetIamPolicySubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetIamPolicySubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetIamPolicySubnetworkRequest', ['resource']);
+            request.resource = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&resource=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy with closed client', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetIamPolicySubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetIamPolicySubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.GetIamPolicySubnetworkRequest', ['resource']);
+            request.resource = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getIamPolicy(request), expectedError);
+        });
+    });
+
+    describe('insert', () => {
+        it('invokes insert without error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.InsertSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.InsertSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
+            const [response] = await client.insert(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.insert as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.insert as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes insert without error using callback', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.InsertSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.InsertSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.insert = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.insert(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.insert as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.insert as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes insert with error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.InsertSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.InsertSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.insert(request), expectedError);
+            const actualRequest = (client.innerApiCalls.insert as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.insert as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes insert with closed client', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.InsertSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.InsertSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.insert(request), expectedError);
+        });
+    });
+
+    describe('patch', () => {
+        it('invokes patch without error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PatchSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PatchSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PatchSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&subnetwork=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
+            const [response] = await client.patch(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.patch as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.patch as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes patch without error using callback', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PatchSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PatchSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PatchSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&subnetwork=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.patch = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.patch(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.patch as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.patch as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes patch with error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PatchSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PatchSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PatchSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&subnetwork=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.patch(request), expectedError);
+            const actualRequest = (client.innerApiCalls.patch as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.patch as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes patch with closed client', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PatchSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PatchSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PatchSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.patch(request), expectedError);
+        });
+    });
+
+    describe('setIamPolicy', () => {
+        it('invokes setIamPolicy without error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetIamPolicySubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetIamPolicySubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetIamPolicySubnetworkRequest', ['resource']);
+            request.resource = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&resource=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Policy()
+            );
+            client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.setIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy without error using callback', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetIamPolicySubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetIamPolicySubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetIamPolicySubnetworkRequest', ['resource']);
+            request.resource = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&resource=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Policy()
+            );
+            client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy with error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetIamPolicySubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetIamPolicySubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetIamPolicySubnetworkRequest', ['resource']);
+            request.resource = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&resource=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy with closed client', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetIamPolicySubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetIamPolicySubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetIamPolicySubnetworkRequest', ['resource']);
+            request.resource = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setIamPolicy(request), expectedError);
+        });
+    });
+
+    describe('setPrivateIpGoogleAccess', () => {
+        it('invokes setPrivateIpGoogleAccess without error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&subnetwork=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.setPrivateIpGoogleAccess = stubSimpleCall(expectedResponse);
+            const [response] = await client.setPrivateIpGoogleAccess(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setPrivateIpGoogleAccess as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setPrivateIpGoogleAccess as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setPrivateIpGoogleAccess without error using callback', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&subnetwork=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.setPrivateIpGoogleAccess = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setPrivateIpGoogleAccess(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setPrivateIpGoogleAccess as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setPrivateIpGoogleAccess as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setPrivateIpGoogleAccess with error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&subnetwork=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setPrivateIpGoogleAccess = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setPrivateIpGoogleAccess(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setPrivateIpGoogleAccess as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setPrivateIpGoogleAccess as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setPrivateIpGoogleAccess with closed client', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest', ['subnetwork']);
+            request.subnetwork = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setPrivateIpGoogleAccess(request), expectedError);
+        });
+    });
+
+    describe('testIamPermissions', () => {
+        it('invokes testIamPermissions without error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest', ['resource']);
+            request.resource = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&resource=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.TestPermissionsResponse()
+            );
+            client.innerApiCalls.testIamPermissions = stubSimpleCall(expectedResponse);
+            const [response] = await client.testIamPermissions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions without error using callback', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest', ['resource']);
+            request.resource = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&resource=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.TestPermissionsResponse()
+            );
+            client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.testIamPermissions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1.ITestPermissionsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions with error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest', ['resource']);
+            request.resource = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&resource=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.testIamPermissions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.testIamPermissions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions with closed client', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest', ['resource']);
+            request.resource = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.testIamPermissions(request), expectedError);
+        });
+    });
+
+    describe('aggregatedList', () => {
+
+        it('uses async iteration with aggregatedList without error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.AggregatedListSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.AggregatedListSubnetworksRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              ['tuple_key_1', generateSampleMessage(new protos.google.cloud.compute.v1.SubnetworksScopedList())],
+              ['tuple_key_2', generateSampleMessage(new protos.google.cloud.compute.v1.SubnetworksScopedList())],
+              ['tuple_key_3', generateSampleMessage(new protos.google.cloud.compute.v1.SubnetworksScopedList())],
+            ];
+            client.descriptors.page.aggregatedList.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: Array<[string, protos.google.cloud.compute.v1.ISubnetworksScopedList]> = [];
+            const iterable = client.aggregatedListAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listUsable as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listUsable as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listUsable with error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListUsableSubnetworksRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listUsable = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listUsable(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listUsable as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listUsable as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listUsableStream without error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListUsableSubnetworksRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.UsableSubnetwork()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.UsableSubnetwork()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.UsableSubnetwork()
-        ),
-      ];
-      client.descriptors.page.listUsable.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listUsableStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.compute.v1.UsableSubnetwork[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.compute.v1.UsableSubnetwork) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with aggregatedList with error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.AggregatedListSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.AggregatedListSubnetworksRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.aggregatedList.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.aggregatedListAsync(request);
+            await assert.rejects(async () => {
+                const responses: Array<[string, protos.google.cloud.compute.v1.ISubnetworksScopedList]> = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listUsable.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listUsable, request)
-      );
-      assert(
-        (client.descriptors.page.listUsable.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listUsableStream with error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListUsableSubnetworksRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listUsable.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listUsableStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.compute.v1.UsableSubnetwork[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.compute.v1.UsableSubnetwork) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('list', () => {
+        it('invokes list without error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListSubnetworksRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListSubnetworksRequest', ['region']);
+            request.region = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
+            ];
+            client.innerApiCalls.list = stubSimpleCall(expectedResponse);
+            const [response] = await client.list(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.list as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.list as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes list without error using callback', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListSubnetworksRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListSubnetworksRequest', ['region']);
+            request.region = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
+            ];
+            client.innerApiCalls.list = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.list(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1.ISubnetwork[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.list as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.list as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listUsable.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listUsable, request)
-      );
-      assert(
-        (client.descriptors.page.listUsable.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+
+        it('invokes list with error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListSubnetworksRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListSubnetworksRequest', ['region']);
+            request.region = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.list(request), expectedError);
+            const actualRequest = (client.innerApiCalls.list as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.list as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listStream without error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListSubnetworksRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListSubnetworksRequest', ['region']);
+            request.region = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
+            ];
+            client.descriptors.page.list.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.compute.v1.Subnetwork[] = [];
+                stream.on('data', (response: protos.google.cloud.compute.v1.Subnetwork) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.list.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.list, request));
+            assert(
+                (client.descriptors.page.list.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listStream with error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListSubnetworksRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListSubnetworksRequest', ['region']);
+            request.region = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.list.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.compute.v1.Subnetwork[] = [];
+                stream.on('data', (response: protos.google.cloud.compute.v1.Subnetwork) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.list.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.list, request));
+            assert(
+                (client.descriptors.page.list.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with list without error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListSubnetworksRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListSubnetworksRequest', ['region']);
+            request.region = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.Subnetwork()),
+            ];
+            client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.compute.v1.ISubnetwork[] = [];
+            const iterable = client.listAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.list.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.list.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with list with error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListSubnetworksRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListSubnetworksRequest', ['region']);
+            request.region = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.compute.v1.ISubnetwork[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.list.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.list.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('uses async iteration with listUsable without error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListUsableSubnetworksRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.UsableSubnetwork()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.UsableSubnetwork()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.UsableSubnetwork()
-        ),
-      ];
-      client.descriptors.page.listUsable.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.compute.v1.IUsableSubnetwork[] = [];
-      const iterable = client.listUsableAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listUsable.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listUsable.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+    describe('listUsable', () => {
+        it('invokes listUsable without error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListUsableSubnetworksRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1.UsableSubnetwork()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.UsableSubnetwork()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.UsableSubnetwork()),
+            ];
+            client.innerApiCalls.listUsable = stubSimpleCall(expectedResponse);
+            const [response] = await client.listUsable(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listUsable as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUsable as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listUsable with error', async () => {
-      const client = new subnetworksModule.v1.SubnetworksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.ListUsableSubnetworksRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listUsable.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listUsableAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.compute.v1.IUsableSubnetwork[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listUsable.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listUsable.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+        it('invokes listUsable without error using callback', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListUsableSubnetworksRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1.UsableSubnetwork()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.UsableSubnetwork()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.UsableSubnetwork()),
+            ];
+            client.innerApiCalls.listUsable = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listUsable(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IUsableSubnetwork[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listUsable as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUsable as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listUsable with error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListUsableSubnetworksRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listUsable = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listUsable(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listUsable as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUsable as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listUsableStream without error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListUsableSubnetworksRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1.UsableSubnetwork()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.UsableSubnetwork()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.UsableSubnetwork()),
+            ];
+            client.descriptors.page.listUsable.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listUsableStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.compute.v1.UsableSubnetwork[] = [];
+                stream.on('data', (response: protos.google.cloud.compute.v1.UsableSubnetwork) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listUsable.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listUsable, request));
+            assert(
+                (client.descriptors.page.listUsable.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listUsableStream with error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListUsableSubnetworksRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listUsable.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listUsableStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.compute.v1.UsableSubnetwork[] = [];
+                stream.on('data', (response: protos.google.cloud.compute.v1.UsableSubnetwork) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listUsable.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listUsable, request));
+            assert(
+                (client.descriptors.page.listUsable.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listUsable without error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListUsableSubnetworksRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1.UsableSubnetwork()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.UsableSubnetwork()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.UsableSubnetwork()),
+            ];
+            client.descriptors.page.listUsable.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.compute.v1.IUsableSubnetwork[] = [];
+            const iterable = client.listUsableAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listUsable.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listUsable.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listUsable with error', async () => {
+            const client = new subnetworksModule.v1.SubnetworksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListUsableSubnetworksRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listUsable.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listUsableAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.compute.v1.IUsableSubnetwork[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listUsable.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listUsable.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-  });
 });

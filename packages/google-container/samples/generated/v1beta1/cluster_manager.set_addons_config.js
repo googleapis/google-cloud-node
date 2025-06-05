@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, zone, clusterId, addonsConfig) {
+function main(addonsConfig) {
   // [START container_v1beta1_generated_ClusterManager_SetAddonsConfig_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -48,9 +48,6 @@ function main(projectId, zone, clusterId, addonsConfig) {
   async function callSetAddonsConfig() {
     // Construct request
     const request = {
-      projectId,
-      zone,
-      clusterId,
       addonsConfig,
     };
 

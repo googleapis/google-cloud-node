@@ -6276,7 +6276,7 @@ export namespace google {
                     interface IBigtableColumn {
 
                         /** BigtableColumn qualifier */
-                        qualifier?: (Uint8Array|string|null);
+                        qualifier?: (Uint8Array|Buffer|string|null);
 
                         /** BigtableColumn fieldName */
                         fieldName?: (string|null);
@@ -6298,7 +6298,7 @@ export namespace google {
                         constructor(properties?: google.cloud.discoveryengine.v1.BigtableOptions.IBigtableColumn);
 
                         /** BigtableColumn qualifier. */
-                        public qualifier: (Uint8Array|string);
+                        public qualifier: (Uint8Array|Buffer|string);
 
                         /** BigtableColumn fieldName. */
                         public fieldName: string;
@@ -9113,7 +9113,7 @@ export namespace google {
                     interface IContent {
 
                         /** Content rawBytes */
-                        rawBytes?: (Uint8Array|string|null);
+                        rawBytes?: (Uint8Array|Buffer|string|null);
 
                         /** Content uri */
                         uri?: (string|null);
@@ -9132,7 +9132,7 @@ export namespace google {
                         constructor(properties?: google.cloud.discoveryengine.v1.Document.IContent);
 
                         /** Content rawBytes. */
-                        public rawBytes?: (Uint8Array|string|null);
+                        public rawBytes?: (Uint8Array|Buffer|string|null);
 
                         /** Content uri. */
                         public uri?: (string|null);
@@ -32635,7 +32635,7 @@ export namespace google {
                                 renderedContent?: (string|null);
 
                                 /** SearchEntryPoint sdkBlob */
-                                sdkBlob?: (Uint8Array|string|null);
+                                sdkBlob?: (Uint8Array|Buffer|string|null);
                             }
 
                             /** Represents a SearchEntryPoint. */
@@ -32651,7 +32651,7 @@ export namespace google {
                                 public renderedContent: string;
 
                                 /** SearchEntryPoint sdkBlob. */
-                                public sdkBlob: (Uint8Array|string);
+                                public sdkBlob: (Uint8Array|Buffer|string);
 
                                 /**
                                  * Creates a new SearchEntryPoint instance using the specified properties.
@@ -51311,7 +51311,7 @@ export namespace google {
                     interface IBigtableColumn {
 
                         /** BigtableColumn qualifier */
-                        qualifier?: (Uint8Array|string|null);
+                        qualifier?: (Uint8Array|Buffer|string|null);
 
                         /** BigtableColumn fieldName */
                         fieldName?: (string|null);
@@ -51333,7 +51333,7 @@ export namespace google {
                         constructor(properties?: google.cloud.discoveryengine.v1alpha.BigtableOptions.IBigtableColumn);
 
                         /** BigtableColumn qualifier. */
-                        public qualifier: (Uint8Array|string);
+                        public qualifier: (Uint8Array|Buffer|string);
 
                         /** BigtableColumn fieldName. */
                         public fieldName: string;
@@ -54584,7 +54584,7 @@ export namespace google {
                     interface IContent {
 
                         /** Content rawBytes */
-                        rawBytes?: (Uint8Array|string|null);
+                        rawBytes?: (Uint8Array|Buffer|string|null);
 
                         /** Content uri */
                         uri?: (string|null);
@@ -54603,7 +54603,7 @@ export namespace google {
                         constructor(properties?: google.cloud.discoveryengine.v1alpha.Document.IContent);
 
                         /** Content rawBytes. */
-                        public rawBytes?: (Uint8Array|string|null);
+                        public rawBytes?: (Uint8Array|Buffer|string|null);
 
                         /** Content uri. */
                         public uri?: (string|null);
@@ -95872,7 +95872,7 @@ export namespace google {
                     interface IContent {
 
                         /** Content rawBytes */
-                        rawBytes?: (Uint8Array|string|null);
+                        rawBytes?: (Uint8Array|Buffer|string|null);
 
                         /** Content uri */
                         uri?: (string|null);
@@ -95891,7 +95891,7 @@ export namespace google {
                         constructor(properties?: google.cloud.discoveryengine.v1beta.Document.IContent);
 
                         /** Content rawBytes. */
-                        public rawBytes?: (Uint8Array|string|null);
+                        public rawBytes?: (Uint8Array|Buffer|string|null);
 
                         /** Content uri. */
                         public uri?: (string|null);
@@ -96662,7 +96662,7 @@ export namespace google {
                     interface IBigtableColumn {
 
                         /** BigtableColumn qualifier */
-                        qualifier?: (Uint8Array|string|null);
+                        qualifier?: (Uint8Array|Buffer|string|null);
 
                         /** BigtableColumn fieldName */
                         fieldName?: (string|null);
@@ -96684,7 +96684,7 @@ export namespace google {
                         constructor(properties?: google.cloud.discoveryengine.v1beta.BigtableOptions.IBigtableColumn);
 
                         /** BigtableColumn qualifier. */
-                        public qualifier: (Uint8Array|string);
+                        public qualifier: (Uint8Array|Buffer|string);
 
                         /** BigtableColumn fieldName. */
                         public fieldName: string;
@@ -125375,7 +125375,7 @@ export namespace google {
                                 renderedContent?: (string|null);
 
                                 /** SearchEntryPoint sdkBlob */
-                                sdkBlob?: (Uint8Array|string|null);
+                                sdkBlob?: (Uint8Array|Buffer|string|null);
                             }
 
                             /** Represents a SearchEntryPoint. */
@@ -125391,7 +125391,7 @@ export namespace google {
                                 public renderedContent: string;
 
                                 /** SearchEntryPoint sdkBlob. */
-                                public sdkBlob: (Uint8Array|string);
+                                public sdkBlob: (Uint8Array|Buffer|string);
 
                                 /**
                                  * Creates a new SearchEntryPoint instance using the specified properties.
@@ -138308,6 +138308,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -138348,6 +138351,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -139510,7 +139516,7 @@ export namespace google {
             contentType?: (string|null);
 
             /** HttpBody data */
-            data?: (Uint8Array|string|null);
+            data?: (Uint8Array|Buffer|string|null);
 
             /** HttpBody extensions */
             extensions?: (google.protobuf.IAny[]|null);
@@ -139529,7 +139535,7 @@ export namespace google {
             public contentType: string;
 
             /** HttpBody data. */
-            public data: (Uint8Array|string);
+            public data: (Uint8Array|Buffer|string);
 
             /** HttpBody extensions. */
             public extensions: google.protobuf.IAny[];
@@ -142410,6 +142416,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -142661,7 +142670,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -142692,7 +142701,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -144263,7 +144272,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -144279,7 +144288,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

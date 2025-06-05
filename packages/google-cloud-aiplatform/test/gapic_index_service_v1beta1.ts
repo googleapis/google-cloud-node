@@ -753,6 +753,160 @@ describe('v1beta1.IndexServiceClient', () => {
         });
     });
 
+    describe('importIndex', () => {
+        it('invokes importIndex without error', async () => {
+            const client = new indexserviceModule.v1beta1.IndexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.ImportIndexRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ImportIndexRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.importIndex = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.importIndex(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.importIndex as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importIndex as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes importIndex without error using callback', async () => {
+            const client = new indexserviceModule.v1beta1.IndexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.ImportIndexRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ImportIndexRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.importIndex = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.importIndex(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.aiplatform.v1beta1.IIndex, protos.google.cloud.aiplatform.v1beta1.IImportIndexOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.aiplatform.v1beta1.IIndex, protos.google.cloud.aiplatform.v1beta1.IImportIndexOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.importIndex as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importIndex as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes importIndex with call error', async () => {
+            const client = new indexserviceModule.v1beta1.IndexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.ImportIndexRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ImportIndexRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.importIndex = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.importIndex(request), expectedError);
+            const actualRequest = (client.innerApiCalls.importIndex as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importIndex as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes importIndex with LRO error', async () => {
+            const client = new indexserviceModule.v1beta1.IndexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.ImportIndexRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ImportIndexRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.importIndex = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.importIndex(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.importIndex as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importIndex as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkImportIndexProgress without error', async () => {
+            const client = new indexserviceModule.v1beta1.IndexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkImportIndexProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkImportIndexProgress with error', async () => {
+            const client = new indexserviceModule.v1beta1.IndexServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkImportIndexProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
     describe('updateIndex', () => {
         it('invokes updateIndex without error', async () => {
             const client = new indexserviceModule.v1beta1.IndexServiceClient({

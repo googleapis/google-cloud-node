@@ -34,8 +34,8 @@ describe('Quickstart', () => {
 
   it('should run quickstart', async () => {
     const output = execSync(
-      `node ./quickstart.js projects/${projectId}/locations/global`,
-      {cwd}
+      `node ./quickstart.js projects/${projectId}/locations/global 1`,
+      {cwd},
     );
     assert(output !== null);
   });

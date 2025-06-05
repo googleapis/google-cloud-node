@@ -20,6 +20,8 @@
   * [Cluster_manager.create_node_pool](#cluster_manager.create_node_pool)
   * [Cluster_manager.delete_cluster](#cluster_manager.delete_cluster)
   * [Cluster_manager.delete_node_pool](#cluster_manager.delete_node_pool)
+  * [Cluster_manager.fetch_cluster_upgrade_info](#cluster_manager.fetch_cluster_upgrade_info)
+  * [Cluster_manager.fetch_node_pool_upgrade_info](#cluster_manager.fetch_node_pool_upgrade_info)
   * [Cluster_manager.get_cluster](#cluster_manager.get_cluster)
   * [Cluster_manager.get_j_s_o_n_web_keys](#cluster_manager.get_j_s_o_n_web_keys)
   * [Cluster_manager.get_node_pool](#cluster_manager.get_node_pool)
@@ -54,6 +56,8 @@
   * [Cluster_manager.create_node_pool](#cluster_manager.create_node_pool)
   * [Cluster_manager.delete_cluster](#cluster_manager.delete_cluster)
   * [Cluster_manager.delete_node_pool](#cluster_manager.delete_node_pool)
+  * [Cluster_manager.fetch_cluster_upgrade_info](#cluster_manager.fetch_cluster_upgrade_info)
+  * [Cluster_manager.fetch_node_pool_upgrade_info](#cluster_manager.fetch_node_pool_upgrade_info)
   * [Cluster_manager.get_cluster](#cluster_manager.get_cluster)
   * [Cluster_manager.get_j_s_o_n_web_keys](#cluster_manager.get_j_s_o_n_web_keys)
   * [Cluster_manager.get_node_pool](#cluster_manager.get_node_pool)
@@ -227,6 +231,40 @@ __Usage:__
 
 
 `node packages/google-container/samples/generated/v1/cluster_manager.delete_node_pool.js`
+
+
+-----
+
+
+
+
+### Cluster_manager.fetch_cluster_upgrade_info
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.fetch_cluster_upgrade_info.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.fetch_cluster_upgrade_info.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-container/samples/generated/v1/cluster_manager.fetch_cluster_upgrade_info.js`
+
+
+-----
+
+
+
+
+### Cluster_manager.fetch_node_pool_upgrade_info
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.fetch_node_pool_upgrade_info.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.fetch_node_pool_upgrade_info.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-container/samples/generated/v1/cluster_manager.fetch_node_pool_upgrade_info.js`
 
 
 -----
@@ -805,6 +843,40 @@ __Usage:__
 
 
 `node packages/google-container/samples/generated/v1beta1/cluster_manager.delete_node_pool.js`
+
+
+-----
+
+
+
+
+### Cluster_manager.fetch_cluster_upgrade_info
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.fetch_cluster_upgrade_info.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.fetch_cluster_upgrade_info.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-container/samples/generated/v1beta1/cluster_manager.fetch_cluster_upgrade_info.js`
+
+
+-----
+
+
+
+
+### Cluster_manager.fetch_node_pool_upgrade_info
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.fetch_node_pool_upgrade_info.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.fetch_node_pool_upgrade_info.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-container/samples/generated/v1beta1/cluster_manager.fetch_node_pool_upgrade_info.js`
 
 
 -----

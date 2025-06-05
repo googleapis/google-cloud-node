@@ -21,6 +21,7 @@ import "google/cloud/aiplatform/v1/openapi.proto";
 import "google/cloud/aiplatform/v1/tool.proto";
 import "google/cloud/aiplatform/v1/vertex_rag_data.proto";
 import "google/protobuf/duration.proto";
+import "google/protobuf/struct.proto";
 import "google/type/date.proto";
 
 option csharp_namespace = "Google.Cloud.AIPlatform.V1";
@@ -127,6 +128,13 @@ message Part {
     // Optional. Result of executing the [ExecutableCode].
     CodeExecutionResult code_execution_result = 9
         [(google.api.field_behavior) = OPTIONAL];
+
+    // Indicates if the part is thought from the model.
+    bool thought = 10 [(google.api.field_behavior) = OPTIONAL];
+
+    // An opaque signature for the thought so it can be reused in subsequent
+    // requests.
+    bytes thought_signature = 11 [(google.api.field_behavior) = OPTIONAL];
   }
 
   oneof metadata {
@@ -214,6 +222,10 @@ message GenerationConfig {
 
   // Config for thinking features.
   message ThinkingConfig {
+    // Indicates whether to include thoughts in the response.
+    // If true, thoughts are returned only when available.
+    optional bool include_thoughts = 1 [(google.api.field_behavior) = OPTIONAL];
+
     // Optional. Indicates the thinking budget in tokens.
     // This is only applied when enable_thinking is true.
     optional int32 thinking_budget = 3 [(google.api.field_behavior) = OPTIONAL];
@@ -269,6 +281,45 @@ message GenerationConfig {
   // Compatible mimetypes:
   // `application/json`: Schema for JSON response.
   optional Schema response_schema = 16 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Output schema of the generated response. This is an alternative
+  // to `response_schema` that accepts [JSON Schema](https://json-schema.org/).
+  //
+  // If set, `response_schema` must be omitted, but `response_mime_type` is
+  // required.
+  //
+  // While the full JSON Schema may be sent, not all features are supported.
+  // Specifically, only the following properties are supported:
+  //
+  // - `$id`
+  // - `$defs`
+  // - `$ref`
+  // - `$anchor`
+  // - `type`
+  // - `format`
+  // - `title`
+  // - `description`
+  // - `enum` (for strings and numbers)
+  // - `items`
+  // - `prefixItems`
+  // - `minItems`
+  // - `maxItems`
+  // - `minimum`
+  // - `maximum`
+  // - `anyOf`
+  // - `oneOf` (interpreted the same as `anyOf`)
+  // - `properties`
+  // - `additionalProperties`
+  // - `required`
+  //
+  // The non-standard `propertyOrdering` property may also be set.
+  //
+  // Cyclic references are unrolled to a limited degree and, as such, may only
+  // be used within non-required properties. (Nullable properties are not
+  // sufficient.) If `$ref` is set on a sub-schema, no other properties, except
+  // for than those starting as a `$`, may be set.
+  optional google.protobuf.Value response_json_schema = 28
+      [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Routing configuration.
   optional RoutingConfig routing_config = 17

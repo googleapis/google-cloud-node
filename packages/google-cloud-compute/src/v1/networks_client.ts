@@ -18,15 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -107,36 +99,17 @@ export class NetworksClient {
    *     const client = new NetworksClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof NetworksClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'compute.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
@@ -145,9 +118,7 @@ export class NetworksClient {
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -170,7 +141,7 @@ export class NetworksClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set defaultServicePath on the auth object.
     this.auth.defaultServicePath = this._servicePath;
@@ -181,7 +152,10 @@ export class NetworksClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -202,25 +176,16 @@ export class NetworksClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      list: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'items'
-      ),
-      listPeeringRoutes: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'items'
-      ),
+      list:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'items'),
+      listPeeringRoutes:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'items')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.compute.v1.Networks',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.compute.v1.Networks', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -251,47 +216,32 @@ export class NetworksClient {
     // Put together the "service stub" for
     // google.cloud.compute.v1.Networks.
     this.networksStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.compute.v1.Networks'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.compute.v1.Networks') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1.Networks,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const networksStubMethods = [
-      'addPeering',
-      'delete',
-      'get',
-      'getEffectiveFirewalls',
-      'insert',
-      'list',
-      'listPeeringRoutes',
-      'patch',
-      'removePeering',
-      'switchToCustomMode',
-      'updatePeering',
-    ];
+    const networksStubMethods =
+        ['addPeering', 'delete', 'get', 'getEffectiveFirewalls', 'insert', 'list', 'listPeeringRoutes', 'patch', 'removePeering', 'switchToCustomMode', 'updatePeering'];
     for (const methodName of networksStubMethods) {
       const callPromise = this.networksStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -311,14 +261,8 @@ export class NetworksClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'compute.googleapis.com';
   }
@@ -329,14 +273,8 @@ export class NetworksClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'compute.googleapis.com';
   }
@@ -369,7 +307,7 @@ export class NetworksClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform'
     ];
   }
 
@@ -379,9 +317,8 @@ export class NetworksClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -392,1298 +329,962 @@ export class NetworksClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Adds a peering to the specified network.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.network
-   *   Name of the network resource to add peering to.
-   * @param {google.cloud.compute.v1.NetworksAddPeeringRequest} request.networksAddPeeringRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/networks.add_peering.js</caption>
-   * region_tag:compute_v1_generated_Networks_AddPeering_async
-   */
+/**
+ * Adds a peering to the specified network.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.network
+ *   Name of the network resource to add peering to.
+ * @param {google.cloud.compute.v1.NetworksAddPeeringRequest} request.networksAddPeeringRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/networks.add_peering.js</caption>
+ * region_tag:compute_v1_generated_Networks_AddPeering_async
+ */
   addPeering(
-    request?: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   addPeering(
-    request: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAddPeeringNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addPeering(
-    request: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAddPeeringNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addPeering(
-    request?: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IAddPeeringNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAddPeeringNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IAddPeeringNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  addPeering(
+      request: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAddPeeringNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  addPeering(
+      request?: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAddPeeringNetworkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAddPeeringNetworkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        network: request.network ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'network': request.network ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('addPeering request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IAddPeeringNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IAddPeeringNetworkRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('addPeering response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .addPeering(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.addPeering(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Deletes the specified network.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.network
-   *   Name of the network to delete.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/networks.delete.js</caption>
-   * region_tag:compute_v1_generated_Networks_Delete_async
-   */
+/**
+ * Deletes the specified network.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.network
+ *   Name of the network to delete.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/networks.delete.js</caption>
+ * region_tag:compute_v1_generated_Networks_Delete_async
+ */
   delete(
-    request?: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDeleteNetworkRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  delete(
-    request: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDeleteNetworkRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  delete(
-    request?: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDeleteNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDeleteNetworkRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IDeleteNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  delete(
+      request: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  delete(
+      request?: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteNetworkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteNetworkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        network: request.network ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'network': request.network ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('delete request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDeleteNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IDeleteNetworkRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('delete response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .delete(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.delete(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Returns the specified network.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.network
-   *   Name of the network to return.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Network|Network}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/networks.get.js</caption>
-   * region_tag:compute_v1_generated_Networks_Get_async
-   */
+/**
+ * Returns the specified network.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.network
+ *   Name of the network to return.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Network|Network}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/networks.get.js</caption>
+ * region_tag:compute_v1_generated_Networks_Get_async
+ */
   get(
-    request?: protos.google.cloud.compute.v1.IGetNetworkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.INetwork,
-      protos.google.cloud.compute.v1.IGetNetworkRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IGetNetworkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.INetwork,
+        protos.google.cloud.compute.v1.IGetNetworkRequest|undefined, {}|undefined
+      ]>;
   get(
-    request: protos.google.cloud.compute.v1.IGetNetworkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.INetwork,
-      protos.google.cloud.compute.v1.IGetNetworkRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  get(
-    request: protos.google.cloud.compute.v1.IGetNetworkRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.INetwork,
-      protos.google.cloud.compute.v1.IGetNetworkRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  get(
-    request?: protos.google.cloud.compute.v1.IGetNetworkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IGetNetworkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.INetwork,
-          protos.google.cloud.compute.v1.IGetNetworkRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.INetwork,
-      protos.google.cloud.compute.v1.IGetNetworkRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.INetwork,
-      protos.google.cloud.compute.v1.IGetNetworkRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IGetNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  get(
+      request: protos.google.cloud.compute.v1.IGetNetworkRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.INetwork,
+          protos.google.cloud.compute.v1.IGetNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  get(
+      request?: protos.google.cloud.compute.v1.IGetNetworkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.INetwork,
+          protos.google.cloud.compute.v1.IGetNetworkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.INetwork,
+          protos.google.cloud.compute.v1.IGetNetworkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.INetwork,
+        protos.google.cloud.compute.v1.IGetNetworkRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        network: request.network ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'network': request.network ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('get request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1.INetwork,
-          protos.google.cloud.compute.v1.IGetNetworkRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.INetwork,
+        protos.google.cloud.compute.v1.IGetNetworkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .get(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1.INetwork,
-          protos.google.cloud.compute.v1.IGetNetworkRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('get response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.get(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.INetwork,
+        protos.google.cloud.compute.v1.IGetNetworkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('get response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Returns the effective firewalls on a given network.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.network
-   *   Name of the network for this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.NetworksGetEffectiveFirewallsResponse|NetworksGetEffectiveFirewallsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/networks.get_effective_firewalls.js</caption>
-   * region_tag:compute_v1_generated_Networks_GetEffectiveFirewalls_async
-   */
+/**
+ * Returns the effective firewalls on a given network.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.network
+ *   Name of the network for this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.NetworksGetEffectiveFirewallsResponse|NetworksGetEffectiveFirewallsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/networks.get_effective_firewalls.js</caption>
+ * region_tag:compute_v1_generated_Networks_GetEffectiveFirewalls_async
+ */
   getEffectiveFirewalls(
-    request?: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
-      (
-        | protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
+        protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest|undefined, {}|undefined
+      ]>;
   getEffectiveFirewalls(
-    request: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
-      | protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEffectiveFirewalls(
-    request: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
-      | protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEffectiveFirewalls(
-    request?: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
-          | protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
-      | protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
-      (
-        | protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEffectiveFirewalls(
+      request: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
+          protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEffectiveFirewalls(
+      request?: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
+          protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
+          protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
+        protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        network: request.network ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'network': request.network ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getEffectiveFirewalls request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
-          | protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
+        protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEffectiveFirewalls response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getEffectiveFirewalls(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
-          (
-            | protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getEffectiveFirewalls response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getEffectiveFirewalls(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
+        protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEffectiveFirewalls response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Creates a network in the specified project using the data included in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.Network} request.networkResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/networks.insert.js</caption>
-   * region_tag:compute_v1_generated_Networks_Insert_async
-   */
+/**
+ * Creates a network in the specified project using the data included in the request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.compute.v1.Network} request.networkResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/networks.insert.js</caption>
+ * region_tag:compute_v1_generated_Networks_Insert_async
+ */
   insert(
-    request?: protos.google.cloud.compute.v1.IInsertNetworkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IInsertNetworkRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   insert(
-    request: protos.google.cloud.compute.v1.IInsertNetworkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IInsertNetworkRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insert(
-    request: protos.google.cloud.compute.v1.IInsertNetworkRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IInsertNetworkRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insert(
-    request?: protos.google.cloud.compute.v1.IInsertNetworkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IInsertNetworkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IInsertNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IInsertNetworkRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IInsertNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  insert(
+      request: protos.google.cloud.compute.v1.IInsertNetworkRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  insert(
+      request?: protos.google.cloud.compute.v1.IInsertNetworkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertNetworkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertNetworkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('insert request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IInsertNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IInsertNetworkRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('insert response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .insert(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.insert(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Patches the specified network with the data included in the request. Only routingConfig can be modified.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.network
-   *   Name of the network to update.
-   * @param {google.cloud.compute.v1.Network} request.networkResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/networks.patch.js</caption>
-   * region_tag:compute_v1_generated_Networks_Patch_async
-   */
+/**
+ * Patches the specified network with the data included in the request. Only routingConfig can be modified.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.network
+ *   Name of the network to update.
+ * @param {google.cloud.compute.v1.Network} request.networkResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/networks.patch.js</caption>
+ * region_tag:compute_v1_generated_Networks_Patch_async
+ */
   patch(
-    request?: protos.google.cloud.compute.v1.IPatchNetworkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IPatchNetworkRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   patch(
-    request: protos.google.cloud.compute.v1.IPatchNetworkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IPatchNetworkRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  patch(
-    request: protos.google.cloud.compute.v1.IPatchNetworkRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IPatchNetworkRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  patch(
-    request?: protos.google.cloud.compute.v1.IPatchNetworkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IPatchNetworkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IPatchNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IPatchNetworkRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IPatchNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  patch(
+      request: protos.google.cloud.compute.v1.IPatchNetworkRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPatchNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  patch(
+      request?: protos.google.cloud.compute.v1.IPatchNetworkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPatchNetworkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPatchNetworkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        network: request.network ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'network': request.network ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('patch request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IPatchNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IPatchNetworkRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('patch response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .patch(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.patch(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Removes a peering from the specified network.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.network
-   *   Name of the network resource to remove peering from.
-   * @param {google.cloud.compute.v1.NetworksRemovePeeringRequest} request.networksRemovePeeringRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/networks.remove_peering.js</caption>
-   * region_tag:compute_v1_generated_Networks_RemovePeering_async
-   */
+/**
+ * Removes a peering from the specified network.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.network
+ *   Name of the network resource to remove peering from.
+ * @param {google.cloud.compute.v1.NetworksRemovePeeringRequest} request.networksRemovePeeringRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/networks.remove_peering.js</caption>
+ * region_tag:compute_v1_generated_Networks_RemovePeering_async
+ */
   removePeering(
-    request?: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   removePeering(
-    request: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removePeering(
-    request: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removePeering(
-    request?: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  removePeering(
+      request: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  removePeering(
+      request?: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        network: request.network ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'network': request.network ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('removePeering request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('removePeering response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .removePeering(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.removePeering(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Switches the network mode from auto subnet mode to custom subnet mode.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.network
-   *   Name of the network to be updated.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/networks.switch_to_custom_mode.js</caption>
-   * region_tag:compute_v1_generated_Networks_SwitchToCustomMode_async
-   */
+/**
+ * Switches the network mode from auto subnet mode to custom subnet mode.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.network
+ *   Name of the network to be updated.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/networks.switch_to_custom_mode.js</caption>
+ * region_tag:compute_v1_generated_Networks_SwitchToCustomMode_async
+ */
   switchToCustomMode(
-    request?: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   switchToCustomMode(
-    request: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  switchToCustomMode(
-    request: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  switchToCustomMode(
-    request?: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  switchToCustomMode(
+      request: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  switchToCustomMode(
+      request?: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        network: request.network ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'network': request.network ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('switchToCustomMode request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('switchToCustomMode response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .switchToCustomMode(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.switchToCustomMode(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Updates the specified network peering with the data included in the request. You can only modify the NetworkPeering.export_custom_routes field and the NetworkPeering.import_custom_routes field.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.network
-   *   Name of the network resource which the updated peering is belonging to.
-   * @param {google.cloud.compute.v1.NetworksUpdatePeeringRequest} request.networksUpdatePeeringRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/networks.update_peering.js</caption>
-   * region_tag:compute_v1_generated_Networks_UpdatePeering_async
-   */
+/**
+ * Updates the specified network peering with the data included in the request. You can only modify the NetworkPeering.export_custom_routes field and the NetworkPeering.import_custom_routes field.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.network
+ *   Name of the network resource which the updated peering is belonging to.
+ * @param {google.cloud.compute.v1.NetworksUpdatePeeringRequest} request.networksUpdatePeeringRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/networks.update_peering.js</caption>
+ * region_tag:compute_v1_generated_Networks_UpdatePeering_async
+ */
   updatePeering(
-    request?: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   updatePeering(
-    request: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updatePeering(
-    request: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updatePeering(
-    request?: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  updatePeering(
+      request: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  updatePeering(
+      request?: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        network: request.network ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'network': request.network ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updatePeering request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('updatePeering response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updatePeering(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.updatePeering(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
 
-  /**
-   * Retrieves the list of networks available to the specified project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.Network|Network}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Retrieves the list of networks available to the specified project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.Network|Network}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   list(
-    request?: protos.google.cloud.compute.v1.IListNetworksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.INetwork[],
-      protos.google.cloud.compute.v1.IListNetworksRequest | null,
-      protos.google.cloud.compute.v1.INetworkList,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IListNetworksRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.INetwork[],
+        protos.google.cloud.compute.v1.IListNetworksRequest|null,
+        protos.google.cloud.compute.v1.INetworkList
+      ]>;
   list(
-    request: protos.google.cloud.compute.v1.IListNetworksRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListNetworksRequest,
-      protos.google.cloud.compute.v1.INetworkList | null | undefined,
-      protos.google.cloud.compute.v1.INetwork
-    >
-  ): void;
-  list(
-    request: protos.google.cloud.compute.v1.IListNetworksRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListNetworksRequest,
-      protos.google.cloud.compute.v1.INetworkList | null | undefined,
-      protos.google.cloud.compute.v1.INetwork
-    >
-  ): void;
-  list(
-    request?: protos.google.cloud.compute.v1.IListNetworksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.compute.v1.IListNetworksRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.compute.v1.IListNetworksRequest,
-          protos.google.cloud.compute.v1.INetworkList | null | undefined,
-          protos.google.cloud.compute.v1.INetwork
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.compute.v1.IListNetworksRequest,
-      protos.google.cloud.compute.v1.INetworkList | null | undefined,
-      protos.google.cloud.compute.v1.INetwork
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.INetwork[],
-      protos.google.cloud.compute.v1.IListNetworksRequest | null,
-      protos.google.cloud.compute.v1.INetworkList,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.INetworkList|null|undefined,
+          protos.google.cloud.compute.v1.INetwork>): void;
+  list(
+      request: protos.google.cloud.compute.v1.IListNetworksRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.compute.v1.IListNetworksRequest,
+          protos.google.cloud.compute.v1.INetworkList|null|undefined,
+          protos.google.cloud.compute.v1.INetwork>): void;
+  list(
+      request?: protos.google.cloud.compute.v1.IListNetworksRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.compute.v1.IListNetworksRequest,
+          protos.google.cloud.compute.v1.INetworkList|null|undefined,
+          protos.google.cloud.compute.v1.INetwork>,
+      callback?: PaginationCallback<
+          protos.google.cloud.compute.v1.IListNetworksRequest,
+          protos.google.cloud.compute.v1.INetworkList|null|undefined,
+          protos.google.cloud.compute.v1.INetwork>):
+      Promise<[
+        protos.google.cloud.compute.v1.INetwork[],
+        protos.google.cloud.compute.v1.IListNetworksRequest|null,
+        protos.google.cloud.compute.v1.INetworkList
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.compute.v1.IListNetworksRequest,
-          protos.google.cloud.compute.v1.INetworkList | null | undefined,
-          protos.google.cloud.compute.v1.INetwork
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.compute.v1.IListNetworksRequest,
+      protos.google.cloud.compute.v1.INetworkList|null|undefined,
+      protos.google.cloud.compute.v1.INetwork>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('list values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1692,62 +1293,59 @@ export class NetworksClient {
     this._log.info('list request %j', request);
     return this.innerApiCalls
       .list(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.compute.v1.INetwork[],
-          protos.google.cloud.compute.v1.IListNetworksRequest | null,
-          protos.google.cloud.compute.v1.INetworkList,
-        ]) => {
-          this._log.info('list values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.compute.v1.INetwork[],
+        protos.google.cloud.compute.v1.IListNetworksRequest|null,
+        protos.google.cloud.compute.v1.INetworkList
+      ]) => {
+        this._log.info('list values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `list`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.Network|Network} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `list`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.Network|Network} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listStream(
-    request?: protos.google.cloud.compute.v1.IListNetworksRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.compute.v1.IListNetworksRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+    });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -1756,53 +1354,52 @@ export class NetworksClient {
     );
   }
 
-  /**
-   * Equivalent to `list`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.compute.v1.Network|Network}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/networks.list.js</caption>
-   * region_tag:compute_v1_generated_Networks_List_async
-   */
+/**
+ * Equivalent to `list`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.compute.v1.Network|Network}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/networks.list.js</caption>
+ * region_tag:compute_v1_generated_Networks_List_async
+ */
   listAsync(
-    request?: protos.google.cloud.compute.v1.IListNetworksRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.compute.v1.INetwork> {
+      request?: protos.google.cloud.compute.v1.IListNetworksRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.compute.v1.INetwork>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+    });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
@@ -1810,128 +1407,103 @@ export class NetworksClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.compute.v1.INetwork>;
   }
-  /**
-   * Lists the peering routes exchanged over peering connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.direction
-   *   The direction of the exchanged routes.
-   *   Check the Direction enum for the list of possible values.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.network
-   *   Name of the network for this request.
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.peeringName
-   *   The response will show routes exchanged over the given peering connection.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   The region of the request. The response will include all subnet routes, static routes and dynamic routes in the region.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.ExchangedPeeringRoute|ExchangedPeeringRoute}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPeeringRoutesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the peering routes exchanged over peering connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.direction
+ *   The direction of the exchanged routes.
+ *   Check the Direction enum for the list of possible values.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.network
+ *   Name of the network for this request.
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.peeringName
+ *   The response will show routes exchanged over the given peering connection.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   The region of the request. The response will include all subnet routes, static routes and dynamic routes in the region.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.ExchangedPeeringRoute|ExchangedPeeringRoute}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPeeringRoutesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPeeringRoutes(
-    request?: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IExchangedPeeringRoute[],
-      protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest | null,
-      protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IExchangedPeeringRoute[],
+        protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest|null,
+        protos.google.cloud.compute.v1.IExchangedPeeringRoutesList
+      ]>;
   listPeeringRoutes(
-    request: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
-      | protos.google.cloud.compute.v1.IExchangedPeeringRoutesList
-      | null
-      | undefined,
-      protos.google.cloud.compute.v1.IExchangedPeeringRoute
-    >
-  ): void;
-  listPeeringRoutes(
-    request: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
-      | protos.google.cloud.compute.v1.IExchangedPeeringRoutesList
-      | null
-      | undefined,
-      protos.google.cloud.compute.v1.IExchangedPeeringRoute
-    >
-  ): void;
-  listPeeringRoutes(
-    request?: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
-          | protos.google.cloud.compute.v1.IExchangedPeeringRoutesList
-          | null
-          | undefined,
-          protos.google.cloud.compute.v1.IExchangedPeeringRoute
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
-      | protos.google.cloud.compute.v1.IExchangedPeeringRoutesList
-      | null
-      | undefined,
-      protos.google.cloud.compute.v1.IExchangedPeeringRoute
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IExchangedPeeringRoute[],
-      protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest | null,
-      protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IExchangedPeeringRoutesList|null|undefined,
+          protos.google.cloud.compute.v1.IExchangedPeeringRoute>): void;
+  listPeeringRoutes(
+      request: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
+          protos.google.cloud.compute.v1.IExchangedPeeringRoutesList|null|undefined,
+          protos.google.cloud.compute.v1.IExchangedPeeringRoute>): void;
+  listPeeringRoutes(
+      request?: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
+          protos.google.cloud.compute.v1.IExchangedPeeringRoutesList|null|undefined,
+          protos.google.cloud.compute.v1.IExchangedPeeringRoute>,
+      callback?: PaginationCallback<
+          protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
+          protos.google.cloud.compute.v1.IExchangedPeeringRoutesList|null|undefined,
+          protos.google.cloud.compute.v1.IExchangedPeeringRoute>):
+      Promise<[
+        protos.google.cloud.compute.v1.IExchangedPeeringRoute[],
+        protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest|null,
+        protos.google.cloud.compute.v1.IExchangedPeeringRoutesList
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        network: request.network ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'network': request.network ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
-          | protos.google.cloud.compute.v1.IExchangedPeeringRoutesList
-          | null
-          | undefined,
-          protos.google.cloud.compute.v1.IExchangedPeeringRoute
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
+      protos.google.cloud.compute.v1.IExchangedPeeringRoutesList|null|undefined,
+      protos.google.cloud.compute.v1.IExchangedPeeringRoute>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPeeringRoutes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1940,72 +1512,69 @@ export class NetworksClient {
     this._log.info('listPeeringRoutes request %j', request);
     return this.innerApiCalls
       .listPeeringRoutes(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.compute.v1.IExchangedPeeringRoute[],
-          protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest | null,
-          protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
-        ]) => {
-          this._log.info('listPeeringRoutes values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.compute.v1.IExchangedPeeringRoute[],
+        protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest|null,
+        protos.google.cloud.compute.v1.IExchangedPeeringRoutesList
+      ]) => {
+        this._log.info('listPeeringRoutes values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listPeeringRoutes`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.direction
-   *   The direction of the exchanged routes.
-   *   Check the Direction enum for the list of possible values.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.network
-   *   Name of the network for this request.
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.peeringName
-   *   The response will show routes exchanged over the given peering connection.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   The region of the request. The response will include all subnet routes, static routes and dynamic routes in the region.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.ExchangedPeeringRoute|ExchangedPeeringRoute} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPeeringRoutesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listPeeringRoutes`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.direction
+ *   The direction of the exchanged routes.
+ *   Check the Direction enum for the list of possible values.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.network
+ *   Name of the network for this request.
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.peeringName
+ *   The response will show routes exchanged over the given peering connection.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   The region of the request. The response will include all subnet routes, static routes and dynamic routes in the region.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.ExchangedPeeringRoute|ExchangedPeeringRoute} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPeeringRoutesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPeeringRoutesStream(
-    request?: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        network: request.network ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'network': request.network ?? '',
+    });
     const defaultCallSettings = this._defaults['listPeeringRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPeeringRoutes stream %j', request);
     return this.descriptors.page.listPeeringRoutes.createStream(
       this.innerApiCalls.listPeeringRoutes as GaxCall,
@@ -2014,63 +1583,62 @@ export class NetworksClient {
     );
   }
 
-  /**
-   * Equivalent to `listPeeringRoutes`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.direction
-   *   The direction of the exchanged routes.
-   *   Check the Direction enum for the list of possible values.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.network
-   *   Name of the network for this request.
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.peeringName
-   *   The response will show routes exchanged over the given peering connection.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   The region of the request. The response will include all subnet routes, static routes and dynamic routes in the region.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.compute.v1.ExchangedPeeringRoute|ExchangedPeeringRoute}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/networks.list_peering_routes.js</caption>
-   * region_tag:compute_v1_generated_Networks_ListPeeringRoutes_async
-   */
+/**
+ * Equivalent to `listPeeringRoutes`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.direction
+ *   The direction of the exchanged routes.
+ *   Check the Direction enum for the list of possible values.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.network
+ *   Name of the network for this request.
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.peeringName
+ *   The response will show routes exchanged over the given peering connection.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   The region of the request. The response will include all subnet routes, static routes and dynamic routes in the region.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.compute.v1.ExchangedPeeringRoute|ExchangedPeeringRoute}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/networks.list_peering_routes.js</caption>
+ * region_tag:compute_v1_generated_Networks_ListPeeringRoutes_async
+ */
   listPeeringRoutesAsync(
-    request?: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.compute.v1.IExchangedPeeringRoute> {
+      request?: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.compute.v1.IExchangedPeeringRoute>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        network: request.network ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'network': request.network ?? '',
+    });
     const defaultCallSettings = this._defaults['listPeeringRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPeeringRoutes iterate %j', request);
     return this.descriptors.page.listPeeringRoutes.asyncIterate(
       this.innerApiCalls['listPeeringRoutes'] as GaxCall,

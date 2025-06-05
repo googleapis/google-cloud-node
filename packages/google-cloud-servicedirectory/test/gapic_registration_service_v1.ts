@@ -270,9 +270,14 @@ describe('v1.RegistrationServiceClient', () => {
         throw err;
       });
       assert(client.registrationServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -283,9 +288,14 @@ describe('v1.RegistrationServiceClient', () => {
         }
       );
       assert.strictEqual(client.registrationServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -460,7 +470,9 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createNamespace(request), expectedError);
     });
   });
@@ -598,7 +610,9 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getNamespace(request), expectedError);
     });
   });
@@ -740,7 +754,9 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.namespace.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateNamespace(request), expectedError);
     });
   });
@@ -878,7 +894,9 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteNamespace(request), expectedError);
     });
   });
@@ -1016,7 +1034,9 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createService(request), expectedError);
     });
   });
@@ -1154,7 +1174,9 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getService(request), expectedError);
     });
   });
@@ -1296,7 +1318,9 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.service.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateService(request), expectedError);
     });
   });
@@ -1434,7 +1458,9 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteService(request), expectedError);
     });
   });
@@ -1572,7 +1598,9 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createEndpoint(request), expectedError);
     });
   });
@@ -1710,7 +1738,9 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getEndpoint(request), expectedError);
     });
   });
@@ -1852,7 +1882,9 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.endpoint.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateEndpoint(request), expectedError);
     });
   });
@@ -1990,7 +2022,9 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteEndpoint(request), expectedError);
     });
   });
@@ -2128,7 +2162,9 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -2266,7 +2302,9 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -2405,7 +2443,9 @@ describe('v1.RegistrationServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
