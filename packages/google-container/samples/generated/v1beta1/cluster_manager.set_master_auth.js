@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, zone, clusterId, action, update) {
+function main(action, update) {
   // [START container_v1beta1_generated_ClusterManager_SetMasterAuth_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -51,9 +51,6 @@ function main(projectId, zone, clusterId, action, update) {
   async function callSetMasterAuth() {
     // Construct request
     const request = {
-      projectId,
-      zone,
-      clusterId,
       action,
       update,
     };

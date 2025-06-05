@@ -13,7 +13,7 @@
     "test": "mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/phishing-protection": "^5.0.1"
+    "@google-cloud/phishing-protection": "^5.1.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

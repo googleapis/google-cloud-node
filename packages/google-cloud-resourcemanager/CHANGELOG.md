@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource-manager?activeTab=versions
 
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/resource-manager-v6.0.1...resource-manager-v6.1.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6302](https://github.com/googleapis/google-cloud-node/issues/6302)) ([abc35be](https://github.com/googleapis/google-cloud-node/commit/abc35be4817709467e6c6b2a12ac4e749ffed72d))
+
 ## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/resource-manager-v6.0.0...resource-manager-v6.0.1) (2025-03-19)
 
 

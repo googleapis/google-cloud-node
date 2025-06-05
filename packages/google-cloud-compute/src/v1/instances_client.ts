@@ -18,15 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -107,36 +99,17 @@ export class InstancesClient {
    *     const client = new InstancesClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof InstancesClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'compute.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
@@ -145,9 +118,7 @@ export class InstancesClient {
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -170,7 +141,7 @@ export class InstancesClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set defaultServicePath on the auth object.
     this.auth.defaultServicePath = this._servicePath;
@@ -181,7 +152,10 @@ export class InstancesClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -202,30 +176,18 @@ export class InstancesClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      aggregatedList: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'items'
-      ),
-      list: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'items'
-      ),
-      listReferrers: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'items'
-      ),
+      aggregatedList:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'items'),
+      list:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'items'),
+      listReferrers:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'items')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.compute.v1.Instances',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.compute.v1.Instances', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -256,85 +218,32 @@ export class InstancesClient {
     // Put together the "service stub" for
     // google.cloud.compute.v1.Instances.
     this.instancesStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.compute.v1.Instances'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.compute.v1.Instances') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1.Instances,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const instancesStubMethods = [
-      'addAccessConfig',
-      'addResourcePolicies',
-      'aggregatedList',
-      'attachDisk',
-      'bulkInsert',
-      'delete',
-      'deleteAccessConfig',
-      'detachDisk',
-      'get',
-      'getEffectiveFirewalls',
-      'getGuestAttributes',
-      'getIamPolicy',
-      'getScreenshot',
-      'getSerialPortOutput',
-      'getShieldedInstanceIdentity',
-      'insert',
-      'list',
-      'listReferrers',
-      'performMaintenance',
-      'removeResourcePolicies',
-      'reportHostAsFaulty',
-      'reset',
-      'resume',
-      'sendDiagnosticInterrupt',
-      'setDeletionProtection',
-      'setDiskAutoDelete',
-      'setIamPolicy',
-      'setLabels',
-      'setMachineResources',
-      'setMachineType',
-      'setMetadata',
-      'setMinCpuPlatform',
-      'setName',
-      'setScheduling',
-      'setSecurityPolicy',
-      'setServiceAccount',
-      'setShieldedInstanceIntegrityPolicy',
-      'setTags',
-      'simulateMaintenanceEvent',
-      'start',
-      'startWithEncryptionKey',
-      'stop',
-      'suspend',
-      'testIamPermissions',
-      'update',
-      'updateAccessConfig',
-      'updateDisplayDevice',
-      'updateNetworkInterface',
-      'updateShieldedInstanceConfig',
-    ];
+    const instancesStubMethods =
+        ['addAccessConfig', 'addResourcePolicies', 'aggregatedList', 'attachDisk', 'bulkInsert', 'delete', 'deleteAccessConfig', 'detachDisk', 'get', 'getEffectiveFirewalls', 'getGuestAttributes', 'getIamPolicy', 'getScreenshot', 'getSerialPortOutput', 'getShieldedInstanceIdentity', 'insert', 'list', 'listReferrers', 'performMaintenance', 'removeResourcePolicies', 'reportHostAsFaulty', 'reset', 'resume', 'sendDiagnosticInterrupt', 'setDeletionProtection', 'setDiskAutoDelete', 'setIamPolicy', 'setLabels', 'setMachineResources', 'setMachineType', 'setMetadata', 'setMinCpuPlatform', 'setName', 'setScheduling', 'setSecurityPolicy', 'setServiceAccount', 'setShieldedInstanceIntegrityPolicy', 'setTags', 'simulateMaintenanceEvent', 'start', 'startWithEncryptionKey', 'stop', 'suspend', 'testIamPermissions', 'update', 'updateAccessConfig', 'updateDisplayDevice', 'updateNetworkInterface', 'updateShieldedInstanceConfig'];
     for (const methodName of instancesStubMethods) {
       const callPromise = this.instancesStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -354,14 +263,8 @@ export class InstancesClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'compute.googleapis.com';
   }
@@ -372,14 +275,8 @@ export class InstancesClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'compute.googleapis.com';
   }
@@ -412,7 +309,7 @@ export class InstancesClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform'
     ];
   }
 
@@ -422,9 +319,8 @@ export class InstancesClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -435,6547 +331,4789 @@ export class InstancesClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Adds an access config to an instance's network interface.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.AccessConfig} request.accessConfigResource
-   *   The body resource for this request
-   * @param {string} request.instance
-   *   The instance name for this request.
-   * @param {string} request.networkInterface
-   *   The name of the network interface to add to this instance.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.add_access_config.js</caption>
-   * region_tag:compute_v1_generated_Instances_AddAccessConfig_async
-   */
+/**
+ * Adds an access config to an instance's network interface.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.compute.v1.AccessConfig} request.accessConfigResource
+ *   The body resource for this request
+ * @param {string} request.instance
+ *   The instance name for this request.
+ * @param {string} request.networkInterface
+ *   The name of the network interface to add to this instance.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.add_access_config.js</caption>
+ * region_tag:compute_v1_generated_Instances_AddAccessConfig_async
+ */
   addAccessConfig(
-    request?: protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   addAccessConfig(
-    request: protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addAccessConfig(
-    request: protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addAccessConfig(
-    request?: protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  addAccessConfig(
+      request: protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  addAccessConfig(
+      request?: protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('addAccessConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('addAccessConfig response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .addAccessConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.addAccessConfig(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Adds existing resource policies to an instance. You can only add one policy right now which will be applied to this instance for scheduling live migrations.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   The instance name for this request.
-   * @param {google.cloud.compute.v1.InstancesAddResourcePoliciesRequest} request.instancesAddResourcePoliciesRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.add_resource_policies.js</caption>
-   * region_tag:compute_v1_generated_Instances_AddResourcePolicies_async
-   */
+/**
+ * Adds existing resource policies to an instance. You can only add one policy right now which will be applied to this instance for scheduling live migrations.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   The instance name for this request.
+ * @param {google.cloud.compute.v1.InstancesAddResourcePoliciesRequest} request.instancesAddResourcePoliciesRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.add_resource_policies.js</caption>
+ * region_tag:compute_v1_generated_Instances_AddResourcePolicies_async
+ */
   addResourcePolicies(
-    request?: protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   addResourcePolicies(
-    request: protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addResourcePolicies(
-    request: protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addResourcePolicies(
-    request?: protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  addResourcePolicies(
+      request: protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  addResourcePolicies(
+      request?: protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('addResourcePolicies request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('addResourcePolicies response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .addResourcePolicies(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.addResourcePolicies(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Attaches an existing Disk resource to an instance. You must first create the disk before you can attach it. It is not possible to create and attach a disk at the same time. For more information, read Adding a persistent disk to your instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.AttachedDisk} request.attachedDiskResource
-   *   The body resource for this request
-   * @param {boolean} request.forceAttach
-   *   Whether to force attach the regional disk even if it's currently attached to another instance. If you try to force attach a zonal disk to an instance, you will receive an error.
-   * @param {string} request.instance
-   *   The instance name for this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.attach_disk.js</caption>
-   * region_tag:compute_v1_generated_Instances_AttachDisk_async
-   */
+/**
+ * Attaches an existing Disk resource to an instance. You must first create the disk before you can attach it. It is not possible to create and attach a disk at the same time. For more information, read Adding a persistent disk to your instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.compute.v1.AttachedDisk} request.attachedDiskResource
+ *   The body resource for this request
+ * @param {boolean} request.forceAttach
+ *   Whether to force attach the regional disk even if it's currently attached to another instance. If you try to force attach a zonal disk to an instance, you will receive an error.
+ * @param {string} request.instance
+ *   The instance name for this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.attach_disk.js</caption>
+ * region_tag:compute_v1_generated_Instances_AttachDisk_async
+ */
   attachDisk(
-    request?: protos.google.cloud.compute.v1.IAttachDiskInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IAttachDiskInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   attachDisk(
-    request: protos.google.cloud.compute.v1.IAttachDiskInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAttachDiskInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  attachDisk(
-    request: protos.google.cloud.compute.v1.IAttachDiskInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAttachDiskInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  attachDisk(
-    request?: protos.google.cloud.compute.v1.IAttachDiskInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IAttachDiskInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IAttachDiskInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAttachDiskInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IAttachDiskInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  attachDisk(
+      request: protos.google.cloud.compute.v1.IAttachDiskInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAttachDiskInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  attachDisk(
+      request?: protos.google.cloud.compute.v1.IAttachDiskInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAttachDiskInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAttachDiskInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('attachDisk request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IAttachDiskInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IAttachDiskInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('attachDisk response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .attachDisk(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.attachDisk(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Creates multiple instances. Count specifies the number of instances to create. For more information, see About bulk creation of VMs.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.BulkInsertInstanceResource} request.bulkInsertInstanceResourceResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.bulk_insert.js</caption>
-   * region_tag:compute_v1_generated_Instances_BulkInsert_async
-   */
+/**
+ * Creates multiple instances. Count specifies the number of instances to create. For more information, see About bulk creation of VMs.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.compute.v1.BulkInsertInstanceResource} request.bulkInsertInstanceResourceResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.bulk_insert.js</caption>
+ * region_tag:compute_v1_generated_Instances_BulkInsert_async
+ */
   bulkInsert(
-    request?: protos.google.cloud.compute.v1.IBulkInsertInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IBulkInsertInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   bulkInsert(
-    request: protos.google.cloud.compute.v1.IBulkInsertInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IBulkInsertInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  bulkInsert(
-    request: protos.google.cloud.compute.v1.IBulkInsertInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IBulkInsertInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  bulkInsert(
-    request?: protos.google.cloud.compute.v1.IBulkInsertInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IBulkInsertInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IBulkInsertInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IBulkInsertInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IBulkInsertInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  bulkInsert(
+      request: protos.google.cloud.compute.v1.IBulkInsertInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IBulkInsertInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  bulkInsert(
+      request?: protos.google.cloud.compute.v1.IBulkInsertInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IBulkInsertInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IBulkInsertInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('bulkInsert request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IBulkInsertInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IBulkInsertInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('bulkInsert response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .bulkInsert(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.bulkInsert(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Deletes the specified Instance resource. For more information, see Deleting an instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance resource to delete.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.delete.js</caption>
-   * region_tag:compute_v1_generated_Instances_Delete_async
-   */
+/**
+ * Deletes the specified Instance resource. For more information, see Deleting an instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance resource to delete.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.delete.js</caption>
+ * region_tag:compute_v1_generated_Instances_Delete_async
+ */
   delete(
-    request?: protos.google.cloud.compute.v1.IDeleteInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IDeleteInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDeleteInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  delete(
-    request: protos.google.cloud.compute.v1.IDeleteInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDeleteInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  delete(
-    request?: protos.google.cloud.compute.v1.IDeleteInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IDeleteInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDeleteInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDeleteInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IDeleteInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  delete(
+      request: protos.google.cloud.compute.v1.IDeleteInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  delete(
+      request?: protos.google.cloud.compute.v1.IDeleteInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('delete request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDeleteInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IDeleteInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('delete response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .delete(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.delete(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Deletes an access config from an instance's network interface.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.accessConfig
-   *   The name of the access config to delete.
-   * @param {string} request.instance
-   *   The instance name for this request.
-   * @param {string} request.networkInterface
-   *   The name of the network interface.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.delete_access_config.js</caption>
-   * region_tag:compute_v1_generated_Instances_DeleteAccessConfig_async
-   */
+/**
+ * Deletes an access config from an instance's network interface.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.accessConfig
+ *   The name of the access config to delete.
+ * @param {string} request.instance
+ *   The instance name for this request.
+ * @param {string} request.networkInterface
+ *   The name of the network interface.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.delete_access_config.js</caption>
+ * region_tag:compute_v1_generated_Instances_DeleteAccessConfig_async
+ */
   deleteAccessConfig(
-    request?: protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   deleteAccessConfig(
-    request: protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAccessConfig(
-    request: protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAccessConfig(
-    request?: protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteAccessConfig(
+      request: protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteAccessConfig(
+      request?: protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteAccessConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('deleteAccessConfig response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteAccessConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.deleteAccessConfig(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Detaches a disk from an instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.deviceName
-   *   The device name of the disk to detach. Make a get() request on the instance to view currently attached disks and device names.
-   * @param {string} request.instance
-   *   Instance name for this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.detach_disk.js</caption>
-   * region_tag:compute_v1_generated_Instances_DetachDisk_async
-   */
+/**
+ * Detaches a disk from an instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.deviceName
+ *   The device name of the disk to detach. Make a get() request on the instance to view currently attached disks and device names.
+ * @param {string} request.instance
+ *   Instance name for this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.detach_disk.js</caption>
+ * region_tag:compute_v1_generated_Instances_DetachDisk_async
+ */
   detachDisk(
-    request?: protos.google.cloud.compute.v1.IDetachDiskInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IDetachDiskInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   detachDisk(
-    request: protos.google.cloud.compute.v1.IDetachDiskInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDetachDiskInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  detachDisk(
-    request: protos.google.cloud.compute.v1.IDetachDiskInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDetachDiskInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  detachDisk(
-    request?: protos.google.cloud.compute.v1.IDetachDiskInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IDetachDiskInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDetachDiskInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDetachDiskInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IDetachDiskInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  detachDisk(
+      request: protos.google.cloud.compute.v1.IDetachDiskInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDetachDiskInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  detachDisk(
+      request?: protos.google.cloud.compute.v1.IDetachDiskInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDetachDiskInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDetachDiskInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('detachDisk request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDetachDiskInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IDetachDiskInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('detachDisk response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .detachDisk(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.detachDisk(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Returns the specified Instance resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance resource to return.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Instance|Instance}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/instances.get.js</caption>
-   * region_tag:compute_v1_generated_Instances_Get_async
-   */
+/**
+ * Returns the specified Instance resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance resource to return.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Instance|Instance}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/instances.get.js</caption>
+ * region_tag:compute_v1_generated_Instances_Get_async
+ */
   get(
-    request?: protos.google.cloud.compute.v1.IGetInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstance,
-      protos.google.cloud.compute.v1.IGetInstanceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IGetInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IInstance,
+        protos.google.cloud.compute.v1.IGetInstanceRequest|undefined, {}|undefined
+      ]>;
   get(
-    request: protos.google.cloud.compute.v1.IGetInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInstance,
-      protos.google.cloud.compute.v1.IGetInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  get(
-    request: protos.google.cloud.compute.v1.IGetInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInstance,
-      protos.google.cloud.compute.v1.IGetInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  get(
-    request?: protos.google.cloud.compute.v1.IGetInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IGetInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IInstance,
-          protos.google.cloud.compute.v1.IGetInstanceRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IInstance,
-      protos.google.cloud.compute.v1.IGetInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstance,
-      protos.google.cloud.compute.v1.IGetInstanceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  get(
+      request: protos.google.cloud.compute.v1.IGetInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IInstance,
+          protos.google.cloud.compute.v1.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  get(
+      request?: protos.google.cloud.compute.v1.IGetInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IInstance,
+          protos.google.cloud.compute.v1.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IInstance,
+          protos.google.cloud.compute.v1.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IInstance,
+        protos.google.cloud.compute.v1.IGetInstanceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('get request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1.IInstance,
-          protos.google.cloud.compute.v1.IGetInstanceRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.IInstance,
+        protos.google.cloud.compute.v1.IGetInstanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .get(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1.IInstance,
-          protos.google.cloud.compute.v1.IGetInstanceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('get response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.get(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.IInstance,
+        protos.google.cloud.compute.v1.IGetInstanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('get response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Returns effective firewalls applied to an interface of the instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance scoping this request.
-   * @param {string} request.networkInterface
-   *   The name of the network interface to get the effective firewalls.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.InstancesGetEffectiveFirewallsResponse|InstancesGetEffectiveFirewallsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/instances.get_effective_firewalls.js</caption>
-   * region_tag:compute_v1_generated_Instances_GetEffectiveFirewalls_async
-   */
+/**
+ * Returns effective firewalls applied to an interface of the instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance scoping this request.
+ * @param {string} request.networkInterface
+ *   The name of the network interface to get the effective firewalls.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.InstancesGetEffectiveFirewallsResponse|InstancesGetEffectiveFirewallsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/instances.get_effective_firewalls.js</caption>
+ * region_tag:compute_v1_generated_Instances_GetEffectiveFirewalls_async
+ */
   getEffectiveFirewalls(
-    request?: protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
-      (
-        | protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
+        protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest|undefined, {}|undefined
+      ]>;
   getEffectiveFirewalls(
-    request: protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
-      | protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEffectiveFirewalls(
-    request: protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
-      | protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEffectiveFirewalls(
-    request?: protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
-          | protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
-      | protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
-      (
-        | protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEffectiveFirewalls(
+      request: protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
+          protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEffectiveFirewalls(
+      request?: protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
+          protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
+          protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
+        protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getEffectiveFirewalls request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
-          | protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
+        protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEffectiveFirewalls response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getEffectiveFirewalls(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
-          (
-            | protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getEffectiveFirewalls response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getEffectiveFirewalls(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
+        protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEffectiveFirewalls response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Returns the specified guest attributes entry.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance scoping this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.queryPath
-   *   Specifies the guest attributes path to be queried.
-   * @param {string} request.variableKey
-   *   Specifies the key for the guest attributes entry.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.GuestAttributes|GuestAttributes}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/instances.get_guest_attributes.js</caption>
-   * region_tag:compute_v1_generated_Instances_GetGuestAttributes_async
-   */
+/**
+ * Returns the specified guest attributes entry.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance scoping this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.queryPath
+ *   Specifies the guest attributes path to be queried.
+ * @param {string} request.variableKey
+ *   Specifies the key for the guest attributes entry.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.GuestAttributes|GuestAttributes}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/instances.get_guest_attributes.js</caption>
+ * region_tag:compute_v1_generated_Instances_GetGuestAttributes_async
+ */
   getGuestAttributes(
-    request?: protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IGuestAttributes,
-      (
-        | protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IGuestAttributes,
+        protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest|undefined, {}|undefined
+      ]>;
   getGuestAttributes(
-    request: protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IGuestAttributes,
-      | protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGuestAttributes(
-    request: protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IGuestAttributes,
-      | protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGuestAttributes(
-    request?: protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IGuestAttributes,
-          | protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IGuestAttributes,
-      | protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IGuestAttributes,
-      (
-        | protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGuestAttributes(
+      request: protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IGuestAttributes,
+          protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGuestAttributes(
+      request?: protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IGuestAttributes,
+          protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IGuestAttributes,
+          protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IGuestAttributes,
+        protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getGuestAttributes request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1.IGuestAttributes,
-          | protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.IGuestAttributes,
+        protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getGuestAttributes response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getGuestAttributes(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1.IGuestAttributes,
-          (
-            | protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getGuestAttributes response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getGuestAttributes(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.IGuestAttributes,
+        protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getGuestAttributes response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.optionsRequestedPolicyVersion
-   *   Requested IAM Policy version.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/instances.get_iam_policy.js</caption>
-   * region_tag:compute_v1_generated_Instances_GetIamPolicy_async
-   */
+/**
+ * Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} request.optionsRequestedPolicyVersion
+ *   Requested IAM Policy version.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.resource
+ *   Name or id of the resource for this request.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/instances.get_iam_policy.js</caption>
+ * region_tag:compute_v1_generated_Instances_GetIamPolicy_async
+ */
   getIamPolicy(
-    request?: protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPolicy,
-      protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest|undefined, {}|undefined
+      ]>;
   getIamPolicy(
-    request: protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request: protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request?: protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IPolicy,
-          | protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPolicy,
-      protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request?: protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1.IPolicy,
-          | protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1.IPolicy,
-          (
-            | protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getIamPolicy response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Returns the screenshot from the specified instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance scoping this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Screenshot|Screenshot}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/instances.get_screenshot.js</caption>
-   * region_tag:compute_v1_generated_Instances_GetScreenshot_async
-   */
+/**
+ * Returns the screenshot from the specified instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance scoping this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Screenshot|Screenshot}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/instances.get_screenshot.js</caption>
+ * region_tag:compute_v1_generated_Instances_GetScreenshot_async
+ */
   getScreenshot(
-    request?: protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IScreenshot,
-      protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IScreenshot,
+        protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest|undefined, {}|undefined
+      ]>;
   getScreenshot(
-    request: protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IScreenshot,
-      | protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getScreenshot(
-    request: protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IScreenshot,
-      | protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getScreenshot(
-    request?: protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IScreenshot,
-          | protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IScreenshot,
-      | protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IScreenshot,
-      protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getScreenshot(
+      request: protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IScreenshot,
+          protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getScreenshot(
+      request?: protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IScreenshot,
+          protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IScreenshot,
+          protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IScreenshot,
+        protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getScreenshot request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1.IScreenshot,
-          | protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.IScreenshot,
+        protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getScreenshot response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getScreenshot(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1.IScreenshot,
-          (
-            | protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getScreenshot response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getScreenshot(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.IScreenshot,
+        protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getScreenshot response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Returns the last 1 MB of serial port output from the specified instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance for this request.
-   * @param {number} request.port
-   *   Specifies which COM or serial port to retrieve data from.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {number} request.start
-   *   Specifies the starting byte position of the output to return. To start with the first byte of output to the specified port, omit this field or set it to `0`. If the output for that byte position is available, this field matches the `start` parameter sent with the request. If the amount of serial console output exceeds the size of the buffer (1 MB), the oldest output is discarded and is no longer available. If the requested start position refers to discarded output, the start position is adjusted to the oldest output still available, and the adjusted start position is returned as the `start` property value. You can also provide a negative start position, which translates to the most recent number of bytes written to the serial port. For example, -3 is interpreted as the most recent 3 bytes written to the serial console. Note that the negative start is bounded by the retained buffer size, and the returned serial console output will not exceed the max buffer size.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.SerialPortOutput|SerialPortOutput}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/instances.get_serial_port_output.js</caption>
-   * region_tag:compute_v1_generated_Instances_GetSerialPortOutput_async
-   */
+/**
+ * Returns the last 1 MB of serial port output from the specified instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance for this request.
+ * @param {number} request.port
+ *   Specifies which COM or serial port to retrieve data from.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {number} request.start
+ *   Specifies the starting byte position of the output to return. To start with the first byte of output to the specified port, omit this field or set it to `0`. If the output for that byte position is available, this field matches the `start` parameter sent with the request. If the amount of serial console output exceeds the size of the buffer (1 MB), the oldest output is discarded and is no longer available. If the requested start position refers to discarded output, the start position is adjusted to the oldest output still available, and the adjusted start position is returned as the `start` property value. You can also provide a negative start position, which translates to the most recent number of bytes written to the serial port. For example, -3 is interpreted as the most recent 3 bytes written to the serial console. Note that the negative start is bounded by the retained buffer size, and the returned serial console output will not exceed the max buffer size.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.SerialPortOutput|SerialPortOutput}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/instances.get_serial_port_output.js</caption>
+ * region_tag:compute_v1_generated_Instances_GetSerialPortOutput_async
+ */
   getSerialPortOutput(
-    request?: protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.ISerialPortOutput,
-      (
-        | protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.ISerialPortOutput,
+        protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest|undefined, {}|undefined
+      ]>;
   getSerialPortOutput(
-    request: protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.ISerialPortOutput,
-      | protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSerialPortOutput(
-    request: protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.ISerialPortOutput,
-      | protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSerialPortOutput(
-    request?: protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.ISerialPortOutput,
-          | protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.ISerialPortOutput,
-      | protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.ISerialPortOutput,
-      (
-        | protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSerialPortOutput(
+      request: protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.ISerialPortOutput,
+          protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSerialPortOutput(
+      request?: protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.ISerialPortOutput,
+          protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.ISerialPortOutput,
+          protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.ISerialPortOutput,
+        protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getSerialPortOutput request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1.ISerialPortOutput,
-          | protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.ISerialPortOutput,
+        protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSerialPortOutput response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getSerialPortOutput(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1.ISerialPortOutput,
-          (
-            | protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getSerialPortOutput response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getSerialPortOutput(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.ISerialPortOutput,
+        protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSerialPortOutput response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Returns the Shielded Instance Identity of an instance
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name or id of the instance scoping this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.ShieldedInstanceIdentity|ShieldedInstanceIdentity}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/instances.get_shielded_instance_identity.js</caption>
-   * region_tag:compute_v1_generated_Instances_GetShieldedInstanceIdentity_async
-   */
+/**
+ * Returns the Shielded Instance Identity of an instance
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name or id of the instance scoping this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.ShieldedInstanceIdentity|ShieldedInstanceIdentity}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/instances.get_shielded_instance_identity.js</caption>
+ * region_tag:compute_v1_generated_Instances_GetShieldedInstanceIdentity_async
+ */
   getShieldedInstanceIdentity(
-    request?: protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IShieldedInstanceIdentity,
-      (
-        | protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IShieldedInstanceIdentity,
+        protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest|undefined, {}|undefined
+      ]>;
   getShieldedInstanceIdentity(
-    request: protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IShieldedInstanceIdentity,
-      | protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getShieldedInstanceIdentity(
-    request: protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IShieldedInstanceIdentity,
-      | protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getShieldedInstanceIdentity(
-    request?: protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IShieldedInstanceIdentity,
-          | protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IShieldedInstanceIdentity,
-      | protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IShieldedInstanceIdentity,
-      (
-        | protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getShieldedInstanceIdentity(
+      request: protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IShieldedInstanceIdentity,
+          protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getShieldedInstanceIdentity(
+      request?: protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IShieldedInstanceIdentity,
+          protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IShieldedInstanceIdentity,
+          protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IShieldedInstanceIdentity,
+        protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getShieldedInstanceIdentity request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1.IShieldedInstanceIdentity,
-          | protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.IShieldedInstanceIdentity,
+        protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getShieldedInstanceIdentity response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getShieldedInstanceIdentity(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1.IShieldedInstanceIdentity,
-          (
-            | protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getShieldedInstanceIdentity response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getShieldedInstanceIdentity(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.IShieldedInstanceIdentity,
+        protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getShieldedInstanceIdentity response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Creates an instance resource in the specified project using the data included in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.Instance} request.instanceResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.sourceInstanceTemplate
-   *   Specifies instance template to create the instance. This field is optional. It can be a full or partial URL. For example, the following are all valid URLs to an instance template: - https://www.googleapis.com/compute/v1/projects/project /global/instanceTemplates/instanceTemplate - projects/project/global/instanceTemplates/instanceTemplate - global/instanceTemplates/instanceTemplate
-   * @param {string} request.sourceMachineImage
-   *   Specifies the machine image to use to create the instance. This field is optional. It can be a full or partial URL. For example, the following are all valid URLs to a machine image: - https://www.googleapis.com/compute/v1/projects/project/global/global /machineImages/machineImage - projects/project/global/global/machineImages/machineImage - global/machineImages/machineImage
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.insert.js</caption>
-   * region_tag:compute_v1_generated_Instances_Insert_async
-   */
+/**
+ * Creates an instance resource in the specified project using the data included in the request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.compute.v1.Instance} request.instanceResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.sourceInstanceTemplate
+ *   Specifies instance template to create the instance. This field is optional. It can be a full or partial URL. For example, the following are all valid URLs to an instance template: - https://www.googleapis.com/compute/v1/projects/project /global/instanceTemplates/instanceTemplate - projects/project/global/instanceTemplates/instanceTemplate - global/instanceTemplates/instanceTemplate
+ * @param {string} request.sourceMachineImage
+ *   Specifies the machine image to use to create the instance. This field is optional. It can be a full or partial URL. For example, the following are all valid URLs to a machine image: - https://www.googleapis.com/compute/v1/projects/project/global/global /machineImages/machineImage - projects/project/global/global/machineImages/machineImage - global/machineImages/machineImage
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.insert.js</caption>
+ * region_tag:compute_v1_generated_Instances_Insert_async
+ */
   insert(
-    request?: protos.google.cloud.compute.v1.IInsertInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IInsertInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   insert(
-    request: protos.google.cloud.compute.v1.IInsertInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IInsertInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insert(
-    request: protos.google.cloud.compute.v1.IInsertInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IInsertInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insert(
-    request?: protos.google.cloud.compute.v1.IInsertInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IInsertInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IInsertInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IInsertInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IInsertInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  insert(
+      request: protos.google.cloud.compute.v1.IInsertInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  insert(
+      request?: protos.google.cloud.compute.v1.IInsertInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('insert request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IInsertInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IInsertInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('insert response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .insert(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.insert(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Perform a manual maintenance on the instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance scoping this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.perform_maintenance.js</caption>
-   * region_tag:compute_v1_generated_Instances_PerformMaintenance_async
-   */
+/**
+ * Perform a manual maintenance on the instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance scoping this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.perform_maintenance.js</caption>
+ * region_tag:compute_v1_generated_Instances_PerformMaintenance_async
+ */
   performMaintenance(
-    request?: protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   performMaintenance(
-    request: protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  performMaintenance(
-    request: protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  performMaintenance(
-    request?: protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  performMaintenance(
+      request: protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  performMaintenance(
+      request?: protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('performMaintenance request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IPerformMaintenanceInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('performMaintenance response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .performMaintenance(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.performMaintenance(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Removes resource policies from an instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   The instance name for this request.
-   * @param {google.cloud.compute.v1.InstancesRemoveResourcePoliciesRequest} request.instancesRemoveResourcePoliciesRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.remove_resource_policies.js</caption>
-   * region_tag:compute_v1_generated_Instances_RemoveResourcePolicies_async
-   */
+/**
+ * Removes resource policies from an instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   The instance name for this request.
+ * @param {google.cloud.compute.v1.InstancesRemoveResourcePoliciesRequest} request.instancesRemoveResourcePoliciesRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.remove_resource_policies.js</caption>
+ * region_tag:compute_v1_generated_Instances_RemoveResourcePolicies_async
+ */
   removeResourcePolicies(
-    request?: protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   removeResourcePolicies(
-    request: protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removeResourcePolicies(
-    request: protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removeResourcePolicies(
-    request?: protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  removeResourcePolicies(
+      request: protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  removeResourcePolicies(
+      request?: protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('removeResourcePolicies request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('removeResourcePolicies response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .removeResourcePolicies(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.removeResourcePolicies(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Mark the host as faulty and try to restart the instance on a new host.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance scoping this request.
-   * @param {google.cloud.compute.v1.InstancesReportHostAsFaultyRequest} request.instancesReportHostAsFaultyRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.report_host_as_faulty.js</caption>
-   * region_tag:compute_v1_generated_Instances_ReportHostAsFaulty_async
-   */
+/**
+ * Mark the host as faulty and try to restart the instance on a new host.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance scoping this request.
+ * @param {google.cloud.compute.v1.InstancesReportHostAsFaultyRequest} request.instancesReportHostAsFaultyRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.report_host_as_faulty.js</caption>
+ * region_tag:compute_v1_generated_Instances_ReportHostAsFaulty_async
+ */
   reportHostAsFaulty(
-    request?: protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   reportHostAsFaulty(
-    request: protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  reportHostAsFaulty(
-    request: protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  reportHostAsFaulty(
-    request?: protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  reportHostAsFaulty(
+      request: protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  reportHostAsFaulty(
+      request?: protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('reportHostAsFaulty request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IReportHostAsFaultyInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('reportHostAsFaulty response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .reportHostAsFaulty(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.reportHostAsFaulty(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Performs a reset on the instance. This is a hard reset. The VM does not do a graceful shutdown. For more information, see Resetting an instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance scoping this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.reset.js</caption>
-   * region_tag:compute_v1_generated_Instances_Reset_async
-   */
+/**
+ * Performs a reset on the instance. This is a hard reset. The VM does not do a graceful shutdown. For more information, see Resetting an instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance scoping this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.reset.js</caption>
+ * region_tag:compute_v1_generated_Instances_Reset_async
+ */
   reset(
-    request?: protos.google.cloud.compute.v1.IResetInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IResetInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   reset(
-    request: protos.google.cloud.compute.v1.IResetInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IResetInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  reset(
-    request: protos.google.cloud.compute.v1.IResetInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IResetInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  reset(
-    request?: protos.google.cloud.compute.v1.IResetInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IResetInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IResetInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IResetInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IResetInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  reset(
+      request: protos.google.cloud.compute.v1.IResetInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IResetInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  reset(
+      request?: protos.google.cloud.compute.v1.IResetInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IResetInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IResetInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('reset request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IResetInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IResetInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('reset response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .reset(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.reset(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Resumes an instance that was suspended using the instances().suspend method.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance resource to resume.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.resume.js</caption>
-   * region_tag:compute_v1_generated_Instances_Resume_async
-   */
+/**
+ * Resumes an instance that was suspended using the instances().suspend method.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance resource to resume.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.resume.js</caption>
+ * region_tag:compute_v1_generated_Instances_Resume_async
+ */
   resume(
-    request?: protos.google.cloud.compute.v1.IResumeInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IResumeInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   resume(
-    request: protos.google.cloud.compute.v1.IResumeInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IResumeInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resume(
-    request: protos.google.cloud.compute.v1.IResumeInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IResumeInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resume(
-    request?: protos.google.cloud.compute.v1.IResumeInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IResumeInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IResumeInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IResumeInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IResumeInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  resume(
+      request: protos.google.cloud.compute.v1.IResumeInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IResumeInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  resume(
+      request?: protos.google.cloud.compute.v1.IResumeInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IResumeInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IResumeInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('resume request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IResumeInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IResumeInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('resume response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .resume(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.resume(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Sends diagnostic interrupt to the instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance scoping this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceResponse|SendDiagnosticInterruptInstanceResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/instances.send_diagnostic_interrupt.js</caption>
-   * region_tag:compute_v1_generated_Instances_SendDiagnosticInterrupt_async
-   */
+/**
+ * Sends diagnostic interrupt to the instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance scoping this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceResponse|SendDiagnosticInterruptInstanceResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/instances.send_diagnostic_interrupt.js</caption>
+ * region_tag:compute_v1_generated_Instances_SendDiagnosticInterrupt_async
+ */
   sendDiagnosticInterrupt(
-    request?: protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceResponse,
-      (
-        | protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceResponse,
+        protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest|undefined, {}|undefined
+      ]>;
   sendDiagnosticInterrupt(
-    request: protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceResponse,
-      | protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  sendDiagnosticInterrupt(
-    request: protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceResponse,
-      | protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  sendDiagnosticInterrupt(
-    request?: protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceResponse,
-          | protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceResponse,
-      | protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceResponse,
-      (
-        | protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  sendDiagnosticInterrupt(
+      request: protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceResponse,
+          protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  sendDiagnosticInterrupt(
+      request?: protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceResponse,
+          protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceResponse,
+          protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceResponse,
+        protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('sendDiagnosticInterrupt request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceResponse,
-          | protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceResponse,
+        protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('sendDiagnosticInterrupt response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .sendDiagnosticInterrupt(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceResponse,
-          (
-            | protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('sendDiagnosticInterrupt response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.sendDiagnosticInterrupt(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceResponse,
+        protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('sendDiagnosticInterrupt response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Sets deletion protection on the instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {boolean} request.deletionProtection
-   *   Whether the resource should be protected against deletion.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.set_deletion_protection.js</caption>
-   * region_tag:compute_v1_generated_Instances_SetDeletionProtection_async
-   */
+/**
+ * Sets deletion protection on the instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {boolean} request.deletionProtection
+ *   Whether the resource should be protected against deletion.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.resource
+ *   Name or id of the resource for this request.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.set_deletion_protection.js</caption>
+ * region_tag:compute_v1_generated_Instances_SetDeletionProtection_async
+ */
   setDeletionProtection(
-    request?: protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   setDeletionProtection(
-    request: protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setDeletionProtection(
-    request: protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setDeletionProtection(
-    request?: protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setDeletionProtection(
+      request: protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setDeletionProtection(
+      request?: protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setDeletionProtection request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('setDeletionProtection response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setDeletionProtection(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.setDeletionProtection(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Sets the auto-delete flag for a disk attached to an instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {boolean} request.autoDelete
-   *   Whether to auto-delete the disk when the instance is deleted.
-   * @param {string} request.deviceName
-   *   The device name of the disk to modify. Make a get() request on the instance to view currently attached disks and device names.
-   * @param {string} request.instance
-   *   The instance name for this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.set_disk_auto_delete.js</caption>
-   * region_tag:compute_v1_generated_Instances_SetDiskAutoDelete_async
-   */
+/**
+ * Sets the auto-delete flag for a disk attached to an instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {boolean} request.autoDelete
+ *   Whether to auto-delete the disk when the instance is deleted.
+ * @param {string} request.deviceName
+ *   The device name of the disk to modify. Make a get() request on the instance to view currently attached disks and device names.
+ * @param {string} request.instance
+ *   The instance name for this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.set_disk_auto_delete.js</caption>
+ * region_tag:compute_v1_generated_Instances_SetDiskAutoDelete_async
+ */
   setDiskAutoDelete(
-    request?: protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   setDiskAutoDelete(
-    request: protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setDiskAutoDelete(
-    request: protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setDiskAutoDelete(
-    request?: protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setDiskAutoDelete(
+      request: protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setDiskAutoDelete(
+      request?: protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setDiskAutoDelete request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('setDiskAutoDelete response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setDiskAutoDelete(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.setDiskAutoDelete(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Sets the access control policy on the specified resource. Replaces any existing policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {google.cloud.compute.v1.ZoneSetPolicyRequest} request.zoneSetPolicyRequestResource
-   *   The body resource for this request
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/instances.set_iam_policy.js</caption>
-   * region_tag:compute_v1_generated_Instances_SetIamPolicy_async
-   */
+/**
+ * Sets the access control policy on the specified resource. Replaces any existing policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.resource
+ *   Name or id of the resource for this request.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {google.cloud.compute.v1.ZoneSetPolicyRequest} request.zoneSetPolicyRequestResource
+ *   The body resource for this request
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/instances.set_iam_policy.js</caption>
+ * region_tag:compute_v1_generated_Instances_SetIamPolicy_async
+ */
   setIamPolicy(
-    request?: protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPolicy,
-      protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest|undefined, {}|undefined
+      ]>;
   setIamPolicy(
-    request: protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request?: protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IPolicy,
-          | protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPolicy,
-      protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request?: protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1.IPolicy,
-          | protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1.IPolicy,
-          (
-            | protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('setIamPolicy response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Sets labels on an instance. To learn more about labels, read the Labeling Resources documentation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance scoping this request.
-   * @param {google.cloud.compute.v1.InstancesSetLabelsRequest} request.instancesSetLabelsRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.set_labels.js</caption>
-   * region_tag:compute_v1_generated_Instances_SetLabels_async
-   */
+/**
+ * Sets labels on an instance. To learn more about labels, read the Labeling Resources documentation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance scoping this request.
+ * @param {google.cloud.compute.v1.InstancesSetLabelsRequest} request.instancesSetLabelsRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.set_labels.js</caption>
+ * region_tag:compute_v1_generated_Instances_SetLabels_async
+ */
   setLabels(
-    request?: protos.google.cloud.compute.v1.ISetLabelsInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetLabelsInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   setLabels(
-    request: protos.google.cloud.compute.v1.ISetLabelsInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetLabelsInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLabels(
-    request: protos.google.cloud.compute.v1.ISetLabelsInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetLabelsInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLabels(
-    request?: protos.google.cloud.compute.v1.ISetLabelsInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetLabelsInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetLabelsInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetLabelsInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetLabelsInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setLabels(
+      request: protos.google.cloud.compute.v1.ISetLabelsInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetLabelsInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setLabels(
+      request?: protos.google.cloud.compute.v1.ISetLabelsInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetLabelsInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetLabelsInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setLabels request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetLabelsInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.ISetLabelsInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('setLabels response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setLabels(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.setLabels(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Changes the number and/or type of accelerator for a stopped instance to the values specified in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance scoping this request.
-   * @param {google.cloud.compute.v1.InstancesSetMachineResourcesRequest} request.instancesSetMachineResourcesRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.set_machine_resources.js</caption>
-   * region_tag:compute_v1_generated_Instances_SetMachineResources_async
-   */
+/**
+ * Changes the number and/or type of accelerator for a stopped instance to the values specified in the request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance scoping this request.
+ * @param {google.cloud.compute.v1.InstancesSetMachineResourcesRequest} request.instancesSetMachineResourcesRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.set_machine_resources.js</caption>
+ * region_tag:compute_v1_generated_Instances_SetMachineResources_async
+ */
   setMachineResources(
-    request?: protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   setMachineResources(
-    request: protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMachineResources(
-    request: protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMachineResources(
-    request?: protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setMachineResources(
+      request: protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setMachineResources(
+      request?: protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setMachineResources request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('setMachineResources response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setMachineResources(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.setMachineResources(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Changes the machine type for a stopped instance to the machine type specified in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance scoping this request.
-   * @param {google.cloud.compute.v1.InstancesSetMachineTypeRequest} request.instancesSetMachineTypeRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.set_machine_type.js</caption>
-   * region_tag:compute_v1_generated_Instances_SetMachineType_async
-   */
+/**
+ * Changes the machine type for a stopped instance to the machine type specified in the request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance scoping this request.
+ * @param {google.cloud.compute.v1.InstancesSetMachineTypeRequest} request.instancesSetMachineTypeRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.set_machine_type.js</caption>
+ * region_tag:compute_v1_generated_Instances_SetMachineType_async
+ */
   setMachineType(
-    request?: protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   setMachineType(
-    request: protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMachineType(
-    request: protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMachineType(
-    request?: protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setMachineType(
+      request: protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setMachineType(
+      request?: protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setMachineType request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('setMachineType response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setMachineType(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.setMachineType(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Sets metadata for the specified instance to the data included in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance scoping this request.
-   * @param {google.cloud.compute.v1.Metadata} request.metadataResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.set_metadata.js</caption>
-   * region_tag:compute_v1_generated_Instances_SetMetadata_async
-   */
+/**
+ * Sets metadata for the specified instance to the data included in the request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance scoping this request.
+ * @param {google.cloud.compute.v1.Metadata} request.metadataResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.set_metadata.js</caption>
+ * region_tag:compute_v1_generated_Instances_SetMetadata_async
+ */
   setMetadata(
-    request?: protos.google.cloud.compute.v1.ISetMetadataInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetMetadataInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   setMetadata(
-    request: protos.google.cloud.compute.v1.ISetMetadataInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetMetadataInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMetadata(
-    request: protos.google.cloud.compute.v1.ISetMetadataInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetMetadataInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMetadata(
-    request?: protos.google.cloud.compute.v1.ISetMetadataInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetMetadataInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetMetadataInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetMetadataInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetMetadataInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setMetadata(
+      request: protos.google.cloud.compute.v1.ISetMetadataInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetMetadataInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setMetadata(
+      request?: protos.google.cloud.compute.v1.ISetMetadataInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetMetadataInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetMetadataInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setMetadata request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetMetadataInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.ISetMetadataInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('setMetadata response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setMetadata(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.setMetadata(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Changes the minimum CPU platform that this instance should use. This method can only be called on a stopped instance. For more information, read Specifying a Minimum CPU Platform.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance scoping this request.
-   * @param {google.cloud.compute.v1.InstancesSetMinCpuPlatformRequest} request.instancesSetMinCpuPlatformRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.set_min_cpu_platform.js</caption>
-   * region_tag:compute_v1_generated_Instances_SetMinCpuPlatform_async
-   */
+/**
+ * Changes the minimum CPU platform that this instance should use. This method can only be called on a stopped instance. For more information, read Specifying a Minimum CPU Platform.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance scoping this request.
+ * @param {google.cloud.compute.v1.InstancesSetMinCpuPlatformRequest} request.instancesSetMinCpuPlatformRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.set_min_cpu_platform.js</caption>
+ * region_tag:compute_v1_generated_Instances_SetMinCpuPlatform_async
+ */
   setMinCpuPlatform(
-    request?: protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   setMinCpuPlatform(
-    request: protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMinCpuPlatform(
-    request: protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMinCpuPlatform(
-    request?: protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setMinCpuPlatform(
+      request: protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setMinCpuPlatform(
+      request?: protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setMinCpuPlatform request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('setMinCpuPlatform response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setMinCpuPlatform(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.setMinCpuPlatform(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Sets name of an instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   The instance name for this request.
-   * @param {google.cloud.compute.v1.InstancesSetNameRequest} request.instancesSetNameRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.set_name.js</caption>
-   * region_tag:compute_v1_generated_Instances_SetName_async
-   */
+/**
+ * Sets name of an instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   The instance name for this request.
+ * @param {google.cloud.compute.v1.InstancesSetNameRequest} request.instancesSetNameRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.set_name.js</caption>
+ * region_tag:compute_v1_generated_Instances_SetName_async
+ */
   setName(
-    request?: protos.google.cloud.compute.v1.ISetNameInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetNameInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   setName(
-    request: protos.google.cloud.compute.v1.ISetNameInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetNameInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setName(
-    request: protos.google.cloud.compute.v1.ISetNameInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetNameInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setName(
-    request?: protos.google.cloud.compute.v1.ISetNameInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetNameInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetNameInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetNameInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetNameInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setName(
+      request: protos.google.cloud.compute.v1.ISetNameInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetNameInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setName(
+      request?: protos.google.cloud.compute.v1.ISetNameInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetNameInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetNameInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setName request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetNameInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.ISetNameInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('setName response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setName(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.setName(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Sets an instance's scheduling options. You can only call this method on a stopped instance, that is, a VM instance that is in a `TERMINATED` state. See Instance Life Cycle for more information on the possible instance states. For more information about setting scheduling options for a VM, see Set VM host maintenance policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Instance name for this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {google.cloud.compute.v1.Scheduling} request.schedulingResource
-   *   The body resource for this request
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.set_scheduling.js</caption>
-   * region_tag:compute_v1_generated_Instances_SetScheduling_async
-   */
+/**
+ * Sets an instance's scheduling options. You can only call this method on a stopped instance, that is, a VM instance that is in a `TERMINATED` state. See Instance Life Cycle for more information on the possible instance states. For more information about setting scheduling options for a VM, see Set VM host maintenance policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Instance name for this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {google.cloud.compute.v1.Scheduling} request.schedulingResource
+ *   The body resource for this request
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.set_scheduling.js</caption>
+ * region_tag:compute_v1_generated_Instances_SetScheduling_async
+ */
   setScheduling(
-    request?: protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   setScheduling(
-    request: protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setScheduling(
-    request: protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setScheduling(
-    request?: protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setScheduling(
+      request: protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setScheduling(
+      request?: protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setScheduling request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('setScheduling response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setScheduling(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.setScheduling(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Sets the Google Cloud Armor security policy for the specified instance. For more information, see Google Cloud Armor Overview
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the Instance resource to which the security policy should be set. The name should conform to RFC1035.
-   * @param {google.cloud.compute.v1.InstancesSetSecurityPolicyRequest} request.instancesSetSecurityPolicyRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   Name of the zone scoping this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.set_security_policy.js</caption>
-   * region_tag:compute_v1_generated_Instances_SetSecurityPolicy_async
-   */
+/**
+ * Sets the Google Cloud Armor security policy for the specified instance. For more information, see Google Cloud Armor Overview
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the Instance resource to which the security policy should be set. The name should conform to RFC1035.
+ * @param {google.cloud.compute.v1.InstancesSetSecurityPolicyRequest} request.instancesSetSecurityPolicyRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   Name of the zone scoping this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.set_security_policy.js</caption>
+ * region_tag:compute_v1_generated_Instances_SetSecurityPolicy_async
+ */
   setSecurityPolicy(
-    request?: protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   setSecurityPolicy(
-    request: protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setSecurityPolicy(
-    request: protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setSecurityPolicy(
-    request?: protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setSecurityPolicy(
+      request: protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setSecurityPolicy(
+      request?: protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setSecurityPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.ISetSecurityPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('setSecurityPolicy response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setSecurityPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.setSecurityPolicy(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Sets the service account on the instance. For more information, read Changing the service account and access scopes for an instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance resource to start.
-   * @param {google.cloud.compute.v1.InstancesSetServiceAccountRequest} request.instancesSetServiceAccountRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.set_service_account.js</caption>
-   * region_tag:compute_v1_generated_Instances_SetServiceAccount_async
-   */
+/**
+ * Sets the service account on the instance. For more information, read Changing the service account and access scopes for an instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance resource to start.
+ * @param {google.cloud.compute.v1.InstancesSetServiceAccountRequest} request.instancesSetServiceAccountRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.set_service_account.js</caption>
+ * region_tag:compute_v1_generated_Instances_SetServiceAccount_async
+ */
   setServiceAccount(
-    request?: protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   setServiceAccount(
-    request: protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setServiceAccount(
-    request: protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setServiceAccount(
-    request?: protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setServiceAccount(
+      request: protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setServiceAccount(
+      request?: protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setServiceAccount request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('setServiceAccount response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setServiceAccount(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.setServiceAccount(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Sets the Shielded Instance integrity policy for an instance. You can only use this method on a running instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name or id of the instance scoping this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {google.cloud.compute.v1.ShieldedInstanceIntegrityPolicy} request.shieldedInstanceIntegrityPolicyResource
-   *   The body resource for this request
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.set_shielded_instance_integrity_policy.js</caption>
-   * region_tag:compute_v1_generated_Instances_SetShieldedInstanceIntegrityPolicy_async
-   */
+/**
+ * Sets the Shielded Instance integrity policy for an instance. You can only use this method on a running instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name or id of the instance scoping this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {google.cloud.compute.v1.ShieldedInstanceIntegrityPolicy} request.shieldedInstanceIntegrityPolicyResource
+ *   The body resource for this request
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.set_shielded_instance_integrity_policy.js</caption>
+ * region_tag:compute_v1_generated_Instances_SetShieldedInstanceIntegrityPolicy_async
+ */
   setShieldedInstanceIntegrityPolicy(
-    request?: protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   setShieldedInstanceIntegrityPolicy(
-    request: protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setShieldedInstanceIntegrityPolicy(
-    request: protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setShieldedInstanceIntegrityPolicy(
-    request?: protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setShieldedInstanceIntegrityPolicy(
+      request: protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setShieldedInstanceIntegrityPolicy(
+      request?: protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setShieldedInstanceIntegrityPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info(
-            'setShieldedInstanceIntegrityPolicy response %j',
-            rawResponse
-          );
+          this._log.info('setShieldedInstanceIntegrityPolicy response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setShieldedInstanceIntegrityPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.setShieldedInstanceIntegrityPolicy(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Sets network tags for the specified instance to the data included in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance scoping this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {google.cloud.compute.v1.Tags} request.tagsResource
-   *   The body resource for this request
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.set_tags.js</caption>
-   * region_tag:compute_v1_generated_Instances_SetTags_async
-   */
+/**
+ * Sets network tags for the specified instance to the data included in the request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance scoping this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {google.cloud.compute.v1.Tags} request.tagsResource
+ *   The body resource for this request
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.set_tags.js</caption>
+ * region_tag:compute_v1_generated_Instances_SetTags_async
+ */
   setTags(
-    request?: protos.google.cloud.compute.v1.ISetTagsInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetTagsInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   setTags(
-    request: protos.google.cloud.compute.v1.ISetTagsInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetTagsInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setTags(
-    request: protos.google.cloud.compute.v1.ISetTagsInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetTagsInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setTags(
-    request?: protos.google.cloud.compute.v1.ISetTagsInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetTagsInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetTagsInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetTagsInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetTagsInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setTags(
+      request: protos.google.cloud.compute.v1.ISetTagsInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetTagsInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setTags(
+      request?: protos.google.cloud.compute.v1.ISetTagsInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetTagsInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetTagsInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setTags request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetTagsInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.ISetTagsInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('setTags response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setTags(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.setTags(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Simulates a host maintenance event on a VM. For more information, see Simulate a host maintenance event.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance scoping this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {boolean} request.withExtendedNotifications
-   *   Determines whether the customers receive notifications before migration. Only applicable to SF vms.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.simulate_maintenance_event.js</caption>
-   * region_tag:compute_v1_generated_Instances_SimulateMaintenanceEvent_async
-   */
+/**
+ * Simulates a host maintenance event on a VM. For more information, see Simulate a host maintenance event.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance scoping this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {boolean} request.withExtendedNotifications
+ *   Determines whether the customers receive notifications before migration. Only applicable to SF vms.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.simulate_maintenance_event.js</caption>
+ * region_tag:compute_v1_generated_Instances_SimulateMaintenanceEvent_async
+ */
   simulateMaintenanceEvent(
-    request?: protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   simulateMaintenanceEvent(
-    request: protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  simulateMaintenanceEvent(
-    request: protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  simulateMaintenanceEvent(
-    request?: protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  simulateMaintenanceEvent(
+      request: protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  simulateMaintenanceEvent(
+      request?: protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('simulateMaintenanceEvent request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('simulateMaintenanceEvent response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .simulateMaintenanceEvent(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.simulateMaintenanceEvent(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Starts an instance that was stopped using the instances().stop method. For more information, see Restart an instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance resource to start.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.start.js</caption>
-   * region_tag:compute_v1_generated_Instances_Start_async
-   */
+/**
+ * Starts an instance that was stopped using the instances().stop method. For more information, see Restart an instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance resource to start.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.start.js</caption>
+ * region_tag:compute_v1_generated_Instances_Start_async
+ */
   start(
-    request?: protos.google.cloud.compute.v1.IStartInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IStartInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   start(
-    request: protos.google.cloud.compute.v1.IStartInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IStartInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  start(
-    request: protos.google.cloud.compute.v1.IStartInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IStartInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  start(
-    request?: protos.google.cloud.compute.v1.IStartInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IStartInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IStartInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IStartInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IStartInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  start(
+      request: protos.google.cloud.compute.v1.IStartInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IStartInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  start(
+      request?: protos.google.cloud.compute.v1.IStartInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IStartInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IStartInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('start request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IStartInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IStartInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('start response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .start(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.start(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Starts an instance that was stopped using the instances().stop method. For more information, see Restart an instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance resource to start.
-   * @param {google.cloud.compute.v1.InstancesStartWithEncryptionKeyRequest} request.instancesStartWithEncryptionKeyRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.start_with_encryption_key.js</caption>
-   * region_tag:compute_v1_generated_Instances_StartWithEncryptionKey_async
-   */
+/**
+ * Starts an instance that was stopped using the instances().stop method. For more information, see Restart an instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance resource to start.
+ * @param {google.cloud.compute.v1.InstancesStartWithEncryptionKeyRequest} request.instancesStartWithEncryptionKeyRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.start_with_encryption_key.js</caption>
+ * region_tag:compute_v1_generated_Instances_StartWithEncryptionKey_async
+ */
   startWithEncryptionKey(
-    request?: protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   startWithEncryptionKey(
-    request: protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  startWithEncryptionKey(
-    request: protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  startWithEncryptionKey(
-    request?: protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  startWithEncryptionKey(
+      request: protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  startWithEncryptionKey(
+      request?: protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('startWithEncryptionKey request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('startWithEncryptionKey response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .startWithEncryptionKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.startWithEncryptionKey(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Stops a running instance, shutting it down cleanly, and allows you to restart the instance at a later time. Stopped instances do not incur VM usage charges while they are stopped. However, resources that the VM is using, such as persistent disks and static IP addresses, will continue to be charged until they are deleted. For more information, see Stopping an instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {boolean} request.discardLocalSsd
-   *   This property is required if the instance has any attached Local SSD disks. If false, Local SSD data will be preserved when the instance is suspended. If true, the contents of any attached Local SSD disks will be discarded.
-   * @param {string} request.instance
-   *   Name of the instance resource to stop.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.stop.js</caption>
-   * region_tag:compute_v1_generated_Instances_Stop_async
-   */
+/**
+ * Stops a running instance, shutting it down cleanly, and allows you to restart the instance at a later time. Stopped instances do not incur VM usage charges while they are stopped. However, resources that the VM is using, such as persistent disks and static IP addresses, will continue to be charged until they are deleted. For more information, see Stopping an instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {boolean} request.discardLocalSsd
+ *   This property is required if the instance has any attached Local SSD disks. If false, Local SSD data will be preserved when the instance is suspended. If true, the contents of any attached Local SSD disks will be discarded.
+ * @param {string} request.instance
+ *   Name of the instance resource to stop.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.stop.js</caption>
+ * region_tag:compute_v1_generated_Instances_Stop_async
+ */
   stop(
-    request?: protos.google.cloud.compute.v1.IStopInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IStopInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   stop(
-    request: protos.google.cloud.compute.v1.IStopInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IStopInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  stop(
-    request: protos.google.cloud.compute.v1.IStopInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IStopInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  stop(
-    request?: protos.google.cloud.compute.v1.IStopInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IStopInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IStopInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IStopInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IStopInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  stop(
+      request: protos.google.cloud.compute.v1.IStopInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IStopInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  stop(
+      request?: protos.google.cloud.compute.v1.IStopInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IStopInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IStopInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('stop request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IStopInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IStopInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('stop response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .stop(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.stop(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * This method suspends a running instance, saving its state to persistent storage, and allows you to resume the instance at a later time. Suspended instances have no compute costs (cores or RAM), and incur only storage charges for the saved VM memory and localSSD data. Any charged resources the virtual machine was using, such as persistent disks and static IP addresses, will continue to be charged while the instance is suspended. For more information, see Suspending and resuming an instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {boolean} request.discardLocalSsd
-   *   This property is required if the instance has any attached Local SSD disks. If false, Local SSD data will be preserved when the instance is suspended. If true, the contents of any attached Local SSD disks will be discarded.
-   * @param {string} request.instance
-   *   Name of the instance resource to suspend.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.suspend.js</caption>
-   * region_tag:compute_v1_generated_Instances_Suspend_async
-   */
+/**
+ * This method suspends a running instance, saving its state to persistent storage, and allows you to resume the instance at a later time. Suspended instances have no compute costs (cores or RAM), and incur only storage charges for the saved VM memory and localSSD data. Any charged resources the virtual machine was using, such as persistent disks and static IP addresses, will continue to be charged while the instance is suspended. For more information, see Suspending and resuming an instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {boolean} request.discardLocalSsd
+ *   This property is required if the instance has any attached Local SSD disks. If false, Local SSD data will be preserved when the instance is suspended. If true, the contents of any attached Local SSD disks will be discarded.
+ * @param {string} request.instance
+ *   Name of the instance resource to suspend.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.suspend.js</caption>
+ * region_tag:compute_v1_generated_Instances_Suspend_async
+ */
   suspend(
-    request?: protos.google.cloud.compute.v1.ISuspendInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISuspendInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   suspend(
-    request: protos.google.cloud.compute.v1.ISuspendInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISuspendInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  suspend(
-    request: protos.google.cloud.compute.v1.ISuspendInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISuspendInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  suspend(
-    request?: protos.google.cloud.compute.v1.ISuspendInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISuspendInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISuspendInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISuspendInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISuspendInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  suspend(
+      request: protos.google.cloud.compute.v1.ISuspendInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISuspendInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  suspend(
+      request?: protos.google.cloud.compute.v1.ISuspendInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISuspendInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISuspendInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('suspend request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISuspendInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.ISuspendInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('suspend response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .suspend(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.suspend(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Returns permissions that a caller has on the specified resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
-   *   The body resource for this request
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.TestPermissionsResponse|TestPermissionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/instances.test_iam_permissions.js</caption>
-   * region_tag:compute_v1_generated_Instances_TestIamPermissions_async
-   */
+/**
+ * Returns permissions that a caller has on the specified resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.resource
+ *   Name or id of the resource for this request.
+ * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
+ *   The body resource for this request
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.TestPermissionsResponse|TestPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/instances.test_iam_permissions.js</caption>
+ * region_tag:compute_v1_generated_Instances_TestIamPermissions_async
+ */
   testIamPermissions(
-    request?: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      (
-        | protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest|undefined, {}|undefined
+      ]>;
   testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      | protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      | protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request?: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.ITestPermissionsResponse,
-          | protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      | protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      (
-        | protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.compute.v1.ITestPermissionsResponse,
-          | protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .testIamPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.compute.v1.ITestPermissionsResponse,
-          (
-            | protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('testIamPermissions response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Updates an instance only if the necessary resources are available. This method can update only a specific set of instance properties. See Updating a running instance for a list of updatable instance properties.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name of the instance resource to update.
-   * @param {google.cloud.compute.v1.Instance} request.instanceResource
-   *   The body resource for this request
-   * @param {string} request.minimalAction
-   *   Specifies the action to take when updating an instance even if the updated properties do not require it. If not specified, then Compute Engine acts based on the minimum action that the updated properties require.
-   *   Check the MinimalAction enum for the list of possible values.
-   * @param {string} request.mostDisruptiveAllowedAction
-   *   Specifies the most disruptive action that can be taken on the instance as part of the update. Compute Engine returns an error if the instance properties require a more disruptive action as part of the instance update. Valid options from lowest to highest are NO_EFFECT, REFRESH, and RESTART.
-   *   Check the MostDisruptiveAllowedAction enum for the list of possible values.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.update.js</caption>
-   * region_tag:compute_v1_generated_Instances_Update_async
-   */
+/**
+ * Updates an instance only if the necessary resources are available. This method can update only a specific set of instance properties. See Updating a running instance for a list of updatable instance properties.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name of the instance resource to update.
+ * @param {google.cloud.compute.v1.Instance} request.instanceResource
+ *   The body resource for this request
+ * @param {string} request.minimalAction
+ *   Specifies the action to take when updating an instance even if the updated properties do not require it. If not specified, then Compute Engine acts based on the minimum action that the updated properties require.
+ *   Check the MinimalAction enum for the list of possible values.
+ * @param {string} request.mostDisruptiveAllowedAction
+ *   Specifies the most disruptive action that can be taken on the instance as part of the update. Compute Engine returns an error if the instance properties require a more disruptive action as part of the instance update. Valid options from lowest to highest are NO_EFFECT, REFRESH, and RESTART.
+ *   Check the MostDisruptiveAllowedAction enum for the list of possible values.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.update.js</caption>
+ * region_tag:compute_v1_generated_Instances_Update_async
+ */
   update(
-    request?: protos.google.cloud.compute.v1.IUpdateInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IUpdateInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   update(
-    request: protos.google.cloud.compute.v1.IUpdateInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IUpdateInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  update(
-    request: protos.google.cloud.compute.v1.IUpdateInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IUpdateInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  update(
-    request?: protos.google.cloud.compute.v1.IUpdateInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IUpdateInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IUpdateInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IUpdateInstanceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IUpdateInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  update(
+      request: protos.google.cloud.compute.v1.IUpdateInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  update(
+      request?: protos.google.cloud.compute.v1.IUpdateInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('update request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IUpdateInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IUpdateInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('update response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .update(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.update(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Updates the specified access config from an instance's network interface with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.AccessConfig} request.accessConfigResource
-   *   The body resource for this request
-   * @param {string} request.instance
-   *   The instance name for this request.
-   * @param {string} request.networkInterface
-   *   The name of the network interface where the access config is attached.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.update_access_config.js</caption>
-   * region_tag:compute_v1_generated_Instances_UpdateAccessConfig_async
-   */
+/**
+ * Updates the specified access config from an instance's network interface with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.compute.v1.AccessConfig} request.accessConfigResource
+ *   The body resource for this request
+ * @param {string} request.instance
+ *   The instance name for this request.
+ * @param {string} request.networkInterface
+ *   The name of the network interface where the access config is attached.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.update_access_config.js</caption>
+ * region_tag:compute_v1_generated_Instances_UpdateAccessConfig_async
+ */
   updateAccessConfig(
-    request?: protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   updateAccessConfig(
-    request: protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAccessConfig(
-    request: protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAccessConfig(
-    request?: protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateAccessConfig(
+      request: protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateAccessConfig(
+      request?: protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateAccessConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('updateAccessConfig response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateAccessConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.updateAccessConfig(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Updates the Display config for a VM instance. You can only use this method on a stopped VM instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.DisplayDevice} request.displayDeviceResource
-   *   The body resource for this request
-   * @param {string} request.instance
-   *   Name of the instance scoping this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.update_display_device.js</caption>
-   * region_tag:compute_v1_generated_Instances_UpdateDisplayDevice_async
-   */
+/**
+ * Updates the Display config for a VM instance. You can only use this method on a stopped VM instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.compute.v1.DisplayDevice} request.displayDeviceResource
+ *   The body resource for this request
+ * @param {string} request.instance
+ *   Name of the instance scoping this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.update_display_device.js</caption>
+ * region_tag:compute_v1_generated_Instances_UpdateDisplayDevice_async
+ */
   updateDisplayDevice(
-    request?: protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   updateDisplayDevice(
-    request: protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDisplayDevice(
-    request: protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDisplayDevice(
-    request?: protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDisplayDevice(
+      request: protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDisplayDevice(
+      request?: protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateDisplayDevice request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('updateDisplayDevice response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateDisplayDevice(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.updateDisplayDevice(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Updates an instance's network interface. This method can only update an interface's alias IP range and attached network. See Modifying alias IP ranges for an existing instance for instructions on changing alias IP ranges. See Migrating a VM between networks for instructions on migrating an interface. This method follows PATCH semantics.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   The instance name for this request.
-   * @param {string} request.networkInterface
-   *   The name of the network interface to update.
-   * @param {google.cloud.compute.v1.NetworkInterface} request.networkInterfaceResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.update_network_interface.js</caption>
-   * region_tag:compute_v1_generated_Instances_UpdateNetworkInterface_async
-   */
+/**
+ * Updates an instance's network interface. This method can only update an interface's alias IP range and attached network. See Modifying alias IP ranges for an existing instance for instructions on changing alias IP ranges. See Migrating a VM between networks for instructions on migrating an interface. This method follows PATCH semantics.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   The instance name for this request.
+ * @param {string} request.networkInterface
+ *   The name of the network interface to update.
+ * @param {google.cloud.compute.v1.NetworkInterface} request.networkInterfaceResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.update_network_interface.js</caption>
+ * region_tag:compute_v1_generated_Instances_UpdateNetworkInterface_async
+ */
   updateNetworkInterface(
-    request?: protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   updateNetworkInterface(
-    request: protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateNetworkInterface(
-    request: protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateNetworkInterface(
-    request?: protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateNetworkInterface(
+      request: protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateNetworkInterface(
+      request?: protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateNetworkInterface request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('updateNetworkInterface response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateNetworkInterface(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.updateNetworkInterface(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
-  /**
-   * Updates the Shielded Instance config for an instance. You can only use this method on a stopped instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Name or id of the instance scoping this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {google.cloud.compute.v1.ShieldedInstanceConfig} request.shieldedInstanceConfigResource
-   *   The body resource for this request
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/instances.update_shielded_instance_config.js</caption>
-   * region_tag:compute_v1_generated_Instances_UpdateShieldedInstanceConfig_async
-   */
+/**
+ * Updates the Shielded Instance config for an instance. You can only use this method on a stopped instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Name or id of the instance scoping this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {google.cloud.compute.v1.ShieldedInstanceConfig} request.shieldedInstanceConfigResource
+ *   The body resource for this request
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.update_shielded_instance_config.js</caption>
+ * region_tag:compute_v1_generated_Instances_UpdateShieldedInstanceConfig_async
+ */
   updateShieldedInstanceConfig(
-    request?: protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
   updateShieldedInstanceConfig(
-    request: protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateShieldedInstanceConfig(
-    request: protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateShieldedInstanceConfig(
-    request?: protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateShieldedInstanceConfig(
+      request: protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateShieldedInstanceConfig(
+      request?: protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateShieldedInstanceConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
+    const wrappedCallback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info(
-            'updateShieldedInstanceConfig response %j',
-            rawResponse
-          );
+          this._log.info('updateShieldedInstanceConfig response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateShieldedInstanceConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.updateShieldedInstanceConfig(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      });
   }
 
-  /**
-   * Retrieves an aggregated list of all of the instances in your project across all regions and zones. The performance of this method degrades when a filter is specified on a project that has a very large number of instances. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {boolean} request.includeAllScopes
-   *   Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {number} request.serviceProjectNumber
-   *   The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   as tuple [string, {@link protos.google.cloud.compute.v1.InstancesScopedList|InstancesScopedList}]. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/instances.aggregated_list.js</caption>
-   * region_tag:compute_v1_generated_Instances_AggregatedList_async
-   */
+
+/**
+ * Retrieves an aggregated list of all of the instances in your project across all regions and zones. The performance of this method degrades when a filter is specified on a project that has a very large number of instances. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {boolean} request.includeAllScopes
+ *   Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {number} request.serviceProjectNumber
+ *   The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   as tuple [string, {@link protos.google.cloud.compute.v1.InstancesScopedList|InstancesScopedList}]. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/instances.aggregated_list.js</caption>
+ * region_tag:compute_v1_generated_Instances_AggregatedList_async
+ */
   aggregatedListAsync(
-    request?: protos.google.cloud.compute.v1.IAggregatedListInstancesRequest,
-    options?: CallOptions
-  ): AsyncIterable<
-    [string, protos.google.cloud.compute.v1.IInstancesScopedList]
-  > {
+      request?: protos.google.cloud.compute.v1.IAggregatedListInstancesRequest,
+      options?: CallOptions):
+    AsyncIterable<[string, protos.google.cloud.compute.v1.IInstancesScopedList]>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+    });
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('aggregatedList iterate %j', request);
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<
-      [string, protos.google.cloud.compute.v1.IInstancesScopedList]
-    >;
+    ) as AsyncIterable<[string, protos.google.cloud.compute.v1.IInstancesScopedList]>;
   }
-  /**
-   * Retrieves the list of instances contained within the specified zone.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.Instance|Instance}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Retrieves the list of instances contained within the specified zone.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.Instance|Instance}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   list(
-    request?: protos.google.cloud.compute.v1.IListInstancesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstance[],
-      protos.google.cloud.compute.v1.IListInstancesRequest | null,
-      protos.google.cloud.compute.v1.IInstanceList,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IListInstancesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IInstance[],
+        protos.google.cloud.compute.v1.IListInstancesRequest|null,
+        protos.google.cloud.compute.v1.IInstanceList
+      ]>;
   list(
-    request: protos.google.cloud.compute.v1.IListInstancesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListInstancesRequest,
-      protos.google.cloud.compute.v1.IInstanceList | null | undefined,
-      protos.google.cloud.compute.v1.IInstance
-    >
-  ): void;
-  list(
-    request: protos.google.cloud.compute.v1.IListInstancesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListInstancesRequest,
-      protos.google.cloud.compute.v1.IInstanceList | null | undefined,
-      protos.google.cloud.compute.v1.IInstance
-    >
-  ): void;
-  list(
-    request?: protos.google.cloud.compute.v1.IListInstancesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.compute.v1.IListInstancesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.compute.v1.IListInstancesRequest,
-          protos.google.cloud.compute.v1.IInstanceList | null | undefined,
-          protos.google.cloud.compute.v1.IInstance
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.compute.v1.IListInstancesRequest,
-      protos.google.cloud.compute.v1.IInstanceList | null | undefined,
-      protos.google.cloud.compute.v1.IInstance
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstance[],
-      protos.google.cloud.compute.v1.IListInstancesRequest | null,
-      protos.google.cloud.compute.v1.IInstanceList,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IInstanceList|null|undefined,
+          protos.google.cloud.compute.v1.IInstance>): void;
+  list(
+      request: protos.google.cloud.compute.v1.IListInstancesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.compute.v1.IListInstancesRequest,
+          protos.google.cloud.compute.v1.IInstanceList|null|undefined,
+          protos.google.cloud.compute.v1.IInstance>): void;
+  list(
+      request?: protos.google.cloud.compute.v1.IListInstancesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.compute.v1.IListInstancesRequest,
+          protos.google.cloud.compute.v1.IInstanceList|null|undefined,
+          protos.google.cloud.compute.v1.IInstance>,
+      callback?: PaginationCallback<
+          protos.google.cloud.compute.v1.IListInstancesRequest,
+          protos.google.cloud.compute.v1.IInstanceList|null|undefined,
+          protos.google.cloud.compute.v1.IInstance>):
+      Promise<[
+        protos.google.cloud.compute.v1.IInstance[],
+        protos.google.cloud.compute.v1.IListInstancesRequest|null,
+        protos.google.cloud.compute.v1.IInstanceList
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.compute.v1.IListInstancesRequest,
-          protos.google.cloud.compute.v1.IInstanceList | null | undefined,
-          protos.google.cloud.compute.v1.IInstance
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.compute.v1.IListInstancesRequest,
+      protos.google.cloud.compute.v1.IInstanceList|null|undefined,
+      protos.google.cloud.compute.v1.IInstance>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('list values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6984,65 +5122,62 @@ export class InstancesClient {
     this._log.info('list request %j', request);
     return this.innerApiCalls
       .list(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.compute.v1.IInstance[],
-          protos.google.cloud.compute.v1.IListInstancesRequest | null,
-          protos.google.cloud.compute.v1.IInstanceList,
-        ]) => {
-          this._log.info('list values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.compute.v1.IInstance[],
+        protos.google.cloud.compute.v1.IListInstancesRequest|null,
+        protos.google.cloud.compute.v1.IInstanceList
+      ]) => {
+        this._log.info('list values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `list`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.Instance|Instance} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `list`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.Instance|Instance} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listStream(
-    request?: protos.google.cloud.compute.v1.IListInstancesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.compute.v1.IListInstancesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+    });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -7051,56 +5186,55 @@ export class InstancesClient {
     );
   }
 
-  /**
-   * Equivalent to `list`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.compute.v1.Instance|Instance}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/instances.list.js</caption>
-   * region_tag:compute_v1_generated_Instances_List_async
-   */
+/**
+ * Equivalent to `list`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.compute.v1.Instance|Instance}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/instances.list.js</caption>
+ * region_tag:compute_v1_generated_Instances_List_async
+ */
   listAsync(
-    request?: protos.google.cloud.compute.v1.IListInstancesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.compute.v1.IInstance> {
+      request?: protos.google.cloud.compute.v1.IListInstancesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.compute.v1.IInstance>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+    });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
@@ -7108,118 +5242,99 @@ export class InstancesClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.compute.v1.IInstance>;
   }
-  /**
-   * Retrieves a list of resources that refer to the VM instance specified in the request. For example, if the VM instance is part of a managed or unmanaged instance group, the referrers list includes the instance group. For more information, read Viewing referrers to VM instances.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {string} request.instance
-   *   Name of the target instance scoping this request, or '-' if the request should span over all instances in the container.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.Reference|Reference}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listReferrersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Retrieves a list of resources that refer to the VM instance specified in the request. For example, if the VM instance is part of a managed or unmanaged instance group, the referrers list includes the instance group. For more information, read Viewing referrers to VM instances.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {string} request.instance
+ *   Name of the target instance scoping this request, or '-' if the request should span over all instances in the container.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.Reference|Reference}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listReferrersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReferrers(
-    request?: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IReference[],
-      protos.google.cloud.compute.v1.IListReferrersInstancesRequest | null,
-      protos.google.cloud.compute.v1.IInstanceListReferrers,
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IReference[],
+        protos.google.cloud.compute.v1.IListReferrersInstancesRequest|null,
+        protos.google.cloud.compute.v1.IInstanceListReferrers
+      ]>;
   listReferrers(
-    request: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
-      protos.google.cloud.compute.v1.IInstanceListReferrers | null | undefined,
-      protos.google.cloud.compute.v1.IReference
-    >
-  ): void;
-  listReferrers(
-    request: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
-      protos.google.cloud.compute.v1.IInstanceListReferrers | null | undefined,
-      protos.google.cloud.compute.v1.IReference
-    >
-  ): void;
-  listReferrers(
-    request?: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
-          | protos.google.cloud.compute.v1.IInstanceListReferrers
-          | null
-          | undefined,
-          protos.google.cloud.compute.v1.IReference
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
-      protos.google.cloud.compute.v1.IInstanceListReferrers | null | undefined,
-      protos.google.cloud.compute.v1.IReference
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IReference[],
-      protos.google.cloud.compute.v1.IListReferrersInstancesRequest | null,
-      protos.google.cloud.compute.v1.IInstanceListReferrers,
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IInstanceListReferrers|null|undefined,
+          protos.google.cloud.compute.v1.IReference>): void;
+  listReferrers(
+      request: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+          protos.google.cloud.compute.v1.IInstanceListReferrers|null|undefined,
+          protos.google.cloud.compute.v1.IReference>): void;
+  listReferrers(
+      request?: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+          protos.google.cloud.compute.v1.IInstanceListReferrers|null|undefined,
+          protos.google.cloud.compute.v1.IReference>,
+      callback?: PaginationCallback<
+          protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+          protos.google.cloud.compute.v1.IInstanceListReferrers|null|undefined,
+          protos.google.cloud.compute.v1.IReference>):
+      Promise<[
+        protos.google.cloud.compute.v1.IReference[],
+        protos.google.cloud.compute.v1.IListReferrersInstancesRequest|null,
+        protos.google.cloud.compute.v1.IInstanceListReferrers
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
-          | protos.google.cloud.compute.v1.IInstanceListReferrers
-          | null
-          | undefined,
-          protos.google.cloud.compute.v1.IReference
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+      protos.google.cloud.compute.v1.IInstanceListReferrers|null|undefined,
+      protos.google.cloud.compute.v1.IReference>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listReferrers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7228,68 +5343,65 @@ export class InstancesClient {
     this._log.info('listReferrers request %j', request);
     return this.innerApiCalls
       .listReferrers(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.compute.v1.IReference[],
-          protos.google.cloud.compute.v1.IListReferrersInstancesRequest | null,
-          protos.google.cloud.compute.v1.IInstanceListReferrers,
-        ]) => {
-          this._log.info('listReferrers values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.compute.v1.IReference[],
+        protos.google.cloud.compute.v1.IListReferrersInstancesRequest|null,
+        protos.google.cloud.compute.v1.IInstanceListReferrers
+      ]) => {
+        this._log.info('listReferrers values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listReferrers`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {string} request.instance
-   *   Name of the target instance scoping this request, or '-' if the request should span over all instances in the container.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.Reference|Reference} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listReferrersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listReferrers`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {string} request.instance
+ *   Name of the target instance scoping this request, or '-' if the request should span over all instances in the container.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.Reference|Reference} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listReferrersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReferrersStream(
-    request?: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
+    });
     const defaultCallSettings = this._defaults['listReferrers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReferrers stream %j', request);
     return this.descriptors.page.listReferrers.createStream(
       this.innerApiCalls.listReferrers as GaxCall,
@@ -7298,59 +5410,58 @@ export class InstancesClient {
     );
   }
 
-  /**
-   * Equivalent to `listReferrers`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-   * @param {string} request.instance
-   *   Name of the target instance scoping this request, or '-' if the request should span over all instances in the container.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.compute.v1.Reference|Reference}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/instances.list_referrers.js</caption>
-   * region_tag:compute_v1_generated_Instances_ListReferrers_async
-   */
+/**
+ * Equivalent to `listReferrers`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ * @param {string} request.instance
+ *   Name of the target instance scoping this request, or '-' if the request should span over all instances in the container.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.compute.v1.Reference|Reference}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/instances.list_referrers.js</caption>
+ * region_tag:compute_v1_generated_Instances_ListReferrers_async
+ */
   listReferrersAsync(
-    request?: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.compute.v1.IReference> {
+      request?: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.compute.v1.IReference>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        zone: request.zone ?? '',
-        instance: request.instance ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
+    });
     const defaultCallSettings = this._defaults['listReferrers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReferrers iterate %j', request);
     return this.descriptors.page.listReferrers.asyncIterate(
       this.innerApiCalls['listReferrers'] as GaxCall,

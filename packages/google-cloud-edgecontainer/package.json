@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/edgecontainer",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Distributed Cloud Edge Container API client for Node.js",
   "repository": {
     "type": "git",

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.5.0...managedkafka-v0.6.0) (2025-06-03)
+
+
+### Features
+
+* [managedkafka] add Managed Kafka ACL API ([#6372](https://github.com/googleapis/google-cloud-node/issues/6372)) ([0e789ba](https://github.com/googleapis/google-cloud-node/commit/0e789bac8803a06904ec0870f3a8c35826c1f161))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.4.0...managedkafka-v0.5.0) (2025-03-19)
 
 

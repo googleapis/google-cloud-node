@@ -13,7 +13,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/life-sciences": "^4.0.1"
+    "@google-cloud/life-sciences": "^4.1.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/cloudprofiler-v0.7.1...cloudprofiler-v0.8.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6304](https://github.com/googleapis/google-cloud-node/issues/6304)) ([132240f](https://github.com/googleapis/google-cloud-node/commit/132240fbf6cb29b309b76c1d60f0611720590847))
+
 ## [0.7.1](https://github.com/googleapis/google-cloud-node/compare/cloudprofiler-v0.7.0...cloudprofiler-v0.7.1) (2025-03-19)
 
 

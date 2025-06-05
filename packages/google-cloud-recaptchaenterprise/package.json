@@ -5,7 +5,7 @@
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "name": "@google-cloud/recaptcha-enterprise",
-  "version": "6.1.0",
+  "version": "6.2.0",
   "author": "Google LLC",
   "description": "reCAPTCHA Enterprise API client for Node.js",
   "main": "build/src/index.js",

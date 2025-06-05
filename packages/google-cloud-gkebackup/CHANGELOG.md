@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/gke-backup-v2.0.1...gke-backup-v2.1.0) (2025-06-03)
+
+
+### Features
+
+* [gkebackup] Add BackupChannel field in BackupPlan ([#6290](https://github.com/googleapis/google-cloud-node/issues/6290)) ([b4c3a92](https://github.com/googleapis/google-cloud-node/commit/b4c3a92160aafd066212afb113a6f014dcdc9af7))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/gke-backup-v2.0.0...gke-backup-v2.0.1) (2025-03-21)
 
 

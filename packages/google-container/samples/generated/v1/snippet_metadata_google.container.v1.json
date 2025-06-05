@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-container",
-        "version": "6.0.1",
+        "version": "6.1.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -230,7 +230,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 204,
+                    "end": 213,
                     "type": "FULL"
                 }
             ],
@@ -366,6 +366,14 @@
                     {
                         "name": "storage_pools",
                         "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "max_run_duration",
+                        "type": ".google.protobuf.Duration"
+                    },
+                    {
+                        "name": "flex_start",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.container.v1.Operation",
@@ -1936,6 +1944,94 @@
                 "method": {
                     "shortName": "CheckAutopilotCompatibility",
                     "fullName": "google.container.v1.ClusterManager.CheckAutopilotCompatibility",
+                    "service": {
+                        "shortName": "ClusterManager",
+                        "fullName": "google.container.v1.ClusterManager"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "container_v1_generated_ClusterManager_FetchClusterUpgradeInfo_async",
+            "title": "ClusterManager fetchClusterUpgradeInfo Sample",
+            "origin": "API_DEFINITION",
+            "description": " Fetch upgrade information of a specific cluster.",
+            "canonical": true,
+            "file": "cluster_manager.fetch_cluster_upgrade_info.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "FetchClusterUpgradeInfo",
+                "fullName": "google.container.v1.ClusterManager.FetchClusterUpgradeInfo",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "version",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.container.v1.ClusterUpgradeInfo",
+                "client": {
+                    "shortName": "ClusterManagerClient",
+                    "fullName": "google.container.v1.ClusterManagerClient"
+                },
+                "method": {
+                    "shortName": "FetchClusterUpgradeInfo",
+                    "fullName": "google.container.v1.ClusterManager.FetchClusterUpgradeInfo",
+                    "service": {
+                        "shortName": "ClusterManager",
+                        "fullName": "google.container.v1.ClusterManager"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "container_v1_generated_ClusterManager_FetchNodePoolUpgradeInfo_async",
+            "title": "ClusterManager fetchNodePoolUpgradeInfo Sample",
+            "origin": "API_DEFINITION",
+            "description": " Fetch upgrade information of a specific nodepool.",
+            "canonical": true,
+            "file": "cluster_manager.fetch_node_pool_upgrade_info.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "FetchNodePoolUpgradeInfo",
+                "fullName": "google.container.v1.ClusterManager.FetchNodePoolUpgradeInfo",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "version",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.container.v1.NodePoolUpgradeInfo",
+                "client": {
+                    "shortName": "ClusterManagerClient",
+                    "fullName": "google.container.v1.ClusterManagerClient"
+                },
+                "method": {
+                    "shortName": "FetchNodePoolUpgradeInfo",
+                    "fullName": "google.container.v1.ClusterManager.FetchNodePoolUpgradeInfo",
                     "service": {
                         "shortName": "ClusterManager",
                         "fullName": "google.container.v1.ClusterManager"
