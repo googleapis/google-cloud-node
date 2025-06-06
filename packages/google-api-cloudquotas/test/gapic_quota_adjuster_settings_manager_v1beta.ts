@@ -27,1185 +27,825 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
 describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'cloudquotas.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          quotaadjustersettingsmanagerModule.v1beta
-            .QuotaAdjusterSettingsManagerClient.servicePath;
-        assert.strictEqual(servicePath, 'cloudquotas.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          quotaadjustersettingsmanagerModule.v1beta
-            .QuotaAdjusterSettingsManagerClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'cloudquotas.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {universeDomain: 'example.com'}
-        );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudquotas.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {universe_domain: 'example.com'}
-        );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudquotas.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudquotas.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'cloudquotas.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-              {universeDomain: 'configured.example.com'}
+        it('has universeDomain', () => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient.servicePath;
+                assert.strictEqual(servicePath, 'cloudquotas.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'cloudquotas.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudquotas.example.com');
+        });
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudquotas.example.com');
+        });
+
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudquotas.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudquotas.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.quotaAdjusterSettingsManagerStub, undefined);
+            await client.initialize();
+            assert(client.quotaAdjusterSettingsManagerStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.quotaAdjusterSettingsManagerStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.quotaAdjusterSettingsManagerStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
+    });
+
+    describe('updateQuotaAdjusterSettings', () => {
+        it('invokes updateQuotaAdjusterSettings without error', async () => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest()
             );
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudquotas.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+            request.quotaAdjusterSettings ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest', ['quotaAdjusterSettings', 'name']);
+            request.quotaAdjusterSettings.name = defaultValue1;
+            const expectedHeaderRequestParams = `quota_adjuster_settings.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1beta.QuotaAdjusterSettings()
+            );
+            client.innerApiCalls.updateQuotaAdjusterSettings = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateQuotaAdjusterSettings(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateQuotaAdjusterSettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateQuotaAdjusterSettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {universe_domain: 'example.com', universeDomain: 'example.net'}
-        );
-      });
-    });
 
-    it('has port', () => {
-      const port =
-        quotaadjustersettingsmanagerModule.v1beta
-          .QuotaAdjusterSettingsManagerClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        it('invokes updateQuotaAdjusterSettings without error using callback', async () => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest()
+            );
+            request.quotaAdjusterSettings ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest', ['quotaAdjusterSettings', 'name']);
+            request.quotaAdjusterSettings.name = defaultValue1;
+            const expectedHeaderRequestParams = `quota_adjuster_settings.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1beta.QuotaAdjusterSettings()
+            );
+            client.innerApiCalls.updateQuotaAdjusterSettings = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateQuotaAdjusterSettings(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateQuotaAdjusterSettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateQuotaAdjusterSettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('should create a client with no option', () => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient();
-      assert(client);
-    });
+        it('invokes updateQuotaAdjusterSettings with error', async () => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest()
+            );
+            request.quotaAdjusterSettings ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest', ['quotaAdjusterSettings', 'name']);
+            request.quotaAdjusterSettings.name = defaultValue1;
+            const expectedHeaderRequestParams = `quota_adjuster_settings.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateQuotaAdjusterSettings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateQuotaAdjusterSettings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateQuotaAdjusterSettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateQuotaAdjusterSettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            fallback: true,
-          }
-        );
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.quotaAdjusterSettingsManagerStub, undefined);
-      await client.initialize();
-      assert(client.quotaAdjusterSettingsManagerStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.quotaAdjusterSettingsManagerStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+        it('invokes updateQuotaAdjusterSettings with closed client', async () => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest()
+            );
+            request.quotaAdjusterSettings ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest', ['quotaAdjusterSettings', 'name']);
+            request.quotaAdjusterSettings.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateQuotaAdjusterSettings(request), expectedError);
         });
     });
 
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.quotaAdjusterSettingsManagerStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+    describe('getQuotaAdjusterSettings', () => {
+        it('invokes getQuotaAdjusterSettings without error', async () => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1beta.QuotaAdjusterSettings()
+            );
+            client.innerApiCalls.getQuotaAdjusterSettings = stubSimpleCall(expectedResponse);
+            const [response] = await client.getQuotaAdjusterSettings(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getQuotaAdjusterSettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getQuotaAdjusterSettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getQuotaAdjusterSettings without error using callback', async () => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1beta.QuotaAdjusterSettings()
+            );
+            client.innerApiCalls.getQuotaAdjusterSettings = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getQuotaAdjusterSettings(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getQuotaAdjusterSettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getQuotaAdjusterSettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getQuotaAdjusterSettings with error', async () => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getQuotaAdjusterSettings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getQuotaAdjusterSettings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getQuotaAdjusterSettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getQuotaAdjusterSettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getQuotaAdjusterSettings with closed client', async () => {
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getQuotaAdjusterSettings(request), expectedError);
         });
     });
 
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
+    describe('Path templates', () => {
 
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
+        describe('folderLocationQuotaAdjusterSettings', async () => {
+            const fakePath = "/rendered/path/folderLocationQuotaAdjusterSettings";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+            };
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationQuotaAdjusterSettingsPath', () => {
+                const result = client.folderLocationQuotaAdjusterSettingsPath("folderValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationQuotaAdjusterSettingsName', () => {
+                const result = client.matchFolderFromFolderLocationQuotaAdjusterSettingsName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationQuotaAdjusterSettingsName', () => {
+                const result = client.matchLocationFromFolderLocationQuotaAdjusterSettingsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
+
+        describe('folderLocationQuotaPreference', async () => {
+            const fakePath = "/rendered/path/folderLocationQuotaPreference";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                quota_preference: "quotaPreferenceValue",
+            };
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationQuotaPreferencePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationQuotaPreferencePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationQuotaPreferencePath', () => {
+                const result = client.folderLocationQuotaPreferencePath("folderValue", "locationValue", "quotaPreferenceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationQuotaPreferencePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationQuotaPreferenceName', () => {
+                const result = client.matchFolderFromFolderLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationQuotaPreferenceName', () => {
+                const result = client.matchLocationFromFolderLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchQuotaPreferenceFromFolderLocationQuotaPreferenceName', () => {
+                const result = client.matchQuotaPreferenceFromFolderLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "quotaPreferenceValue");
+                assert((client.pathTemplates.folderLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderLocationServiceQuotaInfo', async () => {
+            const fakePath = "/rendered/path/folderLocationServiceQuotaInfo";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                service: "serviceValue",
+                quota_info: "quotaInfoValue",
+            };
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationServiceQuotaInfoPath', () => {
+                const result = client.folderLocationServiceQuotaInfoPath("folderValue", "locationValue", "serviceValue", "quotaInfoValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationServiceQuotaInfoName', () => {
+                const result = client.matchFolderFromFolderLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationServiceQuotaInfoName', () => {
+                const result = client.matchLocationFromFolderLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromFolderLocationServiceQuotaInfoName', () => {
+                const result = client.matchServiceFromFolderLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchQuotaInfoFromFolderLocationServiceQuotaInfoName', () => {
+                const result = client.matchQuotaInfoFromFolderLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "quotaInfoValue");
+                assert((client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationQuotaAdjusterSettings', async () => {
+            const fakePath = "/rendered/path/organizationLocationQuotaAdjusterSettings";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+            };
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationQuotaAdjusterSettingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationQuotaAdjusterSettingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationQuotaAdjusterSettingsPath', () => {
+                const result = client.organizationLocationQuotaAdjusterSettingsPath("organizationValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationQuotaAdjusterSettingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationQuotaAdjusterSettingsName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationQuotaAdjusterSettingsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationQuotaAdjusterSettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationQuotaAdjusterSettingsName', () => {
+                const result = client.matchLocationFromOrganizationLocationQuotaAdjusterSettingsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationQuotaAdjusterSettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationQuotaPreference', async () => {
+            const fakePath = "/rendered/path/organizationLocationQuotaPreference";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                quota_preference: "quotaPreferenceValue",
+            };
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationQuotaPreferencePath', () => {
+                const result = client.organizationLocationQuotaPreferencePath("organizationValue", "locationValue", "quotaPreferenceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationQuotaPreferenceName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationQuotaPreferenceName', () => {
+                const result = client.matchLocationFromOrganizationLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchQuotaPreferenceFromOrganizationLocationQuotaPreferenceName', () => {
+                const result = client.matchQuotaPreferenceFromOrganizationLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "quotaPreferenceValue");
+                assert((client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationServiceQuotaInfo', async () => {
+            const fakePath = "/rendered/path/organizationLocationServiceQuotaInfo";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                service: "serviceValue",
+                quota_info: "quotaInfoValue",
+            };
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationServiceQuotaInfoPath', () => {
+                const result = client.organizationLocationServiceQuotaInfoPath("organizationValue", "locationValue", "serviceValue", "quotaInfoValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationServiceQuotaInfoName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationServiceQuotaInfoName', () => {
+                const result = client.matchLocationFromOrganizationLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromOrganizationLocationServiceQuotaInfoName', () => {
+                const result = client.matchServiceFromOrganizationLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchQuotaInfoFromOrganizationLocationServiceQuotaInfoName', () => {
+                const result = client.matchQuotaInfoFromOrganizationLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "quotaInfoValue");
+                assert((client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationQuotaAdjusterSettings', async () => {
+            const fakePath = "/rendered/path/projectLocationQuotaAdjusterSettings";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationQuotaAdjusterSettingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationQuotaAdjusterSettingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationQuotaAdjusterSettingsPath', () => {
+                const result = client.projectLocationQuotaAdjusterSettingsPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationQuotaAdjusterSettingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationQuotaAdjusterSettingsName', () => {
+                const result = client.matchProjectFromProjectLocationQuotaAdjusterSettingsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationQuotaAdjusterSettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationQuotaAdjusterSettingsName', () => {
+                const result = client.matchLocationFromProjectLocationQuotaAdjusterSettingsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationQuotaAdjusterSettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationQuotaPreference', async () => {
+            const fakePath = "/rendered/path/projectLocationQuotaPreference";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                quota_preference: "quotaPreferenceValue",
+            };
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationQuotaPreferencePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationQuotaPreferencePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationQuotaPreferencePath', () => {
+                const result = client.projectLocationQuotaPreferencePath("projectValue", "locationValue", "quotaPreferenceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationQuotaPreferencePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationQuotaPreferenceName', () => {
+                const result = client.matchProjectFromProjectLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationQuotaPreferenceName', () => {
+                const result = client.matchLocationFromProjectLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchQuotaPreferenceFromProjectLocationQuotaPreferenceName', () => {
+                const result = client.matchQuotaPreferenceFromProjectLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "quotaPreferenceValue");
+                assert((client.pathTemplates.projectLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationServiceQuotaInfo', async () => {
+            const fakePath = "/rendered/path/projectLocationServiceQuotaInfo";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                service: "serviceValue",
+                quota_info: "quotaInfoValue",
+            };
+            const client = new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationServiceQuotaInfoPath', () => {
+                const result = client.projectLocationServiceQuotaInfoPath("projectValue", "locationValue", "serviceValue", "quotaInfoValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationServiceQuotaInfoName', () => {
+                const result = client.matchProjectFromProjectLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationServiceQuotaInfoName', () => {
+                const result = client.matchLocationFromProjectLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromProjectLocationServiceQuotaInfoName', () => {
+                const result = client.matchServiceFromProjectLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchQuotaInfoFromProjectLocationServiceQuotaInfoName', () => {
+                const result = client.matchQuotaInfoFromProjectLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "quotaInfoValue");
+                assert((client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-  });
-
-  describe('updateQuotaAdjusterSettings', () => {
-    it('invokes updateQuotaAdjusterSettings without error', async () => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest()
-      );
-      request.quotaAdjusterSettings ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest',
-        ['quotaAdjusterSettings', 'name']
-      );
-      request.quotaAdjusterSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `quota_adjuster_settings.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1beta.QuotaAdjusterSettings()
-      );
-      client.innerApiCalls.updateQuotaAdjusterSettings =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateQuotaAdjusterSettings(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateQuotaAdjusterSettings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateQuotaAdjusterSettings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateQuotaAdjusterSettings without error using callback', async () => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest()
-      );
-      request.quotaAdjusterSettings ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest',
-        ['quotaAdjusterSettings', 'name']
-      );
-      request.quotaAdjusterSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `quota_adjuster_settings.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1beta.QuotaAdjusterSettings()
-      );
-      client.innerApiCalls.updateQuotaAdjusterSettings =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateQuotaAdjusterSettings(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateQuotaAdjusterSettings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateQuotaAdjusterSettings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateQuotaAdjusterSettings with error', async () => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest()
-      );
-      request.quotaAdjusterSettings ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest',
-        ['quotaAdjusterSettings', 'name']
-      );
-      request.quotaAdjusterSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `quota_adjuster_settings.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateQuotaAdjusterSettings = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateQuotaAdjusterSettings(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateQuotaAdjusterSettings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateQuotaAdjusterSettings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateQuotaAdjusterSettings with closed client', async () => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest()
-      );
-      request.quotaAdjusterSettings ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest',
-        ['quotaAdjusterSettings', 'name']
-      );
-      request.quotaAdjusterSettings.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.updateQuotaAdjusterSettings(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getQuotaAdjusterSettings', () => {
-    it('invokes getQuotaAdjusterSettings without error', async () => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1beta.QuotaAdjusterSettings()
-      );
-      client.innerApiCalls.getQuotaAdjusterSettings =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getQuotaAdjusterSettings(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getQuotaAdjusterSettings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getQuotaAdjusterSettings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getQuotaAdjusterSettings without error using callback', async () => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1beta.QuotaAdjusterSettings()
-      );
-      client.innerApiCalls.getQuotaAdjusterSettings =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getQuotaAdjusterSettings(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.cloudquotas.v1beta.IQuotaAdjusterSettings | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getQuotaAdjusterSettings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getQuotaAdjusterSettings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getQuotaAdjusterSettings with error', async () => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getQuotaAdjusterSettings = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getQuotaAdjusterSettings(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getQuotaAdjusterSettings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getQuotaAdjusterSettings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getQuotaAdjusterSettings with closed client', async () => {
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getQuotaAdjusterSettings(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('folderLocationQuotaPreference', async () => {
-      const fakePath = '/rendered/path/folderLocationQuotaPreference';
-      const expectedParameters = {
-        folder: 'folderValue',
-        location: 'locationValue',
-        quota_preference: 'quotaPreferenceValue',
-      };
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.folderLocationQuotaPreferencePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.folderLocationQuotaPreferencePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('folderLocationQuotaPreferencePath', () => {
-        const result = client.folderLocationQuotaPreferencePath(
-          'folderValue',
-          'locationValue',
-          'quotaPreferenceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderLocationQuotaPreferencePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchFolderFromFolderLocationQuotaPreferenceName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromFolderLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchLocationFromFolderLocationQuotaPreferenceName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchQuotaPreferenceFromFolderLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchQuotaPreferenceFromFolderLocationQuotaPreferenceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'quotaPreferenceValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderLocationServiceQuotaInfo', async () => {
-      const fakePath = '/rendered/path/folderLocationServiceQuotaInfo';
-      const expectedParameters = {
-        folder: 'folderValue',
-        location: 'locationValue',
-        service: 'serviceValue',
-        quota_info: 'quotaInfoValue',
-      };
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('folderLocationServiceQuotaInfoPath', () => {
-        const result = client.folderLocationServiceQuotaInfoPath(
-          'folderValue',
-          'locationValue',
-          'serviceValue',
-          'quotaInfoValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchFolderFromFolderLocationServiceQuotaInfoName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromFolderLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchLocationFromFolderLocationServiceQuotaInfoName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromFolderLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchServiceFromFolderLocationServiceQuotaInfoName(fakePath);
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchQuotaInfoFromFolderLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchQuotaInfoFromFolderLocationServiceQuotaInfoName(fakePath);
-        assert.strictEqual(result, 'quotaInfoValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocationQuotaPreference', async () => {
-      const fakePath = '/rendered/path/organizationLocationQuotaPreference';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        quota_preference: 'quotaPreferenceValue',
-      };
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationLocationQuotaPreferencePath', () => {
-        const result = client.organizationLocationQuotaPreferencePath(
-          'organizationValue',
-          'locationValue',
-          'quotaPreferenceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationLocationQuotaPreferencePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationQuotaPreferenceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationQuotaPreferenceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchQuotaPreferenceFromOrganizationLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchQuotaPreferenceFromOrganizationLocationQuotaPreferenceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'quotaPreferenceValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocationServiceQuotaInfo', async () => {
-      const fakePath = '/rendered/path/organizationLocationServiceQuotaInfo';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        service: 'serviceValue',
-        quota_info: 'quotaInfoValue',
-      };
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationLocationServiceQuotaInfoPath', () => {
-        const result = client.organizationLocationServiceQuotaInfoPath(
-          'organizationValue',
-          'locationValue',
-          'serviceValue',
-          'quotaInfoValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationServiceQuotaInfoPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationServiceQuotaInfoName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationServiceQuotaInfoName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromOrganizationLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchServiceFromOrganizationLocationServiceQuotaInfoName(
-            fakePath
-          );
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchQuotaInfoFromOrganizationLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchQuotaInfoFromOrganizationLocationServiceQuotaInfoName(
-            fakePath
-          );
-        assert.strictEqual(result, 'quotaInfoValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationQuotaPreference', async () => {
-      const fakePath = '/rendered/path/projectLocationQuotaPreference';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        quota_preference: 'quotaPreferenceValue',
-      };
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationQuotaPreferencePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationQuotaPreferencePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationQuotaPreferencePath', () => {
-        const result = client.projectLocationQuotaPreferencePath(
-          'projectValue',
-          'locationValue',
-          'quotaPreferenceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationQuotaPreferencePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchProjectFromProjectLocationQuotaPreferenceName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchLocationFromProjectLocationQuotaPreferenceName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchQuotaPreferenceFromProjectLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchQuotaPreferenceFromProjectLocationQuotaPreferenceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'quotaPreferenceValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationServiceQuotaInfo', async () => {
-      const fakePath = '/rendered/path/projectLocationServiceQuotaInfo';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        service: 'serviceValue',
-        quota_info: 'quotaInfoValue',
-      };
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationServiceQuotaInfoPath', () => {
-        const result = client.projectLocationServiceQuotaInfoPath(
-          'projectValue',
-          'locationValue',
-          'serviceValue',
-          'quotaInfoValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchProjectFromProjectLocationServiceQuotaInfoName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchLocationFromProjectLocationServiceQuotaInfoName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromProjectLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchServiceFromProjectLocationServiceQuotaInfoName(fakePath);
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchQuotaInfoFromProjectLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchQuotaInfoFromProjectLocationServiceQuotaInfoName(
-            fakePath
-          );
-        assert.strictEqual(result, 'quotaInfoValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('quotaAdjusterSettings', async () => {
-      const fakePath = '/rendered/path/quotaAdjusterSettings';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client =
-        new quotaadjustersettingsmanagerModule.v1beta.QuotaAdjusterSettingsManagerClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.quotaAdjusterSettingsPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.quotaAdjusterSettingsPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('quotaAdjusterSettingsPath', () => {
-        const result = client.quotaAdjusterSettingsPath(
-          'projectValue',
-          'locationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.quotaAdjusterSettingsPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromQuotaAdjusterSettingsName', () => {
-        const result =
-          client.matchProjectFromQuotaAdjusterSettingsName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.quotaAdjusterSettingsPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromQuotaAdjusterSettingsName', () => {
-        const result =
-          client.matchLocationFromQuotaAdjusterSettingsName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.quotaAdjusterSettingsPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });
