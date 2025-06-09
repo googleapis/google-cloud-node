@@ -35,27 +35,7 @@ type SessionTemplateControllerClient = v1.SessionTemplateControllerClient;
 const WorkflowTemplateServiceClient = v1.WorkflowTemplateServiceClient;
 type WorkflowTemplateServiceClient = v1.WorkflowTemplateServiceClient;
 
-export {
-  v1,
-  AutoscalingPolicyServiceClient,
-  BatchControllerClient,
-  ClusterControllerClient,
-  JobControllerClient,
-  NodeGroupControllerClient,
-  SessionControllerClient,
-  SessionTemplateControllerClient,
-  WorkflowTemplateServiceClient,
-};
-export default {
-  v1,
-  AutoscalingPolicyServiceClient,
-  BatchControllerClient,
-  ClusterControllerClient,
-  JobControllerClient,
-  NodeGroupControllerClient,
-  SessionControllerClient,
-  SessionTemplateControllerClient,
-  WorkflowTemplateServiceClient,
-};
+export {v1, AutoscalingPolicyServiceClient, BatchControllerClient, ClusterControllerClient, JobControllerClient, NodeGroupControllerClient, SessionControllerClient, SessionTemplateControllerClient, WorkflowTemplateServiceClient};
+export default {v1, AutoscalingPolicyServiceClient, BatchControllerClient, ClusterControllerClient, JobControllerClient, NodeGroupControllerClient, SessionControllerClient, SessionTemplateControllerClient, WorkflowTemplateServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
