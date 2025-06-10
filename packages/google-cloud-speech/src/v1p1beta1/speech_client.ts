@@ -18,14 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation} from 'google-gax';
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -108,41 +101,20 @@ export class SpeechClient {
    *     const client = new SpeechClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SpeechClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'speech.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +140,7 @@ export class SpeechClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +154,10 @@ export class SpeechClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -214,11 +189,7 @@ export class SpeechClient {
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
-      streamingRecognize: new this._gaxModule.StreamDescriptor(
-        this._gaxModule.StreamType.BIDI_STREAMING,
-        !!opts.fallback,
-        !!opts.gaxServerStreamingRetries
-      ),
+      streamingRecognize: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries)
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -227,46 +198,29 @@ export class SpeechClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1p1beta1/operations/{name=**}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1p1beta1/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v1p1beta1/operations/{name=**}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1p1beta1/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const longRunningRecognizeResponse = protoFilesRoot.lookup(
-      '.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse') as gax.protobuf.Type;
     const longRunningRecognizeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       longRunningRecognize: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         longRunningRecognizeResponse.decode.bind(longRunningRecognizeResponse),
-        longRunningRecognizeMetadata.decode.bind(longRunningRecognizeMetadata)
-      ),
+        longRunningRecognizeMetadata.decode.bind(longRunningRecognizeMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.speech.v1p1beta1.Speech',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.speech.v1p1beta1.Speech', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -297,49 +251,35 @@ export class SpeechClient {
     // Put together the "service stub" for
     // google.cloud.speech.v1p1beta1.Speech.
     this.speechStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.speech.v1p1beta1.Speech'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.speech.v1p1beta1.Speech') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.speech.v1p1beta1.Speech,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const speechStubMethods = [
-      'recognize',
-      'longRunningRecognize',
-      'streamingRecognize',
-    ];
+    const speechStubMethods =
+        ['recognize', 'longRunningRecognize', 'streamingRecognize'];
     for (const methodName of speechStubMethods) {
       const callPromise = this.speechStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({objectMode: true});
-                setImmediate(() => {
-                  stream.emit(
-                    'error',
-                    new this._gaxModule.GoogleError(
-                      'The client has already been closed.'
-                    )
-                  );
-                });
-                return stream;
-              }
-              return Promise.reject('The client has already been closed.');
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            if (methodName in this.descriptors.stream) {
+              const stream = new PassThrough({objectMode: true});
+              setImmediate(() => {
+                stream.emit('error', new this._gaxModule.GoogleError('The client has already been closed.'));
+              });
+              return stream;
             }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.stream[methodName] ||
@@ -364,14 +304,8 @@ export class SpeechClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'speech.googleapis.com';
   }
@@ -382,14 +316,8 @@ export class SpeechClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'speech.googleapis.com';
   }
@@ -420,7 +348,9 @@ export class SpeechClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -429,9 +359,8 @@ export class SpeechClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -442,318 +371,230 @@ export class SpeechClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Performs synchronous speech recognition: receive results after all audio
-   * has been sent and processed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.speech.v1p1beta1.RecognitionConfig} request.config
-   *   Required. Provides information to the recognizer that specifies how to
-   *   process the request.
-   * @param {google.cloud.speech.v1p1beta1.RecognitionAudio} request.audio
-   *   Required. The audio data to be recognized.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.speech.v1p1beta1.RecognizeResponse|RecognizeResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p1beta1/speech.recognize.js</caption>
-   * region_tag:speech_v1p1beta1_generated_Speech_Recognize_async
-   */
+/**
+ * Performs synchronous speech recognition: receive results after all audio
+ * has been sent and processed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.speech.v1p1beta1.RecognitionConfig} request.config
+ *   Required. Provides information to the recognizer that specifies how to
+ *   process the request.
+ * @param {google.cloud.speech.v1p1beta1.RecognitionAudio} request.audio
+ *   Required. The audio data to be recognized.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.speech.v1p1beta1.RecognizeResponse|RecognizeResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p1beta1/speech.recognize.js</caption>
+ * region_tag:speech_v1p1beta1_generated_Speech_Recognize_async
+ */
   recognize(
-    request?: protos.google.cloud.speech.v1p1beta1.IRecognizeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
-      protos.google.cloud.speech.v1p1beta1.IRecognizeRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.speech.v1p1beta1.IRecognizeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
+        protos.google.cloud.speech.v1p1beta1.IRecognizeRequest|undefined, {}|undefined
+      ]>;
   recognize(
-    request: protos.google.cloud.speech.v1p1beta1.IRecognizeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
-      protos.google.cloud.speech.v1p1beta1.IRecognizeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  recognize(
-    request: protos.google.cloud.speech.v1p1beta1.IRecognizeRequest,
-    callback: Callback<
-      protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
-      protos.google.cloud.speech.v1p1beta1.IRecognizeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  recognize(
-    request?: protos.google.cloud.speech.v1p1beta1.IRecognizeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.speech.v1p1beta1.IRecognizeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
-          | protos.google.cloud.speech.v1p1beta1.IRecognizeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
-      protos.google.cloud.speech.v1p1beta1.IRecognizeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
-      protos.google.cloud.speech.v1p1beta1.IRecognizeRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.speech.v1p1beta1.IRecognizeRequest|null|undefined,
+          {}|null|undefined>): void;
+  recognize(
+      request: protos.google.cloud.speech.v1p1beta1.IRecognizeRequest,
+      callback: Callback<
+          protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
+          protos.google.cloud.speech.v1p1beta1.IRecognizeRequest|null|undefined,
+          {}|null|undefined>): void;
+  recognize(
+      request?: protos.google.cloud.speech.v1p1beta1.IRecognizeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
+          protos.google.cloud.speech.v1p1beta1.IRecognizeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
+          protos.google.cloud.speech.v1p1beta1.IRecognizeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
+        protos.google.cloud.speech.v1p1beta1.IRecognizeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('recognize request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
-          | protos.google.cloud.speech.v1p1beta1.IRecognizeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
+        protos.google.cloud.speech.v1p1beta1.IRecognizeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('recognize response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .recognize(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
-          protos.google.cloud.speech.v1p1beta1.IRecognizeRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('recognize response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.recognize(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
+        protos.google.cloud.speech.v1p1beta1.IRecognizeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('recognize response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
-   * Performs bidirectional streaming speech recognition: receive results while
-   * sending audio. This method is only available via the gRPC API (not REST).
-   *
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which is both readable and writable. It accepts objects
-   *   representing {@link protos.google.cloud.speech.v1p1beta1.StreamingRecognizeRequest|StreamingRecognizeRequest} for write() method, and
-   *   will emit objects representing {@link protos.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse|StreamingRecognizeResponse} on 'data' event asynchronously.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p1beta1/speech.streaming_recognize.js</caption>
-   * region_tag:speech_v1p1beta1_generated_Speech_StreamingRecognize_async
-   */
-  _streamingRecognize(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch(err => {
-      throw err;
-    });
+/**
+ * Performs bidirectional streaming speech recognition: receive results while
+ * sending audio. This method is only available via the gRPC API (not REST).
+ *
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which is both readable and writable. It accepts objects
+ *   representing {@link protos.google.cloud.speech.v1p1beta1.StreamingRecognizeRequest|StreamingRecognizeRequest} for write() method, and
+ *   will emit objects representing {@link protos.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse|StreamingRecognizeResponse} on 'data' event asynchronously.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p1beta1/speech.streaming_recognize.js</caption>
+ * region_tag:speech_v1p1beta1_generated_Speech_StreamingRecognize_async
+ */
+  _streamingRecognize(
+      options?: CallOptions):
+    gax.CancellableStream {
+    this.initialize().catch(err => {throw err});
     this._log.info('streamingRecognize stream %j', options);
     return this.innerApiCalls.streamingRecognize(null, options);
   }
 
-  /**
-   * Performs asynchronous speech recognition: receive results via the
-   * google.longrunning.Operations interface. Returns either an
-   * `Operation.error` or an `Operation.response` which contains
-   * a `LongRunningRecognizeResponse` message.
-   * For more information on asynchronous speech recognition, see the
-   * [how-to](https://cloud.google.com/speech-to-text/docs/async-recognize).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.speech.v1p1beta1.RecognitionConfig} request.config
-   *   Required. Provides information to the recognizer that specifies how to
-   *   process the request.
-   * @param {google.cloud.speech.v1p1beta1.RecognitionAudio} request.audio
-   *   Required. The audio data to be recognized.
-   * @param {google.cloud.speech.v1p1beta1.TranscriptOutputConfig} [request.outputConfig]
-   *   Optional. Specifies an optional destination for the recognition results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p1beta1/speech.long_running_recognize.js</caption>
-   * region_tag:speech_v1p1beta1_generated_Speech_LongRunningRecognize_async
-   */
+/**
+ * Performs asynchronous speech recognition: receive results via the
+ * google.longrunning.Operations interface. Returns either an
+ * `Operation.error` or an `Operation.response` which contains
+ * a `LongRunningRecognizeResponse` message.
+ * For more information on asynchronous speech recognition, see the
+ * [how-to](https://cloud.google.com/speech-to-text/docs/async-recognize).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.speech.v1p1beta1.RecognitionConfig} request.config
+ *   Required. Provides information to the recognizer that specifies how to
+ *   process the request.
+ * @param {google.cloud.speech.v1p1beta1.RecognitionAudio} request.audio
+ *   Required. The audio data to be recognized.
+ * @param {google.cloud.speech.v1p1beta1.TranscriptOutputConfig} [request.outputConfig]
+ *   Optional. Specifies an optional destination for the recognition results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p1beta1/speech.long_running_recognize.js</caption>
+ * region_tag:speech_v1p1beta1_generated_Speech_LongRunningRecognize_async
+ */
   longRunningRecognize(
-    request?: protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeResponse,
-        protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeResponse, protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   longRunningRecognize(
-    request: protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeResponse,
-        protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeResponse, protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   longRunningRecognize(
-    request: protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeResponse,
-        protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeResponse, protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   longRunningRecognize(
-    request?: protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeResponse,
-            protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeResponse,
-        protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeResponse,
-        protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeResponse, protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeResponse, protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeResponse, protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeResponse,
-            protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeResponse, protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('longRunningRecognize response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('longRunningRecognize request %j', request);
-    return this.innerApiCalls
-      .longRunningRecognize(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeResponse,
-            protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('longRunningRecognize response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.longRunningRecognize(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeResponse, protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('longRunningRecognize response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `longRunningRecognize()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p1beta1/speech.long_running_recognize.js</caption>
-   * region_tag:speech_v1p1beta1_generated_Speech_LongRunningRecognize_async
-   */
-  async checkLongRunningRecognizeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse,
-      protos.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `longRunningRecognize()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p1beta1/speech.long_running_recognize.js</caption>
+ * region_tag:speech_v1p1beta1_generated_Speech_LongRunningRecognize_async
+ */
+  async checkLongRunningRecognizeProgress(name: string): Promise<LROperation<protos.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse, protos.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata>>{
     this._log.info('longRunningRecognize long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.longRunningRecognize,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse,
-      protos.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.longRunningRecognize, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse, protos.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata>;
   }
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -798,20 +639,20 @@ export class SpeechClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -848,13 +689,13 @@ export class SpeechClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -888,7 +729,7 @@ export class SpeechClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -903,20 +744,20 @@ export class SpeechClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -960,20 +801,20 @@ export class SpeechClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -989,7 +830,7 @@ export class SpeechClient {
    * @param {string} custom_class
    * @returns {string} Resource name string.
    */
-  customClassPath(project: string, location: string, customClass: string) {
+  customClassPath(project:string,location:string,customClass:string) {
     return this.pathTemplates.customClassPathTemplate.render({
       project: project,
       location: location,
@@ -1005,8 +846,7 @@ export class SpeechClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCustomClassName(customClassName: string) {
-    return this.pathTemplates.customClassPathTemplate.match(customClassName)
-      .project;
+    return this.pathTemplates.customClassPathTemplate.match(customClassName).project;
   }
 
   /**
@@ -1017,8 +857,7 @@ export class SpeechClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCustomClassName(customClassName: string) {
-    return this.pathTemplates.customClassPathTemplate.match(customClassName)
-      .location;
+    return this.pathTemplates.customClassPathTemplate.match(customClassName).location;
   }
 
   /**
@@ -1029,8 +868,7 @@ export class SpeechClient {
    * @returns {string} A string representing the custom_class.
    */
   matchCustomClassFromCustomClassName(customClassName: string) {
-    return this.pathTemplates.customClassPathTemplate.match(customClassName)
-      .custom_class;
+    return this.pathTemplates.customClassPathTemplate.match(customClassName).custom_class;
   }
 
   /**
@@ -1041,7 +879,7 @@ export class SpeechClient {
    * @param {string} phrase_set
    * @returns {string} Resource name string.
    */
-  phraseSetPath(project: string, location: string, phraseSet: string) {
+  phraseSetPath(project:string,location:string,phraseSet:string) {
     return this.pathTemplates.phraseSetPathTemplate.render({
       project: project,
       location: location,
@@ -1057,8 +895,7 @@ export class SpeechClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPhraseSetName(phraseSetName: string) {
-    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName)
-      .project;
+    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName).project;
   }
 
   /**
@@ -1069,8 +906,7 @@ export class SpeechClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPhraseSetName(phraseSetName: string) {
-    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName)
-      .location;
+    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName).location;
   }
 
   /**
@@ -1081,8 +917,7 @@ export class SpeechClient {
    * @returns {string} A string representing the phrase_set.
    */
   matchPhraseSetFromPhraseSetName(phraseSetName: string) {
-    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName)
-      .phrase_set;
+    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName).phrase_set;
   }
 
   /**
