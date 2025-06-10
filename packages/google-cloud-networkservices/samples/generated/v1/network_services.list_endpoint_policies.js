@@ -44,6 +44,12 @@ function main(parent) {
    *  next page of data.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. If true, allow partial responses for multi-regional Aggregated
+   *  List requests. Otherwise if one of the locations is down or unreachable,
+   *  the Aggregated List request will fail.
+   */
+  // const returnPartialSuccess = true
 
   // Imports the Networkservices library
   const {NetworkServicesClient} = require('@google-cloud/networkservices').v1;

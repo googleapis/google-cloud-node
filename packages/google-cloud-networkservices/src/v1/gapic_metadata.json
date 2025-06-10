@@ -172,6 +172,21 @@
                 "getMesh"
               ]
             },
+            "GetServiceLbPolicy": {
+              "methods": [
+                "getServiceLbPolicy"
+              ]
+            },
+            "GetGatewayRouteView": {
+              "methods": [
+                "getGatewayRouteView"
+              ]
+            },
+            "GetMeshRouteView": {
+              "methods": [
+                "getMeshRouteView"
+              ]
+            },
             "CreateEndpointPolicy": {
               "methods": [
                 "createEndpointPolicy"
@@ -267,6 +282,11 @@
                 "createServiceBinding"
               ]
             },
+            "UpdateServiceBinding": {
+              "methods": [
+                "updateServiceBinding"
+              ]
+            },
             "DeleteServiceBinding": {
               "methods": [
                 "deleteServiceBinding"
@@ -285,6 +305,21 @@
             "DeleteMesh": {
               "methods": [
                 "deleteMesh"
+              ]
+            },
+            "CreateServiceLbPolicy": {
+              "methods": [
+                "createServiceLbPolicy"
+              ]
+            },
+            "UpdateServiceLbPolicy": {
+              "methods": [
+                "updateServiceLbPolicy"
+              ]
+            },
+            "DeleteServiceLbPolicy": {
+              "methods": [
+                "deleteServiceLbPolicy"
               ]
             },
             "ListEndpointPolicies": {
@@ -341,6 +376,27 @@
                 "listMeshes",
                 "listMeshesStream",
                 "listMeshesAsync"
+              ]
+            },
+            "ListServiceLbPolicies": {
+              "methods": [
+                "listServiceLbPolicies",
+                "listServiceLbPoliciesStream",
+                "listServiceLbPoliciesAsync"
+              ]
+            },
+            "ListGatewayRouteViews": {
+              "methods": [
+                "listGatewayRouteViews",
+                "listGatewayRouteViewsStream",
+                "listGatewayRouteViewsAsync"
+              ]
+            },
+            "ListMeshRouteViews": {
+              "methods": [
+                "listMeshRouteViews",
+                "listMeshRouteViewsStream",
+                "listMeshRouteViewsAsync"
               ]
             }
           }
@@ -388,6 +444,21 @@
                 "getMesh"
               ]
             },
+            "GetServiceLbPolicy": {
+              "methods": [
+                "getServiceLbPolicy"
+              ]
+            },
+            "GetGatewayRouteView": {
+              "methods": [
+                "getGatewayRouteView"
+              ]
+            },
+            "GetMeshRouteView": {
+              "methods": [
+                "getMeshRouteView"
+              ]
+            },
             "CreateEndpointPolicy": {
               "methods": [
                 "createEndpointPolicy"
@@ -483,6 +554,11 @@
                 "createServiceBinding"
               ]
             },
+            "UpdateServiceBinding": {
+              "methods": [
+                "updateServiceBinding"
+              ]
+            },
             "DeleteServiceBinding": {
               "methods": [
                 "deleteServiceBinding"
@@ -501,6 +577,21 @@
             "DeleteMesh": {
               "methods": [
                 "deleteMesh"
+              ]
+            },
+            "CreateServiceLbPolicy": {
+              "methods": [
+                "createServiceLbPolicy"
+              ]
+            },
+            "UpdateServiceLbPolicy": {
+              "methods": [
+                "updateServiceLbPolicy"
+              ]
+            },
+            "DeleteServiceLbPolicy": {
+              "methods": [
+                "deleteServiceLbPolicy"
               ]
             },
             "ListEndpointPolicies": {
@@ -557,6 +648,27 @@
                 "listMeshes",
                 "listMeshesStream",
                 "listMeshesAsync"
+              ]
+            },
+            "ListServiceLbPolicies": {
+              "methods": [
+                "listServiceLbPolicies",
+                "listServiceLbPoliciesStream",
+                "listServiceLbPoliciesAsync"
+              ]
+            },
+            "ListGatewayRouteViews": {
+              "methods": [
+                "listGatewayRouteViews",
+                "listGatewayRouteViewsStream",
+                "listGatewayRouteViewsAsync"
+              ]
+            },
+            "ListMeshRouteViews": {
+              "methods": [
+                "listMeshRouteViews",
+                "listMeshRouteViewsStream",
+                "listMeshRouteViewsAsync"
               ]
             }
           }

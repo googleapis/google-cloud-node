@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. A name of the ServiceBinding to get. Must be in the format
-   *  `projects/* /locations/global/serviceBindings/*`.
+   *  `projects/* /locations/* /serviceBindings/*`.
    */
   // const name = 'abc123'
 

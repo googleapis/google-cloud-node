@@ -7,7 +7,9 @@
   "../../protos/google/cloud/networkservices/v1/http_route.proto",
   "../../protos/google/cloud/networkservices/v1/mesh.proto",
   "../../protos/google/cloud/networkservices/v1/network_services.proto",
+  "../../protos/google/cloud/networkservices/v1/route_view.proto",
   "../../protos/google/cloud/networkservices/v1/service_binding.proto",
+  "../../protos/google/cloud/networkservices/v1/service_lb_policy.proto",
   "../../protos/google/cloud/networkservices/v1/tcp_route.proto",
   "../../protos/google/cloud/networkservices/v1/tls_route.proto"
 ]
