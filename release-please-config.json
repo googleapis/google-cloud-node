@@ -203,7 +203,8 @@
     "packages/google-shopping-merchant-ordertracking": {},
     "packages/google-cloud-chronicle": {},
     "packages/google-cloud-devicestreaming": {},
-    "packages/google-apps-events-subscriptions": {}
+    "packages/google-apps-events-subscriptions": {},
+    "packages/google-cloud-configdelivery": {}
   },
   "plugins": [
     {
