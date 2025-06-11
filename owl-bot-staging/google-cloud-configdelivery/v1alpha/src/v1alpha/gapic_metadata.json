@@ -1,0 +1,293 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.configdelivery.v1alpha",
+  "libraryPackage": "@google-cloud/configdelivery",
+  "services": {
+    "ConfigDelivery": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ConfigDeliveryClient",
+          "rpcs": {
+            "GetResourceBundle": {
+              "methods": [
+                "getResourceBundle"
+              ]
+            },
+            "GetFleetPackage": {
+              "methods": [
+                "getFleetPackage"
+              ]
+            },
+            "GetRelease": {
+              "methods": [
+                "getRelease"
+              ]
+            },
+            "GetVariant": {
+              "methods": [
+                "getVariant"
+              ]
+            },
+            "GetRollout": {
+              "methods": [
+                "getRollout"
+              ]
+            },
+            "CreateResourceBundle": {
+              "methods": [
+                "createResourceBundle"
+              ]
+            },
+            "UpdateResourceBundle": {
+              "methods": [
+                "updateResourceBundle"
+              ]
+            },
+            "DeleteResourceBundle": {
+              "methods": [
+                "deleteResourceBundle"
+              ]
+            },
+            "CreateFleetPackage": {
+              "methods": [
+                "createFleetPackage"
+              ]
+            },
+            "UpdateFleetPackage": {
+              "methods": [
+                "updateFleetPackage"
+              ]
+            },
+            "DeleteFleetPackage": {
+              "methods": [
+                "deleteFleetPackage"
+              ]
+            },
+            "CreateRelease": {
+              "methods": [
+                "createRelease"
+              ]
+            },
+            "UpdateRelease": {
+              "methods": [
+                "updateRelease"
+              ]
+            },
+            "DeleteRelease": {
+              "methods": [
+                "deleteRelease"
+              ]
+            },
+            "CreateVariant": {
+              "methods": [
+                "createVariant"
+              ]
+            },
+            "UpdateVariant": {
+              "methods": [
+                "updateVariant"
+              ]
+            },
+            "DeleteVariant": {
+              "methods": [
+                "deleteVariant"
+              ]
+            },
+            "SuspendRollout": {
+              "methods": [
+                "suspendRollout"
+              ]
+            },
+            "ResumeRollout": {
+              "methods": [
+                "resumeRollout"
+              ]
+            },
+            "AbortRollout": {
+              "methods": [
+                "abortRollout"
+              ]
+            },
+            "ListResourceBundles": {
+              "methods": [
+                "listResourceBundles",
+                "listResourceBundlesStream",
+                "listResourceBundlesAsync"
+              ]
+            },
+            "ListFleetPackages": {
+              "methods": [
+                "listFleetPackages",
+                "listFleetPackagesStream",
+                "listFleetPackagesAsync"
+              ]
+            },
+            "ListReleases": {
+              "methods": [
+                "listReleases",
+                "listReleasesStream",
+                "listReleasesAsync"
+              ]
+            },
+            "ListVariants": {
+              "methods": [
+                "listVariants",
+                "listVariantsStream",
+                "listVariantsAsync"
+              ]
+            },
+            "ListRollouts": {
+              "methods": [
+                "listRollouts",
+                "listRolloutsStream",
+                "listRolloutsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ConfigDeliveryClient",
+          "rpcs": {
+            "GetResourceBundle": {
+              "methods": [
+                "getResourceBundle"
+              ]
+            },
+            "GetFleetPackage": {
+              "methods": [
+                "getFleetPackage"
+              ]
+            },
+            "GetRelease": {
+              "methods": [
+                "getRelease"
+              ]
+            },
+            "GetVariant": {
+              "methods": [
+                "getVariant"
+              ]
+            },
+            "GetRollout": {
+              "methods": [
+                "getRollout"
+              ]
+            },
+            "CreateResourceBundle": {
+              "methods": [
+                "createResourceBundle"
+              ]
+            },
+            "UpdateResourceBundle": {
+              "methods": [
+                "updateResourceBundle"
+              ]
+            },
+            "DeleteResourceBundle": {
+              "methods": [
+                "deleteResourceBundle"
+              ]
+            },
+            "CreateFleetPackage": {
+              "methods": [
+                "createFleetPackage"
+              ]
+            },
+            "UpdateFleetPackage": {
+              "methods": [
+                "updateFleetPackage"
+              ]
+            },
+            "DeleteFleetPackage": {
+              "methods": [
+                "deleteFleetPackage"
+              ]
+            },
+            "CreateRelease": {
+              "methods": [
+                "createRelease"
+              ]
+            },
+            "UpdateRelease": {
+              "methods": [
+                "updateRelease"
+              ]
+            },
+            "DeleteRelease": {
+              "methods": [
+                "deleteRelease"
+              ]
+            },
+            "CreateVariant": {
+              "methods": [
+                "createVariant"
+              ]
+            },
+            "UpdateVariant": {
+              "methods": [
+                "updateVariant"
+              ]
+            },
+            "DeleteVariant": {
+              "methods": [
+                "deleteVariant"
+              ]
+            },
+            "SuspendRollout": {
+              "methods": [
+                "suspendRollout"
+              ]
+            },
+            "ResumeRollout": {
+              "methods": [
+                "resumeRollout"
+              ]
+            },
+            "AbortRollout": {
+              "methods": [
+                "abortRollout"
+              ]
+            },
+            "ListResourceBundles": {
+              "methods": [
+                "listResourceBundles",
+                "listResourceBundlesStream",
+                "listResourceBundlesAsync"
+              ]
+            },
+            "ListFleetPackages": {
+              "methods": [
+                "listFleetPackages",
+                "listFleetPackagesStream",
+                "listFleetPackagesAsync"
+              ]
+            },
+            "ListReleases": {
+              "methods": [
+                "listReleases",
+                "listReleasesStream",
+                "listReleasesAsync"
+              ]
+            },
+            "ListVariants": {
+              "methods": [
+                "listVariants",
+                "listVariantsStream",
+                "listVariantsAsync"
+              ]
+            },
+            "ListRollouts": {
+              "methods": [
+                "listRollouts",
+                "listRolloutsStream",
+                "listRolloutsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
