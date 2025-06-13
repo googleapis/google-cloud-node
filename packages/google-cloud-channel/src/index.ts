@@ -24,10 +24,6 @@ const CloudChannelServiceClient = v1.CloudChannelServiceClient;
 type CloudChannelServiceClient = v1.CloudChannelServiceClient;
 
 export {v1, CloudChannelReportsServiceClient, CloudChannelServiceClient};
-export default {
-  v1,
-  CloudChannelReportsServiceClient,
-  CloudChannelServiceClient,
-};
+export default {v1, CloudChannelReportsServiceClient, CloudChannelServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
