@@ -4952,6 +4952,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -42752,6 +42759,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "userMetadata": {
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -42929,6 +42943,50 @@
                         }
                       }
                     },
+                    "RagFileMetadataConfig": {
+                      "oneofs": {
+                        "metadataSchemaSource": {
+                          "oneof": [
+                            "gcsMetadataSchemaSource",
+                            "googleDriveMetadataSchemaSource",
+                            "inlineMetadataSchemaSource"
+                          ]
+                        },
+                        "metadataSource": {
+                          "oneof": [
+                            "gcsMetadataSource",
+                            "googleDriveMetadataSource",
+                            "inlineMetadataSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsMetadataSchemaSource": {
+                          "type": "GcsSource",
+                          "id": 1
+                        },
+                        "googleDriveMetadataSchemaSource": {
+                          "type": "GoogleDriveSource",
+                          "id": 2
+                        },
+                        "inlineMetadataSchemaSource": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "gcsMetadataSource": {
+                          "type": "GcsSource",
+                          "id": 4
+                        },
+                        "googleDriveMetadataSource": {
+                          "type": "GoogleDriveSource",
+                          "id": 5
+                        },
+                        "inlineMetadataSource": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
                     "UploadRagFileConfig": {
                       "fields": {
                         "ragFileChunkingConfig": {
@@ -42941,6 +42999,17 @@
                         "ragFileTransformationConfig": {
                           "type": "RagFileTransformationConfig",
                           "id": 3
+                        },
+                        "ragFileMetadataConfig": {
+                          "type": "RagFileMetadataConfig",
+                          "id": 4
+                        },
+                        "ragFileParsingConfig": {
+                          "type": "RagFileParsingConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -43028,6 +43097,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "ragFileMetadataConfig": {
+                          "type": "RagFileMetadataConfig",
+                          "id": 17
                         },
                         "maxEmbeddingRequestsPerMin": {
                           "type": "int32",

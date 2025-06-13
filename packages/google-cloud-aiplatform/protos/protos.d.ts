@@ -18622,6 +18622,9 @@ export namespace google {
 
                     /** RagCorpus corpusStatus */
                     corpusStatus?: (google.cloud.aiplatform.v1.ICorpusStatus|null);
+
+                    /** RagCorpus encryptionSpec */
+                    encryptionSpec?: (google.cloud.aiplatform.v1.IEncryptionSpec|null);
                 }
 
                 /** Represents a RagCorpus. */
@@ -18656,6 +18659,9 @@ export namespace google {
 
                     /** RagCorpus corpusStatus. */
                     public corpusStatus?: (google.cloud.aiplatform.v1.ICorpusStatus|null);
+
+                    /** RagCorpus encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.aiplatform.v1.IEncryptionSpec|null);
 
                     /** RagCorpus backendConfig. */
                     public backendConfig?: ("vectorDbConfig"|"vertexAiSearchConfig");
@@ -159742,6 +159748,9 @@ export namespace google {
 
                     /** RagFile fileStatus */
                     fileStatus?: (google.cloud.aiplatform.v1beta1.IFileStatus|null);
+
+                    /** RagFile userMetadata */
+                    userMetadata?: (string|null);
                 }
 
                 /** Represents a RagFile. */
@@ -159794,6 +159803,9 @@ export namespace google {
 
                     /** RagFile fileStatus. */
                     public fileStatus?: (google.cloud.aiplatform.v1beta1.IFileStatus|null);
+
+                    /** RagFile userMetadata. */
+                    public userMetadata: string;
 
                     /** RagFile ragFileSource. */
                     public ragFileSource?: ("gcsSource"|"googleDriveSource"|"directUploadSource"|"slackSource"|"jiraSource"|"sharePointSources");
@@ -160852,6 +160864,139 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a RagFileMetadataConfig. */
+                interface IRagFileMetadataConfig {
+
+                    /** RagFileMetadataConfig gcsMetadataSchemaSource */
+                    gcsMetadataSchemaSource?: (google.cloud.aiplatform.v1beta1.IGcsSource|null);
+
+                    /** RagFileMetadataConfig googleDriveMetadataSchemaSource */
+                    googleDriveMetadataSchemaSource?: (google.cloud.aiplatform.v1beta1.IGoogleDriveSource|null);
+
+                    /** RagFileMetadataConfig inlineMetadataSchemaSource */
+                    inlineMetadataSchemaSource?: (string|null);
+
+                    /** RagFileMetadataConfig gcsMetadataSource */
+                    gcsMetadataSource?: (google.cloud.aiplatform.v1beta1.IGcsSource|null);
+
+                    /** RagFileMetadataConfig googleDriveMetadataSource */
+                    googleDriveMetadataSource?: (google.cloud.aiplatform.v1beta1.IGoogleDriveSource|null);
+
+                    /** RagFileMetadataConfig inlineMetadataSource */
+                    inlineMetadataSource?: (string|null);
+                }
+
+                /** Represents a RagFileMetadataConfig. */
+                class RagFileMetadataConfig implements IRagFileMetadataConfig {
+
+                    /**
+                     * Constructs a new RagFileMetadataConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IRagFileMetadataConfig);
+
+                    /** RagFileMetadataConfig gcsMetadataSchemaSource. */
+                    public gcsMetadataSchemaSource?: (google.cloud.aiplatform.v1beta1.IGcsSource|null);
+
+                    /** RagFileMetadataConfig googleDriveMetadataSchemaSource. */
+                    public googleDriveMetadataSchemaSource?: (google.cloud.aiplatform.v1beta1.IGoogleDriveSource|null);
+
+                    /** RagFileMetadataConfig inlineMetadataSchemaSource. */
+                    public inlineMetadataSchemaSource?: (string|null);
+
+                    /** RagFileMetadataConfig gcsMetadataSource. */
+                    public gcsMetadataSource?: (google.cloud.aiplatform.v1beta1.IGcsSource|null);
+
+                    /** RagFileMetadataConfig googleDriveMetadataSource. */
+                    public googleDriveMetadataSource?: (google.cloud.aiplatform.v1beta1.IGoogleDriveSource|null);
+
+                    /** RagFileMetadataConfig inlineMetadataSource. */
+                    public inlineMetadataSource?: (string|null);
+
+                    /** RagFileMetadataConfig metadataSchemaSource. */
+                    public metadataSchemaSource?: ("gcsMetadataSchemaSource"|"googleDriveMetadataSchemaSource"|"inlineMetadataSchemaSource");
+
+                    /** RagFileMetadataConfig metadataSource. */
+                    public metadataSource?: ("gcsMetadataSource"|"googleDriveMetadataSource"|"inlineMetadataSource");
+
+                    /**
+                     * Creates a new RagFileMetadataConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RagFileMetadataConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IRagFileMetadataConfig): google.cloud.aiplatform.v1beta1.RagFileMetadataConfig;
+
+                    /**
+                     * Encodes the specified RagFileMetadataConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RagFileMetadataConfig.verify|verify} messages.
+                     * @param message RagFileMetadataConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IRagFileMetadataConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RagFileMetadataConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RagFileMetadataConfig.verify|verify} messages.
+                     * @param message RagFileMetadataConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IRagFileMetadataConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RagFileMetadataConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RagFileMetadataConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.RagFileMetadataConfig;
+
+                    /**
+                     * Decodes a RagFileMetadataConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RagFileMetadataConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.RagFileMetadataConfig;
+
+                    /**
+                     * Verifies a RagFileMetadataConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RagFileMetadataConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RagFileMetadataConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.RagFileMetadataConfig;
+
+                    /**
+                     * Creates a plain object from a RagFileMetadataConfig message. Also converts values to other types if specified.
+                     * @param message RagFileMetadataConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.RagFileMetadataConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RagFileMetadataConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RagFileMetadataConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an UploadRagFileConfig. */
                 interface IUploadRagFileConfig {
 
@@ -160860,6 +161005,12 @@ export namespace google {
 
                     /** UploadRagFileConfig ragFileTransformationConfig */
                     ragFileTransformationConfig?: (google.cloud.aiplatform.v1beta1.IRagFileTransformationConfig|null);
+
+                    /** UploadRagFileConfig ragFileMetadataConfig */
+                    ragFileMetadataConfig?: (google.cloud.aiplatform.v1beta1.IRagFileMetadataConfig|null);
+
+                    /** UploadRagFileConfig ragFileParsingConfig */
+                    ragFileParsingConfig?: (google.cloud.aiplatform.v1beta1.IRagFileParsingConfig|null);
                 }
 
                 /** Represents an UploadRagFileConfig. */
@@ -160876,6 +161027,12 @@ export namespace google {
 
                     /** UploadRagFileConfig ragFileTransformationConfig. */
                     public ragFileTransformationConfig?: (google.cloud.aiplatform.v1beta1.IRagFileTransformationConfig|null);
+
+                    /** UploadRagFileConfig ragFileMetadataConfig. */
+                    public ragFileMetadataConfig?: (google.cloud.aiplatform.v1beta1.IRagFileMetadataConfig|null);
+
+                    /** UploadRagFileConfig ragFileParsingConfig. */
+                    public ragFileParsingConfig?: (google.cloud.aiplatform.v1beta1.IRagFileParsingConfig|null);
 
                     /**
                      * Creates a new UploadRagFileConfig instance using the specified properties.
@@ -160994,6 +161151,9 @@ export namespace google {
                     /** ImportRagFilesConfig ragFileParsingConfig */
                     ragFileParsingConfig?: (google.cloud.aiplatform.v1beta1.IRagFileParsingConfig|null);
 
+                    /** ImportRagFilesConfig ragFileMetadataConfig */
+                    ragFileMetadataConfig?: (google.cloud.aiplatform.v1beta1.IRagFileMetadataConfig|null);
+
                     /** ImportRagFilesConfig maxEmbeddingRequestsPerMin */
                     maxEmbeddingRequestsPerMin?: (number|null);
 
@@ -161048,6 +161208,9 @@ export namespace google {
 
                     /** ImportRagFilesConfig ragFileParsingConfig. */
                     public ragFileParsingConfig?: (google.cloud.aiplatform.v1beta1.IRagFileParsingConfig|null);
+
+                    /** ImportRagFilesConfig ragFileMetadataConfig. */
+                    public ragFileMetadataConfig?: (google.cloud.aiplatform.v1beta1.IRagFileMetadataConfig|null);
 
                     /** ImportRagFilesConfig maxEmbeddingRequestsPerMin. */
                     public maxEmbeddingRequestsPerMin: number;
