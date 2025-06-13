@@ -18733,6 +18733,9 @@ export namespace google {
 
                     /** RagCorpus corpusStatus */
                     corpusStatus?: (google.cloud.aiplatform.v1.ICorpusStatus|null);
+
+                    /** RagCorpus encryptionSpec */
+                    encryptionSpec?: (google.cloud.aiplatform.v1.IEncryptionSpec|null);
                 }
 
                 /** Represents a RagCorpus. */
@@ -18767,6 +18770,9 @@ export namespace google {
 
                     /** RagCorpus corpusStatus. */
                     public corpusStatus?: (google.cloud.aiplatform.v1.ICorpusStatus|null);
+
+                    /** RagCorpus encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.aiplatform.v1.IEncryptionSpec|null);
 
                     /** RagCorpus backendConfig. */
                     public backendConfig?: ("vectorDbConfig"|"vertexAiSearchConfig");
