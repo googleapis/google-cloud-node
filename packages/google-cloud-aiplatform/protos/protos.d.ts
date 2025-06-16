@@ -21357,6 +21357,9 @@ export namespace google {
 
                     /** PscInterfaceConfig networkAttachment */
                     networkAttachment?: (string|null);
+
+                    /** PscInterfaceConfig dnsPeeringConfigs */
+                    dnsPeeringConfigs?: (google.cloud.aiplatform.v1.IDnsPeeringConfig[]|null);
                 }
 
                 /** Represents a PscInterfaceConfig. */
@@ -21370,6 +21373,9 @@ export namespace google {
 
                     /** PscInterfaceConfig networkAttachment. */
                     public networkAttachment: string;
+
+                    /** PscInterfaceConfig dnsPeeringConfigs. */
+                    public dnsPeeringConfigs: google.cloud.aiplatform.v1.IDnsPeeringConfig[];
 
                     /**
                      * Creates a new PscInterfaceConfig instance using the specified properties.
@@ -21443,6 +21449,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for PscInterfaceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DnsPeeringConfig. */
+                interface IDnsPeeringConfig {
+
+                    /** DnsPeeringConfig domain */
+                    domain?: (string|null);
+
+                    /** DnsPeeringConfig targetProject */
+                    targetProject?: (string|null);
+
+                    /** DnsPeeringConfig targetNetwork */
+                    targetNetwork?: (string|null);
+                }
+
+                /** Represents a DnsPeeringConfig. */
+                class DnsPeeringConfig implements IDnsPeeringConfig {
+
+                    /**
+                     * Constructs a new DnsPeeringConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IDnsPeeringConfig);
+
+                    /** DnsPeeringConfig domain. */
+                    public domain: string;
+
+                    /** DnsPeeringConfig targetProject. */
+                    public targetProject: string;
+
+                    /** DnsPeeringConfig targetNetwork. */
+                    public targetNetwork: string;
+
+                    /**
+                     * Creates a new DnsPeeringConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DnsPeeringConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IDnsPeeringConfig): google.cloud.aiplatform.v1.DnsPeeringConfig;
+
+                    /**
+                     * Encodes the specified DnsPeeringConfig message. Does not implicitly {@link google.cloud.aiplatform.v1.DnsPeeringConfig.verify|verify} messages.
+                     * @param message DnsPeeringConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IDnsPeeringConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DnsPeeringConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.DnsPeeringConfig.verify|verify} messages.
+                     * @param message DnsPeeringConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IDnsPeeringConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DnsPeeringConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DnsPeeringConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.DnsPeeringConfig;
+
+                    /**
+                     * Decodes a DnsPeeringConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DnsPeeringConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.DnsPeeringConfig;
+
+                    /**
+                     * Verifies a DnsPeeringConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DnsPeeringConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DnsPeeringConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.DnsPeeringConfig;
+
+                    /**
+                     * Creates a plain object from a DnsPeeringConfig message. Also converts values to other types if specified.
+                     * @param message DnsPeeringConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.DnsPeeringConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DnsPeeringConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DnsPeeringConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
